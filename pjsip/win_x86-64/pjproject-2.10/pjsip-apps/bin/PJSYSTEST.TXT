@@ -1,0 +1,68 @@
+18:12:29.462 sip_endpoint.c  .Module "mod-pjsua-log" registered
+18:12:29.463 sip_endpoint.c  .Module "mod-tsx-layer" registered
+18:12:29.465 sip_endpoint.c  .Module "mod-stateful-util" registered
+18:12:29.467 sip_endpoint.c  .Module "mod-ua" registered
+18:12:29.468 sip_endpoint.c  .Module "mod-100rel" registered
+18:12:29.482 sip_endpoint.c  .Module "mod-pjsua" registered
+18:12:29.485 sip_endpoint.c  .Module "mod-invite" registered
+18:12:29.584     wmme_dev.c  ..WMME found no sound devices
+18:12:29.584     wmme_dev.c  ..WMME initialized
+18:12:29.585          pjlib  ..select() I/O Queue created (000002C4537715A8)
+18:12:29.597   conference.c  ..Creating conference bridge with 254 ports
+18:12:29.597   Master/sound  ..Using delay buffer with WSOLA.
+18:12:29.600 sip_endpoint.c  .Module "mod-evsub" registered
+18:12:29.600 sip_endpoint.c  .Module "mod-presence" registered
+18:12:29.607        evsub.c  .Event pkg "presence" registered by mod-presence
+18:12:29.607 sip_endpoint.c  .Module "mod-mwi" registered
+18:12:29.609        evsub.c  .Event pkg "message-summary" registered by mod-mwi
+18:12:29.609 sip_endpoint.c  .Module "mod-refer" registered
+18:12:29.611        evsub.c  .Event pkg "refer" registered by mod-refer
+18:12:29.611 sip_endpoint.c  .Module "mod-pjsua-pres" registered
+18:12:29.611 sip_endpoint.c  .Module "mod-pjsua-im" registered
+18:12:29.611 sip_endpoint.c  .Module "mod-pjsua-options" registered
+18:12:29.611   pjsua_core.c  .1 SIP worker threads created
+18:12:29.611   pjsua_core.c  .pjsua version 2.10 for win32-6.2/x86_64/msvc-19.0 initialized
+18:12:29.612   pjsua_core.c  .PJSUA state changed: CREATED --> INIT
+18:12:29.612   pjsua_core.c  PJSUA state changed: INIT --> STARTING
+18:12:29.612 sip_endpoint.c  .Module "mod-unsolicited-mwi" registered
+18:12:29.612   pjsua_core.c  .PJSUA state changed: STARTING --> RUNNING
+18:12:34.192      systest.c  Running Audio Device List
+18:12:41.209   pjsua_core.c  Shutting down, flags=0...
+18:12:41.210   pjsua_core.c  PJSUA state changed: RUNNING --> CLOSING
+18:12:41.215        pjsua_0 !Thread stack max usage=2224 by ..\src\pj\os_core_win32.c:1008
+18:12:41.215   pjsua_call.c !.Hangup all calls..
+18:12:41.217  pjsua_media.c  .Call 0: deinitializing media..
+18:12:41.227  pjsua_media.c  .Call 1: deinitializing media..
+18:12:41.231  pjsua_media.c  .Call 2: deinitializing media..
+18:12:41.243  pjsua_media.c  .Call 3: deinitializing media..
+18:12:41.244   pjsua_pres.c  .Shutting down presence..
+18:12:42.253   pjsua_core.c  .Destroying...
+18:12:42.256  pjsua_media.c  .Shutting down media..
+18:12:42.316          media !Thread stack max usage=2160 by ..\src\pj\os_core_win32.c:1008
+18:12:42.317      ev_thread !Thread stack max usage=176 by ..\src\pj\os_core_win32.c:1244
+18:12:42.317 sip_endpoint.c !.Destroying endpoint instance..
+18:12:42.317 sip_transactio  .Stopping transaction layer module
+18:12:42.319 sip_transactio  .Stopped transaction layer module
+18:12:42.319 sip_endpoint.c  .Module "mod-unsolicited-mwi" unregistered
+18:12:42.320 sip_endpoint.c  .Module "mod-pjsua-options" unregistered
+18:12:42.321 sip_endpoint.c  .Module "mod-pjsua-im" unregistered
+18:12:42.321 sip_endpoint.c  .Module "mod-pjsua-pres" unregistered
+18:12:42.322 sip_endpoint.c  .Module "mod-pjsua" unregistered
+18:12:42.323 sip_endpoint.c  .Module "mod-stateful-util" unregistered
+18:12:42.323 sip_endpoint.c  .Module "mod-refer" unregistered
+18:12:42.324 sip_endpoint.c  .Module "mod-mwi" unregistered
+18:12:42.325 sip_endpoint.c  .Module "mod-presence" unregistered
+18:12:42.325 sip_endpoint.c  .Module "mod-evsub" unregistered
+18:12:42.326 sip_endpoint.c  .Module "mod-invite" unregistered
+18:12:42.327 sip_endpoint.c  .Module "mod-100rel" unregistered
+18:12:42.328 sip_endpoint.c  .Module "mod-ua" unregistered
+18:12:42.329 sip_transactio  .Transaction layer module destroyed
+18:12:42.330 sip_endpoint.c  .Module "mod-tsx-layer" unregistered
+18:12:42.331 sip_endpoint.c  .Module "mod-msg-print" unregistered
+18:12:42.334 sip_endpoint.c  .Module "mod-pjsua-log" unregistered
+18:12:42.337 sip_transport.  .Destroying transport manager
+18:12:42.337        timer.c  .Dumping timer heap:
+18:12:42.338        timer.c  .  Cur size: 0 entries, max: 3070
+18:12:42.339 sip_endpoint.c  .Endpoint 000002C4536E6D28 destroyed
+18:12:42.340   pjsua_core.c  .PJSUA state changed: CLOSING --> NULL
+18:12:42.340   pjsua_core.c  .PJSUA destroyed...

@@ -1,0 +1,27 @@
+﻿  anaFilter.c
+  constants.c
+  createCB.c
+  doCPLC.c
+  enhancer.c
+  filter.c
+  FrameClassify.c
+  gainquant.c
+  getCBvec.c
+  helpfun.c
+  hpInput.c
+  hpOutput.c
+  iCBConstruct.c
+  iCBSearch.c
+  iLBC_decode.c
+  iLBC_encode.c
+  LPCdecode.c
+  LPCencode.c
+  lsf.c
+  packing.c
+  Generating Code...
+  Compiling...
+  StateConstructW.c
+  StateSearchW.c
+  syntFilter.c
+  Generating Code...
+  libilbccodec.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\third_party\build\ilbc\..\..\lib\libilbccodec-x86_64-x64-vc14-Debug-Dynamic.lib

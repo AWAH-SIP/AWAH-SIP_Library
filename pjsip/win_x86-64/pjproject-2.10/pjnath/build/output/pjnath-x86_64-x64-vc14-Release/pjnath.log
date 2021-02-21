@@ -1,0 +1,16 @@
+﻿  errno.c
+  ice_session.c
+  ice_strans.c
+..\src\pjnath\ice_strans.c(1578): warning C4267: 'function': conversion from 'size_t' to 'unsigned int', possible loss of data
+  nat_detect.c
+  stun_auth.c
+  stun_msg.c
+  stun_msg_dump.c
+  stun_session.c
+  stun_sock.c
+  stun_transaction.c
+  turn_session.c
+  turn_sock.c
+..\src\pjnath\turn_sock.c(1452): warning C4267: 'function': conversion from 'size_t' to 'unsigned int', possible loss of data
+  Generating Code...
+  pjnath.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjnath\build\..\lib\pjnath-x86_64-x64-vc14-Release.lib

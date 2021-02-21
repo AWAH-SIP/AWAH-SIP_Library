@@ -1,0 +1,323 @@
+﻿  main_console.c
+  systest.c
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+LIBCMTD.lib(initializers.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(os_core_win32.obj) : warning LNK4217: locally defined symbol strchr imported in function pj_thread_create
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(pool.obj) : warning LNK4049: locally defined symbol strchr imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(scanner.obj) : warning LNK4049: locally defined symbol strchr imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(transport_srtp.obj) : warning LNK4049: locally defined symbol strncpy imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(delaybuf.obj) : warning LNK4049: locally defined symbol strncpy imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stream_common.obj) : warning LNK4049: locally defined symbol strncpy imported
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_aud.obj) : warning LNK4217: locally defined symbol strncpy imported in function open_snd_dev
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_timer.obj) : warning LNK4049: locally defined symbol strncpy imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(addr_resolv_sock.obj) : warning LNK4049: locally defined symbol strncpy imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(transport_loop.obj) : warning LNK4049: locally defined symbol strncpy imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(os_core_win32.obj) : warning LNK4217: locally defined symbol strncpy imported in function pj_thread_create
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(pool.obj) : warning LNK4049: locally defined symbol strncpy imported
+pjmedia-x86_64-x64-vc14-Debug-Dynamic.lib(audiodev.obj) : warning LNK4049: locally defined symbol strncpy imported
+pjmedia-audiodev-x86_64-x64-vc14-Debug-Dynamic.lib(wmme_dev.obj) : warning LNK4049: locally defined symbol strncpy imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(silencedet.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stream_common.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stun_msg_dump.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stun_transaction.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(echo_suppress.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stun_msg.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(errno.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(ilbc.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(opus.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(transport_ice.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(transport_srtp.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_errno.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(errno.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stream.obj) : warning LNK4217: locally defined symbol __stdio_common_vsprintf imported in function pjmedia_stream_create
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sdp.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_inv.obj) : warning LNK4217: locally defined symbol __stdio_common_vsprintf imported in function pjsip_inv_verify_request3
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(presence_body.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(mwi.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(presence.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_dialog.obj) : warning LNK4217: locally defined symbol __stdio_common_vsprintf imported in function pjsip_dlg_on_rx_request
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(codec.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(ice_session.obj) : warning LNK4217: locally defined symbol __stdio_common_vsprintf imported in function pj_ice_sess_start_check
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(evsub.obj) : warning LNK4217: locally defined symbol __stdio_common_vsprintf imported in function pjsip_evsub_create_uac
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_xfer.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_100rel.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(rtcp_fb.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(os_info.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(endpoint.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(errno.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_transport_tcp.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_auth_client.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_transaction.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_ua_layer.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sock_common.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_transport.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_endpoint.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_transport_udp.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_media.obj) : warning LNK4217: locally defined symbol __stdio_common_vsprintf imported in function create_rtp_rtcp_sock
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_im.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(errno.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_msg.obj) : warning LNK4217: locally defined symbol __stdio_common_vsprintf imported in function print_media_type
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_aud.obj) : warning LNK4217: locally defined symbol __stdio_common_vsprintf imported in function pjsua_aud_subsys_start
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_acc.obj) : warning LNK4217: locally defined symbol __stdio_common_vsprintf imported in function acc_check_nat_addr
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_call.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_pres.obj) : warning LNK4217: locally defined symbol __stdio_common_vsprintf imported in function publish_cb
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(except.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(os_error_win32.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+pjmedia-audiodev-x86_64-x64-vc14-Debug-Dynamic.lib(errno.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_core.obj) : warning LNK4217: locally defined symbol __stdio_common_vsprintf imported in function init_data
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(os_core_win32.obj) : warning LNK4217: locally defined symbol __stdio_common_vsprintf imported in function _vsnprintf_l
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(errno.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(log.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(pool.obj) : warning LNK4049: locally defined symbol __stdio_common_vsprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(add.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(long_term.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(lpc.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(preprocess.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(rpe.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(plc_common.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(silencedet.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(g722_enc.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(g722_dec.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stun_transaction.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(wsola.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(echo_suppress.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(echo_speex.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(turn_session.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(turn_sock.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(base64.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stun_msg_dump.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(g711.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(pidf.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(xpidf.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stream_common.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(ilbc.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(l16.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(opus.obj) : warning LNK4217: locally defined symbol _wassert imported in function pjmedia_codec_opus_set_default_param
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(speex_codec.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(rtcp.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(jbuf.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(g722.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(gsm.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(resample_resample.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(clock_thread.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(echo_common.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(rtp.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stun_msg.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stun_session.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(srv_resolver.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(delaybuf.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(pool_buf.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_resolve.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_tel_uri.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(activesock.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(scanner.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_auth_parser.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(ip_helper_win32.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(dns.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(transport_loop.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(transport_srtp.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(transport_udp.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_uri.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(types.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stream_info.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(ice_strans.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(transport_ice.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_util_statefull.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sdp.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sdp_neg.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_inv.obj) : warning LNK4217: locally defined symbol _wassert imported in function pjsip_inv_verify_request3
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_auth_msg.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(rpid.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(addr_resolv_sock.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(array.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stream.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(wav_writer.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(wav_playlist.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(audio_codecs.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(null_port.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(resample_port.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sound_port.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(splitcomb.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_dialog.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(codec.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(conference.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(master_port.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(presence.obj) : warning LNK4217: locally defined symbol _wassert imported in function pjsip_pres_create_uac
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(publishc.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(nat_detect.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(hash.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_xfer.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_100rel.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_timer.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(mwi.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stun_sock.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_reg.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_replaces.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(evsub.obj) : warning LNK4217: locally defined symbol _wassert imported in function pj_pool_zalloc
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(endpoint.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(errno.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stun_auth.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(ice_session.obj) : warning LNK4217: locally defined symbol _wassert imported in function perform_check
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_auth_client.obj) : warning LNK4217: locally defined symbol _wassert imported in function __local_stdio_printf_options
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_transaction.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_ua_layer.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(rtcp_fb.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sock_qos_common.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_transport_udp.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_transport_tcp.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(pool_caching.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(resolver.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_transport.obj) : warning LNK4217: locally defined symbol _wassert imported in function pjsip_tpmgr_destroy
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_endpoint.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_util.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_multipart.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_parser.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(timer.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sock_common.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_im.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(file_access_win32.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(errno.obj) : warning LNK4049: locally defined symbol _wassert imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_msg.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_acc.obj) : warning LNK4217: locally defined symbol _wassert imported in function acc_check_nat_addr
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_call.obj) : warning LNK4217: locally defined symbol _wassert imported in function pjsua_call_xfer
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_pres.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_media.obj) : warning LNK4217: locally defined symbol _wassert imported in function create_ice_media_transport
+pjmedia-audiodev-x86_64-x64-vc14-Debug-Dynamic.lib(audiodev.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjmedia-audiodev-x86_64-x64-vc14-Debug-Dynamic.lib(wmme_dev.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_core.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_aud.obj) : warning LNK4217: locally defined symbol _wassert imported in function pj_bzero
+pjmedia-x86_64-x64-vc14-Debug-Dynamic.lib(tonegen.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjmedia-x86_64-x64-vc14-Debug-Dynamic.lib(wav_player.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjmedia-x86_64-x64-vc14-Debug-Dynamic.lib(format.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjmedia-x86_64-x64-vc14-Debug-Dynamic.lib(event.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(sock_bsd.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(lock.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjmedia-x86_64-x64-vc14-Debug-Dynamic.lib(audiodev.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjmedia-x86_64-x64-vc14-Debug-Dynamic.lib(port.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(pool.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(except.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(ioqueue_select.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(os_error_win32.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(os_core_win32.obj) : warning LNK4217: locally defined symbol _wassert imported in function pj_init
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(errno.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(file_io_win32.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(string.obj) : warning LNK4049: locally defined symbol _wassert imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(string.obj) : warning LNK4217: locally defined symbol _strnicmp imported in function pj_stricmp
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_parser.obj) : warning LNK4217: locally defined symbol _strnicmp imported in function on_str_parse_error
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(hash.obj) : warning LNK4049: locally defined symbol _strnicmp imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(scanner.obj) : warning LNK4049: locally defined symbol _strnicmp imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sdp_neg.obj) : warning LNK4217: locally defined symbol isdigit imported in function match_offer
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stream_info.obj) : warning LNK4217: locally defined symbol isdigit imported in function get_audio_codec_info_param
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(transport_srtp.obj) : warning LNK4217: locally defined symbol isdigit imported in function srtp_rtcp_cb
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(string.obj) : warning LNK4217: locally defined symbol isdigit imported in function pj_isdigit
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sock_common.obj) : warning LNK4049: locally defined symbol isdigit imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_100rel.obj) : warning LNK4049: locally defined symbol isdigit imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sdp.obj) : warning LNK4217: locally defined symbol isdigit imported in function pjmedia_sdp_attr_clone
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(string.obj) : warning LNK4217: locally defined symbol isxdigit imported in function pj_isxdigit
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(string.obj) : warning LNK4049: locally defined symbol isxdigit imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(scanner.obj) : warning LNK4049: locally defined symbol isxdigit imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(string.obj) : warning LNK4217: locally defined symbol isspace imported in function pj_isspace
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_multipart.obj) : warning LNK4217: locally defined symbol isspace imported in function pjsip_multipart_create
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sb_celp.obj) : warning LNK4049: locally defined symbol __acrt_iob_func imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(log_writer_stdout.obj) : warning LNK4217: locally defined symbol __acrt_iob_func imported in function printf
+pjmedia-audiodev-x86_64-x64-vc14-Debug-Dynamic.lib(audiotest.obj) : warning LNK4217: locally defined symbol __acrt_iob_func imported in function pjmedia_aud_test
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(bits.obj) : warning LNK4217: locally defined symbol __acrt_iob_func imported in function speex_bits_pack
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(nb_celp.obj) : warning LNK4217: locally defined symbol __acrt_iob_func imported in function nb_decode
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sb_celp.obj) : warning LNK4049: locally defined symbol __stdio_common_vfprintf imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(speex_callbacks.obj) : warning LNK4049: locally defined symbol __stdio_common_vfprintf imported
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(log_writer_stdout.obj) : warning LNK4217: locally defined symbol __stdio_common_vfprintf imported in function _vfprintf_l
+pjmedia-audiodev-x86_64-x64-vc14-Debug-Dynamic.lib(audiotest.obj) : warning LNK4217: locally defined symbol __stdio_common_vfprintf imported in function pjmedia_aud_test
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(bits.obj) : warning LNK4217: locally defined symbol __stdio_common_vfprintf imported in function speex_bits_pack
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(nb_celp.obj) : warning LNK4217: locally defined symbol __stdio_common_vfprintf imported in function nb_decode
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(hash.obj) : warning LNK4049: locally defined symbol tolower imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stream.obj) : warning LNK4217: locally defined symbol tolower imported in function handle_incoming_dtmf
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(guid.obj) : warning LNK4049: locally defined symbol tolower imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_tel_uri.obj) : warning LNK4217: locally defined symbol tolower imported in function tel_uri_parse
+pjmedia-x86_64-x64-vc14-Debug-Dynamic.lib(tonegen.obj) : warning LNK4217: locally defined symbol tolower imported in function pj_tolower
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_parser.obj) : warning LNK4217: locally defined symbol tolower imported in function init_parser
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(resolver.obj) : warning LNK4217: locally defined symbol tolower imported in function pj_dns_resolver_start_query
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_auth_client.obj) : warning LNK4049: locally defined symbol tolower imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_msg.obj) : warning LNK4217: locally defined symbol toupper imported in function pj_toupper
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(enhancer.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(nb_celp.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(iLBC_encode.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(iLBC_decode.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(bits.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(LPCencode.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(turn_sock.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(wsola.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(g722_enc.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(g722_dec.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(array.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sdp_neg.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(transport_srtp.obj) : warning LNK4217: locally defined symbol memmove imported in function pjmedia_transport_srtp_start
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(scanner.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_parser.obj) : warning LNK4217: locally defined symbol memmove imported in function pj_memmove
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_transport_tcp.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(conference.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(stream.obj) : warning LNK4049: locally defined symbol memmove imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(smallft.obj) : warning LNK4217: locally defined symbol free imported in function speex_alloc
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(nb_celp.obj) : warning LNK4217: locally defined symbol free imported in function nb_decode
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sb_celp.obj) : warning LNK4049: locally defined symbol free imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(fftwrap.obj) : warning LNK4217: locally defined symbol free imported in function spx_fft_init
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(filterbank.obj) : warning LNK4217: locally defined symbol free imported in function filterbank_psy_smooth
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(alloc.obj) : warning LNK4049: locally defined symbol free imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(mdf.obj) : warning LNK4049: locally defined symbol free imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(scal.obj) : warning LNK4049: locally defined symbol free imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(preprocess.obj) : warning LNK4217: locally defined symbol free imported in function speex_preprocess_ctl
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(ip_helper_win32.obj) : warning LNK4217: locally defined symbol free imported in function enum_ipv4_interface
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(pool_policy_malloc.obj) : warning LNK4049: locally defined symbol free imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(gsm_destroy.obj) : warning LNK4049: locally defined symbol free imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(bits.obj) : warning LNK4217: locally defined symbol free imported in function speex_bits_pack
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(ip_helper_win32.obj) : warning LNK4217: locally defined symbol malloc imported in function enum_ipv4_interface
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(pool_policy_malloc.obj) : warning LNK4049: locally defined symbol malloc imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(gsm_create.obj) : warning LNK4049: locally defined symbol malloc imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(alloc.obj) : warning LNK4049: locally defined symbol malloc imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(iLBC_encode.obj) : warning LNK4217: locally defined symbol exit imported in function initEncode
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(iLBC_decode.obj) : warning LNK4217: locally defined symbol exit imported in function initDecode
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(crypto_kernel.obj) : warning LNK4049: locally defined symbol exit imported
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(nb_celp.obj) : warning LNK4217: locally defined symbol exit imported in function _speex_fatal
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(transport_ice.obj) : error LNK2019: unresolved external symbol __imp_memchr referenced in function ice_on_rx_data
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_uri.obj) : error LNK2001: unresolved external symbol __imp_memchr
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(scanner.obj) : error LNK2001: unresolved external symbol __imp_memchr
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_util.obj) : error LNK2001: unresolved external symbol __imp_memchr
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_auth_client.obj) : error LNK2001: unresolved external symbol __imp_memchr
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(ice_session.obj) : error LNK2001: unresolved external symbol __imp_memchr
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(string.obj) : error LNK2001: unresolved external symbol __imp_memchr
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_media.obj) : error LNK2001: unresolved external symbol __imp_memchr
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_msg.obj) : error LNK2001: unresolved external symbol __imp_memchr
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sip_parser.obj) : error LNK2001: unresolved external symbol __imp_memchr
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sock_common.obj) : error LNK2001: unresolved external symbol __imp_memchr
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(string.obj) : error LNK2001: unresolved external symbol __imp_memchr
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_core.obj) : error LNK2001: unresolved external symbol __imp_memchr
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_acc.obj) : error LNK2001: unresolved external symbol __imp_memchr
+pjsua-lib-x86_64-x64-vc14-Debug-Dynamic.lib(pjsua_pres.obj) : error LNK2001: unresolved external symbol __imp_memchr
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(string.obj) : error LNK2019: unresolved external symbol __imp_strncmp referenced in function pj_strstr
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(scanner.obj) : error LNK2001: unresolved external symbol __imp_strncmp
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(crypto_kernel.obj) : error LNK2001: unresolved external symbol __imp_strncmp
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(rand.obj) : error LNK2019: unresolved external symbol __imp_srand referenced in function pj_srand
+pjlib-x86_64-x64-vc14-Debug-Dynamic.lib(rand.obj) : error LNK2019: unresolved external symbol __imp_rand referenced in function platform_rand
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(cipher.obj) : error LNK2001: unresolved external symbol __imp_rand
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(scal.obj) : error LNK2001: unresolved external symbol __imp_rand
+pjmedia-x86_64-x64-vc14-Debug-Dynamic.lib(audiodev.obj) : error LNK2019: unresolved external symbol __imp__stricmp referenced in function pjmedia_aud_dev_lookup
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(codec.obj) : error LNK2001: unresolved external symbol __imp__stricmp
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(srtp.obj) : error LNK2019: unresolved external symbol __imp___stdio_common_vsscanf referenced in function _vsscanf_l
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(smallft.obj) : error LNK2001: unresolved external symbol __imp_calloc
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(nb_celp.obj) : error LNK2001: unresolved external symbol __imp_calloc
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sb_celp.obj) : error LNK2001: unresolved external symbol __imp_calloc
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(fftwrap.obj) : error LNK2001: unresolved external symbol __imp_calloc
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(filterbank.obj) : error LNK2001: unresolved external symbol __imp_calloc
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(bits.obj) : error LNK2001: unresolved external symbol __imp_calloc
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(mdf.obj) : error LNK2001: unresolved external symbol __imp_calloc
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(scal.obj) : error LNK2001: unresolved external symbol __imp_calloc
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(preprocess.obj) : error LNK2001: unresolved external symbol __imp_calloc
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(bits.obj) : error LNK2019: unresolved external symbol __imp_realloc referenced in function speex_realloc
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(sb_celp.obj) : error LNK2001: unresolved external symbol __imp_floor
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(filterbank.obj) : error LNK2001: unresolved external symbol __imp_floor
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(speex.obj) : error LNK2001: unresolved external symbol __imp_floor
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(mdf.obj) : error LNK2001: unresolved external symbol __imp_floor
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(preprocess.obj) : error LNK2001: unresolved external symbol __imp_floor
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(nb_celp.obj) : error LNK2001: unresolved external symbol __imp_floor
+libpjproject-x86_64-x64-vc14-Debug-Dynamic.lib(cipher.obj) : error LNK2019: unresolved external symbol __imp_clock referenced in function srtp_cipher_bits_per_second
+..\bin\pjsystest-x86_64-x64-vc14-Debug.exe : fatal error LNK1120: 10 unresolved externals

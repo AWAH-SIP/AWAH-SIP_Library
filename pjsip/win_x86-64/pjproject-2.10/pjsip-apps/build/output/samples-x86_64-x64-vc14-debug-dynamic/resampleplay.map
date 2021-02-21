@@ -1,0 +1,1516 @@
+ resampleplay
+
+ Timestamp is 5f974736 (Mon Oct 26 23:01:26 2020)
+
+ Preferred load address is 0000000140000000
+
+ Start         Length     Name                   Class
+ 0001:00000000 00078670H .text$mn                CODE
+ 0001:00078670 00001020H .text$mn$00             CODE
+ 0001:00079690 0000108dH .text$x                 CODE
+ 0002:00000000 00000110H .CRT$XCA                DATA
+ 0002:00000110 00000110H .CRT$XCAA               DATA
+ 0002:00000220 00000110H .CRT$XCZ                DATA
+ 0002:00000330 00000110H .CRT$XIA                DATA
+ 0002:00000440 00000110H .CRT$XIAA               DATA
+ 0002:00000550 00000110H .CRT$XIAC               DATA
+ 0002:00000660 00000110H .CRT$XIZ                DATA
+ 0002:00000770 00000110H .CRT$XPA                DATA
+ 0002:00000880 00000110H .CRT$XPZ                DATA
+ 0002:00000990 00000110H .CRT$XTA                DATA
+ 0002:00000aa0 00000110H .CRT$XTZ                DATA
+ 0002:00000bb0 0001a968H .rdata                  DATA
+ 0002:0001b518 000001f0H .rdata$zzzdbg           DATA
+ 0002:0001b708 00000110H .rtc$IAA                DATA
+ 0002:0001b818 00000110H .rtc$IZZ                DATA
+ 0002:0001b928 00000110H .rtc$TAA                DATA
+ 0002:0001ba38 00000110H .rtc$TZZ                DATA
+ 0002:0001bb48 00002f23H .xdata                  DATA
+ 0002:0001ea6b 00000000H .edata                  DATA
+ 0003:00000000 000234c0H .data                   DATA
+ 0003:000234c0 00002859H .bss                    DATA
+ 0004:00000000 00003d50H .pdata                  DATA
+ 0005:00000000 00000928H .idata$5                DATA
+ 0005:00000928 00000078H .idata$2                DATA
+ 0005:000009a0 00000018H .idata$3                DATA
+ 0005:000009b8 00000928H .idata$4                DATA
+ 0005:000012e0 00000d36H .idata$6                DATA
+ 0006:00000000 0000012cH .gfids$y                DATA
+ 0007:00000000 0000011bH .00cfg                  DATA
+
+  Address         Publics by Value              Rva+Base               Lib:Object
+
+ 0000:00000000       ___safe_se_handler_table   0000000000000000     <absolute>
+ 0000:00000000       __guard_longjmp_table      0000000000000000     <absolute>
+ 0000:00000000       __guard_fids_count         0000000000000000     <absolute>
+ 0000:00000000       ___safe_se_handler_count   0000000000000000     <absolute>
+ 0000:00000000       __guard_iat_count          0000000000000000     <absolute>
+ 0000:00000000       __guard_iat_table          0000000000000000     <absolute>
+ 0000:00000000       __guard_longjmp_count      0000000000000000     <absolute>
+ 0000:00000000       __guard_fids_table         0000000000000000     <absolute>
+ 0000:00000000       __dynamic_value_reloc_table 0000000000000000     <absolute>
+ 0000:00000100       __guard_flags              0000000000000100     <absolute>
+ 0000:00000000       __ImageBase                0000000140000000     <linker-defined>
+ 0001:00002330       get_snd_options            0000000140003330 f   resampleplay.obj
+ 0001:000027a0       dump_pool_usage            00000001400037a0 f   resampleplay.obj
+ 0001:00002890       main                       0000000140003890 f   resampleplay.obj
+ 0001:00003090       __local_stdio_printf_options 0000000140004090 f i resampleplay.obj
+ 0001:000030a0       _vfprintf_l                00000001400040a0 f i resampleplay.obj
+ 0001:00003100       printf                     0000000140004100 f i resampleplay.obj
+ 0001:00003170       pjmedia_aud_subsys_init    0000000140004170 f   pjmedia-audiodev-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:000032c0       pjmedia_aud_subsys_get_pool_factory 00000001400042c0 f   pjmedia-audiodev-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:000032f0       pjmedia_aud_subsys_shutdown 00000001400042f0 f   pjmedia-audiodev-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:00003370       pjmedia_aud_register_factory 0000000140004370 f   pjmedia-audiodev-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:00003400       pjmedia_aud_unregister_factory 0000000140004400 f   pjmedia-audiodev-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:000035b0       pjmedia_audiodev_strerror  00000001400045b0 f   pjmedia-audiodev-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:000039f0       _snprintf                  00000001400049f0 f i pjmedia-audiodev-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:00003a60       _vsnprintf                 0000000140004a60 f i pjmedia-audiodev-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:00003ab0       _vsnprintf_l               0000000140004ab0 f i pjmedia-audiodev-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:00005420       pjmedia_wmme_factory       0000000140006420 f   pjmedia-audiodev-x86_64-x64-vc14-debug-dynamic:wmme_dev.obj
+ 0001:000079c0       pjmedia_port_info_init     00000001400089c0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:port.obj
+ 0001:00007b10       pjmedia_port_info_init2    0000000140008b10 f   pjmedia-x86_64-x64-vc14-debug-dynamic:port.obj
+ 0001:00007b90       pjmedia_port_get_clock_src 0000000140008b90 f   pjmedia-x86_64-x64-vc14-debug-dynamic:port.obj
+ 0001:00007be0       pjmedia_port_get_frame     0000000140008be0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:port.obj
+ 0001:00007c80       pjmedia_port_put_frame     0000000140008c80 f   pjmedia-x86_64-x64-vc14-debug-dynamic:port.obj
+ 0001:00007d10       pjmedia_port_destroy       0000000140008d10 f   pjmedia-x86_64-x64-vc14-debug-dynamic:port.obj
+ 0001:00007f70       pjmedia_endpt_create2      0000000140008f70 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:000082f0       pjmedia_endpt_destroy2     00000001400092f0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:000083c0       pjmedia_endpt_set_flag     00000001400093c0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:00008450       pjmedia_endpt_get_flag     0000000140009450 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:000084e0       pjmedia_endpt_get_ioqueue  00000001400094e0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:00008540       pjmedia_endpt_get_thread_count 0000000140009540 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:000085a0       pjmedia_endpt_get_thread   00000001400095a0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:00008650       pjmedia_endpt_stop_threads 0000000140009650 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:00008730       pjmedia_endpt_create_pool  0000000140009730 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:000087a0       pjmedia_endpt_get_codec_mgr 00000001400097a0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:000087c0       pjmedia_endpt_create_sdp   00000001400097c0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:00008970       pjmedia_endpt_create_base_sdp 0000000140009970 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:00008c00       pjmedia_endpt_create_audio_sdp 0000000140009c00 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:00009810       pjmedia_endpt_dump         000000014000a810 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:00009c30       pjmedia_endpt_atexit       000000014000ac30 f   pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:0000a990       _vsprintf_l                000000014000b990 f i pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:0000a9f0       sprintf                    000000014000b9f0 f i pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0001:0000ad30       pjmedia_resample_port_create 000000014000bd30 f   pjmedia-x86_64-x64-vc14-debug-dynamic:resample_port.obj
+ 0001:0000b8a0       pjmedia_snd_port_param_default 000000014000c8a0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000b8d0       pjmedia_snd_port_create    000000014000c8d0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000b9f0       pjmedia_snd_port_create_rec 000000014000c9f0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000baf0       pjmedia_snd_port_create_player 000000014000caf0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000bbf0       pjmedia_snd_port_create2   000000014000cbf0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000be80       pjmedia_snd_port_destroy   000000014000ce80 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000bee0       pjmedia_snd_port_get_snd_stream 000000014000cee0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000bf40       pjmedia_snd_port_set_ec    000000014000cf40 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000c340       pjmedia_snd_port_get_ec_tail 000000014000d340 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000c480       pjmedia_snd_port_get_ec_stat 000000014000d480 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000c510       pjmedia_snd_port_get_clock_src 000000014000d510 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000c560       pjmedia_snd_port_connect   000000014000d560 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000c670       pjmedia_snd_port_get_port  000000014000d670 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000c6d0       pjmedia_snd_port_disconnect 000000014000d6d0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sound_port.obj
+ 0001:0000d730       pjmedia_wav_player_port_create 000000014000e730 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wav_player.obj
+ 0001:0000df20       pjmedia_wav_player_get_info 000000014000ef20 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wav_player.obj
+ 0001:0000e0d0       pjmedia_wav_player_get_len 000000014000f0d0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wav_player.obj
+ 0001:0000e1a0       pjmedia_wav_player_port_set_pos 000000014000f1a0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wav_player.obj
+ 0001:0000e340       pjmedia_wav_player_port_get_pos 000000014000f340 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wav_player.obj
+ 0001:0000e490       pjmedia_wav_player_set_eof_cb 000000014000f490 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wav_player.obj
+ 0001:0000e580       pjmedia_wav_player_set_eof_cb2 000000014000f580 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wav_player.obj
+ 0001:0000f9b0       pjmedia_get_aud_subsys     00000001400109b0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:0000f9c0       pjmedia_aud_driver_init    00000001400109c0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:0000fd20       pjmedia_aud_driver_deinit  0000000140010d20 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:0000fdc0       pjmedia_aud_dev_cap_name   0000000140010dc0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:0000fe80       pjmedia_aud_param_set_cap  0000000140010e80 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:0000ff00       pjmedia_aud_param_get_cap  0000000140010f00 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:0000ff90       pjmedia_aud_dev_refresh    0000000140010f90 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:00010070       pjmedia_aud_dev_count      0000000140011070 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:00010080       pjmedia_aud_dev_get_info   0000000140011080 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:00010160       pjmedia_aud_dev_lookup     0000000140011160 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:00010390       pjmedia_aud_dev_default_param 0000000140011390 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:000104c0       pjmedia_aud_stream_create  00000001400114c0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:00010810       pjmedia_aud_stream_get_param 0000000140011810 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:00010910       pjmedia_aud_stream_get_cap 0000000140011910 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:00010950       pjmedia_aud_stream_set_cap 0000000140011950 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:00010990       pjmedia_aud_stream_start   0000000140011990 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:000109c0       pjmedia_aud_stream_stop    00000001400119c0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:000109f0       pjmedia_aud_stream_destroy 00000001400119f0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:audiodev.obj
+ 0001:00011580       pjmedia_event_mgr_create   0000000140012580 f   pjmedia-x86_64-x64-vc14-debug-dynamic:event.obj
+ 0001:00011720       pjmedia_event_mgr_instance 0000000140012720 f   pjmedia-x86_64-x64-vc14-debug-dynamic:event.obj
+ 0001:00011730       pjmedia_event_mgr_set_instance 0000000140012730 f   pjmedia-x86_64-x64-vc14-debug-dynamic:event.obj
+ 0001:00011750       pjmedia_event_mgr_destroy  0000000140012750 f   pjmedia-x86_64-x64-vc14-debug-dynamic:event.obj
+ 0001:00011860       pjmedia_event_init         0000000140012860 f   pjmedia-x86_64-x64-vc14-debug-dynamic:event.obj
+ 0001:000118e0       pjmedia_event_subscribe    00000001400128e0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:event.obj
+ 0001:00011ac0       pjmedia_event_unsubscribe  0000000140012ac0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:event.obj
+ 0001:00011ca0       pjmedia_event_publish      0000000140012ca0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:event.obj
+ 0001:000125d0       pjmedia_format_copy        00000001400135d0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:format.obj
+ 0001:00012600       pjmedia_format_get_audio_format_detail 0000000140013600 f   pjmedia-x86_64-x64-vc14-debug-dynamic:format.obj
+ 0001:000126d0       pjmedia_sdp_attr_create    00000001400136d0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:000127b0       pjmedia_sdp_attr_clone     00000001400137b0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00012870       pjmedia_sdp_attr_find      0000000140013870 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00012980       pjmedia_sdp_attr_find2     0000000140013980 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:000129e0       pjmedia_sdp_attr_add       00000001400139e0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00012ac0       pjmedia_sdp_attr_remove_all 0000000140013ac0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00012c20       pjmedia_sdp_attr_remove    0000000140013c20 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00012d70       pjmedia_sdp_attr_to_rtpmap 0000000140013d70 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00012e50       pjmedia_sdp_attr_get_rtpmap 0000000140013e50 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:000131d0       pjmedia_sdp_rtpmap_to_attr 00000001400141d0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:000134a0       pjmedia_sdp_attr_get_fmtp  00000001400144a0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00013610       pjmedia_sdp_attr_get_rtcp  0000000140014610 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00013840       pjmedia_sdp_attr_create_rtcp 0000000140014840 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00013a00       pjmedia_sdp_attr_get_ssrc  0000000140014a00 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00013c20       pjmedia_sdp_attr_create_ssrc 0000000140014c20 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00013d10       pjmedia_sdp_conn_clone     0000000140014d10 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00013dd0       pjmedia_sdp_bandw_clone    0000000140014dd0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00013e50       pjmedia_sdp_media_clone    0000000140014e50 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00014190       pjmedia_sdp_media_find_attr 0000000140015190 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00014220       pjmedia_sdp_media_find_attr2 0000000140015220 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:000142b0       pjmedia_sdp_media_add_attr 00000001400152b0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:000142f0       pjmedia_sdp_media_remove_all_attr 00000001400152f0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00014330       pjmedia_sdp_media_remove_attr 0000000140015330 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00014370       pjmedia_sdp_transport_cmp  0000000140015370 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:000143f0       pjmedia_sdp_transport_get_proto 00000001400153f0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:000145b0       pjmedia_sdp_media_deactivate 00000001400155b0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00014620       pjmedia_sdp_media_clone_deactivate 0000000140015620 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00014890       pjmedia_sdp_parse          0000000140015890 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00014f00       pjmedia_sdp_print          0000000140015f00 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00014f40       pjmedia_sdp_validate       0000000140015f40 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:00014f70       pjmedia_sdp_validate2      0000000140015f70 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:000152b0       pjmedia_sdp_session_clone  00000001400162b0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:000155f0       pjmedia_sdp_session_add_attr 00000001400165f0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:sdp.obj
+ 0001:000183f0       pjmedia_codec_param_clone  00000001400193f0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:000185b0       pjmedia_codec_mgr_init     00000001400195b0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:000186c0       pjmedia_codec_mgr_destroy  00000001400196c0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:00018830       pjmedia_codec_mgr_register_factory 0000000140019830 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:00018af0       pjmedia_codec_mgr_unregister_factory 0000000140019af0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:00018ca0       pjmedia_codec_mgr_enum_codecs 0000000140019ca0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:00018e00       pjmedia_codec_mgr_get_codec_info 0000000140019e00 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:00018f10       pjmedia_codec_info_to_id   0000000140019f10 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:00019000       pjmedia_codec_mgr_find_codecs_by_id 000000014001a000 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:000191b0       pjmedia_codec_mgr_set_codec_priority 000000014001a1b0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:000192f0       pjmedia_codec_mgr_get_default_param 000000014001a2f0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:000195a0       pjmedia_codec_mgr_set_default_param 000000014001a5a0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:00019860       pjmedia_codec_mgr_alloc_codec 000000014001a860 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:00019990       pjmedia_codec_mgr_dealloc_codec 000000014001a990 f   pjmedia-x86_64-x64-vc14-debug-dynamic:codec.obj
+ 0001:0001a250       pjmedia_strerror           000000014001b250 f   pjmedia-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:0001a6d0       pjmedia_resample_create    000000014001b6d0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:resample_resample.obj
+ 0001:0001ab70       pjmedia_resample_run       000000014001bb70 f   pjmedia-x86_64-x64-vc14-debug-dynamic:resample_resample.obj
+ 0001:0001af40       pjmedia_resample_get_input_size 000000014001bf40 f   pjmedia-x86_64-x64-vc14-debug-dynamic:resample_resample.obj
+ 0001:0001afa0       pjmedia_resample_destroy   000000014001bfa0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:resample_resample.obj
+ 0001:0001b220       pjmedia_clock_src_init     000000014001c220 f   pjmedia-x86_64-x64-vc14-debug-dynamic:clock_thread.obj
+ 0001:0001b2d0       pjmedia_clock_src_update   000000014001c2d0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:clock_thread.obj
+ 0001:0001b360       pjmedia_clock_src_get_current_timestamp 000000014001c360 f   pjmedia-x86_64-x64-vc14-debug-dynamic:clock_thread.obj
+ 0001:0001b430       pjmedia_clock_src_get_time_msec 000000014001c430 f   pjmedia-x86_64-x64-vc14-debug-dynamic:clock_thread.obj
+ 0001:0001b4b0       pjmedia_clock_create       000000014001c4b0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:clock_thread.obj
+ 0001:0001b530       pjmedia_clock_create2      000000014001c530 f   pjmedia-x86_64-x64-vc14-debug-dynamic:clock_thread.obj
+ 0001:0001b740       pjmedia_clock_start        000000014001c740 f   pjmedia-x86_64-x64-vc14-debug-dynamic:clock_thread.obj
+ 0001:0001b870       pjmedia_clock_stop         000000014001c870 f   pjmedia-x86_64-x64-vc14-debug-dynamic:clock_thread.obj
+ 0001:0001b930       pjmedia_clock_modify       000000014001c930 f   pjmedia-x86_64-x64-vc14-debug-dynamic:clock_thread.obj
+ 0001:0001b990       pjmedia_clock_wait         000000014001c990 f   pjmedia-x86_64-x64-vc14-debug-dynamic:clock_thread.obj
+ 0001:0001bb40       pjmedia_clock_destroy      000000014001cb40 f   pjmedia-x86_64-x64-vc14-debug-dynamic:clock_thread.obj
+ 0001:0001c190       pjmedia_echo_stat_default  000000014001d190 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_common.obj
+ 0001:0001c210       pjmedia_echo_create        000000014001d210 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_common.obj
+ 0001:0001c270       pjmedia_echo_create2       000000014001d270 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_common.obj
+ 0001:0001c6d0       pjmedia_echo_destroy       000000014001d6d0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_common.obj
+ 0001:0001c730       pjmedia_echo_reset         000000014001d730 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_common.obj
+ 0001:0001c7d0       pjmedia_echo_get_stat      000000014001d7d0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_common.obj
+ 0001:0001c860       pjmedia_echo_playback      000000014001d860 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_common.obj
+ 0001:0001c9a0       pjmedia_echo_capture       000000014001d9a0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_common.obj
+ 0001:0001caf0       pjmedia_echo_cancel        000000014001daf0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_common.obj
+ 0001:0001cfd0       pjmedia_wave_hdr_file_to_host 000000014001dfd0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wave.obj
+ 0001:0001cff0       pjmedia_wave_hdr_host_to_file 000000014001dff0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wave.obj
+ 0001:0001d490       pjmedia_srtp_init_lib      000000014001e490 f   pjmedia-x86_64-x64-vc14-debug-dynamic:transport_srtp.obj
+ 0001:0001d560       pjmedia_srtp_setting_default 000000014001e560 f   pjmedia-x86_64-x64-vc14-debug-dynamic:transport_srtp.obj
+ 0001:0001d5c0       pjmedia_srtp_enum_crypto   000000014001e5c0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:transport_srtp.obj
+ 0001:0001d6d0       pjmedia_srtp_enum_keying   000000014001e6d0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:transport_srtp.obj
+ 0001:0001d780       pjmedia_transport_srtp_create 000000014001e780 f   pjmedia-x86_64-x64-vc14-debug-dynamic:transport_srtp.obj
+ 0001:0001dce0       pjmedia_transport_srtp_dtls_get_fingerprint 000000014001ece0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:transport_srtp.obj
+ 0001:0001dd00       pjmedia_transport_srtp_dtls_start_nego 000000014001ed00 f   pjmedia-x86_64-x64-vc14-debug-dynamic:transport_srtp.obj
+ 0001:0001dd20       pjmedia_transport_srtp_start 000000014001ed20 f   pjmedia-x86_64-x64-vc14-debug-dynamic:transport_srtp.obj
+ 0001:0001e6f0       pjmedia_transport_srtp_stop 000000014001f6f0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:transport_srtp.obj
+ 0001:0001e870       pjmedia_transport_srtp_decrypt_pkt 000000014001f870 f   pjmedia-x86_64-x64-vc14-debug-dynamic:transport_srtp.obj
+ 0001:0001ea90       pjmedia_transport_srtp_get_member 000000014001fa90 f   pjmedia-x86_64-x64-vc14-debug-dynamic:transport_srtp.obj
+ 0001:00020950       get_libsrtp_errstr         0000000140021950 f   pjmedia-x86_64-x64-vc14-debug-dynamic:transport_srtp.obj
+ 0001:00023650       echo_supp_create           0000000140024650 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0001:000238a0       echo_supp_destroy          00000001400248a0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0001:000238b0       echo_supp_get_stat         00000001400248b0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0001:00023ae0       echo_supp_reset            0000000140024ae0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0001:00023c60       echo_supp_cancel_echo      0000000140024c60 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0001:00024240       echo_supp_soft_reset       0000000140025240 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0001:000259a0       speex_aec_create           00000001400269a0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_speex.obj
+ 0001:00025c40       speex_aec_destroy          0000000140026c40 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_speex.obj
+ 0001:00025d80       speex_aec_reset            0000000140026d80 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_speex.obj
+ 0001:00025db0       speex_aec_cancel_echo      0000000140026db0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_speex.obj
+ 0001:00025fc0       speex_aec_playback         0000000140026fc0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_speex.obj
+ 0001:00026090       speex_aec_capture          0000000140027090 f   pjmedia-x86_64-x64-vc14-debug-dynamic:echo_speex.obj
+ 0001:000264b0       pjmedia_delay_buf_create   00000001400274b0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:delaybuf.obj
+ 0001:00026750       pjmedia_delay_buf_put      0000000140027750 f   pjmedia-x86_64-x64-vc14-debug-dynamic:delaybuf.obj
+ 0001:00026960       pjmedia_delay_buf_get      0000000140027960 f   pjmedia-x86_64-x64-vc14-debug-dynamic:delaybuf.obj
+ 0001:00026b90       pjmedia_delay_buf_reset    0000000140027b90 f   pjmedia-x86_64-x64-vc14-debug-dynamic:delaybuf.obj
+ 0001:00026c60       pjmedia_delay_buf_destroy  0000000140027c60 f   pjmedia-x86_64-x64-vc14-debug-dynamic:delaybuf.obj
+ 0001:00027b90       pjmedia_silence_det_create 0000000140028b90 f   pjmedia-x86_64-x64-vc14-debug-dynamic:silencedet.obj
+ 0001:00027ca0       pjmedia_silence_det_set_name 0000000140028ca0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:silencedet.obj
+ 0001:00027d40       pjmedia_silence_det_set_fixed 0000000140028d40 f   pjmedia-x86_64-x64-vc14-debug-dynamic:silencedet.obj
+ 0001:00027dc0       pjmedia_silence_det_set_adaptive 0000000140028dc0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:silencedet.obj
+ 0001:00027e40       pjmedia_silence_det_set_params 0000000140028e40 f   pjmedia-x86_64-x64-vc14-debug-dynamic:silencedet.obj
+ 0001:00027ef0       pjmedia_silence_det_disable 0000000140028ef0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:silencedet.obj
+ 0001:00027f50       pjmedia_silence_det_detect 0000000140028f50 f   pjmedia-x86_64-x64-vc14-debug-dynamic:silencedet.obj
+ 0001:00027fb0       pjmedia_calc_avg_signal    0000000140028fb0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:silencedet.obj
+ 0001:00028060       pjmedia_silence_det_apply  0000000140029060 f   pjmedia-x86_64-x64-vc14-debug-dynamic:silencedet.obj
+ 0001:00028650       pjmedia_wsola_create       0000000140029650 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wsola.obj
+ 0001:00028a60       pjmedia_wsola_set_max_expand 0000000140029a60 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wsola.obj
+ 0001:00028ae0       pjmedia_wsola_destroy      0000000140029ae0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wsola.obj
+ 0001:00028af0       pjmedia_wsola_reset        0000000140029af0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wsola.obj
+ 0001:00028bc0       pjmedia_wsola_save         0000000140029bc0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wsola.obj
+ 0001:000291f0       pjmedia_wsola_generate     000000014002a1f0 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wsola.obj
+ 0001:00029310       pjmedia_wsola_discard      000000014002a310 f   pjmedia-x86_64-x64-vc14-debug-dynamic:wsola.obj
+ 0001:0002b740       pj_getopt                  000000014002c740 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:getopt.obj
+ 0001:0002b790       pj_getopt_long             000000014002c790 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:getopt.obj
+ 0001:0002ccb0       pj_cis_buf_init            000000014002dcb0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002ccf0       pj_cis_init                000000014002dcf0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002cdb0       pj_cis_dup                 000000014002ddb0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002cee0       pj_cis_add_range           000000014002dee0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002cf80       pj_cis_add_alpha           000000014002df80 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002cfc0       pj_cis_add_num             000000014002dfc0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002cff0       pj_cis_add_str             000000014002dff0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d070       pj_cis_add_cis             000000014002e070 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d130       pj_cis_del_range           000000014002e130 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d1b0       pj_cis_del_str             000000014002e1b0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d230       pj_cis_invert              000000014002e230 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d330       pj_scan_init               000000014002e330 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d3f0       pj_scan_fini               000000014002e3f0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d420       pj_scan_peek               000000014002e420 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d4c0       pj_scan_peek_n             000000014002e4c0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d540       pj_scan_peek_until         000000014002e540 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d5f0       pj_scan_get                000000014002e5f0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d6e0       pj_scan_get_unescape       000000014002e6e0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d990       pj_scan_get_quote          000000014002e990 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002d9f0       pj_scan_get_quotes         000000014002e9f0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002dc30       pj_scan_get_n              000000014002ec30 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002dcd0       pj_scan_get_char           000000014002ecd0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002dd50       pj_scan_get_until          000000014002ed50 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002de20       pj_scan_get_until_ch       000000014002ee20 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002dee0       pj_scan_get_until_chr      000000014002eee0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002dfc0       pj_scan_advance_n          000000014002efc0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002e040       pj_scan_strcmp             000000014002f040 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002e0b0       pj_scan_stricmp            000000014002f0b0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002e120       pj_scan_stricmp_alnum      000000014002f120 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002e190       pj_scan_get_newline        000000014002f190 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002e250       pj_scan_skip_whitespace    000000014002f250 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002e4a0       pj_scan_skip_line          000000014002f4a0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002e530       pj_scan_save_state         000000014002f530 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002e580       pj_scan_restore_state      000000014002f580 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:scanner.obj
+ 0001:0002ee70       pj_base64_encode           000000014002fe70 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:base64.obj
+ 0001:0002f0b0       pj_base64_decode           00000001400300b0 f   pjlib-util-x86_64-x64-vc14-debug-dynamic:base64.obj
+ 0001:0002f7f0       pj_init                    00000001400307f0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:0002f9c0       pj_shutdown                00000001400309c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:0002fb00       pj_atexit                  0000000140030b00 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:0002fb50       pj_getpid                  0000000140030b50 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:0002fb80       pj_thread_create           0000000140030b80 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:0002fde0       pj_thread_register         0000000140030de0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:0002ff50       pj_thread_is_registered    0000000140030f50 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:0002ff90       pj_thread_get_prio         0000000140030f90 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:0002ffc0       pj_thread_set_prio         0000000140030fc0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000300c0       pj_thread_get_prio_min     00000001400310c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000300e0       pj_thread_get_prio_max     00000001400310e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030100       pj_thread_get_os_handle    0000000140031100 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030160       pj_thread_get_name         0000000140031160 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000301d0       pj_thread_resume           00000001400311d0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000302a0       pj_thread_this             00000001400312a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030300       pj_thread_join             0000000140031300 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030410       pj_thread_destroy          0000000140031410 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000304e0       pj_thread_sleep            00000001400314e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030510       pj_thread_check_stack      0000000140031510 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030610       pj_thread_get_stack_max_usage 0000000140031610 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030630       pj_thread_get_stack_info   0000000140031630 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000306a0       pj_thread_local_alloc      00000001400316a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030750       pj_thread_local_free       0000000140031750 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030780       pj_thread_local_set        0000000140031780 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030810       pj_thread_local_get        0000000140031810 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030830       pj_atomic_create           0000000140031830 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030890       pj_atomic_destroy          0000000140031890 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000308e0       pj_atomic_set              00000001400318e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030950       pj_atomic_get              0000000140031950 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000309c0       pj_atomic_inc              00000001400319c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030a20       pj_atomic_inc_and_get      0000000140031a20 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030a60       pj_atomic_dec              0000000140031a60 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030ac0       pj_atomic_dec_and_get      0000000140031ac0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030b00       pj_atomic_add              0000000140031b00 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030b60       pj_atomic_add_and_get      0000000140031b60 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030ba0       pj_mutex_create            0000000140031ba0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030c60       pj_mutex_create_simple     0000000140031c60 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030ca0       pj_mutex_create_recursive  0000000140031ca0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030ce0       pj_mutex_lock              0000000140031ce0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030da0       pj_mutex_unlock            0000000140031da0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030e80       pj_mutex_trylock           0000000140031e80 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030f60       pj_mutex_destroy           0000000140031f60 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00030fe0       pj_mutex_is_locked         0000000140031fe0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031020       pj_rwmutex_create          0000000140032020 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031140       pj_rwmutex_lock_read       0000000140032140 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031240       pj_rwmutex_lock_write      0000000140032240 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000312a0       pj_rwmutex_unlock_read     00000001400322a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000313a0       pj_rwmutex_unlock_write    00000001400323a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031430       pj_rwmutex_destroy         0000000140032430 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000314a0       pj_enter_critical_section  00000001400324a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000314c0       pj_leave_critical_section  00000001400324c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000314e0       pj_sem_create              00000001400324e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031680       pj_sem_wait                0000000140032680 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:000316f0       pj_sem_trywait             00000001400326f0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031760       pj_sem_post                0000000140032760 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031830       pj_sem_destroy             0000000140032830 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031900       pj_event_create            0000000140032900 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031ae0       pj_event_wait              0000000140032ae0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031b40       pj_event_trywait           0000000140032b40 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031ba0       pj_event_set               0000000140032ba0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031c70       pj_event_pulse             0000000140032c70 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031d40       pj_event_reset             0000000140032d40 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031e10       pj_event_destroy           0000000140032e10 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031ee0       pj_term_set_color          0000000140032ee0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00031fa0       pj_term_get_color          0000000140032fa0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00032000       pj_run_app                 0000000140033000 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00032030       pj_thread_init             0000000140033030 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_core_win32.obj
+ 0001:00033110       pj_pool_create             0000000140034110 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:00033160       pj_pool_release            0000000140034160 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:000331a0       pj_pool_safe_release       00000001400341a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:000331e0       pj_pool_secure_release     00000001400341e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:00033290       pj_pool_getobjname         0000000140034290 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:000332b0       pj_pool_reset              00000001400342b0 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:000332e0       pj_pool_get_capacity       00000001400342e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:00033300       pj_pool_get_used_size      0000000140034300 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:00033370       pj_pool_alloc              0000000140034370 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:000333d0       pj_pool_calloc             00000001400343d0 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:00033430       pj_pool_alloc_from_block   0000000140034430 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:000334c0       pj_pool_allocate_find      00000001400344c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:00033640       pj_NO_MEMORY_EXCEPTION     0000000140034640 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:00033650       pj_pool_create_int         0000000140034650 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:000337e0       pj_pool_init_int           00000001400347e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:000338c0       pj_pool_destroy_int        00000001400348c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool.obj
+ 0001:00033ec0       pj_caching_pool_init       0000000140034ec0 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool_caching.obj
+ 0001:00034020       pj_caching_pool_destroy    0000000140035020 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool_caching.obj
+ 0001:00034bd0       pj_strerror                0000000140035bd0 f   pjlib-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:00034e70       pj_perror                  0000000140035e70 f   pjlib-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:00034ed0       pj_register_strerror       0000000140035ed0 f   pjlib-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:00035130       pj_errno_clear_handlers    0000000140036130 f   pjlib-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:00035160       pj_perror_1                0000000140036160 f   pjlib-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:000351c0       pj_perror_2                00000001400361c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:00035220       pj_perror_3                0000000140036220 f   pjlib-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:00035280       pj_perror_4                0000000140036280 f   pjlib-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:000352e0       pj_perror_5                00000001400362e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:errno.obj
+ 0001:00035870       pj_log                     0000000140036870 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:000360e0       pj_log_set_log_func        00000001400370e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:00036100       pj_log_get_log_func        0000000140037100 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:00036110       pj_log_set_level           0000000140037110 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:00036130       pj_log_get_level           0000000140037130 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:00036140       pj_log_set_decor           0000000140037140 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:00036160       pj_log_get_decor           0000000140037160 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:00036170       pj_log_add_indent          0000000140037170 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:000361a0       pj_log_push_indent         00000001400371a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:000361c0       pj_log_pop_indent          00000001400371c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:000361e0       pj_log_set_color           00000001400371e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:00036300       pj_log_get_color           0000000140037300 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:000363a0       pj_log_init                00000001400373a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:00036420       pj_log_1                   0000000140037420 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:00036470       pj_log_2                   0000000140037470 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:000364c0       pj_log_3                   00000001400374c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:00036510       pj_log_4                   0000000140037510 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:00036560       pj_log_5                   0000000140037560 f   pjlib-x86_64-x64-vc14-debug-dynamic:log.obj
+ 0001:00036bb0       pj_pool_factory_get_default_policy 0000000140037bb0 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool_policy_malloc.obj
+ 0001:00036d40       pj_str                     0000000140037d40 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00036db0       pj_strassign               0000000140037db0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00036df0       pj_strcpy                  0000000140037df0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00036e50       pj_strcpy2                 0000000140037e50 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00036ed0       pj_strncpy                 0000000140037ed0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00036f70       pj_strncpy_with_null       0000000140037f70 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037020       pj_strdup                  0000000140038020 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:000370b0       pj_strdup_with_null        00000001400380b0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037150       pj_strdup2                 0000000140038150 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037200       pj_strdup2_with_null       0000000140038200 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:000372b0       pj_strdup3                 00000001400382b0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037300       pj_strcmp                  0000000140038300 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037430       pj_strcmp2                 0000000140038430 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037490       pj_strncmp                 0000000140038490 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037520       pj_strncmp2                0000000140038520 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037580       pj_stricmp                 0000000140038580 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:000376b0       pj_stricmp2                00000001400386b0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037710       pj_strnicmp                0000000140038710 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:000377a0       pj_strnicmp2               00000001400387a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037800       pj_strcat                  0000000140038800 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037870       pj_strcat2                 0000000140038870 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037900       pj_strspn                  0000000140038900 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:000379c0       pj_strspn2                 00000001400389c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037a90       pj_strcspn                 0000000140038a90 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037b30       pj_strcspn2                0000000140038b30 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037be0       pj_strtok                  0000000140038be0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037d00       pj_strtok2                 0000000140038d00 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037e20       pj_strstr                  0000000140038e20 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037ed0       pj_stristr                 0000000140038ed0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00037f80       pj_strltrim                0000000140038f80 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00038020       pj_strrtrim                0000000140039020 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:000380c0       pj_strtrim                 00000001400390c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:000380f0       pj_create_random_string    00000001400390f0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00038240       pj_strtol                  0000000140039240 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00038320       pj_strtol2                 0000000140039320 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00038510       pj_strtoul                 0000000140039510 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:000385a0       pj_strtoul2                00000001400395a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00038730       pj_strtoul3                0000000140039730 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00038a10       pj_strtof                  0000000140039a10 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00038be0       pj_utoa                    0000000140039be0 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00038c10       pj_utoa_pad                0000000140039c10 f   pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0001:00039780       pj_get_os_error            000000014003a780 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_error_win32.obj
+ 0001:000397c0       pj_set_os_error            000000014003a7c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_error_win32.obj
+ 0001:00039800       pj_get_netos_error         000000014003a800 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_error_win32.obj
+ 0001:00039840       pj_set_netos_error         000000014003a840 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_error_win32.obj
+ 0001:000398c0       platform_strerror          000000014003a8c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_error_win32.obj
+ 0001:00039c00       pj_inet_ntop2              000000014003ac00 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:00039c60       pj_sockaddr_print          000000014003ac60 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:00039e00       pj_inet_addr               000000014003ae00 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:00039e30       pj_inet_addr2              000000014003ae30 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:00039e80       pj_sockaddr_in_init        000000014003ae80 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:00039f30       pj_sockaddr_init           000000014003af30 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003a020       pj_sockaddr_cmp            000000014003b020 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003a130       pj_sockaddr_get_addr       000000014003b130 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003a1f0       pj_sockaddr_has_addr       000000014003b1f0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003a2e0       pj_sockaddr_get_addr_len   000000014003b2e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003a3a0       pj_sockaddr_get_len        000000014003b3a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003a460       pj_sockaddr_copy_addr      000000014003b460 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003a4d0       pj_sockaddr_cp             000000014003b4d0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003a510       pj_sockaddr_synthesize     000000014003b510 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003a6a0       pj_sockaddr_in_get_addr    000000014003b6a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003a6d0       pj_sockaddr_in_set_addr    000000014003b6d0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003a700       pj_sockaddr_in_set_str_addr 000000014003b700 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003a8b0       pj_sockaddr_set_str_addr   000000014003b8b0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003aa50       pj_sockaddr_get_port       000000014003ba50 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003ab20       pj_sockaddr_in_get_port    000000014003bb20 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003ab50       pj_sockaddr_set_port       000000014003bb50 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003ac10       pj_sockaddr_in_set_port    000000014003bc10 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003ac40       pj_sockaddr_parse          000000014003bc40 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003adc0       pj_sockaddr_parse2         000000014003bdc0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003b310       pj_gethostaddr             000000014003c310 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003b360       pj_sock_bind_random        000000014003c360 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003b4e0       pj_sock_setsockopt_sobuf   000000014003c4e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003b700       pj_addr_str_print          000000014003c700 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003b990       pj_gethostip               000000014003c990 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003c4e0       pj_getipinterface          000000014003d4e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003c760       pj_getdefaultipinterface   000000014003d760 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_common.obj
+ 0001:0003d330       pj_list_insert_before      000000014003e330 f   pjlib-x86_64-x64-vc14-debug-dynamic:list.obj
+ 0001:0003d360       pj_list_insert_nodes_before 000000014003e360 f   pjlib-x86_64-x64-vc14-debug-dynamic:list.obj
+ 0001:0003d390       pj_list_insert_after       000000014003e390 f   pjlib-x86_64-x64-vc14-debug-dynamic:list.obj
+ 0001:0003d3e0       pj_list_insert_nodes_after 000000014003e3e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:list.obj
+ 0001:0003d440       pj_list_merge_first        000000014003e440 f   pjlib-x86_64-x64-vc14-debug-dynamic:list.obj
+ 0001:0003d4a0       pj_list_merge_last         000000014003e4a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:list.obj
+ 0001:0003d500       pj_list_erase              000000014003e500 f   pjlib-x86_64-x64-vc14-debug-dynamic:list.obj
+ 0001:0003d540       pj_list_find_node          000000014003e540 f   pjlib-x86_64-x64-vc14-debug-dynamic:list.obj
+ 0001:0003d5b0       pj_list_search             000000014003e5b0 f   pjlib-x86_64-x64-vc14-debug-dynamic:list.obj
+ 0001:0003d630       pj_list_size               000000014003e630 f   pjlib-x86_64-x64-vc14-debug-dynamic:list.obj
+ 0001:0003d7e0       pj_gettimeofday            000000014003e7e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_time_win32.obj
+ 0001:0003d8a0       pj_time_decode             000000014003e8a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_time_win32.obj
+ 0001:0003d9a0       pj_time_encode             000000014003e9a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_time_win32.obj
+ 0001:0003dc70       pj_ioqueue_name            000000014003ec70 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003dc80       pj_ioqueue_create          000000014003ec80 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003df70       pj_ioqueue_destroy         000000014003ef70 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e0b0       pj_ioqueue_set_lock        000000014003f0b0 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e160       pj_ioqueue_set_default_concurrency 000000014003f160 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e1c0       pj_ioqueue_register_sock   000000014003f1c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e220       pj_ioqueue_register_sock2  000000014003f220 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e4d0       pj_ioqueue_unregister      000000014003f4d0 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e6e0       pj_ioqueue_get_user_data   000000014003f6e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e740       pj_ioqueue_set_user_data   000000014003f740 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e7c0       pj_ioqueue_set_concurrency 000000014003f7c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e870       pj_ioqueue_lock_key        000000014003f870 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e8b0       pj_ioqueue_trylock_key     000000014003f8b0 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e8f0       pj_ioqueue_unlock_key      000000014003f8f0 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e930       pj_ioqueue_op_key_init     000000014003f930 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e960       pj_ioqueue_is_pending      000000014003f960 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003e9b0       pj_ioqueue_post_completion 000000014003f9b0 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003eb90       pj_ioqueue_accept          000000014003fb90 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003ede0       pj_ioqueue_connect         000000014003fde0 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003ef40       pj_ioqueue_poll            000000014003ff40 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003f520       pj_ioqueue_recv            0000000140040520 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003f750       pj_ioqueue_recvfrom        0000000140040750 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003f9c0       pj_ioqueue_send            00000001400409c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:0003fc00       pj_ioqueue_sendto          0000000140040c00 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:00040470       ioqueue_dispatch_write_event 0000000140041470 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:00040940       ioqueue_dispatch_read_event 0000000140041940 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:00040ce0       ioqueue_dispatch_exception_event 0000000140041ce0 f   pjlib-x86_64-x64-vc14-debug-dynamic:ioqueue_select.obj
+ 0001:00041ea0       pj_ntohs                   0000000140042ea0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00041ec0       pj_htons                   0000000140042ec0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00041ee0       pj_ntohl                   0000000140042ee0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00041f00       pj_htonl                   0000000140042f00 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00041f20       pj_inet_ntoa               0000000140042f20 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00041f60       pj_inet_aton               0000000140042f60 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042090       pj_inet_pton               0000000140043090 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042330       pj_inet_ntop               0000000140043330 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042590       pj_gethostname             0000000140043590 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042620       pj_sock_socket             0000000140043620 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:000427c0       pj_sock_close              00000001400437c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042850       pj_sock_bind               0000000140043850 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042930       pj_sock_bind_in            0000000140043930 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:000429d0       pj_sock_listen             00000001400439d0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042a60       pj_sock_accept             0000000140043a60 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042b40       pj_sock_connect            0000000140043b40 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042be0       pj_sock_getpeername        0000000140043be0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042c80       pj_sock_getsockname        0000000140043c80 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042d20       pj_sock_getsockopt         0000000140043d20 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042e20       pj_sock_setsockopt         0000000140043e20 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00042f00       pj_sock_setsockopt_params  0000000140043f00 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00043050       pj_sock_recv               0000000140044050 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00043150       pj_sock_recvfrom           0000000140044150 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00043260       pj_sock_send               0000000140044260 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00043350       pj_sock_sendto             0000000140044350 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00043450       pj_sock_shutdown           0000000140044450 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0001:00043af0       pj_file_exists             0000000140044af0 f   pjlib-x86_64-x64-vc14-debug-dynamic:file_access_win32.obj
+ 0001:00043b90       pj_file_size               0000000140044b90 f   pjlib-x86_64-x64-vc14-debug-dynamic:file_access_win32.obj
+ 0001:00043c50       pj_file_delete             0000000140044c50 f   pjlib-x86_64-x64-vc14-debug-dynamic:file_access_win32.obj
+ 0001:00043d00       pj_file_move               0000000140044d00 f   pjlib-x86_64-x64-vc14-debug-dynamic:file_access_win32.obj
+ 0001:00043dd0       pj_file_getstat            0000000140044dd0 f   pjlib-x86_64-x64-vc14-debug-dynamic:file_access_win32.obj
+ 0001:00044510       pj_file_open               0000000140045510 f   pjlib-x86_64-x64-vc14-debug-dynamic:file_io_win32.obj
+ 0001:00044760       pj_file_close              0000000140045760 f   pjlib-x86_64-x64-vc14-debug-dynamic:file_io_win32.obj
+ 0001:000447d0       pj_file_write              00000001400457d0 f   pjlib-x86_64-x64-vc14-debug-dynamic:file_io_win32.obj
+ 0001:00044880       pj_file_read               0000000140045880 f   pjlib-x86_64-x64-vc14-debug-dynamic:file_io_win32.obj
+ 0001:00044930       pj_file_setpos             0000000140045930 f   pjlib-x86_64-x64-vc14-debug-dynamic:file_io_win32.obj
+ 0001:00044a20       pj_file_getpos             0000000140045a20 f   pjlib-x86_64-x64-vc14-debug-dynamic:file_io_win32.obj
+ 0001:00044aa0       pj_file_flush              0000000140045aa0 f   pjlib-x86_64-x64-vc14-debug-dynamic:file_io_win32.obj
+ 0001:00044da0       pj_array_insert            0000000140045da0 f   pjlib-x86_64-x64-vc14-debug-dynamic:array.obj
+ 0001:00044e60       pj_array_erase             0000000140045e60 f   pjlib-x86_64-x64-vc14-debug-dynamic:array.obj
+ 0001:00044f10       pj_array_find              0000000140045f10 f   pjlib-x86_64-x64-vc14-debug-dynamic:array.obj
+ 0001:00045060       pj_exception_id_alloc      0000000140046060 f   pjlib-x86_64-x64-vc14-debug-dynamic:except.obj
+ 0001:000450e0       pj_exception_id_free       00000001400460e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:except.obj
+ 0001:00045160       pj_exception_id_name       0000000140046160 f   pjlib-x86_64-x64-vc14-debug-dynamic:except.obj
+ 0001:00045210       pj_throw_exception_        0000000140046210 f   pjlib-x86_64-x64-vc14-debug-dynamic:except.obj
+ 0001:000452b0       pj_push_exception_handler_ 00000001400462b0 f   pjlib-x86_64-x64-vc14-debug-dynamic:except.obj
+ 0001:00045350       pj_pop_exception_handler_  0000000140046350 f   pjlib-x86_64-x64-vc14-debug-dynamic:except.obj
+ 0001:000454e0       pj_lock_create_simple_mutex 00000001400464e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045520       pj_lock_create_recursive_mutex 0000000140046520 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045560       pj_lock_create_null_mutex  0000000140046560 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:000455d0       pj_lock_create_semaphore   00000001400465d0 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:000456e0       pj_lock_acquire            00000001400466e0 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045740       pj_lock_tryacquire         0000000140046740 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:000457a0       pj_lock_release            00000001400467a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045800       pj_lock_destroy            0000000140046800 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045860       pj_grp_lock_config_default 0000000140046860 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045890       pj_grp_lock_create         0000000140046890 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045a80       pj_grp_lock_create_w_handler 0000000140046a80 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045af0       pj_grp_lock_destroy        0000000140046af0 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045b10       pj_grp_lock_replace        0000000140046b10 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045bd0       pj_grp_lock_acquire        0000000140046bd0 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045bf0       pj_grp_lock_tryacquire     0000000140046bf0 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045c10       pj_grp_lock_release        0000000140046c10 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045c30       pj_grp_lock_add_handler    0000000140046c30 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045c80       pj_grp_lock_del_handler    0000000140046c80 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045d20       pj_grp_lock_add_ref        0000000140046d20 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045d40       pj_grp_lock_dec_ref        0000000140046d40 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045d60       pj_grp_lock_get_ref        0000000140046d60 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045d90       pj_grp_lock_dump           0000000140046d90 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045de0       pj_grp_lock_chain_lock     0000000140046de0 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00045ed0       pj_grp_lock_unchain_lock   0000000140046ed0 f   pjlib-x86_64-x64-vc14-debug-dynamic:lock.obj
+ 0001:00046bd0       pj_get_timestamp           0000000140047bd0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_win32.obj
+ 0001:00046c50       pj_get_timestamp_freq      0000000140047c50 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_win32.obj
+ 0001:00046d00       pj_gettickcount            0000000140047d00 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_common.obj
+ 0001:00046d60       pj_elapsed_time            0000000140047d60 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_common.obj
+ 0001:00046e20       pj_elapsed_msec            0000000140047e20 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_common.obj
+ 0001:00046e50       pj_elapsed_msec64          0000000140047e50 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_common.obj
+ 0001:00046eb0       pj_elapsed_usec            0000000140047eb0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_common.obj
+ 0001:00046ee0       pj_elapsed_nanosec         0000000140047ee0 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_common.obj
+ 0001:00046f80       pj_elapsed_cycle           0000000140047f80 f   pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_common.obj
+ 0001:00047250       pj_srand                   0000000140048250 f   pjlib-x86_64-x64-vc14-debug-dynamic:rand.obj
+ 0001:00047280       pj_rand                    0000000140048280 f   pjlib-x86_64-x64-vc14-debug-dynamic:rand.obj
+ 0001:00047300       pj_GUID_STRING_LENGTH      0000000140048300 f   pjlib-x86_64-x64-vc14-debug-dynamic:guid_win32.obj
+ 0001:00047310       pj_generate_unique_string  0000000140048310 f   pjlib-x86_64-x64-vc14-debug-dynamic:guid_win32.obj
+ 0001:00047510       pj_get_version             0000000140048510 f   pjlib-x86_64-x64-vc14-debug-dynamic:config.obj
+ 0001:00047520       pj_dump_config             0000000140048520 f   pjlib-x86_64-x64-vc14-debug-dynamic:config.obj
+ 0001:00047c00       pj_pool_create_on_buf      0000000140048c00 f   pjlib-x86_64-x64-vc14-debug-dynamic:pool_buf.obj
+ 0001:00047ef0       pj_log_write               0000000140048ef0 f   pjlib-x86_64-x64-vc14-debug-dynamic:log_writer_stdout.obj
+ 0001:00048080       pj_enum_ip_interface       0000000140049080 f   pjlib-x86_64-x64-vc14-debug-dynamic:ip_helper_win32.obj
+ 0001:000481c0       pj_enum_ip_interface2      00000001400491c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:ip_helper_win32.obj
+ 0001:00048230       pj_enum_ip_route           0000000140049230 f   pjlib-x86_64-x64-vc14-debug-dynamic:ip_helper_win32.obj
+ 0001:00049150       pj_gethostbyname           000000014004a150 f   pjlib-x86_64-x64-vc14-debug-dynamic:addr_resolv_sock.obj
+ 0001:000492c0       pj_getaddrinfo             000000014004a2c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:addr_resolv_sock.obj
+ 0001:000496a0       pj_time_val_normalize      000000014004a6a0 f   pjlib-x86_64-x64-vc14-debug-dynamic:types.obj
+ 0001:00049810       PJ_FD_ZERO                 000000014004a810 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_select.obj
+ 0001:00049860       PJ_FD_COUNT                000000014004a860 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_select.obj
+ 0001:00049880       PJ_FD_SET                  000000014004a880 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_select.obj
+ 0001:000499c0       PJ_FD_CLR                  000000014004a9c0 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_select.obj
+ 0001:00049b20       PJ_FD_ISSET                000000014004ab20 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_select.obj
+ 0001:00049b80       pj_sock_select             000000014004ab80 f   pjlib-x86_64-x64-vc14-debug-dynamic:sock_select.obj
+ 0001:00049de0       res_SrcLinear              000000014004ade0 f   libresample-x86_64-x64-vc14-debug-dynamic:resamplesubs.obj
+ 0001:00049e20       res_Resample               000000014004ae20 f   libresample-x86_64-x64-vc14-debug-dynamic:resamplesubs.obj
+ 0001:00049ff0       res_GetXOFF                000000014004aff0 f   libresample-x86_64-x64-vc14-debug-dynamic:resamplesubs.obj
+ 0001:0004af30       speex_echo_state_init      000000014004bf30 f   libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0001:0004af60       speex_echo_state_init_mc   000000014004bf60 f   libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0001:0004b7b0       speex_echo_state_destroy   000000014004c7b0 f   libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0001:0004b990       speex_echo_cancellation    000000014004c990 f   libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0001:0004e3a0       speex_echo_cancel          000000014004f3a0 f   libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0001:0004e3e0       speex_echo_capture         000000014004f3e0 f   libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0001:0004e580       speex_echo_playback        000000014004f580 f   libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0001:0004e740       speex_echo_state_reset     000000014004f740 f   libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0001:0004eb10       speex_echo_ctl             000000014004fb10 f   libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0001:0004ee20       speex_echo_get_residual    000000014004fe20 f   libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0001:00050e10       speex_decorrelate_new      0000000140051e10 f   libspeex-x86_64-x64-vc14-debug-dynamic:scal.obj
+ 0001:00051090       speex_decorrelate          0000000140052090 f   libspeex-x86_64-x64-vc14-debug-dynamic:scal.obj
+ 0001:00051980       speex_decorrelate_destroy  0000000140052980 f   libspeex-x86_64-x64-vc14-debug-dynamic:scal.obj
+ 0001:00051e30       speex_preprocess_state_init 0000000140052e30 f   libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0001:00052770       speex_preprocess_state_destroy 0000000140053770 f   libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0001:00052920       speex_preprocess_run       0000000140053920 f   libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0001:000543f0       speex_preprocess           00000001400553f0 f   libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0001:00054420       speex_preprocess_estimate_update 0000000140055420 f   libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0001:00054690       speex_preprocess_ctl       0000000140055690 f   libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0001:000572f0       spx_fft_init               00000001400582f0 f   libspeex-x86_64-x64-vc14-debug-dynamic:fftwrap.obj
+ 0001:00057330       spx_fft_destroy            0000000140058330 f   libspeex-x86_64-x64-vc14-debug-dynamic:fftwrap.obj
+ 0001:00057360       spx_fft                    0000000140058360 f   libspeex-x86_64-x64-vc14-debug-dynamic:fftwrap.obj
+ 0001:000574a0       spx_ifft                   00000001400584a0 f   libspeex-x86_64-x64-vc14-debug-dynamic:fftwrap.obj
+ 0001:00057550       spx_fft_float              0000000140058550 f   libspeex-x86_64-x64-vc14-debug-dynamic:fftwrap.obj
+ 0001:00057590       spx_ifft_float             0000000140058590 f   libspeex-x86_64-x64-vc14-debug-dynamic:fftwrap.obj
+ 0001:00057690       filterbank_new             0000000140058690 f   libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0001:00057ba0       filterbank_destroy         0000000140058ba0 f   libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0001:00057c10       filterbank_compute_bank32  0000000140058c10 f   libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0001:00057d40       filterbank_compute_psd16   0000000140058d40 f   libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0001:00057e30       filterbank_compute_bank    0000000140058e30 f   libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0001:00057fb0       filterbank_compute_psd     0000000140058fb0 f   libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0001:000580f0       filterbank_psy_smooth      00000001400590f0 f   libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0001:00058520       spx_drft_forward           0000000140059520 f   libspeex-x86_64-x64-vc14-debug-dynamic:smallft.obj
+ 0001:00058590       spx_drft_backward          0000000140059590 f   libspeex-x86_64-x64-vc14-debug-dynamic:smallft.obj
+ 0001:00058600       spx_drft_init              0000000140059600 f   libspeex-x86_64-x64-vc14-debug-dynamic:smallft.obj
+ 0001:00058670       spx_drft_clear             0000000140059670 f   libspeex-x86_64-x64-vc14-debug-dynamic:smallft.obj
+ 0001:0005fa40       srtp_init                  0000000140060a40 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:0005fa90       srtp_shutdown              0000000140060a90 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:0005fac0       srtp_protect               0000000140060ac0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:0005fb00       srtp_protect_mki           0000000140060b00 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00060520       srtp_unprotect             0000000140061520 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00060560       srtp_unprotect_mki         0000000140061560 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061070       srtp_create                0000000140062070 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061150       srtp_add_stream            0000000140062150 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000612b0       srtp_remove_stream         00000001400622b0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061390       srtp_update                0000000140062390 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061410       srtp_update_stream         0000000140062410 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000614b0       srtp_crypto_policy_set_rtp_default 00000001400624b0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061510       srtp_crypto_policy_set_rtcp_default 0000000140062510 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061570       srtp_crypto_policy_set_aes_cm_128_hmac_sha1_32 0000000140062570 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000615d0       srtp_crypto_policy_set_aes_cm_128_null_auth 00000001400625d0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061630       srtp_crypto_policy_set_null_cipher_hmac_sha1_80 0000000140062630 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061690       srtp_crypto_policy_set_null_cipher_hmac_null 0000000140062690 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000616f0       srtp_crypto_policy_set_aes_cm_256_hmac_sha1_80 00000001400626f0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061750       srtp_crypto_policy_set_aes_cm_256_hmac_sha1_32 0000000140062750 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000617b0       srtp_crypto_policy_set_aes_cm_256_null_auth 00000001400627b0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061810       srtp_dealloc               0000000140062810 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000618b0       srtp_crypto_policy_set_from_profile_for_rtp 00000001400628b0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061920       srtp_crypto_policy_set_from_profile_for_rtcp 0000000140062920 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061990       srtp_profile_get_master_key_length 0000000140062990 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061a00       srtp_profile_get_master_salt_length 0000000140062a00 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061a70       srtp_append_salt_to_key    0000000140062a70 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061ac0       srtp_protect_rtcp          0000000140062ac0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00061b00       srtp_protect_rtcp_mki      0000000140062b00 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000621d0       srtp_unprotect_rtcp        00000001400631d0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062210       srtp_unprotect_rtcp_mki    0000000140063210 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062af0       srtp_set_user_data         0000000140063af0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062b10       srtp_get_user_data         0000000140063b10 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062b30       srtp_install_event_handler 0000000140063b30 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062b50       srtp_get_version_string    0000000140063b50 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062b60       srtp_get_version           0000000140063b60 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062c10       srtp_set_debug_module      0000000140063c10 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062c40       srtp_list_debug_modules    0000000140063c40 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062c60       srtp_install_log_handler   0000000140063c60 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062cc0       srtp_get_protect_trailer_length 0000000140063cc0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062dd0       srtp_get_protect_rtcp_trailer_length 0000000140063dd0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062f00       srtp_set_stream_roc        0000000140063f00 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00062f60       srtp_get_stream_roc        0000000140063f60 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00063030       srtp_get_stream            0000000140064030 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00063080       srtp_stream_init_keys      0000000140064080 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00063c20       srtp_stream_init           0000000140064c20 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00064060       srtp_stream_alloc          0000000140065060 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000644f0       srtp_stream_dealloc        00000001400654f0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00064820       srtp_stream_clone          0000000140065820 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00064e50       srtp_validate_policy_master_keys 0000000140065e50 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00064f00       srtp_get_session_keys_with_mki_index 0000000140065f00 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00064f50       srtp_inject_mki            0000000140065f50 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00064fb0       srtp_stream_init_all_master_keys 0000000140065fb0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000650a0       srtp_event_reporter        00000001400660a0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00065770       srtp_get_session_keys      0000000140066770 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000673c0       srtp_err_handler           00000001400683c0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000692d0       __local_stdio_scanf_options 000000014006a2d0 f i libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000692e0       _vsscanf_l                 000000014006a2e0 f i libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:00069350       sscanf                     000000014006a350 f i libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0001:000693c0       srtp_crypto_alloc          000000014006a3c0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:alloc.obj
+ 0001:00069440       srtp_crypto_free           000000014006a440 f   libsrtp-x86_64-x64-vc14-debug-dynamic:alloc.obj
+ 0001:000694b0       octet_get_weight           000000014006a4b0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:000694d0       srtp_octet_string_hex_string 000000014006a4d0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:000695c0       v128_bit_string            000000014006a5c0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:000696a0       v128_hex_string            000000014006a6a0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:00069770       v128_copy_octet_string     000000014006a770 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:000699d0       v128_left_shift            000000014006a9d0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:00069b90       v128_right_shift           000000014006ab90 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:00069d40       octet_string_is_eq         000000014006ad40 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:00069de0       srtp_cleanse               000000014006ade0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:00069e40       octet_string_set_to_zero   000000014006ae40 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:00069e70       bitvector_alloc            000000014006ae70 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:00069f20       bitvector_dealloc          000000014006af20 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:00069f70       bitvector_set_to_zero      000000014006af70 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:00069fb0       bitvector_left_shift       000000014006afb0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:0006a190       bitvector_bit_string       000000014006b190 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:0006a270       srtp_nibble_to_hex_char    000000014006b270 f   libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0001:0006a690       srtp_err_reporting_init    000000014006b690 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp_err.obj
+ 0001:0006a6a0       srtp_install_err_report_handler 000000014006b6a0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp_err.obj
+ 0001:0006a6b0       srtp_err_report            000000014006b6b0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp_err.obj
+ 0001:0006a710       srtp_err_reporting_set_level 000000014006b710 f   libsrtp-x86_64-x64-vc14-debug-dynamic:srtp_err.obj
+ 0001:0006a750       srtp_rdbx_init             000000014006b750 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006a7b0       srtp_rdbx_dealloc          000000014006b7b0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006a7e0       srtp_rdbx_estimate_index   000000014006b7e0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006a850       srtp_rdbx_check            000000014006b850 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006a8f0       srtp_rdbx_add_index        000000014006b8f0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006aa10       srtp_rdbx_set_roc          000000014006ba10 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006aa90       srtp_rdbx_get_packet_index 000000014006ba90 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006aab0       srtp_rdbx_get_window_size  000000014006bab0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006aad0       srtp_index_init            000000014006bad0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006aaf0       srtp_index_advance         000000014006baf0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006ab20       srtp_index_guess           000000014006bb20 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006ac40       srtp_rdbx_get_roc          000000014006bc40 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006ac70       srtp_rdbx_set_roc_seq      000000014006bc70 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdbx.obj
+ 0001:0006ae50       srtp_rdb_init              000000014006be50 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdb.obj
+ 0001:0006aed0       srtp_rdb_check             000000014006bed0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdb.obj
+ 0001:0006af60       srtp_rdb_add_index         000000014006bf60 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdb.obj
+ 0001:0006b030       srtp_rdb_increment         000000014006c030 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdb.obj
+ 0001:0006b070       srtp_rdb_get_value         000000014006c070 f   libsrtp-x86_64-x64-vc14-debug-dynamic:rdb.obj
+ 0001:0006b110       srtp_cipher_get_key_length 000000014006c110 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006b130       srtp_cipher_type_self_test 000000014006c130 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006b160       srtp_cipher_type_test      000000014006c160 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006bfc0       srtp_cipher_bits_per_second 000000014006cfc0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006c140       srtp_cipher_type_alloc     000000014006d140 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006c1a0       srtp_cipher_dealloc        000000014006d1a0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006c1e0       srtp_cipher_init           000000014006d1e0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006c240       srtp_cipher_set_iv         000000014006d240 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006c2b0       srtp_cipher_output         000000014006d2b0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006c300       srtp_cipher_encrypt        000000014006d300 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006c370       srtp_cipher_decrypt        000000014006d370 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006c3e0       srtp_cipher_get_tag        000000014006d3e0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006c460       srtp_cipher_set_aad        000000014006d460 f   libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0001:0006ca50       srtp_auth_get_key_length   000000014006da50 f   libsrtp-x86_64-x64-vc14-debug-dynamic:auth.obj
+ 0001:0006ca70       srtp_auth_get_tag_length   000000014006da70 f   libsrtp-x86_64-x64-vc14-debug-dynamic:auth.obj
+ 0001:0006ca90       srtp_auth_get_prefix_length 000000014006da90 f   libsrtp-x86_64-x64-vc14-debug-dynamic:auth.obj
+ 0001:0006cab0       srtp_auth_type_self_test   000000014006dab0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:auth.obj
+ 0001:0006cae0       srtp_auth_type_test        000000014006dae0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:auth.obj
+ 0001:0006cf70       srtp_key_limit_set         000000014006df70 f   libsrtp-x86_64-x64-vc14-debug-dynamic:key.obj
+ 0001:0006cfb0       srtp_key_limit_clone       000000014006dfb0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:key.obj
+ 0001:0006cfe0       srtp_key_limit_check       000000014006dfe0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:key.obj
+ 0001:0006d000       srtp_key_limit_update      000000014006e000 f   libsrtp-x86_64-x64-vc14-debug-dynamic:key.obj
+ 0001:0006d0b0       srtp_replace_cipher_type   000000014006e0b0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006d0e0       srtp_replace_auth_type     000000014006e0e0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006d110       srtp_crypto_kernel_init    000000014006e110 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006d2e0       srtp_crypto_kernel_shutdown 000000014006e2e0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006d420       srtp_crypto_kernel_status  000000014006e420 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006d580       srtp_crypto_kernel_list_debug_modules 000000014006e580 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006d620       srtp_crypto_kernel_load_cipher_type 000000014006e620 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006d650       srtp_crypto_kernel_load_auth_type 000000014006e650 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006d680       srtp_crypto_kernel_load_debug_module 000000014006e680 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006d740       srtp_crypto_kernel_alloc_cipher 000000014006e740 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006d7b0       srtp_crypto_kernel_alloc_auth 000000014006e7b0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006d820       srtp_crypto_kernel_set_debug_module 000000014006e820 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006da00       srtp_crypto_kernel_do_load_auth_type 000000014006ea00 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006db60       srtp_crypto_kernel_get_cipher_type 000000014006eb60 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006dbb0       srtp_crypto_kernel_get_auth_type 000000014006ebb0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0001:0006ded0       srtp_ekt_octets_after_base_tag 000000014006eed0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:ekt.obj
+ 0001:0006df10       srtp_ekt_alloc             000000014006ef10 f   libsrtp-x86_64-x64-vc14-debug-dynamic:ekt.obj
+ 0001:0006df50       srtp_ekt_stream_init_from_policy 000000014006ef50 f   libsrtp-x86_64-x64-vc14-debug-dynamic:ekt.obj
+ 0001:0006df70       srtp_stream_init_from_ekt  000000014006ef70 f   libsrtp-x86_64-x64-vc14-debug-dynamic:ekt.obj
+ 0001:0006e0c0       srtp_ekt_write_data        000000014006f0c0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:ekt.obj
+ 0001:0006e390       aes_decrypt_with_raw_key   000000014006f390 f   libsrtp-x86_64-x64-vc14-debug-dynamic:ekt.obj
+ 0001:0006e410       srtcp_ekt_trailer          000000014006f410 f   libsrtp-x86_64-x64-vc14-debug-dynamic:ekt.obj
+ 0001:0006e580       stat_test_monobit          000000014006f580 f   libsrtp-x86_64-x64-vc14-debug-dynamic:stat.obj
+ 0001:0006e630       stat_test_poker            000000014006f630 f   libsrtp-x86_64-x64-vc14-debug-dynamic:stat.obj
+ 0001:0006e830       stat_test_runs             000000014006f830 f   libsrtp-x86_64-x64-vc14-debug-dynamic:stat.obj
+ 0001:00070af0       srtp_aes_expand_encryption_key 0000000140071af0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:aes.obj
+ 0001:00070b60       srtp_aes_expand_decryption_key 0000000140071b60 f   libsrtp-x86_64-x64-vc14-debug-dynamic:aes.obj
+ 0001:00071380       srtp_aes_encrypt           0000000140072380 f   libsrtp-x86_64-x64-vc14-debug-dynamic:aes.obj
+ 0001:000716c0       srtp_aes_decrypt           00000001400726c0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:aes.obj
+ 0001:00073820       srtp_sha1_init             0000000140074820 f   libsrtp-x86_64-x64-vc14-debug-dynamic:sha1.obj
+ 0001:000738b0       srtp_sha1_update           00000001400748b0 f   libsrtp-x86_64-x64-vc14-debug-dynamic:sha1.obj
+ 0001:00073a60       srtp_sha1_final            0000000140074a60 f   libsrtp-x86_64-x64-vc14-debug-dynamic:sha1.obj
+ 0001:00074660       srtp_sha1_core             0000000140075660 f   libsrtp-x86_64-x64-vc14-debug-dynamic:sha1.obj
+ 0001:00075290       srtp_sha1                  0000000140076290 f   libsrtp-x86_64-x64-vc14-debug-dynamic:sha1.obj
+ 0001:000759be       CoCreateGuid               00000001400769be f   ole32:ole32.dll
+ 0001:000759c4       WSAStartup                 00000001400769c4 f   ws2_32:WS2_32.dll
+ 0001:000759ca       WSACleanup                 00000001400769ca f   ws2_32:WS2_32.dll
+ 0001:000759d0       WSAGetLastError            00000001400769d0 f   ws2_32:WS2_32.dll
+ 0001:000759d6       WSASetLastError            00000001400769d6 f   ws2_32:WS2_32.dll
+ 0001:000759dc       ioctlsocket                00000001400769dc f   ws2_32:WS2_32.dll
+ 0001:000759e2       accept                     00000001400769e2 f   ws2_32:WS2_32.dll
+ 0001:000759e8       bind                       00000001400769e8 f   ws2_32:WS2_32.dll
+ 0001:000759ee       closesocket                00000001400769ee f   ws2_32:WS2_32.dll
+ 0001:000759f4       connect                    00000001400769f4 f   ws2_32:WS2_32.dll
+ 0001:000759fa       getpeername                00000001400769fa f   ws2_32:WS2_32.dll
+ 0001:00075a00       getsockname                0000000140076a00 f   ws2_32:WS2_32.dll
+ 0001:00075a06       getsockopt                 0000000140076a06 f   ws2_32:WS2_32.dll
+ 0001:00075a0c       htonl                      0000000140076a0c f   ws2_32:WS2_32.dll
+ 0001:00075a12       htons                      0000000140076a12 f   ws2_32:WS2_32.dll
+ 0001:00075a18       inet_addr                  0000000140076a18 f   ws2_32:WS2_32.dll
+ 0001:00075a1e       inet_ntoa                  0000000140076a1e f   ws2_32:WS2_32.dll
+ 0001:00075a24       listen                     0000000140076a24 f   ws2_32:WS2_32.dll
+ 0001:00075a2a       ntohl                      0000000140076a2a f   ws2_32:WS2_32.dll
+ 0001:00075a30       ntohs                      0000000140076a30 f   ws2_32:WS2_32.dll
+ 0001:00075a36       recv                       0000000140076a36 f   ws2_32:WS2_32.dll
+ 0001:00075a3c       recvfrom                   0000000140076a3c f   ws2_32:WS2_32.dll
+ 0001:00075a42       send                       0000000140076a42 f   ws2_32:WS2_32.dll
+ 0001:00075a48       sendto                     0000000140076a48 f   ws2_32:WS2_32.dll
+ 0001:00075a4e       setsockopt                 0000000140076a4e f   ws2_32:WS2_32.dll
+ 0001:00075a54       shutdown                   0000000140076a54 f   ws2_32:WS2_32.dll
+ 0001:00075a5a       gethostname                0000000140076a5a f   ws2_32:WS2_32.dll
+ 0001:00075a60       WSAIoctl                   0000000140076a60 f   ws2_32:WS2_32.dll
+ 0001:00075a66       WSASocketA                 0000000140076a66 f   ws2_32:WS2_32.dll
+ 0001:00075a6c       WSAAddressToStringA        0000000140076a6c f   ws2_32:WS2_32.dll
+ 0001:00075a72       WSAStringToAddressA        0000000140076a72 f   ws2_32:WS2_32.dll
+ 0001:00075a78       gethostbyname              0000000140076a78 f   ws2_32:WS2_32.dll
+ 0001:00075a7e       __WSAFDIsSet               0000000140076a7e f   ws2_32:WS2_32.dll
+ 0001:00075a84       select                     0000000140076a84 f   ws2_32:WS2_32.dll
+ 0001:00075a90       __GSHandlerCheck           0000000140076a90 f   MSVCRTD:_gshandler_.obj
+ 0001:00075ae0       __GSHandlerCheckCommon     0000000140076ae0 f   MSVCRTD:_gshandler_.obj
+ 0001:00075c30       __security_check_cookie    0000000140076c30 f   MSVCRTD:_amdsecgs_.obj
+ 0001:00075fb0       ?configure_argv@__scrt_narrow_argv_policy@@SAHXZ 0000000140076fb0 f i MSVCRTD:exe_main.obj
+ 0001:00075fd0       ?get_app_type@__scrt_main_policy@@SA?AW4_crt_app_type@@XZ 0000000140076fd0 f i MSVCRTD:exe_main.obj
+ 0001:00076050       mainCRTStartup             0000000140077050 f   MSVCRTD:exe_main.obj
+ 0001:00076070       __raise_securityfailure    0000000140077070 f   MSVCRTD:gs_report.obj
+ 0001:000760c0       __report_gsfailure         00000001400770c0 f   MSVCRTD:gs_report.obj
+ 0001:000761d0       __report_rangecheckfailure 00000001400771d0 f   MSVCRTD:gs_report.obj
+ 0001:000761f0       __report_securityfailure   00000001400771f0 f   MSVCRTD:gs_report.obj
+ 0001:000762c0       __report_securityfailureEx 00000001400772c0 f   MSVCRTD:gs_report.obj
+ 0001:000765d0       _alloca_probe              00000001400775d0 f   MSVCRTD:_chkstk_.obj
+ 0001:000765d0       __chkstk                   00000001400775d0 f   MSVCRTD:_chkstk_.obj
+ 0001:00076640       ??$__crt_fast_decode_pointer@PEAP6AXXZ@@YAPEAP6AXXZQEAP6AXXZ@Z 0000000140077640 f i MSVCRTD:utility.obj
+ 0001:00076690       ??$__crt_fast_encode_pointer@PEAP6AXXZ@@YAPEAP6AXXZQEAP6AXXZ@Z 0000000140077690 f i MSVCRTD:utility.obj
+ 0001:000766e0       ?__crt_rotate_pointer_value@@YA_K_KH@Z 00000001400776e0 f i MSVCRTD:utility.obj
+ 0001:000768b0       NtCurrentTeb               00000001400778b0 f i MSVCRTD:utility.obj
+ 0001:000768c0       __scrt_acquire_startup_lock 00000001400778c0 f   MSVCRTD:utility.obj
+ 0001:00076940       __scrt_dllmain_after_initialize_c 0000000140077940 f   MSVCRTD:utility.obj
+ 0001:00076980       __scrt_dllmain_before_initialize_c 0000000140077980 f   MSVCRTD:utility.obj
+ 0001:000769b0       __scrt_dllmain_crt_thread_attach 00000001400779b0 f   MSVCRTD:utility.obj
+ 0001:000769f0       __scrt_dllmain_crt_thread_detach 00000001400779f0 f   MSVCRTD:utility.obj
+ 0001:00076a10       __scrt_dllmain_exception_filter 0000000140077a10 f   MSVCRTD:utility.obj
+ 0001:00076a90       __scrt_dllmain_uninitialize_c 0000000140077a90 f   MSVCRTD:utility.obj
+ 0001:00076ad0       __scrt_dllmain_uninitialize_critical 0000000140077ad0 f   MSVCRTD:utility.obj
+ 0001:00076af0       __scrt_initialize_crt      0000000140077af0 f   MSVCRTD:utility.obj
+ 0001:00076b50       __scrt_initialize_onexit_tables 0000000140077b50 f   MSVCRTD:utility.obj
+ 0001:00076c90       __scrt_is_nonwritable_in_current_image 0000000140077c90 f   MSVCRTD:utility.obj
+ 0001:00076d40       __scrt_release_startup_lock 0000000140077d40 f   MSVCRTD:utility.obj
+ 0001:00076d80       __scrt_uninitialize_crt    0000000140077d80 f   MSVCRTD:utility.obj
+ 0001:00076dd0       _onexit                    0000000140077dd0 f   MSVCRTD:utility.obj
+ 0001:00076e80       at_quick_exit              0000000140077e80 f   MSVCRTD:utility.obj
+ 0001:00076ef0       atexit                     0000000140077ef0 f   MSVCRTD:utility.obj
+ 0001:00076f30       __security_init_cookie     0000000140077f30 f   MSVCRTD:gs_support.obj
+ 0001:00077090       _matherr                   0000000140078090 f   MSVCRTD:matherr.obj
+ 0001:000770a0       _get_startup_argv_mode     00000001400780a0 f   MSVCRTD:argv_mode.obj
+ 0001:000770b0       _get_startup_commit_mode   00000001400780b0 f   MSVCRTD:commit_mode.obj
+ 0001:000770c0       _get_startup_file_mode     00000001400780c0 f   MSVCRTD:file_mode.obj
+ 0001:000770d0       _get_startup_new_mode      00000001400780d0 f   MSVCRTD:new_mode.obj
+ 0001:000770e0       _get_startup_thread_locale_mode 00000001400780e0 f   MSVCRTD:thread_locale.obj
+ 0001:000770f0       ?__scrt_initialize_type_info@@YAXXZ 00000001400780f0 f   MSVCRTD:tncleanup.obj
+ 0001:00077110       ?__scrt_uninitialize_type_info@@YAXXZ 0000000140078110 f   MSVCRTD:tncleanup.obj
+ 0001:00077130       _should_initialize_environment 0000000140078130 f   MSVCRTD:env_mode.obj
+ 0001:00077140       _initialize_invalid_parameter_handler 0000000140078140 f   MSVCRTD:invalid_parameter_handler.obj
+ 0001:00077150       _initialize_denormal_control 0000000140078150 f   MSVCRTD:denormal_control.obj
+ 0001:00077160       __scrt_initialize_default_local_stdio_options 0000000140078160 f   MSVCRTD:default_local_stdio_options.obj
+ 0001:000771c0       __scrt_is_user_matherr_present 00000001400781c0 f   MSVCRTD:matherr_detection.obj
+ 0001:000771f0       __scrt_get_dyn_tls_init_callback 00000001400781f0 f   MSVCRTD:dyn_tls_init.obj
+ 0001:00077200       __scrt_get_dyn_tls_dtor_callback 0000000140078200 f   MSVCRTD:dyn_tls_dtor.obj
+ 0001:00077210       __crt_debugger_hook        0000000140078210 f   MSVCRTD:utility_desktop.obj
+ 0001:00077230       __scrt_fastfail            0000000140078230 f   MSVCRTD:utility_desktop.obj
+ 0001:00077430       __scrt_get_show_window_mode 0000000140078430 f   MSVCRTD:utility_desktop.obj
+ 0001:000774a0       __scrt_initialize_winrt    00000001400784a0 f   MSVCRTD:utility_desktop.obj
+ 0001:000774b0       __scrt_is_managed_app      00000001400784b0 f   MSVCRTD:utility_desktop.obj
+ 0001:00077580       __scrt_set_unhandled_exception_filter 0000000140078580 f   MSVCRTD:utility_desktop.obj
+ 0001:000775a0       __scrt_unhandled_exception_filter 00000001400785a0 f   MSVCRTD:utility_desktop.obj
+ 0001:00077630       _RTC_Initialize            0000000140078630 f   MSVCRTD:_initsect_.obj
+ 0001:00077690       _RTC_Terminate             0000000140078690 f   MSVCRTD:_initsect_.obj
+ 0001:000776f0       _guard_check_icall         00000001400786f0 f i MSVCRTD:checkcfg.obj
+ 0001:00077710       __isa_available_init       0000000140078710 f   MSVCRTD:_cpu_disp_.obj
+ 0001:00077b70       __scrt_is_ucrt_dll_in_use  0000000140078b70 f   MSVCRTD:ucrt_detection.obj
+ 0001:00077ba0       _guard_check_icall_nop     0000000140078ba0 f i MSVCRTD:guard_support.obj
+ 0001:00077bb0       _guard_icall_checks_enforced 0000000140078bb0 f i MSVCRTD:guard_support.obj
+ 0001:00077bf0       waveOutGetErrorTextA       0000000140078bf0 f   winmm:WINMM.dll
+ 0001:00077bf6       waveInGetErrorTextA        0000000140078bf6 f   winmm:WINMM.dll
+ 0001:00077bfc       waveOutGetNumDevs          0000000140078bfc f   winmm:WINMM.dll
+ 0001:00077c02       waveOutGetDevCapsA         0000000140078c02 f   winmm:WINMM.dll
+ 0001:00077c08       waveOutGetVolume           0000000140078c08 f   winmm:WINMM.dll
+ 0001:00077c0e       waveOutSetVolume           0000000140078c0e f   winmm:WINMM.dll
+ 0001:00077c14       waveOutOpen                0000000140078c14 f   winmm:WINMM.dll
+ 0001:00077c1a       waveOutClose               0000000140078c1a f   winmm:WINMM.dll
+ 0001:00077c20       waveOutPrepareHeader       0000000140078c20 f   winmm:WINMM.dll
+ 0001:00077c26       waveOutUnprepareHeader     0000000140078c26 f   winmm:WINMM.dll
+ 0001:00077c2c       waveOutWrite               0000000140078c2c f   winmm:WINMM.dll
+ 0001:00077c32       waveOutPause               0000000140078c32 f   winmm:WINMM.dll
+ 0001:00077c38       waveOutRestart             0000000140078c38 f   winmm:WINMM.dll
+ 0001:00077c3e       waveOutReset               0000000140078c3e f   winmm:WINMM.dll
+ 0001:00077c44       waveInGetNumDevs           0000000140078c44 f   winmm:WINMM.dll
+ 0001:00077c4a       waveInGetDevCapsA          0000000140078c4a f   winmm:WINMM.dll
+ 0001:00077c50       waveInOpen                 0000000140078c50 f   winmm:WINMM.dll
+ 0001:00077c56       waveInClose                0000000140078c56 f   winmm:WINMM.dll
+ 0001:00077c5c       waveInPrepareHeader        0000000140078c5c f   winmm:WINMM.dll
+ 0001:00077c62       waveInUnprepareHeader      0000000140078c62 f   winmm:WINMM.dll
+ 0001:00077c68       waveInAddBuffer            0000000140078c68 f   winmm:WINMM.dll
+ 0001:00077c6e       waveInStart                0000000140078c6e f   winmm:WINMM.dll
+ 0001:00077c74       waveInStop                 0000000140078c74 f   winmm:WINMM.dll
+ 0001:00077c7a       waveInReset                0000000140078c7a f   winmm:WINMM.dll
+ 0001:00077c80       CloseHandle                0000000140078c80 f   kernel32:KERNEL32.dll
+ 0001:00077c86       SetEvent                   0000000140078c86 f   kernel32:KERNEL32.dll
+ 0001:00077c8c       CreateEventA               0000000140078c8c f   kernel32:KERNEL32.dll
+ 0001:00077c92       GetCurrentThread           0000000140078c92 f   kernel32:KERNEL32.dll
+ 0001:00077c98       SetThreadPriority          0000000140078c98 f   kernel32:KERNEL32.dll
+ 0001:00077c9e       WaitForMultipleObjects     0000000140078c9e f   kernel32:KERNEL32.dll
+ 0001:00077ca4       GetStdHandle               0000000140078ca4 f   kernel32:KERNEL32.dll
+ 0001:00077caa       GetLastError               0000000140078caa f   kernel32:KERNEL32.dll
+ 0001:00077cb0       InitializeCriticalSection  0000000140078cb0 f   kernel32:KERNEL32.dll
+ 0001:00077cb6       EnterCriticalSection       0000000140078cb6 f   kernel32:KERNEL32.dll
+ 0001:00077cbc       LeaveCriticalSection       0000000140078cbc f   kernel32:KERNEL32.dll
+ 0001:00077cc2       TryEnterCriticalSection    0000000140078cc2 f   kernel32:KERNEL32.dll
+ 0001:00077cc8       DeleteCriticalSection      0000000140078cc8 f   kernel32:KERNEL32.dll
+ 0001:00077cce       ResetEvent                 0000000140078cce f   kernel32:KERNEL32.dll
+ 0001:00077cd4       ReleaseSemaphore           0000000140078cd4 f   kernel32:KERNEL32.dll
+ 0001:00077cda       WaitForSingleObject        0000000140078cda f   kernel32:KERNEL32.dll
+ 0001:00077ce0       Sleep                      0000000140078ce0 f   kernel32:KERNEL32.dll
+ 0001:00077ce6       GetCurrentProcessId        0000000140078ce6 f   kernel32:KERNEL32.dll
+ 0001:00077cec       CreateThread               0000000140078cec f   kernel32:KERNEL32.dll
+ 0001:00077cf2       GetCurrentThreadId         0000000140078cf2 f   kernel32:KERNEL32.dll
+ 0001:00077cf8       GetThreadPriority          0000000140078cf8 f   kernel32:KERNEL32.dll
+ 0001:00077cfe       ResumeThread               0000000140078cfe f   kernel32:KERNEL32.dll
+ 0001:00077d04       TlsAlloc                   0000000140078d04 f   kernel32:KERNEL32.dll
+ 0001:00077d0a       TlsGetValue                0000000140078d0a f   kernel32:KERNEL32.dll
+ 0001:00077d10       TlsSetValue                0000000140078d10 f   kernel32:KERNEL32.dll
+ 0001:00077d16       TlsFree                    0000000140078d16 f   kernel32:KERNEL32.dll
+ 0001:00077d1c       PulseEvent                 0000000140078d1c f   kernel32:KERNEL32.dll
+ 0001:00077d22       CreateSemaphoreA           0000000140078d22 f   kernel32:KERNEL32.dll
+ 0001:00077d28       GetConsoleScreenBufferInfo 0000000140078d28 f   kernel32:KERNEL32.dll
+ 0001:00077d2e       SetConsoleTextAttribute    0000000140078d2e f   kernel32:KERNEL32.dll
+ 0001:00077d34       SetLastError               0000000140078d34 f   kernel32:KERNEL32.dll
+ 0001:00077d3a       FormatMessageA             0000000140078d3a f   kernel32:KERNEL32.dll
+ 0001:00077d40       GetLocalTime               0000000140078d40 f   kernel32:KERNEL32.dll
+ 0001:00077d46       FileTimeToSystemTime       0000000140078d46 f   kernel32:KERNEL32.dll
+ 0001:00077d4c       SystemTimeToFileTime       0000000140078d4c f   kernel32:KERNEL32.dll
+ 0001:00077d52       CreateFileA                0000000140078d52 f   kernel32:KERNEL32.dll
+ 0001:00077d58       DeleteFileA                0000000140078d58 f   kernel32:KERNEL32.dll
+ 0001:00077d5e       FileTimeToLocalFileTime    0000000140078d5e f   kernel32:KERNEL32.dll
+ 0001:00077d64       GetFileSize                0000000140078d64 f   kernel32:KERNEL32.dll
+ 0001:00077d6a       GetFileTime                0000000140078d6a f   kernel32:KERNEL32.dll
+ 0001:00077d70       MoveFileExA                0000000140078d70 f   kernel32:KERNEL32.dll
+ 0001:00077d76       FlushFileBuffers           0000000140078d76 f   kernel32:KERNEL32.dll
+ 0001:00077d7c       ReadFile                   0000000140078d7c f   kernel32:KERNEL32.dll
+ 0001:00077d82       SetFilePointer             0000000140078d82 f   kernel32:KERNEL32.dll
+ 0001:00077d88       WriteFile                  0000000140078d88 f   kernel32:KERNEL32.dll
+ 0001:00077d8e       QueryPerformanceCounter    0000000140078d8e f   kernel32:KERNEL32.dll
+ 0001:00077d94       QueryPerformanceFrequency  0000000140078d94 f   kernel32:KERNEL32.dll
+ 0001:00077d9a       FreeLibrary                0000000140078d9a f   kernel32:KERNEL32.dll
+ 0001:00077da0       GetProcAddress             0000000140078da0 f   kernel32:KERNEL32.dll
+ 0001:00077da6       LoadLibraryA               0000000140078da6 f   kernel32:KERNEL32.dll
+ 0001:00077dac       RtlCaptureContext          0000000140078dac f   kernel32:KERNEL32.dll
+ 0001:00077db2       RtlLookupFunctionEntry     0000000140078db2 f   kernel32:KERNEL32.dll
+ 0001:00077db8       RtlVirtualUnwind           0000000140078db8 f   kernel32:KERNEL32.dll
+ 0001:00077dbe       UnhandledExceptionFilter   0000000140078dbe f   kernel32:KERNEL32.dll
+ 0001:00077dc4       SetUnhandledExceptionFilter 0000000140078dc4 f   kernel32:KERNEL32.dll
+ 0001:00077dca       GetCurrentProcess          0000000140078dca f   kernel32:KERNEL32.dll
+ 0001:00077dd0       TerminateProcess           0000000140078dd0 f   kernel32:KERNEL32.dll
+ 0001:00077dd6       IsProcessorFeaturePresent  0000000140078dd6 f   kernel32:KERNEL32.dll
+ 0001:00077ddc       GetSystemTimeAsFileTime    0000000140078ddc f   kernel32:KERNEL32.dll
+ 0001:00077de2       InitializeSListHead        0000000140078de2 f   kernel32:KERNEL32.dll
+ 0001:00077de8       IsDebuggerPresent          0000000140078de8 f   kernel32:KERNEL32.dll
+ 0001:00077dee       GetStartupInfoW            0000000140078dee f   kernel32:KERNEL32.dll
+ 0001:00077df4       GetModuleHandleW           0000000140078df4 f   kernel32:KERNEL32.dll
+ 0001:00077dfa       memcpy                     0000000140078dfa f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00077e00       memset                     0000000140078e00 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00077e06       memmove                    0000000140078e06 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00077e0c       memchr                     0000000140078e0c f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00077e12       strchr                     0000000140078e12 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00077e18       memcmp                     0000000140078e18 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00077e1e       longjmp                    0000000140078e1e f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00077e24       __C_specific_handler       0000000140078e24 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00077e2a       __intrinsic_setjmp         0000000140078e2a f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00077e2a       _setjmp                    0000000140078e2a f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00077e30       __std_type_info_destroy_list 0000000140078e30 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00077e36       __acrt_iob_func            0000000140078e36 f   ucrtd:ucrtbased.dll
+ 0001:00077e3c       fgets                      0000000140078e3c f   ucrtd:ucrtbased.dll
+ 0001:00077e42       puts                       0000000140078e42 f   ucrtd:ucrtbased.dll
+ 0001:00077e48       __stdio_common_vfprintf    0000000140078e48 f   ucrtd:ucrtbased.dll
+ 0001:00077e4e       strtol                     0000000140078e4e f   ucrtd:ucrtbased.dll
+ 0001:00077e54       _wassert                   0000000140078e54 f   ucrtd:ucrtbased.dll
+ 0001:00077e5a       strlen                     0000000140078e5a f   ucrtd:ucrtbased.dll
+ 0001:00077e60       __stdio_common_vsprintf    0000000140078e60 f   ucrtd:ucrtbased.dll
+ 0001:00077e66       strcpy                     0000000140078e66 f   ucrtd:ucrtbased.dll
+ 0001:00077e6c       strncpy                    0000000140078e6c f   ucrtd:ucrtbased.dll
+ 0001:00077e72       _stricmp                   0000000140078e72 f   ucrtd:ucrtbased.dll
+ 0001:00077e78       isdigit                    0000000140078e78 f   ucrtd:ucrtbased.dll
+ 0001:00077e7e       cos                        0000000140078e7e f   ucrtd:ucrtbased.dll
+ 0001:00077e84       strcmp                     0000000140078e84 f   ucrtd:ucrtbased.dll
+ 0001:00077e8a       strncmp                    0000000140078e8a f   ucrtd:ucrtbased.dll
+ 0001:00077e90       isxdigit                   0000000140078e90 f   ucrtd:ucrtbased.dll
+ 0001:00077e96       _strnicmp                  0000000140078e96 f   ucrtd:ucrtbased.dll
+ 0001:00077e9c       free                       0000000140078e9c f   ucrtd:ucrtbased.dll
+ 0001:00077ea2       malloc                     0000000140078ea2 f   ucrtd:ucrtbased.dll
+ 0001:00077ea8       isspace                    0000000140078ea8 f   ucrtd:ucrtbased.dll
+ 0001:00077eae       fmod                       0000000140078eae f   ucrtd:ucrtbased.dll
+ 0001:00077eb4       srand                      0000000140078eb4 f   ucrtd:ucrtbased.dll
+ 0001:00077eba       rand                       0000000140078eba f   ucrtd:ucrtbased.dll
+ 0001:00077ec0       calloc                     0000000140078ec0 f   ucrtd:ucrtbased.dll
+ 0001:00077ec6       exp                        0000000140078ec6 f   ucrtd:ucrtbased.dll
+ 0001:00077ecc       sqrt                       0000000140078ecc f   ucrtd:ucrtbased.dll
+ 0001:00077ed2       floor                      0000000140078ed2 f   ucrtd:ucrtbased.dll
+ 0001:00077ed8       pow                        0000000140078ed8 f   ucrtd:ucrtbased.dll
+ 0001:00077ede       sin                        0000000140078ede f   ucrtd:ucrtbased.dll
+ 0001:00077ee4       fabs                       0000000140078ee4 f   ucrtd:ucrtbased.dll
+ 0001:00077eea       log                        0000000140078eea f   ucrtd:ucrtbased.dll
+ 0001:00077ef0       atan                       0000000140078ef0 f   ucrtd:ucrtbased.dll
+ 0001:00077ef6       __stdio_common_vsscanf     0000000140078ef6 f   ucrtd:ucrtbased.dll
+ 0001:00077efc       clock                      0000000140078efc f   ucrtd:ucrtbased.dll
+ 0001:00077f02       exit                       0000000140078f02 f   ucrtd:ucrtbased.dll
+ 0001:00077f08       _seh_filter_exe            0000000140078f08 f   ucrtd:ucrtbased.dll
+ 0001:00077f0e       _set_app_type              0000000140078f0e f   ucrtd:ucrtbased.dll
+ 0001:00077f14       __setusermatherr           0000000140078f14 f   ucrtd:ucrtbased.dll
+ 0001:00077f1a       _configure_narrow_argv     0000000140078f1a f   ucrtd:ucrtbased.dll
+ 0001:00077f20       _initialize_narrow_environment 0000000140078f20 f   ucrtd:ucrtbased.dll
+ 0001:00077f26       _get_initial_narrow_environment 0000000140078f26 f   ucrtd:ucrtbased.dll
+ 0001:00077f2c       _initterm                  0000000140078f2c f   ucrtd:ucrtbased.dll
+ 0001:00077f32       _initterm_e                0000000140078f32 f   ucrtd:ucrtbased.dll
+ 0001:00077f38       _exit                      0000000140078f38 f   ucrtd:ucrtbased.dll
+ 0001:00077f3e       _set_fmode                 0000000140078f3e f   ucrtd:ucrtbased.dll
+ 0001:00077f44       __p___argc                 0000000140078f44 f   ucrtd:ucrtbased.dll
+ 0001:00077f4a       __p___argv                 0000000140078f4a f   ucrtd:ucrtbased.dll
+ 0001:00077f50       _cexit                     0000000140078f50 f   ucrtd:ucrtbased.dll
+ 0001:00077f56       _c_exit                    0000000140078f56 f   ucrtd:ucrtbased.dll
+ 0001:00077f5c       _register_thread_local_exe_atexit_callback 0000000140078f5c f   ucrtd:ucrtbased.dll
+ 0001:00077f62       _configthreadlocale        0000000140078f62 f   ucrtd:ucrtbased.dll
+ 0001:00077f68       _set_new_mode              0000000140078f68 f   ucrtd:ucrtbased.dll
+ 0001:00077f6e       __p__commode               0000000140078f6e f   ucrtd:ucrtbased.dll
+ 0001:00077f74       _seh_filter_dll            0000000140078f74 f   ucrtd:ucrtbased.dll
+ 0001:00077f7a       _initialize_onexit_table   0000000140078f7a f   ucrtd:ucrtbased.dll
+ 0001:00077f80       _register_onexit_function  0000000140078f80 f   ucrtd:ucrtbased.dll
+ 0001:00077f86       _execute_onexit_table      0000000140078f86 f   ucrtd:ucrtbased.dll
+ 0001:00077f8c       _crt_atexit                0000000140078f8c f   ucrtd:ucrtbased.dll
+ 0001:00077f92       _crt_at_quick_exit         0000000140078f92 f   ucrtd:ucrtbased.dll
+ 0001:00077f98       terminate                  0000000140078f98 f   ucrtd:ucrtbased.dll
+ 0001:00077fa0       __acrt_initialize          0000000140078fa0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fa0       __vcrt_initialize          0000000140078fa0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fa0       __scrt_stub_for_acrt_initialize 0000000140078fa0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fb0       __vcrt_thread_attach       0000000140078fb0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fb0       __scrt_stub_for_acrt_thread_attach 0000000140078fb0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fb0       __acrt_thread_attach       0000000140078fb0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fc0       __acrt_thread_detach       0000000140078fc0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fc0       __vcrt_thread_detach       0000000140078fc0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fc0       __scrt_stub_for_acrt_thread_detach 0000000140078fc0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fd0       __vcrt_uninitialize        0000000140078fd0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fd0       __scrt_stub_for_acrt_uninitialize 0000000140078fd0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fd0       __acrt_uninitialize        0000000140078fd0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fe0       __vcrt_uninitialize_critical 0000000140078fe0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fe0       __scrt_stub_for_acrt_uninitialize_critical 0000000140078fe0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077fe0       __acrt_uninitialize_critical 0000000140078fe0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077ff0       __scrt_stub_for_is_c_termination_complete 0000000140078ff0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00077ff0       _is_c_termination_complete 0000000140078ff0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00078680       _guard_dispatch_icall_nop  0000000140079680 f   MSVCRTD:_guard_dispatch_.obj
+ 0002:00000000       __xc_a                     000000014007c000     MSVCRTD:initializers.obj
+ 0002:00000220       __xc_z                     000000014007c220     MSVCRTD:initializers.obj
+ 0002:00000330       __xi_a                     000000014007c330     MSVCRTD:initializers.obj
+ 0002:00000660       __xi_z                     000000014007c660     MSVCRTD:initializers.obj
+ 0002:00000770       __xp_a                     000000014007c770     MSVCRTD:initializers.obj
+ 0002:00000880       __xp_z                     000000014007c880     MSVCRTD:initializers.obj
+ 0002:00000990       __xt_a                     000000014007c990     MSVCRTD:initializers.obj
+ 0002:00000aa0       __xt_z                     000000014007caa0     MSVCRTD:initializers.obj
+ 0002:00001508       __real@3fe0000000000000    000000014007d508     pjmedia-x86_64-x64-vc14-debug-dynamic:resample_resample.obj
+ 0002:00001518       __real@3ff0000000000000    000000014007d518     pjmedia-x86_64-x64-vc14-debug-dynamic:resample_resample.obj
+ 0002:00001528       __real@43f0000000000000    000000014007d528     pjmedia-x86_64-x64-vc14-debug-dynamic:resample_resample.obj
+ 0002:00001534       __real@497423f0            000000014007d534     pjmedia-x86_64-x64-vc14-debug-dynamic:echo_common.obj
+ 0002:00001540       pjmedia_linear2ulaw_tab    000000014007d540     pjmedia-x86_64-x64-vc14-debug-dynamic:alaw_ulaw_table.obj
+ 0002:00005540       pjmedia_linear2alaw_tab    0000000140081540     pjmedia-x86_64-x64-vc14-debug-dynamic:alaw_ulaw_table.obj
+ 0002:00009540       pjmedia_ulaw2linear_tab    0000000140085540     pjmedia-x86_64-x64-vc14-debug-dynamic:alaw_ulaw_table.obj
+ 0002:00009740       pjmedia_alaw2linear_tab    0000000140085740     pjmedia-x86_64-x64-vc14-debug-dynamic:alaw_ulaw_table.obj
+ 0002:0000b3e4       __real@3f800000            00000001400873e4     pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0002:0000b3e8       __real@40000000            00000001400873e8     pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0002:0000b3f0       __real@4004000000000000    00000001400873f0     pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0002:0000b3fc       __real@40400000            00000001400873fc     pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0002:0000b400       __real@41980000            0000000140087400     pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0002:0000b404       __real@41a00000            0000000140087404     pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0002:0000b408       __real@447a0000            0000000140087408     pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0002:0000b40c       __real@7efffff8            000000014008740c     pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0002:0000b410       __xmm@80000000800000008000000080000000 0000000140087410     pjmedia-x86_64-x64-vc14-debug-dynamic:echo_suppress.obj
+ 0002:0000b424       __real@00000000            0000000140087424     pjmedia-x86_64-x64-vc14-debug-dynamic:wsola.obj
+ 0002:0000b428       __real@3ff8000000000000    0000000140087428     pjmedia-x86_64-x64-vc14-debug-dynamic:wsola.obj
+ 0002:0000b438       __real@401921fb54442d18    0000000140087438     pjmedia-x86_64-x64-vc14-debug-dynamic:wsola.obj
+ 0002:0000b66c       __real@41200000            000000014008766c     pjlib-x86_64-x64-vc14-debug-dynamic:string.obj
+ 0002:0000ba30       PJ_AF_UNSPEC               0000000140087a30     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba34       PJ_AF_UNIX                 0000000140087a34     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba38       PJ_AF_INET                 0000000140087a38     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba3c       PJ_AF_INET6                0000000140087a3c     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba40       PJ_AF_PACKET               0000000140087a40     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba44       PJ_AF_IRDA                 0000000140087a44     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba48       PJ_SOCK_STREAM             0000000140087a48     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba4c       PJ_SOCK_DGRAM              0000000140087a4c     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba50       PJ_SOCK_RAW                0000000140087a50     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba54       PJ_SOCK_RDM                0000000140087a54     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba58       PJ_SOL_SOCKET              0000000140087a58     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba5c       PJ_SOL_IP                  0000000140087a5c     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba60       PJ_SOL_TCP                 0000000140087a60     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba64       PJ_SOL_UDP                 0000000140087a64     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba68       PJ_SOL_IPV6                0000000140087a68     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba6c       PJ_IP_TOS                  0000000140087a6c     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba70       PJ_IPTOS_LOWDELAY          0000000140087a70     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba74       PJ_IPTOS_THROUGHPUT        0000000140087a74     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba78       PJ_IPTOS_RELIABILITY       0000000140087a78     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba7c       PJ_IPTOS_MINCOST           0000000140087a7c     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba80       PJ_IPV6_TCLASS             0000000140087a80     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba84       PJ_SO_TYPE                 0000000140087a84     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba88       PJ_SO_RCVBUF               0000000140087a88     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba8c       PJ_SO_SNDBUF               0000000140087a8c     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba90       PJ_TCP_NODELAY             0000000140087a90     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba94       PJ_SO_REUSEADDR            0000000140087a94     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba98       PJ_SO_NOSIGPIPE            0000000140087a98     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000ba9c       PJ_SO_PRIORITY             0000000140087a9c     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000baa0       PJ_IP_MULTICAST_IF         0000000140087aa0     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000baa4       PJ_IP_MULTICAST_TTL        0000000140087aa4     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000baa8       PJ_IP_MULTICAST_LOOP       0000000140087aa8     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000baac       PJ_IP_ADD_MEMBERSHIP       0000000140087aac     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000bab0       PJ_IP_DROP_MEMBERSHIP      0000000140087ab0     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000bab4       PJ_MSG_OOB                 0000000140087ab4     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000bab8       PJ_MSG_PEEK                0000000140087ab8     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000babc       PJ_MSG_DONTROUTE           0000000140087abc     pjlib-x86_64-x64-vc14-debug-dynamic:sock_bsd.obj
+ 0002:0000bae0       __real@0000000000000000    0000000140087ae0     pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_common.obj
+ 0002:0000baf0       __real@408f400000000000    0000000140087af0     pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_common.obj
+ 0002:0000bb00       __real@412e848000000000    0000000140087b00     pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_common.obj
+ 0002:0000bb10       __real@41cdcd6500000000    0000000140087b10     pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_common.obj
+ 0002:0000bb20       __real@43e0000000000000    0000000140087b20     pjlib-x86_64-x64-vc14-debug-dynamic:os_timestamp_common.obj
+ 0002:0000bb2c       PJ_GUID_STRING_LENGTH      0000000140087b2c     pjlib-x86_64-x64-vc14-debug-dynamic:guid_win32.obj
+ 0002:00018000       __real@401c000000000000    0000000140094000     libresample-x86_64-x64-vc14-debug-dynamic:resamplesubs.obj
+ 0002:00018010       __real@4040800000000000    0000000140094010     libresample-x86_64-x64-vc14-debug-dynamic:resamplesubs.obj
+ 0002:00018020       __real@4060000000000000    0000000140094020     libresample-x86_64-x64-vc14-debug-dynamic:resamplesubs.obj
+ 0002:00018030       __real@4070000000000000    0000000140094030     libresample-x86_64-x64-vc14-debug-dynamic:resamplesubs.obj
+ 0002:00018040       __real@40c9a40000000000    0000000140094040     libresample-x86_64-x64-vc14-debug-dynamic:resamplesubs.obj
+ 0002:00018050       __real@40cccd0000000000    0000000140094050     libresample-x86_64-x64-vc14-debug-dynamic:resamplesubs.obj
+ 0002:00018060       __real@40e0000000000000    0000000140094060     libresample-x86_64-x64-vc14-debug-dynamic:resamplesubs.obj
+ 0002:00018088       __real@3cf5c28f            0000000140094088     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:0001808c       __real@3dcccccd            000000014009408c     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:00018090       __real@3e19999a            0000000140094090     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:00018094       __real@3e800000            0000000140094094     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:00018098       __real@3ecccccd            0000000140094098     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:0001809c       __real@3f000000            000000014009409c     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:000180a0       __real@3f19999a            00000001400940a0     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:000180a8       __real@3f1a36e2eb1c432d    00000001400940a8     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:000180b4       __real@3f333333            00000001400940b4     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:000180b8       __real@3f4ccccd            00000001400940b8     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:000180bc       __real@3f59999a            00000001400940bc     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:000180c0       __real@3f666666            00000001400940c0     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:000180c4       __real@3f7b645a            00000001400940c4     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:000180c8       __real@3f7d70a4            00000001400940c8     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:000180cc       __real@3f7df3b6            00000001400940cc     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:000180d0       __real@3fd0000000000000    00000001400940d0     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:000180e0       __real@3fd3333333333333    00000001400940e0     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:000180f0       __real@3fd6666666666666    00000001400940f0     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:00018100       __real@3fe6666666666666    0000000140094100     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:00018110       __real@4008000000000000    0000000140094110     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:0001811c       __real@4019999a            000000014009411c     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:00018120       __real@42c80000            0000000140094120     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:00018124       __real@461c4000            0000000140094124     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:00018128       __real@467ffc00            0000000140094128     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:0001812c       __real@46fffd00            000000014009412c     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:00018130       __real@46fffe00            0000000140094130     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:00018134       __real@c6ffff00            0000000140094134     libspeex-x86_64-x64-vc14-debug-dynamic:mdf.obj
+ 0002:00018138       __real@3f847ae147ae147b    0000000140094138     libspeex-x86_64-x64-vc14-debug-dynamic:scal.obj
+ 0002:00018148       __real@3fa47ae147ae147b    0000000140094148     libspeex-x86_64-x64-vc14-debug-dynamic:scal.obj
+ 0002:00018158       __real@3fd999999999999a    0000000140094158     libspeex-x86_64-x64-vc14-debug-dynamic:scal.obj
+ 0002:00018168       __real@3fe43d1cc100e6b0    0000000140094168     libspeex-x86_64-x64-vc14-debug-dynamic:scal.obj
+ 0002:00018178       __real@3feeb851eb851eb8    0000000140094178     libspeex-x86_64-x64-vc14-debug-dynamic:scal.obj
+ 0002:00018188       __real@3fef5c28f5c28f5c    0000000140094188     libspeex-x86_64-x64-vc14-debug-dynamic:scal.obj
+ 0002:00018198       __real@3ff921fb54442d18    0000000140094198     libspeex-x86_64-x64-vc14-debug-dynamic:scal.obj
+ 0002:000181a8       __real@400921fb54442d18    00000001400941a8     libspeex-x86_64-x64-vc14-debug-dynamic:scal.obj
+ 0002:000181b4       __real@c6fffe00            00000001400941b4     libspeex-x86_64-x64-vc14-debug-dynamic:scal.obj
+ 0002:00018224       __real@26901d7d            0000000140094224     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018228       __real@38d1b717            0000000140094228     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:0001822c       __real@3a83126f            000000014009422c     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018230       __real@3c23d70a            0000000140094230     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018234       __real@3d4ccccd            0000000140094234     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018238       __real@3d99999a            0000000140094238     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:0001823c       __real@3debc947            000000014009423c     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018240       __real@3e4bc6a8            0000000140094240     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018244       __real@3e4ccccd            0000000140094244     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018248       __real@3e6bc8e2            0000000140094248     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:0001824c       __real@3e99999a            000000014009424c     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018250       __real@3eaa7efa            0000000140094250     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018254       __real@3eb33333            0000000140094254     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018258       __real@3f63d70a            0000000140094258     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:0001825c       __real@3f6624dd            000000014009425c     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018260       __real@3f733333            0000000140094260     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018268       __real@3f9eb851eb851eb8    0000000140094268     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018274       __real@3fa2cdb8            0000000140094274     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018278       __real@3fc096bb98c7e282    0000000140094278     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018288       __real@3fc999999999999a    0000000140094288     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018298       __real@3fe75c2900000000    0000000140094298     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182a8       __real@3ff61adea8000000    00000001400942a8     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182b8       __real@4014000000000000    00000001400942b8     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182c8       __real@40215f212d773190    00000001400942c8     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182d4       __real@40800000            00000001400942d4     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182d8       __real@41f00000            00000001400942d8     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182dc       __real@456d8000            00000001400942dc     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182e0       __real@45fa0000            00000001400942e0     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182e4       __real@467a0000            00000001400942e4     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182e8       __real@46dac000            00000001400942e8     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182ec       __real@47000000            00000001400942ec     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182f0       __real@495bba00            00000001400942f0     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182f4       __real@4e6e6b28            00000001400942f4     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:000182f8       __real@bf000000            00000001400942f8     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018300       __real@bfc99999a0000000    0000000140094300     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:00018310       __real@c0126bb98c000000    0000000140094310     libspeex-x86_64-x64-vc14-debug-dynamic:preprocess.obj
+ 0002:0001831c       __real@329ee9ee            000000014009431c     libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0002:00018320       __real@3a41fc8f            0000000140094320     libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0002:00018324       __real@3eaed289            0000000140094324     libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0002:00018328       __real@3f004dfd            0000000140094328     libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0002:00018330       __real@4001eb8520000000    0000000140094330     libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0002:00018340       __real@402a333340000000    0000000140094340     libspeex-x86_64-x64-vc14-debug-dynamic:filterbank.obj
+ 0002:00018350       __real@3f6a36e2eb1c432d    0000000140094350     libsrtp-x86_64-x64-vc14-debug-dynamic:stat.obj
+ 0002:00018360       __real@400147ae147ae148    0000000140094360     libsrtp-x86_64-x64-vc14-debug-dynamic:stat.obj
+ 0002:00018370       __real@404715c28f5c28f6    0000000140094370     libsrtp-x86_64-x64-vc14-debug-dynamic:stat.obj
+ 0002:00018380       __real@40b3880000000000    0000000140094380     libsrtp-x86_64-x64-vc14-debug-dynamic:stat.obj
+ 0002:00018400       srtp_null_cipher           0000000140094400     libsrtp-x86_64-x64-vc14-debug-dynamic:null_cipher.obj
+ 0002:00018480       srtp_aes_icm_128           0000000140094480     libsrtp-x86_64-x64-vc14-debug-dynamic:aes_icm.obj
+ 0002:000184e0       srtp_aes_icm_256           00000001400944e0     libsrtp-x86_64-x64-vc14-debug-dynamic:aes_icm.obj
+ 0002:000187f0       srtp_null_auth             00000001400947f0     libsrtp-x86_64-x64-vc14-debug-dynamic:null_auth.obj
+ 0002:00018900       srtp_hmac                  0000000140094900     libsrtp-x86_64-x64-vc14-debug-dynamic:hmac.obj
+ 0002:0001b2b0       _load_config_used          00000001400972b0     MSVCRTD:loadcfg.obj
+ 0002:0001b708       __rtc_iaa                  0000000140097708     MSVCRTD:_initsect_.obj
+ 0002:0001b818       __rtc_izz                  0000000140097818     MSVCRTD:_initsect_.obj
+ 0002:0001b928       __rtc_taa                  0000000140097928     MSVCRTD:_initsect_.obj
+ 0002:0001ba38       __rtc_tzz                  0000000140097a38     MSVCRTD:_initsect_.obj
+ 0003:000047bc       pjmedia_add_rtpmap_for_static_pt 000000014009f7bc     pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0003:000047dc       pjmedia_add_bandwidth_tias_in_sdp 000000014009f7dc     pjmedia-x86_64-x64-vc14-debug-dynamic:endpoint.obj
+ 0003:00017574       pj_optind                  00000001400b2574     pjlib-util-x86_64-x64-vc14-debug-dynamic:getopt.obj
+ 0003:00017578       pj_optopt                  00000001400b2578     pjlib-util-x86_64-x64-vc14-debug-dynamic:getopt.obj
+ 0003:0001af80       pj_pool_factory_default_policy 00000001400b5f80     pjlib-x86_64-x64-vc14-debug-dynamic:pool_policy_malloc.obj
+ 0003:00020c00       PJ_VERSION                 00000001400bbc00     pjlib-x86_64-x64-vc14-debug-dynamic:config.obj
+ 0003:00022008       mod_srtp                   00000001400bd008     libsrtp-x86_64-x64-vc14-debug-dynamic:srtp.obj
+ 0003:000221c0       mod_alloc                  00000001400bd1c0     libsrtp-x86_64-x64-vc14-debug-dynamic:alloc.obj
+ 0003:00022260       octet_weight               00000001400bd260     libsrtp-x86_64-x64-vc14-debug-dynamic:datatypes.obj
+ 0003:00022740       srtp_mod_cipher            00000001400bd740     libsrtp-x86_64-x64-vc14-debug-dynamic:cipher.obj
+ 0003:00022a78       srtp_mod_auth              00000001400bda78     libsrtp-x86_64-x64-vc14-debug-dynamic:auth.obj
+ 0003:00022b88       srtp_mod_crypto_kernel     00000001400bdb88     libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0003:00022de0       mod_stat                   00000001400bdde0     libsrtp-x86_64-x64-vc14-debug-dynamic:stat.obj
+ 0003:00022f58       srtp_mod_aes_icm           00000001400bdf58     libsrtp-x86_64-x64-vc14-debug-dynamic:aes_icm.obj
+ 0003:000230d8       srtp_mod_hmac              00000001400be0d8     libsrtp-x86_64-x64-vc14-debug-dynamic:hmac.obj
+ 0003:000231d8       srtp_mod_sha1              00000001400be1d8     libsrtp-x86_64-x64-vc14-debug-dynamic:sha1.obj
+ 0003:000231f0       SHA_K0                     00000001400be1f0     libsrtp-x86_64-x64-vc14-debug-dynamic:sha1.obj
+ 0003:000231f4       SHA_K1                     00000001400be1f4     libsrtp-x86_64-x64-vc14-debug-dynamic:sha1.obj
+ 0003:000231f8       SHA_K2                     00000001400be1f8     libsrtp-x86_64-x64-vc14-debug-dynamic:sha1.obj
+ 0003:000231fc       SHA_K3                     00000001400be1fc     libsrtp-x86_64-x64-vc14-debug-dynamic:sha1.obj
+ 0003:000232e0       __security_cookie          00000001400be2e0     MSVCRTD:gs_cookie.obj
+ 0003:000232e8       __security_cookie_complement 00000001400be2e8     MSVCRTD:gs_cookie.obj
+ 0003:000232f4       _fltused                   00000001400be2f4     MSVCRTD:dllsupp.obj
+ 0003:00023300       __scrt_native_dllmain_reason 00000001400be300     MSVCRTD:utility.obj
+ 0003:00023304       __scrt_default_matherr     00000001400be304     MSVCRTD:matherr.obj
+ 0003:00023308       __isa_available            00000001400be308     MSVCRTD:_cpu_disp_.obj
+ 0003:0002330c       __isa_enabled              00000001400be30c     MSVCRTD:_cpu_disp_.obj
+ 0003:00023310       __memcpy_nt_iters          00000001400be310     MSVCRTD:_cpu_disp_.obj
+ 0003:00023320       __scrt_ucrt_dll_is_in_use  00000001400be320     MSVCRTD:ucrt_stubs.obj
+ 0003:00024a28       pj_optarg                  00000001400bfa28     pjlib-util-x86_64-x64-vc14-debug-dynamic:getopt.obj
+ 0003:00025064       err_level                  00000001400c0064     libsrtp-x86_64-x64-vc14-debug-dynamic:srtp_err.obj
+ 0003:00025068       crypto_kernel              00000001400c0068     libsrtp-x86_64-x64-vc14-debug-dynamic:crypto_kernel.obj
+ 0003:00025748       __scrt_current_native_startup_state 00000001400c0748     MSVCRTD:utility.obj
+ 0003:00025750       __scrt_native_startup_lock 00000001400c0750     MSVCRTD:utility.obj
+ 0003:000257a0       ?__type_info_root_node@@3U__type_info_node@@A 00000001400c07a0     MSVCRTD:tncleanup.obj
+ 0003:000257b8       ?_OptionsStorage@?1??__local_stdio_printf_options@@9@4_KA 00000001400c07b8     MSVCRTD:default_local_stdio_options.obj
+ 0003:000257c8       ?_OptionsStorage@?1??__local_stdio_scanf_options@@9@4_KA 00000001400c07c8     MSVCRTD:default_local_stdio_options.obj
+ 0003:000257d4       __scrt_debugger_hook_flag  00000001400c07d4     MSVCRTD:utility_desktop.obj
+ 0003:000257d8       __favor                    00000001400c07d8     MSVCRTD:_cpu_disp_.obj
+ 0003:000257e0       ?_OptionsStorage@?1??__local_stdio_printf_options@@9@9 00000001400c07e0     <common>
+ 0003:000257f4       PJ_NO_MEMORY_EXCEPTION     00000001400c07f4     <common>
+ 0003:00025800       bit_string                 00000001400c0800     <common>
+ 0003:00025cd8       ?_OptionsStorage@?1??__local_stdio_scanf_options@@9@9 00000001400c0cd8     <common>
+ 0003:00025cf0       __dyn_tls_dtor_callback    00000001400c0cf0     <common>
+ 0003:00025d08       __dyn_tls_init_callback    00000001400c0d08     <common>
+ 0005:00000000       __imp_FileTimeToLocalFileTime 00000001400c5000     kernel32:KERNEL32.dll
+ 0005:00000008       __imp_GetModuleHandleW     00000001400c5008     kernel32:KERNEL32.dll
+ 0005:00000010       __imp_GetStartupInfoW      00000001400c5010     kernel32:KERNEL32.dll
+ 0005:00000018       __imp_IsDebuggerPresent    00000001400c5018     kernel32:KERNEL32.dll
+ 0005:00000020       __imp_InitializeSListHead  00000001400c5020     kernel32:KERNEL32.dll
+ 0005:00000028       __imp_GetSystemTimeAsFileTime 00000001400c5028     kernel32:KERNEL32.dll
+ 0005:00000030       __imp_IsProcessorFeaturePresent 00000001400c5030     kernel32:KERNEL32.dll
+ 0005:00000038       __imp_TerminateProcess     00000001400c5038     kernel32:KERNEL32.dll
+ 0005:00000040       __imp_GetCurrentProcess    00000001400c5040     kernel32:KERNEL32.dll
+ 0005:00000048       __imp_SetUnhandledExceptionFilter 00000001400c5048     kernel32:KERNEL32.dll
+ 0005:00000050       __imp_UnhandledExceptionFilter 00000001400c5050     kernel32:KERNEL32.dll
+ 0005:00000058       __imp_RtlVirtualUnwind     00000001400c5058     kernel32:KERNEL32.dll
+ 0005:00000060       __imp_RtlLookupFunctionEntry 00000001400c5060     kernel32:KERNEL32.dll
+ 0005:00000068       __imp_RtlCaptureContext    00000001400c5068     kernel32:KERNEL32.dll
+ 0005:00000070       __imp_LoadLibraryA         00000001400c5070     kernel32:KERNEL32.dll
+ 0005:00000078       __imp_GetProcAddress       00000001400c5078     kernel32:KERNEL32.dll
+ 0005:00000080       __imp_FreeLibrary          00000001400c5080     kernel32:KERNEL32.dll
+ 0005:00000088       __imp_QueryPerformanceFrequency 00000001400c5088     kernel32:KERNEL32.dll
+ 0005:00000090       __imp_QueryPerformanceCounter 00000001400c5090     kernel32:KERNEL32.dll
+ 0005:00000098       __imp_WriteFile            00000001400c5098     kernel32:KERNEL32.dll
+ 0005:000000a0       __imp_SetFilePointer       00000001400c50a0     kernel32:KERNEL32.dll
+ 0005:000000a8       __imp_ReadFile             00000001400c50a8     kernel32:KERNEL32.dll
+ 0005:000000b0       __imp_FlushFileBuffers     00000001400c50b0     kernel32:KERNEL32.dll
+ 0005:000000b8       __imp_MoveFileExA          00000001400c50b8     kernel32:KERNEL32.dll
+ 0005:000000c0       __imp_GetFileTime          00000001400c50c0     kernel32:KERNEL32.dll
+ 0005:000000c8       __imp_GetFileSize          00000001400c50c8     kernel32:KERNEL32.dll
+ 0005:000000d0       __imp_DeleteFileA          00000001400c50d0     kernel32:KERNEL32.dll
+ 0005:000000d8       __imp_CreateFileA          00000001400c50d8     kernel32:KERNEL32.dll
+ 0005:000000e0       __imp_SystemTimeToFileTime 00000001400c50e0     kernel32:KERNEL32.dll
+ 0005:000000e8       __imp_FileTimeToSystemTime 00000001400c50e8     kernel32:KERNEL32.dll
+ 0005:000000f0       __imp_GetLocalTime         00000001400c50f0     kernel32:KERNEL32.dll
+ 0005:000000f8       __imp_FormatMessageA       00000001400c50f8     kernel32:KERNEL32.dll
+ 0005:00000100       __imp_SetLastError         00000001400c5100     kernel32:KERNEL32.dll
+ 0005:00000108       __imp_SetConsoleTextAttribute 00000001400c5108     kernel32:KERNEL32.dll
+ 0005:00000110       __imp_GetConsoleScreenBufferInfo 00000001400c5110     kernel32:KERNEL32.dll
+ 0005:00000118       __imp_CreateSemaphoreA     00000001400c5118     kernel32:KERNEL32.dll
+ 0005:00000120       __imp_PulseEvent           00000001400c5120     kernel32:KERNEL32.dll
+ 0005:00000128       __imp_TlsFree              00000001400c5128     kernel32:KERNEL32.dll
+ 0005:00000130       __imp_TlsSetValue          00000001400c5130     kernel32:KERNEL32.dll
+ 0005:00000138       __imp_TlsGetValue          00000001400c5138     kernel32:KERNEL32.dll
+ 0005:00000140       __imp_TlsAlloc             00000001400c5140     kernel32:KERNEL32.dll
+ 0005:00000148       __imp_ResumeThread         00000001400c5148     kernel32:KERNEL32.dll
+ 0005:00000150       __imp_GetThreadPriority    00000001400c5150     kernel32:KERNEL32.dll
+ 0005:00000158       __imp_GetCurrentThreadId   00000001400c5158     kernel32:KERNEL32.dll
+ 0005:00000160       __imp_CreateThread         00000001400c5160     kernel32:KERNEL32.dll
+ 0005:00000168       __imp_GetCurrentProcessId  00000001400c5168     kernel32:KERNEL32.dll
+ 0005:00000170       __imp_Sleep                00000001400c5170     kernel32:KERNEL32.dll
+ 0005:00000178       __imp_WaitForSingleObject  00000001400c5178     kernel32:KERNEL32.dll
+ 0005:00000180       __imp_ReleaseSemaphore     00000001400c5180     kernel32:KERNEL32.dll
+ 0005:00000188       __imp_ResetEvent           00000001400c5188     kernel32:KERNEL32.dll
+ 0005:00000190       __imp_DeleteCriticalSection 00000001400c5190     kernel32:KERNEL32.dll
+ 0005:00000198       __imp_TryEnterCriticalSection 00000001400c5198     kernel32:KERNEL32.dll
+ 0005:000001a0       __imp_LeaveCriticalSection 00000001400c51a0     kernel32:KERNEL32.dll
+ 0005:000001a8       __imp_EnterCriticalSection 00000001400c51a8     kernel32:KERNEL32.dll
+ 0005:000001b0       __imp_InitializeCriticalSection 00000001400c51b0     kernel32:KERNEL32.dll
+ 0005:000001b8       __imp_GetLastError         00000001400c51b8     kernel32:KERNEL32.dll
+ 0005:000001c0       __imp_GetStdHandle         00000001400c51c0     kernel32:KERNEL32.dll
+ 0005:000001c8       __imp_WaitForMultipleObjects 00000001400c51c8     kernel32:KERNEL32.dll
+ 0005:000001d0       __imp_SetThreadPriority    00000001400c51d0     kernel32:KERNEL32.dll
+ 0005:000001d8       __imp_GetCurrentThread     00000001400c51d8     kernel32:KERNEL32.dll
+ 0005:000001e0       __imp_CloseHandle          00000001400c51e0     kernel32:KERNEL32.dll
+ 0005:000001e8       __imp_SetEvent             00000001400c51e8     kernel32:KERNEL32.dll
+ 0005:000001f0       __imp_CreateEventA         00000001400c51f0     kernel32:KERNEL32.dll
+ 0005:000001f8       \177KERNEL32_NULL_THUNK_DATA 00000001400c51f8     kernel32:KERNEL32.dll
+ 0005:000002b0       __imp_memset               00000001400c52b0     vcruntimed:VCRUNTIME140D.dll
+ 0005:000002b8       __imp_memmove              00000001400c52b8     vcruntimed:VCRUNTIME140D.dll
+ 0005:000002c0       __imp_memchr               00000001400c52c0     vcruntimed:VCRUNTIME140D.dll
+ 0005:000002c8       __imp_strchr               00000001400c52c8     vcruntimed:VCRUNTIME140D.dll
+ 0005:000002d0       __imp_memcmp               00000001400c52d0     vcruntimed:VCRUNTIME140D.dll
+ 0005:000002d8       __imp_longjmp              00000001400c52d8     vcruntimed:VCRUNTIME140D.dll
+ 0005:000002e0       __imp___C_specific_handler 00000001400c52e0     vcruntimed:VCRUNTIME140D.dll
+ 0005:000002e8       __imp___intrinsic_setjmp   00000001400c52e8     vcruntimed:VCRUNTIME140D.dll
+ 0005:000002f0       __imp___std_type_info_destroy_list 00000001400c52f0     vcruntimed:VCRUNTIME140D.dll
+ 0005:000002f8       __imp_memcpy               00000001400c52f8     vcruntimed:VCRUNTIME140D.dll
+ 0005:00000300       \177VCRUNTIME140D_NULL_THUNK_DATA 00000001400c5300     vcruntimed:VCRUNTIME140D.dll
+ 0005:00000368       __imp_waveOutReset         00000001400c5368     winmm:WINMM.dll
+ 0005:00000370       __imp_waveOutRestart       00000001400c5370     winmm:WINMM.dll
+ 0005:00000378       __imp_waveOutPause         00000001400c5378     winmm:WINMM.dll
+ 0005:00000380       __imp_waveOutWrite         00000001400c5380     winmm:WINMM.dll
+ 0005:00000388       __imp_waveOutUnprepareHeader 00000001400c5388     winmm:WINMM.dll
+ 0005:00000390       __imp_waveOutPrepareHeader 00000001400c5390     winmm:WINMM.dll
+ 0005:00000398       __imp_waveInGetNumDevs     00000001400c5398     winmm:WINMM.dll
+ 0005:000003a0       __imp_waveOutOpen          00000001400c53a0     winmm:WINMM.dll
+ 0005:000003a8       __imp_waveOutSetVolume     00000001400c53a8     winmm:WINMM.dll
+ 0005:000003b0       __imp_waveOutGetVolume     00000001400c53b0     winmm:WINMM.dll
+ 0005:000003b8       __imp_waveOutGetDevCapsA   00000001400c53b8     winmm:WINMM.dll
+ 0005:000003c0       __imp_waveOutGetNumDevs    00000001400c53c0     winmm:WINMM.dll
+ 0005:000003c8       __imp_waveInGetErrorTextA  00000001400c53c8     winmm:WINMM.dll
+ 0005:000003d0       __imp_waveOutGetErrorTextA 00000001400c53d0     winmm:WINMM.dll
+ 0005:000003d8       __imp_waveInGetDevCapsA    00000001400c53d8     winmm:WINMM.dll
+ 0005:000003e0       __imp_waveInOpen           00000001400c53e0     winmm:WINMM.dll
+ 0005:000003e8       __imp_waveInClose          00000001400c53e8     winmm:WINMM.dll
+ 0005:000003f0       __imp_waveInPrepareHeader  00000001400c53f0     winmm:WINMM.dll
+ 0005:000003f8       __imp_waveInUnprepareHeader 00000001400c53f8     winmm:WINMM.dll
+ 0005:00000400       __imp_waveInAddBuffer      00000001400c5400     winmm:WINMM.dll
+ 0005:00000408       __imp_waveInStart          00000001400c5408     winmm:WINMM.dll
+ 0005:00000410       __imp_waveInStop           00000001400c5410     winmm:WINMM.dll
+ 0005:00000418       __imp_waveInReset          00000001400c5418     winmm:WINMM.dll
+ 0005:00000420       __imp_waveOutClose         00000001400c5420     winmm:WINMM.dll
+ 0005:00000428       \177WINMM_NULL_THUNK_DATA  00000001400c5428     winmm:WINMM.dll
+ 0005:000004a0       __imp_shutdown             00000001400c54a0     ws2_32:WS2_32.dll
+ 0005:000004a8       __imp_sendto               00000001400c54a8     ws2_32:WS2_32.dll
+ 0005:000004b0       __imp_send                 00000001400c54b0     ws2_32:WS2_32.dll
+ 0005:000004b8       __imp_recvfrom             00000001400c54b8     ws2_32:WS2_32.dll
+ 0005:000004c0       __imp_recv                 00000001400c54c0     ws2_32:WS2_32.dll
+ 0005:000004c8       __imp_ntohs                00000001400c54c8     ws2_32:WS2_32.dll
+ 0005:000004d0       __imp_ntohl                00000001400c54d0     ws2_32:WS2_32.dll
+ 0005:000004d8       __imp_listen               00000001400c54d8     ws2_32:WS2_32.dll
+ 0005:000004e0       __imp_inet_ntoa            00000001400c54e0     ws2_32:WS2_32.dll
+ 0005:000004e8       __imp_inet_addr            00000001400c54e8     ws2_32:WS2_32.dll
+ 0005:000004f0       __imp_htons                00000001400c54f0     ws2_32:WS2_32.dll
+ 0005:000004f8       __imp_htonl                00000001400c54f8     ws2_32:WS2_32.dll
+ 0005:00000500       __imp_getsockopt           00000001400c5500     ws2_32:WS2_32.dll
+ 0005:00000508       __imp_getsockname          00000001400c5508     ws2_32:WS2_32.dll
+ 0005:00000510       __imp_getpeername          00000001400c5510     ws2_32:WS2_32.dll
+ 0005:00000518       __imp_connect              00000001400c5518     ws2_32:WS2_32.dll
+ 0005:00000520       __imp_closesocket          00000001400c5520     ws2_32:WS2_32.dll
+ 0005:00000528       __imp_bind                 00000001400c5528     ws2_32:WS2_32.dll
+ 0005:00000530       __imp_accept               00000001400c5530     ws2_32:WS2_32.dll
+ 0005:00000538       __imp_ioctlsocket          00000001400c5538     ws2_32:WS2_32.dll
+ 0005:00000540       __imp_WSASetLastError      00000001400c5540     ws2_32:WS2_32.dll
+ 0005:00000548       __imp_WSAGetLastError      00000001400c5548     ws2_32:WS2_32.dll
+ 0005:00000550       __imp_WSACleanup           00000001400c5550     ws2_32:WS2_32.dll
+ 0005:00000558       __imp_WSAStartup           00000001400c5558     ws2_32:WS2_32.dll
+ 0005:00000560       __imp_select               00000001400c5560     ws2_32:WS2_32.dll
+ 0005:00000568       __imp_gethostname          00000001400c5568     ws2_32:WS2_32.dll
+ 0005:00000570       __imp_WSAIoctl             00000001400c5570     ws2_32:WS2_32.dll
+ 0005:00000578       __imp_WSASocketA           00000001400c5578     ws2_32:WS2_32.dll
+ 0005:00000580       __imp_WSAAddressToStringA  00000001400c5580     ws2_32:WS2_32.dll
+ 0005:00000588       __imp_WSAStringToAddressA  00000001400c5588     ws2_32:WS2_32.dll
+ 0005:00000590       __imp_gethostbyname        00000001400c5590     ws2_32:WS2_32.dll
+ 0005:00000598       __imp___WSAFDIsSet         00000001400c5598     ws2_32:WS2_32.dll
+ 0005:000005a0       __imp_setsockopt           00000001400c55a0     ws2_32:WS2_32.dll
+ 0005:000005a8       \177WS2_32_NULL_THUNK_DATA 00000001400c55a8     ws2_32:WS2_32.dll
+ 0005:00000630       __imp_CoCreateGuid         00000001400c5630     ole32:ole32.dll
+ 0005:00000638       \177ole32_NULL_THUNK_DATA  00000001400c5638     ole32:ole32.dll
+ 0005:00000690       __imp___acrt_iob_func      00000001400c5690     ucrtd:ucrtbased.dll
+ 0005:00000698       __imp_fgets                00000001400c5698     ucrtd:ucrtbased.dll
+ 0005:000006a0       __imp_puts                 00000001400c56a0     ucrtd:ucrtbased.dll
+ 0005:000006a8       __imp___stdio_common_vfprintf 00000001400c56a8     ucrtd:ucrtbased.dll
+ 0005:000006b0       __imp_strtol               00000001400c56b0     ucrtd:ucrtbased.dll
+ 0005:000006b8       __imp__wassert             00000001400c56b8     ucrtd:ucrtbased.dll
+ 0005:000006c0       __imp_strlen               00000001400c56c0     ucrtd:ucrtbased.dll
+ 0005:000006c8       __imp___stdio_common_vsprintf 00000001400c56c8     ucrtd:ucrtbased.dll
+ 0005:000006d0       __imp_strcpy               00000001400c56d0     ucrtd:ucrtbased.dll
+ 0005:000006d8       __imp_strncpy              00000001400c56d8     ucrtd:ucrtbased.dll
+ 0005:000006e0       __imp__stricmp             00000001400c56e0     ucrtd:ucrtbased.dll
+ 0005:000006e8       __imp_isdigit              00000001400c56e8     ucrtd:ucrtbased.dll
+ 0005:000006f0       __imp_cos                  00000001400c56f0     ucrtd:ucrtbased.dll
+ 0005:000006f8       __imp_strcmp               00000001400c56f8     ucrtd:ucrtbased.dll
+ 0005:00000700       __imp_strncmp              00000001400c5700     ucrtd:ucrtbased.dll
+ 0005:00000708       __imp_isxdigit             00000001400c5708     ucrtd:ucrtbased.dll
+ 0005:00000710       __imp__strnicmp            00000001400c5710     ucrtd:ucrtbased.dll
+ 0005:00000718       __imp_free                 00000001400c5718     ucrtd:ucrtbased.dll
+ 0005:00000720       __imp_malloc               00000001400c5720     ucrtd:ucrtbased.dll
+ 0005:00000728       __imp_isspace              00000001400c5728     ucrtd:ucrtbased.dll
+ 0005:00000730       __imp_fmod                 00000001400c5730     ucrtd:ucrtbased.dll
+ 0005:00000738       __imp_srand                00000001400c5738     ucrtd:ucrtbased.dll
+ 0005:00000740       __imp_rand                 00000001400c5740     ucrtd:ucrtbased.dll
+ 0005:00000748       __imp_calloc               00000001400c5748     ucrtd:ucrtbased.dll
+ 0005:00000750       __imp_exp                  00000001400c5750     ucrtd:ucrtbased.dll
+ 0005:00000758       __imp_sqrt                 00000001400c5758     ucrtd:ucrtbased.dll
+ 0005:00000760       __imp_floor                00000001400c5760     ucrtd:ucrtbased.dll
+ 0005:00000768       __imp_pow                  00000001400c5768     ucrtd:ucrtbased.dll
+ 0005:00000770       __imp_sin                  00000001400c5770     ucrtd:ucrtbased.dll
+ 0005:00000778       __imp_fabs                 00000001400c5778     ucrtd:ucrtbased.dll
+ 0005:00000780       __imp_log                  00000001400c5780     ucrtd:ucrtbased.dll
+ 0005:00000788       __imp_atan                 00000001400c5788     ucrtd:ucrtbased.dll
+ 0005:00000790       __imp___stdio_common_vsscanf 00000001400c5790     ucrtd:ucrtbased.dll
+ 0005:00000798       __imp_clock                00000001400c5798     ucrtd:ucrtbased.dll
+ 0005:000007a0       __imp_exit                 00000001400c57a0     ucrtd:ucrtbased.dll
+ 0005:000007a8       __imp__seh_filter_exe      00000001400c57a8     ucrtd:ucrtbased.dll
+ 0005:000007b0       __imp__set_app_type        00000001400c57b0     ucrtd:ucrtbased.dll
+ 0005:000007b8       __imp___setusermatherr     00000001400c57b8     ucrtd:ucrtbased.dll
+ 0005:000007c0       __imp__configure_narrow_argv 00000001400c57c0     ucrtd:ucrtbased.dll
+ 0005:000007c8       __imp__initialize_narrow_environment 00000001400c57c8     ucrtd:ucrtbased.dll
+ 0005:000007d0       __imp__get_initial_narrow_environment 00000001400c57d0     ucrtd:ucrtbased.dll
+ 0005:000007d8       __imp__initterm            00000001400c57d8     ucrtd:ucrtbased.dll
+ 0005:000007e0       __imp__initterm_e          00000001400c57e0     ucrtd:ucrtbased.dll
+ 0005:000007e8       __imp__exit                00000001400c57e8     ucrtd:ucrtbased.dll
+ 0005:000007f0       __imp__set_fmode           00000001400c57f0     ucrtd:ucrtbased.dll
+ 0005:000007f8       __imp___p___argc           00000001400c57f8     ucrtd:ucrtbased.dll
+ 0005:00000800       __imp___p___argv           00000001400c5800     ucrtd:ucrtbased.dll
+ 0005:00000808       __imp__cexit               00000001400c5808     ucrtd:ucrtbased.dll
+ 0005:00000810       __imp__c_exit              00000001400c5810     ucrtd:ucrtbased.dll
+ 0005:00000818       __imp__register_thread_local_exe_atexit_callback 00000001400c5818     ucrtd:ucrtbased.dll
+ 0005:00000820       __imp__configthreadlocale  00000001400c5820     ucrtd:ucrtbased.dll
+ 0005:00000828       __imp__set_new_mode        00000001400c5828     ucrtd:ucrtbased.dll
+ 0005:00000830       __imp___p__commode         00000001400c5830     ucrtd:ucrtbased.dll
+ 0005:00000838       __imp__seh_filter_dll      00000001400c5838     ucrtd:ucrtbased.dll
+ 0005:00000840       __imp__initialize_onexit_table 00000001400c5840     ucrtd:ucrtbased.dll
+ 0005:00000848       __imp__register_onexit_function 00000001400c5848     ucrtd:ucrtbased.dll
+ 0005:00000850       __imp__execute_onexit_table 00000001400c5850     ucrtd:ucrtbased.dll
+ 0005:00000858       __imp__crt_atexit          00000001400c5858     ucrtd:ucrtbased.dll
+ 0005:00000860       __imp__crt_at_quick_exit   00000001400c5860     ucrtd:ucrtbased.dll
+ 0005:00000868       __imp_terminate            00000001400c5868     ucrtd:ucrtbased.dll
+ 0005:00000870       \177ucrtbased_NULL_THUNK_DATA 00000001400c5870     ucrtd:ucrtbased.dll
+ 0005:00000928       __IMPORT_DESCRIPTOR_ole32  00000001400c5928     ole32:ole32.dll
+ 0005:0000093c       __IMPORT_DESCRIPTOR_WS2_32 00000001400c593c     ws2_32:WS2_32.dll
+ 0005:00000950       __IMPORT_DESCRIPTOR_WINMM  00000001400c5950     winmm:WINMM.dll
+ 0005:00000964       __IMPORT_DESCRIPTOR_KERNEL32 00000001400c5964     kernel32:KERNEL32.dll
+ 0005:00000978       __IMPORT_DESCRIPTOR_VCRUNTIME140D 00000001400c5978     vcruntimed:VCRUNTIME140D.dll
+ 0005:0000098c       __IMPORT_DESCRIPTOR_ucrtbased 00000001400c598c     ucrtd:ucrtbased.dll
+ 0005:000009a0       __NULL_IMPORT_DESCRIPTOR   00000001400c59a0     ole32:ole32.dll
+ 0007:00000000       __guard_check_icall_fptr   00000001400c9000     MSVCRTD:guard_support.obj
+ 0007:00000010       __guard_dispatch_icall_fptr 00000001400c9010     MSVCRTD:guard_support.obj

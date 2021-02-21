@@ -1,0 +1,13 @@
+﻿  errno.c
+  evsub.c
+  evsub_msg.c
+  iscomposing.c
+  mwi.c
+  pidf.c
+  presence.c
+  presence_body.c
+  publishc.c
+  rpid.c
+  xpidf.c
+  Generating Code...
+  pjsip_simple.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjsip\build\..\lib\pjsip-simple-x86_64-x64-vc14-Release.lib

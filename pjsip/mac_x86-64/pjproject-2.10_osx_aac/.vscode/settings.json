@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.sql": "sql",
+        "fdk_audio.h": "c",
+        "aacenc_lib.h": "c"
+    }
+}

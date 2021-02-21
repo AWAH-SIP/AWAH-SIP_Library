@@ -1,0 +1,23 @@
+﻿  dlg_core_test.c
+  dns_test.c
+  inv_offer_answer_test.c
+  main.c
+  msg_err_test.c
+  msg_logger.c
+  msg_test.c
+  multipart_test.c
+  regc_test.c
+  test.c
+  transport_loop_test.c
+  transport_tcp_test.c
+  transport_test.c
+  transport_udp_test.c
+  tsx_basic_test.c
+  tsx_bench.c
+  tsx_uac_test.c
+  tsx_uas_test.c
+  txdata_test.c
+  uri_test.c
+  Generating Code...
+  pjsip_test.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjsip\build\..\bin\pjsip-test-x86_64-x64-vc14-Release.exe
+  pjsip_test.vcxproj -> ..\bin\pjsip-test-x86_64-x64-vc14-Release.pdb (Full PDB)

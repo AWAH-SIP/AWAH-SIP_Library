@@ -1,0 +1,4 @@
+﻿  milenage.c
+  rijndael.c
+  Generating Code...
+  libmilenage.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\third_party\build\milenage\..\..\lib\libmilenage-x86_64-x64-vc14-Debug-Dynamic.lib

@@ -1,0 +1,59 @@
+
+
+PJSYSTEST Report
+Time: 2021/02/15 00:45:46
+Tests invoked: 8
+-----------------------------------------------
+
+TEST 0: Audio Device List Success
+Found 9 devices
+  0: core audio [Built-in Microphone] (4/0)
+  1: core audio [Lenovo Monitor USB Speaker] (1/2)
+  2: core audio [Built-in Output] (0/2)
+  3: core audio [IOUSBHostInterface] (2/0)
+  4: core audio [Headsets] (0/2)
+  5: core audio [LEN Y44w-10] (0/2)
+  6: core audio [Merging RAVENNA/AES67] (2/8)
+  7: core audio [AirPods Pro von Adi] (1/0)
+  8: core audio [AirPods Pro von Adi] (0/2)
+
+
+TEST 1: Audio Settings Success
+Version: 2.10
+Test clock rate: 8000
+Device clock rate: 8000
+Aud frame ptime: 20
+Channel count: 1
+Audio switching: Conf bridge
+Snd buff count: 8
+Rec dev : -1 (Lenovo Monitor USB Speaker) [core audio]
+Rec  buf : 100 msec
+Play dev: -2 (Lenovo Monitor USB Speaker) [core audio]
+Play buf: 140 msec
+
+
+TEST 2: Audio Tone Playback Test Success
+
+
+TEST 3: WAV File Playback Test Failed
+Not found (PJ_ENOTFOUND)
+
+TEST 4: Audio Recording Skipped
+
+
+TEST 5: Audio Device Test Success
+Here are the audio statistics:
+Rec : interval (min/max/avg/dev)=
+         20/20/20/0 (ms)
+      max burst=1
+Play: interval (min/max/avg/dev)=
+         20/20/20/0 (ms)
+      burst=1
+
+The sound device seems to be okay!
+
+TEST 6: Audio Latency Test Failed
+Not found (PJ_ENOTFOUND)
+
+TEST 7: AEC/AES Test Skipped
+

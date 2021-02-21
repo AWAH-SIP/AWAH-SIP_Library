@@ -1,0 +1,13 @@
+﻿  codec_vectors.c
+  jbuf_test.c
+  main.c
+  mips_test.c
+  rtp_test.c
+  sdp_neg_test.c
+  test.c
+  vid_codec_test.c
+  vid_dev_test.c
+  vid_port_test.c
+  Generating Code...
+  pjmedia_test.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjmedia\build\..\bin\pjmedia-test-x86_64-x64-vc14-Debug-Dynamic.exe
+  pjmedia_test.vcxproj -> .\output\pjmedia_test-x86_64-x64-vc14-Debug-Dynamic\pjmedia-test-x86_64-x64-vc14-Debug-Dynamic.pdb (Full PDB)

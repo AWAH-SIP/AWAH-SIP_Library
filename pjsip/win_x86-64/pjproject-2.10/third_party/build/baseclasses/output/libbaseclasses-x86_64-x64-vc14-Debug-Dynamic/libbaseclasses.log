@@ -1,0 +1,12 @@
+﻿  amfilter.cpp
+  amvideo.cpp
+  arithutil.cpp
+  combase.cpp
+  ctlutil.cpp
+  mtype.cpp
+  renbase.cpp
+  wxdebug.cpp
+  wxlist.cpp
+  wxutil.cpp
+  Generating Code...
+  libbaseclasses.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\third_party\build\baseclasses\..\..\lib\libbaseclasses-x86_64-x64-vc14-Debug-Dynamic.lib

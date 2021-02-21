@@ -1,0 +1,10 @@
+﻿  avi_dev.c
+  colorbar_dev.c
+  dshow_dev.c
+  errno.c
+  ffmpeg_dev.c
+  sdl_dev.c
+  videodev.c
+  Generating Code...
+  dshowclasses.cpp
+  pjmedia_videodev.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjmedia\build\..\lib\pjmedia-videodev-x86_64-x64-vc14-Release.lib

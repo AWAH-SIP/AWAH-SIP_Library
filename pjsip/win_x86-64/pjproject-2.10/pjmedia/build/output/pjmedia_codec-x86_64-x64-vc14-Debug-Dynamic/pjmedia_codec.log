@@ -1,0 +1,32 @@
+﻿  amr_sdp_match.c
+  audio_codecs.c
+  bcg729.c
+  ffmpeg_vid_codecs.c
+  g722.c
+  g7221.c
+  g7221_sdp_match.c
+  g722_dec.c
+  g722_enc.c
+  gsm.c
+  h263_packetizer.c
+  h264_packetizer.c
+  ilbc.c
+  ipp_codecs.c
+  l16.c
+  opencore_amr.c
+  opus.c
+..\src\pjmedia-codec\opus.c(861): warning C4267: 'function': conversion from 'size_t' to 'opus_int32', possible loss of data
+..\src\pjmedia-codec\opus.c(878): warning C4267: 'function': conversion from 'size_t' to 'opus_int32', possible loss of data
+..\src\pjmedia-codec\opus.c(1037): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+..\src\pjmedia-codec\opus.c(1047): warning C4267: 'function': conversion from 'size_t' to 'opus_int32', possible loss of data
+..\src\pjmedia-codec\opus.c(1113): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+..\src\pjmedia-codec\opus.c(1122): warning C4267: 'function': conversion from 'size_t' to 'opus_int32', possible loss of data
+  passthrough.c
+  silk.c
+  speex_codec.c
+  Generating Code...
+  Compiling...
+  vpx.c
+  Generating Code...
+  openh264.cpp
+  pjmedia_codec.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjmedia\build\..\lib\pjmedia-codec-x86_64-x64-vc14-Debug-Dynamic.lib

@@ -1,0 +1,159 @@
+/*
+ * Copyright (C) 2016 - 2021 Andy Weiss, Adi Hilber
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+#ifndef ACCOUNTS_H
+#define ACCOUNTS_H
+
+#include <QObject>
+#include "types.h"
+
+class AWAHSipLib;
+
+class Accounts : public QObject
+{
+    Q_OBJECT
+public:
+    explicit Accounts(AWAHSipLib *parentLib, QObject *parent = nullptr);
+
+    /**
+    * @brief create and regiser a new SIP account
+    * @param accountName a user definable name to identify the account
+    * @param server the uri of the sip server
+    * @param user  username of the account
+    * @param password the password
+    * @param FilePlayPath if a path is specified then this file will be payed on call accepted
+    * @param FileRecPath if a record path is specified all calls will be recorded into this directory
+    * @param history the call history
+    * @param uid the unique idenifyer of the account
+    */
+    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, QList<s_callHistory> history = QList<s_callHistory>(), QString uid = "");
+
+    /**
+    * @brief modify a existing SIP account
+    * @param accountPtr the account you wish to modify
+    * @param accountName a user definable name to identify the account
+    * @param server the uri of the sip server
+    * @param user  username of the account
+    * @param password the password
+    * @param FilePlayPath if a path is specified then this file will be payed on call accepted
+    * @param FileRecPath if a record path is specified all calls will be recorded into this directory
+    */
+    void modifyAccount(int index, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath);
+
+    /**
+    * @brief remove a SIP Account
+    * @param index the position of the account in the Accounts list you like to remove
+    */
+    void removeAccount(int index);
+
+    /**
+    * @brief get the active accounts
+    * @return the Account struct
+    */
+    QList <s_account>* getAccounts() { return &m_accounts; };
+
+    /**
+    * @brief get an account by it's ID
+    * @return the Account struct
+    */
+    s_account* getAccountByID(int ID);
+
+    /**
+    * @brief get an account by it's uid
+    * @return the Account struct
+    */
+    s_account* getAccountByUID(QString uid);
+
+    /**
+    * @brief establish a new call
+    * @param number the number you like to call
+    * @param AccID the account that originates the call
+    */
+    void makeCall(QString number, int AccID);
+
+    /**
+    * @brief end a call
+    * @param callId the ID of the call you like to end
+    * @param AccID the account that owns the call
+    */
+    void hangupCall(int callId, int AccID);
+
+    /**
+    * @brief accept a call
+    * @param callId the ID of the call you like to accept
+    * @param AccID the account that owns the call
+    */
+    void acceptCall(int callId, int AccID);
+
+    // untestet and thus not documented yet
+    void holdCall(int callId, int AccID);
+    void transferCall(int callId, int AccID, QString destination);
+
+
+    /**
+    * @brief get streaminfo and callstatistics for a call
+    * @param callId the ID of the call you're intrested in
+    * @param AccID the account that owns the call
+    * @return QJsonObject with all the infos and their parameters
+    */
+    QJsonObject getCallInfo(int callId, int AccID);
+
+    /**
+    * @brief add call to the challhistory (the last 10 calls will be stored)
+    * @param AccID the account witch history shold be edited
+    * @param callUri the Uri of the call
+    * @param duration the duration of the call
+    * @param codec the used coded
+    * @param outgoing 1 = the call was outgoing (we called someone)
+    */
+    void addCallToHistory(int AccID, QString callUri, int duration, QString codec, bool outgoing);
+
+    /**
+    * @brief get streaminfos callhistory for an account
+    * @param AccID the account
+    * @return a qlist with up to 10 calls
+    */
+    const QList<s_callHistory>* getCallHistory(int AccID);
+
+    void OncallStateChanged(int accID, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri);
+
+    AccountConfig getDefaultACfg() const { return defaultACfg;};
+
+    void setDefaultACfg(const AccountConfig &value){ defaultACfg = value; };
+
+signals:
+    void regStateChanged(int accId, bool status);
+    void callStateChanged(int accID, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri);
+    void signalSipStatus(int accId, int status, QString remoteUri);
+
+private:
+    AWAHSipLib* m_lib;
+    AccountConfig aCfg, defaultACfg;
+
+    /**
+    * @brief All accounts are added to this list
+    *       in order to save and load current setup
+    */
+    QList<s_account> m_accounts;
+
+
+
+
+};
+
+#endif // ACCOUNTS_H

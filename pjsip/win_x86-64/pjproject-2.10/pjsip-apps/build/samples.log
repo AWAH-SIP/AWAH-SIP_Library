@@ -1,0 +1,38 @@
+﻿  auddemo.c
+  aectest.c
+  aviplay.c
+  clidemo.c
+  confsample.c
+  confbench.c
+  encdec.c
+MSVCRTD.lib(initializers.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+  httpdemo.c
+  icedemo.c
+  jbsim.c
+MSVCRTD.lib(initializers.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+  latency.c
+  level.c
+  mix.c
+  pcaputil.c
+MSVCRTD.lib(initializers.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+  pjsip-perf.c
+MSVCRTD.lib(initializers.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+  playfile.c
+  playsine.c
+  recfile.c
+  resampleplay.c
+  simpleua.c
+  simple_pjsua.c
+MSVCRTD.lib(initializers.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+  sipecho.c
+  siprtp.c
+..\src\samples\siprtp.c(703): warning C4102: 'TODO___HANDLE_FORKING': unreferenced label
+  sipstateless.c
+  stateful_proxy.c
+  stateless_proxy.c
+  stereotest.c
+  streamutil.c
+MSVCRTD.lib(initializers.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+  strerror.c
+  tonegen.c
+  vid_streamutil.c
