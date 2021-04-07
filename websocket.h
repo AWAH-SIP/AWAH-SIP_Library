@@ -67,6 +67,14 @@ private slots:
      * @param &ret JSON-Object which contains Data and Error Object
      */
     void echo(QJsonObject &data, QJsonObject &ret);
+
+    /**
+     * use this function to initialize a new client with the current stae
+     * all relevant variables will be transmitted (e.g. Accounts, Sounddevices etc.)
+     * @param &data JSON-Object with the supplied Data from Websocket
+     * @param &ret JSON-Object which contains Data and Error Object
+     */
+    void getAllVariables(QJsonObject &data, QJsonObject &ret);
     // Public API - Accounts
     void createAccount(QJsonObject &data, QJsonObject &ret);
     void modifyAccount(QJsonObject &data, QJsonObject &ret);
@@ -124,6 +132,9 @@ public slots:
     void logMessage(QString msg);
     void audioRoutesChanged(const QList<s_audioRoutes>& audioRoutes);
     void audioRoutesTableChanged(const s_audioPortList& portList);
+    void callInfo(int accId, int callId, QJsonObject callInfo);
+    void AccountsChanged(QList <s_account>* Accounts);
+    void AudioDevicesChanged(QList<s_audioDevices>* audioDev);
 
 private:
     AWAHSipLib* m_lib;

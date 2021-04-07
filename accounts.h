@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include "types.h"
+#include <QTimer>
 
 class AWAHSipLib;
 
@@ -31,6 +32,13 @@ public:
     explicit Accounts(AWAHSipLib *parentLib, QObject *parent = nullptr);
 
     /**
+    * @brief start the call inspector, to get call information once a second
+    *        the call inspector also detects media loss, handles max call time and
+    *        is redials calls presistent calls
+    */
+    void startCallInspector();
+
+    /**
     * @brief create and regiser a new SIP account
     * @param accountName a user definable name to identify the account
     * @param server the uri of the sip server
@@ -38,10 +46,12 @@ public:
     * @param password the password
     * @param FilePlayPath if a path is specified then this file will be payed on call accepted
     * @param FileRecPath if a record path is specified all calls will be recorded into this directory
+    * @param fixedJitterBuffer if true a fixed jitter buffer is set, otherwise an adaptive jitter buffer is active
+    * @param fixedJitterBufferValue the time in ms for the fixed jitter buffer
     * @param history the call history
     * @param uid the unique idenifyer of the account
     */
-    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, QList<s_callHistory> history = QList<s_callHistory>(), QString uid = "");
+    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue, QList<s_callHistory> history = QList<s_callHistory>(), QString uid = "");
 
     /**
     * @brief modify a existing SIP account
@@ -52,8 +62,10 @@ public:
     * @param password the password
     * @param FilePlayPath if a path is specified then this file will be payed on call accepted
     * @param FileRecPath if a record path is specified all calls will be recorded into this directory
+    * @param fixedJitterBuffer if true a fixed jitter buffer is set, otherwise an adaptive jitter buffer is active
+    * @param fixedJitterBufferValue the time in ms for the fixed jitter buffer
     */
-    void modifyAccount(int index, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath);
+    void modifyAccount(int index, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue);
 
     /**
     * @brief remove a SIP Account
@@ -131,19 +143,26 @@ public:
     const QList<s_callHistory>* getCallHistory(int AccID);
 
     void OncallStateChanged(int accID, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri);
+    void OnsignalSipStatus(int accId, int status, QString remoteUri);
 
     AccountConfig getDefaultACfg() const { return defaultACfg;};
 
     void setDefaultACfg(const AccountConfig &value){ defaultACfg = value; };
 
+    int m_MaxCallTime;
+
 signals:
     void regStateChanged(int accId, bool status);
-    void callStateChanged(int accID, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri);
+    void callStateChanged(int accId, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri);
     void signalSipStatus(int accId, int status, QString remoteUri);
+    void callInfo(int accId, int callId, QJsonObject callInfo);
+    void AccountsChanged(QList <s_account>* Accounts);
 
 private:
     AWAHSipLib* m_lib;
     AccountConfig aCfg, defaultACfg;
+    QTimer *m_CallInspectorTimer;
+
 
     /**
     * @brief All accounts are added to this list
@@ -151,7 +170,8 @@ private:
     */
     QList<s_account> m_accounts;
 
-
+private slots:
+    void CallInspector();
 
 
 };

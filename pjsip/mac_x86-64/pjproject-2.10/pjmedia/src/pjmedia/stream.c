@@ -3305,3 +3305,13 @@ pjmedia_stream_get_rtp_session_info(pjmedia_stream *stream,
     session_info->rtcp = &stream->rtcp;
     return PJ_SUCCESS;
 }
+
+/**
+ * Set JitterBuffer to fixed Mode
+ */
+PJ_DEF(pj_status_t)
+pjmedia_stream_jbuf_set_fixed(pjmedia_stream *stream,
+							  unsigned prefetch)
+{
+	return pjmedia_jbuf_set_fixed(stream->jb, prefetch / stream->dec_ptime);
+}

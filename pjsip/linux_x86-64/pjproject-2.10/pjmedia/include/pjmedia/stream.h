@@ -459,6 +459,20 @@ pjmedia_stream_get_rtp_session_info(pjmedia_stream *stream,
 
 
 /**
+ * Set the Jitter-Buffer to fixed delay mode.
+ *
+ * @param stream	The media stream.
+ *
+ * @param prefetch	The fixed delay value, in ms.
+ *
+ * @return		PJ_SUCCESS on success.
+ */
+PJ_DECL(pj_status_t)
+pjmedia_stream_jbuf_set_fixed(pjmedia_stream *stream,
+							  unsigned prefetch);
+
+
+/**
  * @}
  */
 

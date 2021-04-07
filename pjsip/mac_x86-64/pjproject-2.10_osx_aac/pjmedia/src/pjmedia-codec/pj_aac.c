@@ -196,7 +196,7 @@ static pj_status_t aac_parse_fmtp(
     unsigned i;
 
     pj_bzero(aac_fmtp, sizeof(*aac_fmtp));
-    aac_fmtp->aot = AOT_ER_AAC_ELD;
+    aac_fmtp->aot = AOT_ER_AAC_LD;
     /* Assume only mono/stereo for now */
     aac_fmtp->channel_mode = MODE_1;
     aac_fmtp->granule_length = 480;
@@ -233,7 +233,7 @@ static void aac_apply_codec_params(pj_pool_t *pool, pjmedia_codec_param *attr, c
 
     aac_add_int_codec_param(pool, &attr->setting.dec_fmtp, pj_str("streamtype"), 5);
     aac_add_str_codec_param(pool, &attr->setting.dec_fmtp, pj_str("mode"), pj_str("AAC-hbr"));
-    aac_add_str_codec_param(pool, &attr->setting.dec_fmtp, pj_str("profile-level-id"), pj_str("58"));
+    aac_add_str_codec_param(pool, &attr->setting.dec_fmtp, pj_str("profile-level-id"), pj_str("52"));
     aac_add_int_codec_param(pool, &attr->setting.dec_fmtp, pj_str("sizelength"), 16 - INDEX_BIT_LENGTH);
     aac_add_int_codec_param(pool, &attr->setting.dec_fmtp, pj_str("indexlength"), INDEX_BIT_LENGTH);
     aac_add_int_codec_param(pool, &attr->setting.dec_fmtp, pj_str("indexdeltalength"), INDEX_BIT_LENGTH);
@@ -417,7 +417,7 @@ static pj_status_t aac_default_attr(pjmedia_codec_factory *factory,
      *
      */
     attr->info.clock_rate = DEFAULT_CLOCK_RATE;
-    attr->info.channel_cnt = 1;
+    attr->info.channel_cnt = 2;
     attr->info.avg_bps = 48000;
     attr->info.max_bps = 64000;
     attr->info.frm_ptime = DEFAULT_PTIME;
@@ -428,11 +428,11 @@ static pj_status_t aac_default_attr(pjmedia_codec_factory *factory,
     attr->setting.vad = 0;
     attr->setting.plc = 1;
 
-    default_aac_params.aot = AOT_ER_AAC_ELD;
+    default_aac_params.aot = AOT_ER_AAC_LD;
     /* Assume only mono/stereo for now */
     default_aac_params.channel_mode = (attr->info.channel_cnt == 1) ? MODE_1 : MODE_2;
     default_aac_params.granule_length = 480;
-    default_aac_params.sbr = 1;
+    default_aac_params.sbr = 0;
 
     // Apply these settings to relevant fmtp parameters
     aac_apply_codec_params(aac_factory.pool, attr, &default_aac_params);
@@ -461,7 +461,7 @@ static pj_status_t aac_enum_codecs(pjmedia_codec_factory *factory,
     codecs[*count].pt = PJMEDIA_RTP_PT_MPEG4;
     codecs[*count].type = PJMEDIA_TYPE_AUDIO;
     codecs[*count].clock_rate = DEFAULT_CLOCK_RATE;
-    codecs[*count].channel_cnt = 1;
+    codecs[*count].channel_cnt = 2;
 
     ++*count;
 
@@ -573,11 +573,11 @@ static pj_status_t aac_codec_open(pjmedia_codec *codec,
 
     /* Create Encoder */
     /* TODO : get from fmtp */
-    default_aac_params.aot = AOT_ER_AAC_ELD;
+    default_aac_params.aot = AOT_ER_AAC_LD;
     /* Assume only mono/stereo for now */
     default_aac_params.channel_mode = (attr->info.channel_cnt == 1) ? MODE_1 : MODE_2;
     default_aac_params.granule_length = 480;
-    default_aac_params.sbr = 1;
+    default_aac_params.sbr = 0;
 
     status = aac_encoder_open(&aac->hAacEnc, attr, &default_aac_params);
 

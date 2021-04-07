@@ -65,10 +65,10 @@ public:
     static void prepareLib();
 
     // Public API - Accounts
-    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath) const
-        { return m_Accounts->createAccount(accountName, server, user, password, filePlayPath, fileRecPath); };
-    void modifyAccount(int index, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath) const
-        { return m_Accounts->modifyAccount(index, accountName, server, user, password, filePlayPath, fileRecPath); };
+    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue) const
+        { return m_Accounts->createAccount(accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue); };
+    void modifyAccount(int index, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue) const
+        { return m_Accounts->modifyAccount(index, accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue); };
     void removeAccount(int index) const { return m_Accounts->removeAccount(index); };
     QList <s_account>* getAccounts() const { return m_Accounts->getAccounts(); };
     void makeCall(QString number, int AccID) const { return m_Accounts->makeCall(number, AccID); };
@@ -150,7 +150,7 @@ signals:
     * @param statustxt the text label to the SIP status code
     * @param remoteUri the URI of the remote end
     */
-    void callStateChanged(int accID, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri);
+    void callStateChanged(int accId, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri);
 
     /**
     * @brief Signal with the status of the buddies
@@ -184,6 +184,25 @@ signals:
     */
     void audioRoutesTableChanged(const s_audioPortList& portList);
 
+    /**
+    * @brief Signal Accounts Changed (e.g. an account is added or deleated)
+    * @param Accounts a QList with all the accounts
+    */
+    void AccountsChanged(QList <s_account>* Accounts);
+
+    /**
+    * @brief Signal if audio device config changed
+    * @param QList of the new device config
+    */
+    void AudioDevicesChanged(QList<s_audioDevices>* audioDev);
+
+    /**
+    * @brief Signal a Callinfo updated every second for every active call
+    * @param accId the account identifier of the Call
+    * @param CallId the call identifier
+    * @param callInfo a JsonObject with various info parameters
+    */
+    void callInfo(int accId, int callId, QJsonObject callInfo);
 
 private:
     EpConfig epCfg;

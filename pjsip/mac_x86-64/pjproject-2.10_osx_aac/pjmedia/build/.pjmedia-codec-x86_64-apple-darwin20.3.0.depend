@@ -1258,9 +1258,9 @@ output/pjmedia-codec-x86_64-apple-darwin20.3.0/speex_codec.o: ../src/pjmedia-cod
   ../../pjlib/include/pj/os.h ../include/pjmedia/errno.h \
   ../include/pjmedia/endpoint.h ../include/pjmedia/transport.h \
   ../include/pjmedia-audiodev/audiodev.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/speex/include/speex/speex.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/speex/include/speex/speex_bits.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/speex/include/speex/speex_types.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/speex/include/speex/speex.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/speex/include/speex/speex_bits.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/speex/include/speex/speex_types.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/types.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_char.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_short.h \
@@ -2532,9 +2532,9 @@ output/pjmedia-codec-x86_64-apple-darwin20.3.0/pj_aac.o: ../src/pjmedia-codec/pj
   ../include/pjmedia-codec/types.h ../include/pjmedia-codec/config.h \
   ../include/pjmedia-codec/config_auto.h ../../pjlib/include/pj/log.h \
   ../include/pjmedia-codec/pj_aac.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/fdk-aac-master/libSYS/include/FDK_audio.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/fdk-aac-master/libSYS/include/machine_type.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/fdk-aac-master/libSYS/include/genericStds.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/fdk-aac-master/libSYS/include/syslib_channelMapDescr.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/fdk-aac-master/libAACenc/include/aacenc_lib.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/fdk-aac-master/libAACdec/include/aacdecoder_lib.h
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/fdk-aac-master/libSYS/include/FDK_audio.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/fdk-aac-master/libSYS/include/machine_type.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/fdk-aac-master/libSYS/include/genericStds.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/fdk-aac-master/libSYS/include/syslib_channelMapDescr.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/fdk-aac-master/libAACenc/include/aacenc_lib.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/fdk-aac-master/libAACdec/include/aacdecoder_lib.h

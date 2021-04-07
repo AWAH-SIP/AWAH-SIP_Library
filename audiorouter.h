@@ -152,6 +152,13 @@ public:
     QMap<int, QString> getDestAudioSlotMap() const { return m_destAudioSlotMap; };
 
 signals:
+
+    /**
+    * @brief Signal if audio device config changed
+    * @param QList of the new device config
+    */
+    void AudioDevicesChanged(QList<s_audioDevices>* audioDev);
+
     /**
     * @brief Signal if audio routes from the conference-bridge changed
     * @param audioRoutes all routes actually set as a QList

@@ -154,16 +154,48 @@ void Websocket::echo(QJsonObject &data, QJsonObject &ret) {
     ret["error"] = noError();
 }
 
+void Websocket::getAllVariables(QJsonObject &data, QJsonObject &ret){
+    Q_UNUSED(data);
+    QJsonObject retDataObj;
+    QJsonArray accountsArr, audioDevArr;
+    pj::AccountInfo accInfo;
+    QList <s_account>* accounts = m_lib->getAccounts();
+    for (auto & account : *accounts) {
+        accountsArr.append(account.toJSON());
+    }
+    retDataObj["accountsArray"] = accountsArr;
+    QList<s_audioDevices>* audioDevs = m_lib->getAudioDevices();
+    for (auto & audioDev : *audioDevs) {
+        audioDevArr.append(audioDev.toJSON());
+    }
+    retDataObj["audioDevicesArray"] = audioDevArr;
+    const s_audioPortList& confPortList = m_lib->getConfPortsList();
+    retDataObj["confPortList"] = confPortList.toJSON();
+
+    QJsonArray audioRoutesArr;
+    QList <s_audioRoutes> audioRoutes = m_lib->getAudioRoutes();
+    for (auto & route : audioRoutes) {
+        audioRoutesArr.append(route.toJSON());
+    }
+    retDataObj["audioRoutesArray"] = audioRoutesArr;
+    ret["data"] = retDataObj;
+    ret["error"] = noError();
+}
+
 void Websocket::createAccount(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     QString accountName, server, user, password, filePlayPath, fileRecPath;
+    bool fixedJitterBuffer = true;
+    int fixedJitterBufferValue = 0;
     if(     jCheckString(accountName, data["accountName"]) &&
             jCheckString(server, data["server"]) &&
             jCheckString(user, data["user"]) &&
             jCheckString(password, data["password"]) &&
             jCheckString(filePlayPath, data["filePlayPath"]) &&
-            jCheckString(fileRecPath, data["fileRecPath"]) ) {
-        m_lib->createAccount(accountName, server, user, password, filePlayPath, fileRecPath);
+            jCheckString(fileRecPath, data["fileRecPath"]) &&
+            jCheckBool(fixedJitterBuffer, data["fixedJitterBuffer"]) &&
+            jCheckInt(fixedJitterBufferValue, data["fixedJitterBufferValue"]) ) {
+        m_lib->createAccount(accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue);
         ret["data"] = retDataObj;
     } else {
         ret["error"] = hasError("Parameters not accepted");
@@ -174,14 +206,18 @@ void Websocket::modifyAccount(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     int index;
     QString accountName, server, user, password, filePlayPath, fileRecPath;
+    bool fixedJitterBuffer = true;
+    int fixedJitterBufferValue = 0;
     if(     jCheckInt(index, data["index"]) &&
             jCheckString(accountName, data["accountName"]) &&
             jCheckString(server, data["server"]) &&
             jCheckString(user, data["user"]) &&
             jCheckString(password, data["password"]) &&
             jCheckString(filePlayPath, data["filePlayPath"]) &&
-            jCheckString(fileRecPath, data["fileRecPath"]) ) {
-        m_lib->modifyAccount(index, accountName, server, user, password, filePlayPath, fileRecPath);
+            jCheckString(fileRecPath, data["fileRecPath"]) &&
+            jCheckBool(fixedJitterBuffer, data["fixedJitterBuffer"]) &&
+            jCheckInt(fixedJitterBufferValue, data["fixedJitterBufferValue"]) ) {
+        m_lib->modifyAccount(index, accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue);
         ret["data"] = retDataObj;
     } else {
         ret["error"] = hasError("Parameters not accepted");
@@ -200,7 +236,7 @@ void Websocket::removeAccount(QJsonObject &data, QJsonObject &ret) {
     }
 }
 
-void Websocket::getAccounts(QJsonObject &data, QJsonObject &ret) {
+void Websocket::getAccounts(QJsonObject &data, QJsonObject &ret) {          // todo -> remove me?
     Q_UNUSED(data);
     QJsonObject retDataObj;
     QJsonArray accountsArr;
@@ -667,6 +703,16 @@ void Websocket::callStateChanged(int accID, int role, int callId, bool remoteoff
     sendToAll(obj);
 }
 
+void Websocket::callInfo(int accId, int callId, QJsonObject callInfo){
+    QJsonObject obj, data;
+    data["accId"] = accId;
+    data["callId"] = callId;
+    data["callInfo"] = callInfo;
+    obj["signal"] = "callInfo";
+    obj["data"] = data;
+    sendToAll(obj);
+}
+
 void Websocket::buddyStatus(QString buddy, int status){
     QJsonObject obj, data;
     data["buddy"] = buddy;
@@ -700,6 +746,30 @@ void Websocket::audioRoutesTableChanged(const s_audioPortList& portList){
     QJsonObject obj, data;
     data["portList"] = portList.toJSON();
     obj["signal"] = "audioRoutesTableChanged";
+    obj["data"] = data;
+    sendToAll(obj);
+}
+
+void Websocket::AccountsChanged(QList <s_account>* Accounts){
+    QJsonObject obj, data;
+    QJsonArray accountsArr;
+    for (auto & account : *Accounts) {
+        accountsArr.append(account.toJSON());
+    }
+    data["Accounts"] = accountsArr;
+    obj["signal"] = "AccountsChanged";
+    obj["data"] = data;
+    sendToAll(obj);
+}
+
+void Websocket::AudioDevicesChanged(QList<s_audioDevices>* audioDev){
+    QJsonObject obj, data;
+    QJsonArray audioDevArr;
+    for (auto & device : *audioDev) {
+        audioDevArr.append(device.toJSON());
+    }
+    data["AudioDevices"] = audioDevArr;
+    obj["signal"] = "AudioDevicesChanged";
     obj["data"] = data;
     sendToAll(obj);
 }

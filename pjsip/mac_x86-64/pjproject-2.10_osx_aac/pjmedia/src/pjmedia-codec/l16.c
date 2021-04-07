@@ -42,7 +42,7 @@ static const pj_str_t STR_L16 = { "L16", 3 };
 /* To keep frame size below 1400 MTU, set ptime to 10ms for
  * sampling rate > 35 KHz
  */
-#define GET_PTIME(clock_rate)	((pj_uint16_t)(clock_rate > 35000 ? 10 : 20))
+#define GET_PTIME(clock_rate)	((pj_uint16_t)(clock_rate > 31000 ? 4 : 20))
 
 
 /* Prototypes for L16 factory */
@@ -405,7 +405,9 @@ static pj_status_t l16_enum_codecs( pjmedia_codec_factory *factory,
 	codecs[count].channel_cnt = 2;
 	++count;
     }
+#endif
 
+#if PJMEDIA_CODEC_L16_HAS_48KHZ_MONO
     if (count < *max_count) {
 	/* 32000 Hz mono */
 	codecs[count].type = PJMEDIA_TYPE_AUDIO;
@@ -415,7 +417,9 @@ static pj_status_t l16_enum_codecs( pjmedia_codec_factory *factory,
 	codecs[count].channel_cnt = 1;
 	++count;
     }
+#endif
 
+#if PJMEDIA_CODEC_L16_HAS_48KHZ_STEREO
     if (count < *max_count) {
 	/* 32000 Hz stereo */
 	codecs[count].type = PJMEDIA_TYPE_AUDIO;

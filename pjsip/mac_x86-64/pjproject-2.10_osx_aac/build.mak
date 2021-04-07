@@ -1,4 +1,4 @@
-export PJDIR := /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac
+export PJDIR := /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac
 include $(PJDIR)/version.mak
 export PJ_DIR := $(PJDIR)
 

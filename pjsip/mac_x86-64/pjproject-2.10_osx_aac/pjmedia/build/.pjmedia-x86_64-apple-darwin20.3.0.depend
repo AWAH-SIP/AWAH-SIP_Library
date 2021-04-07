@@ -97,8 +97,8 @@ output/pjmedia-x86_64-apple-darwin20.3.0/echo_speex.o: ../src/pjmedia/echo_speex
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/assert.h \
   ../../pjlib/include/pj/log.h ../../pjlib/include/pj/pool.h \
   ../../pjlib/include/pj/list.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/speex/include/speex/speex_echo.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/speex/include/speex/speexdsp_types.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/speex/include/speex/speex_echo.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/speex/include/speex/speexdsp_types.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/types.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_char.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_short.h \
@@ -135,7 +135,7 @@ output/pjmedia-x86_64-apple-darwin20.3.0/echo_speex.o: ../src/pjmedia/echo_speex
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_key_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_fsblkcnt_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_fsfilcnt_t.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/speex/include/speex/speex_preprocess.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/speex/include/speex/speex_preprocess.h \
   ../src/pjmedia/echo_internal.h
 output/pjmedia-x86_64-apple-darwin20.3.0/alaw_ulaw.o: ../src/pjmedia/alaw_ulaw.c ../include/pjmedia/alaw_ulaw.h \
   ../include/pjmedia/types.h ../include/pjmedia/config.h \
@@ -1692,12 +1692,12 @@ output/pjmedia-x86_64-apple-darwin20.3.0/echo_webrtc.o: ../src/pjmedia/echo_webr
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/malloc/_malloc.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_dev_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_mode_t.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/webrtc/src/webrtc/modules/audio_processing/aec/include/echo_cancellation.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/webrtc/src/webrtc/typedefs.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/webrtc/src/webrtc/modules/audio_processing/aecm/include/echo_control_mobile.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/webrtc/src/webrtc/modules/audio_processing/aec/aec_core.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/webrtc/src/webrtc/modules/audio_processing/aec/include/echo_cancellation.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/webrtc/src/webrtc/typedefs.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/webrtc/src/webrtc/modules/audio_processing/aecm/include/echo_control_mobile.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/webrtc/src/webrtc/modules/audio_processing/aec/aec_core.h \
   ../src/pjmedia/echo_internal.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/webrtc/src/webrtc/modules/audio_processing/ns/include/noise_suppression.h
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/webrtc/src/webrtc/modules/audio_processing/ns/include/noise_suppression.h
 output/pjmedia-x86_64-apple-darwin20.3.0/endpoint.o: ../src/pjmedia/endpoint.c ../include/pjmedia/endpoint.h \
   ../include/pjmedia/codec.h ../include/pjmedia/port.h \
   ../include/pjmedia/clock.h ../include/pjmedia/types.h \
@@ -5943,17 +5943,17 @@ output/pjmedia-x86_64-apple-darwin20.3.0/transport_srtp.o: ../src/pjmedia/transp
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/runetype.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_wint_t.h \
   ../../pjlib/include/pj/lock.h ../../pjlib/include/pj/log.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/srtp/include/srtp.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/crypto_kernel.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/cipher.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/crypto_types.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/auth.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/err.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/key.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/rdbx.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/datatypes.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/integers.h \
-  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/alloc.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/srtp/include/srtp.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/crypto_kernel.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/cipher.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/crypto_types.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/auth.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/err.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/key.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/rdbx.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/datatypes.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/integers.h \
+  /Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac/third_party/srtp/crypto/include/alloc.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/time.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_clock_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_time_t.h \

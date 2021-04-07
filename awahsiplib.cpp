@@ -60,6 +60,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Settings->loadAccConfig();
         m_Settings->loadSettings();
         m_Settings->loadAudioRoutes();
+        m_Accounts->startCallInspector();
 
     }
     catch (Error &err){
@@ -76,6 +77,9 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(m_Log, &Log::logMessage, this, &AWAHSipLib::logMessage);
     connect(m_AudioRouter, &AudioRouter::audioRoutesChanged, this, &AWAHSipLib::audioRoutesChanged);
     connect(m_AudioRouter, &AudioRouter::audioRoutesTableChanged, this, &AWAHSipLib::audioRoutesTableChanged);
+    connect(m_Accounts, &Accounts::AccountsChanged, this, &AWAHSipLib::AccountsChanged);
+    connect(m_Accounts, &Accounts::callInfo, this, &AWAHSipLib::callInfo);
+    connect(m_AudioRouter, &AudioRouter::AudioDevicesChanged, this, &AWAHSipLib::AudioDevicesChanged);
 
     connect(this, &AWAHSipLib::regStateChanged, m_Websocket, &Websocket::regStateChanged);
     connect(this, &AWAHSipLib::callStateChanged, m_Websocket, &Websocket::callStateChanged);
@@ -85,6 +89,9 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(this, &AWAHSipLib::logMessage, m_Websocket, &Websocket::logMessage);
     connect(this, &AWAHSipLib::audioRoutesChanged, m_Websocket, &Websocket::audioRoutesChanged);
     connect(this, &AWAHSipLib::audioRoutesTableChanged, m_Websocket, &Websocket::audioRoutesTableChanged);
+    connect(this, &AWAHSipLib::AccountsChanged, m_Websocket, &Websocket::AccountsChanged);
+    connect(this, &AWAHSipLib::callInfo, m_Websocket, &Websocket::callInfo);
+    connect(this, &AWAHSipLib::AudioDevicesChanged, m_Websocket, &Websocket::AudioDevicesChanged);
 }
 
 AWAHSipLib::~AWAHSipLib()
@@ -130,13 +137,13 @@ QDataStream &operator>>(QDataStream &in, s_audioDevices &obj)
 
 QDataStream &operator<<(QDataStream &out, const s_account &obj)
 {
-    out << obj.name << obj.user << obj.password << obj.serverURI << obj.FileRecordPath << obj.FilePlayPath << obj.uid << obj.CallHistory;
+    out << obj.name << obj.user << obj.password << obj.serverURI << obj.FileRecordPath << obj.FilePlayPath << obj.uid << obj.CallHistory << obj.fixedJitterBuffer << obj.fixedJitterBufferValue << obj.autoredialLastCall;
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, s_account &obj)
 {
-   in  >> obj.name >> obj.user >> obj.password >> obj.serverURI >> obj.FileRecordPath >> obj.FilePlayPath >> obj.uid >> obj.CallHistory;
+   in  >> obj.name >> obj.user >> obj.password >> obj.serverURI >> obj.FileRecordPath >> obj.FilePlayPath >> obj.uid >> obj.CallHistory >> obj.fixedJitterBuffer >> obj.fixedJitterBufferValue >> obj.autoredialLastCall;
    return in;
 }
 

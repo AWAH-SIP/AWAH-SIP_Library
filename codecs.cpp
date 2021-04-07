@@ -37,8 +37,7 @@ QStringList Codecs::listCodec(){
         codecname = QString::fromStdString(codec.codecId);
         priority = settings.value("settings/CodecPriority/"+codecname,"127").toInt();
         if(priority){                                                                          // hide codecs with priority 0
-            if(codecname != "L16/44100/2")                                                     // todo remove me Codec is disabled for demo only because it chrashes the app see issue #22
-        codeclist << codecname;
+            codeclist << codecname;
         }
         m_lib->ep.codecSetPriority(codec.codecId, priority);
 
@@ -119,7 +118,9 @@ const QJsonObject Codecs::getCodecParam(QString codecId)
             codecparam["Streamtype"]= item;
         }
         else if(strcmp(fmtp.name.c_str(),"profile-level-id")==0){               //AAC profile-level-id
-            item["streamtype"] = STRING;
+            item["streamtype"] = INTEGER;
+            item["min"] = 0;                                              // todo check values here!!!!!!!!!!!!!!¨
+            item["max"] = 9000;
             item["value"] = fmtp.val.c_str();
             codecparam["Profile level id"]= item;
         }
@@ -162,7 +163,7 @@ const QJsonObject Codecs::getCodecParam(QString codecId)
             item["streamtype"] = INTEGER;
             item["value"] = atoi(fmtp.val.c_str());
             item["min"] = 0;                                              // todo check values here!!!!!!!!!!!!!!¨
-            item["max"] = 90000;
+            item["max"] = 384000;
             codecparam["Bitrate"]= item;
         }
         else m_lib->m_Log->writeLog(3,QString("getCodecParam: unparsed key/value: ") +fmtp.name.c_str());

@@ -433,7 +433,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac'
+ac_pwd='/Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac'
 srcdir='.'
 test -n "$AWK" || AWK=awk
 # The default lists apply if the user does not specify any file.
@@ -701,7 +701,7 @@ S["CPP"]="gcc -E"
 S["ac_cross_compile"]=""
 S["ac_shlib_suffix"]="dylib"
 S["ac_build_mak_vars"]=""
-S["ac_pjdir"]="/Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/pjproject-2.10_osx_aac"
+S["ac_pjdir"]="/Users/adi/Documents/GitHub/awah-sip-testapp/lib/pjsip/mac_x86-64/pjproject-2.10_osx_aac"
 S["CC_CFLAGS"]="-Wall"
 S["CC_OPTIMIZE"]="-O2"
 S["CC_DEF"]="-D"

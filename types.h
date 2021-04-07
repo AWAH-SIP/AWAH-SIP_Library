@@ -63,6 +63,12 @@ inline QString pj2Str(const pj_str_t &input_str)
     return QString();
 }
 
+inline int dBtoAdjLevel(const float dB)
+{
+    float factor = pow(10, (dB/20));
+    return (int)((factor-1) * 128);
+}
+
 enum DeviceType {
     SoundDevice,
     TestToneGenerator,
@@ -79,11 +85,13 @@ struct s_audioDevices{
     QString inputname;
     QString outputame;
     QList <int> portNo;
-    int genfrequency;               // only for devicetype TestToneGenerator
-    int RecDevID;                   // only for devicetype AudioDevice
-    int PBDevID;
-    QString path;                   // ony for devicetype Fileplayer, FileRecorder
+    int genfrequency = -1;               // only for devicetype TestToneGenerator
+    int RecDevID = -1;                   // only for devicetype AudioDevice
+    int PBDevID = -1;
+    QString path = "n/a";                   // ony for devicetype Fileplayer, FileRecorder
     pjmedia_snd_port *soundport;
+    uint inChannelCount = 0;            // Not in JSON, not saved, only for listConfPorts
+    uint outChannelCount = 0;           // Not in JSON, not saved, only for listConfPorts
     QJsonObject toJSON() const {
         QJsonArray portNrArr;
         for (auto & port: portNo) {
@@ -161,6 +169,13 @@ struct s_account{
     pjmedia_port *splitComb;
     QList <PJCall*> CallList;       // In JSON only QList <int> as an List of Call IDs
     QList <s_callHistory> CallHistory;
+    bool fixedJitterBuffer = true;
+    uint fixedJitterBufferValue = 160;
+    bool autoredialLastCall = false;
+    QString SIPStatusText = "trying to register account...";
+    int SIPStatusCode = 0;
+    QString CallStatusText = "Idle... ";
+    int CallStatusCode = 0;
     QJsonObject toJSON() const {
         QJsonArray callListJSON, callHistoryJSON;
         for (auto & pPJCall: CallList) {
@@ -174,15 +189,18 @@ struct s_account{
             {"user", user},
             {"password", password},
             {"serverURI", serverURI},
-            {"uid", uid},
             {"FileRecordPath", FileRecordPath},
             {"FilePlayPath", FilePlayPath},
-            {"player_id", player_id},
-            {"rec_id", rec_id},
             {"AccID", AccID},
-            {"splitterSlot", splitterSlot},
             {"CallList", callListJSON},
             {"CallHistory", callHistoryJSON},
+            {"fixedJitterBuffer", fixedJitterBuffer},
+            {"fixedJitterBufferValue", (int)fixedJitterBufferValue},
+            {"autoredialLastCall", autoredialLastCall},
+            {"SIPStatusCode", SIPStatusCode},
+            {"SIPStatusText", SIPStatusText},
+            {"CallStatusText", CallStatusText},
+            {"CallStatusCode", CallStatusCode}
         };
     }
     s_account* fromJSON(QJsonObject &accountJSON){
@@ -192,6 +210,9 @@ struct s_account{
         serverURI = accountJSON["serverURI"].toString();
         FileRecordPath = accountJSON["FileRecordPath"].toString();
         FilePlayPath = accountJSON["FilePlayPath"].toString();
+        fixedJitterBuffer = accountJSON["fixedJitterBuffer"].toBool();
+        fixedJitterBufferValue = accountJSON["fixedJitterBufferValue"].toInt();
+        autoredialLastCall = accountJSON["autoredialLastCall"].toBool();
         return this;
     }
 };

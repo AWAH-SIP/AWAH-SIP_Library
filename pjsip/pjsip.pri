@@ -15,9 +15,4 @@ win32 {
     include(win_x86-64/pjsip_win_x86-64.pri)
 }
 
-OTHER_FILES += \
-    $$PWD/mac_x86-64/pjproject-2.10/pjsip/src/pjsip/* \
-    $$PWD/mac_x86-64/pjproject-2.10/pjsip/src/pjsip-simple/* \
-    $$PWD/mac_x86-64/pjproject-2.10/pjsip/src/pjsip-ua/* \
-    $$PWD/mac_x86-64/pjproject-2.10/pjsip/src/pjsua-lib/* \
-    $$PWD/mac_x86-64/pjproject-2.10/pjsip/src/pjsua2/*
+OTHER_FILES +=

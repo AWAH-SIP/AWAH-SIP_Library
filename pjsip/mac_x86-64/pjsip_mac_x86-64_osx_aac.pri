@@ -54,3 +54,12 @@ INCLUDEPATH += $$PWD/pjproject-2.10_osx_aac/pjsip/include \
             -framework CoreMedia \
             -framework VideoToolbox \
             -framework Security
+
+OTHER_FILES += \
+    $$PWD/pjproject-2.10_osx_aac/pjsip/src/pjsip/* \
+    $$PWD/pjproject-2.10_osx_aac/pjsip/src/pjsip-simple/* \
+    $$PWD/pjproject-2.10_osx_aac/pjsip/src/pjsip-ua/* \
+    $$PWD/pjproject-2.10_osx_aac/pjsip/src/pjsua-lib/* \
+    $$PWD/pjproject-2.10_osx_aac/pjsip/src/pjsua2/* \
+    $$PWD/pjproject-2.10_osx_aac/pjmedia/src/pjmedia-codec/* \
+    $$PWD/pjproject-2.10_osx_aac/pjmedia/src/pjmedia/*

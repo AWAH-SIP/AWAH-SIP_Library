@@ -86,7 +86,7 @@ void Settings::loadAccConfig()
     loadedAccounts = settings.value("AccountConfig").value<QList<s_account>>();
 
     for( int i=0; i<loadedAccounts.count(); ++i ){
-        m_lib->m_Accounts->createAccount(loadedAccounts.at(i).name,loadedAccounts.at(i).serverURI,loadedAccounts.at(i).user,loadedAccounts.at(i).password, loadedAccounts.at(i).FilePlayPath, loadedAccounts.at(i).FileRecordPath,loadedAccounts.at(i).CallHistory, loadedAccounts.at(i).uid);
+        m_lib->m_Accounts->createAccount(loadedAccounts.at(i).name,loadedAccounts.at(i).serverURI,loadedAccounts.at(i).user,loadedAccounts.at(i).password, loadedAccounts.at(i).FilePlayPath, loadedAccounts.at(i).FileRecordPath,loadedAccounts.at(i).fixedJitterBuffer,loadedAccounts.at(i).fixedJitterBufferValue,loadedAccounts.at(i).CallHistory, loadedAccounts.at(i).uid);
         m_lib->m_Log->writeLog(3,QString("loadAccConfig: added Account from config file: ") + loadedAccounts.at(i).name);
     }
 
@@ -198,6 +198,16 @@ void Settings::loadSettings()                                           // todo 
     item["max"] = 200;
     GlobalSettings["Audio frame packet time "] = item;
 
+    // ***** Max Call Duration *****
+    item = QJsonObject();
+    item["type"] = INTEGER;
+    m_lib->m_Accounts->m_MaxCallTime = settings.value("settings/MediaConfig/Max_Call_Duration","0").toInt();
+    item["value"] = settings.value("settings/MediaConfig/Max_Call_Duration","0").toInt();
+    item["min"] = 0;
+    item["max"] = 7200;
+    GlobalSettings["Max call duration (min)"] = item;
+
+
     // ***** clockrate *****
     item = QJsonObject();
     m_lib->epCfg.medConfig.clockRate = settings.value("settings/MediaConfig/Conference_Bridge_Clock_Rate","48000").toInt();
@@ -231,8 +241,8 @@ void Settings::loadSettings()                                           // todo 
     item["min"] = 0;
     item["max"] = 1;
     enumitems = QJsonObject();
-    enumitems["enabled"] = 1;
-    enumitems["disabled"] = 0;
+    enumitems["enabled"] = 0;
+    enumitems["disabled"] = 1;
     item["enumlist"] = enumitems;
     AudioSettings["Auto hang up when silence "] = item;
 
@@ -545,8 +555,9 @@ void Settings::setSettings(QJsonObject editedSettings)
                 settings.setValue("settings/TransportConfig/Protocol", "tcp");
             }
         }
-        if (it.key() == "Max Calls"){
-            settings.setValue("settings/UserAgentConfig/MaxCalls",it.value().toInt());
+
+        if (it.key() == "Max call duration (min)"){
+            settings.setValue("settings/MediaConfig/Max_Call_Duration",it.value().toInt());
         }
 
         if (it.key() == "Router max channel"){
