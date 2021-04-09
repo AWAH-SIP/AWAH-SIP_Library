@@ -10,6 +10,11 @@ linux-g++ {
     include(linux_x86-64/pjsip_linux_x86-64.pri)
 }
 
+linux {
+    message("includes PJSIP Library for linux")
+    include(linux_x86-64/pjsip_linux_x86-64.pri)
+}
+
 win32 {
     message("includes PJSIP Library for Windows x86-64")
     include(win_x86-64/pjsip_win_x86-64.pri)
