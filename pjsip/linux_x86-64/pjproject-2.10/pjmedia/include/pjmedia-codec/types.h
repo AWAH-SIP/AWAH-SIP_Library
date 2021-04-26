@@ -100,8 +100,12 @@ enum pjmedia_audio_pt
 #endif
     //PJMEDIA_RTP_PT_L16_22KHZ_MONO,		/**< L16 @ 22KHz, mono	    */
     //PJMEDIA_RTP_PT_L16_22KHZ_STEREO,		/**< L16 @ 22KHz, stereo    */
-    //PJMEDIA_RTP_PT_L16_32KHZ_MONO,		/**< L16 @ 32KHz, mono	    */
-    //PJMEDIA_RTP_PT_L16_32KHZ_STEREO,		/**< L16 @ 32KHz, stereo    */
+#if PJMEDIA_CODEC_L16_HAS_48KHZ_MONO
+    PJMEDIA_RTP_PT_L16_32KHZ_MONO,		/**< L16 @ 32KHz, mono	    */
+#endif
+#if PJMEDIA_CODEC_L16_HAS_48KHZ_STEREO
+    PJMEDIA_RTP_PT_L16_32KHZ_STEREO,		/**< L16 @ 32KHz, stereo    */
+#endif
 #if PJMEDIA_CODEC_L16_HAS_48KHZ_MONO
     PJMEDIA_RTP_PT_L16_48KHZ_MONO,		/**< L16 @ 48KHz, mono	    */
 #endif
