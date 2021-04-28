@@ -1,5 +1,4 @@
 # QT Include File for PJSIP Library for AWAHSipLib
-
 macx {
     message("include PJSIP Library for MacOS")
     include(mac_x86-64/pjsip_mac_x86-64_osx_aac.pri)
@@ -10,9 +9,9 @@ linux-g++ {
     include(linux_x86-64/pjsip_linux_x86-64.pri)
 }
 
-linux {
-    message("includes PJSIP Library for linux")
-    include(linux_x86-64/pjsip_linux_x86-64.pri)
+linux-rasp-pi4-v3d-g++ {
+        message("includes PJSIP Library for linux arm")
+        include(linux_arm_rpi4/pjsip_linux_arm_rpi4.pri)
 }
 
 win32 {
