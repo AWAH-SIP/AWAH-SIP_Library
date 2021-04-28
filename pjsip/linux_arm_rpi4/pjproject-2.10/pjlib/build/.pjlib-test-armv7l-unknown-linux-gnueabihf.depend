@@ -1,0 +1,2316 @@
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/main.o: ../src/pjlib-test/main.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h \
+ ../include/pj/string.h ../include/pj/compat/string.h \
+ /usr/include/string.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/sock.h ../include/pj/log.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/activesock.o: ../src/pjlib-test/activesock.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/atomic.o: ../src/pjlib-test/atomic.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/echo_clt.o: ../src/pjlib-test/echo_clt.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/errno.o: ../src/pjlib-test/errno.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h ../include/pj/log.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/compat/socket.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/arm-linux-gnueabihf/sys/socket.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_iovec.h \
+ /usr/include/arm-linux-gnueabihf/bits/socket.h \
+ /usr/include/arm-linux-gnueabihf/bits/socket_type.h \
+ /usr/include/arm-linux-gnueabihf/bits/sockaddr.h \
+ /usr/include/arm-linux-gnueabihf/asm/socket.h \
+ /usr/include/asm-generic/socket.h \
+ /usr/include/arm-linux-gnueabihf/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_osockaddr.h \
+ /usr/include/linux/socket.h /usr/include/netinet/in.h \
+ /usr/include/arm-linux-gnueabihf/bits/in.h \
+ /usr/include/netinet/in_systm.h /usr/include/netinet/ip.h \
+ /usr/include/netinet/tcp.h /usr/include/net/if.h /usr/include/ifaddrs.h \
+ /usr/include/arpa/inet.h /usr/include/arm-linux-gnueabihf/sys/ioctl.h \
+ /usr/include/arm-linux-gnueabihf/bits/ioctls.h \
+ /usr/include/arm-linux-gnueabihf/asm/ioctls.h \
+ /usr/include/asm-generic/ioctls.h /usr/include/linux/ioctl.h \
+ /usr/include/arm-linux-gnueabihf/asm/ioctl.h \
+ /usr/include/asm-generic/ioctl.h \
+ /usr/include/arm-linux-gnueabihf/bits/ioctl-types.h \
+ /usr/include/arm-linux-gnueabihf/sys/ttydefaults.h /usr/include/errno.h \
+ /usr/include/arm-linux-gnueabihf/bits/errno.h /usr/include/linux/errno.h \
+ /usr/include/arm-linux-gnueabihf/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ /usr/include/netdb.h /usr/include/rpc/netdb.h \
+ /usr/include/arm-linux-gnueabihf/bits/netdb.h /usr/include/unistd.h \
+ /usr/include/arm-linux-gnueabihf/bits/posix_opt.h \
+ /usr/include/arm-linux-gnueabihf/bits/environments.h \
+ /usr/include/arm-linux-gnueabihf/bits/confname.h \
+ /usr/include/arm-linux-gnueabihf/bits/getopt_posix.h \
+ /usr/include/arm-linux-gnueabihf/bits/getopt_core.h \
+ ../include/pj/string.h ../include/pj/compat/string.h \
+ /usr/include/string.h /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/exception.o: ../src/pjlib-test/exception.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/fifobuf.o: ../src/pjlib-test/fifobuf.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/file.o: ../src/pjlib-test/file.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/hash_test.o: ../src/pjlib-test/hash_test.c /usr/include/stdc-predef.h \
+ ../include/pj/hash.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h \
+ ../include/pj/rand.h ../include/pj/log.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h ../include/pj/pool.h \
+ ../include/pj/list.h ../src/pjlib-test/test.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/ioq_perf.o: ../src/pjlib-test/ioq_perf.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/ioq_udp.o: ../src/pjlib-test/ioq_udp.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h \
+ ../include/pj/compat/socket.h \
+ /usr/include/arm-linux-gnueabihf/sys/socket.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_iovec.h \
+ /usr/include/arm-linux-gnueabihf/bits/socket.h \
+ /usr/include/arm-linux-gnueabihf/bits/socket_type.h \
+ /usr/include/arm-linux-gnueabihf/bits/sockaddr.h \
+ /usr/include/arm-linux-gnueabihf/asm/socket.h \
+ /usr/include/asm-generic/socket.h \
+ /usr/include/arm-linux-gnueabihf/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_osockaddr.h \
+ /usr/include/linux/socket.h /usr/include/netinet/in.h \
+ /usr/include/arm-linux-gnueabihf/bits/in.h \
+ /usr/include/netinet/in_systm.h /usr/include/netinet/ip.h \
+ /usr/include/netinet/tcp.h /usr/include/net/if.h /usr/include/ifaddrs.h \
+ /usr/include/arpa/inet.h /usr/include/arm-linux-gnueabihf/sys/ioctl.h \
+ /usr/include/arm-linux-gnueabihf/bits/ioctls.h \
+ /usr/include/arm-linux-gnueabihf/asm/ioctls.h \
+ /usr/include/asm-generic/ioctls.h /usr/include/linux/ioctl.h \
+ /usr/include/arm-linux-gnueabihf/asm/ioctl.h \
+ /usr/include/asm-generic/ioctl.h \
+ /usr/include/arm-linux-gnueabihf/bits/ioctl-types.h \
+ /usr/include/arm-linux-gnueabihf/sys/ttydefaults.h /usr/include/errno.h \
+ /usr/include/arm-linux-gnueabihf/bits/errno.h /usr/include/linux/errno.h \
+ /usr/include/arm-linux-gnueabihf/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ /usr/include/netdb.h /usr/include/rpc/netdb.h \
+ /usr/include/arm-linux-gnueabihf/bits/netdb.h /usr/include/unistd.h \
+ /usr/include/arm-linux-gnueabihf/bits/posix_opt.h \
+ /usr/include/arm-linux-gnueabihf/bits/environments.h \
+ /usr/include/arm-linux-gnueabihf/bits/confname.h \
+ /usr/include/arm-linux-gnueabihf/bits/getopt_posix.h \
+ /usr/include/arm-linux-gnueabihf/bits/getopt_core.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/ioq_unreg.o: ../src/pjlib-test/ioq_unreg.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/ioqueue.h ../include/pj/log.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/list.h ../include/pj/sock.h \
+ ../include/pj/compat/socket.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/arm-linux-gnueabihf/sys/socket.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_iovec.h \
+ /usr/include/arm-linux-gnueabihf/bits/socket.h \
+ /usr/include/arm-linux-gnueabihf/bits/socket_type.h \
+ /usr/include/arm-linux-gnueabihf/bits/sockaddr.h \
+ /usr/include/arm-linux-gnueabihf/asm/socket.h \
+ /usr/include/asm-generic/socket.h \
+ /usr/include/arm-linux-gnueabihf/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_osockaddr.h \
+ /usr/include/linux/socket.h /usr/include/netinet/in.h \
+ /usr/include/arm-linux-gnueabihf/bits/in.h \
+ /usr/include/netinet/in_systm.h /usr/include/netinet/ip.h \
+ /usr/include/netinet/tcp.h /usr/include/net/if.h /usr/include/ifaddrs.h \
+ /usr/include/arpa/inet.h /usr/include/arm-linux-gnueabihf/sys/ioctl.h \
+ /usr/include/arm-linux-gnueabihf/bits/ioctls.h \
+ /usr/include/arm-linux-gnueabihf/asm/ioctls.h \
+ /usr/include/asm-generic/ioctls.h /usr/include/linux/ioctl.h \
+ /usr/include/arm-linux-gnueabihf/asm/ioctl.h \
+ /usr/include/asm-generic/ioctl.h \
+ /usr/include/arm-linux-gnueabihf/bits/ioctl-types.h \
+ /usr/include/arm-linux-gnueabihf/sys/ttydefaults.h /usr/include/errno.h \
+ /usr/include/arm-linux-gnueabihf/bits/errno.h /usr/include/linux/errno.h \
+ /usr/include/arm-linux-gnueabihf/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ /usr/include/netdb.h /usr/include/rpc/netdb.h \
+ /usr/include/arm-linux-gnueabihf/bits/netdb.h /usr/include/unistd.h \
+ /usr/include/arm-linux-gnueabihf/bits/posix_opt.h \
+ /usr/include/arm-linux-gnueabihf/bits/environments.h \
+ /usr/include/arm-linux-gnueabihf/bits/confname.h \
+ /usr/include/arm-linux-gnueabihf/bits/getopt_posix.h \
+ /usr/include/arm-linux-gnueabihf/bits/getopt_core.h \
+ ../include/pj/string.h ../include/pj/compat/string.h \
+ /usr/include/string.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/ioq_tcp.o: ../src/pjlib-test/ioq_tcp.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/list.o: ../src/pjlib-test/list.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/mutex.o: ../src/pjlib-test/mutex.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/os.o: ../src/pjlib-test/os.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pj/log.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h ../include/pj/os.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/pool.o: ../src/pjlib-test/pool.c /usr/include/stdc-predef.h \
+ ../include/pj/pool.h ../include/pj/list.h ../include/pj/types.h \
+ ../include/pj/config.h ../include/pj/compat/cc_gcc.h \
+ ../include/pj/compat/os_auto.h ../include/pj/compat/m_auto.h \
+ ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h \
+ ../include/pj/pool_buf.h ../include/pj/rand.h ../include/pj/log.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../src/pjlib-test/test.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/pool_perf.o: ../src/pjlib-test/pool_perf.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h \
+ ../include/pj/compat/malloc.h /usr/include/malloc.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/rand.o: ../src/pjlib-test/rand.c /usr/include/stdc-predef.h \
+ ../include/pj/rand.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pj/log.h \
+ ../include/pj/types.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../src/pjlib-test/test.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/rbtree.o: ../src/pjlib-test/rbtree.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/select.o: ../src/pjlib-test/select.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h \
+ ../include/pj/sock.h ../include/pj/sock_select.h ../include/pj/log.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/string.h ../include/pj/compat/string.h \
+ /usr/include/string.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/assert.h ../include/pj/compat/assert.h \
+ /usr/include/assert.h ../include/pj/os.h ../include/pj/errno.h \
+ ../include/pj/compat/errno.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/sleep.o: ../src/pjlib-test/sleep.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/sock.o: ../src/pjlib-test/sock.c /usr/include/stdc-predef.h \
+ ../include/pjlib.h ../include/pj/activesock.h ../include/pj/ioqueue.h \
+ ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h \
+ ../include/pj/sock.h ../include/pj/addr_resolv.h ../include/pj/array.h \
+ ../include/pj/assert.h ../include/pj/compat/assert.h \
+ /usr/include/assert.h ../include/pj/ctype.h ../include/pj/compat/ctype.h \
+ /usr/include/ctype.h /usr/include/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h ../src/pjlib-test/test.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/sock_perf.o: ../src/pjlib-test/sock_perf.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/ssl_sock.o: ../src/pjlib-test/ssl_sock.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/string.o: ../src/pjlib-test/string.c /usr/include/stdc-predef.h \
+ ../include/pj/string.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/pool.h ../include/pj/list.h ../include/pj/log.h \
+ ../include/pj/os.h ../src/pjlib-test/test.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/test.o: ../src/pjlib-test/test.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/thread.o: ../src/pjlib-test/thread.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/timer.o: ../src/pjlib-test/timer.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/timestamp.o: ../src/pjlib-test/timestamp.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pj/os.h \
+ ../include/pj/log.h /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/rand.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/udp_echo_srv_sync.o: ../src/pjlib-test/udp_echo_srv_sync.c \
+ /usr/include/stdc-predef.h ../src/pjlib-test/test.h \
+ ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/udp_echo_srv_ioqueue.o: ../src/pjlib-test/udp_echo_srv_ioqueue.c \
+ /usr/include/stdc-predef.h ../include/pjlib.h ../include/pj/activesock.h \
+ ../include/pj/ioqueue.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h \
+ ../include/pj/sock.h ../include/pj/addr_resolv.h ../include/pj/array.h \
+ ../include/pj/assert.h ../include/pj/compat/assert.h \
+ /usr/include/assert.h ../include/pj/ctype.h ../include/pj/compat/ctype.h \
+ /usr/include/ctype.h /usr/include/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h ../src/pjlib-test/test.h
+output/pjlib-test-armv7l-unknown-linux-gnueabihf/util.o: ../src/pjlib-test/util.c /usr/include/stdc-predef.h \
+ ../src/pjlib-test/test.h ../include/pj/types.h ../include/pj/config.h \
+ ../include/pj/compat/cc_gcc.h ../include/pj/compat/os_auto.h \
+ ../include/pj/compat/m_auto.h ../include/pj/compat/size_t.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stddef.h \
+ ../include/pj/config_site.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdint.h \
+ /usr/include/stdint.h \
+ /usr/include/arm-linux-gnueabihf/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/arm-linux-gnueabihf/sys/cdefs.h \
+ /usr/include/arm-linux-gnueabihf/bits/wordsize.h \
+ /usr/include/arm-linux-gnueabihf/bits/long-double.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs.h \
+ /usr/include/arm-linux-gnueabihf/gnu/stubs-hard.h \
+ /usr/include/arm-linux-gnueabihf/bits/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/typesizes.h \
+ /usr/include/arm-linux-gnueabihf/bits/wchar.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-intn.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdint-uintn.h ../include/pjlib.h \
+ ../include/pj/activesock.h ../include/pj/ioqueue.h ../include/pj/sock.h \
+ ../include/pj/addr_resolv.h ../include/pj/array.h ../include/pj/assert.h \
+ ../include/pj/compat/assert.h /usr/include/assert.h \
+ ../include/pj/ctype.h ../include/pj/compat/ctype.h /usr/include/ctype.h \
+ /usr/include/endian.h /usr/include/arm-linux-gnueabihf/bits/endian.h \
+ /usr/include/arm-linux-gnueabihf/bits/byteswap.h \
+ /usr/include/arm-linux-gnueabihf/bits/uintn-identity.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/locale_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__locale_t.h \
+ ../include/pj/errno.h ../include/pj/compat/errno.h \
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include/stdarg.h \
+ ../include/pj/except.h ../include/pj/compat/setjmp.h \
+ /usr/include/setjmp.h /usr/include/arm-linux-gnueabihf/bits/setjmp.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__sigset_t.h \
+ ../include/pj/log.h ../include/pj/fifobuf.h ../include/pj/file_access.h \
+ ../include/pj/file_io.h ../include/pj/guid.h ../include/pj/hash.h \
+ ../include/pj/ip_helper.h ../include/pj/string.h \
+ ../include/pj/compat/string.h /usr/include/string.h \
+ /usr/include/strings.h /usr/include/stdio.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__mbstate_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__fpos64_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/__FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_FILE.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio_lim.h \
+ /usr/include/arm-linux-gnueabihf/bits/sys_errlist.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitflags.h \
+ /usr/include/arm-linux-gnueabihf/bits/waitstatus.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn.h \
+ /usr/include/arm-linux-gnueabihf/bits/floatn-common.h \
+ /usr/include/arm-linux-gnueabihf/sys/types.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clock_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/clockid_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/time_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/timer_t.h \
+ /usr/include/arm-linux-gnueabihf/sys/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/select.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/sigset_t.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timeval.h \
+ /usr/include/arm-linux-gnueabihf/bits/types/struct_timespec.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes.h \
+ /usr/include/arm-linux-gnueabihf/bits/thread-shared-types.h \
+ /usr/include/arm-linux-gnueabihf/bits/pthreadtypes-arch.h \
+ /usr/include/alloca.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-bsearch.h \
+ /usr/include/arm-linux-gnueabihf/bits/stdlib-float.h \
+ ../include/pj/list.h ../include/pj/lock.h ../include/pj/math.h \
+ ../include/pj/compat/high_precision.h /usr/include/math.h \
+ /usr/include/arm-linux-gnueabihf/bits/math-vector.h \
+ /usr/include/arm-linux-gnueabihf/bits/libm-simd-decl-stubs.h \
+ /usr/include/arm-linux-gnueabihf/bits/flt-eval-method.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-logb.h \
+ /usr/include/arm-linux-gnueabihf/bits/fp-fast.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls-helper-functions.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathcalls.h \
+ /usr/include/arm-linux-gnueabihf/bits/mathinline.h ../include/pj/os.h \
+ ../include/pj/pool.h ../include/pj/pool_buf.h ../include/pj/rand.h \
+ ../include/pj/rbtree.h ../include/pj/sock_qos.h \
+ ../include/pj/sock_select.h ../include/pj/ssl_sock.h \
+ ../include/pj/timer.h ../include/pj/unicode.h
+../bin/pjlib-test-armv7l-unknown-linux-gnueabihf: ../lib/libpj-armv7l-unknown-linux-gnueabihf.a
