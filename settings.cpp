@@ -48,12 +48,13 @@ void Settings::loadSoundDevConfig()
         if(loadedDevices.at(i).devicetype == SoundDevice){
             recordDevId = m_lib->m_AudioRouter->getSoundDevID(loadedDevices.at(i).inputname);
             playbackDevId = m_lib->m_AudioRouter->getSoundDevID(loadedDevices.at(i).outputame);
-            if (recordDevId != -1 || playbackDevId !=-1){
-              m_lib->m_AudioRouter->addAudioDevice(recordDevId,playbackDevId, loadedDevices.at(i).uid);
-              m_lib->m_Log->writeLog(3,QString("loadSoundDevConfig: added sound device from config file: ") + loadedDevices.at(i).inputname + loadedDevices.at(i).outputame);
+            if (recordDevId != -1 && playbackDevId !=-1){
+                m_lib->m_AudioRouter->addAudioDevice(recordDevId,playbackDevId, loadedDevices.at(i).uid);
+                m_lib->m_Log->writeLog(3,QString("loadSoundDevConfig: added sound device from config file: ") + loadedDevices.at(i).inputname + loadedDevices.at(i).outputame);
             }
             else{
-                m_lib->m_Log->writeLog(1,QString("loadSoundDevConfig: Error loading sound Device: device not avaliable anymore"));
+                m_lib->m_AudioRouter->addOfflineAudioDevice(loadedDevices.at(i).inputname,loadedDevices.at(i).outputame, loadedDevices.at(i).uid);
+                m_lib->m_Log->writeLog(1,QString("loadSoundDevConfig: Error loading sound Device: device not found"));
             }
         }
         if(loadedDevices.at(i).devicetype == TestToneGenerator){

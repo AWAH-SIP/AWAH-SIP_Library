@@ -23,6 +23,7 @@
 #include <QDebug>
 #include <QDate>
 #include <QTime>
+#include "qdir.h"
 #include "pjlogwriter.h"
 
 #define LOGSIZE (1024 * 1024) * 2 //log size in bytes (1024 * 1024 = 1MB)  2MB
@@ -39,7 +40,7 @@ public:
     void writePJSUALog(const QString& msg);
     void writeLog(unsigned int loglevel, const QString& msg);
     QStringList readNewestLog();
-    QString logFolderName = "logs";
+    QString logFolderName = QDir::currentPath();
 
 signals:
     void logMessage(QString msg);

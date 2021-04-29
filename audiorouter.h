@@ -55,9 +55,20 @@ public:
     *        all channels of the device will be added (upto 64 channels)
     * @param recordDevId ID of the desired record device
     * @param playbackDevId ID of the dseired playback device
+    * @param if the device is loaded from settings you have to provide it's uid to assign the correct routes
     * @return no of channels added or -1 on error
     */
     int addAudioDevice(int recordDevId, int playbackDevId, QString uid = "");
+
+    /**
+    * @brief Add an offline device to the the router
+    *        it will not be added to the conference bridge but it will stay in the device config
+    *        if you don't add it here it gets deleated
+    * @param inputName  the Name of the Input device
+    * @param outputName the name of the output devie
+    * @param uid the uid of the device
+    */
+    void addOfflineAudioDevice(QString inputName, QString outputName, QString uid);
 
 
     /**

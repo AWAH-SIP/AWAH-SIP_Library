@@ -444,6 +444,7 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
         if(account.AccID == accID){
             account.CallStatusCode = state;
             account.CallStatusText = statustxt;
+            account.ConnectedTo = remoteUri;
         }
     }
     m_lib->m_Log->writeLog(3,(QString("Callstate of: ") + remoteUri + " is:  " + statustxt));

@@ -84,11 +84,15 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
     AudioDevInfo recorddev, playbackdev;
     int slot;
     int samples_per_frame, channelCnt;
-    recorddev =  m_lib->ep.audDevManager().getDevInfo(recordDevId);
-    playbackdev = m_lib->ep.audDevManager().getDevInfo(playbackDevId);
     QList<int> connectedSlots;
     s_audioDevices Audiodevice;
 
+    recorddev =  m_lib->ep.audDevManager().getDevInfo(recordDevId);
+    playbackdev = m_lib->ep.audDevManager().getDevInfo(playbackDevId);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//    recorddev.inputCount = 6;                                                           // octo sound card hack!!!!!!!
+//    playbackdev.outputCount = 8;                                                        // fix and remove me!!!!!!!!
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if(uid.isEmpty())
         uid = createNewUID();
 
@@ -195,6 +199,19 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
     conferenceBridgeChanged();
     emit AudioDevicesChanged(&AudioDevices);
     return channelCnt;
+}
+
+void AudioRouter::addOfflineAudioDevice(QString inputName, QString outputName, QString uid)
+{
+    s_audioDevices Audiodevice;
+    Audiodevice.inputname = inputName;
+    Audiodevice.outputame = outputName;
+    Audiodevice.PBDevID = -1;
+    Audiodevice.RecDevID = -1;
+    Audiodevice.devicetype = SoundDevice;
+    Audiodevice.uid = uid;
+    AudioDevices.append(Audiodevice);
+    m_lib->m_Settings->saveSoundDevConfig();
 }
 
 int AudioRouter::removeAudioDevice(int DevIndex)

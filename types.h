@@ -86,7 +86,7 @@ struct s_audioDevices{
     QString outputame;
     QList <int> portNo;
     int genfrequency = -1;               // only for devicetype TestToneGenerator
-    int RecDevID = -1;                   // only for devicetype AudioDevice
+    int RecDevID = -1;                   // only for devicetype AudioDevice, -1 indicates an offline device
     int PBDevID = -1;
     QString path = "n/a";                   // ony for devicetype Fileplayer, FileRecorder
     pjmedia_snd_port *soundport;
@@ -176,6 +176,7 @@ struct s_account{
     int SIPStatusCode = 0;
     QString CallStatusText = "Idle... ";
     int CallStatusCode = 0;
+    QString ConnectedTo = "";
     QJsonObject toJSON() const {
         QJsonArray callListJSON, callHistoryJSON;
         for (auto & pPJCall: CallList) {
@@ -200,7 +201,8 @@ struct s_account{
             {"SIPStatusCode", SIPStatusCode},
             {"SIPStatusText", SIPStatusText},
             {"CallStatusText", CallStatusText},
-            {"CallStatusCode", CallStatusCode}
+            {"CallStatusCode", CallStatusCode},
+            {"ConnectedTo", ConnectedTo}
         };
     }
     s_account* fromJSON(QJsonObject &accountJSON){

@@ -1,7 +1,7 @@
-diff --git a/pjsip/linux_x86-64/pjproject-2.10/pjmedia/src/pjmedia/splitcomb.c b/pjsip/linux_x86-64/pjproject-2.10/pjmedia/src/pjmedia/splitcomb.c
+diff --git a/pjsip/linux_arm_rpi4/pjproject-2.10/pjmedia/src/pjmedia/splitcomb.c b/pjsip/linux_arm_rpi4/pjproject-2.10/pjmedia/src/pjmedia/splitcomb.c
 index 300886b..3f35b62 100644
---- a/pjsip/linux_x86-64/pjproject-2.10/pjmedia/src/pjmedia/splitcomb.c
-+++ b/pjsip/linux_x86-64/pjproject-2.10/pjmedia/src/pjmedia/splitcomb.c
+--- a/pjsip/linux_arm_rpi4/pjproject-2.10/pjmedia/src/pjmedia/splitcomb.c
++++ b/pjsip/linux_arm_rpi4/pjproject-2.10/pjmedia/src/pjmedia/splitcomb.c
 @@ -31,7 +31,7 @@
  #define TMP_SAMP_TYPE	    pj_int16_t
  
