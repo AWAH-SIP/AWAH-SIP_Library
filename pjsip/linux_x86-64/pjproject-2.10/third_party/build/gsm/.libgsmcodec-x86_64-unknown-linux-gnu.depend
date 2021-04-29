@@ -1,0 +1,249 @@
+output/libgsmcodec-x86_64-unknown-linux-gnu/add.o: ../../gsm/src/add.c /usr/include/stdc-predef.h config.h \
+ /usr/include/string.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ ../../gsm/inc/config.h /usr/include/stdio.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/assert.h ../../gsm/inc/private.h \
+ ../../gsm/inc/proto.h ../../gsm/inc/unproto.h ../../gsm/inc/gsm.h \
+ ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/code.o: ../../gsm/src/code.c /usr/include/stdc-predef.h config.h \
+ /usr/include/string.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ ../../gsm/inc/config.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ ../../gsm/inc/private.h ../../gsm/inc/proto.h ../../gsm/inc/unproto.h \
+ ../../gsm/inc/gsm.h /usr/include/stdio.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/decode.o: ../../gsm/src/decode.c /usr/include/stdc-predef.h config.h \
+ /usr/include/string.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ ../../gsm/inc/config.h /usr/include/stdio.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h ../../gsm/inc/private.h ../../gsm/inc/proto.h \
+ ../../gsm/inc/unproto.h ../../gsm/inc/gsm.h ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/gsm_create.o: ../../gsm/src/gsm_create.c /usr/include/stdc-predef.h \
+ config.h /usr/include/string.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ ../../gsm/inc/config.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h ../../gsm/inc/gsm.h ../../gsm/inc/private.h \
+ ../../gsm/inc/proto.h ../../gsm/inc/unproto.h ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/gsm_decode.o: ../../gsm/src/gsm_decode.c /usr/include/stdc-predef.h \
+ ../../gsm/inc/private.h ../../gsm/inc/proto.h ../../gsm/inc/unproto.h \
+ ../../gsm/inc/gsm.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/gsm_destroy.o: ../../gsm/src/gsm_destroy.c /usr/include/stdc-predef.h \
+ ../../gsm/inc/gsm.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h config.h /usr/include/string.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ ../../gsm/inc/config.h ../../gsm/inc/proto.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/gsm_encode.o: ../../gsm/src/gsm_encode.c /usr/include/stdc-predef.h \
+ ../../gsm/inc/private.h ../../gsm/inc/proto.h ../../gsm/inc/unproto.h \
+ ../../gsm/inc/gsm.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/gsm_explode.o: ../../gsm/src/gsm_explode.c /usr/include/stdc-predef.h \
+ ../../gsm/inc/private.h ../../gsm/inc/proto.h ../../gsm/inc/unproto.h \
+ ../../gsm/inc/gsm.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/gsm_implode.o: ../../gsm/src/gsm_implode.c /usr/include/stdc-predef.h \
+ ../../gsm/inc/private.h ../../gsm/inc/proto.h ../../gsm/inc/unproto.h \
+ ../../gsm/inc/gsm.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/gsm_option.o: ../../gsm/src/gsm_option.c /usr/include/stdc-predef.h \
+ ../../gsm/inc/private.h ../../gsm/inc/proto.h ../../gsm/inc/unproto.h \
+ ../../gsm/inc/gsm.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/long_term.o: ../../gsm/src/long_term.c /usr/include/stdc-predef.h \
+ config.h /usr/include/string.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ ../../gsm/inc/config.h /usr/include/stdio.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/assert.h ../../gsm/inc/private.h \
+ ../../gsm/inc/proto.h ../../gsm/inc/unproto.h ../../gsm/inc/gsm.h \
+ ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/lpc.o: ../../gsm/src/lpc.c /usr/include/stdc-predef.h config.h \
+ /usr/include/string.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ ../../gsm/inc/config.h /usr/include/stdio.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/assert.h ../../gsm/inc/private.h \
+ ../../gsm/inc/proto.h ../../gsm/inc/unproto.h ../../gsm/inc/gsm.h \
+ ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/preprocess.o: ../../gsm/src/preprocess.c /usr/include/stdc-predef.h \
+ config.h /usr/include/string.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ ../../gsm/inc/config.h /usr/include/stdio.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/assert.h ../../gsm/inc/private.h \
+ ../../gsm/inc/proto.h ../../gsm/inc/unproto.h ../../gsm/inc/gsm.h \
+ ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/rpe.o: ../../gsm/src/rpe.c /usr/include/stdc-predef.h config.h \
+ /usr/include/string.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ ../../gsm/inc/config.h /usr/include/stdio.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/assert.h ../../gsm/inc/private.h \
+ ../../gsm/inc/proto.h ../../gsm/inc/unproto.h ../../gsm/inc/gsm.h \
+ ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/short_term.o: ../../gsm/src/short_term.c /usr/include/stdc-predef.h \
+ config.h /usr/include/string.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ ../../gsm/inc/config.h /usr/include/stdio.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/assert.h ../../gsm/inc/private.h \
+ ../../gsm/inc/proto.h ../../gsm/inc/unproto.h ../../gsm/inc/gsm.h \
+ ../../gsm/inc/proto.h
+output/libgsmcodec-x86_64-unknown-linux-gnu/table.o: ../../gsm/src/table.c /usr/include/stdc-predef.h \
+ ../../gsm/inc/private.h ../../gsm/inc/proto.h ../../gsm/inc/unproto.h \
+ ../../gsm/inc/gsm.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h

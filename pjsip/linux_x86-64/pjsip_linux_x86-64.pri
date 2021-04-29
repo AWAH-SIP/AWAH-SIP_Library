@@ -38,7 +38,10 @@ INCLUDEPATH += $$PWD/pjproject-2.10/pjsip/include \
             -lopus \
             -lssl \
             -lcrypto \
+            -luuid \
             -lm \
             -lrt \
             -lpthread  \
             -lasound
+
+

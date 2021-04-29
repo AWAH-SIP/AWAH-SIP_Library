@@ -1,0 +1,1027 @@
+output/libyuv-x86_64-unknown-linux-gnu/compare.o: ../../yuv/source/compare.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/compare.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/math.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cmath \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/cpp_type_traits.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/ext/type_traits.h \
+ /usr/include/math.h /usr/include/bits/huge_val.h \
+ /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h \
+ /usr/include/bits/inf.h /usr/include/bits/nan.h \
+ /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h \
+ /usr/include/bits/mathinline.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../../yuv/include/libyuv/compare_row.h \
+ ../../yuv/include/libyuv/cpu_id.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ ../../yuv/include/libyuv/video_common.h
+output/libyuv-x86_64-unknown-linux-gnu/compare_common.o: ../../yuv/source/compare_common.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/compare_row.h
+output/libyuv-x86_64-unknown-linux-gnu/compare_gcc.o: ../../yuv/source/compare_gcc.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/compare_row.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/compare_neon64.o: ../../yuv/source/compare_neon64.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/compare_row.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/compare_neon.o: ../../yuv/source/compare_neon.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/compare_row.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/compare_win.o: ../../yuv/source/compare_win.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/convert_argb.o: ../../yuv/source/convert_argb.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/rotate.h ../../yuv/include/libyuv/cpu_id.h \
+ ../../yuv/include/libyuv/planar_functions.h \
+ ../../yuv/include/libyuv/convert.h \
+ ../../yuv/include/libyuv/convert_from.h \
+ ../../yuv/include/libyuv/rotate_argb.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/video_common.h
+output/libyuv-x86_64-unknown-linux-gnu/convert.o: ../../yuv/source/convert.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/convert.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/rotate.h \
+ ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/convert_from.h \
+ ../../yuv/include/libyuv/planar_functions.h \
+ ../../yuv/include/libyuv/cpu_id.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/scale.h
+output/libyuv-x86_64-unknown-linux-gnu/convert_from_argb.o: ../../yuv/source/convert_from_argb.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/convert_from_argb.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/cpu_id.h \
+ ../../yuv/include/libyuv/planar_functions.h \
+ ../../yuv/include/libyuv/convert.h ../../yuv/include/libyuv/rotate.h \
+ ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/convert_from.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/convert_from.o: ../../yuv/source/convert_from.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/convert_from.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/rotate.h ../../yuv/include/libyuv/convert.h \
+ ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/planar_functions.h \
+ ../../yuv/include/libyuv/cpu_id.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/scale.h ../../yuv/include/libyuv/video_common.h
+output/libyuv-x86_64-unknown-linux-gnu/convert_jpeg.o: ../../yuv/source/convert_jpeg.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/convert.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/rotate.h \
+ ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/convert_from.h \
+ ../../yuv/include/libyuv/planar_functions.h
+output/libyuv-x86_64-unknown-linux-gnu/convert_to_argb.o: ../../yuv/source/convert_to_argb.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/rotate.h ../../yuv/include/libyuv/cpu_id.h \
+ ../../yuv/include/libyuv/rotate_argb.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/video_common.h
+output/libyuv-x86_64-unknown-linux-gnu/convert_to_i420.o: ../../yuv/source/convert_to_i420.cc \
+ /usr/include/stdc-predef.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h \
+ /usr/include/xlocale.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/convert.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/rotate.h \
+ ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/convert_from.h \
+ ../../yuv/include/libyuv/planar_functions.h \
+ ../../yuv/include/libyuv/video_common.h
+output/libyuv-x86_64-unknown-linux-gnu/cpu_id.o: ../../yuv/source/cpu_id.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/cpu_id.h ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/string.h
+output/libyuv-x86_64-unknown-linux-gnu/mjpeg_decoder.o: ../../yuv/source/mjpeg_decoder.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/mjpeg_decoder.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h
+output/libyuv-x86_64-unknown-linux-gnu/mjpeg_validate.o: ../../yuv/source/mjpeg_validate.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/mjpeg_decoder.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ /usr/include/string.h /usr/include/xlocale.h
+output/libyuv-x86_64-unknown-linux-gnu/planar_functions.o: ../../yuv/source/planar_functions.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/planar_functions.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/convert.h ../../yuv/include/libyuv/rotate.h \
+ ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/convert_from.h /usr/include/string.h \
+ /usr/include/xlocale.h ../../yuv/include/libyuv/cpu_id.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/scale_row.h ../../yuv/include/libyuv/scale.h
+output/libyuv-x86_64-unknown-linux-gnu/rotate_any.o: ../../yuv/source/rotate_any.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/rotate.h ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/rotate_row.h
+output/libyuv-x86_64-unknown-linux-gnu/rotate_argb.o: ../../yuv/source/rotate_argb.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/rotate.h ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/convert.h \
+ ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/convert_from.h \
+ ../../yuv/include/libyuv/planar_functions.h \
+ ../../yuv/include/libyuv/cpu_id.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/rotate.o: ../../yuv/source/rotate.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/rotate.h ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/convert.h \
+ ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/convert_from.h \
+ ../../yuv/include/libyuv/planar_functions.h \
+ ../../yuv/include/libyuv/cpu_id.h ../../yuv/include/libyuv/rotate_row.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/rotate_common.o: ../../yuv/source/rotate_common.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/rotate_row.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/rotate_gcc.o: ../../yuv/source/rotate_gcc.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/rotate_row.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/rotate_dspr2.o: ../../yuv/source/rotate_dspr2.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/rotate_row.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/rotate_neon64.o: ../../yuv/source/rotate_neon64.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/rotate_row.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/rotate_neon.o: ../../yuv/source/rotate_neon.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/rotate_row.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/rotate_win.o: ../../yuv/source/rotate_win.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/rotate_row.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/row_any.o: ../../yuv/source/row_any.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h \
+ /usr/include/xlocale.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h /usr/include/string.h
+output/libyuv-x86_64-unknown-linux-gnu/row_common.o: ../../yuv/source/row_common.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h \
+ /usr/include/xlocale.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h /usr/include/string.h
+output/libyuv-x86_64-unknown-linux-gnu/row_gcc.o: ../../yuv/source/row_gcc.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h \
+ /usr/include/xlocale.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h
+output/libyuv-x86_64-unknown-linux-gnu/row_dspr2.o: ../../yuv/source/row_dspr2.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h \
+ /usr/include/xlocale.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h
+output/libyuv-x86_64-unknown-linux-gnu/row_neon64.o: ../../yuv/source/row_neon64.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h \
+ /usr/include/xlocale.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h
+output/libyuv-x86_64-unknown-linux-gnu/row_neon.o: ../../yuv/source/row_neon.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h \
+ /usr/include/xlocale.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h /usr/include/stdio.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h
+output/libyuv-x86_64-unknown-linux-gnu/row_win.o: ../../yuv/source/row_win.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h \
+ /usr/include/xlocale.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h
+output/libyuv-x86_64-unknown-linux-gnu/scale_any.o: ../../yuv/source/scale_any.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/scale.h ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/scale_row.h
+output/libyuv-x86_64-unknown-linux-gnu/scale_argb.o: ../../yuv/source/scale_argb.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/scale.h ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ /usr/include/assert.h /usr/include/string.h /usr/include/xlocale.h \
+ ../../yuv/include/libyuv/cpu_id.h \
+ ../../yuv/include/libyuv/planar_functions.h \
+ ../../yuv/include/libyuv/convert.h ../../yuv/include/libyuv/rotate.h \
+ ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/convert_from.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/scale_row.h
+output/libyuv-x86_64-unknown-linux-gnu/scale.o: ../../yuv/source/scale.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/scale.h ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ /usr/include/assert.h /usr/include/string.h /usr/include/xlocale.h \
+ ../../yuv/include/libyuv/cpu_id.h \
+ ../../yuv/include/libyuv/planar_functions.h \
+ ../../yuv/include/libyuv/convert.h ../../yuv/include/libyuv/rotate.h \
+ ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/convert_from.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/scale_row.h
+output/libyuv-x86_64-unknown-linux-gnu/scale_common.o: ../../yuv/source/scale_common.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/scale.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ /usr/include/assert.h /usr/include/string.h /usr/include/xlocale.h \
+ ../../yuv/include/libyuv/cpu_id.h \
+ ../../yuv/include/libyuv/planar_functions.h \
+ ../../yuv/include/libyuv/convert.h ../../yuv/include/libyuv/rotate.h \
+ ../../yuv/include/libyuv/convert_argb.h \
+ ../../yuv/include/libyuv/convert_from.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/scale_row.h
+output/libyuv-x86_64-unknown-linux-gnu/scale_gcc.o: ../../yuv/source/scale_gcc.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h \
+ /usr/include/xlocale.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/scale_row.h ../../yuv/include/libyuv/scale.h
+output/libyuv-x86_64-unknown-linux-gnu/scale_dspr2.o: ../../yuv/source/scale_dspr2.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h
+output/libyuv-x86_64-unknown-linux-gnu/scale_neon64.o: ../../yuv/source/scale_neon64.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h \
+ /usr/include/xlocale.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/scale.h ../../yuv/include/libyuv/scale_row.h
+output/libyuv-x86_64-unknown-linux-gnu/scale_neon.o: ../../yuv/source/scale_neon.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h \
+ /usr/include/xlocale.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h
+output/libyuv-x86_64-unknown-linux-gnu/scale_win.o: ../../yuv/source/scale_win.cc /usr/include/stdc-predef.h \
+ ../../yuv/include/libyuv/row.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/cstdlib \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/x86_64-redhat-linux/bits/cpu_defines.h \
+ /usr/include/stdlib.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/byteswap-16.h \
+ /usr/include/xlocale.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ /opt/rh/devtoolset-7/root/usr/include/c++/7/bits/std_abs.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../yuv/include/libyuv/scale_row.h ../../yuv/include/libyuv/scale.h
+output/libyuv-x86_64-unknown-linux-gnu/video_common.o: ../../yuv/source/video_common.cc \
+ /usr/include/stdc-predef.h ../../yuv/include/libyuv/video_common.h \
+ ../../yuv/include/libyuv/basic_types.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h

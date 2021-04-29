@@ -31,7 +31,7 @@
 #define TMP_SAMP_TYPE	    pj_int16_t
 
 /* Maximum number of channels. */
-#define MAX_CHANNELS	    16
+#define MAX_CHANNELS	    64
 
 /* Maximum number of buffers to be accommodated by delaybuf */
 #define MAX_BUF_CNT	    PJMEDIA_SOUND_BUFFER_COUNT

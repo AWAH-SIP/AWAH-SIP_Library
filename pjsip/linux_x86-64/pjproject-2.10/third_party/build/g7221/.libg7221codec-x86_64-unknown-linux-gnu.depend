@@ -1,0 +1,321 @@
+output/libg7221codec-x86_64-unknown-linux-gnu/common.o: ../../g7221/common/common.c /usr/include/stdc-predef.h \
+ ../../g7221/common/defs.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ ../../g7221/common/typedef.h ../../../pjlib/include/pj/types.h \
+ ../../../pjlib/include/pj/config.h \
+ ../../../pjlib/include/pj/compat/cc_gcc.h \
+ ../../../pjlib/include/pj/compat/os_auto.h \
+ ../../../pjlib/include/pj/compat/m_auto.h \
+ ../../../pjlib/include/pj/compat/size_t.h \
+ ../../../pjlib/include/pj/config_site.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../g7221/common/basic_op.h ../../g7221/common/config.h \
+ ../../g7221/common/basic_op_i.h ../../g7221/common/huff_def.h \
+ ../../g7221/common/huff_tab.h ../../g7221/common/tables.h \
+ ../../g7221/common/count.h
+output/libg7221codec-x86_64-unknown-linux-gnu/huff_tab.o: ../../g7221/common/huff_tab.c /usr/include/stdc-predef.h \
+ ../../g7221/common/defs.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ ../../g7221/common/typedef.h ../../../pjlib/include/pj/types.h \
+ ../../../pjlib/include/pj/config.h \
+ ../../../pjlib/include/pj/compat/cc_gcc.h \
+ ../../../pjlib/include/pj/compat/os_auto.h \
+ ../../../pjlib/include/pj/compat/m_auto.h \
+ ../../../pjlib/include/pj/compat/size_t.h \
+ ../../../pjlib/include/pj/config_site.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../g7221/common/basic_op.h ../../g7221/common/config.h \
+ ../../g7221/common/basic_op_i.h ../../g7221/common/huff_def.h
+output/libg7221codec-x86_64-unknown-linux-gnu/tables.o: ../../g7221/common/tables.c /usr/include/stdc-predef.h \
+ ../../g7221/common/defs.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ ../../g7221/common/typedef.h ../../../pjlib/include/pj/types.h \
+ ../../../pjlib/include/pj/config.h \
+ ../../../pjlib/include/pj/compat/cc_gcc.h \
+ ../../../pjlib/include/pj/compat/os_auto.h \
+ ../../../pjlib/include/pj/compat/m_auto.h \
+ ../../../pjlib/include/pj/compat/size_t.h \
+ ../../../pjlib/include/pj/config_site.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../g7221/common/basic_op.h ../../g7221/common/config.h \
+ ../../g7221/common/basic_op_i.h
+output/libg7221codec-x86_64-unknown-linux-gnu/basic_op.o: ../../g7221/common/basic_op.c /usr/include/stdc-predef.h \
+ ../../g7221/common/config.h ../../../pjlib/include/pj/config.h \
+ ../../../pjlib/include/pj/compat/cc_gcc.h \
+ ../../../pjlib/include/pj/compat/os_auto.h \
+ ../../../pjlib/include/pj/compat/m_auto.h \
+ ../../../pjlib/include/pj/compat/size_t.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ ../../../pjlib/include/pj/config_site.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../../g7221/common/typedef.h ../../../pjlib/include/pj/types.h \
+ ../../g7221/common/basic_op.h ../../g7221/common/basic_op_i.h \
+ ../../../pjlib/include/pj/assert.h \
+ ../../../pjlib/include/pj/compat/assert.h /usr/include/assert.h
+output/libg7221codec-x86_64-unknown-linux-gnu/coef2sam.o: ../../g7221/decode/coef2sam.c /usr/include/stdc-predef.h \
+ ../../g7221/common/defs.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ ../../g7221/common/typedef.h ../../../pjlib/include/pj/types.h \
+ ../../../pjlib/include/pj/config.h \
+ ../../../pjlib/include/pj/compat/cc_gcc.h \
+ ../../../pjlib/include/pj/compat/os_auto.h \
+ ../../../pjlib/include/pj/compat/m_auto.h \
+ ../../../pjlib/include/pj/compat/size_t.h \
+ ../../../pjlib/include/pj/config_site.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../g7221/common/basic_op.h ../../g7221/common/config.h \
+ ../../g7221/common/basic_op_i.h ../../g7221/common/tables.h \
+ ../../g7221/common/count.h
+output/libg7221codec-x86_64-unknown-linux-gnu/dct4_s.o: ../../g7221/decode/dct4_s.c /usr/include/stdc-predef.h \
+ ../../g7221/common/defs.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ ../../g7221/common/typedef.h ../../../pjlib/include/pj/types.h \
+ ../../../pjlib/include/pj/config.h \
+ ../../../pjlib/include/pj/compat/cc_gcc.h \
+ ../../../pjlib/include/pj/compat/os_auto.h \
+ ../../../pjlib/include/pj/compat/m_auto.h \
+ ../../../pjlib/include/pj/compat/size_t.h \
+ ../../../pjlib/include/pj/config_site.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../g7221/common/basic_op.h ../../g7221/common/config.h \
+ ../../g7221/common/basic_op_i.h ../../g7221/common/count.h \
+ ../../g7221/decode/dct4_s.h
+output/libg7221codec-x86_64-unknown-linux-gnu/decoder.o: ../../g7221/decode/decoder.c /usr/include/stdc-predef.h \
+ ../../g7221/common/defs.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ ../../g7221/common/typedef.h ../../../pjlib/include/pj/types.h \
+ ../../../pjlib/include/pj/config.h \
+ ../../../pjlib/include/pj/compat/cc_gcc.h \
+ ../../../pjlib/include/pj/compat/os_auto.h \
+ ../../../pjlib/include/pj/compat/m_auto.h \
+ ../../../pjlib/include/pj/compat/size_t.h \
+ ../../../pjlib/include/pj/config_site.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../g7221/common/basic_op.h ../../g7221/common/config.h \
+ ../../g7221/common/basic_op_i.h ../../g7221/common/tables.h \
+ ../../g7221/common/huff_def.h ../../g7221/common/count.h
+output/libg7221codec-x86_64-unknown-linux-gnu/dct4_a.o: ../../g7221/encode/dct4_a.c /usr/include/stdc-predef.h \
+ ../../g7221/common/defs.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ ../../g7221/common/typedef.h ../../../pjlib/include/pj/types.h \
+ ../../../pjlib/include/pj/config.h \
+ ../../../pjlib/include/pj/compat/cc_gcc.h \
+ ../../../pjlib/include/pj/compat/os_auto.h \
+ ../../../pjlib/include/pj/compat/m_auto.h \
+ ../../../pjlib/include/pj/compat/size_t.h \
+ ../../../pjlib/include/pj/config_site.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../g7221/common/basic_op.h ../../g7221/common/config.h \
+ ../../g7221/common/basic_op_i.h ../../g7221/common/count.h \
+ ../../g7221/encode/dct4_a.h
+output/libg7221codec-x86_64-unknown-linux-gnu/sam2coef.o: ../../g7221/encode/sam2coef.c /usr/include/stdc-predef.h \
+ ../../g7221/common/defs.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
+ ../../g7221/common/typedef.h ../../../pjlib/include/pj/types.h \
+ ../../../pjlib/include/pj/config.h \
+ ../../../pjlib/include/pj/compat/cc_gcc.h \
+ ../../../pjlib/include/pj/compat/os_auto.h \
+ ../../../pjlib/include/pj/compat/m_auto.h \
+ ../../../pjlib/include/pj/compat/size_t.h \
+ ../../../pjlib/include/pj/config_site.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../g7221/common/basic_op.h ../../g7221/common/config.h \
+ ../../g7221/common/basic_op_i.h ../../g7221/common/tables.h \
+ ../../g7221/common/count.h
+output/libg7221codec-x86_64-unknown-linux-gnu/encoder.o: ../../g7221/encode/encoder.c /usr/include/stdc-predef.h \
+ /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/math.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
+ ../../g7221/common/defs.h /usr/include/stdlib.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/byteswap-16.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../../g7221/common/typedef.h \
+ ../../../pjlib/include/pj/types.h ../../../pjlib/include/pj/config.h \
+ ../../../pjlib/include/pj/compat/cc_gcc.h \
+ ../../../pjlib/include/pj/compat/os_auto.h \
+ ../../../pjlib/include/pj/compat/m_auto.h \
+ ../../../pjlib/include/pj/compat/size_t.h \
+ ../../../pjlib/include/pj/config_site.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ ../../g7221/common/basic_op.h ../../g7221/common/config.h \
+ ../../g7221/common/basic_op_i.h ../../g7221/common/huff_def.h \
+ ../../g7221/common/tables.h ../../g7221/common/count.h
