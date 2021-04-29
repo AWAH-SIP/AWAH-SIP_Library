@@ -1,4 +1,4 @@
-export PJDIR := /home/vsip/awah-sip-testapp/lib/pjsip/linux_x86-64/pjproject-2.10
+export PJDIR := /home/adi/git/awah-sip_codec/awah-sip_library/pjsip/linux_x86-64/pjproject-2.10
 include $(PJDIR)/version.mak
 export PJ_DIR := $(PJDIR)
 
@@ -294,7 +294,7 @@ export APP_LDLIBS := $(PJSUA_LIB_LDLIB) \
 	$(APP_THIRD_PARTY_LIBS)\
 	$(APP_THIRD_PARTY_EXT)\
 	$(PJLIB_LDLIB) \
-	-lopus -lssl -lcrypto -lm -lrt -lpthread  -lasound  
+	-lopus -lssl -lcrypto -luuid -lm -lrt -lpthread  -lasound  
 export APP_LDXXLIBS := $(PJSUA2_LIB_LDLIB) \
 	-lstdc++ \
 	$(APP_LDLIBS)

@@ -5,65 +5,27 @@ output/pjsip-test-x86_64-unknown-linux-gnu/main.o: ../src/test/main.c /usr/inclu
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h /usr/include/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/string.h /usr/include/xlocale.h \
+ /usr/include/bits/string.h /usr/include/bits/string2.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/byteswap-16.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-float.h
 output/pjsip-test-x86_64-unknown-linux-gnu/dlg_core_test.o: ../src/test/dlg_core_test.c /usr/include/stdc-predef.h \
  ../src/test/test.h ../include/pjsip/sip_types.h \
  ../include/pjsip/sip_config.h ../../pjlib/include/pj/types.h \
@@ -71,24 +33,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/dlg_core_test.o: ../src/test/dlg_core
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -109,49 +63,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/dlg_core_test.o: ../src/test/dlg_core
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -163,24 +88,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/dns_test.o: ../src/test/dns_test.c /u
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -201,49 +118,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/dns_test.o: ../src/test/dns_test.c /u
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -253,21 +141,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/dns_test.o: ../src/test/dns_test.c /u
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h \
@@ -299,24 +182,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/msg_err_test.o: ../src/test/msg_err_t
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -337,49 +212,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/msg_err_test.o: ../src/test/msg_err_t
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -389,21 +235,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/msg_err_test.o: ../src/test/msg_err_t
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -414,24 +255,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/msg_logger.o: ../src/test/msg_logger.
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -452,49 +285,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/msg_logger.o: ../src/test/msg_logger.
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -504,21 +308,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/msg_logger.o: ../src/test/msg_logger.
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -529,24 +328,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/msg_test.o: ../src/test/msg_test.c /u
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -567,49 +358,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/msg_test.o: ../src/test/msg_test.c /u
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -619,21 +381,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/msg_test.o: ../src/test/msg_test.c /u
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -644,24 +401,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/multipart_test.o: ../src/test/multipa
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -682,49 +431,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/multipart_test.o: ../src/test/multipa
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -734,21 +454,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/multipart_test.o: ../src/test/multipa
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -759,20 +474,12 @@ output/pjsip-test-x86_64-unknown-linux-gnu/regc_test.o: ../src/test/regc_test.c 
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip_ua.h \
  ../include/pjsip-ua/sip_inv.h ../include/pjsip/sip_dialog.h \
  ../include/pjsip/sip_msg.h ../include/pjsip/sip_uri.h \
@@ -784,7 +491,7 @@ output/pjsip-test-x86_64-unknown-linux-gnu/regc_test.o: ../src/test/regc_test.c 
  ../include/pjsip/sip_auth.h ../include/pjsip/sip_auth_msg.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_transport.h ../include/pjsip/sip_parser.h \
  ../include/pjsip/sip_resolve.h \
  ../../pjlib-util/include/pjlib-util/resolver.h \
@@ -809,70 +516,36 @@ output/pjsip-test-x86_64-unknown-linux-gnu/regc_test.o: ../src/test/regc_test.c 
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h \
- ../include/pjsip/sip_auth_aka.h ../include/pjsip/sip_transaction.h \
- ../include/pjsip/sip_ua_layer.h ../../pjlib/include/pjlib.h \
- ../../pjlib/include/pj/activesock.h ../../pjlib/include/pj/addr_resolv.h \
- ../../pjlib/include/pj/array.h ../../pjlib/include/pj/ctype.h \
- ../../pjlib/include/pj/compat/ctype.h /usr/include/ctype.h \
- ../../pjlib/include/pj/except.h ../../pjlib/include/pj/compat/setjmp.h \
- /usr/include/setjmp.h /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth_aka.h \
+ ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
+ ../../pjlib/include/pjlib.h ../../pjlib/include/pj/activesock.h \
+ ../../pjlib/include/pj/addr_resolv.h ../../pjlib/include/pj/array.h \
+ ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
+ /usr/include/ctype.h ../../pjlib/include/pj/except.h \
+ ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -883,91 +556,47 @@ output/pjsip-test-x86_64-unknown-linux-gnu/test.o: ../src/test/test.c /usr/inclu
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../../pjlib/include/pjlib.h \
  ../../pjlib/include/pj/activesock.h ../../pjlib/include/pj/ioqueue.h \
  ../../pjlib/include/pj/sock.h ../../pjlib/include/pj/addr_resolv.h \
  ../../pjlib/include/pj/array.h ../../pjlib/include/pj/assert.h \
  ../../pjlib/include/pj/compat/assert.h /usr/include/assert.h \
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
- /usr/include/ctype.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+ /usr/include/ctype.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
  ../../pjlib/include/pj/errno.h ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../../pjlib/include/pj/except.h ../../pjlib/include/pj/compat/setjmp.h \
- /usr/include/setjmp.h /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/string.h \
- ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h \
- ../../pjlib/include/pj/list.h ../../pjlib/include/pj/lock.h \
- ../../pjlib/include/pj/math.h \
+ /usr/include/setjmp.h /usr/include/bits/setjmp.h \
+ /usr/include/bits/sigset.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/string.h ../../pjlib/include/pj/compat/string.h \
+ /usr/include/string.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/stdlib.h /usr/include/stdio.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../../pjlib/include/pj/list.h \
+ ../../pjlib/include/pj/lock.h ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/pool_buf.h ../../pjlib/include/pj/rand.h \
  ../../pjlib/include/pj/rbtree.h ../../pjlib/include/pj/sock_qos.h \
@@ -1021,24 +650,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/transport_loop_test.o: ../src/test/tr
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -1059,49 +680,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/transport_loop_test.o: ../src/test/tr
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -1111,21 +703,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/transport_loop_test.o: ../src/test/tr
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -1137,24 +724,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/transport_tcp_test.o: ../src/test/tra
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -1175,49 +754,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/transport_tcp_test.o: ../src/test/tra
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -1227,21 +777,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/transport_tcp_test.o: ../src/test/tra
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -1252,24 +797,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/transport_test.o: ../src/test/transpo
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -1290,49 +827,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/transport_test.o: ../src/test/transpo
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -1342,21 +850,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/transport_test.o: ../src/test/transpo
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -1368,24 +871,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/transport_udp_test.o: ../src/test/tra
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -1406,49 +901,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/transport_udp_test.o: ../src/test/tra
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -1458,21 +924,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/transport_udp_test.o: ../src/test/tra
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -1483,24 +944,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/tsx_basic_test.o: ../src/test/tsx_bas
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -1521,49 +974,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/tsx_basic_test.o: ../src/test/tsx_bas
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -1573,21 +997,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/tsx_basic_test.o: ../src/test/tsx_bas
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -1598,24 +1017,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/tsx_bench.o: ../src/test/tsx_bench.c 
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -1636,49 +1047,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/tsx_bench.o: ../src/test/tsx_bench.c 
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -1688,21 +1070,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/tsx_bench.o: ../src/test/tsx_bench.c 
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -1713,24 +1090,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/tsx_uac_test.o: ../src/test/tsx_uac_t
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -1751,49 +1120,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/tsx_uac_test.o: ../src/test/tsx_uac_t
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -1803,21 +1143,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/tsx_uac_test.o: ../src/test/tsx_uac_t
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -1828,24 +1163,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/tsx_uas_test.o: ../src/test/tsx_uas_t
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -1866,49 +1193,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/tsx_uas_test.o: ../src/test/tsx_uas_t
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -1918,21 +1216,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/tsx_uas_test.o: ../src/test/tsx_uas_t
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -1943,24 +1236,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/txdata_test.o: ../src/test/txdata_tes
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -1981,49 +1266,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/txdata_test.o: ../src/test/txdata_tes
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -2033,21 +1289,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/txdata_test.o: ../src/test/txdata_tes
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -2058,24 +1309,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/uri_test.o: ../src/test/uri_test.c /u
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_uri.h ../../pjlib/include/pj/list.h \
  ../../pjlib-util/include/pjlib-util/scanner.h \
  ../../pjlib-util/include/pjlib-util/types.h \
@@ -2096,49 +1339,20 @@ output/pjsip-test-x86_64-unknown-linux-gnu/uri_test.o: ../src/test/uri_test.c /u
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../include/pjsip/sip_auth.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth.h \
  ../include/pjsip/sip_auth_msg.h ../include/pjsip/sip_auth_aka.h \
  ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
  ../include/pjsip/sip_dialog.h ../../pjlib/include/pj/assert.h \
@@ -2148,21 +1362,16 @@ output/pjsip-test-x86_64-unknown-linux-gnu/uri_test.o: ../src/test/uri_test.c /u
  ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
  /usr/include/ctype.h ../../pjlib/include/pj/except.h \
  ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
@@ -2174,20 +1383,12 @@ output/pjsip-test-x86_64-unknown-linux-gnu/inv_offer_answer_test.o: ../src/test/
  ../../pjlib/include/pj/compat/os_auto.h \
  ../../pjlib/include/pj/compat/m_auto.h \
  ../../pjlib/include/pj/compat/size_t.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stddef.h \
  ../../pjlib/include/pj/config_site.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
  ../include/pjsip/sip_autoconf.h ../include/pjsip_ua.h \
  ../include/pjsip-ua/sip_inv.h ../include/pjsip/sip_dialog.h \
  ../include/pjsip/sip_msg.h ../include/pjsip/sip_uri.h \
@@ -2199,7 +1400,7 @@ output/pjsip-test-x86_64-unknown-linux-gnu/inv_offer_answer_test.o: ../src/test/
  ../include/pjsip/sip_auth.h ../include/pjsip/sip_auth_msg.h \
  ../include/pjsip/sip_errno.h ../../pjlib/include/pj/errno.h \
  ../../pjlib/include/pj/compat/errno.h \
- /usr/lib/gcc/x86_64-linux-gnu/7/include/stdarg.h \
+ /opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/include/stdarg.h \
  ../include/pjsip/sip_transport.h ../include/pjsip/sip_parser.h \
  ../include/pjsip/sip_resolve.h \
  ../../pjlib-util/include/pjlib-util/resolver.h \
@@ -2224,70 +1425,36 @@ output/pjsip-test-x86_64-unknown-linux-gnu/inv_offer_answer_test.o: ../src/test/
  ../include/pjsip/sip_transport_tls.h ../../pjlib/include/pj/pool.h \
  ../../pjlib/include/pj/ssl_sock.h ../../pjlib/include/pj/string.h \
  ../../pjlib/include/pj/compat/string.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/libio.h \
- /usr/include/x86_64-linux-gnu/bits/_G_config.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h \
- ../include/pjsip/sip_auth_aka.h ../include/pjsip/sip_transaction.h \
- ../include/pjsip/sip_ua_layer.h ../../pjlib/include/pjlib.h \
- ../../pjlib/include/pj/activesock.h ../../pjlib/include/pj/addr_resolv.h \
- ../../pjlib/include/pj/array.h ../../pjlib/include/pj/ctype.h \
- ../../pjlib/include/pj/compat/ctype.h /usr/include/ctype.h \
- ../../pjlib/include/pj/except.h ../../pjlib/include/pj/compat/setjmp.h \
- /usr/include/setjmp.h /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- ../../pjlib/include/pj/log.h ../../pjlib/include/pj/fifobuf.h \
- ../../pjlib/include/pj/file_access.h ../../pjlib/include/pj/file_io.h \
- ../../pjlib/include/pj/guid.h ../../pjlib/include/pj/hash.h \
- ../../pjlib/include/pj/ip_helper.h ../../pjlib/include/pj/math.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/byteswap-16.h /usr/include/stdlib.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h ../include/pjsip/sip_auth_aka.h \
+ ../include/pjsip/sip_transaction.h ../include/pjsip/sip_ua_layer.h \
+ ../../pjlib/include/pjlib.h ../../pjlib/include/pj/activesock.h \
+ ../../pjlib/include/pj/addr_resolv.h ../../pjlib/include/pj/array.h \
+ ../../pjlib/include/pj/ctype.h ../../pjlib/include/pj/compat/ctype.h \
+ /usr/include/ctype.h ../../pjlib/include/pj/except.h \
+ ../../pjlib/include/pj/compat/setjmp.h /usr/include/setjmp.h \
+ /usr/include/bits/setjmp.h ../../pjlib/include/pj/log.h \
+ ../../pjlib/include/pj/fifobuf.h ../../pjlib/include/pj/file_access.h \
+ ../../pjlib/include/pj/file_io.h ../../pjlib/include/pj/guid.h \
+ ../../pjlib/include/pj/hash.h ../../pjlib/include/pj/ip_helper.h \
+ ../../pjlib/include/pj/math.h \
  ../../pjlib/include/pj/compat/high_precision.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
  ../../pjlib/include/pj/os.h ../../pjlib/include/pj/pool_buf.h \
  ../../pjlib/include/pj/rand.h ../../pjlib/include/pj/rbtree.h \
  ../../pjlib/include/pj/sock_select.h ../../pjlib/include/pj/unicode.h
