@@ -122,6 +122,13 @@ private:
     */
     QJsonObject m_settings;
 
+    /**
+    * @brief offline routes are stored here
+    * @details we have to keep track of offline routes, oterwise they get lost on restart
+    * this list is then added to te settingsfile with the online routes
+    */
+    QList<s_audioRoutes>  offlineRoutes;
+
 };
 
 #endif // SETTINGS_H

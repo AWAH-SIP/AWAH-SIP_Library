@@ -122,9 +122,11 @@ int Settings::loadAudioRoutes()
             else
                 m_lib->m_Log->writeLog(3,QString("loadAudioRoutes: added AudioRoute from: ") + route.srcDevName + " to " + route.destDevName);
         } else {
+            offlineRoutes.append(route);
             status = -1;
         }
     }
+    saveAudioRoutes();
     return status;
 }
 
@@ -135,6 +137,7 @@ int Settings::saveAudioRoutes()
         if(route.persistant)
             routesToSave.append(route);
     }
+    routesToSave.append(offlineRoutes);
     QSettings settings("awah", "AWAHsipConfig");
     settings.setValue("AudioRoutes", QVariant::fromValue(routesToSave));
     settings.sync();
