@@ -405,17 +405,22 @@ void Accounts::addCallToHistory(int AccID, QString callUri, int duration, QStrin
 {
     s_account* account = getAccountByID(AccID);
     bool entryexists = false;
-    QList<s_callHistory>::iterator i;
-    for (i = account->CallHistory.begin(); i != account->CallHistory.end(); ++i)
-    {
-        if(i->callUri == callUri){
+    for(auto histentry : account->CallHistory){
+        if(histentry.callUri == callUri){
             entryexists = true;
-            i->codec = codec;
-            i->count++;
-            i->duration = duration;
-            i->outgoing = outgoing;
+            histentry.codec = codec;
+            histentry.count++;
+            histentry.duration = duration;
+            histentry.outgoing = outgoing;
+            for(int i =0; i<account->CallHistory.size(); i++){      // deleate the existing entry and place then modified entry as the first item
+                if(account->CallHistory.at(i).callUri == callUri){
+                    account->CallHistory.removeAt(i);
+                    account->CallHistory.prepend(histentry);
+                }
+            }
         }
     }
+
     if(!entryexists){
         s_callHistory newCall;
         newCall.callUri = callUri;
