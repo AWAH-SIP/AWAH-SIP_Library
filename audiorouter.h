@@ -39,10 +39,17 @@ public:
     QList <s_audioRoutes> getAudioRoutes() { return m_audioRoutes; };
 
     /**
-    * @brief List all Sound devicees available in the system
+    * @brief List all input sound devicees available in the system
     * @return Stringlist wit the Names and channelcount. Position of the Name is the device ID
     */
-    QStringList listSoundDev();
+    QStringList listInputSoundDev();
+
+    /**
+    * @brief List all output sound devicees available in the system
+    * @return Stringlist wit the Names and channelcount. Position of the Name is the device ID
+    */
+    QStringList listOutputSoundDev();
+
 
     /**
     * @brief get the sound device id of the given sound device name
@@ -83,7 +90,7 @@ public:
     * @param uid  the unique identifyer
     * @return a pointer to the audio device struct
     */
-    s_audioDevices* getADeviceByUID(QString uid);
+    s_IODevices* getADeviceByUID(QString uid);
 
     /**
     * @brief add a file player to the conference bridge
@@ -154,7 +161,7 @@ public:
     * @brief get the active devices
     * @return the AudioDevice struct
     */
-    QList<s_audioDevices>* getAudioDevices() { return &AudioDevices; };
+    QList<s_IODevices>* getAudioDevices() { return &AudioDevices; };
 
     void conferenceBridgeChanged();
     void removeAllRoutesFromAccount(const s_account account);
@@ -168,7 +175,7 @@ signals:
     * @brief Signal if audio device config changed
     * @param QList of the new device config
     */
-    void AudioDevicesChanged(QList<s_audioDevices>* audioDev);
+    void AudioDevicesChanged(QList<s_IODevices>* audioDev);
 
     /**
     * @brief Signal if audio routes from the conference-bridge changed
@@ -192,7 +199,7 @@ private:
     * @brief All AudioDevices (soundcards, generators, fileplayer and recoder) are added to this list
     *       in order to save and load current audio setup
     */
-    QList<s_audioDevices> AudioDevices;
+    QList<s_IODevices> AudioDevices;
 
     /**
     * @brief All routes from the Conference Bridge are added to this list

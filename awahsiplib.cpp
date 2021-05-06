@@ -56,12 +56,11 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
 
         /* Create pool for multiple Sound Device handling */
         pool = pjsua_pool_create("awahsip", 512, 512);
-        m_Settings->loadSoundDevConfig();
+        m_Settings->loadIODevConfig();
         m_Settings->loadAccConfig();
         m_Settings->loadSettings();
         m_Settings->loadAudioRoutes();
         m_Accounts->startCallInspector();
-
     }
     catch (Error &err){
         m_Log->writeLog(1,QString("AWAHsip: starting lib failed: ") + err.info().c_str());
@@ -112,7 +111,7 @@ AWAHSipLib::~AWAHSipLib()
 
 void AWAHSipLib::prepareLib()
 {
-    qRegisterMetaTypeStreamOperators <QList<s_audioDevices>>("QList<s_audioDevices>");
+    qRegisterMetaTypeStreamOperators <QList<s_IODevices>>("QList<s_IODevices>");
     qRegisterMetaTypeStreamOperators <QList<s_account>>("QList<s_account>");
     qRegisterMetaTypeStreamOperators <QList<s_audioRoutes>>("QList<s_audioRoutes>");
     qRegisterMetaTypeStreamOperators <QList<s_callHistory>>("QList<s_callHistory>");
@@ -123,13 +122,13 @@ void AWAHSipLib::slotSendMessage(int callId, int AccID, QString type, QByteArray
     m_MessageManager->slotSendMessage(callId, AccID, type, message);
 }
 
-QDataStream &operator<<(QDataStream &out, const s_audioDevices &obj)
+QDataStream &operator<<(QDataStream &out, const s_IODevices &obj)
 {
     out << obj.devicetype << obj.inputname << obj.outputame << obj.genfrequency << obj.uid << obj.path;
     return out;
 }
 
-QDataStream &operator>>(QDataStream &in, s_audioDevices &obj)
+QDataStream &operator>>(QDataStream &in, s_IODevices &obj)
 {
    in  >> obj.devicetype >> obj.inputname >> obj.outputame >> obj.genfrequency >> obj.uid >> obj.path;
    return in;
@@ -172,3 +171,13 @@ QDataStream &operator>>(QDataStream &in, s_callHistory &obj)
    return in;
 }
 
+ void AWAHSipLib::on_ip_change_progress(pjsua_ip_change_op op, pj_status_t status, const pjsua_ip_change_op_info *info)
+ {
+     Q_UNUSED(op);
+     Q_UNUSED(status);
+     qDebug() << "IP Adress Change detected: " << info->acc_reinvite_calls.acc_id ;
+     pjsua_ip_change_param param;
+     pjsua_ip_change_param_default(&param);
+     param.restart_listener = true;
+     pjsua_handle_ip_change(&param);
+ }

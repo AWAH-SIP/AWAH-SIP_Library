@@ -73,13 +73,17 @@ enum DeviceType {
     SoundDevice,
     TestToneGenerator,
     FilePlayer,
-    FileRecorder
+    FileRecorder,
+    GPIODevice
 };
 Q_ENUMS(DeviceType)
 
+enum GPIOprotocol {
+    WebSocketDevice
+};
+Q_ENUMS(GPIOprotocol)
 
-
-struct s_audioDevices{
+struct s_IODevices{
     DeviceType devicetype;
     QString uid;
     QString inputname;
@@ -100,7 +104,7 @@ struct s_audioDevices{
         return {{"devicetype", devicetype}, {"uid", uid}, {"inputname", inputname}, {"outputname", outputame}, {"portNo", portNrArr},
                 {"genfrequency", genfrequency}, {"RecDevID", RecDevID}, {"PBDevID", PBDevID}, {"path", path},};
     }
-    s_audioDevices* fromJSON(QJsonObject &audioDeviceJSON) {
+    s_IODevices* fromJSON(QJsonObject &audioDeviceJSON) {
         QJsonArray portNrArr = audioDeviceJSON["portNo"].toArray();
         switch (audioDeviceJSON["devicetype"].toInt()) {
         case SoundDevice:
@@ -129,8 +133,8 @@ struct s_audioDevices{
         return this;
     }
 };
-Q_DECLARE_METATYPE(s_audioDevices);
-Q_DECLARE_METATYPE( QList<s_audioDevices>);
+Q_DECLARE_METATYPE(s_IODevices);
+Q_DECLARE_METATYPE( QList<s_IODevices>);
 
 struct s_callHistory{
     QString callUri;

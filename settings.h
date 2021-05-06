@@ -31,17 +31,17 @@ public:
     explicit Settings(AWAHSipLib *parentLib, QObject *parent = nullptr);
 
     /**
-    * @brief Load sound device config (audio interfaces, tone generator etc) from settings file
+    * @brief Load IO device config (audio interfaces, tone generator, GPIO etc) from settings file
     * and add them to the conference bridge
     * @return PJ_SUCESS or -1
     */
-    void loadSoundDevConfig();
+    void loadIODevConfig();
 
     /**
-    * @brief save current sound device config (audio interfaces, tone generator etc) to the settings file
+    * @brief save current IO device config (audio interfaces, tone generator etc) to the settings file
     * @return PJ_SUCESS or -1
     */
-    void saveSoundDevConfig();
+    void saveIODevConfig();
 
     /**
     * @brief Load endpoint and media settings from settings file and restart endpoint to activate them

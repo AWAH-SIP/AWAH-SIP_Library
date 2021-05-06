@@ -34,14 +34,14 @@ Settings::Settings(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_
 }
 
 
-void Settings::loadSoundDevConfig()
+void Settings::loadIODevConfig()
 {
-    //qRegisterMetaTypeStreamOperators <QList<s_audioDevices>>("QList<s_audioDevices>");
-    QList<s_audioDevices>  loadedDevices;
+    //qRegisterMetaTypeStreamOperators <QList<s_IODevices>>("QList<s_IODevices>");
+    QList<s_IODevices>  loadedDevices;
     int recordDevId, playbackDevId;
     QSettings settings("awah", "AWAHsipConfig");
 
-    loadedDevices = settings.value("SoundDevConfig").value<QList<s_audioDevices>>();
+    loadedDevices = settings.value("IODevConfig").value<QList<s_IODevices>>();
 
     for( int i=0; i<loadedDevices.count(); ++i )                                                     // todo send an error message if sound defice is not found!!
     {
@@ -50,33 +50,33 @@ void Settings::loadSoundDevConfig()
             playbackDevId = m_lib->m_AudioRouter->getSoundDevID(loadedDevices.at(i).outputame);
             if (recordDevId != -1 && playbackDevId !=-1){
                 m_lib->m_AudioRouter->addAudioDevice(recordDevId,playbackDevId, loadedDevices.at(i).uid);
-                m_lib->m_Log->writeLog(3,QString("loadSoundDevConfig: added sound device from config file: ") + loadedDevices.at(i).inputname + loadedDevices.at(i).outputame);
+                m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added sound device from config file: ") + loadedDevices.at(i).inputname + loadedDevices.at(i).outputame);
             }
             else{
                 m_lib->m_AudioRouter->addOfflineAudioDevice(loadedDevices.at(i).inputname,loadedDevices.at(i).outputame, loadedDevices.at(i).uid);
-                m_lib->m_Log->writeLog(1,QString("loadSoundDevConfig: Error loading sound Device: device not found"));
+                m_lib->m_Log->writeLog(1,QString("loadIODevConfig: Error loading sound Device: device not found"));
             }
         }
         if(loadedDevices.at(i).devicetype == TestToneGenerator){
             m_lib->m_AudioRouter->addToneGen(loadedDevices.at(i).genfrequency, loadedDevices.at(i).uid);
-            m_lib->m_Log->writeLog(3,QString("loadSoundDevConfig: added Generator from config file: ") + loadedDevices.at(i).inputname);
+            m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added Generator from config file: ") + loadedDevices.at(i).inputname);
 
         }
         if(loadedDevices.at(i).devicetype == FilePlayer){
             m_lib->m_AudioRouter->addFilePlayer(loadedDevices.at(i).inputname, loadedDevices.at(i).path, loadedDevices.at(i).uid);
-            m_lib->m_Log->writeLog(3,QString("loadSoundDevConfig: added FilePlayer from config file: ") + loadedDevices.at(i).inputname);
+            m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added FilePlayer from config file: ") + loadedDevices.at(i).inputname);
         }
         if(loadedDevices.at(i).devicetype == FileRecorder){
             m_lib->m_AudioRouter->addFileRecorder(loadedDevices.at(i).path, loadedDevices.at(i).uid);
-            m_lib->m_Log->writeLog(3,QString("loadSoundDevConfig: added FileRecorder from config file: ") + loadedDevices.at(i).outputame);
+            m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added FileRecorder from config file: ") + loadedDevices.at(i).outputame);
         }
     }
 }
 
-void Settings::saveSoundDevConfig()
+void Settings::saveIODevConfig()
 {
     QSettings settings("awah", "AWAHsipConfig");
-    settings.setValue("SoundDevConfig", QVariant::fromValue(*m_lib->m_AudioRouter->getAudioDevices()));
+    settings.setValue("IODevConfig", QVariant::fromValue(*m_lib->m_AudioRouter->getAudioDevices()));
     settings.sync();
 }
 

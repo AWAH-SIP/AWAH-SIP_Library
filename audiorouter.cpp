@@ -35,7 +35,7 @@ AudioRouter::AudioRouter(AWAHSipLib *parentLib, QObject *parent) : QObject(paren
 
 AudioRouter::~AudioRouter()
 {
-    QList<s_audioDevices> *audioDevs = getAudioDevices();
+    QList<s_IODevices> *audioDevs = getAudioDevices();
     for(int i = 0;i<audioDevs->count();i++) {                    // close all sound device bevore deinit library to prevent assertion fault!
         if(audioDevs->at(i).devicetype == SoundDevice) {
             pjmedia_snd_port_destroy(audioDevs->at(i).soundport);
@@ -49,17 +49,28 @@ AudioRouter::~AudioRouter()
 }
 
 
-QStringList AudioRouter::listSoundDev(){
+QStringList AudioRouter::listInputSoundDev(){
     QStringList snddevlist;
     QString snddev;
     foreach(AudioDevInfo audiodev, m_lib->ep.audDevManager().enumDev2()){
         snddev.clear();
-        snddev.append(QString::fromStdString(audiodev.name));
-        snddev.append(" ins: ");
-        snddev.append(QString::number(audiodev.inputCount));
-        snddev.append(" outs: ");
-        snddev.append(QString::number(audiodev.outputCount));
-        snddevlist << snddev;
+        if(audiodev.inputCount>0){
+            snddev.append(QString::fromStdString(audiodev.name));
+            snddevlist << snddev;
+        }
+    }
+    return snddevlist;
+}
+
+QStringList AudioRouter::listOutputSoundDev(){
+    QStringList snddevlist;
+    QString snddev;
+    foreach(AudioDevInfo audiodev, m_lib->ep.audDevManager().enumDev2()){
+        snddev.clear();
+        if(audiodev.outputCount>0){
+            snddev.append(QString::fromStdString(audiodev.name));
+            snddevlist << snddev;
+        }
     }
     return snddevlist;
 }
@@ -85,7 +96,7 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
     int slot;
     int samples_per_frame, channelCnt;
     QList<int> connectedSlots;
-    s_audioDevices Audiodevice;
+    s_IODevices Audiodevice;
 
     recorddev =  m_lib->ep.audDevManager().getDevInfo(recordDevId);
     playbackdev = m_lib->ep.audDevManager().getDevInfo(playbackDevId);
@@ -195,7 +206,7 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
     Audiodevice.inChannelCount = recorddev.inputCount;
     Audiodevice.outChannelCount = playbackdev.outputCount;
     AudioDevices.append(Audiodevice);
-    m_lib->m_Settings->saveSoundDevConfig();
+    m_lib->m_Settings->saveIODevConfig();
     conferenceBridgeChanged();
     emit AudioDevicesChanged(&AudioDevices);
     return channelCnt;
@@ -203,7 +214,7 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
 
 void AudioRouter::addOfflineAudioDevice(QString inputName, QString outputName, QString uid)
 {
-    s_audioDevices Audiodevice;
+    s_IODevices Audiodevice;
     Audiodevice.inputname = inputName;
     Audiodevice.outputame = outputName;
     Audiodevice.PBDevID = -1;
@@ -211,7 +222,7 @@ void AudioRouter::addOfflineAudioDevice(QString inputName, QString outputName, Q
     Audiodevice.devicetype = SoundDevice;
     Audiodevice.uid = uid;
     AudioDevices.append(Audiodevice);
-    m_lib->m_Settings->saveSoundDevConfig();
+    m_lib->m_Settings->saveIODevConfig();
 }
 
 int AudioRouter::removeAudioDevice(int DevIndex)
@@ -251,7 +262,7 @@ int AudioRouter::removeAudioDevice(int DevIndex)
     m_lib->m_Log->writeLog(3,(QString("removeAudioDevice: removing: ")  +   AudioDevices.at(DevIndex).inputname));
     AudioDevices.removeAt(DevIndex);
     conferenceBridgeChanged();
-    m_lib->m_Settings->saveSoundDevConfig();
+    m_lib->m_Settings->saveIODevConfig();
     emit AudioDevicesChanged(&AudioDevices);
     return PJ_SUCCESS;
 }
@@ -267,7 +278,7 @@ int AudioRouter::addToneGen(int freq, QString uid){
     pj_strdup2(m_lib->pool, &label, name.toStdString().c_str());
     pjsua_conf_port_info masterPortInfo;
     int slot;
-    s_audioDevices Audiodevice;
+    s_IODevices Audiodevice;
 
     //get info about master conference port
     status = pjsua_conf_get_port_info( 0, &masterPortInfo );
@@ -315,7 +326,7 @@ int AudioRouter::addToneGen(int freq, QString uid){
     Audiodevice.genfrequency = freq;
     Audiodevice.portNo.append(slot);
     AudioDevices.append(Audiodevice);
-    m_lib->m_Settings->saveSoundDevConfig();
+    m_lib->m_Settings->saveIODevConfig();
     conferenceBridgeChanged();
     emit AudioDevicesChanged(&AudioDevices);
     return PJ_SUCCESS;
@@ -329,7 +340,7 @@ int AudioRouter::addFilePlayer(QString PlayerName, QString File, QString uid)
     pj_status_t status;
     const pj_str_t sound_file = pj_strdup3 (m_lib->pool, File.toStdString().c_str());
     pjmedia_port *player_media_port;
-    s_audioDevices Audiodevice;
+    s_IODevices Audiodevice;
     int slot;
 
     if(uid.isEmpty())
@@ -368,7 +379,7 @@ int AudioRouter::addFilePlayer(QString PlayerName, QString File, QString uid)
     Audiodevice.portNo.append(slot);
     AudioDevices.append(Audiodevice);
     conferenceBridgeChanged();
-    m_lib->m_Settings->saveSoundDevConfig();
+    m_lib->m_Settings->saveIODevConfig();
     emit AudioDevicesChanged(&AudioDevices);
     return status;
 }
@@ -380,7 +391,7 @@ int AudioRouter::addFileRecorder(QString File, QString uid)
     pj_status_t status;
     const pj_str_t sound_file = pj_strdup3 (m_lib->pool, File.toStdString().c_str());
     pjmedia_port *player_media_port;
-    s_audioDevices Audiodevice;
+    s_IODevices Audiodevice;
     int slot;
     if(uid.isEmpty())
         uid = createNewUID();
@@ -414,7 +425,7 @@ int AudioRouter::addFileRecorder(QString File, QString uid)
     Audiodevice.path = File;
     Audiodevice.portNo.append(slot);
     AudioDevices.append(Audiodevice);
-    m_lib->m_Settings->saveSoundDevConfig();
+    m_lib->m_Settings->saveIODevConfig();
     conferenceBridgeChanged();
     emit AudioDevicesChanged(&AudioDevices);
     return status;
@@ -487,7 +498,7 @@ int AudioRouter::addSplittComb(s_account &account)
     return PJ_SUCCESS;
 }
 
-s_audioDevices* AudioRouter::getADeviceByUID(QString uid)
+s_IODevices* AudioRouter::getADeviceByUID(QString uid)
 {
     for(auto& device : AudioDevices){
         if(device.uid == uid){
@@ -522,7 +533,7 @@ s_audioPortList AudioRouter::listConfPorts(){
         QStringList split = portName.split("-");
         if(portName.startsWith("AD:")){
             QString uid = split[0].remove("AD:");
-            const s_audioDevices* aDevice = getADeviceByUID(uid);
+            const s_IODevices* aDevice = getADeviceByUID(uid);
             if(aDevice != nullptr){
                 if(aDevice->devicetype == TestToneGenerator){
                     src.name = aDevice->inputname;
@@ -566,7 +577,7 @@ s_audioPortList AudioRouter::listConfPorts(){
             }
         } else if(portName.startsWith("FP:")){
             QString uid = split[0].remove("FP:");
-            const s_audioDevices* aDevice = getADeviceByUID(uid);
+            const s_IODevices* aDevice = getADeviceByUID(uid);
             if(aDevice != nullptr) {
                 if(aDevice->devicetype == FilePlayer){
                     src.name = "File Player: " + aDevice->inputname;
@@ -579,7 +590,7 @@ s_audioPortList AudioRouter::listConfPorts(){
         }
         else if(portName.startsWith("FR:")){
             QString uid = split[0].remove("FR:");
-            const s_audioDevices* aDevice = getADeviceByUID(uid);
+            const s_IODevices* aDevice = getADeviceByUID(uid);
             if(aDevice != nullptr) {
                 if(aDevice->devicetype == FileRecorder){
                     dest.name = aDevice->outputame;

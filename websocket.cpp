@@ -164,7 +164,7 @@ void Websocket::getAllVariables(QJsonObject &data, QJsonObject &ret){
         accountsArr.append(account.toJSON());
     }
     retDataObj["accountsArray"] = accountsArr;
-    QList<s_audioDevices>* audioDevs = m_lib->getAudioDevices();
+    QList<s_IODevices>* audioDevs = m_lib->getAudioDevices();
     for (auto & audioDev : *audioDevs) {
         audioDevArr.append(audioDev.toJSON());
     }
@@ -367,15 +367,28 @@ void Websocket::getAudioRoutes(QJsonObject &data, QJsonObject &ret) {
     ret["error"] = noError();
 }
 
-void Websocket::listSoundDev(QJsonObject &data, QJsonObject &ret) {
+void Websocket::listInputSoundDev(QJsonObject &data, QJsonObject &ret) {
     Q_UNUSED(data);
     QJsonObject retDataObj;
     QJsonArray soundDevArr;
-    QStringList soundDevList = m_lib->listSoundDev();
-    for (auto & soundDev : soundDevList) {
+    QStringList soundInputDevList = m_lib->listInputSoundDev();
+    for (auto & soundDev : soundInputDevList) {
         soundDevArr.append(soundDev);
     }
-    retDataObj["soundDeviceArray"] = soundDevArr;
+    retDataObj["soundInputDeviceArray"] = soundDevArr;
+    ret["data"] = retDataObj;
+    ret["error"] = noError();
+}
+
+void Websocket::listOutputSoundDev(QJsonObject &data, QJsonObject &ret) {
+    Q_UNUSED(data);
+    QJsonObject retDataObj;
+    QJsonArray soundDevArr;
+    QStringList soundOutputDevList = m_lib->listOutputSoundDev();
+    for (auto & soundDev : soundOutputDevList) {
+        soundDevArr.append(soundDev);
+    }
+    retDataObj["soundOutputDeviceArray"] = soundDevArr;
     ret["data"] = retDataObj;
     ret["error"] = noError();
 }
@@ -509,13 +522,26 @@ void Websocket::getAudioDevices(QJsonObject &data, QJsonObject &ret) {
     Q_UNUSED(data);
     QJsonObject retDataObj;
     QJsonArray audioDevArr;
-    QList<s_audioDevices>* audioDevs = m_lib->getAudioDevices();
+    QList<s_IODevices>* audioDevs = m_lib->getAudioDevices();
     for (auto & audioDev : *audioDevs) {
         audioDevArr.append(audioDev.toJSON());
     }
     retDataObj["audioDevicesArray"] = audioDevArr;
     ret["data"] = retDataObj;
     ret["error"] = noError();
+}
+
+void Websocket::getSoundDevID(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj;
+    QString DeviceName;
+    if (jCheckString(DeviceName, data["DeviceName"])){
+        int retVal = m_lib->getSoundDevID(DeviceName);
+        retDataObj["returnValue"] = retVal;
+        ret["data"] = retDataObj;
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
 }
 
 void Websocket::registerBuddy(QJsonObject &data, QJsonObject &ret) {
@@ -762,7 +788,7 @@ void Websocket::AccountsChanged(QList <s_account>* Accounts){
     sendToAll(obj);
 }
 
-void Websocket::AudioDevicesChanged(QList<s_audioDevices>* audioDev){
+void Websocket::AudioDevicesChanged(QList<s_IODevices>* audioDev){
     QJsonObject obj, data;
     QJsonArray audioDevArr;
     for (auto & device : *audioDev) {

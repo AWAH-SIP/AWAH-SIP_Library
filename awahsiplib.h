@@ -82,7 +82,8 @@ public:
 
     // Public API - AudioRouter
     QList <s_audioRoutes> getAudioRoutes() const { return m_AudioRouter->getAudioRoutes(); };
-    QStringList listSoundDev() const { return m_AudioRouter->listSoundDev(); };
+    QStringList listInputSoundDev() const { return m_AudioRouter->listInputSoundDev(); };
+    QStringList listOutputSoundDev() const { return m_AudioRouter->listOutputSoundDev(); };
     int addAudioDevice(int recordDevId, int playbackDevId) const { return m_AudioRouter->addAudioDevice(recordDevId, playbackDevId); };
     int removeAudioDevice(int DevIndex) const { return m_AudioRouter->removeAudioDevice(DevIndex); };
     int addFilePlayer(QString Name, QString File) const { return m_AudioRouter->addFilePlayer(Name, File); };
@@ -93,7 +94,8 @@ public:
     int disconnectConfPort(int src_slot, int sink_slot) const { return m_AudioRouter->disconnectConfPort(src_slot, sink_slot); };
     int changeConfPortLevel(int src_slot, int sink_slot, float level) const { return m_AudioRouter->changeConfPortLevel(src_slot, sink_slot, level); };
     int addToneGen(int freq) const { return m_AudioRouter->addToneGen(freq); };
-    QList<s_audioDevices>* getAudioDevices() const { return m_AudioRouter->getAudioDevices(); };
+    QList<s_IODevices>* getAudioDevices() const { return m_AudioRouter->getAudioDevices(); };
+    int getSoundDevID(QString DeviceName) const { return m_AudioRouter->getSoundDevID(DeviceName); };
 
     // Public API - Buddies
     bool registerBuddy(int AccID, QString buddyUrl) const { return m_Buddies->registerBuddy(AccID, buddyUrl); };
@@ -116,6 +118,8 @@ public:
     void setSettings(QJsonObject editedSetting) { return m_Settings->setSettings(editedSetting); } ;
     const QJsonObject getCodecPriorities() const { return m_Settings->getCodecPriorities(); };
     void setSCodecPriorities(QJsonObject Codecpriority) { return m_Settings->setCodecPriorities(Codecpriority); } ;
+
+    virtual void on_ip_change_progress(pjsua_ip_change_op op, pj_status_t status, const pjsua_ip_change_op_info *info);
 
 public slots:
     void slotSendMessage(int callId, int AccID, QString type, QByteArray message);
@@ -194,7 +198,7 @@ signals:
     * @brief Signal if audio device config changed
     * @param QList of the new device config
     */
-    void AudioDevicesChanged(QList<s_audioDevices>* audioDev);
+    void AudioDevicesChanged(QList<s_IODevices>* audioDev);
 
     /**
     * @brief Signal a Callinfo updated every second for every active call

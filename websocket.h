@@ -90,7 +90,8 @@ private slots:
     void getAccountByID(QJsonObject &data, QJsonObject &ret);
     // Public API - AudioRouter
     void getAudioRoutes(QJsonObject &data, QJsonObject &ret);
-    void listSoundDev(QJsonObject &data, QJsonObject &ret);
+    void listInputSoundDev(QJsonObject &data, QJsonObject &ret);
+    void listOutputSoundDev(QJsonObject &data, QJsonObject &ret);
     void addAudioDevice(QJsonObject &data, QJsonObject &ret);
     void removeAudioDevice(QJsonObject &data, QJsonObject &ret);
     void addFilePlayer(QJsonObject &data, QJsonObject &ret);
@@ -101,6 +102,8 @@ private slots:
     void changeConfPortLevel(QJsonObject &data, QJsonObject &ret);
     void addToneGen(QJsonObject &data, QJsonObject &ret);
     void getAudioDevices(QJsonObject &data, QJsonObject &ret);
+    void getSoundDevID(QJsonObject &data, QJsonObject &ret);
+
     // Public API - Buddies
     void registerBuddy(QJsonObject &data, QJsonObject &ret);
     void deleteBuddy(QJsonObject &data, QJsonObject &ret);
@@ -134,7 +137,7 @@ public slots:
     void audioRoutesTableChanged(const s_audioPortList& portList);
     void callInfo(int accId, int callId, QJsonObject callInfo);
     void AccountsChanged(QList <s_account>* Accounts);
-    void AudioDevicesChanged(QList<s_audioDevices>* audioDev);
+    void AudioDevicesChanged(QList<s_IODevices>* audioDev);
 
 private:
     AWAHSipLib* m_lib;

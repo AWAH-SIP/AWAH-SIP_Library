@@ -44,6 +44,8 @@ void Accounts::createAccount(QString accountName, QString server, QString user, 
         aCfg = defaultACfg;
         aCfg.idUri = idUri.toStdString();
         aCfg.regConfig.registrarUri = registrarUri.toStdString();
+        aCfg.ipChangeConfig.hangupCalls = false;
+        aCfg.ipChangeConfig.reinviteFlags = PJSUA_CALL_UPDATE_CONTACT & PJSUA_CALL_REINIT_MEDIA & PJSUA_CALL_UPDATE_VIA  & PJSUA_CALL_UPDATE_TARGET ;
         AuthCredInfo cred("digest", "*", user.toStdString(), 0, password.toStdString());
         aCfg.sipConfig.authCreds.push_back(cred);
         PJAccount *account = new PJAccount(m_lib,this);
