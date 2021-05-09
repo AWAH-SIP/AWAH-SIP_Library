@@ -25,7 +25,7 @@ public:
     void setLib(AWAHSipLib *lib);
 
 signals:
-    void gpioDeviceChanged(const QList<s_IODevices>& deviceList);
+    void gpioDevicesChanged(const QList<s_IODevices>& deviceList);
 
 private:
     explicit GpioDeviceManager(QObject *parent = nullptr);

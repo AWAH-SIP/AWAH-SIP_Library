@@ -127,7 +127,7 @@ void GpioDeviceManager::removeDevice(QString uid)
         disconnect(m_devPtr[uid], &GpioDevice::gpioChanged, m_router, &GpioRouter::processGpioStates);
         delete m_devPtr[uid];
         m_devPtr.remove(uid);
-        emit gpioDeviceChanged(getGpioDevices());
+        emit gpioDevicesChanged(getGpioDevices());
     }
 }
 
@@ -160,7 +160,7 @@ void GpioDeviceManager::appendDevice(GpioDevice *device)
     if(device) {
         m_devPtr[device->getDeviceInfo().uid] = device;
         connect(device, &GpioDevice::gpioChanged, m_router, &GpioRouter::processGpioStates, Qt::QueuedConnection);
-        emit gpioDeviceChanged(getGpioDevices());
+        emit gpioDevicesChanged(getGpioDevices());
     }
 }
 

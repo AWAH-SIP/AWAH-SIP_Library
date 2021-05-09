@@ -83,7 +83,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(m_Accounts, &Accounts::AccountsChanged, this, &AWAHSipLib::AccountsChanged);
     connect(m_Accounts, &Accounts::callInfo, this, &AWAHSipLib::callInfo);
     connect(m_AudioRouter, &AudioRouter::AudioDevicesChanged, this, &AWAHSipLib::AudioDevicesChanged);
-    connect(m_GpioDeviceManager, &GpioDeviceManager::gpioDeviceChanged, this, &AWAHSipLib::gpioDeviceChanged);
+    connect(m_GpioDeviceManager, &GpioDeviceManager::gpioDevicesChanged, this, &AWAHSipLib::gpioDevicesChanged);
     connect(GpioRouter::instance(), &GpioRouter::gpioRoutesChanged, this, &AWAHSipLib::gpioRoutesChanged);
     connect(GpioRouter::instance(), &GpioRouter::gpioRoutesTableChanged, this, &AWAHSipLib::gpioRoutesTableChanged);
     connect(GpioRouter::instance(), &GpioRouter::gpioStateChanged, this, &AWAHSipLib::gpioStateChanged);
@@ -100,6 +100,10 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(this, &AWAHSipLib::AccountsChanged, m_Websocket, &Websocket::AccountsChanged);
     connect(this, &AWAHSipLib::callInfo, m_Websocket, &Websocket::callInfo);
     connect(this, &AWAHSipLib::AudioDevicesChanged, m_Websocket, &Websocket::AudioDevicesChanged);
+    connect(this, &AWAHSipLib::gpioDevicesChanged, m_Websocket, &Websocket::gpioDevicesChanged);
+    connect(this, &AWAHSipLib::gpioRoutesChanged, m_Websocket, &Websocket::gpioRoutesChanged);
+    connect(this, &AWAHSipLib::gpioRoutesTableChanged, m_Websocket, &Websocket::gpioRoutesTableChanged);
+    connect(this, &AWAHSipLib::gpioStateChanged, m_Websocket, &Websocket::gpioStatesChanged);
 }
 
 AWAHSipLib::~AWAHSipLib()

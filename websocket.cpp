@@ -56,6 +56,13 @@ static bool jCheckInt(int &ret, QJsonValueRef val) {
     } else return false;
 }
 
+static bool jCheckUint(uint &ret, QJsonValueRef val) {
+    if(val.isDouble()){
+        ret = val.toInt();
+        return true;
+    } else return false;
+}
+
 static bool jCheckString(QString &ret, QJsonValueRef val) {
     if(val.isString()){
         ret = val.toString();
@@ -157,27 +164,44 @@ void Websocket::echo(QJsonObject &data, QJsonObject &ret) {
 void Websocket::getAllVariables(QJsonObject &data, QJsonObject &ret){
     Q_UNUSED(data);
     QJsonObject retDataObj;
-    QJsonArray accountsArr, audioDevArr;
-    pj::AccountInfo accInfo;
+    QJsonArray accountsArr, audioDevArr, audioRoutesArr , gpioDevArr, gpioRoutesArr;
+
     QList <s_account>* accounts = m_lib->getAccounts();
     for (auto & account : *accounts) {
         accountsArr.append(account.toJSON());
     }
     retDataObj["accountsArray"] = accountsArr;
+
     QList<s_IODevices>* audioDevs = m_lib->getAudioDevices();
     for (auto & audioDev : *audioDevs) {
         audioDevArr.append(audioDev.toJSON());
     }
     retDataObj["audioDevicesArray"] = audioDevArr;
+
     const s_audioPortList& confPortList = m_lib->getConfPortsList();
     retDataObj["confPortList"] = confPortList.toJSON();
 
-    QJsonArray audioRoutesArr;
     QList <s_audioRoutes> audioRoutes = m_lib->getAudioRoutes();
     for (auto & route : audioRoutes) {
         audioRoutesArr.append(route.toJSON());
     }
     retDataObj["audioRoutesArray"] = audioRoutesArr;
+
+    const QList<s_IODevices>& gpioDevs = m_lib->getGpioDevices();
+    for (auto & gpioDev : gpioDevs) {
+        gpioDevArr.append(gpioDev.toJSON());
+    }
+    retDataObj["gpioDevicesArray"] = gpioDevArr;
+
+    const s_gpioPortList& gpioPortList = m_lib->getGpioPortsList();
+    retDataObj["gpioPortList"] = gpioPortList.toJSON();
+
+    const QList<s_gpioRoute>& gpioRoutes = m_lib->getGpioRoutes();
+    for (auto & route : gpioRoutes) {
+        gpioRoutesArr.append(route.toJSON());
+    }
+    retDataObj["gpioRoutesArray"] = gpioRoutesArr;
+
     ret["data"] = retDataObj;
     ret["error"] = noError();
 }
@@ -624,6 +648,126 @@ void Websocket::setCodecParam(QJsonObject &data, QJsonObject &ret) {
     }
 }
 
+void Websocket::createGpioDev(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj;
+    int type;
+    uint inCount, outCount;
+    QString devName;
+    if (jCheckInt(type, data["type"]) && jCheckUint(inCount, data["inCount"])  && jCheckUint(outCount, data["outCount"]) && jCheckString(devName, data["devName"])) {
+        bool error = false;
+        DeviceType devType = (DeviceType) type;
+        switch (devType) {
+        case LogicAndGpioDevice:
+        case LogicOrGpioDevice:
+            m_lib->createGpioDev(devType, outCount, devName);
+            break;
+        case VirtualGpioDevice:
+            m_lib->createGpioDev(inCount, outCount, devName);
+            break;
+        default:
+            error = true;
+            ret["error"] = hasError("Not acceptable Devicetype");
+            break;
+        }
+        ret["data"] = retDataObj;
+        if (!error)
+            ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::removeGpioDevice(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj;
+    QString uid;
+    if (jCheckString(uid, data["uid"])) {
+        m_lib->removeGpioDevice(uid);
+        ret["data"] = retDataObj;
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::getGpioDevices(QJsonObject &data, QJsonObject &ret) {
+    Q_UNUSED(data);
+    QJsonObject retDataObj;
+    QJsonArray gpioDevArr;
+    const QList<s_IODevices>& gpioDevs = m_lib->getGpioDevices();
+    for (auto & gpioDev : gpioDevs) {
+        gpioDevArr.append(gpioDev.toJSON());
+    }
+    retDataObj["gpioDevicesArray"] = gpioDevArr;
+    ret["data"] = retDataObj;
+    ret["error"] = noError();
+}
+
+void Websocket::getGpioRoutes(QJsonObject &data, QJsonObject &ret) {
+    Q_UNUSED(data);
+    QJsonObject retDataObj;
+    QJsonArray gpioRoutesArr;
+    const QList<s_gpioRoute>& gpioRoutes = m_lib->getGpioRoutes();
+    for (auto & route : gpioRoutes) {
+        gpioRoutesArr.append(route.toJSON());
+    }
+    retDataObj["gpioRoutesArray"] = gpioRoutesArr;
+    ret["data"] = retDataObj;
+    ret["error"] = noError();
+}
+
+void Websocket::getGpioPortsList(QJsonObject &data, QJsonObject &ret) {
+    Q_UNUSED(data);
+    QJsonObject retDataObj;
+    const s_gpioPortList& gpioPortList = m_lib->getGpioPortsList();
+    retDataObj["gpioPortList"] = gpioPortList.toJSON();
+    ret["data"] = retDataObj;
+    ret["error"] = noError();
+}
+
+void Websocket::connectGpioPort(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj;
+    QString srcSlotId, destSlotId;
+    bool inverted, persistant;
+    if (    jCheckString(srcSlotId, data["srcSlotId"]) &&
+            jCheckString(destSlotId, data["destSlotId"]) &&
+            jCheckBool(inverted, data["inverted"]) &&
+            jCheckBool(persistant, data["persistant"]) ) {
+        m_lib->connectGpioPort(srcSlotId, destSlotId, inverted, persistant);
+        ret["data"] = retDataObj;
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::disconnectGpioPort(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj;
+    QString srcSlotId, destSlotId;
+    if (    jCheckString(srcSlotId, data["srcSlotId"]) &&
+            jCheckString(destSlotId, data["destSlotId"]) ) {
+        m_lib->disconnectGpioPort(srcSlotId, destSlotId);
+        ret["data"] = retDataObj;
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::changeGpioCrosspoint(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj;
+    QString srcSlotId, destSlotId;
+    bool inverted;
+    if (    jCheckString(srcSlotId, data["srcSlotId"]) &&
+            jCheckString(destSlotId, data["destSlotId"]) &&
+            jCheckBool(inverted, data["inverted"]) ) {
+        m_lib->changeGpioCrosspoint(srcSlotId, destSlotId, inverted);
+        ret["data"] = retDataObj;
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
 void Websocket::readNewestLog(QJsonObject &data, QJsonObject &ret) {
     Q_UNUSED(data);
     QJsonObject retDataObj;
@@ -796,6 +940,56 @@ void Websocket::AudioDevicesChanged(QList<s_IODevices>* audioDev){
     }
     data["AudioDevices"] = audioDevArr;
     obj["signal"] = "AudioDevicesChanged";
+    obj["data"] = data;
+    sendToAll(obj);
+}
+
+void Websocket::gpioDevicesChanged(const QList<s_IODevices> &deviceList){
+    QJsonObject obj, data;
+    QJsonArray gpioDevArr;
+    for (auto & device : deviceList) {
+        gpioDevArr.append(device.toJSON());
+    }
+    data["GpioDevices"] = gpioDevArr;
+    obj["signal"] = "gpioDevicesChanged";
+    obj["data"] = data;
+    sendToAll(obj);
+}
+
+void Websocket::gpioRoutesChanged(const QList<s_gpioRoute>& gpioRoutes){
+    QJsonObject obj, data;
+    QJsonArray gpioRoutesArr;
+    for (auto & gpioRoute: gpioRoutes) {
+        gpioRoutesArr.append(gpioRoute.toJSON());
+    }
+    data["gpioRoutes"] = gpioRoutesArr;
+    obj["signal"] = "gpioRoutesChanged";
+    obj["data"] = data;
+    sendToAll(obj);
+}
+
+void Websocket::gpioRoutesTableChanged(const s_gpioPortList& portList){
+    QJsonObject obj, data;
+    data["portList"] = portList.toJSON();
+    obj["signal"] = "gpioRoutesTableChanged";
+    obj["data"] = data;
+    sendToAll(obj);
+}
+
+void Websocket::gpioStatesChanged(const QMap<QString, bool> changedGpios)
+{
+    QJsonObject obj, data;
+    QJsonArray gpioStateArr;
+    QMapIterator<QString, bool> i(changedGpios);
+    while (i.hasNext()) {
+        i.next();
+        QJsonObject entry;
+        entry["slotID"] = i.key();
+        entry["state"] = i.value();
+        gpioStateArr.append(entry);
+    }
+    data["gpioStates"] = gpioStateArr;
+    obj["signal"] = "gpioStatesChanged";
     obj["data"] = data;
     sendToAll(obj);
 }

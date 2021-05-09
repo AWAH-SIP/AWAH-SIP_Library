@@ -112,6 +112,16 @@ private slots:
     void selectCodec(QJsonObject &data, QJsonObject &ret);
     void getCodecParam(QJsonObject &data, QJsonObject &ret);
     void setCodecParam(QJsonObject &data, QJsonObject &ret);
+    // Public API - GpioDeviceManager
+    void createGpioDev(QJsonObject &data, QJsonObject &ret);
+    void removeGpioDevice(QJsonObject &data, QJsonObject &ret);
+    void getGpioDevices(QJsonObject &data, QJsonObject &ret);
+    // Public API - GpioRouter
+    void getGpioRoutes(QJsonObject &data, QJsonObject &ret);
+    void getGpioPortsList(QJsonObject &data, QJsonObject &ret);
+    void connectGpioPort(QJsonObject &data, QJsonObject &ret);
+    void disconnectGpioPort(QJsonObject &data, QJsonObject &ret);
+    void changeGpioCrosspoint(QJsonObject &data, QJsonObject &ret);
     // Public API - Log
     void readNewestLog(QJsonObject &data, QJsonObject &ret);
     // Public API - MessageManager
@@ -138,6 +148,10 @@ public slots:
     void callInfo(int accId, int callId, QJsonObject callInfo);
     void AccountsChanged(QList <s_account>* Accounts);
     void AudioDevicesChanged(QList<s_IODevices>* audioDev);
+    void gpioDevicesChanged(const QList<s_IODevices>& deviceList);
+    void gpioRoutesChanged(const QList<s_gpioRoute>& routes);
+    void gpioRoutesTableChanged(const s_gpioPortList& portList);
+    void gpioStatesChanged(const QMap<QString, bool> changedGpios);
 
 private:
     AWAHSipLib* m_lib;

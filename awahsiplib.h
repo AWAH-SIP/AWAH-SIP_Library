@@ -115,8 +115,16 @@ public:
     const LogicGpioDev* createGpioDev(DeviceType type, uint outCount, QString devName)
         { return m_GpioDeviceManager->create(type, outCount, devName); };
     void removeGpioDevice(QString uid) { return m_GpioDeviceManager->removeDevice(uid); };
-    const GpioDevice* getGpioDeviceByUid(QString uid) const { return m_GpioDeviceManager->getDeviceByUid(uid); };
     const QList<s_IODevices>& getGpioDevices() const { return m_GpioDeviceManager->getGpioDevices(); };
+
+    // Public API - GpioRouter
+    const QList<s_gpioRoute>& getGpioRoutes() { return GpioRouter::instance()->getGpioRoutes(); };
+    const s_gpioPortList& getGpioPortsList() { return GpioRouter::instance()->getGpioPortsList(); };
+    void connectGpioPort(QString srcSlotId, QString destSlotId, bool inverted, bool persistant = true)
+        { return GpioRouter::instance()->connectGpioPort(srcSlotId, destSlotId, inverted, persistant); };
+    void disconnectGpioPort(QString srcSlotId, QString destSlotId) { return GpioRouter::instance()->disconnectGpioPort(srcSlotId, destSlotId); };
+    void changeGpioCrosspoint(QString srcSlotId, QString destSlotId, bool inverted)
+        { return GpioRouter::instance()->changeGpioCrosspoint(srcSlotId, destSlotId, inverted); };
 
     // Public API - Log
     QStringList readNewestLog() const { return m_Log->readNewestLog();};
@@ -220,7 +228,7 @@ signals:
     void callInfo(int accId, int callId, QJsonObject callInfo);
 
     // GPIO Signals TODO: Doku-Description
-    void gpioDeviceChanged(QList<s_IODevices> deviceList);
+    void gpioDevicesChanged(const QList<s_IODevices>& deviceList);
     void gpioRoutesChanged(const QList<s_gpioRoute>& routes);
     void gpioRoutesTableChanged(const s_gpioPortList& portList);
     void gpioStateChanged(const QMap<QString, bool> changedGpios);
