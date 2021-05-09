@@ -202,6 +202,18 @@ void Websocket::getAllVariables(QJsonObject &data, QJsonObject &ret){
     }
     retDataObj["gpioRoutesArray"] = gpioRoutesArr;
 
+    QJsonArray gpioStateArr;
+    const QMap<QString, bool> gpioStates = m_lib->getGpioStates();
+    QMapIterator<QString, bool> i(gpioStates);
+    while (i.hasNext()) {
+        i.next();
+        QJsonObject entry;
+        entry["slotID"] = i.key();
+        entry["state"] = i.value();
+        gpioStateArr.append(entry);
+    }
+    retDataObj["gpioStatesArray"] = gpioStateArr;
+
     ret["data"] = retDataObj;
     ret["error"] = noError();
 }
@@ -766,6 +778,24 @@ void Websocket::changeGpioCrosspoint(QJsonObject &data, QJsonObject &ret) {
     } else {
         ret["error"] = hasError("Parameters not accepted");
     }
+}
+
+void Websocket::getGpioStates(QJsonObject &data, QJsonObject &ret) {
+    Q_UNUSED(data);
+    QJsonObject retDataObj;
+    QJsonArray gpioStateArr;
+    const QMap<QString, bool> gpioStates = m_lib->getGpioStates();
+    QMapIterator<QString, bool> i(gpioStates);
+    while (i.hasNext()) {
+        i.next();
+        QJsonObject entry;
+        entry["slotID"] = i.key();
+        entry["state"] = i.value();
+        gpioStateArr.append(entry);
+    }
+    retDataObj["gpioStatesArray"] = gpioStateArr;
+    ret["data"] = retDataObj;
+    ret["error"] = noError();
 }
 
 void Websocket::readNewestLog(QJsonObject &data, QJsonObject &ret) {

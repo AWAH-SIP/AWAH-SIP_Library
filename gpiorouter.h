@@ -20,6 +20,7 @@ public:
     void changeGpioCrosspoint(QString srcSlotId, QString destSlotId, bool inverted);
     void registerDevice(s_IODevices& deviceInfo, GpioDevice* device, QStringList gpiNames = QStringList(), QStringList gpoNames = QStringList());
     void removeDevice(s_IODevices& deviceInfo);
+    const QMap<QString, bool> getGpioStates();
 
 signals:
     void gpioRoutesChanged(const QList<s_gpioRoute>& routes);

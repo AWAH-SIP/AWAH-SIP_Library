@@ -125,6 +125,7 @@ public:
     void disconnectGpioPort(QString srcSlotId, QString destSlotId) { return GpioRouter::instance()->disconnectGpioPort(srcSlotId, destSlotId); };
     void changeGpioCrosspoint(QString srcSlotId, QString destSlotId, bool inverted)
         { return GpioRouter::instance()->changeGpioCrosspoint(srcSlotId, destSlotId, inverted); };
+    const QMap<QString, bool> getGpioStates() { return GpioRouter::instance()->getGpioStates(); };
 
     // Public API - Log
     QStringList readNewestLog() const { return m_Log->readNewestLog();};

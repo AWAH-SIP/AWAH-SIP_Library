@@ -4,8 +4,8 @@
 #include <QObject>
 #include "types.h"
 
-#define MAX_GPIO        8
-#define MAX_LOGIC_OUT    4
+#define MAX_GPIO        16
+#define MAX_LOGIC_OUT    8
 
 class GpioRouter;
 class GpioDeviceManager;
@@ -67,7 +67,6 @@ signals:
 
 private:
     uint m_outCount;
-    DeviceType m_type;
     bool m_inState, m_outState[MAX_LOGIC_OUT];
 
 };

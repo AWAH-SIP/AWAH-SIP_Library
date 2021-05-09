@@ -119,6 +119,18 @@ void GpioRouter::removeDevice(s_IODevices& deviceInfo)
     }
 }
 
+const QMap<QString, bool> GpioRouter::getGpioStates()
+{
+    QMap<QString, bool> ret;
+    for(auto & srcPort : m_portList.srcPorts) {
+        ret[srcPort.slotId] = srcPort.lastState;
+    }
+    for(auto & destPort : m_portList.destPorts) {
+        ret[destPort.slotId] = destPort.lastState;
+    }
+    return ret;
+}
+
 void GpioRouter::processGpioStates()
 {
     QMap<QString, bool> gpiStates, calculatedStates, changedStates;

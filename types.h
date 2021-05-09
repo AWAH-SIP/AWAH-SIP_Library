@@ -397,7 +397,7 @@ struct s_gpioRoute{
     }
     s_gpioRoute* fromJSON(const QJsonObject &audioRouteJSON) {
         srcSlotId = audioRouteJSON["srcSlotId"].toString();
-        destSlotId = audioRouteJSON["destSlot"].toString();
+        destSlotId = audioRouteJSON["destSlotId"].toString();
         inverted = audioRouteJSON["inverted"].toBool();
         persistant = audioRouteJSON["persistant"].toBool();
         return this;

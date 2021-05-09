@@ -77,6 +77,8 @@ AccountGpioDev* GpioDeviceManager::create(const s_account &account)
     newDev.uid = account.uid;
     newDev.inputname = newDev.outputame = account.name;
     newDev.RecDevID = newDev.PBDevID = 0;
+    newDev.inChannelCount = 2;
+    newDev.outChannelCount = 0;
     AccountGpioDev* ret = new AccountGpioDev(newDev);
     appendDevice(ret);
     return ret;

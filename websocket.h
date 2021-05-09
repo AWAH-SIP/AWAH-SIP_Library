@@ -122,6 +122,7 @@ private slots:
     void connectGpioPort(QJsonObject &data, QJsonObject &ret);
     void disconnectGpioPort(QJsonObject &data, QJsonObject &ret);
     void changeGpioCrosspoint(QJsonObject &data, QJsonObject &ret);
+    void getGpioStates(QJsonObject &data, QJsonObject &ret);
     // Public API - Log
     void readNewestLog(QJsonObject &data, QJsonObject &ret);
     // Public API - MessageManager

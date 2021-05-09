@@ -450,13 +450,10 @@ const QList<s_callHistory>* Accounts::getCallHistory(int AccID){
 void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri)
 {
     emit callStateChanged(accID, role, callId, remoteofferer, calldur, state, lastStatusCode, statustxt, remoteUri);
-    for(auto& account : m_accounts){
-        if(account.AccID == accID){
-            account.CallStatusCode = state;
-            account.CallStatusText = statustxt;
-            account.ConnectedTo = remoteUri;
-        }
-    }
+    s_account* thisAccount = getAccountByID(accID);
+    thisAccount->CallStatusCode = state;
+    thisAccount->CallStatusText = statustxt;
+    thisAccount->ConnectedTo = remoteUri;
     m_lib->m_Log->writeLog(3,(QString("Callstate of: ") + remoteUri + " is:  " + statustxt));
     if(state == PJSIP_INV_STATE_EARLY && lastStatusCode == 180){
         if(role == 1){                                                                           // autoanswer call
@@ -464,11 +461,11 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
         }
     }
     else if(state == PJSIP_INV_STATE_CONFIRMED && lastStatusCode == 200){
-        getAccountByID(accID)->gpioDev->setConnected(true);
+        thisAccount->gpioDev->setConnected(true);
         emit m_lib->m_AudioRouter->audioRoutesChanged(m_lib->m_AudioRouter->getAudioRoutes());
     }
     else if(state == PJSIP_INV_STATE_DISCONNECTED) {
-        getAccountByID(accID)->gpioDev->setConnected(false);
+        thisAccount->gpioDev->setConnected(false);
         //         if(sipStatus.fields.SipClientRegistered)
         {
             //             pjsua->sendPresenceStatus(online);

@@ -59,19 +59,15 @@ void LogicGpioDev::setGPO(uint number, bool state)
     if(number < m_outCount) {
         m_outState[number] = state;
     }
-    bool inState = false;
+    bool inState = m_outState[0];
     for (uint i = 0; i < m_outCount; i++) {
-        if(i == 0) {
-            inState = m_outState[i];
-        } else {
-            if (m_type == LogicAndGpioDevice)
-                inState = inState && m_outState[i];
-            else
-                inState = inState || m_outState[i];
-        }
+        if (m_deviceInfo.devicetype == LogicAndGpioDevice)
+            inState = inState && m_outState[i];
+        else
+            inState = inState || m_outState[i];
     }
     if (m_inState != inState) {
-        m_inState = state;
+        m_inState = inState;
         emit gpioChanged();
     }
 }
