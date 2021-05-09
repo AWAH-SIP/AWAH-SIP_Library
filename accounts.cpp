@@ -18,6 +18,7 @@
 
 #include "accounts.h"
 #include "awahsiplib.h"
+#include "gpiodevicemanager.h"
 
 #define THIS_FILE		"accounts.cpp"
 
@@ -64,6 +65,7 @@ void Accounts::createAccount(QString accountName, QString server, QString user, 
         newAccount.fixedJitterBufferValue = fixedJitterBufferValue;
         newAccount.CallHistory = history;
         PJSUA2_CHECK_EXPR(m_lib->m_AudioRouter->addSplittComb(newAccount));
+        newAccount.gpioDev = GpioDeviceManager::instance()->create(newAccount);
         m_accounts.append(newAccount);
         m_lib->m_Settings->saveAccConfig();
         m_lib->m_AudioRouter->conferenceBridgeChanged();
@@ -117,6 +119,7 @@ void Accounts::removeAccount(int index)
         m_accounts.at(index).accountPtr->shutdown();
         m_lib->m_AudioRouter->removeAllRoutesFromAccount(m_accounts.at(index));
         // TODO: here we have to remove the Splittercombiner from the Account!
+        GpioDeviceManager::instance()->removeDevice(m_accounts.at(index).uid);
         m_accounts.removeAt(index);
         m_lib->m_AudioRouter->conferenceBridgeChanged();
         m_lib->m_Settings->saveAccConfig();
@@ -461,15 +464,15 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
         }
     }
     else if(state == PJSIP_INV_STATE_CONFIRMED && lastStatusCode == 200){
-
-       emit m_lib->m_AudioRouter->audioRoutesChanged(m_lib->m_AudioRouter->getAudioRoutes());
+        getAccountByID(accID)->gpioDev->setConnected(true);
+        emit m_lib->m_AudioRouter->audioRoutesChanged(m_lib->m_AudioRouter->getAudioRoutes());
     }
     else if(state == PJSIP_INV_STATE_DISCONNECTED) {
-
-//         if(sipStatus.fields.SipClientRegistered)
-            {
-//             pjsua->sendPresenceStatus(online);
-            }
+        getAccountByID(accID)->gpioDev->setConnected(false);
+        //         if(sipStatus.fields.SipClientRegistered)
+        {
+            //             pjsua->sendPresenceStatus(online);
+        }
     }
 }
 

@@ -52,7 +52,7 @@ AudioRouter::~AudioRouter()
 QStringList AudioRouter::listInputSoundDev(){
     QStringList snddevlist;
     QString snddev;
-    foreach(AudioDevInfo audiodev, m_lib->ep.audDevManager().enumDev2()){
+    foreach(AudioDevInfo audiodev, m_lib->m_pjEp->audDevManager().enumDev2()){
         snddev.clear();
         if(audiodev.inputCount>0){
             snddev.append(QString::fromStdString(audiodev.name));
@@ -65,7 +65,7 @@ QStringList AudioRouter::listInputSoundDev(){
 QStringList AudioRouter::listOutputSoundDev(){
     QStringList snddevlist;
     QString snddev;
-    foreach(AudioDevInfo audiodev, m_lib->ep.audDevManager().enumDev2()){
+    foreach(AudioDevInfo audiodev, m_lib->m_pjEp->audDevManager().enumDev2()){
         snddev.clear();
         if(audiodev.outputCount>0){
             snddev.append(QString::fromStdString(audiodev.name));
@@ -79,7 +79,7 @@ QStringList AudioRouter::listOutputSoundDev(){
 int AudioRouter::getSoundDevID(QString DeviceName)
 {
     int id = 0;
-    foreach(AudioDevInfo audiodev, m_lib->ep.audDevManager().enumDev2()){
+    foreach(AudioDevInfo audiodev, m_lib->m_pjEp->audDevManager().enumDev2()){
         if (audiodev.name == DeviceName.toStdString()){
             return id;
         }
@@ -98,8 +98,8 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
     QList<int> connectedSlots;
     s_IODevices Audiodevice;
 
-    recorddev =  m_lib->ep.audDevManager().getDevInfo(recordDevId);
-    playbackdev = m_lib->ep.audDevManager().getDevInfo(playbackDevId);
+    recorddev =  m_lib->m_pjEp->audDevManager().getDevInfo(recordDevId);
+    playbackdev = m_lib->m_pjEp->audDevManager().getDevInfo(playbackDevId);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //    recorddev.inputCount = 6;                                                           // octo sound card hack!!!!!!!
 //    playbackdev.outputCount = 8;                                                        // fix and remove me!!!!!!!!

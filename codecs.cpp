@@ -32,14 +32,14 @@ QStringList Codecs::listCodec(){
     QSettings settings("awah", "AWAHsipConfig");
     int priority;
     QString codecname;
-    foreach(const CodecInfo codec, m_lib->ep.codecEnum2())
+    foreach(const CodecInfo codec, m_lib->m_pjEp->codecEnum2())
     {
         codecname = QString::fromStdString(codec.codecId);
         priority = settings.value("settings/CodecPriority/"+codecname,"127").toInt();
         if(priority){                                                                          // hide codecs with priority 0
             codeclist << codecname;
         }
-        m_lib->ep.codecSetPriority(codec.codecId, priority);
+        m_lib->m_pjEp->codecSetPriority(codec.codecId, priority);
 
     }
     settings.sync();
@@ -48,13 +48,13 @@ QStringList Codecs::listCodec(){
 
 void Codecs::selectCodec(QString selectedcodec){
 
-    foreach(const CodecInfo codec, m_lib->ep.codecEnum2())
+    foreach(const CodecInfo codec, m_lib->m_pjEp->codecEnum2())
     {
         if(QString::fromStdString(codec.codecId).startsWith(selectedcodec)){           // because we removed the Channelcount we have to search         todo
-            m_lib->ep.codecSetPriority(codec.codecId, 255);                                   // channelcount is not removed at the moment
+            m_lib->m_pjEp->codecSetPriority(codec.codecId, 255);                                   // channelcount is not removed at the moment
             }
         else{
-            m_lib->ep.codecSetPriority(codec.codecId, 0);
+            m_lib->m_pjEp->codecSetPriority(codec.codecId, 0);
             }
     }
 }
@@ -64,7 +64,7 @@ const QJsonObject Codecs::getCodecParam(QString codecId)
     CodecParam param;
     QJsonObject codecparam, item, enumitems;
 
-    param = m_lib->ep.codecGetParam(codecId.toStdString());
+    param = m_lib->m_pjEp->codecGetParam(codecId.toStdString());
 
     item = QJsonObject();
     item["type"] = ENUM;

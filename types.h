@@ -46,6 +46,9 @@ extern "C" {
 #include "pjcall.h"
 #include "pjlogwriter.h"
 
+class GpioDevice;
+class AccountGpioDev;
+
 inline QString createNewUID() { return QUuid::createUuid().toString(QUuid::Id128); }
 
 inline pj_str_t str2Pj(const QString &input_str)
@@ -74,7 +77,10 @@ enum DeviceType {
     TestToneGenerator,
     FilePlayer,
     FileRecorder,
-    GPIODevice
+    VirtualGpioDevice,
+    LogicAndGpioDevice,
+    LogicOrGpioDevice,
+    AccountGpioDevice
 };
 Q_ENUMS(DeviceType)
 
@@ -94,8 +100,8 @@ struct s_IODevices{
     int PBDevID = -1;
     QString path = "n/a";                   // ony for devicetype Fileplayer, FileRecorder
     pjmedia_snd_port *soundport;
-    uint inChannelCount = 0;            // Not in JSON, not saved, only for listConfPorts
-    uint outChannelCount = 0;           // Not in JSON, not saved, only for listConfPorts
+    uint inChannelCount = 0;            // For AudioDevices: Not in JSON, not saved, only for listConfPorts
+    uint outChannelCount = 0;           // For AudioDevices: Not in JSON, not saved, only for listConfPorts
     QJsonObject toJSON() const {
         QJsonArray portNrArr;
         for (auto & port: portNo) {
@@ -165,7 +171,8 @@ struct s_account{
     QString uid;
     QString FileRecordPath;
     QString FilePlayPath;
-    PJAccount *accountPtr;            // not saved to file, only for runtime handling
+    PJAccount *accountPtr;          // not saved to file, only for runtime handling
+    AccountGpioDev *gpioDev;        // not saved to file, only for runtime handling
     pjsua_player_id player_id = INVALID_ID;
     pjsua_recorder_id rec_id = PJSUA_INVALID_ID;
     int AccID;
@@ -315,6 +322,75 @@ enum settingType{
     ENUM
 };
 Q_ENUMS(settingType)
+
+struct s_gpioPort{
+    QString name;
+    QString slotId;
+    GpioDevice* device;     //NOT in JSON only for InternalRef
+    uint channel;           //NOT in JSON only for InternalRef
+    bool lastState;         //NOT in JSON only for InternalRef
+    QJsonObject toJSON() const {
+        return {{"name",name}, {"slotId",slotId}};
+    }
+    s_gpioPort* fromJSON(const QJsonObject &audioPortJSON) {
+        name = audioPortJSON["name"].toString();
+        slotId = audioPortJSON["slotId"].toString();
+        return this;
+    }
+};
+Q_DECLARE_METATYPE(s_gpioPort);
+
+struct s_gpioPortList{
+    QList<s_gpioPort> srcPorts;
+    QList<s_gpioPort> destPorts;
+    QJsonObject toJSON() const {
+        QJsonArray srcPortsArr, destPortsArr;
+        for (auto & srcPort: srcPorts) {
+            srcPortsArr.append(srcPort.toJSON());
+        }
+        for (auto & destPort: destPorts) {
+            destPortsArr.append(destPort.toJSON());
+        }
+        return {{"srcPorts", srcPortsArr}, {"destPorts", destPortsArr}};
+    }
+    s_gpioPortList* fromJSON(QJsonObject &audioPortListJSON) {
+        QJsonArray srcPortArr, destPortArr;
+        srcPorts.clear();
+        destPorts.clear();
+        if(audioPortListJSON["srcPorts"].isArray() && audioPortListJSON["destPorts"].isArray()) {
+            s_gpioPort entry;
+            srcPortArr = audioPortListJSON["srcPorts"].toArray();
+            destPortArr = audioPortListJSON["destPorts"].toArray();
+            for (auto srcPort : srcPortArr) {
+                srcPorts.append(*entry.fromJSON(srcPort.toObject()));
+            }
+            for (auto destPort : destPortArr) {
+                destPorts.append(*entry.fromJSON(destPort.toObject()));
+            }
+        }
+        return this;
+    }
+};
+Q_DECLARE_METATYPE(s_gpioPortList);
+
+struct s_gpioRoute{
+    QString srcSlotId;
+    QString destSlotId;
+    bool inverted;
+    bool persistant;
+    QJsonObject toJSON() const {
+        return {{"srcSlotId", srcSlotId}, {"destSlotId", destSlotId}, {"inverted", inverted}, {"persistant", persistant} };
+    }
+    s_gpioRoute* fromJSON(const QJsonObject &audioRouteJSON) {
+        srcSlotId = audioRouteJSON["srcSlotId"].toString();
+        destSlotId = audioRouteJSON["destSlot"].toString();
+        inverted = audioRouteJSON["inverted"].toBool();
+        persistant = audioRouteJSON["persistant"].toBool();
+        return this;
+    }
+};
+Q_DECLARE_METATYPE(s_gpioRoute);
+Q_DECLARE_METATYPE(QList<s_gpioRoute>);
 
 
 #endif // TYPES_H

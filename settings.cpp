@@ -692,7 +692,7 @@ const QJsonObject Settings::getCodecPriorities(){
      enumitems["1 lowest"] = 1;
      enumitems["0 disabled"] = 0;
 
-     foreach(const CodecInfo codec, m_lib->ep.codecEnum2())
+     foreach(const CodecInfo codec, m_lib->m_pjEp->codecEnum2())
      {
          codecname = QString::fromStdString(codec.codecId);
          priority = settings.value("settings/CodecPriority/"+codecname,"128").toInt();

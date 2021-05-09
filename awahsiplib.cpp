@@ -21,17 +21,21 @@
 
 AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
 {
-
     m_Accounts = new Accounts(this, this);
     m_AudioRouter = new AudioRouter(this, this);
     m_Buddies = new Buddies(this, this);
     m_Codecs = new Codecs(this, this);
+    m_GpioDeviceManager = GpioDeviceManager::instance(this);
     m_MessageManager = new MessageManager(this, this);
     m_Settings = new Settings(this, this);
 
+    m_GpioDeviceManager->setLib(this);
+
+    m_pjEp = PJEndpoint::instance();
+    m_pjEp->setAwahLibrary(this);
 
     try{
-        ep.libCreate();
+        m_pjEp->libCreate();
 
         // read config from config file:
         m_Settings->loadSettings();
@@ -43,15 +47,15 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
 //        epCfg.medConfig.txDropPct = TX_DROP_PACKAGE;
 
         m_Log = new Log(this, this);
-        ep.libInit(epCfg);
-        ep.audDevManager().setNullDev();                  // set a nulldevice as masterdevice
+        m_pjEp->libInit(epCfg);
+        m_pjEp->audDevManager().setNullDev();                  // set a nulldevice as masterdevice
         if(TransportProtocol=="TCP")
-            ep.transportCreate(PJSIP_TRANSPORT_TCP, tCfg);
+            m_pjEp->transportCreate(PJSIP_TRANSPORT_TCP, tCfg);
         else
-            ep.transportCreate(PJSIP_TRANSPORT_UDP, tCfg);
+            m_pjEp->transportCreate(PJSIP_TRANSPORT_UDP, tCfg);
 
         // Start the library (worker threads etc)
-        ep.libStart();
+        m_pjEp->libStart();
         m_Log->writeLog(3,"**** AWAHsip lib STARTED ****");
 
         /* Create pool for multiple Sound Device handling */
@@ -79,6 +83,11 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(m_Accounts, &Accounts::AccountsChanged, this, &AWAHSipLib::AccountsChanged);
     connect(m_Accounts, &Accounts::callInfo, this, &AWAHSipLib::callInfo);
     connect(m_AudioRouter, &AudioRouter::AudioDevicesChanged, this, &AWAHSipLib::AudioDevicesChanged);
+    connect(m_GpioDeviceManager, &GpioDeviceManager::gpioDeviceChanged, this, &AWAHSipLib::gpioDeviceChanged);
+    connect(GpioRouter::instance(), &GpioRouter::gpioRoutesChanged, this, &AWAHSipLib::gpioRoutesChanged);
+    connect(GpioRouter::instance(), &GpioRouter::gpioRoutesTableChanged, this, &AWAHSipLib::gpioRoutesTableChanged);
+    connect(GpioRouter::instance(), &GpioRouter::gpioStateChanged, this, &AWAHSipLib::gpioStateChanged);
+
 
     connect(this, &AWAHSipLib::regStateChanged, m_Websocket, &Websocket::regStateChanged);
     connect(this, &AWAHSipLib::callStateChanged, m_Websocket, &Websocket::callStateChanged);
@@ -98,12 +107,13 @@ AWAHSipLib::~AWAHSipLib()
     pjsua_call_hangup_all();
     m_Log->writeLog(3,"**** shuting down AWAHsip lib  ****");
     delete m_AudioRouter;               // remove all sound devices before destroying the endpoint.
-    ep.libDestroy();
+    m_pjEp->libDestroy();
     m_Log->writeLog(3,"**** shuting down AWAHsip lib ... done ****");
 
     delete m_Accounts;
     delete m_Buddies;
     delete m_Codecs;
+    delete m_GpioDeviceManager;
     delete m_Log;
     delete m_MessageManager;
     delete m_Settings;

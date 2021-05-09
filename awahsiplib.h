@@ -39,6 +39,7 @@ extern "C" {
 #include <pj/string.h>
 }
 
+#include "pjendpoint.h"
 #include "pjaccount.h"
 #include "pjbuddy.h"
 #include "pjcall.h"
@@ -48,6 +49,7 @@ extern "C" {
 #include "audiorouter.h"
 #include "buddies.h"
 #include "codecs.h"
+#include "gpiodevicemanager.h"
 #include "log.h"
 #include "messagemanager.h"
 #include "settings.h"
@@ -106,6 +108,15 @@ public:
     void selectCodec(QString selectedcodec) const { return m_Codecs->selectCodec(selectedcodec); };
     const QJsonObject getCodecParam(QString codecId) const { return m_Codecs->getCodecParam(codecId); };
     int setCodecParam(QString codecId, QJsonObject codecParam) const { return m_Codecs->setCodecParam(codecId, codecParam); };
+
+    // Public API - GpioDeviceManager
+    const VirtualGpioDev* createGpioDev(uint inCount, uint outCount, QString devName)
+        { return m_GpioDeviceManager->create(inCount, outCount, devName); };
+    const LogicGpioDev* createGpioDev(DeviceType type, uint outCount, QString devName)
+        { return m_GpioDeviceManager->create(type, outCount, devName); };
+    void removeGpioDevice(QString uid) { return m_GpioDeviceManager->removeDevice(uid); };
+    const GpioDevice* getGpioDeviceByUid(QString uid) const { return m_GpioDeviceManager->getDeviceByUid(uid); };
+    const QList<s_IODevices>& getGpioDevices() const { return m_GpioDeviceManager->getGpioDevices(); };
 
     // Public API - Log
     QStringList readNewestLog() const { return m_Log->readNewestLog();};
@@ -208,9 +219,15 @@ signals:
     */
     void callInfo(int accId, int callId, QJsonObject callInfo);
 
+    // GPIO Signals TODO: Doku-Description
+    void gpioDeviceChanged(QList<s_IODevices> deviceList);
+    void gpioRoutesChanged(const QList<s_gpioRoute>& routes);
+    void gpioRoutesTableChanged(const s_gpioPortList& portList);
+    void gpioStateChanged(const QMap<QString, bool> changedGpios);
+
 private:
     EpConfig epCfg;
-    Endpoint ep;
+    PJEndpoint *m_pjEp;
     TransportConfig tCfg;
     pj_pool_t *pool;
     QString TransportProtocol;      // only used for loading a setting  -> is there a better way?
@@ -220,6 +237,7 @@ private:
     AudioRouter* m_AudioRouter;
     Buddies* m_Buddies;
     Codecs* m_Codecs;
+    GpioDeviceManager* m_GpioDeviceManager;
     Log* m_Log;
     MessageManager* m_MessageManager;
     Settings* m_Settings;
@@ -229,9 +247,12 @@ private:
     friend class AudioRouter;
     friend class Buddies;
     friend class Codecs;
+    friend class GpioDevice;
+    friend class GpioDeviceManager;
     friend class Log;
     friend class MessageManager;
     friend class Settings;
+    friend class PJEndpoint;
     friend class PJAccount;
     friend class PJBuddy;
     friend class PJCall;
