@@ -100,19 +100,19 @@ struct s_IODevices{
     int PBDevID = -1;
     QString path = "n/a";                   // ony for devicetype Fileplayer, FileRecorder
     pjmedia_snd_port *soundport;
-    uint inChannelCount = 0;            // For AudioDevices: Not in JSON, not saved, only for listConfPorts
-    uint outChannelCount = 0;           // For AudioDevices: Not in JSON, not saved, only for listConfPorts
+    uint inChannelCount = 0;            // For AudioDevices: not saved, only for listConfPorts
+    uint outChannelCount = 0;           // For AudioDevices: not saved, only for listConfPorts
     QJsonObject toJSON() const {
         QJsonArray portNrArr;
         for (auto & port: portNo) {
             portNrArr.append(port);
         }
         return {{"devicetype", devicetype}, {"uid", uid}, {"inputname", inputname}, {"outputname", outputame}, {"portNo", portNrArr},
-                {"genfrequency", genfrequency}, {"RecDevID", RecDevID}, {"PBDevID", PBDevID}, {"path", path},};
+                {"genfrequency", genfrequency}, {"RecDevID", RecDevID}, {"PBDevID", PBDevID}, {"path", path}, {"inChannelCount", (int) inChannelCount}, {"outChannelCount", (int) outChannelCount}};
     }
-    s_IODevices* fromJSON(QJsonObject &audioDeviceJSON) {
-        QJsonArray portNrArr = audioDeviceJSON["portNo"].toArray();
-        switch (audioDeviceJSON["devicetype"].toInt()) {
+    s_IODevices* fromJSON(QJsonObject &ioDeviceJSON) {
+        QJsonArray portNrArr = ioDeviceJSON["portNo"].toArray();
+        switch (ioDeviceJSON["devicetype"].toInt()) {
         case SoundDevice:
             devicetype = SoundDevice;
             break;
@@ -125,17 +125,31 @@ struct s_IODevices{
         case FileRecorder:
             devicetype = FileRecorder;
             break;
+        case VirtualGpioDevice:
+            devicetype = VirtualGpioDevice;
+            break;
+        case LogicAndGpioDevice:
+            devicetype = LogicAndGpioDevice;
+            break;
+        case LogicOrGpioDevice:
+            devicetype = LogicOrGpioDevice;
+            break;
+        case AccountGpioDevice:
+            devicetype = AccountGpioDevice;
+            break;
         }
-        uid = audioDeviceJSON["uid"].toString();
-        inputname = audioDeviceJSON["inputname"].toString();
-        outputame = audioDeviceJSON["outputname"].toString();
+        uid = ioDeviceJSON["uid"].toString();
+        inputname = ioDeviceJSON["inputname"].toString();
+        outputame = ioDeviceJSON["outputname"].toString();
         for (auto portNrObj : portNrArr) {
             portNo.append(portNrObj.toInt());
         }
-        genfrequency = audioDeviceJSON["genfrequency"].toInt();
-        RecDevID = audioDeviceJSON["RecDevID"].toInt();
-        PBDevID = audioDeviceJSON["PBDevID"].toInt();
-        path = audioDeviceJSON["path"].toString();
+        genfrequency = ioDeviceJSON["genfrequency"].toInt();
+        RecDevID = ioDeviceJSON["RecDevID"].toInt();
+        PBDevID = ioDeviceJSON["PBDevID"].toInt();
+        path = ioDeviceJSON["path"].toString();
+        inChannelCount = (uint) ioDeviceJSON["inChannelCount"].toInt();
+        outChannelCount = (uint) ioDeviceJSON["outChannelCount"].toInt();
         return this;
     }
 };
@@ -353,14 +367,14 @@ struct s_gpioPortList{
         }
         return {{"srcPorts", srcPortsArr}, {"destPorts", destPortsArr}};
     }
-    s_gpioPortList* fromJSON(QJsonObject &audioPortListJSON) {
+    s_gpioPortList* fromJSON(QJsonObject &gpioPortListJSON) {
         QJsonArray srcPortArr, destPortArr;
         srcPorts.clear();
         destPorts.clear();
-        if(audioPortListJSON["srcPorts"].isArray() && audioPortListJSON["destPorts"].isArray()) {
+        if(gpioPortListJSON["srcPorts"].isArray() && gpioPortListJSON["destPorts"].isArray()) {
             s_gpioPort entry;
-            srcPortArr = audioPortListJSON["srcPorts"].toArray();
-            destPortArr = audioPortListJSON["destPorts"].toArray();
+            srcPortArr = gpioPortListJSON["srcPorts"].toArray();
+            destPortArr = gpioPortListJSON["destPorts"].toArray();
             for (auto srcPort : srcPortArr) {
                 srcPorts.append(*entry.fromJSON(srcPort.toObject()));
             }
