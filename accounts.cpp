@@ -465,7 +465,6 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
         emit m_lib->m_AudioRouter->audioRoutesChanged(m_lib->m_AudioRouter->getAudioRoutes());
     }
     else if(state == PJSIP_INV_STATE_DISCONNECTED) {
-        thisAccount->gpioDev->setConnected(false);
         //         if(sipStatus.fields.SipClientRegistered)
         {
             //             pjsua->sendPresenceStatus(online);

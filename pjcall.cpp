@@ -85,7 +85,7 @@ void PJCall::onCallState(OnCallStateParam &prm)
 
         }
 
-        for (int pos = 0; pos<callAcc->CallList.count(); pos++)
+        for (int pos = 0; pos < callAcc->CallList.count(); pos++)
         {                                                               // Check if callId is valid
             if (callAcc->CallList.at(pos)->getId() == ci.id)
             {
@@ -96,6 +96,8 @@ void PJCall::onCallState(OnCallStateParam &prm)
         if (callAcc->CallList.count()>0){
             QString tmp = "1: still active: " + QString::number(callAcc->CallList.count()); ;
             parent->OncallStateChanged(ci.accId, ci.role, ci.id, ci.remOfferer, ci.connectDuration.sec,ci.state, ci.lastStatusCode, tmp ,QString::fromStdString(ci.remoteUri));
+        } else {
+            callAcc->gpioDev->setConnected(false);
         }
         delete this;
     }

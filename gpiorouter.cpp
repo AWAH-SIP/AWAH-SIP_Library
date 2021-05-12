@@ -97,7 +97,6 @@ void GpioRouter::removeDevice(s_IODevices& deviceInfo)
 {
     bool save = false;
     QMutableListIterator<s_gpioPort> i(m_portList.srcPorts), o(m_portList.destPorts);
-    removeAllRoutesfromDevice(deviceInfo.uid);
     while(i.hasNext()){
         s_gpioPort& port = i.next();
         if (port.slotId.contains(deviceInfo.uid)) {
@@ -112,6 +111,7 @@ void GpioRouter::removeDevice(s_IODevices& deviceInfo)
             save = true;
         }
     }
+    removeAllRoutesfromDevice(deviceInfo.uid);
     if (save) {
         emit gpioRoutesTableChanged(m_portList);
         processGpioStates();

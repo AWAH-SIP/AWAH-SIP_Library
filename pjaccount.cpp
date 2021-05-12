@@ -38,7 +38,8 @@ void PJAccount::onRegState(OnRegStateParam &prm) {
     Q_UNUSED(prm);
     emit parent->regStateChanged(ai.id, ai.regIsActive);
     emit parent->signalSipStatus(ai.id, ai.regStatus,QString::fromStdString(ai.regStatusText));
-    parent->getAccountByID(ai.id)->gpioDev->setRegistered(ai.regIsActive);
+    if(parent->getAccountByID(ai.id))
+        parent->getAccountByID(ai.id)->gpioDev->setRegistered(ai.regIsActive);
     if(!ai.regIsActive && ai.regStatus ==200){
         emit parent->signalSipStatus(ai.id, 0,"unregistered");
     }
