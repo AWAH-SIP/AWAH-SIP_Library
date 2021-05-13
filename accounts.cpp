@@ -88,22 +88,22 @@ void Accounts::modifyAccount(int index, QString accountName, QString server, QSt
     aCfg.sipConfig.authCreds.push_back(cred);
     if(m_accounts.count()> index){
         try{
-           m_accounts.at(index).accountPtr->modify(aCfg);
-           TmpAccount.name = accountName;
-           TmpAccount.serverURI = server;
-           TmpAccount.user = user;
-           TmpAccount.password = password;
-           TmpAccount.uid = m_accounts.at(index).uid;
-           TmpAccount.accountPtr = m_accounts.at(index).accountPtr;
-           TmpAccount.AccID = m_accounts.at(index).accountPtr->getId();
-           TmpAccount.FilePlayPath = filePlayPath;
-           TmpAccount.FileRecordPath = fileRecPath;
-           TmpAccount.fixedJitterBuffer = fixedJitterBuffer;
-           TmpAccount.fixedJitterBufferValue = fixedJitterBufferValue;
-           m_accounts.replace(index, TmpAccount);
-           m_lib->m_Settings->saveAccConfig();
-           m_lib->m_AudioRouter->conferenceBridgeChanged();
-           emit AccountsChanged(&m_accounts);
+            m_accounts.at(index).accountPtr->modify(aCfg);
+            TmpAccount.name = accountName;
+            TmpAccount.serverURI = server;
+            TmpAccount.user = user;
+            TmpAccount.password = password;
+            TmpAccount.uid = m_accounts.at(index).uid;
+            TmpAccount.accountPtr = m_accounts.at(index).accountPtr;
+            TmpAccount.AccID = m_accounts.at(index).accountPtr->getId();
+            TmpAccount.FilePlayPath = filePlayPath;
+            TmpAccount.FileRecordPath = fileRecPath;
+            TmpAccount.fixedJitterBuffer = fixedJitterBuffer;
+            TmpAccount.fixedJitterBufferValue = fixedJitterBufferValue;
+            m_accounts.replace(index, TmpAccount);
+            m_lib->m_Settings->saveAccConfig();
+            m_lib->m_AudioRouter->conferenceBridgeChanged();
+            emit AccountsChanged(&m_accounts);
         }
         catch (Error &err){
             m_lib->m_Log->writeLog(0,(QString("ModifyAccount: failed") + err.info().c_str()));
@@ -268,10 +268,10 @@ void Accounts::transferCall(int callId, int AccID, QString destination)
     PJCall *m_call = Q_NULLPTR;
 
     for (int pos = 0; pos<account->CallList.count(); pos++){       // Check if callId is valid
-            if (account->CallList.at(pos)->getId() == callId){
-                m_call = account->CallList.at(pos);
-            }
+        if (account->CallList.at(pos)->getId() == callId){
+            m_call = account->CallList.at(pos);
         }
+    }
 
     if(account && m_call != Q_NULLPTR){
         try{
@@ -290,17 +290,23 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
     QJsonObject callInfo;
     QStringList Line;
     s_account* account = getAccountByID(AccID);
-    PJCall *m_call = Q_NULLPTR;
+    PJCall *pjCall = Q_NULLPTR;
     StreamInfo streaminfo;
     StreamStat streamstats;
     pjsua_call_info ci;
 
     for (int pos = 0; pos<account->CallList.count(); pos++){       // Check if callId is valid
         if (account->CallList.at(pos)->getId() == callId){
-            m_call = account->CallList.at(pos);
+            pjCall = account->CallList.at(pos);
             pjsua_call_get_info(callId, &ci);
+            break;          // found!
+        }
+    }
+
+    if(pjCall !=Q_NULLPTR){
+        try{
             if(ci.media_status ==PJSUA_CALL_MEDIA_ACTIVE ){
-                streaminfo = account->CallList.at(pos)->getStreamInfo(0);
+                streaminfo = pjCall->getStreamInfo(0);
                 callInfo["Codec: "] = QString::fromStdString(streaminfo.codecName);
                 callInfo["Channel Count: "] = (int)streaminfo.audCodecParam.info.channelCnt;
                 callInfo["Frame lenght: "] = (int)streaminfo.audCodecParam.info.frameLen;
@@ -310,15 +316,15 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
                 callInfo["Tx Payload type: "] = (int)streaminfo.txPt;
                 callInfo["Bit depth: "] = (int)streaminfo.audCodecParam.info.pcmBitsPerSample;
 
-                streamstats = account->CallList.at(pos)->getStreamStat(0);
+                streamstats = pjCall->getStreamStat(0);
                 callInfo["RTCP: SDES: "] = QString("%1, %2, %3, %4, %5, %6, %7").arg(
-                        QString::fromStdString(streamstats.rtcp.peerSdes.cname),
-                        QString::fromStdString(streamstats.rtcp.peerSdes.name),
-                        QString::fromStdString(streamstats.rtcp.peerSdes.email),
-                        QString::fromStdString(streamstats.rtcp.peerSdes.phone),
-                        QString::fromStdString(streamstats.rtcp.peerSdes.loc),
-                        QString::fromStdString(streamstats.rtcp.peerSdes.tool),
-                        QString::fromStdString(streamstats.rtcp.peerSdes.note));
+                            QString::fromStdString(streamstats.rtcp.peerSdes.cname),
+                            QString::fromStdString(streamstats.rtcp.peerSdes.name),
+                            QString::fromStdString(streamstats.rtcp.peerSdes.email),
+                            QString::fromStdString(streamstats.rtcp.peerSdes.phone),
+                            QString::fromStdString(streamstats.rtcp.peerSdes.loc),
+                            QString::fromStdString(streamstats.rtcp.peerSdes.tool),
+                            QString::fromStdString(streamstats.rtcp.peerSdes.note));
                 callInfo["JB: FrameSize (bytes): "] = (int)streamstats.jbuf.frameSize;
                 callInfo["JB: Minimum allowed prefetch (frms): "] = (int)streamstats.jbuf.minPrefetch;
                 callInfo["JB: Maximum allowed prefetch (frms): "] = (int)streamstats.jbuf.maxPrefetch;
@@ -333,13 +339,10 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
                 callInfo["JB: Lost (frms): "] = (int)streamstats.jbuf.lost;
                 callInfo["JB: Discarded (frms): "] = (int)streamstats.jbuf.discard;
                 callInfo["JB: Number of empty on GET events: "] = (int)streamstats.jbuf.empty;
-             }
-        }
-    }
+            }
 
-    if(m_call !=Q_NULLPTR){
-        try{
-            QString calldump = QString::fromStdString(m_call->dump(true,""));
+            // TODO: Rewrite completly
+            QString calldump = QString::fromStdString(pjCall->dump(true,""));
             Line = calldump.split("\n");
 
             int startPos = Line.at(0).indexOf("To:") + 4 ;
@@ -410,7 +413,7 @@ void Accounts::addCallToHistory(int AccID, QString callUri, int duration, QStrin
 {
     s_account* account = getAccountByID(AccID);
     bool entryexists = false;
-    for(auto histentry : account->CallHistory){
+    for (auto histentry : account->CallHistory) {
         if(histentry.callUri == callUri){
             entryexists = true;
             histentry.codec = codec;
@@ -423,17 +426,18 @@ void Accounts::addCallToHistory(int AccID, QString callUri, int duration, QStrin
                     account->CallHistory.prepend(histentry);
                 }
             }
+            break;
         }
     }
 
-    if(!entryexists){
+    if (!entryexists) {
         s_callHistory newCall;
         newCall.callUri = callUri;
         newCall.codec = codec;
         newCall.duration = duration;
         newCall.outgoing = outgoing;
         newCall.count = 1;
-        if(account->CallHistory.count()>9){
+        if (account->CallHistory.count() > 9) {
             account->CallHistory.removeLast();
         }
         account->CallHistory.prepend(newCall);
@@ -441,7 +445,7 @@ void Accounts::addCallToHistory(int AccID, QString callUri, int duration, QStrin
     m_lib->m_Settings->saveAccConfig();
 }
 
-const QList<s_callHistory>* Accounts::getCallHistory(int AccID){
+const QList<s_callHistory>* Accounts::getCallHistory(int AccID) {
     s_account* account = getAccountByID(AccID);
     return &account->CallHistory ;
 }
