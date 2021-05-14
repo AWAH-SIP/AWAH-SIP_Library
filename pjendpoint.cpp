@@ -101,12 +101,13 @@ void PJEndpoint::onSelectAccount(OnSelectAccountParam &prm)
 }
 
 void PJEndpoint::onIpChangeProgress(OnIpChangeProgressParam &prm)
-{
-    Q_UNUSED(prm);
+{    
     qDebug() << "onIpChangeProgress() IP Adress Change detected !";
     pjsua_ip_change_param param;
     pjsua_ip_change_param_default(&param);
     param.restart_listener = true;
+    param.restart_lis_delay = true;
+    pjsua_acc_set_registration(prm.accId,true);
     pjsua_handle_ip_change(&param);
 }
 

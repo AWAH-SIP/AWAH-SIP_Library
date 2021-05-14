@@ -127,7 +127,6 @@ QStringList Log::readNewestLog(){
             list.append("error reading logfile!");
             return list;
         }
-
     QTextStream stream(&inputFile);
     QString line = stream.readLine();
     while (!line.isNull()) {
@@ -135,5 +134,7 @@ QStringList Log::readNewestLog(){
         line = stream.readLine() ;
         list.append(line);
     }
-    return list;
+    QStringList ret;
+    ret = list.mid(list.count()-501, -1);        // restrict the log to the newest 500 entrys for
+    return ret;
 }

@@ -293,6 +293,8 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
     PJCall *pjCall = Q_NULLPTR;
     StreamInfo streaminfo;
     StreamStat streamstats;
+    MediaTransportInfo transportinfo;
+    CallInfo callinfo;
     pjsua_call_info ci;
 
     for (int pos = 0; pos<account->CallList.count(); pos++){       // Check if callId is valid
@@ -306,7 +308,48 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
     if(pjCall !=Q_NULLPTR){
         try{
             if(ci.media_status ==PJSUA_CALL_MEDIA_ACTIVE ){
+                callinfo = pjCall->getInfo();
+                transportinfo =pjCall->getMedTransportInfo(0);
                 streaminfo = pjCall->getStreamInfo(0);
+                streamstats = pjCall->getStreamStat(0);
+                callInfo["Status: "] = QString::fromStdString(callinfo.stateText);
+                callInfo["Connected to: "] = QString::fromStdString(callinfo.remoteUri);
+                callInfo["Call time: "] = QDateTime::fromSecsSinceEpoch(callinfo.connectDuration.sec, Qt::OffsetFromUTC).toString("hh:mm:ss");
+                callInfo["Peer: "] = QString::fromStdString(transportinfo.srcRtpName);
+                callInfo["Recieved data total: "] = sizeFormat(streamstats.rtcp.rxStat.bytes);
+                if(callinfo.connectDuration.sec){       //avoid division by zero
+                    callInfo["Recieved data average kbps: "] = QString::number(streamstats.rtcp.rxStat.bytes * 8 /1024 / callinfo.connectDuration.sec);
+                    callInfo["Transmitted data average kbps: "] = QString::number(streamstats.rtcp.txStat.bytes * 8 /1024 / callinfo.connectDuration.sec);
+                }
+                callInfo["Recieved packets lost: "] = (int)streamstats.rtcp.rxStat.loss;
+                if(streamstats.rtcp.rxStat.pkt){
+                    callInfo["Recieved packets lost: (%) "] = (float)(100.0/streamstats.rtcp.rxStat.pkt*streamstats.rtcp.rxStat.loss);
+                    callInfo["Transmitted packets lost: (%) "] = (float)(100.0/streamstats.rtcp.txStat.pkt*streamstats.rtcp.txStat.loss);
+                }
+                callInfo["Recieved packets discarded: "] = (int)streamstats.rtcp.rxStat.discard;
+                callInfo["RX loss period min: (ms) "] = (int)streamstats.rtcp.rxStat.lossPeriodUsec.min/1000;
+                callInfo["RX loss period average: (ms) "] = (int)streamstats.rtcp.rxStat.lossPeriodUsec.mean/1000;
+                callInfo["RX loss period max: (ms) "] = (int)streamstats.rtcp.rxStat.lossPeriodUsec.max/1000;
+                callInfo["RX loss period last: (ms) "] = (int)streamstats.rtcp.rxStat.lossPeriodUsec.last/1000;
+                callInfo["RX jitter min: (ms) "] = (float)streamstats.rtcp.rxStat.jitterUsec.min/1000;
+                callInfo["RX jitter max: (ms) "] = (float)streamstats.rtcp.rxStat.jitterUsec.max/1000;
+                callInfo["RX jitter last: (ms) "] = (float)streamstats.rtcp.rxStat.jitterUsec.last/1000;
+                callInfo["RX jitter average: (ms) "] = (float)streamstats.rtcp.rxStat.jitterUsec.mean/1000;
+                callInfo["Transmitted data total: "] = sizeFormat(streamstats.rtcp.txStat.bytes);
+                callInfo["Transmitted packets lost: "] = (int)streamstats.rtcp.txStat.loss;
+                callInfo["Transmitted packets discarded: "] = (int)streamstats.rtcp.txStat.discard;
+                callInfo["TX loss period min: (ms) "] = (int)streamstats.rtcp.txStat.lossPeriodUsec.min/1000;
+                callInfo["TX loss period average: (ms) "] = (int)streamstats.rtcp.txStat.lossPeriodUsec.mean/1000;
+                callInfo["TX loss period max: (ms) "] = (int)streamstats.rtcp.txStat.lossPeriodUsec.max/1000;
+                callInfo["TX loss period last: (ms) "] = (int)streamstats.rtcp.txStat.lossPeriodUsec.last/1000;
+                callInfo["TX jitter min: (ms) "] = (float)streamstats.rtcp.txStat.jitterUsec.min/1000;
+                callInfo["TX jitter average: (ms) "] = (float)streamstats.rtcp.txStat.jitterUsec.mean/1000;
+                callInfo["TX jitter max: (ms) "] = (float)streamstats.rtcp.txStat.jitterUsec.max/1000;
+                callInfo["TX jitter last: (ms) "] = (float)streamstats.rtcp.txStat.jitterUsec.last/1000;
+                callInfo["RTT min: (ms) "] = (float)streamstats.rtcp.rttUsec.min/1000;
+                callInfo["RTT average: (ms) "] = (float)streamstats.rtcp.rttUsec.mean/1000;
+                callInfo["RTT max: (ms) "] = (float)streamstats.rtcp.rttUsec.max/1000;
+                callInfo["RTT last: (ms) "] = (float)streamstats.rtcp.rttUsec.last/1000;
                 callInfo["Codec: "] = QString::fromStdString(streaminfo.codecName);
                 callInfo["Channel Count: "] = (int)streaminfo.audCodecParam.info.channelCnt;
                 callInfo["Frame lenght: "] = (int)streaminfo.audCodecParam.info.frameLen;
@@ -315,8 +358,6 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
                 callInfo["Rx Payload type: "] = (int)streaminfo.rxPt;
                 callInfo["Tx Payload type: "] = (int)streaminfo.txPt;
                 callInfo["Bit depth: "] = (int)streaminfo.audCodecParam.info.pcmBitsPerSample;
-
-                streamstats = pjCall->getStreamStat(0);
                 callInfo["RTCP: SDES: "] = QString("%1, %2, %3, %4, %5, %6, %7").arg(
                             QString::fromStdString(streamstats.rtcp.peerSdes.cname),
                             QString::fromStdString(streamstats.rtcp.peerSdes.name),
@@ -339,65 +380,6 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
                 callInfo["JB: Lost (frms): "] = (int)streamstats.jbuf.lost;
                 callInfo["JB: Discarded (frms): "] = (int)streamstats.jbuf.discard;
                 callInfo["JB: Number of empty on GET events: "] = (int)streamstats.jbuf.empty;
-            }
-
-            // TODO: Rewrite completly
-            QString calldump = QString::fromStdString(pjCall->dump(true,""));
-            Line = calldump.split("\n");
-
-            int startPos = Line.at(0).indexOf("To:") + 4 ;
-            int endPos = Line.at(0).indexOf(";tag=");
-            int length = endPos - startPos;
-            callInfo["Status:"] = Line.at(0).left(startPos - 4);
-            callInfo["Connected to:"] = Line.at(0).mid(startPos, length);
-
-            if(Line.count()>15){
-                callInfo["Call time:"] = Line.at(1).mid(13,11);
-                callInfo["Peer:"] = Line.at(2).mid(Line.at(2).indexOf("peer=")+5);
-                callInfo["SRTP status:"] = Line.at(3).mid(18);
-                startPos = Line.at(5).indexOf("@avg=");
-                callInfo["Recieved packets (total):"] = Line.at(5).mid(14,startPos-15);
-                callInfo["Recieved packets (average):"] = Line.at(5).mid(startPos+5);
-                startPos = Line.at(6).indexOf("discrd=");
-                callInfo["Recieved packets lost:"] = Line.at(6).mid(17,startPos -19);
-                endPos = Line.at(6).indexOf("dup=");
-                callInfo["Recieved packets discarded:"] = Line.at(6).mid(startPos+7,endPos-startPos-9);
-                startPos = Line.at(6).indexOf("reord=");
-                callInfo["Recieved packets reordered:"] = Line.at(6).mid(startPos+ 6);
-                callInfo["RX loss period min:"] = Line.at(8).mid(21,8) + " msec";
-                callInfo["RX loss period average:"] = Line.at(8).mid(29,8) + " msec";
-                callInfo["RX loss period max:"] = Line.at(8).mid(37,8) + " msec";
-                callInfo["RX loss period last:"] = Line.at(8).mid(45,8) + " msec";
-                callInfo["RX loss period dev:"] = Line.at(8).mid(53,8) + " msec";
-                callInfo["RX jitter min:"] = Line.at(9).mid(21,8) + " msec";
-                callInfo["RX jitter average:"] = Line.at(9).mid(29,8) + " msec";
-                callInfo["RX jitter max:"] = Line.at(9).mid(37,8) + " msec";
-                callInfo["RX jitter last:"] = Line.at(9).mid(45,8) + " msec";
-                callInfo["RX jitter dev:"] = Line.at(9).mid(53,8) + " msec";
-
-                startPos = Line.at(11).indexOf("@avg=");
-                callInfo["Transmitted packets (total):"] = Line.at(11).mid(14,startPos-15);
-                callInfo["Transmitted packets (average):"] = Line.at(11).mid(startPos+5);
-                startPos = Line.at(12).indexOf("loss=");
-                endPos = Line.at(12).indexOf("dup=");
-                callInfo["Transmitted packets lost:"] = Line.at(12).mid(startPos+5,endPos - startPos-7);
-                startPos = Line.at(12).indexOf("reorder=");
-                callInfo["Transmitted packets reordered:"] = Line.at(12).mid(startPos+8);
-                callInfo["TX loss period min:"] = Line.at(14).mid(21,8) + " msec";
-                callInfo["TX loss period average:"] = Line.at(14).mid(29,8) + " msec";
-                callInfo["TX loss period max:"] = Line.at(14).mid(37,8) + " msec";
-                callInfo["TX loss period last:"] = Line.at(14).mid(45,8) + " msec";
-                callInfo["TX loss period dev:"] = Line.at(14).mid(53,8) + " msec";
-                callInfo["TX jitter min:"] = Line.at(15).mid(21,8) + " msec";
-                callInfo["TX jitter average:"] = Line.at(15).mid(29,8) + " msec";
-                callInfo["TX jitter max:"] = Line.at(15).mid(37,8) + " msec";
-                callInfo["TX jitter last:"] = Line.at(15).mid(45,8) + " msec";
-                callInfo["TX jitter dev:"] = Line.at(15).mid(53,8) + " msec";
-                callInfo["RTT min:"] = Line.at(16).mid(21,8) + " msec";
-                callInfo["RTT average:"] = Line.at(16).mid(29,8) + " msec";
-                callInfo["RTT max:"] = Line.at(16).mid(37,8) + " msec";
-                callInfo["RTT last:"] = Line.at(16).mid(45,8) + " msec";
-                callInfo["RTT dev:"] = Line.at(16).mid(53,8) + " msec";
             }
         }
         catch(Error& err){
@@ -511,3 +493,5 @@ void Accounts::CallInspector()
 
 
 }
+
+

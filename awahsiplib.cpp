@@ -185,13 +185,3 @@ QDataStream &operator>>(QDataStream &in, s_callHistory &obj)
    return in;
 }
 
- void AWAHSipLib::on_ip_change_progress(pjsua_ip_change_op op, pj_status_t status, const pjsua_ip_change_op_info *info)
- {
-     Q_UNUSED(op);
-     Q_UNUSED(status);
-     qDebug() << "IP Adress Change detected: " << info->acc_reinvite_calls.acc_id ;
-     pjsua_ip_change_param param;
-     pjsua_ip_change_param_default(&param);
-     param.restart_listener = true;
-     pjsua_handle_ip_change(&param);
- }

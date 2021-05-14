@@ -139,8 +139,6 @@ public:
     const QJsonObject getCodecPriorities() const { return m_Settings->getCodecPriorities(); };
     void setSCodecPriorities(QJsonObject Codecpriority) { return m_Settings->setCodecPriorities(Codecpriority); } ;
 
-    virtual void on_ip_change_progress(pjsua_ip_change_op op, pj_status_t status, const pjsua_ip_change_op_info *info);
-
 public slots:
     void slotSendMessage(int callId, int AccID, QString type, QByteArray message);
 
