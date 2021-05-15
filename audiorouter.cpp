@@ -738,18 +738,5 @@ void AudioRouter::removeAllRoutesFromAccount(const s_account account)
     }
 }
 
-int setMasterClockDev(pjmedia_port *clockPort);
 
 
-
-void AudioRouter::setMasterClockDev(pjmedia_port *clockPort){
-    pj_status_t status;
-    //  pjsua_data* intData = pjsua_get_var();
-
-    status = pjmedia_master_port_set_uport(pjsua_var.null_snd, clockPort);
-    if (status != PJ_SUCCESS){
-        char buf[50];
-        pj_strerror	(status,buf,sizeof (buf) );
-        m_lib->m_Log->writeLog(2,(QString("setMasterClockDev faild: ") +buf));
-    }
-}

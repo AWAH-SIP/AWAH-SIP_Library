@@ -155,8 +155,6 @@ public:
     */
     int addSplittComb(s_account& account);
 
-    void setMasterClockDev(pjmedia_port *clockPort);
-
     /**
     * @brief get the active devices
     * @return the AudioDevice struct

@@ -238,18 +238,6 @@ void Settings::loadSettings()                                           // todo 
     item["max"] = 500;
     AudioSettings["Echo canceler tail lenght (0 for off)"] = item;
 
-    // ***** voice activity detector *****
-    item = QJsonObject();
-    item["value"]  = m_lib->epCfg.medConfig.noVad = settings.value("settings/MediaConfig/Disable_autohangup_when_silence","1").toBool();
-    item["type"] = ENUM;
-    item["min"] = 0;
-    item["max"] = 1;
-    enumitems = QJsonObject();
-    enumitems["enabled"] = 0;
-    enumitems["disabled"] = 1;
-    item["enumlist"] = enumitems;
-    AudioSettings["Auto hang up when silence "] = item;
-
     // ***** jitter buffer *****
     item = QJsonObject();
     item["value"]  = m_lib->epCfg.medConfig.jbMax = settings.value("settings/MediaConfig/Jitter_Buffer_Max","-1").toInt();
@@ -521,10 +509,10 @@ void Settings::loadSettings()                                           // todo 
 
     // ****************** Hard coded settings ********************
     m_lib->epCfg.medConfig.quality =10;
+    m_lib->epCfg.medConfig.noVad = true;
     aCfg.callConfig.timerUse = PJSUA_SIP_TIMER_ALWAYS;
     aCfg.callConfig.timerSessExpiresSec = 90;
     aCfg.regConfig.randomRetryIntervalSec = 10;                     // not all account schould reregister on the same time
-
     m_settings["SIPSettings"] = SIPSettings;
     m_settings["GlobalSettings"] = GlobalSettings;
     m_settings["AudioSettings"] =  AudioSettings;
