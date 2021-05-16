@@ -98,6 +98,13 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
     QList<int> connectedSlots;
     s_IODevices Audiodevice;
 
+    for(auto& device : AudioDevices){
+        if(device.RecDevID == recordDevId || device.PBDevID == playbackDevId){
+            m_lib->m_Log->writeLog(3,"AddAudioDevice: error could not add device. Device already exists!" );
+            return -1;
+        }
+    }
+
     recorddev =  m_lib->m_pjEp->audDevManager().getDevInfo(recordDevId);
     playbackdev = m_lib->m_pjEp->audDevManager().getDevInfo(playbackDevId);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

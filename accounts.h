@@ -164,6 +164,7 @@ private:
     QTimer *m_CallInspectorTimer;
 
 
+
     /**
     * @brief All accounts are added to this list
     *       in order to save and load current setup

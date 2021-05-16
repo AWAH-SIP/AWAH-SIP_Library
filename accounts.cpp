@@ -475,18 +475,30 @@ void Accounts::startCallInspector()
 
 void Accounts::CallInspector()
 {
-    QJsonObject m_callInfo;
-    for(auto& account : m_accounts){                    // send callInfo for every call one a second
+    QJsonObject info;
+    for(auto& account : m_accounts){                                                   // send callInfo for every call one a second
         for(auto& call : account.CallList ){
-            m_callInfo = getCallInfo(call->getId(),account.AccID);
-            emit callInfo(account.AccID, call->getId(),m_callInfo);
+            info = getCallInfo(call->getId(),account.AccID);
+            emit callInfo(account.AccID, call->getId(),info);
 
-            if(m_MaxCallTime){                                              // hang up calls if call time is exeeded
-                QTime time = QTime::fromString(m_callInfo["Call time:"].toString(), "HH'h':mm'm':ss's'");
+            if(m_MaxCallTime){                                                          // hang up calls if call time is exeeded
+                QTime time = QTime::fromString(info["Call time:"].toString(), "HH'h':mm'm':ss's'");
                 if(m_MaxCallTime <= (time.hour()*60 + time.minute())){
                     hangupCall(call->getId(),account.AccID);
                     m_lib->m_Log->writeLog(3,(QString("Max call time exeeded on account ID: ")+ QString::number(account.AccID) + " call disconnected"));
                 }
+            }
+
+            int emptyGetevent = info["JB: Number of empty on GET events: "].toInt();    // detect rx media loss
+            if(emptyGetevent > account.CallInspectorTemp.lastJBemptyGETevent){  // RX media lost
+                emit  callStateChanged(account.AccID, 0, call->getId(), 0, 0, 7, account.CallStatusCode, QString("RX madia lost since: ") + QDateTime::fromSecsSinceEpoch(account.CallInspectorTemp.RXlostSeconds, Qt::OffsetFromUTC).toString("hh:mm:ss"), account.ConnectedTo);
+                account.CallInspectorTemp.lastJBemptyGETevent = emptyGetevent;
+                 account.CallInspectorTemp.RXlostSeconds++;
+            }
+            else if(account.CallInspectorTemp.RXlostSeconds){    // RX media revovered
+                account.CallInspectorTemp.RXlostSeconds = 0;
+                emit  callStateChanged(account.AccID, 0, call->getId(), 0, 0, 5, account.CallStatusCode, account.CallStatusText, account.ConnectedTo);
+                qDebug() << "RX Stream recovered";
             }
         }
     }

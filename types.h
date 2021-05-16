@@ -195,6 +195,13 @@ struct s_callHistory{
 Q_DECLARE_METATYPE(s_callHistory);
 Q_DECLARE_METATYPE(QList<s_callHistory>);
 
+struct s_CallInspectorTemp{
+    int lastJBemptyGETevent = 0;
+    int RXlostSeconds = 0;      // time in seconds since the last recieved frame
+};
+Q_DECLARE_METATYPE(s_CallInspectorTemp);
+Q_DECLARE_METATYPE(QList<s_CallInspectorTemp>);
+
 struct s_account{
     QString name;
     QString user;
@@ -220,6 +227,7 @@ struct s_account{
     QString CallStatusText = "Idle... ";
     int CallStatusCode = 0;
     QString ConnectedTo = "";
+    s_CallInspectorTemp CallInspectorTemp;
     QJsonObject toJSON() const {
         QJsonArray callListJSON, callHistoryJSON;
         for (auto & pPJCall: CallList) {
@@ -423,6 +431,5 @@ struct s_gpioRoute{
 };
 Q_DECLARE_METATYPE(s_gpioRoute);
 Q_DECLARE_METATYPE(QList<s_gpioRoute>);
-
 
 #endif // TYPES_H
