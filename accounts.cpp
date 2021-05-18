@@ -158,6 +158,7 @@ void Accounts::makeCall(QString number, int AccID)
             m_lib->m_Log->writeLog(3,(QString("MakeCall: Trying to call: ") +number ));
             newCall->makeCall(fulladdr.toStdString(), prm);
             account->CallList.append(newCall);
+            account->CallInspectorTemp.RXlostSeconds=0;
             emit AccountsChanged(getAccounts());
         }
         catch(Error& err){
@@ -298,7 +299,7 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
     pjsua_call_info ci;
 
     for (int pos = 0; pos<account->CallList.count(); pos++){       // Check if callId is valid
-        if (account->CallList.at(pos)->getId() == callId){
+        if (account->CallList.at(pos)->getId() == callId && callId < (int)m_lib->epCfg.uaConfig.maxCalls){
             pjCall = account->CallList.at(pos);
             pjsua_call_get_info(callId, &ci);
             break;          // found!
@@ -493,6 +494,13 @@ void Accounts::CallInspector()
             if(emptyGetevent > account.CallInspectorTemp.lastJBemptyGETevent){  // RX media lost
                 emit  callStateChanged(account.AccID, 0, call->getId(), 0, 0, 7, account.CallStatusCode, QString("RX madia lost since: ") + QDateTime::fromSecsSinceEpoch(account.CallInspectorTemp.RXlostSeconds, Qt::OffsetFromUTC).toString("hh:mm:ss"), account.ConnectedTo);
                 account.CallInspectorTemp.lastJBemptyGETevent = emptyGetevent;
+                if(account.CallInspectorTemp.RXlostSeconds==1){
+                    qDebug() << "loss prevention";
+//                     pjsua_call_setting  	opt;
+//                     opt.aud_cnt = call->getInfo().remAudioCount;
+//                     opt.flag = PJSUA_CALL_UPDATE_CONTACT ;
+//                    pjsua_call_update2	(	call->getId(),&opt ,NULL)	;
+                }
                  account.CallInspectorTemp.RXlostSeconds++;
             }
             else if(account.CallInspectorTemp.RXlostSeconds){    // RX media revovered
