@@ -61,8 +61,8 @@ class AWAHSipLib : public QObject
 {
     Q_OBJECT
 public:
-    explicit AWAHSipLib(QObject *parent = nullptr);
     ~AWAHSipLib();
+    static AWAHSipLib* instance(QObject *parent = nullptr);
 
     static void prepareLib();
 
@@ -233,6 +233,9 @@ signals:
     void gpioStateChanged(const QMap<QString, bool> changedGpios);
 
 private:
+    explicit AWAHSipLib(QObject *parent = nullptr);
+
+    static AWAHSipLib *AWAHSipLibInstance;
     EpConfig epCfg;
     PJEndpoint *m_pjEp;
     TransportConfig tCfg;

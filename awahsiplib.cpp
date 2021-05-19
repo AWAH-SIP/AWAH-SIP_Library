@@ -19,8 +19,20 @@
 #include "awahsiplib.h"
 #include "pjsua-lib/pjsua_internal.h"
 
+AWAHSipLib *AWAHSipLib::AWAHSipLibInstance = NULL;
+AWAHSipLib *AWAHSipLib::instance(QObject *parent)
+{
+    if(AWAHSipLibInstance == NULL)
+        AWAHSipLibInstance = new AWAHSipLib(parent);
+
+    return AWAHSipLibInstance;
+}
+
 AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
 {
+    delete AWAHSipLibInstance;
+    AWAHSipLibInstance = NULL;
+
     m_Accounts = new Accounts(this, this);
     m_AudioRouter = new AudioRouter(this, this);
     m_Buddies = new Buddies(this, this);
