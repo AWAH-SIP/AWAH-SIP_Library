@@ -195,12 +195,15 @@ struct s_callHistory{
 Q_DECLARE_METATYPE(s_callHistory);
 Q_DECLARE_METATYPE(QList<s_callHistory>);
 
-struct s_CallInspectorTemp{
+struct s_Call{
     int lastJBemptyGETevent = 0;
     int RXlostSeconds = 0;      // time in seconds since the last recieved frame
+    pjsua_player_id player_id = INVALID_ID;
+    pjsua_recorder_id rec_id = PJSUA_INVALID_ID;
+    PJCall* callptr = nullptr;
 };
-Q_DECLARE_METATYPE(s_CallInspectorTemp);
-Q_DECLARE_METATYPE(QList<s_CallInspectorTemp>);
+Q_DECLARE_METATYPE(s_Call);
+Q_DECLARE_METATYPE(QList<s_Call>);
 
 struct s_account{
     QString name;
@@ -212,12 +215,10 @@ struct s_account{
     QString FilePlayPath;
     PJAccount *accountPtr;          // not saved to file, only for runtime handling
     AccountGpioDev *gpioDev;        // not saved to file, only for runtime handling
-    pjsua_player_id player_id = INVALID_ID;
-    pjsua_recorder_id rec_id = PJSUA_INVALID_ID;
     int AccID;
     int splitterSlot;
     pjmedia_port *splitComb;
-    QList <PJCall*> CallList;       // In JSON only QList <int> as an List of Call IDs
+    QList <s_Call> CallList;       // In JSON only QList <int> as an List of Call IDs
     QList <s_callHistory> CallHistory;
     bool fixedJitterBuffer = true;
     uint fixedJitterBufferValue = 160;
@@ -227,11 +228,10 @@ struct s_account{
     QString CallStatusText = "Idle... ";
     int CallStatusCode = 0;
     QString ConnectedTo = "";
-    s_CallInspectorTemp CallInspectorTemp;
     QJsonObject toJSON() const {
         QJsonArray callListJSON, callHistoryJSON;
         for (auto & pPJCall: CallList) {
-            callListJSON.append(pPJCall->getId());
+            callListJSON.append(pPJCall.callptr->getId());
         }
         for (auto & callhistory: CallHistory) {
             callHistoryJSON.append(callhistory.toJSON());

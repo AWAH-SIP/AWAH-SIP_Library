@@ -83,6 +83,8 @@ public:
     }
 
 private:
+    static void on_media_finished(pjmedia_port *media_port, void *user_data);
+
     Accounts *parent;
     AWAHSipLib* m_lib;
     MessageManager *m_msg;
