@@ -128,6 +128,10 @@ private:
     * this list is then added to te settingsfile with the online routes
     */
     QList<s_audioRoutes>  offlineRoutes;
+    bool m_AccountsLoaded = false;
+    bool m_IoDevicesLoaded = false;
+    bool m_AudioRoutesLoaded = false;
+
 
 };
 

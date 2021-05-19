@@ -71,10 +71,13 @@ void Settings::loadIODevConfig()
             m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added FileRecorder from config file: ") + loadedDevices.at(i).outputame);
         }
     }
+    m_IoDevicesLoaded = true;
 }
 
 void Settings::saveIODevConfig()
 {
+    if (!m_IoDevicesLoaded)
+        return;
     QSettings settings("awah", "AWAHsipConfig");
     settings.setValue("IODevConfig", QVariant::fromValue(*m_lib->m_AudioRouter->getAudioDevices()));
     settings.sync();
@@ -90,11 +93,14 @@ void Settings::loadAccConfig()
         m_lib->m_Accounts->createAccount(loadedAccounts.at(i).name,loadedAccounts.at(i).serverURI,loadedAccounts.at(i).user,loadedAccounts.at(i).password, loadedAccounts.at(i).FilePlayPath, loadedAccounts.at(i).FileRecordPath,loadedAccounts.at(i).fixedJitterBuffer,loadedAccounts.at(i).fixedJitterBufferValue,loadedAccounts.at(i).CallHistory, loadedAccounts.at(i).uid);
         m_lib->m_Log->writeLog(3,QString("loadAccConfig: added Account from config file: ") + loadedAccounts.at(i).name);
     }
+    m_AccountsLoaded = true;
 
 }
 
 void Settings::saveAccConfig()
 {
+    if(!m_AccountsLoaded)
+        return;
     QSettings settings("awah", "AWAHsipConfig");
     settings.setValue("AccountConfig", QVariant::fromValue(*m_lib->m_Accounts->getAccounts()));
     settings.sync();
@@ -126,12 +132,15 @@ int Settings::loadAudioRoutes()
             status = -1;
         }
     }
+    m_AudioRoutesLoaded = true;
     saveAudioRoutes();
     return status;
 }
 
 int Settings::saveAudioRoutes()
 {
+    if(!m_AudioRoutesLoaded)
+        return PJ_SUCCESS;
     QList<s_audioRoutes> routesToSave, audioRoutes = m_lib->m_AudioRouter->getAudioRoutes();
     for(auto& route : audioRoutes){
         if(route.persistant)
