@@ -85,15 +85,15 @@ void PJCall::onCallState(OnCallStateParam &prm)
                 PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callId, callAcc->splitterSlot) );
                 if (Callopts->player_id!= PJSUA_INVALID_ID)
                 {
-                    Callopts->player_id = PJSUA_INVALID_ID;
                     PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(Callopts->player_id, callId) );
                     PJSUA2_CHECK_EXPR( pjsua_player_destroy(Callopts->player_id) );
+                    Callopts->player_id = PJSUA_INVALID_ID;
                 }
                 if (Callopts->rec_id != PJSUA_INVALID_ID)
                 {
-                    Callopts->rec_id = PJSUA_INVALID_ID;
                     PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callId, Callopts->rec_id) );
                     PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(Callopts->rec_id) );
+                    Callopts->rec_id = PJSUA_INVALID_ID;
                 }
 
                 streaminfo = getStreamInfo(0);
