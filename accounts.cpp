@@ -197,19 +197,22 @@ void Accounts::acceptCall(int callId, int AccID)
 void Accounts::hangupCall(int callId, int AccID)
 {
     s_account* account = getAccountByID(AccID);
-    PJCall *m_call = Q_NULLPTR;
+    PJCall *call = nullptr;
     int pos;
 
     for (pos = 0; pos < account->CallList.count(); pos++){       // Check if callId is valid
         if (account->CallList.at(pos).callId == callId){
-            m_call = account->CallList.at(pos).callptr;
+            call = account->CallList.at(pos).callptr;
+            break;
         }
     }
+    if (call == nullptr)
+        return;
 
-    if(account && m_call != Q_NULLPTR){
+    if(account && call != Q_NULLPTR){
         m_lib->m_Log->writeLog(3,(QString("HangupCall: Account: ") + account->name + " hang up call with ID: " + QString::number(callId)));
         try{
-            CallInfo ci = m_call->getInfo();
+            CallInfo ci = call->getInfo();
             CallOpParam prm;
 
             if(ci.lastStatusCode == PJSIP_SC_RINGING){
@@ -220,7 +223,7 @@ void Accounts::hangupCall(int callId, int AccID)
             }
 
             if(callId>= 0 && callId < (int)m_lib->epCfg.uaConfig.maxCalls){
-                m_call->hangup(prm);                                                                // callobject gets deleted in onCallState callback
+                call->hangup(prm);                                                                // callobject gets deleted in onCallState callback
             }
             else{
                 m_lib->m_Log->writeLog(3, "HangupCall: Hang up call, max. calls bug");                                                   // todo check if this bug exists anymore!

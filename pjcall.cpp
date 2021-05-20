@@ -52,17 +52,21 @@ void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
 void PJCall::onCallState(OnCallStateParam &prm)
 {
     Q_UNUSED(prm);
-    int PlayerID = -1;
-    int RecorderID = -1;
     CallInfo ci = getInfo();
     s_account* callAcc = parent->getAccountByID(ci.accId);
-    for(auto & call : callAcc->CallList){
+    s_Call*  Callopts = nullptr;
+    for(auto& call : callAcc->CallList){
         if(call.callId == getId()){
-            PlayerID = call.player_id;
-            RecorderID = call.rec_id;
+            Callopts = &call;
             break;
         }
     }
+    if(Callopts == nullptr) {
+        m_lib->m_Log->writeLog(1, QString("onCallState: Call %1 not found in CallList of Account %2:%3")
+                               .arg(QString::fromStdString(ci.remoteUri), QString::number(callAcc->AccID), callAcc->name));
+        return;
+    }
+
 
     parent->OncallStateChanged(ci.accId, ci.role, ci.id, ci.remOfferer, ci.connectDuration.sec,ci.state, ci.lastStatusCode, QString::fromStdString(ci.lastReason),QString::fromStdString(ci.remoteUri));
     if(ci.state == PJSIP_INV_STATE_DISCONNECTED)
@@ -79,15 +83,17 @@ void PJCall::onCallState(OnCallStateParam &prm)
                 //first stop the mic stream, then the playback stream
                 PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callAcc->splitterSlot, callId) );
                 PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callId, callAcc->splitterSlot) );
-                if (PlayerID!= PJSUA_INVALID_ID)
+                if (Callopts->player_id!= PJSUA_INVALID_ID)
                 {
-                    PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(PlayerID, callId) );
-                    PJSUA2_CHECK_EXPR( pjsua_player_destroy(PlayerID) );
+                    Callopts->player_id = PJSUA_INVALID_ID;
+                    PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(Callopts->player_id, callId) );
+                    PJSUA2_CHECK_EXPR( pjsua_player_destroy(Callopts->player_id) );
                 }
-                if (RecorderID != PJSUA_INVALID_ID)
+                if (Callopts->rec_id != PJSUA_INVALID_ID)
                 {
-                    PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callId, RecorderID) );
-                    PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(RecorderID) );
+                    Callopts->rec_id = PJSUA_INVALID_ID;
+                    PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callId, Callopts->rec_id) );
+                    PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(Callopts->rec_id) );
                 }
 
                 streaminfo = getStreamInfo(0);
