@@ -42,7 +42,7 @@ void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
         }
     }                                                                                   // if routed here, call is not routed correctly
     //    if(Call->rec_id != INVALID_ID){               // if a callrecorder is configured, start it!
-    //        pjsua_conf_port_id callID = Call->callptr->getId();
+    //        pjsua_conf_port_id callID = Call->callId;
     //        pjsua_conf_port_id rec_port = pjsua_recorder_get_conf_port(Call->rec_id);
     //        PJSUA2_CHECK_EXPR (pjsua_conf_connect(callID, rec_port));
     //   }
@@ -56,8 +56,8 @@ void PJCall::onCallState(OnCallStateParam &prm)
     int RecorderID = -1;
     CallInfo ci = getInfo();
     s_account* callAcc = parent->getAccountByID(ci.accId);
-    for(auto& call : callAcc->CallList){
-        if(call.callptr->getId() == getId()){
+    for(auto & call : callAcc->CallList){
+        if(call.callId == getId()){
             PlayerID = call.player_id;
             RecorderID = call.rec_id;
             break;
@@ -68,7 +68,7 @@ void PJCall::onCallState(OnCallStateParam &prm)
     if(ci.state == PJSIP_INV_STATE_DISCONNECTED)
     {
         //parent->setConnectDuration(ci.connectDuration.sec);
-        m_lib->m_Log->writeLog(3,QString("onCallState: deleting call with id: ") + QString::number(ci.id));
+        m_lib->m_Log->writeLog(3,QString("onCallState: deleting call with id: %1 from %2 of Account %3").arg(QString::number(ci.id), QString::fromStdString(ci.remoteUri), callAcc->name));
 
         if(hasMedia())                                          //to be determined if it's a bug... Nope Adi encounters it... but it crashes...
         {
@@ -101,7 +101,7 @@ void PJCall::onCallState(OnCallStateParam &prm)
 
         for (int pos = 0; pos < callAcc->CallList.count(); pos++)
         {                                                               // Check if callId is valid
-            if (callAcc->CallList.at(pos).callptr->getId() == ci.id)
+            if (callAcc->CallList.at(pos).callId == ci.id)
             {
                 callAcc->CallList.removeAt(pos);
                 emit m_lib->m_Accounts->AccountsChanged(m_lib->m_Accounts->getAccounts());
@@ -123,14 +123,21 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
     Q_UNUSED(prm);
     CallInfo ci = getInfo();
     s_account* callAcc = parent->getAccountByID(ci.accId);
-    s_Call*  Callopts;
+    s_Call*  Callopts = nullptr;
     for(auto& call : callAcc->CallList){
-        if(call.callptr->getId() == getId()){
+        if(call.callId == getId()){
             Callopts = &call;
             break;
         }
     }
-    m_lib->m_Log->writeLog(3,QString("onCallMediaState: Call has media: ") + QString::number(hasMedia()));
+    if(Callopts == nullptr) {
+        m_lib->m_Log->writeLog(1, QString("onCallMediaState: Call %1 not found in CallList of Account %2:%3")
+                               .arg(QString::fromStdString(ci.remoteUri), QString::number(callAcc->AccID), callAcc->name));
+        return;
+    }
+
+    m_lib->m_Log->writeLog(3,QString("onCallMediaState: Call %1:%2 of Account %3:%4 has media: %5")
+                           .arg(QString::number(Callopts->callId), QString::fromStdString(ci.remoteUri), QString::number(callAcc->AccID), callAcc->name, hasMedia() ? "true" : "false" ));
 
     AudioMedia audioMedia;
     try {
@@ -144,7 +151,7 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
             pj_status_t status = PJ_ENOTFOUND;
 
             // create player for playback media
-            m_lib->m_Log->writeLog(3,QString("onCallMediaState: creating announcement player for account: ") + callAcc->name);
+            m_lib->m_Log->writeLog(3,QString("onCallMediaState: creating announcement player for callId %1").arg(Callopts->callId));
             status = pjsua_player_create(pj_cstr(&name,callAcc->FilePlayPath.toStdString().c_str()), PJMEDIA_FILE_NO_LOOP, &Callopts->player_id);
             if (status != PJ_SUCCESS) {
                 char buf[50];
@@ -169,7 +176,7 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
 
         if(!callAcc->FileRecordPath.isEmpty() && ci.remOfferer){            // if a filerecorder is configured and the call is incoming, create a recorder
 
-            m_lib->m_Log->writeLog(3,QString("onCallMediaState: creating call recorder for account: ") + callAcc->name);
+            m_lib->m_Log->writeLog(3,QString("onCallMediaState: creating call recorder for callId %1").arg(Callopts->callId));
             pj_status_t status = PJ_ENOTFOUND;
             pj_str_t rec_file;
             QDateTime local(QDateTime::currentDateTime());

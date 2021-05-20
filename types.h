@@ -196,9 +196,10 @@ Q_DECLARE_METATYPE(s_callHistory);
 Q_DECLARE_METATYPE(QList<s_callHistory>);
 
 struct s_Call{
+    int callId = PJSUA_INVALID_ID;
     int lastJBemptyGETevent = 0;
     int RXlostSeconds = 0;      // time in seconds since the last recieved frame
-    pjsua_player_id player_id = INVALID_ID;
+    pjsua_player_id player_id = PJSUA_INVALID_ID;
     pjsua_recorder_id rec_id = PJSUA_INVALID_ID;
     PJCall* callptr = nullptr;
 };
@@ -231,7 +232,7 @@ struct s_account{
     QJsonObject toJSON() const {
         QJsonArray callListJSON, callHistoryJSON;
         for (auto & pPJCall: CallList) {
-            callListJSON.append(pPJCall.callptr->getId());
+            callListJSON.append(pPJCall.callId);
         }
         for (auto & callhistory: CallHistory) {
             callHistoryJSON.append(callhistory.toJSON());

@@ -32,7 +32,7 @@ void MessageManager::sendDtmf(int callId, int AccID, QString num)
     PJCall *m_call = Q_NULLPTR;
 
     for (int pos = 0; pos<account->CallList.size(); pos++){       // Check if callId is valid
-            if (account->CallList.at(pos).callptr->getId() == callId){
+            if (account->CallList.at(pos).callId == callId){
                 m_call = account->CallList.at(pos).callptr;
             }
         }
@@ -55,7 +55,7 @@ void MessageManager::slotSendMessage(int callId, int AccID, QString type, QByteA
     PJCall *m_call = Q_NULLPTR;
 
     for (int pos = 0; pos<account->CallList.size(); pos++){       // Check if callId is valid
-        if (account->CallList.at(pos).callptr->getId() == callId){
+        if (account->CallList.at(pos).callId == callId){
             m_call = account->CallList.at(pos).callptr;
         }
     }

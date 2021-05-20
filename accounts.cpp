@@ -158,7 +158,8 @@ void Accounts::makeCall(QString number, int AccID)
             m_lib->m_Log->writeLog(3,(QString("MakeCall: Trying to call: ") +number ));
             newCall->makeCall(fulladdr.toStdString(), prm);
             s_Call thisCall;
-            thisCall.callptr =newCall;
+            thisCall.callptr = newCall;
+            thisCall.callId = newCall->getId();
             account->CallList.append(thisCall);
             emit AccountsChanged(getAccounts());
         }
@@ -180,6 +181,7 @@ void Accounts::acceptCall(int callId, int AccID)
             prm.statusCode = PJSIP_SC_OK;
             s_Call thisCall;
             thisCall.callptr = newCall;
+            thisCall.callId = callId;
             m_lib->m_Log->writeLog(3,(QString("AcceptCall: Account: ") + account->name + " accepting call with ID: " + QString::number(callId)));
             newCall->answer(prm);
             account->CallList.append(thisCall);
@@ -199,7 +201,7 @@ void Accounts::hangupCall(int callId, int AccID)
     int pos;
 
     for (pos = 0; pos < account->CallList.count(); pos++){       // Check if callId is valid
-        if (account->CallList.at(pos).callptr->getId() == callId){
+        if (account->CallList.at(pos).callId == callId){
             m_call = account->CallList.at(pos).callptr;
         }
     }
@@ -236,7 +238,7 @@ void Accounts::holdCall(int callId, int AccID)                                  
     PJCall *m_call = Q_NULLPTR;
 
     for (int pos = 0; pos<account->CallList.count(); pos++){       // Check if callId is valid
-        if (account->CallList.at(pos).callptr->getId() == callId){
+        if (account->CallList.at(pos).callId == callId){
             m_call = account->CallList.at(pos).callptr;
         }
     }
@@ -272,7 +274,7 @@ void Accounts::transferCall(int callId, int AccID, QString destination)
     PJCall *m_call = Q_NULLPTR;
 
     for (int pos = 0; pos<account->CallList.count(); pos++){       // Check if callId is valid
-        if (account->CallList.at(pos).callptr->getId() == callId){
+        if (account->CallList.at(pos).callId == callId){
             m_call = account->CallList.at(pos).callptr;
         }
     }
@@ -302,7 +304,7 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
     pjsua_call_info ci;
 
     for (int pos = 0; pos<account->CallList.count(); pos++){       // Check if callId is valid
-        if (account->CallList.at(pos).callptr->getId() == callId && callId < (int)m_lib->epCfg.uaConfig.maxCalls){
+        if (account->CallList.at(pos).callId == callId && callId < (int)m_lib->epCfg.uaConfig.maxCalls){
             try {
                 pjCall = account->CallList.at(pos).callptr;
                 PJSUA2_CHECK_EXPR( pjsua_call_get_info(callId, &ci) );
@@ -448,11 +450,15 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
     thisAccount->CallStatusCode = state;
     thisAccount->CallStatusText = statustxt;
     thisAccount->ConnectedTo = remoteUri;
-    m_lib->m_Log->writeLog(3,(QString("Callstate of: ") + remoteUri + " is:  " + statustxt));
-    if(state == PJSIP_INV_STATE_EARLY && lastStatusCode == 180){
-        if(role == 1){                                                                           // autoanswer call
+
+    if(state == PJSIP_INV_STATE_EARLY){
+        if(lastStatusCode == 180 && role == 1){                                                                           // autoanswer call
             acceptCall(accID,callId);
         }
+        thisAccount->CallStatusText = "Invite: State Early";
+    }
+    else if (state == PJSIP_INV_STATE_CALLING) {
+        thisAccount->CallStatusText = "calling";
     }
     else if(state == PJSIP_INV_STATE_CONFIRMED && lastStatusCode == 200){
         thisAccount->gpioDev->setConnected(true);
@@ -464,6 +470,7 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
             //             pjsua->sendPresenceStatus(online);
         }
     }
+    m_lib->m_Log->writeLog(3,(QString("Callstate of: ") + remoteUri + " is:  " + thisAccount->CallStatusText));
 }
 
 void Accounts::OnsignalSipStatus(int accId, int status, QString remoteUri)
@@ -486,20 +493,20 @@ void Accounts::CallInspector()
     QJsonObject info;
     for(auto& account : m_accounts){                                                   // send callInfo for every call one a second
         for(auto& call : account.CallList ){
-            info = getCallInfo(call.callptr->getId(),account.AccID);
-            emit callInfo(account.AccID, call.callptr->getId(),info);
+            info = getCallInfo(call.callId, account.AccID);
+            emit callInfo(account.AccID, call.callId,info);
 
             if(m_MaxCallTime){                                                          // hang up calls if call time is exeeded
                 QTime time = QTime::fromString(info["Call time:"].toString(), "HH'h':mm'm':ss's'");
                 if(m_MaxCallTime <= (time.hour()*60 + time.minute())){
-                    hangupCall(call.callptr->getId(),account.AccID);
+                    hangupCall(call.callId,account.AccID);
                     m_lib->m_Log->writeLog(3,(QString("Max call time exeeded on account ID: ")+ QString::number(account.AccID) + " call disconnected"));
                 }
             }
 
             int emptyGetevent = info["JB: Number of empty on GET events: "].toInt();    // detect rx media loss
             if(emptyGetevent > call.lastJBemptyGETevent){  // RX media lost
-                emit  callStateChanged(account.AccID, 0, call.callptr->getId(), 0, 0, 7, account.CallStatusCode, QString("RX madia lost since: ") + QDateTime::fromSecsSinceEpoch(call.RXlostSeconds, Qt::OffsetFromUTC).toString("hh:mm:ss"), account.ConnectedTo);
+                emit  callStateChanged(account.AccID, 0, call.callId, 0, 0, 7, account.CallStatusCode, QString("RX madia lost since: ") + QDateTime::fromSecsSinceEpoch(call.RXlostSeconds, Qt::OffsetFromUTC).toString("hh:mm:ss"), account.ConnectedTo);
                 call.lastJBemptyGETevent = emptyGetevent;
                 if(call.RXlostSeconds==1){
                     qDebug() << "loss prevention";
@@ -512,7 +519,7 @@ void Accounts::CallInspector()
             }
             else if(call.RXlostSeconds){    // RX media revovered
                 call.RXlostSeconds = 0;
-                emit  callStateChanged(account.AccID, 0, call.callptr->getId(), 0, 0, 5, account.CallStatusCode, account.CallStatusText, account.ConnectedTo);
+                emit  callStateChanged(account.AccID, 0, call.callId, 0, 0, 5, account.CallStatusCode, account.CallStatusText, account.ConnectedTo);
                 qDebug() << "RX Stream recovered";
             }
         }
