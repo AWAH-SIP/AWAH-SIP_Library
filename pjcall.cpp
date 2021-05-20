@@ -34,14 +34,18 @@ void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
     Q_UNUSED(media_port);
     s_Call *Call = static_cast<s_Call*>(user_data);
     if(Call->player_id != PJSUA_INVALID_ID){
-        PJSUA2_CHECK_EXPR( pjsua_player_destroy(Call->player_id) );
-        Call->player_id = PJSUA_INVALID_ID;
+        try {
+            PJSUA2_CHECK_EXPR( pjsua_player_destroy(Call->player_id) );
+            Call->player_id = PJSUA_INVALID_ID;
+        }  catch (Error &err) {
+            AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): destroy Player failed") + err.info().c_str()));
+        }
     }                                                                                   // if routed here, call is not routed correctly
-//    if(Call->rec_id != INVALID_ID){                                                 // if a callrecorder is configured, start it!
-//        pjsua_conf_port_id callID = Call->callptr->getId();
-//        pjsua_conf_port_id rec_port = pjsua_recorder_get_conf_port(Call->rec_id);
-//        PJSUA2_CHECK_EXPR (pjsua_conf_connect(callID, rec_port));
-//   }
+    //    if(Call->rec_id != INVALID_ID){               // if a callrecorder is configured, start it!
+    //        pjsua_conf_port_id callID = Call->callptr->getId();
+    //        pjsua_conf_port_id rec_port = pjsua_recorder_get_conf_port(Call->rec_id);
+    //        PJSUA2_CHECK_EXPR (pjsua_conf_connect(callID, rec_port));
+    //   }
 }
 
 // Notification when call's state has changed.

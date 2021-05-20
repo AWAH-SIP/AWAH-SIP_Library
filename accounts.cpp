@@ -303,8 +303,12 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
 
     for (int pos = 0; pos<account->CallList.count(); pos++){       // Check if callId is valid
         if (account->CallList.at(pos).callptr->getId() == callId && callId < (int)m_lib->epCfg.uaConfig.maxCalls){
-            pjCall = account->CallList.at(pos).callptr;
-            PJSUA2_CHECK_EXPR( pjsua_call_get_info(callId, &ci) );
+            try {
+                pjCall = account->CallList.at(pos).callptr;
+                PJSUA2_CHECK_EXPR( pjsua_call_get_info(callId, &ci) );
+            }  catch (Error &err) {
+                m_lib->m_Log->writeLog(0,(QString("Accounts::getCallInfo() failed") + err.info().c_str()));
+            }
             break;          // found!
         }
     }
