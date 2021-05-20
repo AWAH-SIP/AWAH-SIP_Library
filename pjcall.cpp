@@ -32,14 +32,11 @@ using namespace pj;
 void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
 {
     Q_UNUSED(media_port);
-
     s_Call *Call = static_cast<s_Call*>(user_data);
-    pj_status_t status;
-    status = pjsua_player_destroy(Call->player_id);
-        if(status == PJ_SUCCESS){
-            Call->player_id = PJSUA_INVALID_ID;
-        }
-                                                                                       // if routed here, call is not routed correctly
+    if(Call->player_id != PJSUA_INVALID_ID){
+        PJSUA2_CHECK_EXPR( pjsua_player_destroy(Call->player_id) );
+        Call->player_id = PJSUA_INVALID_ID;
+    }                                                                                   // if routed here, call is not routed correctly
 //    if(Call->rec_id != INVALID_ID){                                                 // if a callrecorder is configured, start it!
 //        pjsua_conf_port_id callID = Call->callptr->getId();
 //        pjsua_conf_port_id rec_port = pjsua_recorder_get_conf_port(Call->rec_id);
@@ -81,12 +78,12 @@ void PJCall::onCallState(OnCallStateParam &prm)
                 if (PlayerID!= PJSUA_INVALID_ID)
                 {
                     PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(PlayerID, callId) );
-                    pjsua_player_destroy(PlayerID);
+                    PJSUA2_CHECK_EXPR( pjsua_player_destroy(PlayerID) );
                 }
                 if (RecorderID != PJSUA_INVALID_ID)
                 {
                     PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callId, RecorderID) );
-                    pjsua_recorder_destroy(RecorderID);
+                    PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(RecorderID) );
                 }
 
                 streaminfo = getStreamInfo(0);
@@ -124,11 +121,9 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
     s_account* callAcc = parent->getAccountByID(ci.accId);
     s_Call*  Callopts;
     for(auto& call : callAcc->CallList){
-        qDebug() << "call list entrys" << call.callptr->getId();
-        qDebug() << "this id" << getId();
         if(call.callptr->getId() == getId()){
             Callopts = &call;
-            //break;
+            break;
         }
     }
     m_lib->m_Log->writeLog(3,QString("onCallMediaState: Call has media: ") + QString::number(hasMedia()));

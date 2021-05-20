@@ -109,15 +109,15 @@ Q_ENUMS(GPIOprotocol)
 
 struct s_IODevices{
     DeviceType devicetype;
-    QString uid;
-    QString inputname;
-    QString outputame;
-    QList <int> portNo;
+    QString uid ="";
+    QString inputname="";
+    QString outputame="";
+    QList <int> portNo = QList <int>();
     int genfrequency = -1;               // only for devicetype TestToneGenerator
     int RecDevID = -1;                   // only for devicetype AudioDevice, -1 indicates an offline device
     int PBDevID = -1;
     QString path = "n/a";                   // ony for devicetype Fileplayer, FileRecorder
-    pjmedia_snd_port *soundport;
+    pjmedia_snd_port *soundport =nullptr;
     uint inChannelCount = 0;            // For AudioDevices: not saved, only for listConfPorts
     uint outChannelCount = 0;           // For AudioDevices: not saved, only for listConfPorts
     QJsonObject toJSON() const {
@@ -175,11 +175,11 @@ Q_DECLARE_METATYPE(s_IODevices);
 Q_DECLARE_METATYPE( QList<s_IODevices>);
 
 struct s_callHistory{
-    QString callUri;
-    int duration;
-    QString codec;
-    bool outgoing;
-    int count;
+    QString callUri = "";
+    int duration = 0;
+    QString codec = "";
+    bool outgoing = 0;
+    int count = 0;
     QJsonObject toJSON() const {
         return {{"callUri", callUri}, {"duration", duration}, {"codec", codec}, {"outgoing", outgoing}, {"count", count},};
     }
@@ -206,20 +206,20 @@ Q_DECLARE_METATYPE(s_Call);
 Q_DECLARE_METATYPE(QList<s_Call>);
 
 struct s_account{
-    QString name;
-    QString user;
-    QString password;
-    QString serverURI;
-    QString uid;
-    QString FileRecordPath;
-    QString FilePlayPath;
-    PJAccount *accountPtr;          // not saved to file, only for runtime handling
-    AccountGpioDev *gpioDev;        // not saved to file, only for runtime handling
-    int AccID;
-    int splitterSlot;
-    pjmedia_port *splitComb;
-    QList <s_Call> CallList;       // In JSON only QList <int> as an List of Call IDs
-    QList <s_callHistory> CallHistory;
+    QString name = "";
+    QString user = "";
+    QString password = "";
+    QString serverURI = "";
+    QString uid = "";
+    QString FileRecordPath = "";
+    QString FilePlayPath = "";
+    PJAccount *accountPtr = nullptr;          // not saved to file, only for runtime handling
+    AccountGpioDev *gpioDev = nullptr;        // not saved to file, only for runtime handling
+    int AccID = PJSUA_INVALID_ID;;
+    int splitterSlot = PJSUA_INVALID_ID;
+    pjmedia_port *splitComb = nullptr;
+    QList <s_Call> CallList = QList <s_Call> ();       // In JSON only QList <int> as an List of Call IDs
+    QList <s_callHistory> CallHistory = QList <s_callHistory>();
     bool fixedJitterBuffer = true;
     uint fixedJitterBufferValue = 160;
     bool autoredialLastCall = false;
@@ -273,9 +273,9 @@ Q_DECLARE_METATYPE(s_account);
 Q_DECLARE_METATYPE( QList<s_account>);
 
 struct s_audioPort{
-    QString name;
+    QString name ="";
     pj_str_t pjName;
-    int slot;
+    int slot =INVALID_ID;
     QJsonObject toJSON() const {
         return {{"name",name}, {"pjName", pj2Str(pjName)}, {"slot",slot}};
     }
@@ -289,8 +289,8 @@ struct s_audioPort{
 Q_DECLARE_METATYPE(s_audioPort);
 
 struct s_audioPortList{
-    QList<s_audioPort> srcPorts;
-    QList<s_audioPort> destPorts;
+    QList<s_audioPort> srcPorts = QList<s_audioPort>();
+    QList<s_audioPort> destPorts = QList<s_audioPort>();
     QJsonObject toJSON() const {
         QJsonArray srcPortsArr, destPortsArr;
         for (auto & srcPort: srcPorts) {
@@ -322,12 +322,12 @@ struct s_audioPortList{
 Q_DECLARE_METATYPE(s_audioPortList);
 
 struct s_audioRoutes{
-    int srcSlot;
-    int destSlot;
-    QString srcDevName;
-    QString destDevName;
-    float level;
-    bool persistant;
+    int srcSlot = PJSUA_INVALID_ID;
+    int destSlot = PJSUA_INVALID_ID;
+    QString srcDevName = "";
+    QString destDevName = "";
+    float level = 0;
+    bool persistant = 0;
     QJsonObject toJSON() const {
         return {{"srcSlot", srcSlot}, {"destSlot", destSlot}, {"srcDevName", srcDevName}, {"destDevName", destDevName}, {"level", level}, {"persistant", persistant} };
     }
@@ -364,9 +364,9 @@ enum settingType{
 Q_ENUMS(settingType)
 
 struct s_gpioPort{
-    QString name;
+    QString name = "";
     QString slotId;
-    GpioDevice* device;     //NOT in JSON only for InternalRef
+    GpioDevice* device = nullptr;     //NOT in JSON only for InternalRef
     uint channel;           //NOT in JSON only for InternalRef
     bool lastState;         //NOT in JSON only for InternalRef
     QJsonObject toJSON() const {
@@ -381,8 +381,8 @@ struct s_gpioPort{
 Q_DECLARE_METATYPE(s_gpioPort);
 
 struct s_gpioPortList{
-    QList<s_gpioPort> srcPorts;
-    QList<s_gpioPort> destPorts;
+    QList<s_gpioPort> srcPorts = QList<s_gpioPort>();
+    QList<s_gpioPort> destPorts = QList<s_gpioPort>();
     QJsonObject toJSON() const {
         QJsonArray srcPortsArr, destPortsArr;
         for (auto & srcPort: srcPorts) {
@@ -414,10 +414,10 @@ struct s_gpioPortList{
 Q_DECLARE_METATYPE(s_gpioPortList);
 
 struct s_gpioRoute{
-    QString srcSlotId;
-    QString destSlotId;
-    bool inverted;
-    bool persistant;
+    QString srcSlotId = "";
+    QString destSlotId = "";
+    bool inverted = 0;
+    bool persistant = 0;
     QJsonObject toJSON() const {
         return {{"srcSlotId", srcSlotId}, {"destSlotId", destSlotId}, {"inverted", inverted}, {"persistant", persistant} };
     }
