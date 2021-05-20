@@ -194,7 +194,6 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
             //else if(callAcc->FilePlayPath.isEmpty()){                                                     // todo move me to on_media_finished
             else {
                 pjsua_conf_port_id rec_port = pjsua_recorder_get_conf_port(Callopts->rec_id);
-                qDebug() << "original rec port" << rec_port;
                 PJSUA2_CHECK_EXPR (pjsua_conf_connect((callId), rec_port) );
             }
 
