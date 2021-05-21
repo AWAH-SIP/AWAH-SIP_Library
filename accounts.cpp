@@ -157,7 +157,7 @@ void Accounts::makeCall(QString number, int AccID)
         try{
             m_lib->m_Log->writeLog(3,(QString("MakeCall: Trying to call: ") +number ));
             newCall->makeCall(fulladdr.toStdString(), prm);
-            s_Call thisCall;
+            s_Call thisCall(*account);
             thisCall.callptr = newCall;
             thisCall.callId = newCall->getId();
             account->CallList.append(thisCall);
@@ -179,7 +179,7 @@ void Accounts::acceptCall(int callId, int AccID)
             newCall = new PJCall(this, m_lib, m_lib->m_MessageManager, *account->accountPtr, callId);
             CallOpParam prm;
             prm.statusCode = PJSIP_SC_OK;
-            s_Call thisCall;
+            s_Call thisCall(*account);
             thisCall.callptr = newCall;
             thisCall.callId = callId;
             m_lib->m_Log->writeLog(3,(QString("AcceptCall: Account: ") + account->name + " accepting call with ID: " + QString::number(callId)));

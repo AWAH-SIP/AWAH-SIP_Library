@@ -33,28 +33,16 @@ void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
 {
     Q_UNUSED(media_port);
     s_Call *Call = static_cast<s_Call*>(user_data);
-    if(Call->player_id != PJSUA_INVALID_ID){
-        try {
-            PJSUA2_CHECK_EXPR( pjsua_player_destroy(Call->player_id) );
-            Call->player_id = PJSUA_INVALID_ID;
-        }  catch (Error &err) {
-            AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): destroy Player failed") + err.info().c_str()));
-        }
+
+    try {
+        PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(pjsua_player_get_conf_port(Call->player_id),pjsua_call_get_conf_port(Call->callId)) );
+    }  catch (Error &err) {
+        AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): dissconnect call from player failed ") + err.info().c_str()));
     }
 
-    qDebug() << "onMediaFinished: via pointer call ID:" << Call->callId << " has a Player ID of: " << Call->player_id;
-
-
-    for(auto& account : *AWAHSipLib::instance()->getAccounts()){                                                                        // for debugging!!!
-        qDebug() << "onMediaFinished: Account: " << account.AccID;
-        for(auto& call : account.CallList){
-            qDebug() << "has Call with id: " << call.callId << "and Player ID " << call.player_id;
-        }
-    }
     if(Call->rec_id != INVALID_ID  ){
-        pjsua_conf_port_id rec_port = pjsua_recorder_get_conf_port(Call->rec_id);
-        pjsua_conf_port_id call_port = pjsua_call_get_conf_port(Call->callId);
-        PJSUA2_CHECK_EXPR (pjsua_conf_connect((call_port), rec_port) );
+        PJSUA2_CHECK_EXPR (pjsua_conf_connect(pjsua_call_get_conf_port(Call->callId), pjsua_recorder_get_conf_port(Call->rec_id)) );
+        PJSUA2_CHECK_EXPR (pjsua_conf_connect(Call->account.splitterSlot, pjsua_recorder_get_conf_port(Call->rec_id)) );
     }
 }
 
@@ -95,13 +83,14 @@ void PJCall::onCallState(OnCallStateParam &prm)
                 PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callId, callAcc->splitterSlot) );
                 if (Callopts->player_id!= PJSUA_INVALID_ID)
                 {
-                    //PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(Callopts->player_id, callId) );
+                    pjsua_conf_disconnect(pjsua_player_get_conf_port(Callopts->player_id), callId);
                     PJSUA2_CHECK_EXPR( pjsua_player_destroy(Callopts->player_id) );
                     Callopts->player_id = PJSUA_INVALID_ID;
                 }
                 if (Callopts->rec_id != PJSUA_INVALID_ID)
                 {
-                    PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callId, Callopts->rec_id) );
+                    pjsua_conf_disconnect(callId, pjsua_recorder_get_conf_port(Callopts->rec_id));
+                    pjsua_conf_disconnect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(Callopts->rec_id));
                     PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(Callopts->rec_id) );
                     Callopts->rec_id = PJSUA_INVALID_ID;
                 }
@@ -172,7 +161,7 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
             if (status != PJ_SUCCESS) {
                 char buf[50];
                 pj_strerror	(status,buf,sizeof (buf) );
-                m_lib->m_Log->writeLog(1,QString("onCallMediaState: Error creating anouncement player: ") + buf);
+                m_lib->m_Log->writeLog(1,QString("onCallMediaState: Error creating announcement player: ") + buf);
             } else {
                 pjsua_data* intData = pjsua_get_var();
                 const pjsua_conf_port_id slot = pjsua_player_get_conf_port(Callopts->player_id);
@@ -196,22 +185,30 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
             }
         }
 
-        if(!callAcc->FileRecordPath.isEmpty() && ci.remOfferer){            // if a filerecorder is configured and the call is incoming, create a recorder
+        if(!callAcc->FileRecordPath.isEmpty()){            // if a filerecorder is configured create a recorder
 
             m_lib->m_Log->writeLog(3,QString("onCallMediaState: creating call recorder for callId %1").arg(Callopts->callId));
             pj_status_t status = PJ_ENOTFOUND;
             pj_str_t rec_file;
             QDateTime local(QDateTime::currentDateTime());
-            QString Date = local.toString("yyyy_MM_dd");
-            QString Time = local.toString("hh_mm_ss");
+            QString Year = local.toString("yyyy");
+            QString Month = local.toString("MM");
+            QString Day = local.toString("dd");
+            QString Hour = local.toString("hh");
+            QString Minute = local.toString("mm");
+            QString Second = local.toString("ss");
             QString Caller = QString::fromStdString(ci.remoteUri);
             Caller.truncate(Caller.lastIndexOf("@"));
             Caller = Caller.mid(Caller.indexOf(":")+1);     // only the Name of the caller
             QString Account = callAcc->name;
 
             QString filename = callAcc->FileRecordPath + ".wav";
-            filename.replace("%D",Date);
-            filename.replace("%T", Time);
+            filename.replace("%Y", Year);
+            filename.replace("%M", Month);
+            filename.replace("%D", Day);
+            filename.replace("%h", Hour);
+            filename.replace("%m", Minute);
+            filename.replace("%s", Second);
             filename.replace("%C", Caller);
             filename.replace("%A",Account);
             pj_cstr(&rec_file,filename.toStdString().c_str());
@@ -225,8 +222,9 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
                 return;
             }
             // connect active call to call recorder immediatley if there is no fileplayer configured
-            else if(callAcc->FilePlayPath.isEmpty()){
+            else if(Callopts->player_id == PJSUA_INVALID_ID){
                 PJSUA2_CHECK_EXPR( pjsua_conf_connect(callId, pjsua_recorder_get_conf_port(Callopts->rec_id)) );
+                PJSUA2_CHECK_EXPR( pjsua_conf_connect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(Callopts->rec_id)) );
             }
 
         }

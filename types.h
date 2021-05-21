@@ -48,6 +48,7 @@ extern "C" {
 
 class GpioDevice;
 class AccountGpioDev;
+struct s_account;
 
 inline QString createNewUID() { return QUuid::createUuid().toString(QUuid::Id128); }
 
@@ -196,15 +197,18 @@ Q_DECLARE_METATYPE(s_callHistory);
 Q_DECLARE_METATYPE(QList<s_callHistory>);
 
 struct s_Call{
+    explicit s_Call(s_account &account) : account(account) { };
+
     int callId = PJSUA_INVALID_ID;
     int lastJBemptyGETevent = 0;
     int RXlostSeconds = 0;      // time in seconds since the last recieved frame
     pjsua_player_id player_id = PJSUA_INVALID_ID;
     pjsua_recorder_id rec_id = PJSUA_INVALID_ID;
     PJCall* callptr = nullptr;
+    const s_account &account;
 };
-Q_DECLARE_METATYPE(s_Call);
-Q_DECLARE_METATYPE(QList<s_Call>);
+//Q_DECLARE_METATYPE(s_Call);
+//Q_DECLARE_METATYPE(QList<s_Call>);
 
 struct s_account{
     QString name = "";
