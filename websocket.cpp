@@ -70,12 +70,12 @@ static bool jCheckString(QString &ret, QJsonValueRef val) {
     } else return false;
 }
 
-static bool jCheckArray(QJsonArray &ret, QJsonValueRef val) {
-    if(val.isArray()){
-        ret = val.toArray();
-        return true;
-    } else return false;
-}
+//static bool jCheckArray(QJsonArray &ret, QJsonValueRef val) {
+//    if(val.isArray()){
+//        ret = val.toArray();
+//        return true;
+//    } else return false;
+//}
 
 static bool jCheckObject(QJsonObject &ret, QJsonValueRef val) {
     if(val.isObject()){
@@ -164,40 +164,30 @@ void Websocket::echo(QJsonObject &data, QJsonObject &ret) {
 void Websocket::getAllVariables(QJsonObject &data, QJsonObject &ret){
     Q_UNUSED(data);
     QJsonObject retDataObj;
-    QJsonArray accountsArr, audioDevArr, audioRoutesArr , gpioDevArr, gpioRoutesArr;
+    QJsonArray accountsArr, ioDevArr, audioRoutesArr , gpioDevArr, gpioRoutesArr;
 
-    QList <s_account>* accounts = m_lib->getAccounts();
-    for (auto & account : *accounts) {
+    for (auto & account : *m_lib->getAccounts()) {
         accountsArr.append(account.toJSON());
     }
     retDataObj["accountsArray"] = accountsArr;
 
-    QList<s_IODevices>* audioDevs = m_lib->getAudioDevices();
-    for (auto & audioDev : *audioDevs) {
-        audioDevArr.append(audioDev.toJSON());
+    for (auto & ioDev : m_lib->getIoDevices()) {
+        ioDevArr.append(ioDev.toJSON());
     }
-    retDataObj["audioDevicesArray"] = audioDevArr;
+    retDataObj["ioDevicesArray"] = ioDevArr;
 
     const s_audioPortList& confPortList = m_lib->getConfPortsList();
     retDataObj["confPortList"] = confPortList.toJSON();
 
-    QList <s_audioRoutes> audioRoutes = m_lib->getAudioRoutes();
-    for (auto & route : audioRoutes) {
+    for (auto & route : m_lib->getAudioRoutes()) {
         audioRoutesArr.append(route.toJSON());
     }
     retDataObj["audioRoutesArray"] = audioRoutesArr;
 
-    const QList<s_IODevices>& gpioDevs = m_lib->getGpioDevices();
-    for (auto & gpioDev : gpioDevs) {
-        gpioDevArr.append(gpioDev.toJSON());
-    }
-    retDataObj["gpioDevicesArray"] = gpioDevArr;
-
     const s_gpioPortList& gpioPortList = m_lib->getGpioPortsList();
     retDataObj["gpioPortList"] = gpioPortList.toJSON();
 
-    const QList<s_gpioRoute>& gpioRoutes = m_lib->getGpioRoutes();
-    for (auto & route : gpioRoutes) {
+    for (auto & route : m_lib->getGpioRoutes()) {
         gpioRoutesArr.append(route.toJSON());
     }
     retDataObj["gpioRoutesArray"] = gpioRoutesArr;
@@ -276,8 +266,7 @@ void Websocket::getAccounts(QJsonObject &data, QJsonObject &ret) {          // t
     Q_UNUSED(data);
     QJsonObject retDataObj;
     QJsonArray accountsArr;
-    QList <s_account>* accounts = m_lib->getAccounts();
-    for (auto & account : *accounts) {
+    for (auto & account : *m_lib->getAccounts()) {
         accountsArr.append(account.toJSON());
     }
     retDataObj["accountsArray"] = accountsArr;
@@ -394,8 +383,7 @@ void Websocket::getAudioRoutes(QJsonObject &data, QJsonObject &ret) {
     Q_UNUSED(data);
     QJsonObject retDataObj;
     QJsonArray audioRoutesArr;
-    QList <s_audioRoutes> audioRoutes = m_lib->getAudioRoutes();
-    for (auto & route : audioRoutes) {
+    for (auto & route : m_lib->getAudioRoutes()) {
         audioRoutesArr.append(route.toJSON());
     }
     retDataObj["audioRoutesArray"] = audioRoutesArr;
@@ -407,8 +395,7 @@ void Websocket::listInputSoundDev(QJsonObject &data, QJsonObject &ret) {
     Q_UNUSED(data);
     QJsonObject retDataObj;
     QJsonArray soundDevArr;
-    QStringList soundInputDevList = m_lib->listInputSoundDev();
-    for (auto & soundDev : soundInputDevList) {
+    for (auto & soundDev : m_lib->listInputSoundDev()) {
         soundDevArr.append(soundDev);
     }
     retDataObj["soundInputDeviceArray"] = soundDevArr;
@@ -420,8 +407,7 @@ void Websocket::listOutputSoundDev(QJsonObject &data, QJsonObject &ret) {
     Q_UNUSED(data);
     QJsonObject retDataObj;
     QJsonArray soundDevArr;
-    QStringList soundOutputDevList = m_lib->listOutputSoundDev();
-    for (auto & soundDev : soundOutputDevList) {
+    for (auto & soundDev : m_lib->listOutputSoundDev()) {
         soundDevArr.append(soundDev);
     }
     retDataObj["soundOutputDeviceArray"] = soundDevArr;
@@ -558,9 +544,20 @@ void Websocket::getAudioDevices(QJsonObject &data, QJsonObject &ret) {
     Q_UNUSED(data);
     QJsonObject retDataObj;
     QJsonArray audioDevArr;
-    QList<s_IODevices>* audioDevs = m_lib->getAudioDevices();
-    for (auto & audioDev : *audioDevs) {
+    for (auto & audioDev : m_lib->getAudioDevices()) {
         audioDevArr.append(audioDev.toJSON());
+    }
+    retDataObj["audioDevicesArray"] = audioDevArr;
+    ret["data"] = retDataObj;
+    ret["error"] = noError();
+}
+
+void Websocket::getIoDevices(QJsonObject &data, QJsonObject &ret) {
+    Q_UNUSED(data);
+    QJsonObject retDataObj;
+    QJsonArray audioDevArr;
+    for (auto & IoDev : m_lib->getIoDevices()) {
+        audioDevArr.append(IoDev.toJSON());
     }
     retDataObj["audioDevicesArray"] = audioDevArr;
     ret["data"] = retDataObj;
@@ -612,8 +609,7 @@ void Websocket::listCodec(QJsonObject &data, QJsonObject &ret) {
     Q_UNUSED(data);
     QJsonObject retDataObj;
     QJsonArray codecArr;
-    QStringList codecList = m_lib->listCodec();
-    for (auto & codecEntry : codecList) {
+    for (auto & codecEntry : m_lib->listCodec()) {
         codecArr.append(codecEntry);
     }
     retDataObj["codecArray"] = codecArr;
@@ -962,30 +958,6 @@ void Websocket::AccountsChanged(QList <s_account>* Accounts){
     sendToAll(obj);
 }
 
-void Websocket::AudioDevicesChanged(QList<s_IODevices>* audioDev){
-    QJsonObject obj, data;
-    QJsonArray audioDevArr;
-    for (auto & device : *audioDev) {
-        audioDevArr.append(device.toJSON());
-    }
-    data["AudioDevices"] = audioDevArr;
-    obj["signal"] = "AudioDevicesChanged";
-    obj["data"] = data;
-    sendToAll(obj);
-}
-
-void Websocket::gpioDevicesChanged(const QList<s_IODevices> &deviceList){
-    QJsonObject obj, data;
-    QJsonArray gpioDevArr;
-    for (auto & device : deviceList) {
-        gpioDevArr.append(device.toJSON());
-    }
-    data["GpioDevices"] = gpioDevArr;
-    obj["signal"] = "gpioDevicesChanged";
-    obj["data"] = data;
-    sendToAll(obj);
-}
-
 void Websocket::gpioRoutesChanged(const QList<s_gpioRoute>& gpioRoutes){
     QJsonObject obj, data;
     QJsonArray gpioRoutesArr;
@@ -1020,6 +992,18 @@ void Websocket::gpioStatesChanged(const QMap<QString, bool> changedGpios)
     }
     data["gpioStates"] = gpioStateArr;
     obj["signal"] = "gpioStatesChanged";
+    obj["data"] = data;
+    sendToAll(obj);
+}
+
+void Websocket::ioDevicesChanged(QList<s_IODevices> &IoDev){
+    QJsonObject obj, data;
+    QJsonArray audioDevArr;
+    for (auto & device : IoDev) {
+        audioDevArr.append(device.toJSON());
+    }
+    data["ioDevices"] = audioDevArr;
+    obj["signal"] = "ioDevicesChanged";
     obj["data"] = data;
     sendToAll(obj);
 }

@@ -99,6 +99,8 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(GpioRouter::instance(), &GpioRouter::gpioRoutesChanged, this, &AWAHSipLib::gpioRoutesChanged);
     connect(GpioRouter::instance(), &GpioRouter::gpioRoutesTableChanged, this, &AWAHSipLib::gpioRoutesTableChanged);
     connect(GpioRouter::instance(), &GpioRouter::gpioStateChanged, this, &AWAHSipLib::gpioStateChanged);
+    connect(m_GpioDeviceManager, &GpioDeviceManager::gpioDevicesChanged, this, &AWAHSipLib::slotIoDevicesChanged);
+    connect(this, &AWAHSipLib::AudioDevicesChanged, this, &AWAHSipLib::slotIoDevicesChanged);
 
 
     connect(this, &AWAHSipLib::regStateChanged, m_Websocket, &Websocket::regStateChanged);
@@ -111,11 +113,10 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(this, &AWAHSipLib::audioRoutesTableChanged, m_Websocket, &Websocket::audioRoutesTableChanged);
     connect(this, &AWAHSipLib::AccountsChanged, m_Websocket, &Websocket::AccountsChanged);
     connect(this, &AWAHSipLib::callInfo, m_Websocket, &Websocket::callInfo);
-    connect(this, &AWAHSipLib::AudioDevicesChanged, m_Websocket, &Websocket::AudioDevicesChanged);
-    connect(this, &AWAHSipLib::gpioDevicesChanged, m_Websocket, &Websocket::gpioDevicesChanged);
     connect(this, &AWAHSipLib::gpioRoutesChanged, m_Websocket, &Websocket::gpioRoutesChanged);
     connect(this, &AWAHSipLib::gpioRoutesTableChanged, m_Websocket, &Websocket::gpioRoutesTableChanged);
     connect(this, &AWAHSipLib::gpioStateChanged, m_Websocket, &Websocket::gpioStatesChanged);
+    connect(this, &AWAHSipLib::IoDevicesChanged, m_Websocket, &Websocket::ioDevicesChanged);
 }
 
 AWAHSipLib::~AWAHSipLib()
@@ -141,6 +142,20 @@ void AWAHSipLib::prepareLib()
     qRegisterMetaTypeStreamOperators <QList<s_account>>("QList<s_account>");
     qRegisterMetaTypeStreamOperators <QList<s_audioRoutes>>("QList<s_audioRoutes>");
     qRegisterMetaTypeStreamOperators <QList<s_callHistory>>("QList<s_callHistory>");
+}
+
+QList<s_IODevices> &AWAHSipLib::getIoDevices()
+{
+    m_IoDevices.clear();
+    m_IoDevices.append(getAudioDevices());
+    m_IoDevices.append(getGpioDevices());
+    return m_IoDevices;
+}
+
+void AWAHSipLib::slotIoDevicesChanged(QList<s_IODevices> &IoDev)
+{
+    Q_UNUSED(IoDev)
+    emit IoDevicesChanged(getIoDevices());
 }
 
 void AWAHSipLib::slotSendMessage(int callId, int AccID, QString type, QByteArray message)

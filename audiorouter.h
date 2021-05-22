@@ -173,7 +173,7 @@ signals:
     * @brief Signal if audio device config changed
     * @param QList of the new device config
     */
-    void AudioDevicesChanged(QList<s_IODevices>* audioDev);
+    void AudioDevicesChanged(QList<s_IODevices>& audioDev);
 
     /**
     * @brief Signal if audio routes from the conference-bridge changed

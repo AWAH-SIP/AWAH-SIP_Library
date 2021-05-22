@@ -215,7 +215,7 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
     AudioDevices.append(Audiodevice);
     m_lib->m_Settings->saveIODevConfig();
     conferenceBridgeChanged();
-    emit AudioDevicesChanged(&AudioDevices);
+    emit AudioDevicesChanged(AudioDevices);
     return channelCnt;
 }
 
@@ -270,7 +270,7 @@ int AudioRouter::removeAudioDevice(int DevIndex)
     AudioDevices.removeAt(DevIndex);
     conferenceBridgeChanged();
     m_lib->m_Settings->saveIODevConfig();
-    emit AudioDevicesChanged(&AudioDevices);
+    emit AudioDevicesChanged(AudioDevices);
     return PJ_SUCCESS;
 }
 
@@ -335,7 +335,7 @@ int AudioRouter::addToneGen(int freq, QString uid){
     AudioDevices.append(Audiodevice);
     m_lib->m_Settings->saveIODevConfig();
     conferenceBridgeChanged();
-    emit AudioDevicesChanged(&AudioDevices);
+    emit AudioDevicesChanged(AudioDevices);
     return PJ_SUCCESS;
 }
 
@@ -387,7 +387,7 @@ int AudioRouter::addFilePlayer(QString PlayerName, QString File, QString uid)
     AudioDevices.append(Audiodevice);
     conferenceBridgeChanged();
     m_lib->m_Settings->saveIODevConfig();
-    emit AudioDevicesChanged(&AudioDevices);
+    emit AudioDevicesChanged(AudioDevices);
     return status;
 }
 
@@ -434,7 +434,7 @@ int AudioRouter::addFileRecorder(QString File, QString uid)
     AudioDevices.append(Audiodevice);
     m_lib->m_Settings->saveIODevConfig();
     conferenceBridgeChanged();
-    emit AudioDevicesChanged(&AudioDevices);
+    emit AudioDevicesChanged(AudioDevices);
     return status;
 }
 

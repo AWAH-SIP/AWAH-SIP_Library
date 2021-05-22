@@ -55,6 +55,7 @@ extern "C" {
 #include "settings.h"
 #include "websocket.h"
 
+#include <QJsonDocument>
 
 
 class AWAHSipLib : public QObject
@@ -82,6 +83,8 @@ public:
     const QList<s_callHistory>* getCallHistory(int AccID) const { return m_Accounts->getCallHistory(AccID); };
     const s_account* getAccountByID(int ID) {return m_Accounts->getAccountByID(ID); };
 
+    QList<s_IODevices>& getIoDevices();
+
     // Public API - AudioRouter
     QList <s_audioRoutes> getAudioRoutes() const { return m_AudioRouter->getAudioRoutes(); };
     QStringList listInputSoundDev() const { return m_AudioRouter->listInputSoundDev(); };
@@ -96,7 +99,7 @@ public:
     int disconnectConfPort(int src_slot, int sink_slot) const { return m_AudioRouter->disconnectConfPort(src_slot, sink_slot); };
     int changeConfPortLevel(int src_slot, int sink_slot, float level) const { return m_AudioRouter->changeConfPortLevel(src_slot, sink_slot, level); };
     int addToneGen(int freq) const { return m_AudioRouter->addToneGen(freq); };
-    QList<s_IODevices>* getAudioDevices() const { return m_AudioRouter->getAudioDevices(); };
+    QList<s_IODevices>& getAudioDevices() const { return *m_AudioRouter->getAudioDevices(); };
     int getSoundDevID(QString DeviceName) const { return m_AudioRouter->getSoundDevID(DeviceName); };
 
     // Public API - Buddies
@@ -126,6 +129,10 @@ public:
     void changeGpioCrosspoint(QString srcSlotId, QString destSlotId, bool inverted)
         { return GpioRouter::instance()->changeGpioCrosspoint(srcSlotId, destSlotId, inverted); };
     const QMap<QString, bool> getGpioStates() { return GpioRouter::instance()->getGpioStates(); };
+    const QJsonObject getGpioDevTypes() const {
+        QString jstring = "{\"Virtual GPIO\":{\"devType\":4,\"parameter\":{\"Name\":{\"type\":1,\"value\":\"\"},\"Inputs\":{\"type\":0,\"value\":1,\"min\":0,\"max\":16},\"Outputs\":{\"type\":0,\"value\":1,\"min\":0,\"max\":16}}},\"And Gate\":{\"devType\":5,\"parameter\":{\"Name\":{\"type\":1,\"value\":\"\"},\"Inputs\":{\"type\":0,\"value\":2,\"min\":2,\"max\":8}}},\"Or Gate\":{\"devType\":6,\"parameter\":{\"Name\":{\"type\":1,\"value\":\"\"},\"Inputs\":{\"type\":0,\"value\":2,\"min\":2,\"max\":8}}}}";
+        QJsonDocument doc= QJsonDocument::fromJson(jstring.toUtf8()) ;
+        return doc.object() ; };
 
     // Public API - Log
     QStringList readNewestLog() const { return m_Log->readNewestLog();};
@@ -141,7 +148,7 @@ public:
 
 public slots:
     void slotSendMessage(int callId, int AccID, QString type, QByteArray message);
-
+    void slotIoDevicesChanged(QList<s_IODevices>& IoDev);
 
 signals:
 
@@ -216,7 +223,7 @@ signals:
     * @brief Signal if audio device config changed
     * @param QList of the new device config
     */
-    void AudioDevicesChanged(QList<s_IODevices>* audioDev);
+    void AudioDevicesChanged(QList<s_IODevices>& audioDev);
 
     /**
     * @brief Signal a Callinfo updated every second for every active call
@@ -225,6 +232,13 @@ signals:
     * @param callInfo a JsonObject with various info parameters
     */
     void callInfo(int accId, int callId, QJsonObject callInfo);
+
+    /**
+    * @brief Signal if device config changed
+    * @param QList of the new device config
+    */
+    void IoDevicesChanged(QList<s_IODevices>& IoDev);
+
 
     // GPIO Signals TODO: Doku-Description
     void gpioDevicesChanged(const QList<s_IODevices>& deviceList);
@@ -242,6 +256,7 @@ private:
     pj_pool_t *pool;
     QString TransportProtocol;      // only used for loading a setting  -> is there a better way?
     quint16 m_websocketPort;
+    QList<s_IODevices> m_IoDevices;
 
     Accounts* m_Accounts;
     AudioRouter* m_AudioRouter;

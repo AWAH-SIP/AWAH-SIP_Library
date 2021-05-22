@@ -138,7 +138,7 @@ GpioDevice* GpioDeviceManager::getDeviceByUid(QString uid)
     return m_devPtr.value(uid, nullptr);
 }
 
-const QList<s_IODevices>& GpioDeviceManager::getGpioDevices()
+QList<s_IODevices> &GpioDeviceManager::getGpioDevices()
 {
     m_devList.clear();
     QMapIterator<QString, GpioDevice*> i(m_devPtr);

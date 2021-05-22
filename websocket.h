@@ -75,6 +75,8 @@ private slots:
      * @param &ret JSON-Object which contains Data and Error Object
      */
     void getAllVariables(QJsonObject &data, QJsonObject &ret);
+    void getIoDevices(QJsonObject &data, QJsonObject &ret);
+
     // Public API - Accounts
     void createAccount(QJsonObject &data, QJsonObject &ret);
     void modifyAccount(QJsonObject &data, QJsonObject &ret);
@@ -148,11 +150,10 @@ public slots:
     void audioRoutesTableChanged(const s_audioPortList& portList);
     void callInfo(int accId, int callId, QJsonObject callInfo);
     void AccountsChanged(QList <s_account>* Accounts);
-    void AudioDevicesChanged(QList<s_IODevices>* audioDev);
-    void gpioDevicesChanged(const QList<s_IODevices>& deviceList);
     void gpioRoutesChanged(const QList<s_gpioRoute>& routes);
     void gpioRoutesTableChanged(const s_gpioPortList& portList);
     void gpioStatesChanged(const QMap<QString, bool> changedGpios);
+    void ioDevicesChanged(QList<s_IODevices>& IoDev);
 
 private:
     AWAHSipLib* m_lib;

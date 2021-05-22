@@ -20,12 +20,12 @@ public:
     GpioDevice* createGeneric(s_IODevices& deviceInfo);
     void removeDevice(QString uid);
     GpioDevice* getDeviceByUid(QString uid);
-    const QList<s_IODevices>& getGpioDevices();
+    QList<s_IODevices>& getGpioDevices();
 
     void setLib(AWAHSipLib *lib);
 
 signals:
-    void gpioDevicesChanged(const QList<s_IODevices>& deviceList);
+    void gpioDevicesChanged(QList<s_IODevices>& deviceList);
 
 private:
     explicit GpioDeviceManager(QObject *parent = nullptr);
