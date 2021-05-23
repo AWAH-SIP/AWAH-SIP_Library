@@ -509,7 +509,7 @@ void Accounts::CallInspector()
 
             int emptyGetevent = info["JB: Number of empty on GET events: "].toInt();    // detect rx media loss
             if(emptyGetevent > call.lastJBemptyGETevent){  // RX media lost
-                emit  callStateChanged(account.AccID, 0, call.callId, 0, 0, 7, account.CallStatusCode, QString("RX madia lost since: ") + QDateTime::fromSecsSinceEpoch(call.RXlostSeconds, Qt::OffsetFromUTC).toString("hh:mm:ss"), account.ConnectedTo);
+                emit  callStateChanged(account.AccID, 0, call.callId, 0, 0, 7, account.CallStatusCode, QString("RX media lost since: ") + QDateTime::fromSecsSinceEpoch(call.RXlostSeconds, Qt::OffsetFromUTC).toString("hh:mm:ss"), account.ConnectedTo);
                 call.lastJBemptyGETevent = emptyGetevent;
                 if(call.RXlostSeconds==1){
                     qDebug() << "loss prevention";

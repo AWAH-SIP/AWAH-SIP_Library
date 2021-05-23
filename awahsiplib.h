@@ -119,6 +119,30 @@ public:
         { return m_GpioDeviceManager->create(type, outCount, devName); };
     void removeGpioDevice(QString uid) { return m_GpioDeviceManager->removeDevice(uid); };
     const QList<s_IODevices>& getGpioDevices() const { return m_GpioDeviceManager->getGpioDevices(); };
+    const QJsonObject getGpioDevTypes() const {
+        QJsonObject gpiodevs,VirtualGPIO, AndGate, OrGate, item;
+        item = QJsonObject();
+        item["type"] = STRING;
+        item["value"] = " ";
+        VirtualGPIO[" Name"] =item;
+        AndGate[" Name"] =item;
+        OrGate[" Name"] =item;
+        item = QJsonObject();
+        item["type"] = INTEGER;
+        item["value"] = 0;
+        item["min"] = 0;
+        item["max"] = 16;
+        VirtualGPIO["Inputs"] =item;
+        VirtualGPIO["Outputs"] =item;
+        AndGate["Inputs"] =item;
+        AndGate["Outputs"] =item;
+        OrGate["Inputs"] =item;
+        OrGate["Outputs"] =item;
+        gpiodevs["Virtual GPIO"] = VirtualGPIO;
+        gpiodevs["And Gate"] = AndGate;
+        gpiodevs["Or Gate"] = OrGate;
+
+        return gpiodevs ; };
 
     // Public API - GpioRouter
     const QList<s_gpioRoute>& getGpioRoutes() { return GpioRouter::instance()->getGpioRoutes(); };
@@ -129,10 +153,7 @@ public:
     void changeGpioCrosspoint(QString srcSlotId, QString destSlotId, bool inverted)
         { return GpioRouter::instance()->changeGpioCrosspoint(srcSlotId, destSlotId, inverted); };
     const QMap<QString, bool> getGpioStates() { return GpioRouter::instance()->getGpioStates(); };
-    const QJsonObject getGpioDevTypes() const {
-        QString jstring = "{\"Virtual GPIO\":{\"devType\":4,\"parameter\":{\"Name\":{\"type\":1,\"value\":\"\"},\"Inputs\":{\"type\":0,\"value\":1,\"min\":0,\"max\":16},\"Outputs\":{\"type\":0,\"value\":1,\"min\":0,\"max\":16}}},\"And Gate\":{\"devType\":5,\"parameter\":{\"Name\":{\"type\":1,\"value\":\"\"},\"Inputs\":{\"type\":0,\"value\":2,\"min\":2,\"max\":8}}},\"Or Gate\":{\"devType\":6,\"parameter\":{\"Name\":{\"type\":1,\"value\":\"\"},\"Inputs\":{\"type\":0,\"value\":2,\"min\":2,\"max\":8}}}}";
-        QJsonDocument doc= QJsonDocument::fromJson(jstring.toUtf8()) ;
-        return doc.object() ; };
+
 
     // Public API - Log
     QStringList readNewestLog() const { return m_Log->readNewestLog();};
