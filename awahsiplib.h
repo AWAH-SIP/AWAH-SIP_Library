@@ -273,6 +273,7 @@ private:
     friend class Buddies;
     friend class Codecs;
     friend class GpioDevice;
+    friend class libgpiod_Device;
     friend class GpioDeviceManager;
     friend class Log;
     friend class MessageManager;

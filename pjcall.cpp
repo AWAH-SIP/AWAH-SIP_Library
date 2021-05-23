@@ -42,7 +42,7 @@ void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
 
     if(Call->rec_id != INVALID_ID  ){
         PJSUA2_CHECK_EXPR (pjsua_conf_connect(pjsua_call_get_conf_port(Call->callId), pjsua_recorder_get_conf_port(Call->rec_id)) );
-        PJSUA2_CHECK_EXPR (pjsua_conf_connect(Call->account.splitterSlot, pjsua_recorder_get_conf_port(Call->rec_id)) );
+        PJSUA2_CHECK_EXPR (pjsua_conf_connect(Call->splitterSlot, pjsua_recorder_get_conf_port(Call->rec_id)) );
     }
 }
 

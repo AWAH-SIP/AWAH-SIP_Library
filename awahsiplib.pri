@@ -15,6 +15,7 @@ SOURCES += \
     $$PWD/gpiodevice.cpp \
     $$PWD/gpiodevicemanager.cpp \
     $$PWD/gpiorouter.cpp \
+    $$PWD/libgpiod_device.cpp \
     $$PWD/log.cpp \
     $$PWD/messagemanager.cpp \
     $$PWD/pjaccount.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     $$PWD/gpiodevice.h \
     $$PWD/gpiodevicemanager.h \
     $$PWD/gpiorouter.h \
+    $$PWD/libgpiod_device.h \
     $$PWD/log.h \
     $$PWD/messagemanager.h \
     $$PWD/pjaccount.h \
@@ -46,3 +48,12 @@ HEADERS += \
     $$PWD/websocket.h
 
 include(pjsip/pjsip.pri)
+
+contains( DEFINES, AWAH_libgpiod ) {
+    message("includes libgpiod Library so Linux Generic GPIO Device will be enabled")
+    LIBS += -lgpiodcxx
+    INCLUDEPATH += $$PWD/libgpiod/bindings/cxx/
+}
+
+OTHER_FILES += \
+    $$PWD/libgpiod/bindings/cxx/*

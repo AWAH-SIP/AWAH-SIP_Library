@@ -7,6 +7,8 @@ GpioDeviceManager *GpioDeviceManager::instance(QObject *parent)
     if(GpioDeviceManagerInstance == NULL) {
         GpioDeviceManagerInstance = new GpioDeviceManager(parent);
         GpioDeviceManagerInstance->createStaticOnDev();
+        uint inarr[2] = {16, 17}, outarr[2] = {22, 26};
+        GpioDeviceManagerInstance->create(2,2,"Test-libgpiod", "gpiochip0", inarr, outarr);
     }
 
     return GpioDeviceManagerInstance;
@@ -84,6 +86,35 @@ AccountGpioDev* GpioDeviceManager::create(const s_account &account)
     return ret;
 }
 
+libgpiod_Device* GpioDeviceManager::create(uint inCount, uint outCount, QString devName, QString chipName, uint *inOffsets, uint *outOffsets)
+{
+    s_IODevices newDev;
+    newDev.devicetype = LinuxGpioDevice;
+    newDev.uid = createNewUID();
+    newDev.inputname = newDev.outputame = devName;
+    newDev.RecDevID = newDev.PBDevID = 0;
+    if(inCount > MAX_GPIO)  newDev.inChannelCount = MAX_GPIO;
+    else                    newDev.inChannelCount = inCount;
+    if(outCount > MAX_GPIO) newDev.outChannelCount = MAX_GPIO;
+    else                    newDev.outChannelCount = outCount;
+
+    QJsonArray inOffsetArr, outOffsetArr;
+    for (uint i = 0; i < newDev.inChannelCount; i++) {
+        inOffsetArr.append(QJsonValue((int) inOffsets[i]));
+    }
+    for (uint i = 0; i < newDev.outChannelCount; i++) {
+        outOffsetArr.append(QJsonValue((int) outOffsets[i]));
+    }
+
+    newDev.typeSpecificSettings["chipName"] = chipName;
+    newDev.typeSpecificSettings["inOffsets"] = inOffsetArr;
+    newDev.typeSpecificSettings["outOffsets"] = outOffsetArr;
+
+    libgpiod_Device* ret = new libgpiod_Device(newDev);
+    appendDevice(ret);
+    return ret;
+}
+
 GpioDevice* GpioDeviceManager::createGeneric(s_IODevices &deviceInfo)
 {
     GpioDevice* ret;
@@ -114,6 +145,19 @@ GpioDevice* GpioDeviceManager::createGeneric(s_IODevices &deviceInfo)
         else if (deviceInfo.outChannelCount < 2)
             deviceInfo.outChannelCount = 2;
         ret = new LogicGpioDev(deviceInfo);
+        break;
+    case LinuxGpioDevice:
+        if(deviceInfo.inputname.isEmpty())
+            deviceInfo.inputname = "Linux GPI Device";
+        if(deviceInfo.outputame.isEmpty())
+            deviceInfo.outputame = "Linux GPO Device";
+        if(deviceInfo.inChannelCount > MAX_GPIO)
+            deviceInfo.inChannelCount = MAX_GPIO;
+        if(deviceInfo.outChannelCount > MAX_GPIO)
+            deviceInfo.outChannelCount = MAX_GPIO;
+        if(deviceInfo.typeSpecificSettings.isEmpty())
+            return nullptr;
+        ret = new libgpiod_Device(deviceInfo);
         break;
     default:
         return nullptr;
@@ -146,7 +190,7 @@ QList<s_IODevices> &GpioDeviceManager::getGpioDevices()
         i.next();
         GpioDevice* dev = i.value();
         s_IODevices devInfo = dev->getDeviceInfo();
-        if(devInfo.devicetype != AccountGpioDevice)
+        if(devInfo.devicetype != AccountGpioDevice && devInfo.devicetype != m_staticOnUid)
             m_devList.append(devInfo);
     }
     return m_devList;
@@ -168,7 +212,10 @@ void GpioDeviceManager::appendDevice(GpioDevice *device)
 
 void GpioDeviceManager::createStaticOnDev()
 {
-    VirtualGpioDev* dev = create(1, 0, QString("Static ON"));
-    dev->setGPI(0, true);
-    emit dev->gpioChanged();
+    if(m_staticOnUid.isEmpty()){
+        VirtualGpioDev* dev = create(1, 0, QString("Static ON"));
+        m_staticOnUid = dev->getDeviceInfo().uid;
+        dev->setGPI(0, true);
+        emit dev->gpioChanged();
+    }
 }
