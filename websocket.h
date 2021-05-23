@@ -118,6 +118,7 @@ private slots:
     void createGpioDev(QJsonObject &data, QJsonObject &ret);
     void removeGpioDevice(QJsonObject &data, QJsonObject &ret);
     void getGpioDevices(QJsonObject &data, QJsonObject &ret);
+    void getGpioDevTypes(QJsonObject &data, QJsonObject &ret);
     // Public API - GpioRouter
     void getGpioRoutes(QJsonObject &data, QJsonObject &ret);
     void getGpioPortsList(QJsonObject &data, QJsonObject &ret);

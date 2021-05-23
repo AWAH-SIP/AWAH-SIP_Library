@@ -208,6 +208,18 @@ void Websocket::getAllVariables(QJsonObject &data, QJsonObject &ret){
     ret["error"] = noError();
 }
 
+void Websocket::getIoDevices(QJsonObject &data, QJsonObject &ret) {
+    Q_UNUSED(data);
+    QJsonObject retDataObj;
+    QJsonArray audioDevArr;
+    for (auto & IoDev : m_lib->getIoDevices()) {
+        audioDevArr.append(IoDev.toJSON());
+    }
+    retDataObj["audioDevicesArray"] = audioDevArr;
+    ret["data"] = retDataObj;
+    ret["error"] = noError();
+}
+
 void Websocket::createAccount(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     QString accountName, server, user, password, filePlayPath, fileRecPath;
@@ -552,18 +564,6 @@ void Websocket::getAudioDevices(QJsonObject &data, QJsonObject &ret) {
     ret["error"] = noError();
 }
 
-void Websocket::getIoDevices(QJsonObject &data, QJsonObject &ret) {
-    Q_UNUSED(data);
-    QJsonObject retDataObj;
-    QJsonArray audioDevArr;
-    for (auto & IoDev : m_lib->getIoDevices()) {
-        audioDevArr.append(IoDev.toJSON());
-    }
-    retDataObj["audioDevicesArray"] = audioDevArr;
-    ret["data"] = retDataObj;
-    ret["error"] = noError();
-}
-
 void Websocket::getSoundDevID(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     QString DeviceName;
@@ -709,6 +709,16 @@ void Websocket::getGpioDevices(QJsonObject &data, QJsonObject &ret) {
     ret["data"] = retDataObj;
     ret["error"] = noError();
 }
+
+void Websocket::getGpioDevTypes(QJsonObject &data, QJsonObject &ret) {
+    Q_UNUSED(data);
+    QJsonObject retDataObj;
+    const QJsonObject retVal = m_lib->getGpioDevTypes();
+    retDataObj["GpioDevTypesObj"] = retVal;
+    ret["data"] = retDataObj;
+    ret["error"] = noError();
+}
+
 
 void Websocket::getGpioRoutes(QJsonObject &data, QJsonObject &ret) {
     Q_UNUSED(data);
