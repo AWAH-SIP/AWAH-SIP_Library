@@ -48,7 +48,6 @@ extern "C" {
 
 class GpioDevice;
 class AccountGpioDev;
-struct s_account;
 
 inline QString createNewUID() { return QUuid::createUuid().toString(QUuid::Id128); }
 
@@ -99,7 +98,9 @@ enum DeviceType {
     VirtualGpioDevice,
     LogicAndGpioDevice,
     LogicOrGpioDevice,
-    AccountGpioDevice
+    AccountGpioDevice,
+    LinuxGpioDevice,
+    AudioRouteGpioDevice
 };
 Q_ENUMS(DeviceType)
 
@@ -121,13 +122,15 @@ struct s_IODevices{
     pjmedia_snd_port *soundport =nullptr;
     uint inChannelCount = 0;            // For AudioDevices: not saved, only for listConfPorts
     uint outChannelCount = 0;           // For AudioDevices: not saved, only for listConfPorts
+    QJsonObject typeSpecificSettings = {};
     QJsonObject toJSON() const {
         QJsonArray portNrArr;
         for (auto & port: portNo) {
             portNrArr.append(port);
         }
         return {{"devicetype", devicetype}, {"uid", uid}, {"inputname", inputname}, {"outputname", outputame}, {"portNo", portNrArr},
-                {"genfrequency", genfrequency}, {"RecDevID", RecDevID}, {"PBDevID", PBDevID}, {"path", path}, {"inChannelCount", (int) inChannelCount}, {"outChannelCount", (int) outChannelCount}};
+                {"genfrequency", genfrequency}, {"RecDevID", RecDevID}, {"PBDevID", PBDevID}, {"path", path},
+                {"inChannelCount", (int) inChannelCount}, {"outChannelCount", (int) outChannelCount}, {"typeSpecificSettings", typeSpecificSettings}};
     }
     s_IODevices* fromJSON(QJsonObject &ioDeviceJSON) {
         QJsonArray portNrArr = ioDeviceJSON["portNo"].toArray();
@@ -156,6 +159,12 @@ struct s_IODevices{
         case AccountGpioDevice:
             devicetype = AccountGpioDevice;
             break;
+        case LinuxGpioDevice:
+            devicetype = LinuxGpioDevice;
+            break;
+        case AudioRouteGpioDevice:
+            devicetype = AudioRouteGpioDevice;
+            break;
         }
         uid = ioDeviceJSON["uid"].toString();
         inputname = ioDeviceJSON["inputname"].toString();
@@ -169,6 +178,7 @@ struct s_IODevices{
         path = ioDeviceJSON["path"].toString();
         inChannelCount = (uint) ioDeviceJSON["inChannelCount"].toInt();
         outChannelCount = (uint) ioDeviceJSON["outChannelCount"].toInt();
+        typeSpecificSettings = ioDeviceJSON["typeSpecificSettings"].toObject();
         return this;
     }
 };
@@ -197,7 +207,7 @@ Q_DECLARE_METATYPE(s_callHistory);
 Q_DECLARE_METATYPE(QList<s_callHistory>);
 
 struct s_Call{
-    explicit s_Call(s_account &account) : account(account) { };
+    explicit s_Call(int &splitterSlot) : splitterSlot(splitterSlot) { };
 
     int callId = PJSUA_INVALID_ID;
     int lastJBemptyGETevent = 0;
@@ -205,7 +215,7 @@ struct s_Call{
     pjsua_player_id player_id = PJSUA_INVALID_ID;
     pjsua_recorder_id rec_id = PJSUA_INVALID_ID;
     PJCall* callptr = nullptr;
-    const s_account &account;
+    int splitterSlot;
 };
 //Q_DECLARE_METATYPE(s_Call);
 //Q_DECLARE_METATYPE(QList<s_Call>);
