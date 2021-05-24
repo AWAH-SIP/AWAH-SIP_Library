@@ -107,8 +107,8 @@ private slots:
     void getSoundDevID(QJsonObject &data, QJsonObject &ret);
 
     // Public API - Buddies
-    void registerBuddy(QJsonObject &data, QJsonObject &ret);
-    void deleteBuddy(QJsonObject &data, QJsonObject &ret);
+    void addBuddy(QJsonObject &data, QJsonObject &ret);
+    void removeBuddy(QJsonObject &data, QJsonObject &ret);
     // Public API - Codecs
     void listCodec(QJsonObject &data, QJsonObject &ret);
     void selectCodec(QJsonObject &data, QJsonObject &ret);

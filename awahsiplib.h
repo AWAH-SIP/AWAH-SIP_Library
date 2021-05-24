@@ -103,8 +103,8 @@ public:
     int getSoundDevID(QString DeviceName) const { return m_AudioRouter->getSoundDevID(DeviceName); };
 
     // Public API - Buddies
-    bool registerBuddy(int AccID, QString buddyUrl) const { return m_Buddies->registerBuddy(AccID, buddyUrl); };
-    bool deleteBuddy(int AccID, QString buddyUrl) const { return  m_Buddies->deleteBuddy(AccID, buddyUrl); };
+    void addBuddy(QString buddyUrl, QString name) const { return m_Buddies->addBuddy(buddyUrl, name); };
+    void removeBuddy(QString buddyUrl) const { return  m_Buddies->removeBuddy(buddyUrl); };
 
     // Public API - Codecs
     QStringList listCodec() const { return m_Codecs->listCodec(); };

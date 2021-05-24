@@ -577,13 +577,12 @@ void Websocket::getSoundDevID(QJsonObject &data, QJsonObject &ret) {
     }
 }
 
-void Websocket::registerBuddy(QJsonObject &data, QJsonObject &ret) {
+void Websocket::addBuddy(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
-    int AccID;
     QString buddyUrl;
-    if (jCheckInt(AccID, data["AccID"]) && jCheckString(buddyUrl, data["buddyUrl"])) {
-        bool retVal = m_lib->registerBuddy(AccID, buddyUrl);
-        retDataObj["returnValue"] = retVal;
+    QString name;
+    if (jCheckString(buddyUrl, data["buddyUrl"]) && jCheckString(name, data["Name"])) {
+         m_lib->addBuddy(buddyUrl, name);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
@@ -591,13 +590,11 @@ void Websocket::registerBuddy(QJsonObject &data, QJsonObject &ret) {
     }
 }
 
-void Websocket::deleteBuddy(QJsonObject &data, QJsonObject &ret) {
+void Websocket::removeBuddy(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
-    int AccID;
     QString buddyUrl;
-    if (jCheckInt(AccID, data["AccID"]) && jCheckString(buddyUrl, data["buddyUrl"])) {
-        bool retVal = m_lib->deleteBuddy(AccID, buddyUrl);
-        retDataObj["returnValue"] = retVal;
+    if (jCheckString(buddyUrl, data["buddyUrl"])) {
+        m_lib->removeBuddy(buddyUrl);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
@@ -714,7 +711,7 @@ void Websocket::getGpioDevTypes(QJsonObject &data, QJsonObject &ret) {
     Q_UNUSED(data);
     QJsonObject retDataObj;
     const QJsonObject retVal = m_lib->getGpioDevTypes();
-    retDataObj["GpioDevTypesObj"] = retVal;
+    retDataObj["GpioDevTypes"] = retVal;
     ret["data"] = retDataObj;
     ret["error"] = noError();
 }

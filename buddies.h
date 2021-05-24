@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include "pjbuddy.h"
+#include "types.h"
 
 class AWAHSipLib;
 
@@ -32,6 +33,9 @@ public:
 
     bool registerBuddy(int AccID, QString buddyUrl);
     bool deleteBuddy(int AccID, QString buddyUrl);
+    void addBuddy(QString buddyUrl, QString name);
+    void removeBuddy(QString buddyUrl);
+    const QList <s_buddy> getBuddies(){return m_buddies; };
 
 signals:
     void signalBuddyStatus(QString buddy, int status);
@@ -39,7 +43,7 @@ signals:
 
 private:
     AWAHSipLib* m_lib;
-
+    QList <s_buddy> m_buddies;
 
 };
 

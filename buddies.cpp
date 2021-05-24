@@ -65,3 +65,15 @@ bool Buddies::deleteBuddy(int AccID, QString buddyUrl){
     }else   return false;
 }
 
+void Buddies::addBuddy(QString buddyUrl, QString name)
+{
+    Q_UNUSED(buddyUrl)          // todo here: Check if buddy exists, register it, add it to the buddy list and save it
+    Q_UNUSED(name)
+}
+
+void Buddies::removeBuddy(QString buddyUrl)
+{
+    Q_UNUSED(buddyUrl)      // todo: delete buddy, remove it from the list and save it
+}
+
+
