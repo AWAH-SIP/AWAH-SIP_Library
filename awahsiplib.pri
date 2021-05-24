@@ -52,8 +52,4 @@ include(pjsip/pjsip.pri)
 contains( DEFINES, AWAH_libgpiod ) {
     message("includes libgpiod Library so Linux Generic GPIO Device will be enabled")
     LIBS += -lgpiodcxx
-    INCLUDEPATH += $$PWD/libgpiod/bindings/cxx/
 }
-
-OTHER_FILES += \
-    $$PWD/libgpiod/bindings/cxx/*

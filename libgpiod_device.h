@@ -4,9 +4,12 @@
 #include "gpiodevice.h"
 #include <QObject>
 #include <QThread>
+#include <QElapsedTimer>
 
 #ifdef AWAH_libgpiod
 #include <gpiod.hpp>
+
+#define DEBOUNCE_TIMEOUT 100
 
 class libgpiod_InputRunner;
 #endif
@@ -21,6 +24,7 @@ public:
     void setGPO(uint number, bool state) override;
     bool getGPI(uint number) const override { return m_inValues.at(number) == 1; };
     bool getGPO(uint number) const override { return m_outValues.at(number) == 1; };
+    static QJsonObject getGpioCaps();
 
 private slots:
     void getLineEvent(uint number, bool state);
@@ -61,6 +65,8 @@ private:
 
     QString m_chipName;
     QVector<uint> m_offsets;
+    QVector<bool> m_state;
+    QVector<QElapsedTimer> m_timers;
     bool m_valid = true;
     gpiod::chip m_chip;
     gpiod::line_bulk m_lines;

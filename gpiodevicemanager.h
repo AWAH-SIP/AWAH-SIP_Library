@@ -23,6 +23,7 @@ public:
     void removeDevice(QString uid);
     GpioDevice* getDeviceByUid(QString uid);
     QList<s_IODevices>& getGpioDevices();
+    const QJsonObject getGpioDevTypes() const;
 
     void setLib(AWAHSipLib *lib);
 

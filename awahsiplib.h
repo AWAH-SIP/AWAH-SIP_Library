@@ -119,10 +119,7 @@ public:
         { return m_GpioDeviceManager->create(type, outCount, devName); };
     void removeGpioDevice(QString uid) { return m_GpioDeviceManager->removeDevice(uid); };
     const QList<s_IODevices>& getGpioDevices() const { return m_GpioDeviceManager->getGpioDevices(); };
-    const QJsonObject getGpioDevTypes() const {
-        QString jstring = "{\"Virtual GPIO\":{\"devType\":4,\"parameter\":{\"Name\":{\"type\":1,\"value\":\"\"},\"Inputs\":{\"type\":0,\"value\":1,\"min\":0,\"max\":16},\"Outputs\":{\"type\":0,\"value\":1,\"min\":0,\"max\":16}}},\"And Gate\":{\"devType\":5,\"parameter\":{\"Name\":{\"type\":1,\"value\":\"\"},\"Inputs\":{\"type\":0,\"value\":2,\"min\":2,\"max\":8}}},\"Or Gate\":{\"devType\":6,\"parameter\":{\"Name\":{\"type\":1,\"value\":\"\"},\"Inputs\":{\"type\":0,\"value\":2,\"min\":2,\"max\":8}}}}";
-                QJsonDocument doc= QJsonDocument::fromJson(jstring.toUtf8()) ;
-        return doc.object() ; };
+    const QJsonObject getGpioDevTypes() const { return m_GpioDeviceManager->getGpioDevTypes(); };
 
     // Public API - GpioRouter
     const QList<s_gpioRoute>& getGpioRoutes() { return GpioRouter::instance()->getGpioRoutes(); };

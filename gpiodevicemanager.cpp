@@ -190,10 +190,49 @@ QList<s_IODevices> &GpioDeviceManager::getGpioDevices()
         i.next();
         GpioDevice* dev = i.value();
         s_IODevices devInfo = dev->getDeviceInfo();
-        if(devInfo.devicetype != AccountGpioDevice && devInfo.devicetype != m_staticOnUid)
+        if(devInfo.devicetype != AccountGpioDevice && devInfo.uid != m_staticOnUid)
             m_devList.append(devInfo);
     }
     return m_devList;
+}
+
+const QJsonObject GpioDeviceManager::getGpioDevTypes() const
+{
+    QJsonObject gpiodevs, virtualGpioParam, andGateParam, orGateParam, virtualGpio, andGate, orGate, item;
+    QJsonObject LinuxGpio = libgpiod_Device::getGpioCaps();
+    item = QJsonObject();
+    item["type"] = STRING;
+    item["value"] = " ";
+    virtualGpioParam["Name"] = item;
+    andGateParam["Name"] = item;
+    orGateParam["Name"] = item;
+    item = QJsonObject();
+    item["type"] = INTEGER;
+    item["value"] = 0;
+    item["min"] = 0;
+    item["max"] = MAX_GPIO;
+    virtualGpioParam["Inputs"] =item;
+    virtualGpioParam["Outputs"] =item;
+    item = QJsonObject();
+    item["type"] = INTEGER;
+    item["value"] = 2;
+    item["min"] = 2;
+    item["max"] = MAX_LOGIC_OUT;
+    andGateParam["Inputs"] =item;
+    orGateParam["Inputs"] =item;
+    virtualGpio["devType"] = VirtualGpioDevice;
+    andGate["devType"] = LogicAndGpioDevice;
+    orGate["devType"] = LogicOrGpioDevice;
+    virtualGpio["parameter"] = virtualGpioParam;
+    andGate["parameter"] = andGateParam;
+    orGate["parameter"] = orGateParam;
+    gpiodevs["Virtual GPIO"] = virtualGpio;
+    gpiodevs["And Gate"] = andGate;
+    gpiodevs["Or Gate"] = orGate;
+    if(!LinuxGpio.isEmpty())
+        gpiodevs["Linux GPIO Device"] = LinuxGpio;
+
+    return gpiodevs;
 }
 
 void GpioDeviceManager::setLib(AWAHSipLib *lib)
