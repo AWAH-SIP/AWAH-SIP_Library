@@ -33,56 +33,51 @@ public:
     /**
     * @brief Load IO device config (audio interfaces, tone generator, GPIO etc) from settings file
     * and add them to the conference bridge
-    * @return PJ_SUCESS or -1
     */
     void loadIODevConfig();
 
     /**
     * @brief save current IO device config (audio interfaces, tone generator etc) to the settings file
-    * @return PJ_SUCESS or -1
     */
     void saveIODevConfig();
 
-
     /**
     * @brief load current GPIO device config from the settings file
-    * @return PJ_SUCESS or -1
     */
     void loadGpioDevConfig();
 
     /**
-    * @brief save current GPIO device config to the settings file
-    * @return PJ_SUCESS or -1
+    * @brief load GPIO routes from settings file
     */
-    void saveGpioDevConfig();
+    int loadGpioRoutes();
+
+    /**
+    * @brief save GPIO routes to the settings file
+    */
+    int saveGpioRoutes();
 
     /**
     * @brief Load endpoint and media settings from settings file and restart endpoint to activate them
-    * @return PJ_SUCESS or -1
     */
     void loadSettings();
 
     /**
     * @brief load current account config from settings file
-    * @return PJ_SUCESS or -1
     */
     void loadAccConfig();
 
     /**
     * @brief save current account config to the settings file
-    * @return PJ_SUCESS or -1
     */
     void saveAccConfig();
 
     /**
-    * @brief load current account config from settings file
-    * @return PJ_SUCESS or -1
+    * @brief load audio routes from settings file
     */
     int loadAudioRoutes();
 
     /**
-    * @brief save current account config to the settings file
-    * @return PJ_SUCESS or -1
+    * @brief save audio routes to the settings file
     */
     int saveAudioRoutes();
 
@@ -119,6 +114,11 @@ public:
     */
     void setCodecPriorities(QJsonObject CodecPriorities);
 
+public slots:
+    /**
+    * @brief save current GPIO device config to the settings file
+    */
+    void saveGpioDevConfig();
 
 signals:
 
@@ -146,6 +146,8 @@ private:
     bool m_AudioRoutesLoaded = false;
     bool m_GpioDevicesLoaded = false;
 
+private slots:
+    void loadIODevConfigLater();
 
 };
 

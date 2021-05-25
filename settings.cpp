@@ -85,12 +85,17 @@ void Settings::saveIODevConfig()
 
 void Settings::loadGpioDevConfig()
 {
+    QTimer::singleShot(1000, this, SLOT(loadIODevConfigLater()));                    // todo there must be a better way to do this
+}
+
+void Settings::loadIODevConfigLater()
+{
     QList<s_IODevices> loadedDevices;
     QSettings settings("awah", "AWAHsipConfig");
     loadedDevices = settings.value("GpioDevConfig").value<QList<s_IODevices>>();
-
     for(auto& device : loadedDevices){
         m_lib->m_GpioDeviceManager->createGeneric(device);
+        m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: added GPIO device from config file: ") + device.outputame);
         }
     m_GpioDevicesLoaded = true;
 }
@@ -104,6 +109,16 @@ void Settings::saveGpioDevConfig()
     settings.sync();
 }
 
+int Settings::loadGpioRoutes()
+{
+
+}
+
+int Settings::saveGpioRoutes()
+{
+
+}
+
 void Settings::loadAccConfig()
 {
     QList<s_account>  loadedAccounts;
@@ -115,7 +130,6 @@ void Settings::loadAccConfig()
         m_lib->m_Log->writeLog(3,QString("loadAccConfig: added Account from config file: ") + loadedAccounts.at(i).name);
     }
     m_AccountsLoaded = true;
-
 }
 
 void Settings::saveAccConfig()

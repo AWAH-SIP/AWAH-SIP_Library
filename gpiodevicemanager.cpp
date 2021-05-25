@@ -88,7 +88,7 @@ AccountGpioDev* GpioDeviceManager::create(const s_account &account)
 AudioCrosspointDev* GpioDeviceManager::create(const s_audioRoutes& route, QString devName)
 {
     s_IODevices newDev;
-    newDev.devicetype = AccountGpioDevice;
+    newDev.devicetype = AudioCrosspointDevice;
     newDev.uid = createNewUID();
     newDev.inputname = newDev.outputame = devName;
     newDev.RecDevID = newDev.PBDevID = 0;

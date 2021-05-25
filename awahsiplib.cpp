@@ -75,8 +75,8 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Settings->loadIODevConfig();
         m_Settings->loadAccConfig();
         m_Settings->loadAudioRoutes();
-        m_Settings->loadGpioDevConfig();
         m_Accounts->startCallInspector();
+        m_Settings->loadGpioDevConfig();
     }
     catch (Error &err){
         m_Log->writeLog(1,QString("AWAHsip: starting lib failed: ") + err.info().c_str());
@@ -100,6 +100,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(GpioRouter::instance(), &GpioRouter::gpioRoutesTableChanged, this, &AWAHSipLib::gpioRoutesTableChanged);
     connect(GpioRouter::instance(), &GpioRouter::gpioStateChanged, this, &AWAHSipLib::gpioStateChanged);
     connect(m_GpioDeviceManager, &GpioDeviceManager::gpioDevicesChanged, this, &AWAHSipLib::slotIoDevicesChanged);
+    connect(m_GpioDeviceManager, &GpioDeviceManager::gpioDevicesChanged, m_Settings, &Settings::saveGpioDevConfig);
     connect(this, &AWAHSipLib::AudioDevicesChanged, this, &AWAHSipLib::slotIoDevicesChanged);
 
 
@@ -117,6 +118,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(this, &AWAHSipLib::gpioRoutesTableChanged, m_Websocket, &Websocket::gpioRoutesTableChanged);
     connect(this, &AWAHSipLib::gpioStateChanged, m_Websocket, &Websocket::gpioStatesChanged);
     connect(this, &AWAHSipLib::IoDevicesChanged, m_Websocket, &Websocket::ioDevicesChanged);
+
 }
 
 AWAHSipLib::~AWAHSipLib()
@@ -142,6 +144,7 @@ void AWAHSipLib::prepareLib()
     qRegisterMetaTypeStreamOperators <QList<s_account>>("QList<s_account>");
     qRegisterMetaTypeStreamOperators <QList<s_audioRoutes>>("QList<s_audioRoutes>");
     qRegisterMetaTypeStreamOperators <QList<s_callHistory>>("QList<s_callHistory>");
+    qRegisterMetaTypeStreamOperators <QList<s_gpioRoute>>("<QList<s_gpioRoute>");
 }
 
 QList<s_IODevices> &AWAHSipLib::getIoDevices()
@@ -212,3 +215,15 @@ QDataStream &operator>>(QDataStream &in, s_callHistory &obj)
    return in;
 }
 
+QDataStream &operator<<(QDataStream &out, const s_gpioRoute &obj)
+{
+    out << obj.srcSlotId << obj.destSlotId << obj.inverted << obj.persistant;
+    return out;
+}
+
+
+QDataStream &operator>>(QDataStream &in, s_gpioRoute &obj)
+{
+  in >> obj.srcSlotId >> obj.destSlotId >> obj.inverted >> obj.persistant;
+  return in;
+}
