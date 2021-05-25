@@ -74,8 +74,8 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         pool = pjsua_pool_create("awahsip", 512, 512);
         m_Settings->loadIODevConfig();
         m_Settings->loadAccConfig();
-        m_Settings->loadSettings();
         m_Settings->loadAudioRoutes();
+        m_Settings->loadGpioDevConfig();
         m_Accounts->startCallInspector();
     }
     catch (Error &err){
@@ -165,13 +165,13 @@ void AWAHSipLib::slotSendMessage(int callId, int AccID, QString type, QByteArray
 
 QDataStream &operator<<(QDataStream &out, const s_IODevices &obj)
 {
-    out << obj.devicetype << obj.inputname << obj.outputame << obj.genfrequency << obj.uid << obj.path;
+    out << obj.devicetype << obj.inputname << obj.outputame << obj.genfrequency << obj.uid << obj.path << obj.inChannelCount << obj.outChannelCount << obj.typeSpecificSettings;
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, s_IODevices &obj)
 {
-   in  >> obj.devicetype >> obj.inputname >> obj.outputame >> obj.genfrequency >> obj.uid >> obj.path;
+   in  >> obj.devicetype >> obj.inputname >> obj.outputame >> obj.genfrequency >> obj.uid >> obj.path  >> obj.inChannelCount >> obj.outChannelCount >> obj.typeSpecificSettings;
    return in;
 }
 

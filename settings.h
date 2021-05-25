@@ -43,6 +43,19 @@ public:
     */
     void saveIODevConfig();
 
+
+    /**
+    * @brief load current GPIO device config from the settings file
+    * @return PJ_SUCESS or -1
+    */
+    void loadGpioDevConfig();
+
+    /**
+    * @brief save current GPIO device config to the settings file
+    * @return PJ_SUCESS or -1
+    */
+    void saveGpioDevConfig();
+
     /**
     * @brief Load endpoint and media settings from settings file and restart endpoint to activate them
     * @return PJ_SUCESS or -1
@@ -131,6 +144,7 @@ private:
     bool m_AccountsLoaded = false;
     bool m_IoDevicesLoaded = false;
     bool m_AudioRoutesLoaded = false;
+    bool m_GpioDevicesLoaded = false;
 
 
 };

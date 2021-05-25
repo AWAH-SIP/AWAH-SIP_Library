@@ -581,8 +581,9 @@ void Websocket::addBuddy(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     QString buddyUrl;
     QString name;
-    if (jCheckString(buddyUrl, data["buddyUrl"]) && jCheckString(name, data["Name"])) {
-         m_lib->addBuddy(buddyUrl, name);
+    QString accUid;
+    if (jCheckString(buddyUrl, data["buddyUrl"]) && jCheckString(name, data["Name"]) && jCheckString(accUid, data["accUid"])) {
+         m_lib->addBuddy(buddyUrl, name, accUid);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
@@ -593,8 +594,9 @@ void Websocket::addBuddy(QJsonObject &data, QJsonObject &ret) {
 void Websocket::removeBuddy(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     QString buddyUrl;
-    if (jCheckString(buddyUrl, data["buddyUrl"])) {
-        m_lib->removeBuddy(buddyUrl);
+    QString accUid;
+    if (jCheckString(buddyUrl, data["buddyUrl"]) && jCheckString(accUid, data["accUid"])) {
+        m_lib->removeBuddy(buddyUrl, accUid);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
@@ -654,29 +656,13 @@ void Websocket::setCodecParam(QJsonObject &data, QJsonObject &ret) {
 }
 
 void Websocket::createGpioDev(QJsonObject &data, QJsonObject &ret) {
-    QJsonObject retDataObj;
-    int type;
-    uint inCount, outCount;
+    QJsonObject retDataObj, newDevice;
     QString devName;
-    if (jCheckInt(type, data["type"]) && jCheckUint(inCount, data["inCount"])  && jCheckUint(outCount, data["outCount"]) && jCheckString(devName, data["devName"])) {
-        bool error = false;
-        DeviceType devType = (DeviceType) type;
-        switch (devType) {
-        case LogicAndGpioDevice:
-        case LogicOrGpioDevice:
-            m_lib->createGpioDev(devType, outCount, devName);
-            break;
-        case VirtualGpioDevice:
-            m_lib->createGpioDev(inCount, outCount, devName);
-            break;
-        default:
-            error = true;
-            ret["error"] = hasError("Not acceptable Devicetype");
-            break;
-        }
+    if (jCheckObject(newDevice, data["newDev"]))   {
+        QString retVal = m_lib->createGpioDev(newDevice);
+        retDataObj["returnValue"] = retVal;
         ret["data"] = retDataObj;
-        if (!error)
-            ret["error"] = noError();
+        ret["error"] = noError();
     } else {
         ret["error"] = hasError("Parameters not accepted");
     }

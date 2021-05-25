@@ -37,7 +37,7 @@ Settings::Settings(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_
 void Settings::loadIODevConfig()
 {
     //qRegisterMetaTypeStreamOperators <QList<s_IODevices>>("QList<s_IODevices>");
-    QList<s_IODevices>  loadedDevices;
+    QList<s_IODevices> loadedDevices;
     int recordDevId, playbackDevId;
     QSettings settings("awah", "AWAHsipConfig");
 
@@ -80,6 +80,27 @@ void Settings::saveIODevConfig()
         return;
     QSettings settings("awah", "AWAHsipConfig");
     settings.setValue("IODevConfig", QVariant::fromValue(*m_lib->m_AudioRouter->getAudioDevices()));
+    settings.sync();
+}
+
+void Settings::loadGpioDevConfig()
+{
+    QList<s_IODevices> loadedDevices;
+    QSettings settings("awah", "AWAHsipConfig");
+    loadedDevices = settings.value("GpioDevConfig").value<QList<s_IODevices>>();
+
+    for(auto& device : loadedDevices){
+        m_lib->m_GpioDeviceManager->createGeneric(device);
+        }
+    m_GpioDevicesLoaded = true;
+}
+
+void Settings::saveGpioDevConfig()
+{
+    if (!m_GpioDevicesLoaded)
+        return;
+    QSettings settings("awah", "AWAHsipConfig");
+    settings.setValue("GpioDevConfig", QVariant::fromValue(m_lib->m_GpioDeviceManager->getGpioDevices()));
     settings.sync();
 }
 
@@ -177,7 +198,7 @@ void Settings::loadSettings()                                           // todo 
     else{
        item["value"] = 0;
     }
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     enumitems = QJsonObject();
     enumitems["tcp"] = "0";
     enumitems["udp"] = "1";
@@ -225,7 +246,7 @@ void Settings::loadSettings()                                           // todo 
     item = QJsonObject();
     m_lib->epCfg.medConfig.clockRate = settings.value("settings/MediaConfig/Conference_Bridge_Clock_Rate","48000").toInt();
     item["value"] = settings.value("settings/MediaConfig/Conference_Bridge_Clock_Rate","48000").toInt();
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     item["min"] = 8000;
     item["max"] = 48000;
     enumitems = QJsonObject();
@@ -281,7 +302,7 @@ void Settings::loadSettings()                                           // todo 
     item = QJsonObject();
     m_lib->epCfg.medConfig.sndClockRate = settings.value("settings/MediaConfig/Sound_Device_Clock_Rate","0").toInt();
     item["value"]  = settings.value("settings/MediaConfig/Sound_Device_Clock_Rate","0").toInt();
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     item["min"] = 8000;
     item["max"] = 48000;
     enumitems = QJsonObject();
@@ -317,7 +338,7 @@ void Settings::loadSettings()                                           // todo 
     item = QJsonObject();
     m_lib->epCfg.logConfig.consoleLevel = settings.value("settings/Loglevel","3").toInt();
     item["value"] = settings.value("settings/Loglevel","3").toInt();
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     item["min"] = 1;
     item["max"] = 5;
     enumitems = QJsonObject();
@@ -359,7 +380,7 @@ void Settings::loadSettings()                                           // todo 
     // ***** enable ICE *****
     item = QJsonObject();
     item["value"] = aCfg.natConfig.iceEnabled = settings.value("settings/NatConfig/Ice_Enabled",0).toBool();
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     item["min"] = 0;
     item["max"] = 1;
     enumitems = QJsonObject();
@@ -371,7 +392,7 @@ void Settings::loadSettings()                                           // todo 
     // ***** ICE aressive nomination *****
     item = QJsonObject();
     item["value"]  = aCfg.natConfig.iceAggressiveNomination = settings.value("settings/NatConfig/Ice_AggressiveNomination","1").toBool();
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     item["min"] = 0;
     item["max"] = 1;
     enumitems = QJsonObject();
@@ -383,7 +404,7 @@ void Settings::loadSettings()                                           // todo 
     // ***** ICE always update *****
     item = QJsonObject();
     item["value"]  = aCfg.natConfig.iceAlwaysUpdate = settings.value("settings/NatConfig/Ice_AlwaysUpdate","0").toBool();
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     item["min"] = 0;
     item["max"] = 1;
     enumitems = QJsonObject();
@@ -413,7 +434,7 @@ void Settings::loadSettings()                                           // todo 
     // ***** ICE no Rtcp *****
     item = QJsonObject();
     item["value"]  = aCfg.natConfig.iceNoRtcp = settings.value("settings/NatConfig/Ice_NoRtcp","1").toBool();
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     item["min"] = 0;
     item["max"] = 1;
     enumitems = QJsonObject();
@@ -452,7 +473,7 @@ void Settings::loadSettings()                                           // todo 
         aCfg.natConfig.sipStunUse = PJSUA_STUN_USE_DISABLED;
         aCfg.natConfig.mediaStunUse = PJSUA_STUN_USE_DISABLED;
     }
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     item["min"] = 0;
     item["max"] = 1;
     enumitems = QJsonObject();
@@ -473,7 +494,7 @@ void Settings::loadSettings()                                           // todo 
     // ***** Header-Rewrites *****
     item = QJsonObject();
     item["value"] = aCfg.natConfig.viaRewriteUse = settings.value("settings/NatConfig/SIPHeader_rewrite_Via","0").toBool();
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     item["min"] = 0;
     item["max"] = 1;
     enumitems = QJsonObject();
@@ -484,7 +505,7 @@ void Settings::loadSettings()                                           // todo 
 
     item = QJsonObject();
     item["value"] = aCfg.natConfig.contactRewriteUse = settings.value("settings/NatConfig/SIPHeader_rewrite_Contact","1").toBool();
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     item["min"] = 0;
     item["max"] = 1;
     enumitems = QJsonObject();
@@ -694,7 +715,7 @@ const QJsonObject Settings::getCodecPriorities(){
          codecname = QString::fromStdString(codec.codecId);
          priority = settings.value("settings/CodecPriority/"+codecname,"128").toInt();
          codecitem = QJsonObject();
-         codecitem["type"] = ENUM;
+         codecitem["type"] = ENUM_INT;
          codecitem["enumlist"] = enumitems;
          codecitem["value"] = priority;
          codecitem["min"] = 0;

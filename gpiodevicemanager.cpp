@@ -10,7 +10,6 @@ GpioDeviceManager *GpioDeviceManager::instance(QObject *parent)
         uint inarr[2] = {16, 17}, outarr[2] = {22, 26};
         GpioDeviceManagerInstance->create(2,2,"Test-libgpiod", "gpiochip0", inarr, outarr);
     }
-
     return GpioDeviceManagerInstance;
 }
 
