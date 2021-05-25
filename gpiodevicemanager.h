@@ -18,8 +18,10 @@ public:
     VirtualGpioDev* create(uint inCount, uint outCount, QString devName);
     LogicGpioDev* create(DeviceType type, uint outCount, QString devName);
     AccountGpioDev* create(const s_account& account);
+    AudioCrosspointDev* create(const s_audioRoutes& route, QString devName);
     libgpiod_Device* create(uint inCount, uint outCount, QString devName, QString chipName, uint inOffsets[MAX_GPIO], uint outOffsets[MAX_GPIO]);
     GpioDevice* createGeneric(s_IODevices& deviceInfo);
+    QString createGpioDev(QJsonObject& newDev);
     void removeDevice(QString uid);
     GpioDevice* getDeviceByUid(QString uid);
     QList<s_IODevices>& getGpioDevices();

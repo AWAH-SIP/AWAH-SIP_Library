@@ -271,6 +271,7 @@ private:
     friend class Buddies;
     friend class Codecs;
     friend class GpioDevice;
+    friend class AudioCrosspointDev;
     friend class libgpiod_Device;
     friend class GpioDeviceManager;
     friend class Log;

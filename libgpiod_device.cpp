@@ -10,14 +10,17 @@ libgpiod_Device::libgpiod_Device(s_IODevices& deviceInfo)
 
     QJsonArray inOffsetsArr = deviceInfo.typeSpecificSettings["inOffsets"].toArray();
     QJsonArray outOffsetsArr = deviceInfo.typeSpecificSettings["outOffsets"].toArray();
+    QStringList inName, outName;
 
     for (uint i = 0; i < m_inCount; i++) {
         m_inValues.append(0);
         m_inOffsets.append((uint) inOffsetsArr.at(i).toInt());
+        inName.append(QString("line %1").arg(inOffsetsArr.at(i).toInt()));
     }
     for (uint i = 0; i < m_outCount; i++) {
         m_outValues.append(0);
         m_outOffsets.append((uint) outOffsetsArr.at(i).toInt());
+        outName.append(QString("line %1").arg(outOffsetsArr.at(i).toInt()));
     }
 
 #ifdef AWAH_libgpiod
@@ -43,7 +46,7 @@ libgpiod_Device::libgpiod_Device(s_IODevices& deviceInfo)
     }
 #endif
 
-    GpioRouter::instance()->registerDevice(m_deviceInfo, this);
+    GpioRouter::instance()->registerDevice(m_deviceInfo, this, inName, outName);
 }
 
 libgpiod_Device::~libgpiod_Device()
@@ -104,19 +107,12 @@ QJsonObject libgpiod_Device::getGpioCaps()
     item["value"] = "";
     parameter["Name"] = item;
     item = QJsonObject();
-    item["type"] = INTEGER;
-    item["value"] = 0;
-    item["min"] = 0;
-    item["max"] = MAX_GPIO;
-    parameter["Inputs"] = item;
-    parameter["Outputs"] = item;
-    item = QJsonObject();
     item["type"] = ENUM;
     item["value"] = 0;
     item["min"] = 0;
     item["max"] = 1024;
     item["enumlist"] = gpiochipEnum;
-    parameter["gpiochip"] = item;
+    parameter["GPIO Chip"] = item;
     lineEnum["No Line"] = -1;
     item = QJsonObject();
     item["type"] = ENUM;

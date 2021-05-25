@@ -86,6 +86,21 @@ AccountGpioDev* GpioDeviceManager::create(const s_account &account)
     return ret;
 }
 
+AudioCrosspointDev* GpioDeviceManager::create(const s_audioRoutes& route, QString devName)
+{
+    s_IODevices newDev;
+    newDev.devicetype = AccountGpioDevice;
+    newDev.uid = createNewUID();
+    newDev.inputname = newDev.outputame = devName;
+    newDev.RecDevID = newDev.PBDevID = 0;
+    newDev.inChannelCount = 1;
+    newDev.outChannelCount = 1;
+    newDev.typeSpecificSettings["route"] = route.toJSON();
+    AudioCrosspointDev* ret = new AudioCrosspointDev(newDev);
+    appendDevice(ret);
+    return ret;
+}
+
 libgpiod_Device* GpioDeviceManager::create(uint inCount, uint outCount, QString devName, QString chipName, uint *inOffsets, uint *outOffsets)
 {
     s_IODevices newDev;
@@ -159,12 +174,75 @@ GpioDevice* GpioDeviceManager::createGeneric(s_IODevices &deviceInfo)
             return nullptr;
         ret = new libgpiod_Device(deviceInfo);
         break;
+    case AudioCrosspointDevice:
+        if(deviceInfo.typeSpecificSettings.isEmpty())
+            return nullptr;
+        ret = new AudioCrosspointDev(deviceInfo);
+        break;
     default:
         return nullptr;
 
     }
     appendDevice(ret);
     return ret;
+}
+
+QString GpioDeviceManager::createGpioDev(QJsonObject &newDev)
+{
+    QString error;
+    GpioDevice *device = nullptr;
+    DeviceType type = (DeviceType) newDev["devType"].toInt(-1);
+    QJsonObject parameter = newDev["parameter"].toObject();
+    QString name = parameter["Name"].toString();
+    uint input, output;
+    int i, gpi, gpo;
+    QVector<uint> inArr, outArr;
+    s_audioRoutes route;
+    QString chipName;
+    if (name.isEmpty())
+        return "Name can not be Empty!";
+    switch (type) {
+    case VirtualGpioDevice:
+        input = parameter["Inputs"].toInt(0);
+        output = parameter["Outputs"].toInt(0);
+        device = create(input, output, name);
+        break;
+    case LogicAndGpioDevice:
+    case LogicOrGpioDevice:
+        output = parameter["Outputs"].toInt(0);
+        device = create(type, output, name);
+        break;
+    case LinuxGpioDevice:
+        chipName = parameter["GPIO Chip"].toString();
+        if (chipName.isEmpty())
+            return "GPIO Chip can not be Empty!";
+        for (i = 0; i < 8; i++) {
+            gpi = parameter[QString("GPI %1").arg(i+1)].toInt(-1);
+            gpo = parameter[QString("GPO %1").arg(i+1)].toInt(-1);
+            if (gpi >= 0)
+                inArr.append(gpi);
+            if (gpo >= 0)
+                outArr.append(gpo);
+        }
+        if (inArr.size() == 0 && outArr.size() == 0)
+            return "There must be at least 1 GPIO Port selected!";
+        device = create(inArr.size(), outArr.size(), name, chipName, inArr.data(), outArr.data());
+        break;
+    case AudioCrosspointDevice:
+        route.srcDevName = parameter["Source Port"].toString();
+        route.destDevName = parameter["Destination Port"].toString();
+        route.level = dBtoFact(parameter["Level"].toDouble(0));
+        if (route.srcDevName.isEmpty() || route.destDevName.isEmpty())
+            return "Source or Destination Port can not be Empty!";
+        device = create(route, name);
+        break;
+    default:
+        error = "Unknown Device Type! Nothing created.";
+        break;
+    }
+    if (device == nullptr)
+        error.append("\nGPIO Device not created!");
+    return error;
 }
 
 void GpioDeviceManager::removeDevice(QString uid)
@@ -200,6 +278,7 @@ const QJsonObject GpioDeviceManager::getGpioDevTypes() const
 {
     QJsonObject gpiodevs, virtualGpioParam, andGateParam, orGateParam, virtualGpio, andGate, orGate, item;
     QJsonObject LinuxGpio = libgpiod_Device::getGpioCaps();
+    QJsonObject AudioCrosspointGpio = AudioCrosspointDev::getGpioCaps();
     item = QJsonObject();
     item["type"] = STRING;
     item["value"] = " ";
@@ -231,6 +310,8 @@ const QJsonObject GpioDeviceManager::getGpioDevTypes() const
     gpiodevs["Or Gate"] = orGate;
     if(!LinuxGpio.isEmpty())
         gpiodevs["Linux GPIO Device"] = LinuxGpio;
+    if(!AudioCrosspointGpio.isEmpty())
+        gpiodevs["Audio Crosspoint GPIO"] = AudioCrosspointGpio;
 
     return gpiodevs;
 }

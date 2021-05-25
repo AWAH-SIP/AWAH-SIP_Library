@@ -72,6 +72,18 @@ inline int dBtoAdjLevel(const float dB)
     return (int)((factor-1) * 128);
 }
 
+inline float dBtoFact(const float dB)
+{
+   float factor = pow(10, (dB/20));
+   return factor;
+}
+
+inline float factTodB(const float fact)
+{
+   float dB = 20 * log10f(fact);
+   return dB;
+}
+
 inline QString sizeFormat(quint64 size)
 {
     qreal calc = size;
@@ -100,7 +112,7 @@ enum DeviceType {
     LogicOrGpioDevice,
     AccountGpioDevice,
     LinuxGpioDevice,
-    AudioRouteGpioDevice
+    AudioCrosspointDevice
 };
 Q_ENUMS(DeviceType)
 
@@ -162,8 +174,8 @@ struct s_IODevices{
         case LinuxGpioDevice:
             devicetype = LinuxGpioDevice;
             break;
-        case AudioRouteGpioDevice:
-            devicetype = AudioRouteGpioDevice;
+        case AudioCrosspointDevice:
+            devicetype = AudioCrosspointDevice;
             break;
         }
         uid = ioDeviceJSON["uid"].toString();

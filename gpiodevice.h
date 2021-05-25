@@ -91,4 +91,31 @@ private:
 
 };
 
+class AudioCrosspointDev : public GpioDevice
+{
+    Q_OBJECT
+public:
+    explicit AudioCrosspointDev(s_IODevices& deviceInfo);
+    ~AudioCrosspointDev();
+    void setGPI(uint number, bool state) override;
+    void setGPO(uint number, bool state) override;
+    bool getGPI(uint number) const override { Q_UNUSED(number); return m_inState; };
+    bool getGPO(uint number) const override { Q_UNUSED(number); return m_outState; };
+    static QJsonObject getGpioCaps();
+
+private slots:
+    void audioRoutesChanged(QList<s_audioRoutes> audioRoutes);
+    void audioRoutesTableChanged(const s_audioPortList& portList);
+
+signals:
+
+private:
+    int getSlots();
+    void setCrosspoint();
+
+    s_audioRoutes m_route;
+    bool m_inState, m_outState;
+
+};
+
 #endif // GPIODEVICE_H
