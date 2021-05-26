@@ -75,7 +75,7 @@ void libgpiod_Device::setGPI(uint number, bool state)
 void libgpiod_Device::setGPO(uint number, bool state)
 {
     if(number < m_outCount) {
-        if (m_outValues.at(number) != state ? 1 : 0) {
+        if (m_outValues.at(number) != (state ? 1 : 0)) {
             m_outValues[number] = state;
             setOutputs();
         }
