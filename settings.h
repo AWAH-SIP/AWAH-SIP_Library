@@ -33,43 +33,47 @@ public:
     /**
     * @brief Load IO device config (audio interfaces, tone generator, GPIO etc) from settings file
     * and add them to the conference bridge
-    * @return PJ_SUCESS or -1
     */
     void loadIODevConfig();
 
     /**
     * @brief save current IO device config (audio interfaces, tone generator etc) to the settings file
-    * @return PJ_SUCESS or -1
     */
     void saveIODevConfig();
 
     /**
+    * @brief load current GPIO device config from the settings file
+    */
+    void loadGpioDevConfig();
+
+    /**
+    * @brief load GPIO routes from settings file
+    */
+    void loadGpioRoutes();
+
+
+    /**
     * @brief Load endpoint and media settings from settings file and restart endpoint to activate them
-    * @return PJ_SUCESS or -1
     */
     void loadSettings();
 
     /**
     * @brief load current account config from settings file
-    * @return PJ_SUCESS or -1
     */
     void loadAccConfig();
 
     /**
     * @brief save current account config to the settings file
-    * @return PJ_SUCESS or -1
     */
     void saveAccConfig();
 
     /**
-    * @brief load current account config from settings file
-    * @return PJ_SUCESS or -1
+    * @brief load audio routes from settings file
     */
     int loadAudioRoutes();
 
     /**
-    * @brief save current account config to the settings file
-    * @return PJ_SUCESS or -1
+    * @brief save audio routes to the settings file
     */
     int saveAudioRoutes();
 
@@ -106,6 +110,16 @@ public:
     */
     void setCodecPriorities(QJsonObject CodecPriorities);
 
+public slots:
+    /**
+    * @brief save current GPIO device config to the settings file
+    */
+    void saveGpioDevConfig();
+
+    /**
+    * @brief save GPIO routes to the settings file
+    */
+    void saveGpioRoutes();
 
 signals:
 
@@ -131,7 +145,11 @@ private:
     bool m_AccountsLoaded = false;
     bool m_IoDevicesLoaded = false;
     bool m_AudioRoutesLoaded = false;
+    bool m_GpioDevicesLoaded = false;
+    bool m_GpioRoutesLoaded = false;
 
+private slots:
+    void loadIODevConfigLater();
 
 };
 

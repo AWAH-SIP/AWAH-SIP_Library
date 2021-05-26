@@ -31,19 +31,19 @@ class Buddies : public QObject
 public:
     explicit Buddies(AWAHSipLib *parentLib, QObject *parent = nullptr);
 
-    bool registerBuddy(int AccID, QString buddyUrl);
+    bool registerBuddy(int AccID, QString buddyUrl);            // todo make me private
     bool deleteBuddy(int AccID, QString buddyUrl);
-    void addBuddy(QString buddyUrl, QString name);
-    void removeBuddy(QString buddyUrl);
+    void addBuddy(QString buddyUrl, QString name, QString accUid);
+    void removeBuddy(QString buddyUrl, QString accUid);
     const QList <s_buddy> getBuddies(){return m_buddies; };
 
 signals:
     void signalBuddyStatus(QString buddy, int status);
-
+    void sinalBuddyCountChanged();
 
 private:
     AWAHSipLib* m_lib;
-    QList <s_buddy> m_buddies;
+    QList <s_buddy> m_buddies;                      // todo move me to account struct
 
 };
 

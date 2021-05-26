@@ -385,8 +385,9 @@ Q_DECLARE_METATYPE(QList<s_audioRoutes>);
 enum settingType{
     INTEGER,
     STRING,
-    BOOL,
-    ENUM
+    BOOL_T,
+    ENUM_INT,
+    ENUM_STRING
 };
 Q_ENUMS(settingType)
 
@@ -463,6 +464,7 @@ struct s_buddy{
     QString buddyUrl = "";
     QString Name = "";
     int status = PJSUA_BUDDY_STATUS_UNKNOWN;
+    QString accUid = "";
     QJsonObject toJSON() const {
         return{{"buddyUrl", buddyUrl}, {"Name", Name}, {"status", status} };
     }

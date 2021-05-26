@@ -103,8 +103,8 @@ public:
     int getSoundDevID(QString DeviceName) const { return m_AudioRouter->getSoundDevID(DeviceName); };
 
     // Public API - Buddies
-    void addBuddy(QString buddyUrl, QString name) const { return m_Buddies->addBuddy(buddyUrl, name); };
-    void removeBuddy(QString buddyUrl) const { return  m_Buddies->removeBuddy(buddyUrl); };
+    void addBuddy(QString buddyUrl, QString name, QString accUid) const { return m_Buddies->addBuddy(buddyUrl, name, accUid); };
+    void removeBuddy(QString buddyUrl, QString accUid) const { return  m_Buddies->removeBuddy(buddyUrl, accUid); };
 
     // Public API - Codecs
     QStringList listCodec() const { return m_Codecs->listCodec(); };
@@ -113,10 +113,7 @@ public:
     int setCodecParam(QString codecId, QJsonObject codecParam) const { return m_Codecs->setCodecParam(codecId, codecParam); };
 
     // Public API - GpioDeviceManager
-    const VirtualGpioDev* createGpioDev(uint inCount, uint outCount, QString devName)
-        { return m_GpioDeviceManager->create(inCount, outCount, devName); };
-    const LogicGpioDev* createGpioDev(DeviceType type, uint outCount, QString devName)
-        { return m_GpioDeviceManager->create(type, outCount, devName); };
+    const QString createGpioDev(QJsonObject &newDev) { return m_GpioDeviceManager->createGpioDev(newDev); };
     void removeGpioDevice(QString uid) { return m_GpioDeviceManager->removeDevice(uid); };
     const QList<s_IODevices>& getGpioDevices() const { return m_GpioDeviceManager->getGpioDevices(); };
     const QJsonObject getGpioDevTypes() const { return m_GpioDeviceManager->getGpioDevTypes(); };

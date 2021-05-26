@@ -67,7 +67,7 @@ const QJsonObject Codecs::getCodecParam(QString codecId)
     param = m_lib->m_pjEp->codecGetParam(codecId.toStdString());
 
     item = QJsonObject();
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     item["value"] = param.setting.cng;
     item["min"] = 0;
     item["max"] = 1;
@@ -100,7 +100,7 @@ const QJsonObject Codecs::getCodecParam(QString codecId)
                 codecparam["Mode"]= item;
         }
         else if(strcmp(fmtp.name.c_str(),"mode")==0 && codecId.startsWith("iLBC")){
-                item["type"] = ENUM;                                //iLBC Mode
+                item["type"] = ENUM_INT;                                //iLBC Mode
                 item["value"] = atoi(fmtp.val.c_str());
                 item["min"] = 20;
                 item["max"] = 30;
@@ -178,7 +178,7 @@ const QJsonObject Codecs::getCodecParam(QString codecId)
         pjmedia_codec_opus_config opus_cfg;
         pjmedia_codec_opus_get_config(&opus_cfg);
         item = QJsonObject();
-        item["type"] = ENUM;
+        item["type"] = ENUM_INT;
         item["value"] = (int) opus_cfg.bit_rate;
         item["min"] = 6000;
         item["max"] = 510000;
@@ -196,7 +196,7 @@ const QJsonObject Codecs::getCodecParam(QString codecId)
         codecparam["Bit rate"] = item;
 
         item = QJsonObject();
-        item["type"] = ENUM;
+        item["type"] = ENUM_INT;
         item["value"] = opus_cfg.cbr;
         item["min"] = 0;
         item["max"] = 1;
@@ -214,7 +214,7 @@ const QJsonObject Codecs::getCodecParam(QString codecId)
         codecparam["Channel count"] = item;
 
         item = QJsonObject();
-        item["type"] = ENUM;
+        item["type"] = ENUM_INT;
         item["value"] = (int)opus_cfg.complexity;
         item["min"] = 1;
         item["max"] = 10;
@@ -233,7 +233,7 @@ const QJsonObject Codecs::getCodecParam(QString codecId)
         codecparam["Complexity"] = item;
 
         item = QJsonObject();
-        item["type"] = ENUM;
+        item["type"] = ENUM_INT;
         item["value"] = (int)opus_cfg.frm_ptime;
         item["min"] = 2;                                         // todo schould be 2.5!!!!
         item["max"] = 60;
@@ -247,7 +247,7 @@ const QJsonObject Codecs::getCodecParam(QString codecId)
         codecparam["Frame ptime"] = item;
 
         item = QJsonObject();
-        item["type"] = ENUM;
+        item["type"] = ENUM_INT;
         item["value"] = (int)opus_cfg.sample_rate;
         item["min"] = 8000;
         item["max"] = 48000;

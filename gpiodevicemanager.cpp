@@ -7,10 +7,9 @@ GpioDeviceManager *GpioDeviceManager::instance(QObject *parent)
     if(GpioDeviceManagerInstance == NULL) {
         GpioDeviceManagerInstance = new GpioDeviceManager(parent);
         GpioDeviceManagerInstance->createStaticOnDev();
-        uint inarr[2] = {16, 17}, outarr[2] = {22, 26};
-        GpioDeviceManagerInstance->create(2,2,"Test-libgpiod", "gpiochip0", inarr, outarr);
+//        uint inarr[2] = {16, 17}, outarr[2] = {22, 26};
+//        GpioDeviceManagerInstance->create(2,2,"Test-libgpiod", "gpiochip0", inarr, outarr);
     }
-
     return GpioDeviceManagerInstance;
 }
 
@@ -89,7 +88,7 @@ AccountGpioDev* GpioDeviceManager::create(const s_account &account)
 AudioCrosspointDev* GpioDeviceManager::create(const s_audioRoutes& route, QString devName)
 {
     s_IODevices newDev;
-    newDev.devicetype = AccountGpioDevice;
+    newDev.devicetype = AudioCrosspointDevice;
     newDev.uid = createNewUID();
     newDev.inputname = newDev.outputame = devName;
     newDev.RecDevID = newDev.PBDevID = 0;

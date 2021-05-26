@@ -87,7 +87,6 @@ QJsonObject libgpiod_Device::getGpioCaps()
     QJsonObject ret;
 #ifdef AWAH_libgpiod
     QJsonObject parameter, item, gpiochipEnum, lineEnum;
-    int i = 0;
     QStringList chips;
     try {
         for (auto& it: ::gpiod::make_chip_iter()) {
@@ -95,7 +94,7 @@ QJsonObject libgpiod_Device::getGpioCaps()
                       << it.label().c_str() << "] ("
                       << it.num_lines() << " lines)";
             QString chipName = QString::fromStdString(it.name());
-            gpiochipEnum[chipName] = i;
+            gpiochipEnum[chipName] = chipName;
             chips.append(chipName);
         }
         for (const QString &chip: chips ) {
@@ -115,7 +114,7 @@ QJsonObject libgpiod_Device::getGpioCaps()
     item["value"] = "";
     parameter["Name"] = item;
     item = QJsonObject();
-    item["type"] = ENUM;
+    item["type"] = ENUM_STRING;
     item["value"] = 0;
     item["min"] = 0;
     item["max"] = 1024;
@@ -123,7 +122,7 @@ QJsonObject libgpiod_Device::getGpioCaps()
     parameter["GPIO Chip"] = item;
     lineEnum["No Line"] = -1;
     item = QJsonObject();
-    item["type"] = ENUM;
+    item["type"] = ENUM_INT;
     item["value"] = -1;
     item["min"] = 0;
     item["max"] = 1024;
