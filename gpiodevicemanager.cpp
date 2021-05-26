@@ -7,8 +7,8 @@ GpioDeviceManager *GpioDeviceManager::instance(QObject *parent)
     if(GpioDeviceManagerInstance == NULL) {
         GpioDeviceManagerInstance = new GpioDeviceManager(parent);
         GpioDeviceManagerInstance->createStaticOnDev();
-        uint inarr[2] = {16, 17}, outarr[2] = {22, 26};
-        GpioDeviceManagerInstance->create(2,2,"Test-libgpiod", "gpiochip0", inarr, outarr);
+//        uint inarr[2] = {16, 17}, outarr[2] = {22, 26};
+//        GpioDeviceManagerInstance->create(2,2,"Test-libgpiod", "gpiochip0", inarr, outarr);
     }
     return GpioDeviceManagerInstance;
 }

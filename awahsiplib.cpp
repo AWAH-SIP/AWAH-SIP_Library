@@ -115,6 +115,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(this, &AWAHSipLib::AccountsChanged, m_Websocket, &Websocket::AccountsChanged);
     connect(this, &AWAHSipLib::callInfo, m_Websocket, &Websocket::callInfo);
     connect(this, &AWAHSipLib::gpioRoutesChanged, m_Websocket, &Websocket::gpioRoutesChanged);
+    connect(this, &AWAHSipLib::gpioRoutesChanged, m_Settings, &Settings::saveGpioRoutes);
     connect(this, &AWAHSipLib::gpioRoutesTableChanged, m_Websocket, &Websocket::gpioRoutesTableChanged);
     connect(this, &AWAHSipLib::gpioStateChanged, m_Websocket, &Websocket::gpioStatesChanged);
     connect(this, &AWAHSipLib::IoDevicesChanged, m_Websocket, &Websocket::ioDevicesChanged);

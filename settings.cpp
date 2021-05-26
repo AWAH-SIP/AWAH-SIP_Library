@@ -98,6 +98,7 @@ void Settings::loadIODevConfigLater()
         m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: added GPIO device from config file: ") + device.outputame);
         }
     m_GpioDevicesLoaded = true;
+    loadGpioRoutes();
 }
 
 void Settings::saveGpioDevConfig()
@@ -109,14 +110,37 @@ void Settings::saveGpioDevConfig()
     settings.sync();
 }
 
-int Settings::loadGpioRoutes()
+void Settings::loadGpioRoutes()
 {
+    QList<s_gpioRoute>  loadedRoutes;
+    const QMap<int, QString> srcGpioSlotMap;
+    const QMap<int, QString> destAudioSlotMap = m_lib->m_AudioRouter->getDestAudioSlotMap();
+    QSettings settings("awah", "AWAHsipConfig");
 
+    loadedRoutes = settings.value("GpioRoutes").value<QList<s_gpioRoute>>();
+    m_lib->m_Log->writeLog(3,QString("loadGpioRoutes: loaded routes: ") + QString::number(loadedRoutes.count()));
+
+
+    for(auto& route : loadedRoutes ){
+        GpioRouter::instance()->connectGpioPort(route.srcSlotId,route.destSlotId,route.inverted, route.persistant);
+    }
+    m_GpioRoutesLoaded = true;
 }
 
-int Settings::saveGpioRoutes()
+void Settings::saveGpioRoutes()
 {
-
+    if(!m_GpioRoutesLoaded)
+        return;
+    QList<s_gpioRoute> routesToSave;
+    const QList<s_gpioRoute> gpioRoutes = GpioRouter::instance()->getGpioRoutes();
+    for(auto& route : gpioRoutes){
+        if(route.persistant)
+            routesToSave.append(route);
+    }
+    //routesToSave.append(offlineRoutes);                                   // todo remember offlie GPIO routes
+    QSettings settings("awah", "AWAHsipConfig");
+    settings.setValue("GpioRoutes", QVariant::fromValue(routesToSave));
+    settings.sync();
 }
 
 void Settings::loadAccConfig()

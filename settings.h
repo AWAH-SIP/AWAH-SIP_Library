@@ -49,12 +49,8 @@ public:
     /**
     * @brief load GPIO routes from settings file
     */
-    int loadGpioRoutes();
+    void loadGpioRoutes();
 
-    /**
-    * @brief save GPIO routes to the settings file
-    */
-    int saveGpioRoutes();
 
     /**
     * @brief Load endpoint and media settings from settings file and restart endpoint to activate them
@@ -120,6 +116,11 @@ public slots:
     */
     void saveGpioDevConfig();
 
+    /**
+    * @brief save GPIO routes to the settings file
+    */
+    void saveGpioRoutes();
+
 signals:
 
 
@@ -145,6 +146,7 @@ private:
     bool m_IoDevicesLoaded = false;
     bool m_AudioRoutesLoaded = false;
     bool m_GpioDevicesLoaded = false;
+    bool m_GpioRoutesLoaded = false;
 
 private slots:
     void loadIODevConfigLater();
