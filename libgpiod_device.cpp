@@ -22,22 +22,30 @@ libgpiod_Device::libgpiod_Device(s_IODevices& deviceInfo)
         m_outOffsets.append((uint) outOffsetsArr.at(i).toInt());
         outName.append(QString("line %1").arg(outOffsetsArr.at(i).toInt()));
     }
+    m_hasGPI = m_inValues.size() > 0;
+    m_hasGPO = m_outValues.size() > 0;
+
+    if(!m_hasGPI && !m_hasGPO) {
+        m_valid = false;
+    }
 
 #ifdef AWAH_libgpiod
     try {
-        m_chip.open(m_chipName.toStdString());
-        m_outLines = m_chip.get_lines(std::vector<uint>(m_outOffsets.begin(), m_outOffsets.end()));
-        m_outLines.request({
-                               QString("AWAH-SIP_Library_Outs").toStdString(),
-                               gpiod::line_request::DIRECTION_OUTPUT,
-                               0
-                           }, std::vector<int>(m_outValues.begin(), m_outValues.end()));
+        if (m_hasGPO) {
+            m_chip.open(m_chipName.toStdString());
+            m_outLines = m_chip.get_lines(std::vector<uint>(m_outOffsets.begin(), m_outOffsets.end()));
+            m_outLines.request({
+                                   QString("AWAH-SIP_Library_Outs").toStdString(),
+                                   gpiod::line_request::DIRECTION_OUTPUT,
+                                   0
+                               }, std::vector<int>(m_outValues.begin(), m_outValues.end()));
+        }
     }  catch (const std::exception &e) {
         m_valid = false;
         AWAHSipLib::instance()->m_Log->writeLog(1, QString("libgpiod_Device(): Failed to open gpioDevice %1: %2").arg(m_chipName, e.what()));
     }
 
-    if(m_valid) {
+    if(m_valid && m_hasGPI) {
         m_inputRunner = new libgpiod_InputRunner(m_chipName, m_inOffsets);
         connect(m_inputRunner, &libgpiod_InputRunner::inputEvent, this, &libgpiod_Device::getLineEvent);
         connect(m_inputRunner, &libgpiod_InputRunner::logMessage, this, &libgpiod_Device::logMessage);
@@ -155,7 +163,7 @@ void libgpiod_Device::logMessage(uint level, QString msg)
 
 void libgpiod_Device::setOutputs()
 {
-    if(!m_valid)
+    if(!m_valid || !m_hasGPO)
         return;
 #ifdef AWAH_libgpiod
     try {

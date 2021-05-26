@@ -38,6 +38,7 @@ private:
     QVector<int> m_inValues, m_outValues;
     uint m_inCount, m_outCount;
     bool m_valid = true;
+    bool m_hasGPI = false, m_hasGPO = false;
 
 #ifdef AWAH_libgpiod
    gpiod::chip m_chip;
