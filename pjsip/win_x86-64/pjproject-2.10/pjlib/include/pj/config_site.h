@@ -2,8 +2,26 @@
 //#define PJ_CONFIG_MINIMAL_SIZE
 
 // Uncomment to get maximum performance
-//#define PJ_CONFIG_MAXIMUM_SPEED
+#define PJ_CONFIG_MAXIMUM_SPEED
 
-#include <pj/config_site_sample.h> 
 #define PJMEDIA_HAS_OPUS_CODEC	1
-/Users/andy/Dropbox/ElektronikundSoft/Projects/AWAH_SIP/AWAH_test/awah-sip-testapp/lib/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/config_site.h
+
+
+#define 	PJMEDIA_CODEC_L16_HAS_8KHZ_MONO   1
+#define 	PJMEDIA_CODEC_L16_HAS_8KHZ_STEREO   1
+#define 	PJMEDIA_CODEC_L16_HAS_16KHZ_MONO   1
+#define 	PJMEDIA_CODEC_L16_HAS_16KHZ_STEREO   1
+#define 	PJMEDIA_CODEC_L16_HAS_48KHZ_MONO   1
+#define 	PJMEDIA_CODEC_L16_HAS_48KHZ_STEREO   1
+
+
+#define 	PJMEDIA_CODEC_OPUS_DEFAULT_BIT_RATE   128000
+#define 	PJMEDIA_CODEC_OPUS_DEFAULT_COMPLEXITY   10
+#define 	PJMEDIA_CODEC_OPUS_DEFAULT_CBR   PJ_TRUE
+
+ 
+#define  	PJMEDIA_CONF_USE_AGC   0
+#define 	PJMEDIA_SPEEX_AEC_USE_AGC   0
+
+
+#define 	PJSUA_MAX_CALLS			255

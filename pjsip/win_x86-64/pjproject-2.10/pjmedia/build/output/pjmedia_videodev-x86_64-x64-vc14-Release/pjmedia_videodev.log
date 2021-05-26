@@ -5,6 +5,6 @@
   ffmpeg_dev.c
   sdl_dev.c
   videodev.c
-  Generating Code...
+  Code wird generiert...
   dshowclasses.cpp
-  pjmedia_videodev.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjmedia\build\..\lib\pjmedia-videodev-x86_64-x64-vc14-Release.lib
+  pjmedia_videodev.vcxproj -> C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjmedia\lib\pjmedia-videodev-x86_64-x64-vc14-Release.lib

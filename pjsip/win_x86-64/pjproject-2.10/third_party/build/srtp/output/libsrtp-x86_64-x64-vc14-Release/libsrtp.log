@@ -16,5 +16,5 @@
   srtp_err.c
   srtp.c
   ekt.c
-  Generating Code...
-  libsrtp.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\third_party\build\srtp\..\..\lib\libsrtp-x86_64-x64-vc14-Release.lib
+  Code wird generiert...
+  libsrtp.vcxproj -> C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\lib\libsrtp-x86_64-x64-vc14-Release.lib

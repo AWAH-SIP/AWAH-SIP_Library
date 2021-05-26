@@ -4,7 +4,7 @@
   auto_corr_to_refl_coef.c
   complex_bit_reverse.c
   complex_fft.c
-..\..\webrtc\src\webrtc\common_audio\signal_processing\complex_fft.c(169): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\webrtc\src\webrtc\common_audio\signal_processing\complex_fft.c(169,20): warning C4334: "<<": Das Ergebnis der 32-Bit-Verschiebung wurde implizit in 64 Bits konvertiert. (War eine 64-Bit-Verschiebung vorgesehen?)
   copy_set_operations.c
   cross_correlation.c
   division_operations.c
@@ -19,8 +19,8 @@
   ilbc_specific_functions.c
   levinson_durbin.c
   lpc_to_refl_coef.c
-  Generating Code...
-  Compiling...
+  Code wird generiert...
+  Kompilieren...
   min_max_operations.c
   randomization_functions.c
   real_fft.c
@@ -40,10 +40,10 @@
   aecm_core_c.c
   echo_control_mobile.c
   aec_core.c
-..\..\webrtc\src\webrtc\modules\audio_processing\aec\aec_core.c(1804): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\webrtc\src\webrtc\modules\audio_processing\aec\aec_core.c(1804,1): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
   aec_core_sse2.c
-  Generating Code...
-  Compiling...
+  Code wird generiert...
+  Kompilieren...
   aec_rdft.c
   aec_rdft_sse2.c
   aec_resampler.c
@@ -51,17 +51,17 @@
   noise_suppression.c
   noise_suppression_x.c
   nsx_core.c
-..\..\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(437): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-..\..\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(446): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-..\..\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(1372): warning C4267: '-=': conversion from 'size_t' to 'int32_t', possible loss of data
-..\..\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(1409): warning C4267: '*=': conversion from 'size_t' to 'int32_t', possible loss of data
-..\..\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(1625): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-..\..\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(1643): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-..\..\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(1580): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(437,41): warning C4267: "Funktion": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(446,37): warning C4267: "Funktion": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(1372,80): warning C4267: "-=": Konvertierung von "size_t" nach "int32_t", Datenverlust möglich
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(1409,44): warning C4267: "*=": Konvertierung von "size_t" nach "int32_t", Datenverlust möglich
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(1625,55): warning C4267: "Funktion": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(1643,48): warning C4267: "Funktion": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\webrtc\src\webrtc\modules\audio_processing\ns\nsx_core.c(1580,1): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
   nsx_core_c.c
   ns_core.c
   delay_estimator.c
   delay_estimator_wrapper.c
-  Generating Code...
+  Code wird generiert...
   cpu_features.cc
-  libwebrtc.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\third_party\build\webrtc\..\..\lib\libwebrtc-x86_64-x64-vc14-Release.lib
+  libwebrtc.vcxproj -> C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\lib\libwebrtc-x86_64-x64-vc14-Release.lib

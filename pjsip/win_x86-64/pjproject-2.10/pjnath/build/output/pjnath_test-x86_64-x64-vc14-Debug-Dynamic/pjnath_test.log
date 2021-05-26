@@ -7,6 +7,5 @@
   stun_sock_test.c
   test.c
   turn_sock_test.c
-  Generating Code...
-  pjnath_test.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjnath\build\..\bin\pjnath-test-x86_64-x64-vc14-Debug-Dynamic.exe
-  pjnath_test.vcxproj -> .\output\pjnath_test-x86_64-x64-vc14-Debug-Dynamic\pjnath-test-x86_64-x64-vc14-Debug-Dynamic.pdb (Full PDB)
+  Code wird generiert...
+  pjnath_test.vcxproj -> C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjnath\bin\pjnath-test-x86_64-x64-vc14-Debug-Dynamic.exe

@@ -1,7 +1,7 @@
 ﻿  account.cpp
-..\src\pjsua2\account.cpp(79): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-..\src\pjsua2\account.cpp(169): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-..\src\pjsua2\account.cpp(174): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjsip\src\pjsua2\account.cpp(79,46): warning C4267: "=": Konvertierung von "size_t" nach "unsigned int", Datenverlust möglich
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjsip\src\pjsua2\account.cpp(169,44): warning C4267: "=": Konvertierung von "size_t" nach "unsigned int", Datenverlust möglich
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjsip\src\pjsua2\account.cpp(174,44): warning C4267: "=": Konvertierung von "size_t" nach "unsigned int", Datenverlust möglich
   call.cpp
   endpoint.cpp
   json.cpp
@@ -10,5 +10,5 @@
   presence.cpp
   siptypes.cpp
   types.cpp
-  Generating Code...
-  pjsua2_lib.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjsip\build\..\lib\pjsua2-lib-x86_64-x64-vc14-Debug-Dynamic.lib
+  Code wird generiert...
+  pjsua2_lib.vcxproj -> C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjsip\lib\pjsua2-lib-x86_64-x64-vc14-Debug-Dynamic.lib

@@ -8,5 +8,5 @@
   dct4_a.c
   encoder.c
   sam2coef.c
-  Generating Code...
-  libg7221codec.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\third_party\build\g7221\..\..\lib\libg7221codec-x86_64-x64-vc14-Debug-Dynamic.lib
+  Code wird generiert...
+  libg7221codec.vcxproj -> C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\lib\libg7221codec-x86_64-x64-vc14-Debug-Dynamic.lib

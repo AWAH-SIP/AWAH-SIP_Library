@@ -265,13 +265,15 @@ const QJsonObject Codecs::getCodecParam(QString codecId)
     return codecparam;
 }
 
+
+#define CodecsCount 20          // Könnte schöner gemacht werden!
 int Codecs::setCodecParam(QString codecId, QJsonObject CodecParam)
 {
     pj_status_t status = 1;
     pjmedia_codec_mgr* mgr;
     pjmedia_endpt *medep;
-    unsigned int count = 20;
-    pjmedia_codec_info  info[count] , * selected;
+    unsigned int count = CodecsCount;
+    pjmedia_codec_info  info[CodecsCount] , * selected;
     pjmedia_codec_param param;
     pjmedia_codec_opus_config opus_cfg;
     QString tmpID;

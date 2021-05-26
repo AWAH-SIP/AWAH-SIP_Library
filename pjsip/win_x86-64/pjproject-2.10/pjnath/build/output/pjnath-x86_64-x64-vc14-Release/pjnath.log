@@ -1,7 +1,7 @@
 ﻿  errno.c
   ice_session.c
   ice_strans.c
-..\src\pjnath\ice_strans.c(1578): warning C4267: 'function': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjnath\src\pjnath\ice_strans.c(1578,45): warning C4267: "Funktion": Konvertierung von "size_t" nach "unsigned int", Datenverlust möglich
   nat_detect.c
   stun_auth.c
   stun_msg.c
@@ -11,6 +11,6 @@
   stun_transaction.c
   turn_session.c
   turn_sock.c
-..\src\pjnath\turn_sock.c(1452): warning C4267: 'function': conversion from 'size_t' to 'unsigned int', possible loss of data
-  Generating Code...
-  pjnath.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjnath\build\..\lib\pjnath-x86_64-x64-vc14-Release.lib
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjnath\src\pjnath\turn_sock.c(1452,58): warning C4267: "Funktion": Konvertierung von "size_t" nach "unsigned int", Datenverlust möglich
+  Code wird generiert...
+  pjnath.vcxproj -> C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjnath\lib\pjnath-x86_64-x64-vc14-Release.lib

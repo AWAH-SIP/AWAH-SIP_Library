@@ -75,7 +75,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <!-- Import common config -->
-  <Import Project="..\..\..\build\vs\pjproject-vs14-common-config.props" />  
+  <Import Project="..\..\..\build\vs\pjproject-vs14-common-config.props" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6794B975-4E84-4F49-B2DC-C31F2224E03E}</ProjectGuid>
     <RootNamespace>libresample</RootNamespace>
@@ -193,8 +193,9 @@
   </PropertyGroup>
   <!-- Override the PlatformToolset -->
   <PropertyGroup>
-    <PlatformToolset>$(BuildToolset)</PlatformToolset>
-    <CharacterSet Condition="'$(API_Family)'!='WinDesktop'"></CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet Condition="'$(API_Family)'!='WinDesktop'">
+    </CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -292,7 +293,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>14.0.22823.1</_ProjectFileVersion>
-    <OutDir>..\..\lib\</OutDir>    
+    <OutDir>..\..\lib\</OutDir>
   </PropertyGroup>
   <!-- Compile and link option definition -->
   <ItemDefinitionGroup>

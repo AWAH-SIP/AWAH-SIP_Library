@@ -1,13 +1,13 @@
 ﻿  pjsua_acc.c
   pjsua_aud.c
   pjsua_call.c
-..\src\pjsua-lib\pjsua_call.c(4329): warning C4102: 'TODO___HANDLE_FORKED_DIALOG': unreferenced label
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjsip\src\pjsua-lib\pjsua_call.c(4329,5): warning C4102: "TODO___HANDLE_FORKED_DIALOG": Unreferenzierte Bezeichnung
   pjsua_core.c
-..\src\pjsua-lib\pjsua_core.c(2850): warning C4102: 'TODO___pjsua_transport_set_enable': unreferenced label
+C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjsip\src\pjsua-lib\pjsua_core.c(2850,5): warning C4102: "TODO___pjsua_transport_set_enable": Unreferenzierte Bezeichnung
   pjsua_dump.c
   pjsua_im.c
   pjsua_media.c
   pjsua_pres.c
   pjsua_vid.c
-  Generating Code...
-  pjsua_lib.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjsip\build\..\lib\pjsua-lib-x86_64-x64-vc14-Release.lib
+  Code wird generiert...
+  pjsua_lib.vcxproj -> C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjsip\lib\pjsua-lib-x86_64-x64-vc14-Release.lib

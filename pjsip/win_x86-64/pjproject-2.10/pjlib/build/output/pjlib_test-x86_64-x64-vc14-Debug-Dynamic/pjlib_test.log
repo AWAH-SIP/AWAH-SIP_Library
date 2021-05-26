@@ -18,8 +18,8 @@
   pool_perf.c
   rand.c
   rbtree.c
-  Generating Code...
-  Compiling...
+  Code wird generiert...
+  Kompilieren...
   select.c
   sleep.c
   sock.c
@@ -33,6 +33,5 @@
   udp_echo_srv_ioqueue.c
   udp_echo_srv_sync.c
   util.c
-  Generating Code...
-  pjlib_test.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjlib\build\..\bin\pjlib-test-x86_64-x64-vc14-Debug-Dynamic.exe
-  pjlib_test.vcxproj -> .\output\pjlib_test-x86_64-x64-vc14-Debug-Dynamic\pjlib-test-x86_64-x64-vc14-Debug-Dynamic.pdb (Full PDB)
+  Code wird generiert...
+  pjlib_test.vcxproj -> C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjlib\bin\pjlib-test-x86_64-x64-vc14-Debug-Dynamic.exe

@@ -1,0 +1,1988 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6297",
+          "message": {
+            "text": "Arithmetischer Überlauf:  Der 32-Bit-Wert wird verschoben und dann in einen 64-Bit-Wert umgewandelt. Die Ergebnisse entsprechen möglicherweise nicht dem erwarteten Wert."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/frame.h"
+                },
+                "region": {
+                  "startLine": 269,
+                  "startColumn": 24,
+                  "endLine": 269,
+                  "endColumn": 31
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "pjmedia_zero_samples",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetischer Überlauf: Wenn Sie den Operator \"<<\" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator \"<<\" verwenden, um einen Überlauf zu vermeiden (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/frame.h"
+                },
+                "region": {
+                  "startLine": 269,
+                  "startColumn": 24,
+                  "endLine": 269,
+                  "endColumn": 31
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "pjmedia_zero_samples",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6297",
+          "message": {
+            "text": "Arithmetischer Überlauf:  Der 32-Bit-Wert wird verschoben und dann in einen 64-Bit-Wert umgewandelt. Die Ergebnisse entsprechen möglicherweise nicht dem erwarteten Wert."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/frame.h"
+                },
+                "region": {
+                  "startLine": 291,
+                  "startColumn": 26,
+                  "endLine": 291,
+                  "endColumn": 33
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "pjmedia_copy_samples",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetischer Überlauf: Wenn Sie den Operator \"<<\" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator \"<<\" verwenden, um einen Überlauf zu vermeiden (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/frame.h"
+                },
+                "region": {
+                  "startLine": 291,
+                  "startColumn": 26,
+                  "endLine": 291,
+                  "endColumn": 33
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "pjmedia_copy_samples",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6297",
+          "message": {
+            "text": "Arithmetischer Überlauf:  Der 32-Bit-Wert wird verschoben und dann in einen 64-Bit-Wert umgewandelt. Die Ergebnisse entsprechen möglicherweise nicht dem erwarteten Wert."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/frame.h"
+                },
+                "region": {
+                  "startLine": 314,
+                  "startColumn": 27,
+                  "endLine": 314,
+                  "endColumn": 34
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "pjmedia_move_samples",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetischer Überlauf: Wenn Sie den Operator \"<<\" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator \"<<\" verwenden, um einen Überlauf zu vermeiden (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/frame.h"
+                },
+                "region": {
+                  "startLine": 314,
+                  "startColumn": 27,
+                  "endLine": 314,
+                  "endColumn": 34
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "pjmedia_move_samples",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetischer Überlauf: Wenn Sie den Operator \"*\" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator \"*\" verwenden, um einen Überlauf zu vermeiden (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/math.h"
+                },
+                "region": {
+                  "startLine": 147,
+                  "startColumn": 24,
+                  "endLine": 147,
+                  "endColumn": 43
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "pj_math_stat_update",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetischer Überlauf: Wenn Sie den Operator \"*\" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator \"*\" verwenden, um einen Überlauf zu vermeiden (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/math.h"
+                },
+                "region": {
+                  "startLine": 190,
+                  "startColumn": 17,
+                  "endLine": 190,
+                  "endColumn": 31
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "pj_math_stat_set_stddev",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "Arithmetischer Überlauf: Wenn Sie den Operator \"*\" für einen 4-Bytewert verwenden und das Ergebnis in einen 8-Bytewert umwandeln, wandeln Sie den Wert in den breiteren Typ um, bevor Sie den Operator \"*\" verwenden, um einen Überlauf zu vermeiden (io.2)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/math.h"
+                },
+                "region": {
+                  "startLine": 190,
+                  "startColumn": 17,
+                  "endLine": 190,
+                  "endColumn": 21
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "pj_math_stat_set_stddev",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.29.30037.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30037\\bin\\HostX86\\x64\\c1.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x003EC1C0 -il C:\\Users\\WERBIN~1\\AppData\\Local\\Temp\\_CL_fff6bc14ast -typedil -f ..\\src\\pjmedia\\sound_port.c -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1929 -D_MSC_FULL_VER=192930037 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\pjmedia\\include -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\pjlib\\include -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\pjlib-util\\include -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\pjnath\\include -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\third_party\\portaudio\\include -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\third_party\\speex\\include -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\third_party\\build\\srtp -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\third_party\\srtp\\include -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\third_party\\srtp\\crypto\\include -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\third_party\\yuv\\include -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\third_party\\webrtc\\src -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10 -I C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\pjmedia\\build\\include -nologo -W 4 -diagnostics:column -GF -Og -Oi -Ot -Oy -DCODE_ANALYSIS -D_LIB -DNDEBUG -D_MBCS -DWIN64 -DPJ_WIN64=1 -DPJ_M_X86_64=1 -D_MT -D_DLL -GS -D_M_FP_PRECISE -Fo.\\output\\pjmedia-x86_64-x64-vc14-Release\\sound_port.obj -Fd..\\lib\\pjmedia-x86_64-x64-vc14-Release.pdb -external:W 4 -Gd -analyze:projectdirectory C:\\Users\\WerBinIch\\Documents\\git\\AWAH-SIP_Codec\\awah-sip_library\\pjsip\\win_x86-64\\pjproject-2.10\\pjmedia\\build -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30037\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -external:I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30037\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30037\\include -external:I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30037\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30037\\atlmfc\\include -external:I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -external:I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\UnitTest\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\UnitTest\\include -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -external:I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30037\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30037\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\UnitTest\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um",
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/errno.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "27f73fee71e1876b815660ee154472a5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/errno.h"
+          },
+          "hashes": {
+            "md5": "cb8a805b9a0516e284dbc2d198964220"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/types.h"
+          },
+          "hashes": {
+            "md5": "2a9427cf739b5632d0928d2f220d7d65"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/config.h"
+          },
+          "hashes": {
+            "md5": "ecb20cf716d739a725104f2072f90332"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/config.h"
+          },
+          "hashes": {
+            "md5": "7aa544a1750030704c1381d2d46e1cb7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/compat/cc_msvc.h"
+          },
+          "hashes": {
+            "md5": "4a686459b28df26cbc7beb1291b94df2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/compat/os_win32.h"
+          },
+          "hashes": {
+            "md5": "944b6a661958023130534a31a999330b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/compat/size_t.h"
+          },
+          "hashes": {
+            "md5": "01659a7fa3852a2d93dabeba7fe76c1c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/config_site.h"
+          },
+          "hashes": {
+            "md5": "f983464fd12e7a6a51b219672c4ae623"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/sock.h"
+          },
+          "hashes": {
+            "md5": "3abc558a840ac60cc6070d0c7bd47233"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/types.h"
+          },
+          "hashes": {
+            "md5": "350b7fd9e236a0d47ff6f95ca78c9644"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/errno.h"
+          },
+          "hashes": {
+            "md5": "8fc4c25bc0c94cd9fa606d732cc0dc83"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/compat/errno.h"
+          },
+          "hashes": {
+            "md5": "0014d3a1480501ac8d1d067f9f7f6b32"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/string.h"
+          },
+          "hashes": {
+            "md5": "00974dd1d10b8a1e2d92dfd03c40516f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/compat/string.h"
+          },
+          "hashes": {
+            "md5": "7db58ad44590f87a6ad9785161dba21d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/frame.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "d224288fd21962ff1efdc92da144ea2f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/math.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "819c1dd09cfcb9c5512bee362a1736c6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/endpoint.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "813d3d2b10c2f994f92276d6ff500601"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/endpoint.h"
+          },
+          "hashes": {
+            "md5": "d548a20715c75f925af0f2a7f44a03f0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/codec.h"
+          },
+          "hashes": {
+            "md5": "b4c6b6a52ef3e08f0e7de2355c120a86"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/port.h"
+          },
+          "hashes": {
+            "md5": "d491448e5628ea8ea9ca8b18ae073188"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/clock.h"
+          },
+          "hashes": {
+            "md5": "2681ed349479b7ea8719a4c5db5e8abc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/event.h"
+          },
+          "hashes": {
+            "md5": "5719e73ccdbec6c1ccdfff7f213582e9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/audiodev.h"
+          },
+          "hashes": {
+            "md5": "5fc92a07823b337237f7cf9deb2d3b1c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia-audiodev/config.h"
+          },
+          "hashes": {
+            "md5": "829bc89208b2f467dac0791496e62b89"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/pool.h"
+          },
+          "hashes": {
+            "md5": "9e6595f2ce89edc79f636fd04ae8aabf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/list.h"
+          },
+          "hashes": {
+            "md5": "506dd0ce8cad42153ceee043e6b4bf69"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia-audiodev/errno.h"
+          },
+          "hashes": {
+            "md5": "1c9fc8074f353afd93954da77377ff39"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/format.h"
+          },
+          "hashes": {
+            "md5": "1cfb019007b2a15b528096e0ffd7f3bf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/rtcp_fb.h"
+          },
+          "hashes": {
+            "md5": "aeff1daa7fa1a68fc3411d3a5807d2ea"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/rtcp.h"
+          },
+          "hashes": {
+            "md5": "74e34a7ef8a437cd843ee4a9ab9cef2b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/rtcp_xr.h"
+          },
+          "hashes": {
+            "md5": "1c0aa998feddde036768ee37b6a383bb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/compat/high_precision.h"
+          },
+          "hashes": {
+            "md5": "62c72f80dd0439365491cca7ab7f965d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/rtp.h"
+          },
+          "hashes": {
+            "md5": "2fced91fecab203605d2455cab7e4bb3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/sdp.h"
+          },
+          "hashes": {
+            "md5": "b710626ef56310c667e8177815eb443b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/signatures.h"
+          },
+          "hashes": {
+            "md5": "caabb7efbfcd31a1f5ddeeae06d8c26c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/videodev.h"
+          },
+          "hashes": {
+            "md5": "5690a9402bd7e259c43480cde939489f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia-videodev/config.h"
+          },
+          "hashes": {
+            "md5": "57af397ce23f54998896659f38337927"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia-videodev/errno.h"
+          },
+          "hashes": {
+            "md5": "cd500d33fbf6216f4fa9296fb0f12a12"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/assert.h"
+          },
+          "hashes": {
+            "md5": "8e583b0bcb5e2a308e0e05a1df0fd54d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/compat/assert.h"
+          },
+          "hashes": {
+            "md5": "0e9553659e113c847ab8a0623abf63dc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/os.h"
+          },
+          "hashes": {
+            "md5": "a1e098fb7739396c0f6ee0b58fd580b2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/transport.h"
+          },
+          "hashes": {
+            "md5": "757be106320f76df4919a2e165857a32"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia-audiodev/audiodev.h"
+          },
+          "hashes": {
+            "md5": "0e60bd8b9ab370308e9fcd1637cd2644"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/vid_codec.h"
+          },
+          "hashes": {
+            "md5": "ab8215dc80002964b6c6c27ae8102a28"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/ioqueue.h"
+          },
+          "hashes": {
+            "md5": "c9c2b22bfe08730fbad000fd3bf9cc69"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/lock.h"
+          },
+          "hashes": {
+            "md5": "324ad508b0dfcacd5ea7e1a31258cbf9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/log.h"
+          },
+          "hashes": {
+            "md5": "531152ec7de6afe791fb99d176c2c0e0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/echo_webrtc.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "468f69fff7b68db2a94f2ffe16aab741"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/echo.h"
+          },
+          "hashes": {
+            "md5": "d48244cdccd30436c04363c9e6713f0d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/echo_suppress.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "18a159c56f5dd1fbd641880d6f57cf23"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/alaw_ulaw.h"
+          },
+          "hashes": {
+            "md5": "912f6381b46f34cd116d6bf6a7db71e3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/silencedet.h"
+          },
+          "hashes": {
+            "md5": "f37fc7e20d6ed802ef1c3c0f40803a9c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/array.h"
+          },
+          "hashes": {
+            "md5": "1839781f012c03a7d1af15930749ef73"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/echo_internal.h"
+          },
+          "hashes": {
+            "md5": "50a5551f3fd70eb3074037a8d85cf774"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/echo_speex.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "3f802654e2e3ccfd8842831e7c134385"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/speex/include/speex/speex_echo.h"
+          },
+          "hashes": {
+            "md5": "0e19471cae6fe159ccfc5c8237533052"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/speex/include/speex/speexdsp_types.h"
+          },
+          "hashes": {
+            "md5": "08654933cb6ad800bf5abbaf60cf50c0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/speex/include/speex/speex_preprocess.h"
+          },
+          "hashes": {
+            "md5": "8f1e5cd72613387853031aa5e97bc6e5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/echo_port.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "de0b19d7b8bb7343c40124dd425666b6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/echo_port.h"
+          },
+          "hashes": {
+            "md5": "de90bfd37c5dfdf9b6fdc3592b05f9f3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/echo_common.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "c3d3ed49a1a3090d0cb14fdb0fb9d710"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/delaybuf.h"
+          },
+          "hashes": {
+            "md5": "89ee03baaf8186210df2f35bdd19b9ea"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/delaybuf.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "97edf2e42655268ef31808297baad3df"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/circbuf.h"
+          },
+          "hashes": {
+            "md5": "b4d10fff4197a28e30a58a5800a47269"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/wsola.h"
+          },
+          "hashes": {
+            "md5": "833b026a9e69751cdda07125eb2eec66"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/converter_libyuv.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "bc595b12da93cc9b243f43442f7e577f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/converter.h"
+          },
+          "hashes": {
+            "md5": "7c04bfe3830c7481cdded18ecdd27d17"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/converter_libswscale.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "a4923f0081813236c068f303b63cb7fc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/converter.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "a2389b485dc226712db3ea5bd9b3d7ac"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/conf_switch.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "2a305afae64bd1e468d6696102fe1173"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/conference.h"
+          },
+          "hashes": {
+            "md5": "49a604f093060b61ad467575507c2c5a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/sound_port.h"
+          },
+          "hashes": {
+            "md5": "41d38de3a29d0466f932d970e05d88a6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/conference.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "15fa9f4a43ac3e004b994d6f856e1bab"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/resample.h"
+          },
+          "hashes": {
+            "md5": "42d44251f4fe28265aced427abac3067"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/stereo.h"
+          },
+          "hashes": {
+            "md5": "3a63730f366c55fc8184608b96365a52"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/codec.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "ca984660ca7b58876668251ab307da82"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/clock_thread.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "cffd742d5e683e9cfbb74c00591515df"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/bidirectional.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "0dbc695a4df10b94a421b08d6aff1561"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/bidirectional.h"
+          },
+          "hashes": {
+            "md5": "fa88bf7134c84acb5b2f44b9cb18fc8a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/avi_player.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "7c2f25bf5f17a850685f66fa2dc66eb6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/avi_stream.h"
+          },
+          "hashes": {
+            "md5": "9ea928a12c061d04041b21c88ebd8994"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/avi.h"
+          },
+          "hashes": {
+            "md5": "c2fed63cfa2b0eca33612d2ad4eecb94"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/wave.h"
+          },
+          "hashes": {
+            "md5": "ee7fa5c39a80a1b1d530d03d6e7e49da"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/file_access.h"
+          },
+          "hashes": {
+            "md5": "989d25cd418d34fc33a39879449d40ef"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/file_io.h"
+          },
+          "hashes": {
+            "md5": "5b92704e7b72fc41aa9a14aaf2bebe6e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/audiodev.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "78aad23c0044a46aed7337e70a95a5fc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia-audiodev/audiodev_imp.h"
+          },
+          "hashes": {
+            "md5": "57f1cb023f03f137c470ef5d5a9e6bc9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/alaw_ulaw_table.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "0e7f6513bbb8a3e636f84038c1c58848"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/alaw_ulaw.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "c35d1030f2d7e9c5b2429f5b74325e9a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/sdp.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "f221fc41e11040f71268e7f4a63bf45c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib-util/include/pjlib-util/scanner.h"
+          },
+          "hashes": {
+            "md5": "2cd270c4c539fc05312358e9d3d4e00e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib-util/include/pjlib-util/types.h"
+          },
+          "hashes": {
+            "md5": "09997db1b6e3d6b997693b22a2f93b3e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib-util/include/pjlib-util/config.h"
+          },
+          "hashes": {
+            "md5": "0f51b45d66a765d317df28e6dad467fa"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib-util/include/pjlib-util/scanner_cis_bitwise.h"
+          },
+          "hashes": {
+            "md5": "56bffda371323d31c6f421f906fc658e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/except.h"
+          },
+          "hashes": {
+            "md5": "cc8c46524f1efc8a5509f4f44c4b25b9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/compat/setjmp.h"
+          },
+          "hashes": {
+            "md5": "00dc13dcfbfef563b6bc6e1434677f00"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/ctype.h"
+          },
+          "hashes": {
+            "md5": "9233cd097949f87a55ff2a6e8cc47a6d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/compat/ctype.h"
+          },
+          "hashes": {
+            "md5": "dc191fc36c8d4b3977a90c3c7cdc79d0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/rtp.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "2e385c15dc1ec0b2e7ba3ff8ed67b4c2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/rand.h"
+          },
+          "hashes": {
+            "md5": "a5c31e600d645391454045c06771cadb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/rtcp_xr.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "19995ff175941f54dcd6c8c26e00d7ad"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/rtcp_fb.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "be842bea2371cb0e7833bafc7c44e034"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/rtcp.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "7330dc2fa39c72099d9f06eee7476198"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/resample_speex.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "b1cf50cc91f9d40de286a79debb1b338"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/resample_resample.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "ad54b46ba6e806f033adac6a87c3bf52"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/resample/include/resamplesubs.h"
+          },
+          "hashes": {
+            "md5": "bda3c176533f3c149a293a6ce202ab92"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/resample_port.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "c8ee5139c0486a09ecbd1c13331ffa52"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/resample_libsamplerate.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "32cb22ab4ba618265b3b776138bf74ae"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/port.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "a43982481f618a54169eac73e41554e6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/plc_common.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "90d59e49f9a9c137f0e070d1c4e1f277"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/plc.h"
+          },
+          "hashes": {
+            "md5": "59c9c172eefbcf32e28fe59eed3fcdc9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/null_port.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "3a36d13eac77b8b4a304124ffb8b9a46"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/null_port.h"
+          },
+          "hashes": {
+            "md5": "021855d623b2cbc02c1a6e17f197f20a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/mem_player.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "0bbc464fca6ac072bb75e6b467dc92f3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/mem_port.h"
+          },
+          "hashes": {
+            "md5": "422b2d978fa76697df9b25b225d56f04"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/mem_capture.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "86fe1abac155bfaaf3e7954c0d2c6bcd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/master_port.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "137e290c0982a5bd42f20bf1c4d5afb9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/master_port.h"
+          },
+          "hashes": {
+            "md5": "3b13918aaf9c2c48c62cf70f25bd9288"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/jbuf.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "978ac9fd3451e81f527894f4f9e3dd68"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/jbuf.h"
+          },
+          "hashes": {
+            "md5": "c1762b4d94d14f7f2d66c04733faa6f2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/g711.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "b6c9cc4f5357f53bfbafaf986983324d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/g711.h"
+          },
+          "hashes": {
+            "md5": "89d08e5ff208af9b96be3dc61f1ee791"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia-codec/types.h"
+          },
+          "hashes": {
+            "md5": "729cc10d68511377c5547af396072590"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia-codec/config.h"
+          },
+          "hashes": {
+            "md5": "dfe9bbd1e7c7c4259fff52bd68daefb9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/format.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "393a41b3fc135c27c2721c90fba49ae2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/ffmpeg_util.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "c5ba4796e70d73c2c7db7e220ec7d9a2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/event.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "68cb4571ffe946effc631aa7d7f1f888"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/vid_codec_util.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "a8b15b8dea011f0d601e7aff5bcf03e6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/vid_codec_util.h"
+          },
+          "hashes": {
+            "md5": "b9d70479ea27dcb42305f0f80d104038"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/sdp_neg.h"
+          },
+          "hashes": {
+            "md5": "7ae4b5a2d48fb809bda7f88c93a71218"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/stream_common.h"
+          },
+          "hashes": {
+            "md5": "897a9136bcc1aa6816dfa3890868239e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib-util/include/pjlib-util/base64.h"
+          },
+          "hashes": {
+            "md5": "448a101eec4abe3379b0f84836d6c9de"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/vid_codec.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "d5be800a79163e0a1a00f795c5578988"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/videodev.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "bad34edf4baa42765d983067625e50a6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia-videodev/videodev_imp.h"
+          },
+          "hashes": {
+            "md5": "c98cde7a100be31fd33d75f5290b00ef"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia-videodev/videodev.h"
+          },
+          "hashes": {
+            "md5": "48ed6d4319d560d53646ef538f603cb1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/types.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "a71a7df0ee5b99de7aa07a3ced413c6e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/transport_udp.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "0a8305487c40eda8e431282cad7c76f9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/transport_udp.h"
+          },
+          "hashes": {
+            "md5": "61a9e2c170cdd878a892c595eb0dd15f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/stream.h"
+          },
+          "hashes": {
+            "md5": "c2a55b09960a0da73c134bb5a298d437"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/compat/socket.h"
+          },
+          "hashes": {
+            "md5": "38cb02e1faca8d722ecf1ecfc88b4fac"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/addr_resolv.h"
+          },
+          "hashes": {
+            "md5": "e8340dcffd9c2d915a57c44bbb056771"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/transport_srtp_sdes.c"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "de82ce4bce28344dde577c4ac6a8081a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/transport_srtp.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "01a2a6d0cf076fe6e80a1da30ebffe16"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/transport_srtp.h"
+          },
+          "hashes": {
+            "md5": "724d2b346df501e892241193edad2904"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/srtp/include/srtp.h"
+          },
+          "hashes": {
+            "md5": "bc8f286c774c7e78505c90a766a49fc4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/srtp/crypto/include/crypto_kernel.h"
+          },
+          "hashes": {
+            "md5": "1a86c29c0475ff3be42f23700db59efc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/srtp/crypto/include/cipher.h"
+          },
+          "hashes": {
+            "md5": "092fd6c96c9a79b62d3d11d2bfb53553"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/srtp/crypto/include/crypto_types.h"
+          },
+          "hashes": {
+            "md5": "844a15c1f718e5bc0bb4926cafb98c6c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/srtp/crypto/include/auth.h"
+          },
+          "hashes": {
+            "md5": "1ad274c25c91c4fe0e9686a0cfb96468"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/srtp/crypto/include/err.h"
+          },
+          "hashes": {
+            "md5": "f53d27f6fac3d5c6acf091d7acad419e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/srtp/crypto/include/key.h"
+          },
+          "hashes": {
+            "md5": "de391ace877d62ea8f923541ed988d45"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/srtp/crypto/include/rdbx.h"
+          },
+          "hashes": {
+            "md5": "be1a2d76185e5a4db1ebf93498bf8743"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/srtp/crypto/include/datatypes.h"
+          },
+          "hashes": {
+            "md5": "59175a0ced0ff8dc5bfeb4fbf5b85d8a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/srtp/crypto/include/integers.h"
+          },
+          "hashes": {
+            "md5": "50860df366d5ed5960a2367b4c0f754d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/third_party/srtp/crypto/include/alloc.h"
+          },
+          "hashes": {
+            "md5": "01bcbdbe889e24e22a17b140c3bc19b0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/transport_loop.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "dddf81f525002c258b1babf3dd1048ed"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/transport_loop.h"
+          },
+          "hashes": {
+            "md5": "be9c1ee19156ef40e516f32e41e6a844"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/transport_ice.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "aace71daa98c644223b1edeae24545bb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/transport_ice.h"
+          },
+          "hashes": {
+            "md5": "8eb070bc34af6e5ef5d9fb4895df21f1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/ice_strans.h"
+          },
+          "hashes": {
+            "md5": "7fefd1c2b8ddaed0d0edb2702ad254e6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/ice_session.h"
+          },
+          "hashes": {
+            "md5": "3c616bcf6ba7fdb13c1429bc1bb4c317"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/types.h"
+          },
+          "hashes": {
+            "md5": "228a4f12c687f9b0aeae2a117b75cd57"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/config.h"
+          },
+          "hashes": {
+            "md5": "79c910cc33fc08daf5f7682a66935a63"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/stun_session.h"
+          },
+          "hashes": {
+            "md5": "9617981ee0fe3c3e2ed668767d1ff74d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/stun_msg.h"
+          },
+          "hashes": {
+            "md5": "fb5a735c54d1dfcfa86466b1bc3a9e97"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/stun_auth.h"
+          },
+          "hashes": {
+            "md5": "aadc66013e238e5b57ed19b565aee291"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/stun_config.h"
+          },
+          "hashes": {
+            "md5": "3eda69c278ba460dd6d9817c41074c48"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/stun_transaction.h"
+          },
+          "hashes": {
+            "md5": "79ce0e3b574ed4cdddbd75831c5a370b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/timer.h"
+          },
+          "hashes": {
+            "md5": "fdc0e26e7b6e66828a08f820455d4100"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/errno.h"
+          },
+          "hashes": {
+            "md5": "f87a67d10b0c218d550296905b5b7376"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/stun_sock.h"
+          },
+          "hashes": {
+            "md5": "6b703f08f831e53418026eb5937a5460"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib-util/include/pjlib-util/resolver.h"
+          },
+          "hashes": {
+            "md5": "c299f273b8d57bd8b7bc66666968a9d0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib-util/include/pjlib-util/dns.h"
+          },
+          "hashes": {
+            "md5": "a8caf287a93214362cf1e522b6ac4f27"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/sock_qos.h"
+          },
+          "hashes": {
+            "md5": "34394cb397a5ac6c9b179184a04f0be3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/turn_sock.h"
+          },
+          "hashes": {
+            "md5": "53b050c2aba56c56761d89b88a3828d8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjnath/include/pjnath/turn_session.h"
+          },
+          "hashes": {
+            "md5": "edce30e24154217054ca47ac13c97637"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/ssl_sock.h"
+          },
+          "hashes": {
+            "md5": "3946ebc07da1e5adc4eb7a099ee19bf5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/transport_adapter_sample.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "3c774cee7df316d4979f74af87c200a5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/transport_adapter_sample.h"
+          },
+          "hashes": {
+            "md5": "eec3ef4fb743e03998f88643d3c6ccac"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/tonegen.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "eb0b38198b1c23e460d0eba4968ccb8f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/tonegen.h"
+          },
+          "hashes": {
+            "md5": "479aae475ef283fc1e5d51c698674c4f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/stream_info.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "42b3b7b96a2d47981e287c26ae89e831"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/stream_common.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "b8f5a605fbd87a4a6e2cb14a4f2291b6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/WerBinIch/Documents/git/AWAH-SIP_Codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/stream.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "1d15237229fb709d0f81ad92af834ab4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjlib/include/pj/sock_select.h"
+          },
+          "hashes": {
+            "md5": "9433a1df9782f11dcb323d1287143d95"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/stereo_port.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "fd9f5cd01b74c6dcc026907f4f8b44b1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/splitcomb.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "2ed0e28464e58b0f84386704bd6c9359"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/include/pjmedia/splitcomb.h"
+          },
+          "hashes": {
+            "md5": "d3cbabf182fcb526aadb8282cfdebb0b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/werbinich/documents/git/awah-sip_codec/awah-sip_library/pjsip/win_x86-64/pjproject-2.10/pjmedia/src/pjmedia/sound_port.c"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "632db7266629569e4936d31d0dfc97b1"
+          }
+        }
+      ]
+    }
+  ]
+}

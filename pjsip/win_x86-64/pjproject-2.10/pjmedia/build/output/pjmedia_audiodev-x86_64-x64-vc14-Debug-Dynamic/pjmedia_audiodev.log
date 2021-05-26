@@ -6,5 +6,5 @@
   null_dev.c
   pa_dev.c
   wmme_dev.c
-  Generating Code...
-  pjmedia_audiodev.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\pjmedia\build\..\lib\pjmedia-audiodev-x86_64-x64-vc14-Debug-Dynamic.lib
+  Code wird generiert...
+  pjmedia_audiodev.vcxproj -> C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjmedia\lib\pjmedia-audiodev-x86_64-x64-vc14-Debug-Dynamic.lib

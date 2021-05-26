@@ -193,7 +193,7 @@
   </PropertyGroup>
   <!-- Override the PlatformToolset -->
   <PropertyGroup>
-    <PlatformToolset>$(BuildToolset)</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet Condition="'$(API_Family)'!='WinDesktop'">
     </CharacterSet>
   </PropertyGroup>
@@ -840,7 +840,7 @@
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">MaxSpeed</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MaxSpeed</Optimization>
     </ClCompile>
-      <ClCompile Include="..\..\speex\libspeex\smallft.c">
+    <ClCompile Include="..\..\speex\libspeex\smallft.c">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release-Dynamic|Win32'">MaxSpeed</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release-Dynamic|ARM'">MaxSpeed</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release-Dynamic|x64'">MaxSpeed</Optimization>

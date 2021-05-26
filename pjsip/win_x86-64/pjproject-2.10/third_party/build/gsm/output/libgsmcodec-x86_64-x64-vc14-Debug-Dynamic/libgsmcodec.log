@@ -16,5 +16,5 @@
   rpe.c
   short_term.c
   table.c
-  Generating Code...
-  libgsmcodec.vcxproj -> C:\Users\User\Documents\GitHub\awah-sip-testapp\lib\pjsip\win_x86-64\pjproject-2.10\third_party\build\gsm\..\..\lib\libgsmcodec-x86_64-x64-vc14-Debug-Dynamic.lib
+  Code wird generiert...
+  libgsmcodec.vcxproj -> C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\third_party\lib\libgsmcodec-x86_64-x64-vc14-Debug-Dynamic.lib
