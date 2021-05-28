@@ -224,10 +224,16 @@ struct s_Call{
     int callId = PJSUA_INVALID_ID;
     int lastJBemptyGETevent = 0;
     int RXlostSeconds = 0;      // time in seconds since the last recieved frame
+    QString CallStatusText = "Idle... ";
+    int CallStatusCode = 0;
+    QString ConnectedTo = "";
     pjsua_player_id player_id = PJSUA_INVALID_ID;
     pjsua_recorder_id rec_id = PJSUA_INVALID_ID;
     PJCall* callptr = nullptr;
     int splitterSlot;
+    QJsonObject toJSON() const {
+        return {{"CallStatusText", CallStatusText}, {"CallStatusCode", CallStatusCode}, {"ConnectedTo", ConnectedTo}, {"callId", callId}};
+    }
 };
 //Q_DECLARE_METATYPE(s_Call);
 //Q_DECLARE_METATYPE(QList<s_Call>);
@@ -245,20 +251,17 @@ struct s_account{
     int AccID = PJSUA_INVALID_ID;;
     int splitterSlot = PJSUA_INVALID_ID;
     pjmedia_port *splitComb = nullptr;
-    QList <s_Call> CallList = QList <s_Call> ();       // In JSON only QList <int> as an List of Call IDs
+    QList <s_Call> CallList = QList <s_Call> ();
     QList <s_callHistory> CallHistory = QList <s_callHistory>();
     bool fixedJitterBuffer = true;
     uint fixedJitterBufferValue = 160;
     bool autoredialLastCall = false;
     QString SIPStatusText = "trying to register account...";
     int SIPStatusCode = 0;
-    QString CallStatusText = "Idle... ";
-    int CallStatusCode = 0;
-    QString ConnectedTo = "";
     QJsonObject toJSON() const {
         QJsonArray callListJSON, callHistoryJSON;
-        for (auto & pPJCall: CallList) {
-            callListJSON.append(pPJCall.callId);
+        for (auto & call: CallList) {
+            callListJSON.append(call.toJSON());
         }
         for (auto & callhistory: CallHistory) {
             callHistoryJSON.append(callhistory.toJSON());
@@ -277,10 +280,7 @@ struct s_account{
             {"fixedJitterBufferValue", (int)fixedJitterBufferValue},
             {"autoredialLastCall", autoredialLastCall},
             {"SIPStatusCode", SIPStatusCode},
-            {"SIPStatusText", SIPStatusText},
-            {"CallStatusText", CallStatusText},
-            {"CallStatusCode", CallStatusCode},
-            {"ConnectedTo", ConnectedTo}
+            {"SIPStatusText", SIPStatusText}
         };
     }
     s_account* fromJSON(QJsonObject &accountJSON){

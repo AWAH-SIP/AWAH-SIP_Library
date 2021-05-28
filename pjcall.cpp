@@ -65,8 +65,8 @@ void PJCall::onCallState(OnCallStateParam &prm)
         return;
     }
 
-
     parent->OncallStateChanged(ci.accId, ci.role, ci.id, ci.remOfferer, ci.connectDuration.sec,ci.state, ci.lastStatusCode, QString::fromStdString(ci.lastReason),QString::fromStdString(ci.remoteUri));
+
     if(ci.state == PJSIP_INV_STATE_DISCONNECTED)
     {
         //parent->setConnectDuration(ci.connectDuration.sec);
@@ -103,21 +103,19 @@ void PJCall::onCallState(OnCallStateParam &prm)
             m_lib->m_Accounts->addCallToHistory(callAcc->AccID,QString::fromStdString(ci.remoteUri),ci.connectDuration.sec,QString::fromStdString(streaminfo.codecName),!ci.remOfferer);
 
         }
-
-        for (int pos = 0; pos < callAcc->CallList.count(); pos++)
-        {                                                               // Check if callId is valid
-            if (callAcc->CallList.at(pos).callId == ci.id)
-            {
-                callAcc->CallList.removeAt(pos);
-                emit m_lib->m_Accounts->AccountsChanged(m_lib->m_Accounts->getAccounts());
+        QMutableListIterator<s_Call> i(callAcc->CallList);
+        while(i.hasNext()){
+            s_Call &callentry = i.next();                    //check if its a valid callid and remove it from the list
+            if(callentry.callId == ci.id){
+                i.remove();
+                break;
             }
         }
-        if (callAcc->CallList.count()>0){
-            QString tmp = "1: still active: " + QString::number(callAcc->CallList.count()); ;
-            parent->OncallStateChanged(ci.accId, ci.role, ci.id, ci.remOfferer, ci.connectDuration.sec,ci.state, ci.lastStatusCode, tmp ,QString::fromStdString(ci.remoteUri));
-        } else {
+
+        if(callAcc->CallList.count()==0){
             callAcc->gpioDev->setConnected(false);
         }
+        emit m_lib->m_Accounts->AccountsChanged(m_lib->m_Accounts->getAccounts());
         delete this;
     }
 }
