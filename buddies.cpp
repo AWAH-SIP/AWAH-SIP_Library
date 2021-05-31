@@ -65,7 +65,7 @@ bool Buddies::deleteBuddy(int AccID, QString buddyUrl){
     }else   return false;
 }
 
-void Buddies::addBuddy(QString buddyUrl, QString name, QString accUid)
+void Buddies::addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings)
 {
 
 }

@@ -582,8 +582,9 @@ void Websocket::addBuddy(QJsonObject &data, QJsonObject &ret) {
     QString buddyUrl;
     QString name;
     QString accUid;
-    if (jCheckString(buddyUrl, data["buddyUrl"]) && jCheckString(name, data["Name"]) && jCheckString(accUid, data["accUid"])) {
-         m_lib->addBuddy(buddyUrl, name, accUid);
+    QJsonObject codecSettings;
+    if (jCheckString(buddyUrl, data["buddyUrl"]) && jCheckString(name, data["Name"]) && jCheckString(accUid, data["accUid"]) && jCheckObject(codecSettings, data["codecSettings"])) {
+         m_lib->addBuddy(buddyUrl, name, accUid, codecSettings);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {

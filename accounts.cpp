@@ -157,11 +157,6 @@ void Accounts::makeCall(QString number, int AccID)
         try{
             m_lib->m_Log->writeLog(3,(QString("MakeCall: Trying to call: ") +number ));
             newCall->makeCall(fulladdr.toStdString(), prm);
-            s_Call thisCall(account->splitterSlot);
-            thisCall.callptr = newCall;
-            thisCall.callId = newCall->getId();
-            account->CallList.append(thisCall);
-            emit AccountsChanged(getAccounts());
         }
         catch(Error& err){
             m_lib->m_Log->writeLog(1,QString("MakeCall: Call could not be made ") + err.info().c_str());
@@ -184,7 +179,6 @@ void Accounts::acceptCall(int callId, int AccID)
             thisCall.callId = callId;
             m_lib->m_Log->writeLog(3,(QString("AcceptCall: Account: ") + account->name + " accepting call with ID: " + QString::number(callId)));
             newCall->answer(prm);
-            account->CallList.append(thisCall);
             emit AccountsChanged(getAccounts());
         }
         catch(Error& err){
@@ -200,9 +194,11 @@ void Accounts::hangupCall(int callId, int AccID)
     PJCall *call = nullptr;
     QMutableListIterator<s_Call> i(account->CallList);
     while(i.hasNext()){
-        s_Call &callenty = i.next();                    //check if its a valid
-        if(callenty.callId == callId){
-            call = callenty.callptr;
+        s_Call &callentry = i.next();                    //check if its a valid
+        if(callentry.callId == callId){
+            call = callentry.callptr;
+            callentry.CallStatusCode = 8;
+            emit callStateChanged(account->AccID,0,callentry.callId,0,0,8,8,"trying to hang up",callentry.ConnectedTo);
             break;
         }
     }
@@ -224,6 +220,7 @@ void Accounts::hangupCall(int callId, int AccID)
 
             if(callId>= 0 && callId < (int)m_lib->epCfg.uaConfig.maxCalls){
                 call->hangup(prm);                                                                // callobject gets deleted in onCallState callback
+
             }
             else{
                 m_lib->m_Log->writeLog(3, "HangupCall: Hang up call, max. calls bug");                                                   // todo check if this bug exists anymore!
@@ -463,6 +460,7 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
     thisCall->CallStatusCode = state;
     thisCall->CallStatusText = statustxt;
     thisCall->ConnectedTo = remoteUri;
+    thisAccount->callStatusLastReason = statustxt;
 
     if(state == PJSIP_INV_STATE_EARLY){
         if(lastStatusCode == 180 && role == 1){                                                                           // autoanswer call

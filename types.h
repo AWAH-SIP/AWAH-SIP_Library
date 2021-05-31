@@ -201,10 +201,11 @@ struct s_callHistory{
     QString callUri = "";
     int duration = 0;
     QString codec = "";
+    QJsonObject codecSettings = QJsonObject();
     bool outgoing = 0;
     int count = 0;
     QJsonObject toJSON() const {
-        return {{"callUri", callUri}, {"duration", duration}, {"codec", codec}, {"outgoing", outgoing}, {"count", count},};
+        return {{"callUri", callUri}, {"duration", duration}, {"codec", codec}, {"outgoing", outgoing}, {"count", count}, {"codecSettings", codecSettings}};
     }
     s_callHistory* fromJSON(const QJsonObject &callHistoryJSON) {
         callUri = callHistoryJSON["callUri"].toString();
@@ -212,6 +213,7 @@ struct s_callHistory{
         codec = callHistoryJSON["codec"].toInt();
         outgoing = callHistoryJSON["outgoing"].toBool();
         count = callHistoryJSON["count"].toInt();
+        codecSettings = callHistoryJSON["codecSettings"].toObject();
         return this;
     }
 };
@@ -253,6 +255,7 @@ struct s_account{
     pjmedia_port *splitComb = nullptr;
     QList <s_Call> CallList = QList <s_Call> ();
     QList <s_callHistory> CallHistory = QList <s_callHistory>();
+    QString callStatusLastReason = "";
     bool fixedJitterBuffer = true;
     uint fixedJitterBufferValue = 160;
     bool autoredialLastCall = false;
@@ -280,7 +283,8 @@ struct s_account{
             {"fixedJitterBufferValue", (int)fixedJitterBufferValue},
             {"autoredialLastCall", autoredialLastCall},
             {"SIPStatusCode", SIPStatusCode},
-            {"SIPStatusText", SIPStatusText}
+            {"SIPStatusText", SIPStatusText},
+            {"callStatusLastReason", callStatusLastReason}
         };
     }
     s_account* fromJSON(QJsonObject &accountJSON){

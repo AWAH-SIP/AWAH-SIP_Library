@@ -51,6 +51,7 @@ void PJCall::onCallState(OnCallStateParam &prm)
 {
     Q_UNUSED(prm);
     CallInfo ci = getInfo();
+
     s_account* callAcc = parent->getAccountByID(ci.accId);
     s_Call*  Callopts = nullptr;
     for(auto& call : callAcc->CallList){
@@ -60,9 +61,16 @@ void PJCall::onCallState(OnCallStateParam &prm)
         }
     }
     if(Callopts == nullptr) {
-        m_lib->m_Log->writeLog(1, QString("onCallState: Call %1 not found in CallList of Account %2:%3")
+        m_lib->m_Log->writeLog(1, QString("onCallState: Call %1 not found in CallList of Account %2:%3: Creating a new entry")
                                .arg(QString::fromStdString(ci.remoteUri), QString::number(callAcc->AccID), callAcc->name));
-        return;
+        s_Call newCall(callAcc->splitterSlot);                              // callist entry is created here
+        newCall.callptr = this;
+        newCall.callId = getId();
+        newCall.CallStatusCode =  getInfo().state;
+        newCall.CallStatusText = QString::fromStdString(getInfo().stateText);
+        callAcc->CallList.append(newCall);
+        Callopts = &newCall;
+        emit m_lib->AccountsChanged(m_lib->m_Accounts->getAccounts());
     }
 
     parent->OncallStateChanged(ci.accId, ci.role, ci.id, ci.remOfferer, ci.connectDuration.sec,ci.state, ci.lastStatusCode, QString::fromStdString(ci.lastReason),QString::fromStdString(ci.remoteUri));

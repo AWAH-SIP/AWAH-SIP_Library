@@ -206,13 +206,13 @@ QDataStream &operator>>(QDataStream &in, s_audioRoutes &obj)
 
 QDataStream &operator<<(QDataStream &out, const s_callHistory &obj)
 {
-    out << obj.callUri << obj.codec << obj.duration << obj.outgoing << obj.count;
+    out << obj.callUri << obj.codec << obj.duration << obj.outgoing << obj.count  << obj.codecSettings;
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, s_callHistory &obj)
 {
-   in  >> obj.callUri >> obj.codec >> obj.duration >> obj.outgoing >> obj.count;
+   in  >> obj.callUri >> obj.codec >> obj.duration >> obj.outgoing >> obj.count >> obj.codecSettings;
    return in;
 }
 
