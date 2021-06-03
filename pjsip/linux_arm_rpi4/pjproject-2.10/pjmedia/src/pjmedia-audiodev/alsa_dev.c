@@ -217,41 +217,78 @@ print_msg:
 static pj_status_t add_dev (struct alsa_factory *af, const char *dev_name)
 {
     pjmedia_aud_dev_info *adi;
-    snd_pcm_t* pcm;
+    snd_pcm_t *pcm;
+    snd_pcm_hw_params_t *params;
+    unsigned int incount, outcount;
     int pb_result, ca_result;
+    int err;
 
     if (af->dev_cnt >= PJ_ARRAY_SIZE(af->devs))
-	return PJ_ETOOMANY;
+        return PJ_ETOOMANY;
 
     adi = &af->devs[af->dev_cnt];
 
     TRACE_((THIS_FILE, "add_dev (%s): Enter", dev_name));
 
     /* Try to open the device in playback mode */
-    pb_result = snd_pcm_open (&pcm, dev_name, SND_PCM_STREAM_PLAYBACK, 0);
-    if (pb_result >= 0) {
-	TRACE_((THIS_FILE, "Try to open the device for playback - success"));
-	snd_pcm_close (pcm);
-    } else {
-	TRACE_((THIS_FILE, "Try to open the device for playback - failure"));
+    pb_result = snd_pcm_open(&pcm, dev_name, SND_PCM_STREAM_PLAYBACK, 0);
+    if (pb_result >= 0)
+    {
+        TRACE_((THIS_FILE, "Try to open the device for playback - success"));
+
+        /* Allocate a hardware parameters object. */
+        snd_pcm_hw_params_alloca(&params);
+
+        /* Fill it in with default values. */
+        snd_pcm_hw_params_any(pcm, params);
+
+        /* Get miniumal accepted Channels of Device */
+        if ((err = snd_pcm_hw_params_get_channels_min(params, &outcount)) < 0)
+        {
+            outcount = 0;
+        }
+
+        snd_pcm_close(pcm);
+    }
+    else
+    {
+        TRACE_((THIS_FILE, "Try to open the device for playback - failure"));
     }
 
     /* Try to open the device in capture mode */
-    ca_result = snd_pcm_open (&pcm, dev_name, SND_PCM_STREAM_CAPTURE, 0);
-    if (ca_result >= 0) {
-	TRACE_((THIS_FILE, "Try to open the device for capture - success"));
-	snd_pcm_close (pcm);
-    } else {
-	TRACE_((THIS_FILE, "Try to open the device for capture - failure"));
+    ca_result = snd_pcm_open(&pcm, dev_name, SND_PCM_STREAM_CAPTURE, 0);
+    if (ca_result >= 0)
+    {
+        TRACE_((THIS_FILE, "Try to open the device for capture - success"));
+
+        /* Allocate a hardware parameters object. */
+        snd_pcm_hw_params_alloca(&params);
+
+        /* Fill it in with default values. */
+        snd_pcm_hw_params_any(pcm, params);
+
+        /* Get miniumal accepted Channels of Device */
+        if ((err = snd_pcm_hw_params_get_channels_min(params, &incount)) < 0)
+        {
+            incount = 0;
+        }
+
+        snd_pcm_close(pcm);
+    }
+    else
+    {
+        TRACE_((THIS_FILE, "Try to open the device for capture - failure"));
     }
 
     /* Check if the device could be opened in playback or capture mode */
-    if (pb_result<0 && ca_result<0) {
-	TRACE_((THIS_FILE, "Unable to open sound device %s, setting "
-	        	   "in/out channel count to 0", dev_name));
-	/* Set I/O channel counts to 0 to indicate unavailable device */
-	adi->output_count = 0;
-	adi->input_count =  0;
+    if (pb_result < 0 && ca_result < 0)
+    {
+        TRACE_((THIS_FILE, "Unable to open sound device %s, setting "
+                           "in/out channel count to 0",
+                dev_name));
+        /* Set I/O channel counts to 0 to indicate unavailable device */
+        adi->output_count = 0;
+        adi->input_count = 0;
     }
 
     /* Reset device info */
@@ -261,10 +298,10 @@ static pj_status_t add_dev (struct alsa_factory *af, const char *dev_name)
     strncpy(adi->name, dev_name, sizeof(adi->name));
 
     /* Check the number of playback channels */
-    adi->output_count = (pb_result>=0) ? 1 : 0;
+    adi->output_count = (pb_result >= 0) ? outcount : 0;
 
     /* Check the number of capture channels */
-    adi->input_count = (ca_result>=0) ? 1 : 0;
+    adi->input_count = (ca_result >= 0) ? incount : 0;
 
     /* Set the default sample rate */
     adi->default_samples_per_sec = 8000;

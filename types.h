@@ -258,7 +258,6 @@ struct s_account{
     QString callStatusLastReason = "";
     bool fixedJitterBuffer = true;
     uint fixedJitterBufferValue = 160;
-    bool autoredialLastCall = false;
     QString SIPStatusText = "trying to register account...";
     int SIPStatusCode = 0;
     QJsonObject toJSON() const {
@@ -281,7 +280,6 @@ struct s_account{
             {"CallHistory", callHistoryJSON},
             {"fixedJitterBuffer", fixedJitterBuffer},
             {"fixedJitterBufferValue", (int)fixedJitterBufferValue},
-            {"autoredialLastCall", autoredialLastCall},
             {"SIPStatusCode", SIPStatusCode},
             {"SIPStatusText", SIPStatusText},
             {"callStatusLastReason", callStatusLastReason}
@@ -296,7 +294,6 @@ struct s_account{
         FilePlayPath = accountJSON["FilePlayPath"].toString();
         fixedJitterBuffer = accountJSON["fixedJitterBuffer"].toBool();
         fixedJitterBufferValue = accountJSON["fixedJitterBufferValue"].toInt();
-        autoredialLastCall = accountJSON["autoredialLastCall"].toBool();
         return this;
     }
 };
@@ -469,6 +466,7 @@ struct s_buddy{
     QString Name = "";
     int status = PJSUA_BUDDY_STATUS_UNKNOWN;
     QString accUid = "";
+    QString autoConnectFromAccountUid = "";
     QJsonObject toJSON() const {
         return{{"buddyUrl", buddyUrl}, {"Name", Name}, {"status", status} };
     }
