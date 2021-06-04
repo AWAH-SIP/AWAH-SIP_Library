@@ -128,6 +128,7 @@ struct s_IODevices{
     QString outputame="";
     QList <int> portNo = QList <int>();
     int genfrequency = -1;               // only for devicetype TestToneGenerator
+    pjmedia_port* mediaport = nullptr;
     int RecDevID = -1;                   // only for devicetype AudioDevice, -1 indicates an offline device
     int PBDevID = -1;
     QString path = "n/a";                   // ony for devicetype Fileplayer, FileRecorder

@@ -65,7 +65,7 @@ public:
     * @param if the device is loaded from settings you have to provide it's uid to assign the correct routes
     * @return no of channels added or -1 on error
     */
-    int addAudioDevice(int recordDevId, int playbackDevId, QString uid = "");
+    void addAudioDevice(int recordDevId, int playbackDevId, QString uid = "");
 
     /**
     * @brief Add an offline device to the the router
@@ -80,10 +80,9 @@ public:
 
     /**
     * @brief remove a an audio device from the conference bridge.
-    * @param DevIndex the position in the Audio devices List to remove
-    * @return PJ_SUCESS or respective error code
+    * @param the uid of the Device to be removed
     */
-    int removeAudioDevice(int DevIndex);
+    void removeAudioDevice(QString uid);
 
     /**
     * @brief get an audio device by it's unique identifyer
@@ -97,17 +96,15 @@ public:
     * @param Name displayed name of the player in the bridge
     * @param File path and filename of the audio file to be played
     * @param uid  the unique identifyer
-    * @return PJ_SUCESS or respective error code
     */
-    int addFilePlayer(QString Name, QString File, QString uid = "");
+    void addFilePlayer(QString Name, QString File, QString uid = "");
 
     /**
     * @brief add a file recorder to the conference bridge
     * @param File the path                                              // todo richtig beschreiben wenn das
     * @param uid  the unique identifyer
-    * @return PJ_SUCESS or respective error code
     */
-    int addFileRecorder(QString File, QString uid = "");
+    void addFileRecorder(QString File, QString uid = "");
 
     /**
     * @brief Return the List of all active conference ports
@@ -144,13 +141,12 @@ public:
     /**
     * @brief Add a sine wave generator
     * @param frequ Frequency in Hz
-    * @return PJ_SUCESS or the respective error code
     */
-    int addToneGen(int freq, QString uid = "");
+    void addToneGen(int freq, QString uid = "");
 
     /**
-    * @brief Add a Splitter-Combiner to the ConferenceBridge for an Account
-    * @param account Account-Struct to add the SplitterCombiner
+    * @brief Add a Splitter-Combiner to the ConferenceBridge for an account
+    * @param account account-struct to add the SplitterCombiner
     * @return PJ_SUCESS or the respective error code
     */
     int addSplittComb(s_account& account);
@@ -159,7 +155,7 @@ public:
     * @brief get the active devices
     * @return the AudioDevice struct
     */
-    QList<s_IODevices>* getAudioDevices() { return &AudioDevices; };
+    QList<s_IODevices>* getAudioDevices() { return &m_AudioDevices; };
 
     void conferenceBridgeChanged();
     void removeAllRoutesFromAccount(const s_account account);
@@ -197,7 +193,7 @@ private:
     * @brief All AudioDevices (soundcards, generators, fileplayer and recoder) are added to this list
     *       in order to save and load current audio setup
     */
-    QList<s_IODevices> AudioDevices;
+    QList<s_IODevices> m_AudioDevices;
 
     /**
     * @brief All routes from the Conference Bridge are added to this list

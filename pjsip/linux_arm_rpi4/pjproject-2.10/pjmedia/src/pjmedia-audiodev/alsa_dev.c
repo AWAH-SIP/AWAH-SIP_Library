@@ -243,7 +243,7 @@ static pj_status_t add_dev (struct alsa_factory *af, const char *dev_name)
         snd_pcm_hw_params_any(pcm, params);
 
         /* Get miniumal accepted Channels of Device */
-        if ((err = snd_pcm_hw_params_get_channels_min(params, &outcount)) < 0)
+        if ((err = snd_pcm_hw_params_get_channels(params, &outcount)) < 0)
         {
             outcount = 0;
         }
@@ -268,7 +268,7 @@ static pj_status_t add_dev (struct alsa_factory *af, const char *dev_name)
         snd_pcm_hw_params_any(pcm, params);
 
         /* Get miniumal accepted Channels of Device */
-        if ((err = snd_pcm_hw_params_get_channels_min(params, &incount)) < 0)
+        if ((err = snd_pcm_hw_params_get_channels(params, &incount)) < 0)
         {
             incount = 0;
         }

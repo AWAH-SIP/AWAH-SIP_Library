@@ -89,16 +89,16 @@ public:
     QList <s_audioRoutes> getAudioRoutes() const { return m_AudioRouter->getAudioRoutes(); };
     QStringList listInputSoundDev() const { return m_AudioRouter->listInputSoundDev(); };
     QStringList listOutputSoundDev() const { return m_AudioRouter->listOutputSoundDev(); };
-    int addAudioDevice(int recordDevId, int playbackDevId) const { return m_AudioRouter->addAudioDevice(recordDevId, playbackDevId); };
-    int removeAudioDevice(int DevIndex) const { return m_AudioRouter->removeAudioDevice(DevIndex); };
-    int addFilePlayer(QString Name, QString File) const { return m_AudioRouter->addFilePlayer(Name, File); };
-    int addFileRecorder(QString File) const { return m_AudioRouter->addFileRecorder(File); };
+    void addAudioDevice(int recordDevId, int playbackDevId) const { return m_AudioRouter->addAudioDevice(recordDevId, playbackDevId); };
+    void removeAudioDevice(QString uid) const { return m_AudioRouter->removeAudioDevice(uid); };
+    void addFilePlayer(QString Name, QString File) const { return m_AudioRouter->addFilePlayer(Name, File); };
+    void addFileRecorder(QString File) const { return m_AudioRouter->addFileRecorder(File); };
     const s_audioPortList& getConfPortsList() const { return m_AudioRouter->getConfPortsList(); };
     int connectConfPort(int src_slot, int sink_slot, float level, bool persistant = true) const
         { return m_AudioRouter->connectConfPort(src_slot, sink_slot, level, persistant); };
     int disconnectConfPort(int src_slot, int sink_slot) const { return m_AudioRouter->disconnectConfPort(src_slot, sink_slot); };
     int changeConfPortLevel(int src_slot, int sink_slot, float level) const { return m_AudioRouter->changeConfPortLevel(src_slot, sink_slot, level); };
-    int addToneGen(int freq) const { return m_AudioRouter->addToneGen(freq); };
+    void addToneGen(int freq) const { return m_AudioRouter->addToneGen(freq); };
     QList<s_IODevices>& getAudioDevices() const { return *m_AudioRouter->getAudioDevices(); };
     int getSoundDevID(QString DeviceName) const { return m_AudioRouter->getSoundDevID(DeviceName); };
 

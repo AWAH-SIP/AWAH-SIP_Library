@@ -88,7 +88,7 @@ int AudioRouter::getSoundDevID(QString DeviceName)
     return -1;
 }
 
-int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid){
+void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid){
     pjmedia_snd_port *soundport;
     pj_status_t status;
     pjsua_conf_port_info masterPortInfo;
@@ -98,11 +98,12 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
     QList<int> connectedSlots;
     s_IODevices Audiodevice;
 
-    for(auto& device : AudioDevices){
-        if(device.RecDevID == recordDevId || device.PBDevID == playbackDevId){
-            m_lib->m_Log->writeLog(3,"AddAudioDevice: error could not add device. Device already exists!" );
-            return -1;
-        }
+    for(auto& device : m_AudioDevices){
+        if(device.devicetype == SoundDevice)
+            if(device.RecDevID == recordDevId || device.PBDevID == playbackDevId){
+                m_lib->m_Log->writeLog(3,"AddAudioDevice: error could not add device. Device already exists!" );
+                return;
+            }
     }
 
     recorddev =  m_lib->m_pjEp->audDevManager().getDevInfo(recordDevId);
@@ -125,7 +126,7 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
 
     if (channelCnt == 0){
         m_lib->m_Log->writeLog(3,"AddAudioDevice: Device has either no input or no outputs!" );
-        return -1;
+        return;
     }
 
     status = pjsua_conf_get_port_info( 0, &masterPortInfo );                           // get the clockrate from master port
@@ -133,7 +134,7 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
         char buf[50];
         pj_strerror	(status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(1,(QString("AddAudioDevice: Error while reading master port info") + buf));
-        return -1;
+        return;
     }
 
     samples_per_frame = masterPortInfo.clock_rate * m_lib->epCfg.medConfig.audioFramePtime * channelCnt /  1000;
@@ -152,7 +153,7 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
         char buf[50];
         pj_strerror	(status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(1,(QString("AddAudioDevice: adding Audio decive failed: ") + buf));
-        return -1;
+        return;
     }
 
     pjmedia_port *splitcomb;
@@ -168,7 +169,7 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
         char buf[50];
         pj_strerror	(status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(1,(QString("AddAudioDevice: create splitcomb port failed: ") + buf));
-        return -1;
+        return;
     }
     for (int i = 0; i<channelCnt;i++)
     {
@@ -179,7 +180,7 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
             char buf[50];
             pj_strerror	(status,buf,sizeof (buf) );
             m_lib->m_Log->writeLog(1,(QString("Add audiodevice: could not create splittcomb revchannel: ") + buf));
-            return -1;
+            return;
         }
         pj_strdup2(m_lib->pool, &revch->info.name, name.toStdString().c_str());
         status = pjsua_conf_add_port(m_lib->pool, revch, &slot);
@@ -187,7 +188,7 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
             char buf[50];
             pj_strerror	(status,buf,sizeof (buf) );
             m_lib->m_Log->writeLog(1,(QString("Add audiodevice: adding  conference port failed: ") + buf));
-            return -1;
+            return;
         }
         pjsua_conf_connect(masterPortInfo.slot_id,slot);        // connect masterport to sound dev to keep it open all the time to prevent different latencies (see issue #29)
         pjsua_conf_connect(slot,masterPortInfo.slot_id);
@@ -197,7 +198,7 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
             char buf[50];
             pj_strerror	(status,buf,sizeof (buf) );
             m_lib->m_Log->writeLog(1,(QString("Add audiodevice: connecting sound port failed: ") + buf));
-            return -1;
+            return;
         }
         connectedSlots.append(slot);
     }
@@ -212,11 +213,11 @@ int AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid)
     Audiodevice.soundport = soundport;
     Audiodevice.inChannelCount = recorddev.inputCount;
     Audiodevice.outChannelCount = playbackdev.outputCount;
-    AudioDevices.append(Audiodevice);
+    m_AudioDevices.append(Audiodevice);
     m_lib->m_Settings->saveIODevConfig();
     conferenceBridgeChanged();
-    emit AudioDevicesChanged(AudioDevices);
-    return channelCnt;
+    emit AudioDevicesChanged(m_AudioDevices);
+    return;
 }
 
 void AudioRouter::addOfflineAudioDevice(QString inputName, QString outputName, QString uid)
@@ -228,18 +229,30 @@ void AudioRouter::addOfflineAudioDevice(QString inputName, QString outputName, Q
     Audiodevice.RecDevID = -1;
     Audiodevice.devicetype = SoundDevice;
     Audiodevice.uid = uid;
-    AudioDevices.append(Audiodevice);
+    m_AudioDevices.append(Audiodevice);
     m_lib->m_Settings->saveIODevConfig();
 }
 
-int AudioRouter::removeAudioDevice(int DevIndex)
+void AudioRouter::removeAudioDevice(QString uid)
 {
     pj_status_t status;
-    if(DevIndex > AudioDevices.count()-1){
-        m_lib->m_Log->writeLog(2,"removeAudioDevice: device not found");
-        return -1;
+    s_IODevices* deviceToRemove = nullptr;
+    for(auto& device : m_AudioDevices){
+        if(device.uid == uid){
+            deviceToRemove = &device;
+            break;
+        }
     }
-    for(auto& slot : AudioDevices.at(DevIndex).portNo){
+    if(deviceToRemove == nullptr){
+        m_lib->m_Log->writeLog(2,"removeAudioDevice: device not found");
+        return;
+    }
+
+    if(deviceToRemove->devicetype > FileRecorder){
+        m_lib->m_Log->writeLog(3,"removeAudioDevice: device not an audio device");
+    }
+
+    for(auto& slot : deviceToRemove->portNo){
         try{
             removeAllRoutesFromSlot(slot);
             status = pjsua_conf_remove_port(slot);
@@ -247,34 +260,92 @@ int AudioRouter::removeAudioDevice(int DevIndex)
                 char buf[50];
                 pj_strerror	(status,buf,sizeof (buf));
                 m_lib->m_Log->writeLog(1,(QString("removeAudioDevice: could not remove port - ERROR: ") + buf));
-                return status;
+                return;
             }
         }
         catch(Error &err)
         {
             m_lib->m_Log->writeLog(1,(QString("removeAudioDevice: failed: - ERROR: " ) +  err.info().c_str()));
-            return status;
+            return;
         }
     }
-    if(AudioDevices.at(DevIndex).devicetype == SoundDevice)
+    if(deviceToRemove->devicetype == SoundDevice)
     {
-        status = pjmedia_snd_port_destroy(AudioDevices.at(DevIndex).soundport);
+        status = pjmedia_snd_port_destroy(deviceToRemove->soundport);
         if (status != PJ_SUCCESS){
             char buf[50];
             pj_strerror	(status,buf,sizeof (buf));
             m_lib->m_Log->writeLog(1,(QString("removeAudioDevice: could not remove sound device - ERROR: ") + buf));
-            return status;
+            return;
+        }
+        m_lib->m_Log->writeLog(3,(QString("removeAudioDevice: removing: ")  +   deviceToRemove->inputname));
+    }
+
+    if(deviceToRemove->devicetype == FilePlayer)
+    {
+        status = pjsua_player_destroy(deviceToRemove->PBDevID);
+        if (status != PJ_SUCCESS){
+            char buf[50];
+            pj_strerror	(status,buf,sizeof (buf));
+            m_lib->m_Log->writeLog(1,(QString("removeAudioDevice: could not remove file player - ERROR: ") + buf));
+            return;
+        }
+        status = pjmedia_port_destroy(deviceToRemove->mediaport);
+        if (status != PJ_SUCCESS){
+            char buf[50];
+            pj_strerror	(status,buf,sizeof (buf));
+            m_lib->m_Log->writeLog(1,(QString("removeAudioDevice: could not remove player port - ERROR: ") + buf));
+            return;
+        }
+        m_lib->m_Log->writeLog(3,(QString("removeAudioDevice: removing: ")  +   deviceToRemove->inputname));
+    }
+
+    if(deviceToRemove->devicetype == FileRecorder)
+    {
+        status = pjsua_recorder_destroy(deviceToRemove->RecDevID);
+        if (status != PJ_SUCCESS){
+            char buf[50];
+            pj_strerror	(status,buf,sizeof (buf));
+            m_lib->m_Log->writeLog(1,(QString("removeAudioDevice: could not remove file player - ERROR: ") + buf));
+            return;
+        }
+        status = pjmedia_port_destroy(deviceToRemove->mediaport);
+        if (status != PJ_SUCCESS){
+            char buf[50];
+            pj_strerror	(status,buf,sizeof (buf));
+            m_lib->m_Log->writeLog(1,(QString("removeAudioDevice: could not remove recorder port - ERROR: ") + buf));
+            return;
+        }
+        m_lib->m_Log->writeLog(3,(QString("removeAudioDevice: removing: ")  +   deviceToRemove->inputname));
+    }
+
+    if(deviceToRemove->devicetype == TestToneGenerator)
+    {
+       status = pjmedia_port_destroy(deviceToRemove->mediaport);
+        if (status != PJ_SUCCESS){
+            char buf[50];
+            pj_strerror	(status,buf,sizeof (buf));
+            m_lib->m_Log->writeLog(1,(QString("removeAudioDevice: could not remove generator port - ERROR: ") + buf));
+            return;
+        }
+        m_lib->m_Log->writeLog(3,(QString("removeAudioDevice: removing: ")  +   deviceToRemove->inputname));
+    }
+
+
+    QMutableListIterator<s_IODevices> i(m_AudioDevices);
+    while(i.hasNext()){
+        s_IODevices &device = i.next();
+        if(device.uid == deviceToRemove->uid){
+            i.remove();
+            break;
         }
     }
-    m_lib->m_Log->writeLog(3,(QString("removeAudioDevice: removing: ")  +   AudioDevices.at(DevIndex).inputname));
-    AudioDevices.removeAt(DevIndex);
     conferenceBridgeChanged();
     m_lib->m_Settings->saveIODevConfig();
-    emit AudioDevicesChanged(AudioDevices);
-    return PJ_SUCCESS;
+    emit AudioDevicesChanged(m_AudioDevices);
 }
 
-int AudioRouter::addToneGen(int freq, QString uid){
+void AudioRouter::addToneGen(int freq, QString uid){
     pjsua_data* intData = pjsua_get_var();
     pj_status_t status;
     pjmedia_port *genPort;
@@ -293,14 +364,14 @@ int AudioRouter::addToneGen(int freq, QString uid){
         char buf[50];
         pj_strerror (status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(2,(QString("AddToneGen: Error while reading master port info") + buf));
-        return status;
+        return;
     }
 
     status = pjmedia_tonegen_create2(m_lib->pool, &label,  masterPortInfo.clock_rate, 1, 2 * masterPortInfo.samples_per_frame, 16,PJMEDIA_TONEGEN_LOOP, &genPort);
     if (status != PJ_SUCCESS) {char buf[50];
         pj_strerror	(status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(2,(QString("AddToneGen: Unable to create tone generator: ") + buf));
-        return status;
+        return;
     }
 
     status = pjsua_conf_add_port(m_lib->pool, genPort, &slot);
@@ -308,12 +379,12 @@ int AudioRouter::addToneGen(int freq, QString uid){
         char buf[50];
         pj_strerror	(status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(2,(QString("AddToneGen: connecting tone generator to confbridge failed: ") + buf));
-        return status;
+        return;
     }
 
     status = pjmedia_conf_adjust_rx_level(intData->mconf, slot, dBtoAdjLevel(-4.5));
     if (status != PJ_SUCCESS) {
-        return status;
+        return;
     }
 
 
@@ -332,15 +403,16 @@ int AudioRouter::addToneGen(int freq, QString uid){
     Audiodevice.inputname = Tempstring.append(QString::number(freq).append("Hz"));
     Audiodevice.genfrequency = freq;
     Audiodevice.portNo.append(slot);
-    AudioDevices.append(Audiodevice);
+    Audiodevice.mediaport = genPort;
+    m_AudioDevices.append(Audiodevice);
     m_lib->m_Settings->saveIODevConfig();
     conferenceBridgeChanged();
-    emit AudioDevicesChanged(AudioDevices);
-    return PJ_SUCCESS;
+    emit AudioDevicesChanged(m_AudioDevices);
+    return;
 }
 
 
-int AudioRouter::addFilePlayer(QString PlayerName, QString File, QString uid)
+void AudioRouter::addFilePlayer(QString PlayerName, QString File, QString uid)
 {
     pjsua_data* intData = pjsua_get_var();
     pjsua_player_id player_id;
@@ -359,12 +431,12 @@ int AudioRouter::addFilePlayer(QString PlayerName, QString File, QString uid)
         char buf[50];
         pj_strerror	(status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(1,(QString("Fileplayer: create player failed: ") + buf));
-        return status;
+        return;
     }
 
     status = pjsua_player_get_port(player_id, &player_media_port);
     if (status != PJ_SUCCESS) {
-        return status;
+        return;
     }
     pj_strdup2(m_lib->pool, &player_media_port->info.name, name.toStdString().c_str());
     status = pjsua_conf_add_port(m_lib->pool, player_media_port, &slot);
@@ -372,11 +444,11 @@ int AudioRouter::addFilePlayer(QString PlayerName, QString File, QString uid)
         char buf[50];
         pj_strerror	(status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(2,(QString("Fileplayer: connecting file player to conference bridge failed: ") + buf));
-        return status;
+        return;
     }
     status = pjmedia_conf_adjust_rx_level(intData->mconf, slot, dBtoAdjLevel(-4.5));
     if (status != PJ_SUCCESS) {
-        return status;
+        return;
     }
 
     Audiodevice.devicetype = FilePlayer;                             // update devicelist for saving and recalling current setup
@@ -384,46 +456,47 @@ int AudioRouter::addFilePlayer(QString PlayerName, QString File, QString uid)
     Audiodevice.uid = uid;
     Audiodevice.path = File;
     Audiodevice.portNo.append(slot);
-    AudioDevices.append(Audiodevice);
+    Audiodevice.PBDevID = player_id;
+    Audiodevice.mediaport = player_media_port;
+    m_AudioDevices.append(Audiodevice);
     conferenceBridgeChanged();
     m_lib->m_Settings->saveIODevConfig();
-    emit AudioDevicesChanged(AudioDevices);
-    return status;
+    emit AudioDevicesChanged(m_AudioDevices);
+    return;
 }
 
 
-int AudioRouter::addFileRecorder(QString File, QString uid)
+void AudioRouter::addFileRecorder(QString File, QString uid)
 {
-    pjsua_player_id player_id;
+    pjsua_recorder_id rec_id;
     pj_status_t status;
     const pj_str_t sound_file = pj_strdup3 (m_lib->pool, File.toStdString().c_str());
-    pjmedia_port *player_media_port;
+    pjmedia_port *media_port;
     s_IODevices Audiodevice;
     int slot;
     if(uid.isEmpty())
         uid = createNewUID();
     QString name = "FR:" + uid + "-File Recorder " + File;
 
-    status = pjsua_recorder_create(&sound_file, 0, 0, -1, 0,&player_id);
+    status = pjsua_recorder_create(&sound_file, 0, 0, -1, 0,&rec_id);
     if (status != PJ_SUCCESS) {
         char buf[50];
         pj_strerror	(status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(1,(QString("Filerecorder: create failed: " ) + buf));
-        return status;
+        return;
     }
-
-    status = pjsua_player_get_port(player_id, &player_media_port);
+    status = pjsua_recorder_get_port(rec_id, &media_port);
     if (status != PJ_SUCCESS)
     {
-        return status;
+        return;
     }
-    pj_strdup2(m_lib->pool, &player_media_port->info.name, name.toStdString().c_str());
-    status = pjsua_conf_add_port(m_lib->pool, player_media_port, &slot);
+    pj_strdup2(m_lib->pool, &media_port->info.name, name.toStdString().c_str());
+    status = pjsua_conf_add_port(m_lib->pool, media_port, &slot);
     if (status != PJ_SUCCESS) {
         char buf[50];
         pj_strerror	(status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(2,(QString("FileRecorder: connecting file recorder to conference bridge failed: ") + buf));
-        return status;
+        return;
     }
 
     Audiodevice.devicetype = FileRecorder;                             // update devicelist for saving and recalling current setup
@@ -431,11 +504,13 @@ int AudioRouter::addFileRecorder(QString File, QString uid)
     Audiodevice.uid = uid;
     Audiodevice.path = File;
     Audiodevice.portNo.append(slot);
-    AudioDevices.append(Audiodevice);
+    Audiodevice.RecDevID = rec_id;
+    Audiodevice.mediaport = media_port;
+    m_AudioDevices.append(Audiodevice);
     m_lib->m_Settings->saveIODevConfig();
     conferenceBridgeChanged();
-    emit AudioDevicesChanged(AudioDevices);
-    return status;
+    emit AudioDevicesChanged(m_AudioDevices);
+    return;
 }
 
 int AudioRouter::addSplittComb(s_account &account)
@@ -507,7 +582,7 @@ int AudioRouter::addSplittComb(s_account &account)
 
 s_IODevices* AudioRouter::getADeviceByUID(QString uid)
 {
-    for(auto& device : AudioDevices){
+    for(auto& device : m_AudioDevices){
         if(device.uid == uid){
             return &device;
         }

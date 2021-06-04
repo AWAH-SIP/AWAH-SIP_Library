@@ -431,8 +431,7 @@ void Websocket::addAudioDevice(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     int recordDevId, playbackDevId;
     if (jCheckInt(recordDevId, data["recordDevId"]) && jCheckInt(playbackDevId, data["playbackDevId"])) {
-        int retVal = m_lib->addAudioDevice(recordDevId, playbackDevId);
-        retDataObj["returnValue"] = retVal;
+        m_lib->addAudioDevice(recordDevId, playbackDevId);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
@@ -442,10 +441,9 @@ void Websocket::addAudioDevice(QJsonObject &data, QJsonObject &ret) {
 
 void Websocket::removeAudioDevice(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
-    int DevIndex;
-    if (jCheckInt(DevIndex, data["DevIndex"])) {
-        int retVal = m_lib->removeAudioDevice(DevIndex);
-        retDataObj["returnValue"] = retVal;
+    QString uid;
+    if (jCheckString(uid, data["DevUid"])) {
+        m_lib->removeAudioDevice(uid);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
@@ -457,8 +455,7 @@ void Websocket::addFilePlayer(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     QString Name, File;
     if (jCheckString(Name, data["Name"]) && jCheckString(File, data["File"])) {
-        int retVal = m_lib->addFilePlayer(Name, File);
-        retDataObj["returnValue"] = retVal;
+        m_lib->addFilePlayer(Name, File);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
@@ -470,8 +467,7 @@ void Websocket::addFileRecorder(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     QString File;
     if (jCheckString(File, data["File"])) {
-        int retVal = m_lib->addFileRecorder(File);
-        retDataObj["returnValue"] = retVal;
+        m_lib->addFileRecorder(File);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
@@ -543,8 +539,7 @@ void Websocket::addToneGen(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     int freq;
     if (jCheckInt(freq, data["freq"])) {
-        int retVal = m_lib->addToneGen(freq);
-        retDataObj["returnValue"] = retVal;
+        m_lib->addToneGen(freq);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
@@ -583,7 +578,7 @@ void Websocket::addBuddy(QJsonObject &data, QJsonObject &ret) {
     QString name;
     QString accUid;
     QJsonObject codecSettings;
-    if (jCheckString(buddyUrl, data["buddyUrl"]) && jCheckString(name, data["Name"]) && jCheckString(accUid, data["accUid"]) && jCheckObject(codecSettings, data["codecSettings"])) {
+    if (jCheckString(buddyUrl, data["buddyUrl"]) && jCheckString(name, data["name"]) && jCheckString(accUid, data["accUid"]) && jCheckObject(codecSettings, data["codecSettings"])) {
          m_lib->addBuddy(buddyUrl, name, accUid, codecSettings);
         ret["data"] = retDataObj;
         ret["error"] = noError();
