@@ -268,7 +268,7 @@ void Settings::loadSettings()                                           // todo 
     item["value"] = settings.value("settings/MediaConfig/Audio_Frame_Ptime","20").toInt();
     item["min"] = 10;
     item["max"] = 200;
-    GlobalSettings["Audio frame packet time "] = item;
+    GlobalSettings["Audio frame packet time"] = item;
 
     // ***** Max Call Duration *****
     item = QJsonObject();
@@ -361,7 +361,7 @@ void Settings::loadSettings()                                           // todo 
     item["type"] = INTEGER;
     item["min"] = 1;
     item["max"] = 200;
-    AudioSettings["Sound device playback buffer in ms "] = item;
+    AudioSettings["Sound device playback buffer in ms"] = item;
 
     // ***** sound dev record buffer *****
     item = QJsonObject();
@@ -370,7 +370,7 @@ void Settings::loadSettings()                                           // todo 
     item["type"] = INTEGER;
     item["min"] = 1;
     item["max"] = 200;
-    AudioSettings["Sound device record buffer in ms "] = item;
+    AudioSettings["Sound device record buffer in ms"] = item;
 
     // ***** log level *****
     item = QJsonObject();
@@ -388,13 +388,13 @@ void Settings::loadSettings()                                           // todo 
     enumitems["5 Detailed events"] = 5;
     enumitems["6 Very detailed events"] = 6;
     item["enumlist"] = enumitems;
-    GlobalSettings["Log level: "] = item;
+    GlobalSettings["Log level:"] = item;
 
     // ***** log path ****
     item = QJsonObject();
     item["value"]  = settings.value("settings/log/Path", QDir::current().filePath("logs/")).toString();
     item["type"] = STRING;
-    GlobalSettings["Log path: "] = item;
+    GlobalSettings["Log path:"] = item;
 
 
     // ***** Account retry interval *****
@@ -620,11 +620,15 @@ void Settings::setSettings(QJsonObject editedSettings)
             settings.setValue("settings/MediaConfig/Max_Call_Duration",it.value().toInt());
         }
 
+        if (it.key() == "Max Calls"){
+            settings.setValue("settings/UserAgentConfig/MaxCalls", it.value().toInt());
+        }
+
         if (it.key() == "Router max channel"){
             settings.setValue("settings/MediaConfig/ChannelCount",it.value().toInt());
         }
 
-        if (it.key() == "Audio frame packet time "){
+        if (it.key() == "Audio frame packet time"){
             settings.setValue("settings/MediaConfig/Audio_Frame_Ptime",it.value().toInt());
         }
 
@@ -660,19 +664,19 @@ void Settings::setSettings(QJsonObject editedSettings)
              settings.setValue("settings/MediaConfig/Sound_Device_Clock_Rate",it.value().toInt());
         }
 
-        if (it.key() == "Sound device playback buffer in ms "){
+        if (it.key() == "Sound device playback buffer in ms"){
              settings.setValue("settings/MediaConfig/Sound_Device_Playback_Latency",it.value().toInt());
         }
 
-        if (it.key() == "Sound device record buffer in ms "){
+        if (it.key() == "Sound device record buffer in ms"){
              settings.setValue("settings/MediaConfig/Sound_Device_Record_Latency",it.value().toInt());
         }
 
-        if (it.key() == "Log level: "){
+        if (it.key() == "Log level:"){
              settings.setValue("settings/Loglevel",it.value().toInt());
         }
 
-        if (it.key() == "Log path: "){
+        if (it.key() == "Log path:"){
              settings.setValue("settings/log/Path",it.value().toString());
         }
 
@@ -692,7 +696,7 @@ void Settings::setSettings(QJsonObject editedSettings)
             settings.setValue("settings/NatConfig/Ice_AggressiveNomination", it.value().toInt());
         }
 
-        if (it.key() == "ICE aalways update"){
+        if (it.key() == "ICE always update"){
             settings.setValue("settings/NatConfig/Ice_AlwaysUpdate", it.value().toInt());
         }
 
@@ -732,6 +736,7 @@ void Settings::setSettings(QJsonObject editedSettings)
             settings.setValue("settings/NatConfig/SIPHeader_rewrite_Contact", it.value().toInt());
         }
 
+
     }
     settings.sync();
     loadSettings();
@@ -770,6 +775,7 @@ void Settings::setCodecPriorities(QJsonObject CodecPriorities){
     QSettings settings("awah", "AWAHsipConfig");
     QJsonObject::iterator i;
     for (i =  CodecPriorities.begin(); i !=  CodecPriorities.end(); ++i) {
+        qDebug() << "codecpriorities" << CodecPriorities;
         settings.setValue("settings/CodecPriority/"+i.key(),i.value().toInt());
     }
     settings.sync();

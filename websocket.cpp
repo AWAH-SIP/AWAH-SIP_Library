@@ -839,11 +839,11 @@ void Websocket::getCodecPriorities(QJsonObject &data, QJsonObject &ret) {
     ret["error"] = noError();
 }
 
-void Websocket::setSCodecPriorities(QJsonObject &data, QJsonObject &ret) {
+void Websocket::setCodecPriorities(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     QJsonObject Codecpriority;
     if (jCheckObject(Codecpriority, data["Codecpriority"])) {
-        m_lib->setSettings(Codecpriority);
+        m_lib->setSCodecPriorities(Codecpriority);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
