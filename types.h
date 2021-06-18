@@ -198,23 +198,40 @@ struct s_IODevices{
 Q_DECLARE_METATYPE(s_IODevices);
 Q_DECLARE_METATYPE( QList<s_IODevices>);
 
+struct s_codec{
+    QString encodingName = "";
+    QString displayName = "";
+    int priority = 0;
+    QJsonObject codecParameters = QJsonObject();
+    QJsonObject toJSON() const {
+        return{{"encodingName", encodingName}, {"displayName", displayName}, {"codecParameters", codecParameters}, {"priority", priority}};
+    }
+    s_codec* fromJSON(const QJsonObject &codecJSON) {
+        encodingName = codecJSON["encodingName"].toString();
+        displayName = codecJSON["displayName"].toString();
+        codecParameters = codecJSON["codecParameters"].toObject();
+        priority = codecJSON["priority"].toInt();
+        return this;
+    }
+};
+Q_DECLARE_METATYPE(s_codec);
+Q_DECLARE_METATYPE(QList<s_codec>);
+
 struct s_callHistory{
     QString callUri = "";
     int duration = 0;
-    QString codec = "";
-    QJsonObject codecSettings = QJsonObject();
+    s_codec codec = s_codec();
     bool outgoing = 0;
     int count = 0;
     QJsonObject toJSON() const {
-        return {{"callUri", callUri}, {"duration", duration}, {"codec", codec}, {"outgoing", outgoing}, {"count", count}, {"codecSettings", codecSettings}};
+        return {{"callUri", callUri}, {"duration", duration}, {"codec", codec.toJSON()}, {"outgoing", outgoing}, {"count", count}};
     }
     s_callHistory* fromJSON(const QJsonObject &callHistoryJSON) {
         callUri = callHistoryJSON["callUri"].toString();
         duration = callHistoryJSON["duration"].toInt();
-        codec = callHistoryJSON["codec"].toInt();
+        codec.fromJSON(callHistoryJSON["codec"].toObject());
         outgoing = callHistoryJSON["outgoing"].toBool();
         count = callHistoryJSON["count"].toInt();
-        codecSettings = callHistoryJSON["codecSettings"].toObject();
         return this;
     }
 };
@@ -233,6 +250,7 @@ struct s_Call{
     pjsua_player_id player_id = PJSUA_INVALID_ID;
     pjsua_recorder_id rec_id = PJSUA_INVALID_ID;
     PJCall* callptr = nullptr;
+    QJsonObject codecSettings = QJsonObject();
     int splitterSlot;
     QJsonObject toJSON() const {
         return {{"CallStatusText", CallStatusText}, {"CallStatusCode", CallStatusCode}, {"ConnectedTo", ConnectedTo}, {"callId", callId}};
@@ -389,7 +407,8 @@ enum settingType{
     STRING,
     BOOL_T,
     ENUM_INT,
-    ENUM_STRING
+    ENUM_STRING,
+    HIDDEN
 };
 Q_ENUMS(settingType)
 
@@ -468,13 +487,17 @@ struct s_buddy{
     int status = PJSUA_BUDDY_STATUS_UNKNOWN;
     QString accUid = "";
     QString autoConnectFromAccountUid = "";
+    s_codec codec;
     QJsonObject toJSON() const {
-        return{{"buddyUrl", buddyUrl}, {"Name", Name}, {"status", status} };
+        return{{"buddyUrl", buddyUrl}, {"Name", Name}, {"status", status}, {"accUid", accUid}, {"autoConnectFromAccountUid", autoConnectFromAccountUid}, {"codec", codec.toJSON()} };
     }
     s_buddy* fromJSON(const QJsonObject &buddyJSON) {
         buddyUrl = buddyJSON["buddyUrl"].toString();
         Name = buddyJSON["Name"].toString();
         status = buddyJSON["status"].toInt();
+        accUid = buddyJSON["accUid"].toString();
+        autoConnectFromAccountUid = buddyJSON["autoConnectFromAccountUid"].toString();
+        codec.fromJSON(buddyJSON["codecSettings"].toObject());
         return this;
     }
 };

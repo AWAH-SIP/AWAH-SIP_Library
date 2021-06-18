@@ -57,7 +57,7 @@ void PJAccount::onRegStarted(OnRegStartedParam &prm)
 void PJAccount::onIncomingCall(OnIncomingCallParam &iprm)
 {
     m_lib->m_Log->writeLog(3, QString("Incoming call with callId: ") + QString::number(iprm.callId));
-    m_lib->listCodec();         // load Codec priority stored in config file
+    m_lib->m_Codecs->listCodecs();         // load Codec priority stored in config file
     AccountInfo ai = getInfo();
     parent->acceptCall(iprm.callId, ai.id);
     emit parent->signalSipStatus(ai.id, ai.regStatus,QString::fromStdString(ai.regStatusText));

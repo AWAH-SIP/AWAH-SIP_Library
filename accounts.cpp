@@ -145,13 +145,15 @@ s_account* Accounts::getAccountByUID(QString uid) {
     return nullptr;
 }
 
-void Accounts::makeCall(QString number, int AccID)
+void Accounts::makeCall(QString number, int AccID, s_codec codec)
 {
     s_account* account = getAccountByID(AccID);
     QString fulladdr;
     PJCall* newCall;
     fulladdr = "sip:"+ number+"@"+ account->serverURI;
     if(account){
+        m_lib->m_Codecs->selectCodec(codec);
+        m_lib->m_Codecs->setCodecParam(codec);
         newCall = new PJCall(this, m_lib, m_lib->m_MessageManager, *account->accountPtr);
         CallOpParam prm(true);        // Use default call settings
         try{
@@ -401,7 +403,7 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
 }
 
 
-void Accounts::addCallToHistory(int AccID, QString callUri, int duration, QString codec, bool outgoing)
+void Accounts::addCallToHistory(int AccID, QString callUri, int duration, s_codec codec, bool outgoing)
 {
     s_account* account = getAccountByID(AccID);
     bool entryexists = false;
@@ -412,7 +414,7 @@ void Accounts::addCallToHistory(int AccID, QString callUri, int duration, QStrin
             histentry.count++;
             histentry.duration = duration;
             histentry.outgoing = outgoing;
-            for(int i =0; i<account->CallHistory.size(); i++){      // deleate the existing entry and place then modified entry as the first item
+            for(int i =0; i<account->CallHistory.size(); i++){      // delete the existing entry and place then modified entry as the first item
                 if(account->CallHistory.at(i).callUri == callUri){
                     account->CallHistory.removeAt(i);
                     account->CallHistory.prepend(histentry);
@@ -428,6 +430,7 @@ void Accounts::addCallToHistory(int AccID, QString callUri, int duration, QStrin
         newCall.codec = codec;
         newCall.duration = duration;
         newCall.outgoing = outgoing;
+        newCall.codec = codec;
         newCall.count = 1;
         if (account->CallHistory.count() > 9) {
             account->CallHistory.removeLast();
@@ -513,7 +516,6 @@ void Accounts::CallInspector()
 
             if(m_MaxCallTime){                                                          // hang up calls if call time is exeeded
                 QTime time = QTime::fromString(info["Call time:"].toString(), "hh:mm:ss");
-                qDebug() << "calltime : " << time;
                 if(m_MaxCallTime <= (time.hour()*60 + time.minute())){
                     hangupCall(call.callId,account.AccID);
                     m_lib->m_Log->writeLog(3,(QString("Max call time exeeded on account ID: ")+ QString::number(account.AccID) + " call disconnected"));

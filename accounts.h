@@ -95,8 +95,9 @@ public:
     * @brief establish a new call
     * @param number the number you like to call
     * @param AccID the account that originates the call
+    * @param codec the codec and optional parameters of that codec
     */
-    void makeCall(QString number, int AccID);
+    void makeCall(QString number, int AccID, s_codec codec);
 
     /**
     * @brief end a call
@@ -130,10 +131,10 @@ public:
     * @param AccID the account witch history shold be edited
     * @param callUri the Uri of the call
     * @param duration the duration of the call
-    * @param codec the used coded
+    * @param codec the used codec
     * @param outgoing 1 = the call was outgoing (we called someone)
     */
-    void addCallToHistory(int AccID, QString callUri, int duration, QString codec, bool outgoing);
+    void addCallToHistory(int AccID, QString callUri, int duration, s_codec codec, bool outgoing);
 
     /**
     * @brief get streaminfos callhistory for an account

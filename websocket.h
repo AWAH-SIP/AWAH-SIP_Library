@@ -90,6 +90,7 @@ private slots:
     void getCallInfo(QJsonObject &data, QJsonObject &ret);
     void getCallHistory(QJsonObject &data, QJsonObject &ret);
     void getAccountByID(QJsonObject &data, QJsonObject &ret);
+
     // Public API - AudioRouter
     void getAudioRoutes(QJsonObject &data, QJsonObject &ret);
     void listInputSoundDev(QJsonObject &data, QJsonObject &ret);
@@ -109,16 +110,16 @@ private slots:
     // Public API - Buddies
     void addBuddy(QJsonObject &data, QJsonObject &ret);
     void removeBuddy(QJsonObject &data, QJsonObject &ret);
+
     // Public API - Codecs
-    void listCodec(QJsonObject &data, QJsonObject &ret);
-    void selectCodec(QJsonObject &data, QJsonObject &ret);
-    void getCodecParam(QJsonObject &data, QJsonObject &ret);
-    void setCodecParam(QJsonObject &data, QJsonObject &ret);
+    void getActiveCodecs(QJsonObject &data, QJsonObject &ret);
+
     // Public API - GpioDeviceManager
     void createGpioDev(QJsonObject &data, QJsonObject &ret);
     void removeGpioDevice(QJsonObject &data, QJsonObject &ret);
     void getGpioDevices(QJsonObject &data, QJsonObject &ret);
     void getGpioDevTypes(QJsonObject &data, QJsonObject &ret);
+
     // Public API - GpioRouter
     void getGpioRoutes(QJsonObject &data, QJsonObject &ret);
     void getGpioPortsList(QJsonObject &data, QJsonObject &ret);
@@ -126,10 +127,13 @@ private slots:
     void disconnectGpioPort(QJsonObject &data, QJsonObject &ret);
     void changeGpioCrosspoint(QJsonObject &data, QJsonObject &ret);
     void getGpioStates(QJsonObject &data, QJsonObject &ret);
+
     // Public API - Log
     void readNewestLog(QJsonObject &data, QJsonObject &ret);
+
     // Public API - MessageManager
     void sendDtmf(QJsonObject &data, QJsonObject &ret);
+
     // Public API - Settings
     void getSettings(QJsonObject &data, QJsonObject &ret);
     void setSettings(QJsonObject &data, QJsonObject &ret);

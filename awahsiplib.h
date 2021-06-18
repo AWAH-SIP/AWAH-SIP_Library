@@ -74,7 +74,7 @@ public:
         { return m_Accounts->modifyAccount(index, accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue); };
     void removeAccount(int index) const { return m_Accounts->removeAccount(index); };
     QList <s_account>* getAccounts() const { return m_Accounts->getAccounts(); };
-    void makeCall(QString number, int AccID) const { return m_Accounts->makeCall(number, AccID); };
+    void makeCall(QString number, int AccID,s_codec codec) const { return m_Accounts->makeCall(number, AccID, codec); };
     void hangupCall(int callId, int AccID) const { return m_Accounts->hangupCall(callId, AccID); };
     void acceptCall(int callId, int AccID) const { return m_Accounts->acceptCall(callId, AccID); };
     void holdCall(int callId, int AccID) const { return m_Accounts->holdCall(callId, AccID); };
@@ -107,10 +107,7 @@ public:
     void removeBuddy(QString buddyUrl, QString accUid) const { return  m_Buddies->removeBuddy(buddyUrl, accUid); };
 
     // Public API - Codecs
-    QStringList listCodec() const { return m_Codecs->listCodec(); };
-    void selectCodec(QString selectedcodec) const { return m_Codecs->selectCodec(selectedcodec); };
-    const QJsonObject getCodecParam(QString codecId) const { return m_Codecs->getCodecParam(codecId); };
-    int setCodecParam(QString codecId, QJsonObject codecParam) const { return m_Codecs->setCodecParam(codecId, codecParam); };
+    QList<s_codec> getActiveCodecs() const { return m_Codecs->getActiveCodecs(); };
 
     // Public API - GpioDeviceManager
     const QString createGpioDev(QJsonObject &newDev) { return m_GpioDeviceManager->createGpioDev(newDev); };

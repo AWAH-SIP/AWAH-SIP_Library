@@ -31,16 +31,25 @@ public:
     explicit Codecs(AWAHSipLib *parentLib, QObject *parent = nullptr);
 
     /**
-    * @brief list all available codecs
-    * @return a stringlist with the names of all supported codecs
+    * @brief returns a list with all supported codecs, including the disabled ones.
+    * @brief a codec can be listed more than once, e.g. L16 with 1 channel and with two channels for 48k for 44.1k etc.
+    * @return a QList with all the codecs
     */
-    QStringList listCodec();
+    QList<s_codec> listCodecs();
+
+    /**
+    * @brief returns a list with the enabled codecs, each codectype is listed only once
+    * @return a QList with all the codecs
+    */
+    QList<s_codec> getActiveCodecs();
+
 
     /**
     * @brief select a codec to force AWAHsip to a specific codec
     * @brief note that all other codecs will be disabled
+    * @param codec the codec you like to select. (only encodingName, channelCount and clockRate are needed)
     */
-    void selectCodec(QString selectedcodec);
+    void selectCodec(s_codec codec);
 
     /**
     * @brief get all editable parameters for a codec
@@ -49,20 +58,21 @@ public:
     * in the parameter Object included is value, max and min and for certain parameters a enum Object with default values
     */
     const QJsonObject getCodecParam(QString codecId);
+    const QJsonObject getCodecParam(CodecParam PJcodecParam, QString codecId);
 
     /**
     * @brief set parameters for a certain codec
-    * @param codecId the ID of the codec  e.g. "opus/48000/2"
-    * @param a QJsonObject with an Object for every changed parameter.
+    * @param codec the codec witch has to be updated
     * @return PJ_Success on sucess or -1 if one or more parameters could not have been set
     */
-    int setCodecParam(QString codecId, QJsonObject CodecParam);
+    int setCodecParam(s_codec codec);
 
 signals:
 
 
 private:
     AWAHSipLib* m_lib;
+    QList<s_codec> m_codecs;
 
 };
 

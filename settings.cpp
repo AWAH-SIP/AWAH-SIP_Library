@@ -779,5 +779,5 @@ void Settings::setCodecPriorities(QJsonObject CodecPriorities){
         settings.setValue("settings/CodecPriority/"+i.key(),i.value().toInt());
     }
     settings.sync();
-    m_lib->listCodec();     // sets priorities to the endpoint
+    m_lib->m_Codecs->listCodecs();     // sets priorities to the endpoint
 }

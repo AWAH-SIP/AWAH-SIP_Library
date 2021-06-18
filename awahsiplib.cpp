@@ -77,6 +77,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Settings->loadAudioRoutes();
         m_Accounts->startCallInspector();
         m_Settings->loadGpioDevConfig();
+        m_Codecs->listCodecs();
     }
     catch (Error &err){
         m_Log->writeLog(1,QString("AWAHsip: starting lib failed: ") + err.info().c_str());
@@ -204,15 +205,27 @@ QDataStream &operator>>(QDataStream &in, s_audioRoutes &obj)
    return in;
 }
 
+QDataStream &operator<<(QDataStream &out, const s_codec &obj)
+{
+    out << obj.codecParameters << obj.displayName << obj.encodingName << obj.priority;
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, s_codec &obj)
+{
+   in  >> obj.codecParameters >> obj.displayName >> obj.encodingName >> obj.priority;
+   return in;
+}
+
 QDataStream &operator<<(QDataStream &out, const s_callHistory &obj)
 {
-    out << obj.callUri << obj.codec << obj.duration << obj.outgoing << obj.count  << obj.codecSettings;
+    out << obj.callUri << obj.codec << obj.duration << obj.outgoing << obj.count  << obj.codec;
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, s_callHistory &obj)
 {
-   in  >> obj.callUri >> obj.codec >> obj.duration >> obj.outgoing >> obj.count >> obj.codecSettings;
+   in  >> obj.callUri >> obj.codec >> obj.duration >> obj.outgoing >> obj.count >> obj.codec;
    return in;
 }
 

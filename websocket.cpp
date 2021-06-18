@@ -287,11 +287,12 @@ void Websocket::getAccounts(QJsonObject &data, QJsonObject &ret) {          // t
 }
 
 void Websocket::makeCall(QJsonObject &data, QJsonObject &ret) {
-    QJsonObject retDataObj;
+    QJsonObject retDataObj, codecJSON;
     QString number;
+    s_codec codec;
     int AccID;
-    if (jCheckString(number, data["number"]) && jCheckInt(AccID, data["AccID"])) {
-        m_lib->makeCall(number, AccID);
+    if (jCheckString(number, data["number"]) && jCheckInt(AccID, data["AccID"])&& jCheckObject(codecJSON, data["codec"])) {
+        m_lib->makeCall(number, AccID, *codec.fromJSON(codecJSON));
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
@@ -600,55 +601,16 @@ void Websocket::removeBuddy(QJsonObject &data, QJsonObject &ret) {
     }
 }
 
-void Websocket::listCodec(QJsonObject &data, QJsonObject &ret) {
+void Websocket::getActiveCodecs(QJsonObject &data, QJsonObject &ret) {
     Q_UNUSED(data);
     QJsonObject retDataObj;
     QJsonArray codecArr;
-    for (auto & codecEntry : m_lib->listCodec()) {
-        codecArr.append(codecEntry);
+    for (auto & codecEntry : m_lib->getActiveCodecs()) {
+        codecArr.append(codecEntry.toJSON());
     }
     retDataObj["codecArray"] = codecArr;
     ret["data"] = retDataObj;
-    ret["error"] = noError();
-}
-
-void Websocket::selectCodec(QJsonObject &data, QJsonObject &ret) {
-    QJsonObject retDataObj;
-    QString selectedcodec;
-    if (jCheckString(selectedcodec, data["selectedcodec"])) {
-        m_lib->selectCodec(selectedcodec);
-        ret["data"] = retDataObj;
-        ret["error"] = noError();
-    } else {
-        ret["error"] = hasError("Parameters not accepted");
-    }
-}
-
-void Websocket::getCodecParam(QJsonObject &data, QJsonObject &ret) {
-    QJsonObject retDataObj;
-    QString codecId;
-    if (jCheckString(codecId, data["codecId"])) {
-        QJsonObject retVal = m_lib->getCodecParam(codecId);
-        retDataObj["codecParamObj"] = retVal;
-        ret["data"] = retDataObj;
-        ret["error"] = noError();
-    } else {
-        ret["error"] = hasError("Parameters not accepted");
-    }
-}
-
-void Websocket::setCodecParam(QJsonObject &data, QJsonObject &ret) {
-    QJsonObject retDataObj;
-    QString codecId;
-    QJsonObject codecParam;
-    if (jCheckString(codecId, data["codecId"]) && jCheckObject(codecParam, data["codecParam"])) {
-        int retVal = m_lib->setCodecParam(codecId, codecParam);
-        retDataObj["returnValue"] = retVal;
-        ret["data"] = retDataObj;
-        ret["error"] = noError();
-    } else {
-        ret["error"] = hasError("Parameters not accepted");
-    }
+    ret  ["error"] = noError();
 }
 
 void Websocket::createGpioDev(QJsonObject &data, QJsonObject &ret) {

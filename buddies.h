@@ -43,7 +43,7 @@ signals:
 
 private:
     AWAHSipLib* m_lib;
-    QList <s_buddy> m_buddies;                      // todo move me to account struct
+    QList <s_buddy> m_buddies;
 
 };
 

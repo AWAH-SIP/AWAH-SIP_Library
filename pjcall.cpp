@@ -108,7 +108,17 @@ void PJCall::onCallState(OnCallStateParam &prm)
             }  catch (Error &err) {
                 m_lib->m_Log->writeLog(1,QString("onCallMediaState: Disconnect Error: ") + QString().fromStdString(err.info(true)));
             }
-            m_lib->m_Accounts->addCallToHistory(callAcc->AccID,QString::fromStdString(ci.remoteUri),ci.connectDuration.sec,QString::fromStdString(streaminfo.codecName),!ci.remOfferer);
+            s_codec callCodec;                                                                                                                              // todo parse all parameters like bitrate etc;
+            //callCodec.channelCount = streaminfo.audCodecParam.info.channelCnt;
+            //callCodec.clockRate = streaminfo.codecClockRate;
+            callCodec.encodingName = QString::fromStdString(streaminfo.codecName);
+            for(auto& codec : m_lib->m_Codecs->listCodecs()){                                   // search the codeclist got get displaynames and parameters
+                if(codec.encodingName == QString::fromStdString(streaminfo.codecName)){
+                    callCodec.displayName = codec.displayName;
+                    callCodec.codecParameters = codec.codecParameters;
+                }
+            }
+            m_lib->m_Accounts->addCallToHistory(callAcc->AccID,QString::fromStdString(ci.remoteUri),ci.connectDuration.sec,callCodec,!ci.remOfferer);
 
         }
         QMutableListIterator<s_Call> i(callAcc->CallList);
@@ -155,6 +165,15 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
         // Get the first audio media and connect it to its Splitter
         audioMedia = getAudioMedia(-1);
         int callId = audioMedia.getPortId();
+
+        // get the codec parameters, remove everything exept the values and store it for callhistory
+        QJsonObject codecParam ,filteredParam;
+        QJsonObject::iterator j;
+        codecParam =  m_lib->m_Codecs->getCodecParam(getStreamInfo(0).audCodecParam,QString::fromStdString(getStreamInfo(0).codecName));
+        for (j = codecParam.begin(); j != codecParam.end(); ++j) {
+         filteredParam [j.key()] = j.value().toObject()["value"];
+        }
+        Callopts->codecSettings = filteredParam;
 
         if(!callAcc->FilePlayPath.isEmpty() && ci.remOfferer){          // if a announcement is configured and call is incoming create a player
             pjmedia_port *player_media_port = nullptr;

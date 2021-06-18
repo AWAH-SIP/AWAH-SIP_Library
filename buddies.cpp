@@ -67,12 +67,22 @@ bool Buddies::deleteBuddy(int AccID, QString buddyUrl){
 
 void Buddies::addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings)
 {
+    s_buddy newBuddy;
+    newBuddy.Name = name;
+    newBuddy.accUid = accUid;
+    newBuddy.buddyUrl = buddyUrl;
 
+   // registerBuddy(m_lib->m_Accounts->getAccountByUID(accUid)->AccID, buddyUrl);
+    m_buddies.append(newBuddy);
 }
 
 void Buddies::removeBuddy(QString buddyUrl, QString accUid)
 {
-                                                      // todo: delete buddy, remove it from the list and save it
+     for(auto buddy : m_buddies){
+        if(buddy.buddyUrl == buddyUrl && buddy.accUid == accUid)
+            deleteBuddy(m_lib->m_Accounts->getAccountByUID(accUid)->AccID, buddyUrl);
+     }
+         // todo: delete buddy, remove it from the list and save it
 }
 
 
