@@ -306,7 +306,7 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
     pjsua_call_info ci;
 
     for (int pos = 0; pos<account->CallList.count(); pos++){       // Check if callId is valid
-        if (account->CallList.at(pos).callId == callId && callId < (int)m_lib->epCfg.uaConfig.maxCalls){
+        if (account->CallList.at(pos).callId == callId && callId >= 0 && callId < (int)m_lib->epCfg.uaConfig.maxCalls){
             try {
                 pjCall = account->CallList.at(pos).callptr;
                 PJSUA2_CHECK_EXPR( pjsua_call_get_info(callId, &ci) );
@@ -484,7 +484,7 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
             //             pjsua->sendPresenceStatus(online);
         }
     }
-    m_lib->m_Log->writeLog(3,(QString("Callstate of: ") + remoteUri + " is:  " + thisCall->CallStatusText));
+    m_lib->m_Log->writeLog(3,(QString("Accounts::OncallStateChanged(): Callstate of ") + remoteUri + " is  " + thisCall->CallStatusText));
 }
 
 void Accounts::OnsignalSipStatus(int accId, int status, QString remoteUri)

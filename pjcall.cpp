@@ -32,17 +32,22 @@ using namespace pj;
 void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
 {
     Q_UNUSED(media_port);
-    s_Call *Call = static_cast<s_Call*>(user_data);
+    s_Call *call = static_cast<s_Call*>(user_data);
+
+    if(call->callId < 0 && call->callId > (int)AWAHSipLib::instance()->epCfg.uaConfig.maxCalls) {
+        AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): Got Invalid CallID: %1").arg(call->callId)));
+        return;
+    }
 
     try {
-        PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(pjsua_player_get_conf_port(Call->player_id),pjsua_call_get_conf_port(Call->callId)) );
+        PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(pjsua_player_get_conf_port(call->player_id),pjsua_call_get_conf_port(call->callId)) );
     }  catch (Error &err) {
         AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): dissconnect call from player failed ") + err.info().c_str()));
     }
 
-    if(Call->rec_id != INVALID_ID  ){
-        PJSUA2_CHECK_EXPR (pjsua_conf_connect(pjsua_call_get_conf_port(Call->callId), pjsua_recorder_get_conf_port(Call->rec_id)) );
-        PJSUA2_CHECK_EXPR (pjsua_conf_connect(Call->splitterSlot, pjsua_recorder_get_conf_port(Call->rec_id)) );
+    if(call->rec_id != INVALID_ID  ){
+        PJSUA2_CHECK_EXPR (pjsua_conf_connect(pjsua_call_get_conf_port(call->callId), pjsua_recorder_get_conf_port(call->rec_id)) );
+        PJSUA2_CHECK_EXPR (pjsua_conf_connect(call->splitterSlot, pjsua_recorder_get_conf_port(call->rec_id)) );
     }
 }
 
@@ -145,7 +150,7 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
     CallInfo ci = getInfo();
     s_account* callAcc = parent->getAccountByID(ci.accId);
     s_Call*  Callopts = nullptr;
-    for(auto& call : callAcc->CallList){
+    for(auto&& call : callAcc->CallList){
         if(call.callId == getId()){
             Callopts = &call;
             break;
@@ -176,80 +181,87 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
         Callopts->codecSettings = filteredParam;
 
         if(!callAcc->FilePlayPath.isEmpty() && ci.remOfferer){          // if a announcement is configured and call is incoming create a player
-            pjmedia_port *player_media_port = nullptr;
-            pj_str_t name;
-            pj_status_t status = PJ_ENOTFOUND;
+            if(Callopts->player_id == PJSUA_INVALID_ID) {
+                pjmedia_port *player_media_port = nullptr;
+                pj_str_t name;
+                pj_status_t status = PJ_ENOTFOUND;
 
-            // create player for playback media
-            m_lib->m_Log->writeLog(3,QString("onCallMediaState: creating announcement player for callId %1").arg(Callopts->callId));
-            status = pjsua_player_create(pj_cstr(&name,callAcc->FilePlayPath.toStdString().c_str()), PJMEDIA_FILE_NO_LOOP, &Callopts->player_id);
-            if (status != PJ_SUCCESS) {
-                char buf[50];
-                pj_strerror	(status,buf,sizeof (buf) );
-                m_lib->m_Log->writeLog(1,QString("onCallMediaState: Error creating announcement player: ") + buf);
+                // create player for playback media
+                m_lib->m_Log->writeLog(3,QString("onCallMediaState: creating announcement player for callId %1").arg(Callopts->callId));
+                status = pjsua_player_create(pj_cstr(&name,callAcc->FilePlayPath.toStdString().c_str()), PJMEDIA_FILE_NO_LOOP, &Callopts->player_id);
+                if (status != PJ_SUCCESS) {
+                    char buf[50];
+                    pj_strerror	(status,buf,sizeof (buf) );
+                    m_lib->m_Log->writeLog(1,QString("onCallMediaState: Error creating announcement player: ") + buf);
+                } else {
+                    pjsua_data* intData = pjsua_get_var();
+                    const pjsua_conf_port_id slot = pjsua_player_get_conf_port(Callopts->player_id);
+                    PJSUA2_CHECK_EXPR(pjmedia_conf_adjust_rx_level(intData->mconf, slot, dBtoAdjLevel(-4.5)));
+                    PJSUA2_CHECK_EXPR(pjsua_conf_connect(slot, callId) );
+                    status = pjsua_player_get_port(Callopts->player_id, &player_media_port);
+                    if (status != PJ_SUCCESS){
+                        char buf[50];
+                        pj_strerror	(status,buf,sizeof (buf) );
+                        m_lib->m_Log->writeLog(1,QString("onCallMediaState: Error getting announcement player port: ") + buf);
+                        return;
+                    }
+                    // register media finished callback
+                    status = pjmedia_wav_player_set_eof_cb2(player_media_port, Callopts, &on_media_finished);
+                    if (status != PJ_SUCCESS){
+                        char buf[50];
+                        pj_strerror	(status,buf,sizeof (buf) );
+                        m_lib->m_Log->writeLog(1,QString("onCallMediaState: Error adding sound-playback callback ") + buf);
+                        return;
+                    }
+                }
             } else {
-                pjsua_data* intData = pjsua_get_var();
-                const pjsua_conf_port_id slot = pjsua_player_get_conf_port(Callopts->player_id);
-                PJSUA2_CHECK_EXPR(pjmedia_conf_adjust_rx_level(intData->mconf, slot, dBtoAdjLevel(-4.5)));
-                PJSUA2_CHECK_EXPR(pjsua_conf_connect(slot, callId) );
-                status = pjsua_player_get_port(Callopts->player_id, &player_media_port);
-                if (status != PJ_SUCCESS){
-                    char buf[50];
-                    pj_strerror	(status,buf,sizeof (buf) );
-                    m_lib->m_Log->writeLog(1,QString("onCallMediaState: Error getting announcement player port: ") + buf);
-                    return;
-                }
-                // register media finished callback
-                status = pjmedia_wav_player_set_eof_cb2(player_media_port, Callopts, &on_media_finished);
-                if (status != PJ_SUCCESS){
-                    char buf[50];
-                    pj_strerror	(status,buf,sizeof (buf) );
-                    m_lib->m_Log->writeLog(1,QString("onCallMediaState: Error adding sound-playback callback ") + buf);
-                    return;
-                }
+                m_lib->m_Log->writeLog(2,QString("onCallMediaState: announcement player for callId %1 already exists!").arg(Callopts->callId));
             }
         }
 
         if(!callAcc->FileRecordPath.isEmpty()){            // if a filerecorder is configured create a recorder
+            if(Callopts->rec_id == PJSUA_INVALID_ID) {
+                m_lib->m_Log->writeLog(3,QString("onCallMediaState: creating call recorder for callId %1").arg(Callopts->callId));
+                pj_status_t status = PJ_ENOTFOUND;
+                pj_str_t rec_file;
+                QDateTime local(QDateTime::currentDateTime());
+                QString Year = local.toString("yyyy");
+                QString Month = local.toString("MM");
+                QString Day = local.toString("dd");
+                QString Hour = local.toString("hh");
+                QString Minute = local.toString("mm");
+                QString Second = local.toString("ss");
+                QString Caller = QString::fromStdString(ci.remoteUri);
+                Caller.truncate(Caller.lastIndexOf("@"));
+                Caller = Caller.mid(Caller.indexOf(":")+1);     // only the Name of the caller
+                QString Account = callAcc->name;
 
-            m_lib->m_Log->writeLog(3,QString("onCallMediaState: creating call recorder for callId %1").arg(Callopts->callId));
-            pj_status_t status = PJ_ENOTFOUND;
-            pj_str_t rec_file;
-            QDateTime local(QDateTime::currentDateTime());
-            QString Year = local.toString("yyyy");
-            QString Month = local.toString("MM");
-            QString Day = local.toString("dd");
-            QString Hour = local.toString("hh");
-            QString Minute = local.toString("mm");
-            QString Second = local.toString("ss");
-            QString Caller = QString::fromStdString(ci.remoteUri);
-            Caller.truncate(Caller.lastIndexOf("@"));
-            Caller = Caller.mid(Caller.indexOf(":")+1);     // only the Name of the caller
-            QString Account = callAcc->name;
+                QString filename = callAcc->FileRecordPath + ".wav";
+                filename.replace("%Y", Year);
+                filename.replace("%M", Month);
+                filename.replace("%D", Day);
+                filename.replace("%h", Hour);
+                filename.replace("%m", Minute);
+                filename.replace("%s", Second);
+                filename.replace("%C", Caller);
+                filename.replace("%A",Account);
+                pj_cstr(&rec_file,filename.toStdString().c_str());
 
-            QString filename = callAcc->FileRecordPath + ".wav";
-            filename.replace("%Y", Year);
-            filename.replace("%M", Month);
-            filename.replace("%D", Day);
-            filename.replace("%h", Hour);
-            filename.replace("%m", Minute);
-            filename.replace("%s", Second);
-            filename.replace("%C", Caller);
-            filename.replace("%A",Account);
-            pj_cstr(&rec_file,filename.toStdString().c_str());
-
-            // Create recorder for call
-            status = pjsua_recorder_create(&rec_file, 0, NULL, 0, 0, &Callopts->rec_id);
-            if (status != PJ_SUCCESS){
-                char buf[50];
-                pj_strerror	(status,buf,sizeof (buf) );
-                m_lib->m_Log->writeLog(1,QString("onCallMediaState: Error creating call recorder: ") + buf);
-                return;
-            }
-            // connect active call to call recorder immediatley if there is no fileplayer configured
-            else if(Callopts->player_id == PJSUA_INVALID_ID){
-                PJSUA2_CHECK_EXPR( pjsua_conf_connect(callId, pjsua_recorder_get_conf_port(Callopts->rec_id)) );
-                PJSUA2_CHECK_EXPR( pjsua_conf_connect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(Callopts->rec_id)) );
+                // Create recorder for call
+                status = pjsua_recorder_create(&rec_file, 0, NULL, 0, 0, &Callopts->rec_id);
+                if (status != PJ_SUCCESS){
+                    char buf[50];
+                    pj_strerror	(status,buf,sizeof (buf) );
+                    m_lib->m_Log->writeLog(1,QString("onCallMediaState: Error creating call recorder: ") + buf);
+                    return;
+                }
+                // connect active call to call recorder immediatley if there is no fileplayer configured
+                else if(Callopts->player_id == PJSUA_INVALID_ID){
+                    PJSUA2_CHECK_EXPR( pjsua_conf_connect(callId, pjsua_recorder_get_conf_port(Callopts->rec_id)) );
+                    PJSUA2_CHECK_EXPR( pjsua_conf_connect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(Callopts->rec_id)) );
+                }
+            } else {
+                m_lib->m_Log->writeLog(2,QString("onCallMediaState: call recorder for callId %1 already exists").arg(Callopts->callId));
             }
 
         }
