@@ -109,7 +109,9 @@ private slots:
 
     // Public API - Buddies
     void addBuddy(QJsonObject &data, QJsonObject &ret);
+    void editBuddy(QJsonObject &data, QJsonObject &ret);
     void removeBuddy(QJsonObject &data, QJsonObject &ret);
+    void getBuddies(QJsonObject &data, QJsonObject &ret);
 
     // Public API - Codecs
     void getActiveCodecs(QJsonObject &data, QJsonObject &ret);

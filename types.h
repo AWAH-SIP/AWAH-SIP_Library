@@ -301,7 +301,8 @@ struct s_account{
             {"fixedJitterBufferValue", (int)fixedJitterBufferValue},
             {"SIPStatusCode", SIPStatusCode},
             {"SIPStatusText", SIPStatusText},
-            {"callStatusLastReason", callStatusLastReason}
+            {"callStatusLastReason", callStatusLastReason},
+            {"uid", uid}
         };
     }
     s_account* fromJSON(QJsonObject &accountJSON){
@@ -486,18 +487,18 @@ struct s_buddy{
     QString Name = "";
     int status = PJSUA_BUDDY_STATUS_UNKNOWN;
     QString accUid = "";
-    QString autoConnectFromAccountUid = "";
     s_codec codec;
+    QString uid = "";
     QJsonObject toJSON() const {
-        return{{"buddyUrl", buddyUrl}, {"Name", Name}, {"status", status}, {"accUid", accUid}, {"autoConnectFromAccountUid", autoConnectFromAccountUid}, {"codec", codec.toJSON()} };
+        return{{"buddyUrl", buddyUrl}, {"Name", Name}, {"status", status}, {"accUid", accUid}, {"codec", codec.toJSON()}, {"uid", uid}};
     }
     s_buddy* fromJSON(const QJsonObject &buddyJSON) {
         buddyUrl = buddyJSON["buddyUrl"].toString();
         Name = buddyJSON["Name"].toString();
         status = buddyJSON["status"].toInt();
         accUid = buddyJSON["accUid"].toString();
-        autoConnectFromAccountUid = buddyJSON["autoConnectFromAccountUid"].toString();
-        codec.fromJSON(buddyJSON["codecSettings"].toObject());
+        codec.fromJSON(buddyJSON["codec"].toObject());
+        uid = buddyJSON["uid"].toString();
         return this;
     }
 };

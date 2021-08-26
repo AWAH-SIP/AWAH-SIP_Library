@@ -578,9 +578,25 @@ void Websocket::addBuddy(QJsonObject &data, QJsonObject &ret) {
     QString buddyUrl;
     QString name;
     QString accUid;
-    QJsonObject codecSettings;
-    if (jCheckString(buddyUrl, data["buddyUrl"]) && jCheckString(name, data["name"]) && jCheckString(accUid, data["accUid"]) && jCheckObject(codecSettings, data["codecSettings"])) {
-         m_lib->addBuddy(buddyUrl, name, accUid, codecSettings);
+    QJsonObject codec;
+    if (jCheckString(buddyUrl, data["buddyUrl"]) && jCheckString(name, data["name"]) && jCheckString(accUid, data["accUid"]) && jCheckObject(codec, data["codec"])) {
+         m_lib->addBuddy(buddyUrl, name, accUid, codec);
+        ret["data"] = retDataObj;
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::editBuddy(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj;
+    QString buddyUrl;
+    QString name;
+    QString accUid;
+    QString uid;
+    QJsonObject codec;
+    if (jCheckString(buddyUrl, data["buddyUrl"]) && jCheckString(name, data["name"]) && jCheckString(accUid, data["accUid"]) && jCheckObject(codec, data["codec"]) &&jCheckString(uid, data["uid"])) {
+         m_lib->editBuddy(buddyUrl, name, accUid, codec, uid);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
@@ -590,15 +606,26 @@ void Websocket::addBuddy(QJsonObject &data, QJsonObject &ret) {
 
 void Websocket::removeBuddy(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
-    QString buddyUrl;
-    QString accUid;
-    if (jCheckString(buddyUrl, data["buddyUrl"]) && jCheckString(accUid, data["accUid"])) {
-        m_lib->removeBuddy(buddyUrl, accUid);
+    QString buddyUid;
+    if (jCheckString(buddyUid, data["buddyUid"])) {
+        m_lib->removeBuddy(buddyUid);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
         ret["error"] = hasError("Parameters not accepted");
     }
+}
+
+void Websocket::getBuddies(QJsonObject &data, QJsonObject &ret){
+    Q_UNUSED(data);
+    QJsonObject retDataObj;
+    QJsonArray buddyArr;
+    for (auto& buddy : m_lib->getBuddies()){
+        buddyArr.append(buddy.toJSON());
+    }
+    retDataObj["buddyArray"] = buddyArr;
+    ret["data"] = retDataObj;
+    ret  ["error"] = noError();
 }
 
 void Websocket::getActiveCodecs(QJsonObject &data, QJsonObject &ret) {

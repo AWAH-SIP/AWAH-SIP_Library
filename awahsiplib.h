@@ -103,8 +103,10 @@ public:
     int getSoundDevID(QString DeviceName) const { return m_AudioRouter->getSoundDevID(DeviceName); };
 
     // Public API - Buddies
-    void addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings) const { return m_Buddies->addBuddy(buddyUrl, name, accUid, codecSettings); };
-    void removeBuddy(QString buddyUrl, QString accUid) const { return  m_Buddies->removeBuddy(buddyUrl, accUid); };
+    void addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codec) const { return m_Buddies->addBuddy(buddyUrl, name, accUid, codec); };
+    void editBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codec, QString uid) const { return m_Buddies->editBuddy(buddyUrl, name, accUid, codec, uid); };
+    void removeBuddy(QString uid) const { return  m_Buddies->removeBuddy(uid); };
+    QList<s_buddy> getBuddies() const { return m_Buddies->getBuddies(); };
 
     // Public API - Codecs
     QList<s_codec> getActiveCodecs() const { return m_Codecs->getActiveCodecs(); };

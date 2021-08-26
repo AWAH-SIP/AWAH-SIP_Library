@@ -33,9 +33,11 @@ public:
 
     bool registerBuddy(int AccID, QString buddyUrl);            // todo make me private
     bool deleteBuddy(int AccID, QString buddyUrl);
-    void addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings);
-    void removeBuddy(QString buddyUrl, QString accUid);
+    void addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings, QString uid = "");
+    void editBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings, QString uid);
+    void removeBuddy(QString uid);
     const QList <s_buddy> getBuddies(){return m_buddies; };
+    s_buddy* getBuddyByUID(QString uid);
 
 signals:
     void signalBuddyStatus(QString buddy, int status);

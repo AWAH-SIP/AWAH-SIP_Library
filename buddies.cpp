@@ -28,13 +28,14 @@ Buddies::Buddies(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_li
 
 bool Buddies::registerBuddy(int AccID, QString buddyUrl){
     s_account* account = m_lib->m_Accounts->getAccountByID(AccID);
+    QString fulladdr = "sip:"+ buddyUrl +"@"+ account->serverURI;
     if(account){
         try{
-            account->accountPtr->findBuddy2(buddyUrl.toStdString());
-        } catch(Error& err){
+            account->accountPtr->findBuddy2(fulladdr.toStdString());
+        } catch(Error &err){
             if(err.status == PJ_ENOTFOUND){
                 BuddyConfig cfg;
-                cfg.uri = buddyUrl.toStdString();
+                cfg.uri = fulladdr.toStdString();
                 cfg.subscribe = true;
                 PJBuddy *buddy = new PJBuddy(m_lib, this);
                 try {
@@ -46,43 +47,83 @@ bool Buddies::registerBuddy(int AccID, QString buddyUrl){
                 return true;
             }
         }
+
         m_lib->m_Log->writeLog(3,"RegisterBuddy: Buddy register failed: Buddy already exists!");
         return false;
-    }else   return false;
+    }else return false;
 }
 
 bool Buddies::deleteBuddy(int AccID, QString buddyUrl){
     s_account* account = m_lib->m_Accounts->getAccountByID(AccID);
+    QString fulladdr = "sip:"+ buddyUrl +"@"+ account->serverURI;
     if(account){
         Buddy buddy;
         try{
-            buddy = account->accountPtr->findBuddy2(buddyUrl.toStdString());
-        } catch(Error& err) {
-            m_lib->m_Log->writeLog(2,QString("deleterBuddy: ") + buddyUrl + " failed: " + err.info().c_str( ));
+            buddy = account->accountPtr->findBuddy2(fulladdr.toStdString());
+        } catch(Error &err) {
+            m_lib->m_Log->writeLog(2,QString("deleteBuddy: ") + buddyUrl + " failed: " + err.info().c_str( ));
             return false;
         }
+        m_lib->m_Log->writeLog(3,QString("deleteBuddy: ") + buddyUrl + " deleted successfully");
         return true;
-    }else   return false;
+    }else return false;
 }
 
-void Buddies::addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings)
+void Buddies::addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings, QString uid)
 {
+    if(uid.isEmpty())
+        uid = createNewUID();
     s_buddy newBuddy;
+    s_account * account = nullptr;
     newBuddy.Name = name;
     newBuddy.accUid = accUid;
     newBuddy.buddyUrl = buddyUrl;
-
-   // registerBuddy(m_lib->m_Accounts->getAccountByUID(accUid)->AccID, buddyUrl);
+    newBuddy.codec.fromJSON(codecSettings);
+    newBuddy.uid = uid;
+    account = m_lib->m_Accounts->getAccountByUID(accUid);
+    if(account != nullptr){
+        registerBuddy(account->AccID, buddyUrl);
+    }
+    else{
+        m_lib->m_Log->writeLog(3,"AddBuddy: failed: could not find account with uid " + newBuddy.accUid);
+    }
     m_buddies.append(newBuddy);
 }
 
-void Buddies::removeBuddy(QString buddyUrl, QString accUid)
+void Buddies::editBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings, QString uid)
 {
-     for(auto buddy : m_buddies){
-        if(buddy.buddyUrl == buddyUrl && buddy.accUid == accUid)
-            deleteBuddy(m_lib->m_Accounts->getAccountByUID(accUid)->AccID, buddyUrl);
-     }
-         // todo: delete buddy, remove it from the list and save it
+    s_buddy *editBuddy = nullptr;
+    editBuddy = getBuddyByUID(uid);
+    if(editBuddy != nullptr){
+        editBuddy->buddyUrl = buddyUrl;
+        editBuddy->Name = name;
+        editBuddy->accUid = accUid;
+        editBuddy->codec.fromJSON(codecSettings);
+    }
+    else{
+        m_lib->m_Log->writeLog(3,"editBuddy: failed: could not find buddy with uid: " + uid);
+    }
 }
 
+void Buddies::removeBuddy(QString uid)
+{
+    QMutableListIterator<s_buddy> i(m_buddies);
+    while(i.hasNext()){
+        s_buddy &buddy = i.next();
+        if(buddy.uid == uid){
+            s_account* account = m_lib->m_Accounts->getAccountByUID(buddy.accUid);
+            deleteBuddy(account->AccID,buddy.buddyUrl);
+            i.remove();
+            break;
+        }
+    }
+}
+
+s_buddy* Buddies::getBuddyByUID(QString uid){
+    for(auto& buddy : m_buddies){
+        if(buddy.uid == uid)
+            return &buddy;
+    }
+    return nullptr;
+}
 
