@@ -33,6 +33,12 @@ void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
 {
     Q_UNUSED(media_port);
     s_Call *call = static_cast<s_Call*>(user_data);
+    Call *ownObj = lookup(call->callId);
+
+    if(ownObj == nullptr) {
+        AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): Got Invalid CallID: %1 PJ::Call Object lookup not succesfull!").arg(call->callId)));
+        return;
+    }
 
     if(call->callId < 0 && call->callId > (int)AWAHSipLib::instance()->epCfg.uaConfig.maxCalls) {
         AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): Got Invalid CallID: %1").arg(call->callId)));
@@ -150,7 +156,7 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
     CallInfo ci = getInfo();
     s_account* callAcc = parent->getAccountByID(ci.accId);
     s_Call*  Callopts = nullptr;
-    for(auto&& call : callAcc->CallList){
+    for(auto& call : callAcc->CallList){
         if(call.callId == getId()){
             Callopts = &call;
             break;

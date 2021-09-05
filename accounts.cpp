@@ -204,8 +204,6 @@ void Accounts::hangupCall(int callId, int AccID)
             break;
         }
     }
-    if (call == nullptr)
-        return;
 
     if(account && call != Q_NULLPTR){
         m_lib->m_Log->writeLog(3,(QString("HangupCall: Account: ") + account->name + " hang up call with ID: " + QString::number(callId)));
@@ -225,7 +223,7 @@ void Accounts::hangupCall(int callId, int AccID)
 
             }
             else{
-                m_lib->m_Log->writeLog(3, "HangupCall: Hang up call, max. calls bug");                                                   // todo check if this bug exists anymore!
+                m_lib->m_Log->writeLog(1, "HangupCall: Hang up call, max. calls bug");                                                   // todo check if this bug exists anymore!
             }
         }
         catch(Error& err){
@@ -450,7 +448,7 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
 {
     emit callStateChanged(accID, role, callId, remoteofferer, calldur, state, lastStatusCode, statustxt, remoteUri);
     s_account* thisAccount = getAccountByID(accID);
-    s_Call* thisCall;
+    s_Call* thisCall = nullptr;
     for(auto& call : thisAccount->CallList){
         if(call.callId == callId){
             thisCall = &call;
