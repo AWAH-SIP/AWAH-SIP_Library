@@ -1,2 +1,0 @@
-﻿MSVCRT.lib(initializers.obj) : warning LNK4098: Standardbibliothek "libcmt.lib" steht in Konflikt mit anderen Bibliotheken; /NODEFAULTLIB:Bibliothek verwenden.
-  pjsystest.vcxproj -> C:\Users\WerBinIch\Documents\git\AWAH-SIP_Codec\awah-sip_library\pjsip\win_x86-64\pjproject-2.10\pjsip-apps\bin\pjsystest-x86_64-x64-vc14-Release.exe
