@@ -1,0 +1,3 @@
+[submodule "pjsip"]
+	path = pjsip
+	url = https://github.com/AWAH-SIP/AWAH-SIP_PJSIP-Assets.git
