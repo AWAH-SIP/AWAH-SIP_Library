@@ -31,17 +31,76 @@ class Buddies : public QObject
 public:
     explicit Buddies(AWAHSipLib *parentLib, QObject *parent = nullptr);
 
+    /**
+    * @brief this function is ondy used internally to register a buddy in pjsua
+    */
     bool registerBuddy(int AccID, QString buddyUrl);            // todo make me private
-    bool deleteBuddy(int AccID, QString buddyUrl);
+
+    /**
+    * @brief this function is ondy used internally to remove a burry from pjsua
+    */
+    bool unregisterBuddy(int AccID, QString buddyUrl);
+
+    /**
+    * @brief add a Buddy entry (a buddy can be seen as a phonebook entry)
+    * @param buddyUrl the SIP server URL of the buddy
+    * @param name the displayed name of the buddy
+    * @param accUid the UID of the account that the buddy is attached to
+    * @param codecSettings when a call is established to the buddy this codec and the settings is used
+    * @param uid the uid of the buddy
+    */
     void addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings, QString uid = "");
+
+    /**
+    * @brief edit a Buddy entry
+    * @param buddyUrl the SIP server URL of the buddy
+    * @param name the displayed name of the buddy
+    * @param accUid the UID of the account that the buddy is attached to
+    * @param codecSettings when a call is established to the buddy this codec and the settings is used
+    * @param uid the uid of the buddy
+    */
     void editBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings, QString uid);
+
+    /**
+    * @brief remove a Buddy
+    * @param uid the UID of the boddy to be removed
+    */
     void removeBuddy(QString uid);
+
+    /**
+    * @brief get the configured Buddies
+    * @return QList with all the buddies
+    */
     const QList <s_buddy> getBuddies(){return m_buddies; };
+
+    /**
+    * @brief get a buddy by its uid
+    * @return s_buddy the buddy
+    */
     s_buddy* getBuddyByUID(QString uid);
 
+
+    /**
+    * @brief  update a status of a buddy
+    * @param  BuddyUrl the full url of the buddy
+    * @param  State the new State
+    */
+    void changeBuddyState(QString buddyUrl, int state);
+
 signals:
-    void signalBuddyStatus(QString buddy, int status);
-    void sinalBuddyCountChanged();
+
+    /**
+    * @brief signalBuddyStatus is emmited when a buddy changes his status (e.g. from online to busy etc.)
+    * @param buddyUrl the SIP url of the buddy
+    * @param status the status of the buddy
+    */
+    void BuddyStatus(QString buddyUrl, int status);
+
+    /**
+    * @brief signalBuddyEntryChanged is emmited when a buddy is added, edited or removed from the buddies list
+    * @param the updated buddy list with all buddies
+    */
+    void BuddyEntryChanged(QList<s_buddy>* buddies);
 
 private:
     AWAHSipLib* m_lib;

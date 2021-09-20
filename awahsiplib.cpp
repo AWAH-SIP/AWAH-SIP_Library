@@ -78,6 +78,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Accounts->startCallInspector();
         m_Settings->loadGpioDevConfig();
         m_Codecs->listCodecs();
+        m_Settings->loadBuddies();
     }
     catch (Error &err){
         m_Log->writeLog(1,QString("AWAHsip: starting lib failed: ") + err.info().c_str());
@@ -89,7 +90,8 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(m_Accounts, &Accounts::callStateChanged, this, &AWAHSipLib::callStateChanged);
     connect(m_MessageManager, &MessageManager::signalMessage, this, &AWAHSipLib::signalMessage);
     connect(m_Accounts, &Accounts::signalSipStatus, this, &AWAHSipLib::signalSipStatus);
-    connect(m_Buddies, &Buddies::signalBuddyStatus, this, &AWAHSipLib::signalBuddyStatus);
+    connect(m_Buddies, &Buddies::BuddyStatus, this, &AWAHSipLib::signalBuddyStatus);
+    connect(m_Buddies, &Buddies::BuddyEntryChanged, this, &AWAHSipLib::signalBuddyEntryChanged);
     connect(m_Log, &Log::logMessage, this, &AWAHSipLib::logMessage);
     connect(m_AudioRouter, &AudioRouter::audioRoutesChanged, this, &AWAHSipLib::audioRoutesChanged);
     connect(m_AudioRouter, &AudioRouter::audioRoutesTableChanged, this, &AWAHSipLib::audioRoutesTableChanged);
@@ -110,6 +112,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     //connect(this, &AWAHSipLib::signalMessage, m_Websocket, &Websocket::message);
     connect(this, &AWAHSipLib::signalSipStatus, m_Websocket, &Websocket::sipStatus);
     connect(this, &AWAHSipLib::signalBuddyStatus, m_Websocket, &Websocket::buddyStatus);
+    connect(this, &AWAHSipLib::signalBuddyEntryChanged, m_Websocket, &Websocket::BuddyEntryChanged);
     connect(this, &AWAHSipLib::logMessage, m_Websocket, &Websocket::logMessage);
     connect(this, &AWAHSipLib::audioRoutesChanged, m_Websocket, &Websocket::audioRoutesChanged);
     connect(this, &AWAHSipLib::audioRoutesTableChanged, m_Websocket, &Websocket::audioRoutesTableChanged);
@@ -147,6 +150,7 @@ void AWAHSipLib::prepareLib()
     qRegisterMetaTypeStreamOperators <QList<s_audioRoutes>>("QList<s_audioRoutes>");
     qRegisterMetaTypeStreamOperators <QList<s_callHistory>>("QList<s_callHistory>");
     qRegisterMetaTypeStreamOperators <QList<s_gpioRoute>>("<QList<s_gpioRoute>");
+    qRegisterMetaTypeStreamOperators <QList<s_buddy>>("<QList<s_buddy>");
 }
 
 QList<s_IODevices> &AWAHSipLib::getIoDevices()
@@ -240,4 +244,16 @@ QDataStream &operator>>(QDataStream &in, s_gpioRoute &obj)
 {
   in >> obj.srcSlotId >> obj.destSlotId >> obj.inverted >> obj.persistant;
   return in;
+}
+
+
+QDataStream &operator<<(QDataStream &out, const s_buddy &obj)
+{
+    out << obj.Name << obj.accUid << obj.buddyUrl << obj.codec << obj.uid;
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, s_buddy &obj){
+    in >> obj.Name >> obj.accUid >> obj.buddyUrl >> obj.codec >> obj.uid;
+    return in;
 }

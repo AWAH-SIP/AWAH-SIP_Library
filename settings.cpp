@@ -143,6 +143,30 @@ void Settings::saveGpioRoutes()
     settings.sync();
 }
 
+void Settings::loadBuddies()
+{
+    QList<s_buddy>  loadedBuddies;
+    QSettings settings("awah", "AWAHsipConfig");
+
+    loadedBuddies = settings.value("Buddies").value<QList<s_buddy>>();
+    m_lib->m_Log->writeLog(3,QString("loadBuddies: loaded buddies: ") + QString::number(loadedBuddies.count()));
+
+    for(auto& buddy : loadedBuddies ){
+        m_lib->m_Buddies->addBuddy(buddy.buddyUrl,buddy.Name,buddy.accUid,buddy.codec.toJSON(),buddy.uid);
+    }
+    m_BuddiesLoaded = true;
+}
+
+void Settings::saveBuddies()
+{
+    if(!m_BuddiesLoaded)
+        return;
+    const QList<s_buddy> buddies = m_lib->m_Buddies->getBuddies();
+    QSettings settings("awah", "AWAHsipConfig");
+    settings.setValue("Buddies", QVariant::fromValue(buddies));
+    settings.sync();
+}
+
 void Settings::loadAccConfig()
 {
     QList<s_account>  loadedAccounts;

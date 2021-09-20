@@ -150,7 +150,8 @@ public slots:
     void regStateChanged(int accId, bool status);
     void sipStatus(int accId, int status, QString remoteUri);
     void callStateChanged(int accID, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri);
-    void buddyStatus(QString buddy, int status);
+    void buddyStatus(QString buddyURI, int status);
+    void BuddyEntryChanged(QList<s_buddy>* buddies);
     //void message(QString type, QByteArray message);
     void logMessage(QString msg);
     void audioRoutesChanged(const QList<s_audioRoutes>& audioRoutes);

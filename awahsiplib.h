@@ -180,7 +180,13 @@ signals:
     * @param buddy the buddy
     * @param status the buddy status code
     */
-    void signalBuddyStatus(QString buddy, int status);
+    void signalBuddyStatus(QString buddyUri, int status);
+
+    /**
+    * @brief signalBuddyEntryChanged is emmited when a buddy is added, edited or removed from the buddies list
+    * @param the updated buddy list with all buddies
+    */
+    void signalBuddyEntryChanged(QList<s_buddy>* buddies);
 
     /**
     * @brief Signal Message recieved
@@ -203,7 +209,7 @@ signals:
 
     /**
     * @brief Signal if audio route Table from the conference-bridge changed
-    * @param portList all Sources and Sinks as Struct
+    * @param portList with all sources and sinks as struct
     */
     void audioRoutesTableChanged(const s_audioPortList& portList);
 
@@ -233,11 +239,28 @@ signals:
     */
     void IoDevicesChanged(QList<s_IODevices>& IoDev);
 
-
-    // GPIO Signals TODO: Doku-Description
+    /**
+    * @brief Signal if GPIO device config changed
+    * @param QList of the new device config
+    */
     void gpioDevicesChanged(const QList<s_IODevices>& deviceList);
+
+    /**
+    * @brief Signal if GPIO Routes changed
+    * @param QList with the new routes
+    */
     void gpioRoutesChanged(const QList<s_gpioRoute>& routes);
+
+    /**
+    * @brief Signal if GPIO routes table has changed (e.g. a device is gone offline)
+    * @param QList of the new portlist
+    */
     void gpioRoutesTableChanged(const s_gpioPortList& portList);
+
+    /**
+    * @brief Signal if a GPIO state has changed
+    * @param QMap with the changed GPIOS
+    */
     void gpioStateChanged(const QMap<QString, bool> changedGpios);
 
 private:

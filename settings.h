@@ -51,6 +51,15 @@ public:
     */
     void loadGpioRoutes();
 
+    /**
+    * @brief load configured buddies from settings file
+    */
+    void loadBuddies();
+
+    /**
+    * @brief save buddies to settings file
+    */
+    void saveBuddies();
 
     /**
     * @brief Load endpoint and media settings from settings file and restart endpoint to activate them
@@ -121,6 +130,11 @@ public slots:
     */
     void saveGpioRoutes();
 
+//    /**
+//     * @brief save Buddies to the settings file
+//     */
+//    void saveBuddies();
+
 signals:
 
 
@@ -147,6 +161,7 @@ private:
     bool m_AudioRoutesLoaded = false;
     bool m_GpioDevicesLoaded = false;
     bool m_GpioRoutesLoaded = false;
+    bool m_BuddiesLoaded = false;
 
 private slots:
     void loadIODevConfigLater();

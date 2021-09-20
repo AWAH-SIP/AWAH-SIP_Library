@@ -887,11 +887,23 @@ void Websocket::callInfo(int accId, int callId, QJsonObject callInfo){
     sendToAll(obj);
 }
 
-void Websocket::buddyStatus(QString buddy, int status){
+void Websocket::buddyStatus(QString buddyURI, int status){
     QJsonObject obj, data;
-    data["buddy"] = buddy;
+    data["buddy"] = buddyURI;
     data["status"] = status;
     obj["signal"] = "buddyStatus";
+    obj["data"] = data;
+    sendToAll(obj);
+}
+
+void Websocket::BuddyEntryChanged(QList<s_buddy>* buddies){
+    QJsonObject obj, data;
+    QJsonArray buddyArr;
+    for (auto & buddy : *buddies) {
+        buddyArr.append(buddy.toJSON());
+    }
+    data["Budies"] = buddyArr;
+    obj["signal"] = "BuddyEntryChanged";
     obj["data"] = data;
     sendToAll(obj);
 }

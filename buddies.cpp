@@ -53,7 +53,7 @@ bool Buddies::registerBuddy(int AccID, QString buddyUrl){
     }else return false;
 }
 
-bool Buddies::deleteBuddy(int AccID, QString buddyUrl){
+bool Buddies::unregisterBuddy(int AccID, QString buddyUrl){
     s_account* account = m_lib->m_Accounts->getAccountByID(AccID);
     QString fulladdr = "sip:"+ buddyUrl +"@"+ account->serverURI;
     if(account){
@@ -88,6 +88,8 @@ void Buddies::addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObje
         m_lib->m_Log->writeLog(3,"AddBuddy: failed: could not find account with uid " + newBuddy.accUid);
     }
     m_buddies.append(newBuddy);
+    m_lib->m_Settings->saveBuddies();
+    emit BuddyEntryChanged(&m_buddies);
 }
 
 void Buddies::editBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings, QString uid)
@@ -99,6 +101,8 @@ void Buddies::editBuddy(QString buddyUrl, QString name, QString accUid, QJsonObj
         editBuddy->Name = name;
         editBuddy->accUid = accUid;
         editBuddy->codec.fromJSON(codecSettings);
+        m_lib->m_Settings->saveBuddies();
+        emit BuddyEntryChanged(&m_buddies);
     }
     else{
         m_lib->m_Log->writeLog(3,"editBuddy: failed: could not find buddy with uid: " + uid);
@@ -112,8 +116,10 @@ void Buddies::removeBuddy(QString uid)
         s_buddy &buddy = i.next();
         if(buddy.uid == uid){
             s_account* account = m_lib->m_Accounts->getAccountByUID(buddy.accUid);
-            deleteBuddy(account->AccID,buddy.buddyUrl);
+            unregisterBuddy(account->AccID,buddy.buddyUrl);
             i.remove();
+            emit BuddyEntryChanged(&m_buddies);
+            m_lib->m_Settings->saveBuddies();
             break;
         }
     }
@@ -125,5 +131,12 @@ s_buddy* Buddies::getBuddyByUID(QString uid){
             return &buddy;
     }
     return nullptr;
+}
+
+void Buddies::changeBuddyState(QString buddyUrl, int state){
+    for(auto& buddy : m_buddies){
+        if(buddy.buddyUrl == buddyUrl)
+            buddy.status = state;
+    }
 }
 

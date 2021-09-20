@@ -48,7 +48,7 @@ void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
     try {
         PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(pjsua_player_get_conf_port(call->player_id),pjsua_call_get_conf_port(call->callId)) );
     }  catch (Error &err) {
-        AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): dissconnect call from player failed ") + err.info().c_str()));
+        AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): disconnect call from player failed ") + err.info().c_str()));
     }
 
     if(call->rec_id != INVALID_ID  ){

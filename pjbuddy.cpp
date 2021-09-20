@@ -55,7 +55,8 @@ void PJBuddy::onBuddyState(){
     }else{
         state = 3;
     }
-    emit parent->signalBuddyStatus(QString::fromStdString(bi.uri), state);
+    m_lib->m_Buddies->changeBuddyState(QString::fromStdString(bi.uri), state);
+    emit parent->BuddyStatus(QString::fromStdString(bi.uri), state);
 }
 
 void PJBuddy::onBuddyEvSubState(OnBuddyEvSubStateParam &prm){
