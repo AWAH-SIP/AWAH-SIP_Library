@@ -24,6 +24,7 @@ public:
     QString createGpioDev(QJsonObject& newDev);
     void removeDevice(QString uid);
     GpioDevice* getDeviceByUid(QString uid);
+    void setGPIStateOfDevice(QString Deviceuid, uint number, bool state);
     QList<s_IODevices>& getGpioDevices();
     const QJsonObject getGpioDevTypes() const;
 

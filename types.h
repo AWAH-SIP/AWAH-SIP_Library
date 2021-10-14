@@ -196,7 +196,7 @@ struct s_IODevices{
     }
 };
 Q_DECLARE_METATYPE(s_IODevices);
-Q_DECLARE_METATYPE( QList<s_IODevices>);
+Q_DECLARE_METATYPE(QList<s_IODevices>);
 
 struct s_codec{
     QString encodingName = "";
@@ -318,7 +318,7 @@ struct s_account{
     }
 };
 Q_DECLARE_METATYPE(s_account);
-Q_DECLARE_METATYPE( QList<s_account>);
+Q_DECLARE_METATYPE(QList<s_account>);
 
 struct s_audioPort{
     QString name ="";

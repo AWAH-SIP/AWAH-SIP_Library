@@ -116,6 +116,7 @@ public:
     void removeGpioDevice(QString uid) { return m_GpioDeviceManager->removeDevice(uid); };
     const QList<s_IODevices>& getGpioDevices() const { return m_GpioDeviceManager->getGpioDevices(); };
     const QJsonObject getGpioDevTypes() const { return m_GpioDeviceManager->getGpioDevTypes(); };
+    void setGPIStateOfDevice(QString Deviceuid, uint number, bool state) {return m_GpioDeviceManager->setGPIStateOfDevice(Deviceuid, number, state); };
 
     // Public API - GpioRouter
     const QList<s_gpioRoute>& getGpioRoutes() { return GpioRouter::instance()->getGpioRoutes(); };

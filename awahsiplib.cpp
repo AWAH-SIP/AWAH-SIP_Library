@@ -150,7 +150,7 @@ void AWAHSipLib::prepareLib()
     qRegisterMetaTypeStreamOperators <QList<s_audioRoutes>>("QList<s_audioRoutes>");
     qRegisterMetaTypeStreamOperators <QList<s_callHistory>>("QList<s_callHistory>");
     qRegisterMetaTypeStreamOperators <QList<s_gpioRoute>>("<QList<s_gpioRoute>");
-    qRegisterMetaTypeStreamOperators <QList<s_buddy>>("<QList<s_buddy>");
+    //qRegisterMetaTypeStreamOperators <QList<s_buddy>>("<QList<s_buddy>");
 }
 
 QList<s_IODevices> &AWAHSipLib::getIoDevices()
@@ -180,8 +180,8 @@ QDataStream &operator<<(QDataStream &out, const s_IODevices &obj)
 
 QDataStream &operator>>(QDataStream &in, s_IODevices &obj)
 {
-   in  >> obj.devicetype >> obj.inputname >> obj.outputame >> obj.genfrequency >> obj.uid >> obj.path  >> obj.inChannelCount >> obj.outChannelCount >> obj.typeSpecificSettings;
-   return in;
+    in  >> obj.devicetype >> obj.inputname >> obj.outputame >> obj.genfrequency >> obj.uid >> obj.path  >> obj.inChannelCount >> obj.outChannelCount >> obj.typeSpecificSettings;
+    return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const s_account &obj)
@@ -192,10 +192,9 @@ QDataStream &operator<<(QDataStream &out, const s_account &obj)
 
 QDataStream &operator>>(QDataStream &in, s_account &obj)
 {
-   in  >> obj.name >> obj.user >> obj.password >> obj.serverURI >> obj.FileRecordPath >> obj.FilePlayPath >> obj.uid >> obj.CallHistory >> obj.fixedJitterBuffer >> obj.fixedJitterBufferValue;
-   return in;
+    in  >> obj.name >> obj.user >> obj.password >> obj.serverURI >> obj.FileRecordPath >> obj.FilePlayPath >> obj.uid >> obj.CallHistory >> obj.fixedJitterBuffer >> obj.fixedJitterBufferValue;
+    return in;
 }
-
 
 QDataStream &operator<<(QDataStream &out, const s_audioRoutes &obj)
 {
@@ -205,8 +204,8 @@ QDataStream &operator<<(QDataStream &out, const s_audioRoutes &obj)
 
 QDataStream &operator>>(QDataStream &in, s_audioRoutes &obj)
 {
-   in  >> obj.srcDevName >> obj.destDevName >> obj.level >> obj.persistant;
-   return in;
+    in  >> obj.srcDevName >> obj.destDevName >> obj.level >> obj.persistant;
+    return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const s_codec &obj)
@@ -217,8 +216,8 @@ QDataStream &operator<<(QDataStream &out, const s_codec &obj)
 
 QDataStream &operator>>(QDataStream &in, s_codec &obj)
 {
-   in  >> obj.codecParameters >> obj.displayName >> obj.encodingName >> obj.priority;
-   return in;
+    in  >> obj.codecParameters >> obj.displayName >> obj.encodingName >> obj.priority;
+    return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const s_callHistory &obj)
@@ -229,8 +228,8 @@ QDataStream &operator<<(QDataStream &out, const s_callHistory &obj)
 
 QDataStream &operator>>(QDataStream &in, s_callHistory &obj)
 {
-   in  >> obj.callUri >> obj.codec >> obj.duration >> obj.outgoing >> obj.count >> obj.codec;
-   return in;
+    in  >> obj.callUri >> obj.codec >> obj.duration >> obj.outgoing >> obj.count >> obj.codec;
+    return in;
 }
 
 QDataStream &operator<<(QDataStream &out, const s_gpioRoute &obj)
@@ -239,21 +238,20 @@ QDataStream &operator<<(QDataStream &out, const s_gpioRoute &obj)
     return out;
 }
 
-
 QDataStream &operator>>(QDataStream &in, s_gpioRoute &obj)
 {
-  in >> obj.srcSlotId >> obj.destSlotId >> obj.inverted >> obj.persistant;
-  return in;
-}
-
-
-QDataStream &operator<<(QDataStream &out, const s_buddy &obj)
-{
-    out << obj.Name << obj.accUid << obj.buddyUrl << obj.codec << obj.uid;
-    return out;
-}
-
-QDataStream &operator>>(QDataStream &in, s_buddy &obj){
-    in >> obj.Name >> obj.accUid >> obj.buddyUrl >> obj.codec >> obj.uid;
+    in >> obj.srcSlotId >> obj.destSlotId >> obj.inverted >> obj.persistant;
     return in;
 }
+
+//QDataStream &operator<<(QDataStream &out, const s_buddy &obj)
+//{
+//    out << obj.Name << obj.accUid << obj.buddyUrl << obj.codec << obj.uid;
+//    return out;
+//}
+
+//QDataStream &operator>>(QDataStream &in, s_buddy &obj)
+//{
+//    in >> obj.Name >> obj.accUid >> obj.buddyUrl >> obj.codec >> obj.uid;
+//    return in;
+//}

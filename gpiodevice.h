@@ -19,14 +19,14 @@ public:
 
     virtual bool getGPI(uint number) const = 0;
     virtual bool getGPO(uint number) const = 0;
+    virtual void setGPI(uint number, bool state) = 0;
+    virtual void setGPO(uint number, bool state) = 0;
     const  s_IODevices& getDeviceInfo() const { return m_deviceInfo;}
 
 signals:
     void gpioChanged();
 
 protected:
-    virtual void setGPI(uint number, bool state) = 0;
-    virtual void setGPO(uint number, bool state) = 0;
 
     s_IODevices m_deviceInfo;
 

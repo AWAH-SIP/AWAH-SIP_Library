@@ -1,5 +1,5 @@
 #include "gpiodevicemanager.h"
-
+#include "awahsiplib.h"
 
 GpioDeviceManager *GpioDeviceManager::GpioDeviceManagerInstance = NULL;
 GpioDeviceManager *GpioDeviceManager::instance(QObject *parent)
@@ -337,4 +337,24 @@ void GpioDeviceManager::createStaticOnDev()
         dev->setGPI(0, true);
         emit dev->gpioChanged();
     }
+}
+
+void GpioDeviceManager::setGPIStateOfDevice(QString Deviceuid, uint number, bool state)
+{
+    GpioDevice* device = nullptr;
+    device = getDeviceByUid(Deviceuid);
+    if(device){
+        if(device->getDeviceInfo().devicetype == VirtualGpioDevice){
+            device->setGPI(number, state);
+            emit device->gpioChanged();
+        }
+        else{
+            AWAHSipLib::instance()->m_Log->writeLog(3,"setGPIStateOfDevice: Changing states of non virtual GPIO devices is not allowed");
+        }
+    }
+    else{
+        AWAHSipLib::instance()->m_Log->writeLog(3,"setGPIStateOfDevice: device not found");
+        qDebug() << "device uid: " << Deviceuid;
+    }
+
 }

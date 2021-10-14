@@ -687,6 +687,19 @@ void Websocket::getGpioDevTypes(QJsonObject &data, QJsonObject &ret) {
     ret["error"] = noError();
 }
 
+void Websocket::setGPIStateOfDevice(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj, setGPI;
+    QString devUiD;
+    uint number;
+    bool state;
+    if (jCheckString(devUiD, data["devUid"]) && jCheckUint(number, data["GPINumber"]) && jCheckBool(state, data["State"])) {
+        m_lib->setGPIStateOfDevice(devUiD,number,state);
+        ret["data"] = retDataObj;
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
 
 void Websocket::getGpioRoutes(QJsonObject &data, QJsonObject &ret) {
     Q_UNUSED(data);
