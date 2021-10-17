@@ -618,8 +618,13 @@ s_audioPortList AudioRouter::listConfPorts(){
             const s_IODevices* aDevice = getADeviceByUID(uid);
             if(aDevice != nullptr){
                 if(aDevice->devicetype == TestToneGenerator){
-                    src.name = aDevice->inputname;
                     src.pjName = confinfo.name;
+                    if(m_customSourceLabels.contains(pj2Str(src.pjName))){
+                        src.name = m_customSourceLabels[pj2Str(src.pjName)];
+                    }
+                    else{
+                        src.name = aDevice->inputname;
+                    }
                     src.slot = slot;
                     audioPortList.srcPorts.append(src);
                     m_srcAudioSlotMap[slot] = pj2Str(confinfo.name);
@@ -627,15 +632,25 @@ s_audioPortList AudioRouter::listConfPorts(){
                     QString channelString = split.at(1);
                     uint channel = channelString.remove("Ch:").toUInt();
                     if(channel <= aDevice->inChannelCount) {
-                        src.name = aDevice->inputname + " " + split.at(1);
                         src.pjName = confinfo.name;
+                        if(m_customSourceLabels.contains(pj2Str(src.pjName))){
+                            src.name = m_customSourceLabels[pj2Str(src.pjName)];
+                        }
+                        else{
+                            src.name = aDevice->inputname + " " + split.at(1);
+                        }
                         src.slot = slot;
                         audioPortList.srcPorts.append(src);
                         m_srcAudioSlotMap[slot] = pj2Str(confinfo.name);
                     }
                     if(channel <= aDevice->outChannelCount) {
-                        dest.name = aDevice->outputame + " " + split.at(1);
                         dest.pjName = confinfo.name;
+                        if(m_customDestLabels.contains(pj2Str(dest.pjName))){
+                            dest.name = m_customDestLabels[pj2Str(dest.pjName)];
+                        }
+                        else{
+                            dest.name = aDevice->outputame + " " + split.at(1);
+                        }
                         dest.slot = slot;
                         audioPortList.destPorts.append(dest);
                         m_destAudioSlotMap[slot] = pj2Str(confinfo.name);
@@ -646,11 +661,21 @@ s_audioPortList AudioRouter::listConfPorts(){
             QString uid = split[0].remove("Acc:");
             const s_account* account = m_lib->m_Accounts->getAccountByUID(uid);
             if(account != nullptr) {
-                src.name = account->name + " " + split.at(1);
                 src.pjName = confinfo.name;
+                if(m_customSourceLabels.contains(pj2Str(src.pjName))){
+                    src.name = m_customSourceLabels[pj2Str(src.pjName)];
+                }
+                else{
+                    src.name = account->name + " " + split.at(1);
+                }
                 src.slot = slot;
-                dest.name = account->name + " " + split.at(1);
                 dest.pjName = confinfo.name;
+                if(m_customDestLabels.contains(pj2Str(dest.pjName))){
+                    dest.name = m_customDestLabels[pj2Str(dest.pjName)];
+                }
+                else{
+                    dest.name = account->name + " " + split.at(1);
+                }
                 dest.slot = slot;
                 audioPortList.srcPorts.append(src);
                 audioPortList.destPorts.append(dest);
@@ -662,8 +687,13 @@ s_audioPortList AudioRouter::listConfPorts(){
             const s_IODevices* aDevice = getADeviceByUID(uid);
             if(aDevice != nullptr) {
                 if(aDevice->devicetype == FilePlayer){
-                    src.name = "File Player: " + aDevice->inputname;
                     src.pjName = confinfo.name;
+                    if(m_customSourceLabels.contains(pj2Str(src.pjName))){
+                        src.name = m_customSourceLabels[pj2Str(src.pjName)];
+                    }
+                    else{
+                        src.name = "File Player: " + aDevice->inputname;
+                    }
                     src.slot = slot;
                     audioPortList.srcPorts.append(src);
                     m_srcAudioSlotMap[slot] = pj2Str(confinfo.name);
@@ -675,8 +705,13 @@ s_audioPortList AudioRouter::listConfPorts(){
             const s_IODevices* aDevice = getADeviceByUID(uid);
             if(aDevice != nullptr) {
                 if(aDevice->devicetype == FileRecorder){
-                    dest.name = aDevice->outputame;
                     dest.pjName = confinfo.name;
+                    if(m_customDestLabels.contains(pj2Str(dest.pjName))){
+                        dest.name = m_customDestLabels[pj2Str(dest.pjName)];
+                    }
+                    else{
+                        dest.name = aDevice->outputame;
+                    }
                     dest.slot = slot;
                     audioPortList.destPorts.append(dest);
                     m_srcAudioSlotMap[slot] = pj2Str(confinfo.name);
@@ -689,7 +724,6 @@ s_audioPortList AudioRouter::listConfPorts(){
         debugSlotOut.append(confinfo.name.ptr);
         confportlist.append(debugSlotOut);
     }
-    qDebug() << confportlist;                                                                        // todo remove me!
     return audioPortList;
 }
 
@@ -820,5 +854,25 @@ void AudioRouter::removeAllRoutesFromAccount(const s_account account)
     }
 }
 
+void AudioRouter::changeConfportsrcName(const QString portName, const QString customName)
+{
+    if(customName.isEmpty()){
+        m_customSourceLabels[portName].clear();
+        conferenceBridgeChanged();
+        return;
+    }
+    m_customSourceLabels[portName] = customName;
+    conferenceBridgeChanged();
+}
 
+void AudioRouter::changeConfportdstName(const QString portName, const QString customName)
+{
+    if(customName.isEmpty()){
+        m_customDestLabels[portName].clear();
+        conferenceBridgeChanged();
+        return;
+    }
+    m_customDestLabels[portName] = customName;
+    conferenceBridgeChanged();
+}
 

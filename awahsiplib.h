@@ -101,6 +101,8 @@ public:
     void addToneGen(int freq) const { return m_AudioRouter->addToneGen(freq); };
     QList<s_IODevices>& getAudioDevices() const { return *m_AudioRouter->getAudioDevices(); };
     int getSoundDevID(QString DeviceName) const { return m_AudioRouter->getSoundDevID(DeviceName); };
+    void changeConfportsrcName(const QString portName, const QString customName) const { return m_AudioRouter->changeConfportsrcName(portName, customName); };
+    void changeConfportdstName(const QString portName, const QString customName) const { return m_AudioRouter->changeConfportdstName(portName, customName); };
 
     // Public API - Buddies
     void addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codec) const { return m_Buddies->addBuddy(buddyUrl, name, accUid, codec); };

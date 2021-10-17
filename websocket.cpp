@@ -573,6 +573,32 @@ void Websocket::getSoundDevID(QJsonObject &data, QJsonObject &ret) {
     }
 }
 
+void Websocket::changeConfportsrcName(QJsonObject &data, QJsonObject &ret)
+{
+    QJsonObject retDataObj;
+    QString portname, customName;
+    if (jCheckString(portname, data["portName"]) && jCheckString(customName, data["customName"])) {
+        m_lib->changeConfportsrcName(portname,customName);
+        ret["data"] = retDataObj;
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+void Websocket::changeConfportdstName(QJsonObject &data, QJsonObject &ret)
+{
+    QJsonObject retDataObj;
+    QString portname, customName;
+    if (jCheckString(portname, data["portName"]) && jCheckString(customName, data["customName"])) {
+        m_lib->changeConfportdstName(portname,customName);
+        ret["data"] = retDataObj;
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+
 void Websocket::addBuddy(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     QString buddyUrl;

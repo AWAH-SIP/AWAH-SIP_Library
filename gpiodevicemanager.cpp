@@ -354,7 +354,6 @@ void GpioDeviceManager::setGPIStateOfDevice(QString Deviceuid, uint number, bool
     }
     else{
         AWAHSipLib::instance()->m_Log->writeLog(3,"setGPIStateOfDevice: device not found");
-        qDebug() << "device uid: " << Deviceuid;
     }
 
 }

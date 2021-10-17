@@ -106,6 +106,8 @@ private slots:
     void addToneGen(QJsonObject &data, QJsonObject &ret);
     void getAudioDevices(QJsonObject &data, QJsonObject &ret);
     void getSoundDevID(QJsonObject &data, QJsonObject &ret);
+    void changeConfportsrcName(QJsonObject &data, QJsonObject &ret);
+    void changeConfportdstName(QJsonObject &data, QJsonObject &ret);
 
     // Public API - Buddies
     void addBuddy(QJsonObject &data, QJsonObject &ret);

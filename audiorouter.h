@@ -152,6 +152,20 @@ public:
     int addSplittComb(s_account& account);
 
     /**
+    * @brief Add a custom lable to a Confport source
+    * @param portName the portName (defaultlable)
+    * @param CustomName the new custom name for that source
+    */
+    void changeConfportsrcName(const QString portName, const QString customName);
+
+    /**
+    * @brief Add a custom lable to a Confport destination
+    * @param portName the portName (defaultlable)
+    * @param CustomName the new custom name for that destination
+    */
+    void changeConfportdstName(const QString portName, const QString customName);
+
+    /**
     * @brief get the active devices
     * @return the AudioDevice struct
     */
@@ -202,12 +216,19 @@ private:
 
     void removeAllRoutesFromSlot(int slot);
 
-
     /**
     * @brief List all active conference ports
     * @return Struct with names and Slot IDs for Sources and Destinations
     */
     s_audioPortList listConfPorts();
+
+    /**
+    * @brief Custom lables for souces are mapped
+    * @param key QString pjname
+    * @param value QString custom label
+    */
+    QMap<QString,QString> m_customSourceLabels;
+    QMap<QString,QString> m_customDestLabels;
 
 
 };
