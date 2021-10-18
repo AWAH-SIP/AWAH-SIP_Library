@@ -87,6 +87,26 @@ public:
     int saveAudioRoutes();
 
     /**
+    * @brief load custom source names from settings file
+    */
+    void loadCustomSourceNames();
+
+    /**
+    * @brief save custiom source names to the settings file
+    */
+    void saveCustomSourceNames();
+
+    /**
+    * @brief load custom destination names from settings file
+    */
+    void loadCustomDestinationNames();
+
+    /**
+    * @brief save custiom destination names to the settings file
+    */
+    void saveCustomDestinationNames();
+
+    /**
     * @brief get the log file path
     * @return QString logfilepath
     */

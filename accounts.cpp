@@ -118,6 +118,7 @@ void Accounts::removeAccount(int index)
     if(m_accounts.count()> index){
         m_accounts.at(index).accountPtr->shutdown();
         m_lib->m_AudioRouter->removeAllRoutesFromAccount(m_accounts.at(index));
+        m_lib->m_AudioRouter->removeAllCustomNamesWithUID(m_accounts.at(index).uid);
         // TODO: here we have to remove the Splittercombiner from the Account!
         GpioDeviceManager::instance()->removeDevice(m_accounts.at(index).uid);
         m_accounts.removeAt(index);

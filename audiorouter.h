@@ -166,6 +166,12 @@ public:
     void changeConfportdstName(const QString portName, const QString customName);
 
     /**
+    * @brief remove changed names with the uid (call this function when removing a audio device or an account to clean up the lables)
+    * @param uid the uid of the account or the audio device
+    */
+    void removeAllCustomNamesWithUID(const QString uid);
+
+    /**
     * @brief get the active devices
     * @return the AudioDevice struct
     */
@@ -176,6 +182,10 @@ public:
 
     QMap<int, QString> getSrcAudioSlotMap() const { return m_srcAudioSlotMap; };
     QMap<int, QString> getDestAudioSlotMap() const { return m_destAudioSlotMap; };
+    QMap<QString, QString> getCustomSourceLabels() const { return m_customSourceLabels; };
+    QMap<QString, QString> getCustomDestLables() const { return m_customDestLabels; };
+    void setCustomSourceLables(const QMap<QString, QString> srclables) { m_customSourceLabels = srclables; };
+    void setCustomDestinationLables(const QMap<QString, QString> dstlables) { m_customDestLabels = dstlables; };
 
 signals:
 

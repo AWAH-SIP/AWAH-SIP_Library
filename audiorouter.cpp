@@ -331,7 +331,6 @@ void AudioRouter::removeAudioDevice(QString uid)
         m_lib->m_Log->writeLog(3,(QString("removeAudioDevice: removing: ")  +   deviceToRemove->inputname));
     }
 
-
     QMutableListIterator<s_IODevices> i(m_AudioDevices);
     while(i.hasNext()){
         s_IODevices &device = i.next();
@@ -340,6 +339,7 @@ void AudioRouter::removeAudioDevice(QString uid)
             break;
         }
     }
+    removeAllCustomNamesWithUID(uid);
     conferenceBridgeChanged();
     m_lib->m_Settings->saveIODevConfig();
     emit AudioDevicesChanged(m_AudioDevices);
@@ -606,7 +606,6 @@ s_audioPortList AudioRouter::listConfPorts(){
         pj_strerror	(status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(2,(QString("ListConfPorts: reading conf port list failed: ") + buf));
     }
-
     for (unsigned int i=0;i<port_cnt;i++){
         s_audioPort src, dest;
         int slot = confports[i];
@@ -863,6 +862,7 @@ void AudioRouter::changeConfportsrcName(const QString portName, const QString cu
     }
     m_customSourceLabels[portName] = customName;
     conferenceBridgeChanged();
+    m_lib->m_Settings->saveCustomSourceNames();
 }
 
 void AudioRouter::changeConfportdstName(const QString portName, const QString customName)
@@ -874,5 +874,29 @@ void AudioRouter::changeConfportdstName(const QString portName, const QString cu
     }
     m_customDestLabels[portName] = customName;
     conferenceBridgeChanged();
+    m_lib->m_Settings->saveCustomDestinationNames();
 }
 
+void AudioRouter::removeAllCustomNamesWithUID(const QString uid)
+{
+    qDebug() << "stored lables: " << m_customSourceLabels << m_customDestLabels;
+    QMap<QString, QString>::const_iterator it = m_customSourceLabels.constBegin();
+    auto end = m_customSourceLabels.constEnd();
+    while (it != end) {
+        if(it.key().contains(uid)){
+            m_customSourceLabels.remove(it.key());
+        }
+        ++it;
+    }
+    it = m_customDestLabels.constBegin();
+    end = m_customDestLabels.constEnd();
+    while (it != end) {
+        if(it.key().contains(uid)){
+            m_customDestLabels.remove(it.key());
+        }
+        ++it;
+    }
+    m_lib->m_Settings->saveCustomSourceNames();
+    m_lib->m_Settings->saveCustomDestinationNames();
+    qDebug() << "now lables: " << m_customSourceLabels << m_customDestLabels;
+}

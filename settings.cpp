@@ -30,7 +30,6 @@
 
 Settings::Settings(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_lib(parentLib)
 {
-
 }
 
 
@@ -234,6 +233,64 @@ int Settings::saveAudioRoutes()
     settings.setValue("AudioRoutes", QVariant::fromValue(routesToSave));
     settings.sync();
     return PJ_SUCCESS;
+}
+
+void Settings::saveCustomSourceNames()
+{
+    QSettings settings("awah", "AWAHsipConfig");
+    settings.remove("CustomSourceNames");
+    settings.beginGroup("CustomSourceNames");
+    QMap<QString,QString> srcLables = m_lib->m_AudioRouter->getCustomSourceLabels();
+    QMap<QString, QString>::const_iterator i = srcLables.constBegin();
+    while (i != srcLables.constEnd()) {
+         settings.setValue(i.key(), i.value());
+         ++i;
+     }
+    settings.endGroup();
+    settings.sync();
+}
+
+void Settings::loadCustomSourceNames()
+{
+    QSettings settings("awah", "AWAHsipConfig");
+    settings.beginGroup("CustomSourceNames");
+    QMap<QString,QString> srcLables;
+    QStringList keys = settings.childKeys();
+    foreach (QString key, keys) {
+         srcLables[key] = settings.value(key).toString();
+         qDebug() << "found lable: " << key << "with value: " << settings.value(key).toString();
+    }
+    settings.endGroup();
+    qDebug() << "Loaded custom Source Lables" << srcLables;
+    m_lib->m_AudioRouter->setCustomSourceLables(srcLables);
+}
+
+void Settings::saveCustomDestinationNames()
+{
+    QSettings settings("awah", "AWAHsipConfig");
+    settings.remove("CustomDestinationNames");
+    settings.beginGroup("CustomDestinationNames");
+    QMap<QString,QString> dstLables = m_lib->m_AudioRouter->getCustomDestLables();
+    QMap<QString, QString>::const_iterator i = dstLables.constBegin();
+    while (i != dstLables.constEnd()) {
+         settings.setValue(i.key(), i.value());
+         ++i;
+     }
+    settings.endGroup();
+    settings.sync();
+}
+
+void Settings::loadCustomDestinationNames()
+{
+    QSettings settings("awah", "AWAHsipConfig");
+    settings.beginGroup("CustomDestinationNames");
+    QMap<QString,QString> dstLables;
+    QStringList keys = settings.childKeys();
+    foreach (QString key, keys) {
+         dstLables[key] = settings.value(key).toString();
+    }
+    settings.endGroup();
+    m_lib->m_AudioRouter->setCustomDestinationLables(dstLables);
 }
 
 void Settings::loadSettings()                                           // todo check if library is alredy running and restart if true

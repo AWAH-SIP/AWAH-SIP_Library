@@ -72,6 +72,8 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
 
         /* Create pool for multiple Sound Device handling */
         pool = pjsua_pool_create("awahsip", 512, 512);
+        m_Settings->loadCustomDestinationNames();
+        m_Settings->loadCustomSourceNames();
         m_Settings->loadIODevConfig();
         m_Settings->loadAccConfig();
         m_Settings->loadAudioRoutes();
