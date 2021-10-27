@@ -151,8 +151,8 @@ void AWAHSipLib::prepareLib()
     qRegisterMetaTypeStreamOperators <QList<s_account>>("QList<s_account>");
     qRegisterMetaTypeStreamOperators <QList<s_audioRoutes>>("QList<s_audioRoutes>");
     qRegisterMetaTypeStreamOperators <QList<s_callHistory>>("QList<s_callHistory>");
-    qRegisterMetaTypeStreamOperators <QList<s_gpioRoute>>("<QList<s_gpioRoute>");
-    //qRegisterMetaTypeStreamOperators <QList<s_buddy>>("<QList<s_buddy>");
+    qRegisterMetaTypeStreamOperators <QList<s_gpioRoute>>("QList<s_gpioRoute>");
+    qRegisterMetaTypeStreamOperators <QList<s_buddy>>("QList<s_buddy>");
 }
 
 QList<s_IODevices> &AWAHSipLib::getIoDevices()
@@ -246,14 +246,14 @@ QDataStream &operator>>(QDataStream &in, s_gpioRoute &obj)
     return in;
 }
 
-//QDataStream &operator<<(QDataStream &out, const s_buddy &obj)
-//{
-//    out << obj.Name << obj.accUid << obj.buddyUrl << obj.codec << obj.uid;
-//    return out;
-//}
+QDataStream &operator<<(QDataStream &out, const s_buddy &obj)
+{
+    out << obj.Name << obj.accUid << obj.buddyUrl << obj.codec << obj.uid;
+    return out;
+}
 
-//QDataStream &operator>>(QDataStream &in, s_buddy &obj)
-//{
-//    in >> obj.Name >> obj.accUid >> obj.buddyUrl >> obj.codec >> obj.uid;
-//    return in;
-//}
+QDataStream &operator>>(QDataStream &in, s_buddy &obj)
+{
+    in >> obj.Name >> obj.accUid >> obj.buddyUrl >> obj.codec >> obj.uid;
+    return in;
+}

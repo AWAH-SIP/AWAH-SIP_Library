@@ -204,6 +204,12 @@ void Websocket::getAllVariables(QJsonObject &data, QJsonObject &ret){
     }
     retDataObj["gpioStatesArray"] = gpioStateArr;
 
+    QJsonArray buddyArr;
+    for (auto& buddy : m_lib->getBuddies()){
+        buddyArr.append(buddy.toJSON());
+    }
+    retDataObj["buddyArray"] = buddyArr;
+
     ret["data"] = retDataObj;
     ret["error"] = noError();
 }
@@ -941,7 +947,7 @@ void Websocket::BuddyEntryChanged(QList<s_buddy>* buddies){
     for (auto & buddy : *buddies) {
         buddyArr.append(buddy.toJSON());
     }
-    data["Budies"] = buddyArr;
+    data["buddies"] = buddyArr;
     obj["signal"] = "BuddyEntryChanged";
     obj["data"] = data;
     sendToAll(obj);
