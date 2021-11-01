@@ -44,19 +44,16 @@ void PJBuddy::onBuddyState(){
         m_lib->m_Log->writeLog(2, QString("onBuddyState:getInfo failed: ") + err.info().c_str());
         return;
     }
-    m_lib->m_Log->writeLog(4, QString("onBuddyState: Buddy: ") + QString::fromStdString(bi.uri) + " is " + QString::fromStdString(bi.presStatus.statusText) + QString::fromStdString(bi.presStatus.rpidId) + QString::fromStdString(bi.presStatus.note));
+    m_lib->m_Log->writeLog(4, QString("onBuddyState: Buddy: ") + QString::fromStdString(bi.uri) + " is " + QString::fromStdString(bi.presStatus.statusText) + " note is: " + QString::fromStdString(bi.presStatus.note));
     m_lib->m_Log->writeLog(4, QString("Contact: ") + QString::fromStdString(bi.contact) + " SubStateName: " + QString::fromStdString(bi.subStateName) + " SubTermReason: " + QString::fromStdString(bi.subTermReason));
     if(bi.presStatus.note == "Online"){
-
+        state = online;
     }else if(bi.presStatus.note == "Busy"){
-        state = 1;
-    }else if(bi.presStatus.note == "NoTransit"){                            // todo remove me!
-        state = 2;
+        state = busy;
     }else{
-        state = 3;
+        state = unknown;
     }
     m_lib->m_Buddies->changeBuddyState(QString::fromStdString(bi.uri), state);
-    emit parent->BuddyStatus(QString::fromStdString(bi.uri), state);
 }
 
 void PJBuddy::onBuddyEvSubState(OnBuddyEvSubStateParam &prm){

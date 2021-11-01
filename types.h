@@ -121,6 +121,13 @@ enum GPIOprotocol {
 };
 Q_ENUMS(GPIOprotocol)
 
+enum AWAHPresenceState {
+    unknown = 0,
+    online = 1,
+    busy = 2
+};
+Q_ENUMS(AWAHPresenceState)
+
 struct s_IODevices{
     DeviceType devicetype;
     QString uid ="";
@@ -279,6 +286,7 @@ struct s_account{
     uint fixedJitterBufferValue = 160;
     QString SIPStatusText = "trying to register account...";
     int SIPStatusCode = 0;
+    AWAHPresenceState presenceState = unknown;
     QJsonObject toJSON() const {
         QJsonArray callListJSON, callHistoryJSON;
         for (auto & call: CallList) {

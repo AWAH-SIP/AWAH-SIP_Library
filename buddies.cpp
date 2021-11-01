@@ -29,28 +29,29 @@ Buddies::Buddies(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_li
 bool Buddies::registerBuddy(int AccID, QString buddyUrl){
     s_account* account = m_lib->m_Accounts->getAccountByID(AccID);
     QString fulladdr = "sip:"+ buddyUrl +"@"+ account->serverURI;
+    Buddy buddyptr;
     if(account){
-        try{
-            account->accountPtr->findBuddy2(fulladdr.toStdString());
-        } catch(Error &err){
-            if(err.status == PJ_ENOTFOUND){
-                BuddyConfig cfg;
-                cfg.uri = fulladdr.toStdString();
-                cfg.subscribe = true;
-                PJBuddy *buddy = new PJBuddy(m_lib, this);
-                try {
-                    buddy->create(*account->accountPtr, cfg);
-                } catch(Error& err) {
-                    m_lib->m_Log->writeLog(1,QString("RegisterBuddy: Buddy register failed: ") + err.info().c_str());
-                    return false;
-                }
-                return true;
-            }
-        }
 
-        m_lib->m_Log->writeLog(3,"RegisterBuddy: Buddy register failed: Buddy already exists!");
-        return false;
-    }else return false;
+        buddyptr = account->accountPtr->findBuddy2(fulladdr.toStdString());
+        if(!buddyptr.isValid()){
+            BuddyConfig cfg;
+            cfg.uri = fulladdr.toStdString();
+            cfg.subscribe = true;
+            PJBuddy *buddy = new PJBuddy(m_lib, this);
+            try {
+                buddy->create(*account->accountPtr, cfg);
+            } catch(Error& err) {
+                m_lib->m_Log->writeLog(1,QString("RegisterBuddy: Buddy register failed: ") + err.info().c_str());
+                return false;
+            }
+            return true;
+        }
+        else{
+            m_lib->m_Log->writeLog(3,"RegisterBuddy: Buddy register failed: Buddy already exists!");
+            return false;
+        }
+    }
+    else return false;
 }
 
 bool Buddies::unregisterBuddy(int AccID, QString buddyUrl){
@@ -134,9 +135,15 @@ s_buddy* Buddies::getBuddyByUID(QString uid){
 }
 
 void Buddies::changeBuddyState(QString buddyUrl, int state){
+    emit BuddyStatus(buddyUrl, state);
+    int startPos = buddyUrl.indexOf("sip:") + 4;
+    int endPos = buddyUrl.indexOf('@');
+    int length = endPos - startPos;
+    QString URL = (buddyUrl.mid(startPos, length));
     for(auto& buddy : m_buddies){
-        if(buddy.buddyUrl == buddyUrl)
+        if(buddy.buddyUrl == URL){
             buddy.status = state;
+        }
     }
 }
 

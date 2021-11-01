@@ -143,6 +143,13 @@ public:
     */
     const QList<s_callHistory>* getCallHistory(int AccID);
 
+    /**
+    * @brief Set or modify accounts presence status to be advertised to remote/ presence soubscribers
+    * @param AccID the account
+    * @return the presence state (e.g. online, busy...)
+    */
+    void sendPresenceStatus(int AccID,AWAHPresenceState AWAHpresence);
+
     void OncallStateChanged(int accID, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri);
     void OnsignalSipStatus(int accId, int status, QString remoteUri);
 

@@ -444,6 +444,39 @@ const QList<s_callHistory>* Accounts::getCallHistory(int AccID) {
     return &account->CallHistory ;
 }
 
+void Accounts::sendPresenceStatus(int AccID, AWAHPresenceState AWAHpresence)
+{
+   s_account* account = nullptr;
+   account = getAccountByID(AccID);
+   PresenceStatus ps;
+   if(account != nullptr && account->presenceState != AWAHpresence)
+       try {
+           switch (AWAHpresence) {
+           case online:
+               ps.status = PJSUA_BUDDY_STATUS_ONLINE;
+               ps.activity = PJRPID_ACTIVITY_UNKNOWN;
+               ps.note = "Online";
+               break;
+           case busy:
+               ps.status = PJSUA_BUDDY_STATUS_ONLINE;
+               ps.activity = PJRPID_ACTIVITY_BUSY;
+               ps.note = "Busy";
+               break;
+           case unknown:
+               ps.status = PJSUA_BUDDY_STATUS_UNKNOWN;
+               ps.activity = PJRPID_ACTIVITY_UNKNOWN;
+               ps.note = "Unknown";
+               break;
+           }
+           account->accountPtr->setOnlineStatus(ps);
+           account->presenceState = AWAHpresence;
+
+       } catch(Error& err) {
+           qDebug() << "PJSUA: Set PresenceState NR: " << AWAHpresence << " " << QString::fromStdString(ps.note) << " failed: " << err.info().c_str();
+           return;
+       }
+       qDebug() << "PJSUA: Set PresenceState NR: " << AWAHpresence << " " << QString::fromStdString(ps.note);
+}
 
 void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri)
 {
@@ -475,13 +508,11 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
     }
     else if(state == PJSIP_INV_STATE_CONFIRMED && lastStatusCode == 200){
         thisAccount->gpioDev->setConnected(true);
+        sendPresenceStatus(accID, busy);
         emit m_lib->m_AudioRouter->audioRoutesChanged(m_lib->m_AudioRouter->getAudioRoutes());
     }
     else if(state == PJSIP_INV_STATE_DISCONNECTED) {
-        //         if(sipStatus.fields.SipClientRegistered)
-        {
-            //             pjsua->sendPresenceStatus(online);
-        }
+        sendPresenceStatus(accID, online);
     }
     m_lib->m_Log->writeLog(3,(QString("Accounts::OncallStateChanged(): Callstate of ") + remoteUri + " is  " + thisCall->CallStatusText));
 }

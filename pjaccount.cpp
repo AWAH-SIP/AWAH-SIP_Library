@@ -38,8 +38,12 @@ void PJAccount::onRegState(OnRegStateParam &prm) {
     Q_UNUSED(prm);
     emit parent->regStateChanged(ai.id, ai.regIsActive);
     emit parent->signalSipStatus(ai.id, ai.regStatus,QString::fromStdString(ai.regStatusText));
-    if(parent->getAccountByID(ai.id))
+    if(parent->getAccountByID(ai.id)){
         parent->getAccountByID(ai.id)->gpioDev->setRegistered(ai.regIsActive);
+//        if(ai.regIsActive){
+//            parent->sendPresenceStatus(ai.id,online);                                           // todo check if this is too much!!!
+//        }
+       }
     if(!ai.regIsActive && ai.regStatus ==200){
         emit parent->signalSipStatus(ai.id, 0,"unregistered");
     }
@@ -51,6 +55,7 @@ void PJAccount::onRegStarted(OnRegStartedParam &prm)
      AccountInfo ai = getInfo();
      m_lib->m_Log->writeLog(2, QString("RegisterStateStarted: on Account: ") + QString::fromStdString(ai.uri) + (ai.regIsConfigured? " Starting Registration" : " AccountParam is NOT Set! NOT starting Registration") + " code = " + QString::number(prm.renew));
      emit parent->regStateChanged(ai.id, ai.regIsConfigured);
+     parent->sendPresenceStatus(ai.id,online);
      //parent->emit signalSipStatus(ai.id, ai.regStatus,QString::fromStdString(ai.regStatusText));
 }
 
