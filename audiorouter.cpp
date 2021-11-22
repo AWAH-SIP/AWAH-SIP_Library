@@ -109,8 +109,8 @@ void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid
     recorddev =  m_lib->m_pjEp->audDevManager().getDevInfo(recordDevId);
     playbackdev = m_lib->m_pjEp->audDevManager().getDevInfo(playbackDevId);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    recorddev.inputCount = 6;                                                           // octo sound card hack!!!!!!!
-//    playbackdev.outputCount = 8;                                                        // fix and remove me!!!!!!!!
+    recorddev.inputCount = 6;                                                           // octo sound card hack!!!!!!!
+    playbackdev.outputCount = 8;                                                        // fix and remove me!!!!!!!!
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if(uid.isEmpty())
         uid = createNewUID();

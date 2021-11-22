@@ -40,12 +40,13 @@ void PJAccount::onRegState(OnRegStateParam &prm) {
     emit parent->signalSipStatus(ai.id, ai.regStatus,QString::fromStdString(ai.regStatusText));
     if(parent->getAccountByID(ai.id)){
         parent->getAccountByID(ai.id)->gpioDev->setRegistered(ai.regIsActive);
-//        if(ai.regIsActive){
-//            parent->sendPresenceStatus(ai.id,online);                                           // todo check if this is too much!!!
-//        }
+        if(ai.regIsActive){
+            parent->sendPresenceStatus(ai.id,online);                                           // todo check if this is too much!!!
+        }
        }
     if(!ai.regIsActive && ai.regStatus ==200){
         emit parent->signalSipStatus(ai.id, 0,"unregistered");
+        parent->sendPresenceStatus(ai.id,unknown);
     }
 
 }

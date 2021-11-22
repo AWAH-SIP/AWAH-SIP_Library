@@ -248,11 +248,10 @@ void Websocket::createAccount(QJsonObject &data, QJsonObject &ret) {
 
 void Websocket::modifyAccount(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
-    int index;
-    QString accountName, server, user, password, filePlayPath, fileRecPath;
+    QString uid, accountName, server, user, password, filePlayPath, fileRecPath;
     bool fixedJitterBuffer = true;
     int fixedJitterBufferValue = 0;
-    if(     jCheckInt(index, data["index"]) &&
+    if(     jCheckString(uid, data["uid"]) &&
             jCheckString(accountName, data["accountName"]) &&
             jCheckString(server, data["server"]) &&
             jCheckString(user, data["user"]) &&
@@ -261,7 +260,7 @@ void Websocket::modifyAccount(QJsonObject &data, QJsonObject &ret) {
             jCheckString(fileRecPath, data["fileRecPath"]) &&
             jCheckBool(fixedJitterBuffer, data["fixedJitterBuffer"]) &&
             jCheckInt(fixedJitterBufferValue, data["fixedJitterBufferValue"]) ) {
-        m_lib->modifyAccount(index, accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue);
+        m_lib->modifyAccount(uid, accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue);
         ret["data"] = retDataObj;
     } else {
         ret["error"] = hasError("Parameters not accepted");
@@ -270,9 +269,9 @@ void Websocket::modifyAccount(QJsonObject &data, QJsonObject &ret) {
 
 void Websocket::removeAccount(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
-    int index;
-    if (jCheckInt(index, data["index"])) {
-        m_lib->removeAccount(index);
+    QString uid;
+    if (jCheckString(uid, data["uid"])) {
+        m_lib->removeAccount(uid);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {

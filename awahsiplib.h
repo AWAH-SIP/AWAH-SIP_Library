@@ -70,9 +70,9 @@ public:
     // Public API - Accounts
     void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue) const
         { return m_Accounts->createAccount(accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue); };
-    void modifyAccount(int index, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue) const
-        { return m_Accounts->modifyAccount(index, accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue); };
-    void removeAccount(int index) const { return m_Accounts->removeAccount(index); };
+    void modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue) const
+        { return m_Accounts->modifyAccount(uid, accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue); };
+    void removeAccount(QString uid) const { return m_Accounts->removeAccount(uid); };
     QList <s_account>* getAccounts() const { return m_Accounts->getAccounts(); };
     void makeCall(QString number, int AccID,s_codec codec) const { return m_Accounts->makeCall(number, AccID, codec); };
     void hangupCall(int callId, int AccID) const { return m_Accounts->hangupCall(callId, AccID); };

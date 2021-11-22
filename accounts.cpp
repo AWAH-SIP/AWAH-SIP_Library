@@ -76,31 +76,29 @@ void Accounts::createAccount(QString accountName, QString server, QString user, 
     }
 }
 
-void Accounts::modifyAccount(int index, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath,bool fixedJitterBuffer, uint fixedJitterBufferValue){
+void Accounts::modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath,bool fixedJitterBuffer, uint fixedJitterBufferValue){
     QString idUri = "\""+ accountName +"\" <sip:"+ user +"@"+ server +">";
     QString registrarUri = "sip:"+ server;
-    s_account TmpAccount = m_accounts.at(index);
+    s_account* TmpAccount = nullptr;
+    TmpAccount = getAccountByUID(uid);
     aCfg = defaultACfg;
     aCfg.idUri = idUri.toStdString();
     aCfg.regConfig.registrarUri = registrarUri.toStdString();
     AuthCredInfo cred("digest", "*", user.toStdString(), 0, password.toStdString());
     aCfg.sipConfig.authCreds.clear();
     aCfg.sipConfig.authCreds.push_back(cred);
-    if(m_accounts.count()> index){
+    if(TmpAccount != nullptr){
         try{
-            m_accounts.at(index).accountPtr->modify(aCfg);
-            TmpAccount.name = accountName;
-            TmpAccount.serverURI = server;
-            TmpAccount.user = user;
-            TmpAccount.password = password;
-            TmpAccount.uid = m_accounts.at(index).uid;
-            TmpAccount.accountPtr = m_accounts.at(index).accountPtr;
-            TmpAccount.AccID = m_accounts.at(index).accountPtr->getId();
-            TmpAccount.FilePlayPath = filePlayPath;
-            TmpAccount.FileRecordPath = fileRecPath;
-            TmpAccount.fixedJitterBuffer = fixedJitterBuffer;
-            TmpAccount.fixedJitterBufferValue = fixedJitterBufferValue;
-            m_accounts.replace(index, TmpAccount);
+            TmpAccount->accountPtr->modify(aCfg);
+            TmpAccount->name = accountName;
+            TmpAccount->serverURI = server;
+            TmpAccount->user = user;
+            TmpAccount->password = password;
+            TmpAccount->AccID = TmpAccount->accountPtr->getId();
+            TmpAccount->FilePlayPath = filePlayPath;
+            TmpAccount->FileRecordPath = fileRecPath;
+            TmpAccount->fixedJitterBuffer = fixedJitterBuffer;
+            TmpAccount->fixedJitterBufferValue = fixedJitterBufferValue;
             m_lib->m_Settings->saveAccConfig();
             m_lib->m_AudioRouter->conferenceBridgeChanged();
             emit AccountsChanged(&m_accounts);
@@ -113,15 +111,24 @@ void Accounts::modifyAccount(int index, QString accountName, QString server, QSt
 
 
 
-void Accounts::removeAccount(int index)
+void Accounts::removeAccount(QString uid)
 {
-    if(m_accounts.count()> index){
-        m_accounts.at(index).accountPtr->shutdown();
-        m_lib->m_AudioRouter->removeAllRoutesFromAccount(m_accounts.at(index));
-        m_lib->m_AudioRouter->removeAllCustomNamesWithUID(m_accounts.at(index).uid);
+    s_account* account = nullptr;
+    account = getAccountByUID(uid);
+    if(account != nullptr){
+        account->accountPtr->shutdown();
+        m_lib->m_AudioRouter->removeAllRoutesFromAccount(*account);
+        m_lib->m_AudioRouter->removeAllCustomNamesWithUID(uid);
         // TODO: here we have to remove the Splittercombiner from the Account!
-        GpioDeviceManager::instance()->removeDevice(m_accounts.at(index).uid);
-        m_accounts.removeAt(index);
+        GpioDeviceManager::instance()->removeDevice(uid);
+        QMutableListIterator<s_account> it(m_accounts);
+        while(it.hasNext()){
+            s_account &acc = it.next();
+            if(acc.uid == uid){
+                it.remove();
+                break;
+            }
+        }
         m_lib->m_AudioRouter->conferenceBridgeChanged();
         m_lib->m_Settings->saveAccConfig();
         emit AccountsChanged(&m_accounts);

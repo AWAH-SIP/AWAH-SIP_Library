@@ -55,7 +55,7 @@ public:
 
     /**
     * @brief modify a existing SIP account
-    * @param accountPtr the account you wish to modify
+    * @param uid of the account you wish to modify
     * @param accountName a user definable name to identify the account
     * @param server the uri of the sip server
     * @param user  username of the account
@@ -65,13 +65,13 @@ public:
     * @param fixedJitterBuffer if true a fixed jitter buffer is set, otherwise an adaptive jitter buffer is active
     * @param fixedJitterBufferValue the time in ms for the fixed jitter buffer
     */
-    void modifyAccount(int index, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue);
+    void modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue);
 
     /**
     * @brief remove a SIP Account
-    * @param index the position of the account in the Accounts list you like to remove
+    * @param the UID of the account you like to remove
     */
-    void removeAccount(int index);
+    void removeAccount(QString uid);
 
     /**
     * @brief get the active accounts
