@@ -68,10 +68,10 @@ public:
     static void prepareLib();
 
     // Public API - Accounts
-    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue) const
-        { return m_Accounts->createAccount(accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue); };
-    void modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue) const
-        { return m_Accounts->modifyAccount(uid, accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue); };
+    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID) const
+        { return m_Accounts->createAccount(accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID); };
+    void modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID) const
+        { return m_Accounts->modifyAccount(uid, accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID); };
     void removeAccount(QString uid) const { return m_Accounts->removeAccount(uid); };
     QList <s_account>* getAccounts() const { return m_Accounts->getAccounts(); };
     void makeCall(QString number, int AccID,s_codec codec) const { return m_Accounts->makeCall(number, AccID, codec); };

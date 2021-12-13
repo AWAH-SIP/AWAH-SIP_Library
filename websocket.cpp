@@ -228,7 +228,7 @@ void Websocket::getIoDevices(QJsonObject &data, QJsonObject &ret) {
 
 void Websocket::createAccount(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
-    QString accountName, server, user, password, filePlayPath, fileRecPath;
+    QString accountName, server, user, password, filePlayPath, fileRecPath, autoconnectToBuddyUID;
     bool fixedJitterBuffer = true;
     int fixedJitterBufferValue = 0;
     if(     jCheckString(accountName, data["accountName"]) &&
@@ -238,8 +238,9 @@ void Websocket::createAccount(QJsonObject &data, QJsonObject &ret) {
             jCheckString(filePlayPath, data["filePlayPath"]) &&
             jCheckString(fileRecPath, data["fileRecPath"]) &&
             jCheckBool(fixedJitterBuffer, data["fixedJitterBuffer"]) &&
-            jCheckInt(fixedJitterBufferValue, data["fixedJitterBufferValue"]) ) {
-        m_lib->createAccount(accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue);
+            jCheckInt(fixedJitterBufferValue, data["fixedJitterBufferValue"]) &&
+            jCheckString(autoconnectToBuddyUID, data["autoconnectToBuddyUID"]) ) {
+        m_lib->createAccount(accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID);
         ret["data"] = retDataObj;
     } else {
         ret["error"] = hasError("Parameters not accepted");
@@ -248,7 +249,7 @@ void Websocket::createAccount(QJsonObject &data, QJsonObject &ret) {
 
 void Websocket::modifyAccount(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
-    QString uid, accountName, server, user, password, filePlayPath, fileRecPath;
+    QString uid, accountName, server, user, password, filePlayPath, fileRecPath, autoconnectToBuddyUID;
     bool fixedJitterBuffer = true;
     int fixedJitterBufferValue = 0;
     if(     jCheckString(uid, data["uid"]) &&
@@ -259,8 +260,9 @@ void Websocket::modifyAccount(QJsonObject &data, QJsonObject &ret) {
             jCheckString(filePlayPath, data["filePlayPath"]) &&
             jCheckString(fileRecPath, data["fileRecPath"]) &&
             jCheckBool(fixedJitterBuffer, data["fixedJitterBuffer"]) &&
-            jCheckInt(fixedJitterBufferValue, data["fixedJitterBufferValue"]) ) {
-        m_lib->modifyAccount(uid, accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue);
+            jCheckInt(fixedJitterBufferValue, data["fixedJitterBufferValue"]) &&
+            jCheckString(autoconnectToBuddyUID, data["autoconnectToBuddyUID"]) ) {
+        m_lib->modifyAccount(uid, accountName, server, user, password, filePlayPath, fileRecPath, fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID);
         ret["data"] = retDataObj;
     } else {
         ret["error"] = hasError("Parameters not accepted");
@@ -389,9 +391,15 @@ void Websocket::getAccountByID(QJsonObject &data, QJsonObject &ret) {
     int ID;
     if (jCheckInt(ID, data["ID"])) {
         const s_account* pAccount = m_lib->getAccountByID(ID);
-        retDataObj["Account"] = pAccount->toJSON();
-        ret["data"] = retDataObj;
-        ret["error"] = noError();
+        if(pAccount != nullptr){
+            retDataObj["Account"] = pAccount->toJSON();
+            ret["data"] = retDataObj;
+            ret["error"] = noError();
+        }
+        else{
+            ret["error"] = hasError("Account not found");
+        }
+
     } else {
         ret["error"] = hasError("Parameters not accepted");
     }

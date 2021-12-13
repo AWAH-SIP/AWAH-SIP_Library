@@ -116,8 +116,11 @@ void Buddies::removeBuddy(QString uid)
     while(i.hasNext()){
         s_buddy &buddy = i.next();
         if(buddy.uid == uid){
-            s_account* account = m_lib->m_Accounts->getAccountByUID(buddy.accUid);
-            unregisterBuddy(account->AccID,buddy.buddyUrl);
+            s_account* account = nullptr;
+            account = m_lib->m_Accounts->getAccountByUID(buddy.accUid);
+            if(account != nullptr){
+                unregisterBuddy(account->AccID,buddy.buddyUrl);
+            }
             i.remove();
             emit BuddyEntryChanged(&m_buddies);
             m_lib->m_Settings->saveBuddies();

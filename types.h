@@ -257,7 +257,7 @@ struct s_Call{
     pjsua_player_id player_id = PJSUA_INVALID_ID;
     pjsua_recorder_id rec_id = PJSUA_INVALID_ID;
     PJCall* callptr = nullptr;
-    QJsonObject codecSettings = QJsonObject();
+    s_codec codec = s_codec();
     int splitterSlot;
     QJsonObject toJSON() const {
         return {{"CallStatusText", CallStatusText}, {"CallStatusCode", CallStatusCode}, {"ConnectedTo", ConnectedTo}, {"callId", callId}};
@@ -274,6 +274,7 @@ struct s_account{
     QString uid = "";
     QString FileRecordPath = "";
     QString FilePlayPath = "";
+    QString autoconnectToBuddyUID = "";
     PJAccount *accountPtr = nullptr;          // not saved to file, only for runtime handling
     AccountGpioDev *gpioDev = nullptr;        // not saved to file, only for runtime handling
     int AccID = PJSUA_INVALID_ID;;
@@ -310,6 +311,7 @@ struct s_account{
             {"SIPStatusCode", SIPStatusCode},
             {"SIPStatusText", SIPStatusText},
             {"callStatusLastReason", callStatusLastReason},
+            {"autoconnectToBuddyUID", autoconnectToBuddyUID},
             {"uid", uid}
         };
     }
@@ -322,6 +324,7 @@ struct s_account{
         FilePlayPath = accountJSON["FilePlayPath"].toString();
         fixedJitterBuffer = accountJSON["fixedJitterBuffer"].toBool();
         fixedJitterBufferValue = accountJSON["fixedJitterBufferValue"].toInt();
+        autoconnectToBuddyUID = accountJSON["AutoconnectToBuddyUID"].toString();
         return this;
     }
 };

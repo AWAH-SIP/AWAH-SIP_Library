@@ -296,7 +296,7 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
             item["max"] = 384000;
             codecparam["Bitrate"]= item;
         }
-        else m_lib->m_Log->writeLog(4,QString("getCodecParam: unparsed key/value: ") +fmtp.name.c_str());
+        else m_lib->m_Log->writeLog(4,QString("getCodecParam: unparsed key/value: ") +fmtp.name.c_str() + "value: " + fmtp.val.c_str());
 
     }
     foreach(const pj::CodecFmtp fmtp, PJcodecParam.setting.encFmtp){

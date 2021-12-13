@@ -48,10 +48,11 @@ public:
     * @param FileRecPath if a record path is specified all calls will be recorded into this directory
     * @param fixedJitterBuffer if true a fixed jitter buffer is set, otherwise an adaptive jitter buffer is active
     * @param fixedJitterBufferValue the time in ms for the fixed jitter buffer
+    * @param autoconnectToBuddyUID connect to this buddy automatically as soon the buddy is online
     * @param history the call history
     * @param uid the unique idenifyer of the account
     */
-    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue, QList<s_callHistory> history = QList<s_callHistory>(), QString uid = "");
+    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID = "", QList<s_callHistory> history = QList<s_callHistory>(), QString uid = "");
 
     /**
     * @brief modify a existing SIP account
@@ -64,8 +65,9 @@ public:
     * @param FileRecPath if a record path is specified all calls will be recorded into this directory
     * @param fixedJitterBuffer if true a fixed jitter buffer is set, otherwise an adaptive jitter buffer is active
     * @param fixedJitterBufferValue the time in ms for the fixed jitter buffer
+    * @param autoconnectToBuddyUID connect to this buddy automatically as soon the buddy is online
     */
-    void modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue);
+    void modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID = "");
 
     /**
     * @brief remove a SIP Account

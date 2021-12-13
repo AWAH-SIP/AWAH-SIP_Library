@@ -62,7 +62,6 @@ void PJCall::onCallState(OnCallStateParam &prm)
 {
     Q_UNUSED(prm);
     CallInfo ci = getInfo();
-
     s_account* callAcc = parent->getAccountByID(ci.accId);
     s_Call*  Callopts = nullptr;
     for(auto& call : callAcc->CallList){
@@ -92,10 +91,9 @@ void PJCall::onCallState(OnCallStateParam &prm)
         m_lib->m_Log->writeLog(3,QString("onCallState: deleting call with id: %1 from %2 of Account %3").arg(QString::number(ci.id), QString::fromStdString(ci.remoteUri), callAcc->name));
 
         if(hasMedia())                                          //to be determined if it's a bug... Nope Adi encounters it... but it crashes...
-        {
+        {                                                       // change this!!!! it never has media (on Andys macbook)!!!!
             AudioMedia audioMedia = getAudioMedia(-1);
-            int callId = audioMedia.getPortId();
-            StreamInfo streaminfo;
+            int callId = ci.media.at(0).audioConfSlot;
             try {
                 //first stop the mic stream, then the playback stream
                 PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callAcc->splitterSlot, callId) );
@@ -113,25 +111,12 @@ void PJCall::onCallState(OnCallStateParam &prm)
                     PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(Callopts->rec_id) );
                     Callopts->rec_id = PJSUA_INVALID_ID;
                 }
-
-                streaminfo = getStreamInfo(0);
-
             }  catch (Error &err) {
                 m_lib->m_Log->writeLog(1,QString("onCallMediaState: Disconnect Error: ") + QString().fromStdString(err.info(true)));
             }
-            s_codec callCodec;                                                                                                                              // todo parse all parameters like bitrate etc;
-            //callCodec.channelCount = streaminfo.audCodecParam.info.channelCnt;
-            //callCodec.clockRate = streaminfo.codecClockRate;
-            callCodec.encodingName = QString::fromStdString(streaminfo.codecName);
-            for(auto& codec : m_lib->m_Codecs->listCodecs()){                                   // search the codeclist got get displaynames and parameters
-                if(codec.encodingName == QString::fromStdString(streaminfo.codecName)){
-                    callCodec.displayName = codec.displayName;
-                    callCodec.codecParameters = codec.codecParameters;
-                }
-            }
-            m_lib->m_Accounts->addCallToHistory(callAcc->AccID,QString::fromStdString(ci.remoteUri),ci.connectDuration.sec,callCodec,!ci.remOfferer);
-
         }
+
+        m_lib->m_Accounts->addCallToHistory(callAcc->AccID,QString::fromStdString(ci.remoteUri),ci.connectDuration.sec,Callopts->codec,!ci.remOfferer);
         QMutableListIterator<s_Call> i(callAcc->CallList);
         while(i.hasNext()){
             s_Call &callentry = i.next();                    //check if its a valid callid and remove it from the list
@@ -176,15 +161,21 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
         // Get the first audio media and connect it to its Splitter
         audioMedia = getAudioMedia(-1);
         int callId = audioMedia.getPortId();
+        StreamInfo streaminfo;
 
-        // get the codec parameters, remove everything exept the values and store it for callhistory
-        QJsonObject codecParam ,filteredParam;
-        QJsonObject::iterator j;
-        codecParam =  m_lib->m_Codecs->getCodecParam(getStreamInfo(0).audCodecParam,QString::fromStdString(getStreamInfo(0).codecName));
-        for (j = codecParam.begin(); j != codecParam.end(); ++j) {
-         filteredParam [j.key()] = j.value().toObject()["value"];
+        // get the codec parameters, to have it ready for the callhistory
+        streaminfo = getStreamInfo(0);
+        s_codec callCodec;                                                                     // todo parse all parameters like bitrate etc;
+        //callCodec.channelCount = streaminfo.audCodecParam.info.channelCnt;                   // pares the SDP !!!!!!!!
+        //callCodec.clockRate = streaminfo.codecClockRate;
+        callCodec.encodingName = QString::fromStdString(streaminfo.codecName);
+        for(auto& codec : m_lib->m_Codecs->listCodecs()){                                   // search the codeclist got get displaynames and parameters
+            if(codec.encodingName == QString::fromStdString(streaminfo.codecName)){         // this is wrong it gets the parameters of the local codec settings!
+                callCodec.displayName = codec.displayName;
+                callCodec.codecParameters = codec.codecParameters;
+            }
         }
-        Callopts->codecSettings = filteredParam;
+        Callopts->codec = callCodec;
 
         if(!callAcc->FilePlayPath.isEmpty() && ci.remOfferer){          // if a announcement is configured and call is incoming create a player
             if(Callopts->player_id == PJSUA_INVALID_ID) {
@@ -287,7 +278,6 @@ void PJCall::onStreamCreated(OnStreamCreatedParam &prm)
     if(callAcc->fixedJitterBuffer){
         pjmedia_stream_jbuf_set_fixed((pjmedia_stream *) prm.stream, callAcc->fixedJitterBufferValue);
     }
-
 }
 
 void PJCall::onCallTransferRequest(OnCallTransferRequestParam &prm)

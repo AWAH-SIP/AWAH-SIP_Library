@@ -31,7 +31,7 @@ Accounts::Accounts(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_
     connect(this, &Accounts::signalSipStatus, this, &Accounts::OnsignalSipStatus);
 }
 
-void Accounts::createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue, QList<s_callHistory> history , QString uid)
+void Accounts::createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID, QList<s_callHistory> history , QString uid)
 {
     QString idUri = "\""+ accountName +"\" <sip:"+ user +"@"+ server +">";
     QString registrarUri = "sip:"+ server;
@@ -39,7 +39,6 @@ void Accounts::createAccount(QString accountName, QString server, QString user, 
 
     if(uid.isEmpty())
         uid = createNewUID();
-
     try{
         // Configure an AccountConfig
         aCfg = defaultACfg;
@@ -63,6 +62,7 @@ void Accounts::createAccount(QString accountName, QString server, QString user, 
         newAccount.FileRecordPath = fileRecPath;
         newAccount.fixedJitterBuffer = fixedJitterBuffer;
         newAccount.fixedJitterBufferValue = fixedJitterBufferValue;
+        newAccount.autoconnectToBuddyUID = autoconnectToBuddyUID;
         newAccount.CallHistory = history;
         PJSUA2_CHECK_EXPR(m_lib->m_AudioRouter->addSplittComb(newAccount));
         newAccount.gpioDev = GpioDeviceManager::instance()->create(newAccount);
@@ -76,40 +76,45 @@ void Accounts::createAccount(QString accountName, QString server, QString user, 
     }
 }
 
-void Accounts::modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath,bool fixedJitterBuffer, uint fixedJitterBufferValue){
+void Accounts::modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath,bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID){
     QString idUri = "\""+ accountName +"\" <sip:"+ user +"@"+ server +">";
     QString registrarUri = "sip:"+ server;
-    s_account* TmpAccount = nullptr;
-    TmpAccount = getAccountByUID(uid);
     aCfg = defaultACfg;
     aCfg.idUri = idUri.toStdString();
     aCfg.regConfig.registrarUri = registrarUri.toStdString();
     AuthCredInfo cred("digest", "*", user.toStdString(), 0, password.toStdString());
     aCfg.sipConfig.authCreds.clear();
     aCfg.sipConfig.authCreds.push_back(cred);
-    if(TmpAccount != nullptr){
-        try{
-            TmpAccount->accountPtr->modify(aCfg);
-            TmpAccount->name = accountName;
-            TmpAccount->serverURI = server;
-            TmpAccount->user = user;
-            TmpAccount->password = password;
-            TmpAccount->AccID = TmpAccount->accountPtr->getId();
-            TmpAccount->FilePlayPath = filePlayPath;
-            TmpAccount->FileRecordPath = fileRecPath;
-            TmpAccount->fixedJitterBuffer = fixedJitterBuffer;
-            TmpAccount->fixedJitterBufferValue = fixedJitterBufferValue;
+
+    QMutableListIterator<s_account> it(m_accounts);
+    while(it.hasNext()){
+        s_account &acc = it.next();
+        if(acc.uid == uid){
+            acc.name = accountName;
+            acc.serverURI = server;
+            acc.user = user;
+            acc.password = password;
+            acc.FilePlayPath = filePlayPath;
+            acc.FileRecordPath = fileRecPath;
+            acc.fixedJitterBuffer = fixedJitterBuffer;
+            acc.fixedJitterBufferValue = fixedJitterBufferValue;
+            acc.autoconnectToBuddyUID = autoconnectToBuddyUID;
+            try{
+                acc.accountPtr->modify(aCfg);
+                m_lib->m_Settings->saveAccConfig();
+                m_lib->m_AudioRouter->conferenceBridgeChanged();
+                emit AccountsChanged(&m_accounts);
+            }
+            catch (Error &err){
+                m_lib->m_Log->writeLog(0,(QString("ModifyAccount: failed") + err.info().c_str()));
+            }
             m_lib->m_Settings->saveAccConfig();
             m_lib->m_AudioRouter->conferenceBridgeChanged();
             emit AccountsChanged(&m_accounts);
-        }
-        catch (Error &err){
-            m_lib->m_Log->writeLog(0,(QString("ModifyAccount: failed") + err.info().c_str()));
+            break;
         }
     }
 }
-
-
 
 void Accounts::removeAccount(QString uid)
 {
