@@ -91,7 +91,8 @@ void PJCall::onCallState(OnCallStateParam &prm)
         m_lib->m_Log->writeLog(3,QString("onCallState: deleting call with id: %1 from %2 of Account %3").arg(QString::number(ci.id), QString::fromStdString(ci.remoteUri), callAcc->name));
 
         if(hasMedia())                                          //to be determined if it's a bug... Nope Adi encounters it... but it crashes...
-        {                                                       // change this!!!! it never has media (on Andys macbook)!!!!
+        {                                                     // change this!!!! it never has media (on Andys macbook)!!!!
+            m_lib->m_Log->writeLog(3,QString("onCallState: Disconnect: call has media!!!!! look at pjcall.cpp @ Line 93"));
             AudioMedia audioMedia = getAudioMedia(-1);
             int callId = ci.media.at(0).audioConfSlot;
             try {
@@ -112,7 +113,7 @@ void PJCall::onCallState(OnCallStateParam &prm)
                     Callopts->rec_id = PJSUA_INVALID_ID;
                 }
             }  catch (Error &err) {
-                m_lib->m_Log->writeLog(1,QString("onCallMediaState: Disconnect Error: ") + QString().fromStdString(err.info(true)));
+                m_lib->m_Log->writeLog(1,QString("onCallState: Disconnect Error: ") + QString().fromStdString(err.info(true)));
             }
         }
 

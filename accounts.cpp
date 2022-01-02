@@ -458,10 +458,9 @@ const QList<s_callHistory>* Accounts::getCallHistory(int AccID) {
 
 void Accounts::sendPresenceStatus(int AccID, AWAHPresenceState AWAHpresence)
 {
-   s_account* account = nullptr;
-   account = getAccountByID(AccID);
+   s_account* account = getAccountByID(AccID);
    PresenceStatus ps;
-   if(account != nullptr && account->presenceState != AWAHpresence)
+   if(account != nullptr && account->presenceState != AWAHpresence){
        try {
            switch (AWAHpresence) {
            case online:
@@ -475,6 +474,7 @@ void Accounts::sendPresenceStatus(int AccID, AWAHPresenceState AWAHpresence)
                ps.note = "Busy";
                break;
            case unknown:
+           default:
                ps.status = PJSUA_BUDDY_STATUS_UNKNOWN;
                ps.activity = PJRPID_ACTIVITY_UNKNOWN;
                ps.note = "Unknown";
@@ -488,6 +488,7 @@ void Accounts::sendPresenceStatus(int AccID, AWAHPresenceState AWAHpresence)
            return;
        }
        qDebug() << "PJSUA: Set PresenceState NR: " << AWAHpresence << " " << QString::fromStdString(ps.note);
+   }
 }
 
 void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri)
