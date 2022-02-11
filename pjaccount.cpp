@@ -35,20 +35,23 @@ PJAccount::~PJAccount()
 
 void PJAccount::onRegState(OnRegStateParam &prm) {
     AccountInfo ai = getInfo();
+    s_account *acc = parent->getAccountByID(ai.id);
     Q_UNUSED(prm);
     emit parent->regStateChanged(ai.id, ai.regIsActive);
     emit parent->signalSipStatus(ai.id, ai.regStatus,QString::fromStdString(ai.regStatusText));
-    if(parent->getAccountByID(ai.id)){
-        parent->getAccountByID(ai.id)->gpioDev->setRegistered(ai.regIsActive);
-        if(ai.regIsActive){
-            parent->sendPresenceStatus(ai.id,online);                                           // todo check if this is too much!!!
+    if(acc != nullptr){
+        acc->gpioDev->setRegistered(ai.regIsActive);
+        if(ai.regIsActive && acc->CallList.isEmpty()){
+            parent->sendPresenceStatus(ai.id,online);
         }
-       }
-    if(!ai.regIsActive && ai.regStatus ==200){
-        emit parent->signalSipStatus(ai.id, 0,"unregistered");
-        parent->sendPresenceStatus(ai.id,unknown);
+        else if(ai.regIsActive && !acc->CallList.isEmpty()){
+            parent->sendPresenceStatus(ai.id,busy);
+        }
+        else if(!ai.regIsActive && ai.regStatus == 200){                                        // todo check me!!!!!!
+            emit parent->signalSipStatus(ai.id, 0,"unregistered");
+            parent->sendPresenceStatus(ai.id,unknown);
+        }
     }
-
 }
 
 void PJAccount::onRegStarted(OnRegStartedParam &prm)

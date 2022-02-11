@@ -230,7 +230,7 @@ QString GpioDeviceManager::createGpioDev(QJsonObject &newDev)
     case AudioCrosspointDevice:
         route.srcDevName = parameter["Source Port"].toString();
         route.destDevName = parameter["Destination Port"].toString();
-        route.level = dBtoFact(parameter["Level"].toDouble(0));
+        route.level = parameter["Level"].toInt();
         if (route.srcDevName.isEmpty() || route.destDevName.isEmpty())
             return "Source or Destination Port can not be Empty!";
         device = create(route, name);

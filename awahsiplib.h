@@ -94,10 +94,10 @@ public:
     void addFilePlayer(QString Name, QString File) const { return m_AudioRouter->addFilePlayer(Name, File); };
     void addFileRecorder(QString File) const { return m_AudioRouter->addFileRecorder(File); };
     const s_audioPortList& getConfPortsList() const { return m_AudioRouter->getConfPortsList(); };
-    int connectConfPort(int src_slot, int sink_slot, float level, bool persistant = true) const
+    int connectConfPort(int src_slot, int sink_slot, int level, bool persistant = true) const
         { return m_AudioRouter->connectConfPort(src_slot, sink_slot, level, persistant); };
     int disconnectConfPort(int src_slot, int sink_slot) const { return m_AudioRouter->disconnectConfPort(src_slot, sink_slot); };
-    int changeConfPortLevel(int src_slot, int sink_slot, float level) const { return m_AudioRouter->changeConfPortLevel(src_slot, sink_slot, level); };
+    void changeConfPortLevel(int src_slot, int sink_slot, int level) const { return m_AudioRouter->changeConfPortLevel(src_slot, sink_slot, level); };
     void addToneGen(int freq) const { return m_AudioRouter->addToneGen(freq); };
     QList<s_IODevices>& getAudioDevices() const { return *m_AudioRouter->getAudioDevices(); };
     int getSoundDevID(QString DeviceName) const { return m_AudioRouter->getSoundDevID(DeviceName); };

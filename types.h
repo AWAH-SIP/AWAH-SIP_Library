@@ -66,22 +66,58 @@ inline QString pj2Str(const pj_str_t &input_str)
     return QString();
 }
 
-inline int dBtoAdjLevel(const float dB)
+
+
+inline int dBtoAdjLevel(int &level)
 {
-    float factor = pow(10, (dB/20));
-    return (int)((factor-1) * 128);
+    int leveladjust = 0;
+    // conversion table from dB to pjusa leveladjust, this is used because I din't find any algorithm to match the dB values over the whole range
+    QHash<int,int> const m_dbToAdjustVol = {{20,1152},{19,1013},{18,889},{17,778},{16,680},{15,592},{14,514},{13,444},{12,382},{11,326},
+                                            {10,277},{9,233},{8,193},{7,157},{6,128},{5,99},{4,75},{3,51},{2,33},{1,15},{0,0},
+                                            {-1,-14},{-2,-26},{-3,-37},{-4,-47},{-5,-56},{-6,-64},{-7,-71},{-8,-77},{-9,-83},{-10,-88},
+                                            {-11,-92},{-12,-96},{-13,-99},{-14,-103},{-15,-105},{-16,-108},{-17,-110},{-18,-112},{-19,-114},{-20,-115},
+                                            {-21,-117},{-22,-118},{-23,-119},{-24,-120},{-25,-121},{-26,-122},{-28,-123},
+                                            {-30,-124},{-32,-125},{-36,-126},
+                                            {-42,-127}};            // levels below -42 are not supported, mute = -128
+
+    if(level > 20) level = 20;              // limit the maximum gain to 20dB
+    if(level < -42){                        // values below -40 are not supported by pjsua, so mute the xp
+        leveladjust = -128;
+        level = -96;
+    }
+    switch (level) {                        // some levels can not be set due to poor resolution so the level is mapped to the next closest
+    case -27:
+        level = -28;
+        break;
+    case -29:
+        level = -30;
+        break;
+    case -31:
+        level = -32;
+        break;
+    case -33:
+    case -34:
+    case -35:
+        level = -36;
+        break;
+    case -37:
+    case -38:
+    case -39:
+    case -40:
+    case -41:
+        level = -42;
+        break;
+    }
+    if(m_dbToAdjustVol.contains(level)){
+        leveladjust = m_dbToAdjustVol.value(level);
+    }
+    return leveladjust;
 }
 
 inline float dBtoFact(const float dB)
 {
    float factor = pow(10, (dB/20));
    return factor;
-}
-
-inline float factTodB(const float fact)
-{
-   float dB = 20 * log10f(fact);
-   return dB;
 }
 
 inline QString sizeFormat(quint64 size)
@@ -385,7 +421,7 @@ struct s_audioRoutes{
     int destSlot = PJSUA_INVALID_ID;
     QString srcDevName = "";
     QString destDevName = "";
-    float level = 0;
+    int level = 0;
     bool persistant = 0;
     QJsonObject toJSON() const {
         return {{"srcSlot", srcSlot}, {"destSlot", destSlot}, {"srcDevName", srcDevName}, {"destDevName", destDevName}, {"level", level}, {"persistant", persistant} };
@@ -396,7 +432,7 @@ struct s_audioRoutes{
         destSlot = audioRoutesJSON["destSlot"].toInt();
         srcDevName = audioRoutesJSON["srcDevName"].toString();
         destDevName = audioRoutesJSON["destDevName"].toString();
-        level = audioRoutesJSON["level"].toVariant().toFloat();
+        level = audioRoutesJSON["level"].toVariant().toInt();
         persistant = audioRoutesJSON["persistant"].toBool();
         return audioroutes;
 
@@ -406,7 +442,7 @@ struct s_audioRoutes{
         destSlot = audioRouteJSON["destSlot"].toInt();
         srcDevName = audioRouteJSON["srcDevName"].toString();
         destDevName = audioRouteJSON["destDevName"].toString();
-        level = audioRouteJSON["level"].toDouble();
+        level = audioRouteJSON["level"].toInt();
         persistant = audioRouteJSON["persistant"].toBool();
         return this;
     }

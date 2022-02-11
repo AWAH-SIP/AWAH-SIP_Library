@@ -204,6 +204,12 @@ int Settings::loadAudioRoutes()
         route.srcSlot = srcAudioSlotMap.key(route.srcDevName, -1);
         route.destSlot = destAudioSlotMap.key(route.destDevName, -1);
         if(route.srcSlot >= 0 && route.destSlot >= 0){
+            if(route.level < -42){                                             // this check is done to catch old volumes witch where stored in factors not dB!!
+                route.level = -43;
+            }
+            if(route.level > 20){
+                route.level = 20;
+            }
             int check = m_lib->m_AudioRouter->connectConfPort(route.srcSlot, route.destSlot, route.level, route.persistant);
             if(check != PJ_SUCCESS)
                 status = -1;

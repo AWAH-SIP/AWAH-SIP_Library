@@ -194,7 +194,8 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
                 } else {
                     pjsua_data* intData = pjsua_get_var();
                     const pjsua_conf_port_id slot = pjsua_player_get_conf_port(Callopts->player_id);
-                    PJSUA2_CHECK_EXPR(pjmedia_conf_adjust_rx_level(intData->mconf, slot, dBtoAdjLevel(-4.5)));
+                    int level = -3;
+                    PJSUA2_CHECK_EXPR(pjmedia_conf_adjust_rx_level(intData->mconf, slot, dBtoAdjLevel(level)));
                     PJSUA2_CHECK_EXPR(pjsua_conf_connect(slot, callId) );
                     status = pjsua_player_get_port(Callopts->player_id, &player_media_port);
                     if (status != PJ_SUCCESS){

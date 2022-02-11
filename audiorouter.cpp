@@ -29,8 +29,9 @@
 
 #define THIS_FILE		"audiorouter.cpp"
 
+
 AudioRouter::AudioRouter(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_lib(parentLib)
-{
+{ 
 }
 
 AudioRouter::~AudioRouter()
@@ -381,8 +382,8 @@ void AudioRouter::addToneGen(int freq, QString uid){
         m_lib->m_Log->writeLog(2,(QString("AddToneGen: connecting tone generator to confbridge failed: ") + buf));
         return;
     }
-
-    status = pjmedia_conf_adjust_rx_level(intData->mconf, slot, dBtoAdjLevel(-4.5));
+    int level = -3;
+    status = pjmedia_conf_adjust_rx_level(intData->mconf, slot, dBtoAdjLevel(level));
     if (status != PJ_SUCCESS) {
         return;
     }
@@ -446,7 +447,8 @@ void AudioRouter::addFilePlayer(QString PlayerName, QString File, QString uid)
         m_lib->m_Log->writeLog(2,(QString("Fileplayer: connecting file player to conference bridge failed: ") + buf));
         return;
     }
-    status = pjmedia_conf_adjust_rx_level(intData->mconf, slot, dBtoAdjLevel(-4.5));
+    int level = -3;
+    status = pjmedia_conf_adjust_rx_level(intData->mconf, slot, dBtoAdjLevel(level));
     if (status != PJ_SUCCESS) {
         return;
     }
@@ -726,7 +728,7 @@ s_audioPortList AudioRouter::listConfPorts(){
     return audioPortList;
 }
 
-int AudioRouter::connectConfPort(int src_slot, int sink_slot, float level, bool persistant)
+int AudioRouter::connectConfPort(int src_slot, int sink_slot, int level, bool persistant)
 {
     s_audioRoutes route;
     route.srcSlot = src_slot;
@@ -739,12 +741,12 @@ int AudioRouter::connectConfPort(int src_slot, int sink_slot, float level, bool 
     pjsua_conf_port_id src = src_slot;
     pjsua_conf_port_id sink = sink_slot;
     pjsua_conf_connect_param param;
-    param.level = level;
+    param.level = dBtoFact(level);
     status = pjsua_conf_connect2(src, sink, &param);
     if (status == PJ_SUCCESS){
         m_lib->m_Log->writeLog(3,(QString("connect slot: ") + QString::number(src_slot) + " to " + QString::number(sink_slot) + " successfully" ));
         m_audioRoutes.append(route);
-        emit audioRoutesChanged(m_audioRoutes);
+        changeConfPortLevel(src_slot,sink_slot, level);     // this is called to set the exact db values with the factor used in this function it is not in every case correct!!
         if(persistant)
             m_lib->m_Settings->saveAudioRoutes();
     }
@@ -783,13 +785,41 @@ int AudioRouter::disconnectConfPort(int src_slot, int sink_slot)
     return status;
 }
 
-int AudioRouter::changeConfPortLevel(int src_slot, int sink_slot, float level)
+void AudioRouter::changeConfPortLevel(int src_slot, int sink_slot, int level)
 {
     pjsua_data* intData = pjsua_get_var();
     pj_status_t status;
     pjsua_conf_port_id src = src_slot;
     pjsua_conf_port_id sink = sink_slot;
-    status = pjmedia_conf_adjust_conn_level(intData->mconf, src, sink,  (int)((level-1) * 128));
+    int leveladjust = dBtoAdjLevel(level);
+//    if(level > 20) level = 20;                // limit the maximum gain to 20dB
+//    if(level < -42){               // values below -40 are not supported by pjsua, so mute the xp
+//        leveladjust = -128;
+//        level = -96;
+//    }
+//    switch (level) {                // adapt level to
+//        level = -28;
+//        break;
+//    case -29:
+//        level = -30;
+//        break;
+//    case -31:
+//        level = -32;
+//        break;
+//    case -33:
+//    case -34:
+//    case -35:
+//        level = -36;
+//        break;
+//    case -37:
+//    case -38:
+//    case -39:
+//    case -40:
+//    case -41:
+//        level = -42;
+//        break;
+//    }
+    status = pjmedia_conf_adjust_conn_level(intData->mconf, src, sink,  leveladjust);
     if (status == PJ_SUCCESS){
 
         m_lib->m_Log->writeLog(3,(QString("ChangeConfPortLevel: changed level from slot: ") + QString::number(src_slot) + " to " + QString::number(sink_slot) + " successfully" ));
@@ -806,9 +836,7 @@ int AudioRouter::changeConfPortLevel(int src_slot, int sink_slot, float level)
         char buf[50];
         pj_strerror	(status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(1,(QString("ChangeConfPortLevel: change level failed: ") + buf));
-
     }
-    return status;
 }
 
 void AudioRouter::conferenceBridgeChanged()

@@ -116,10 +116,11 @@ public:
     * @brief Make an unidirectional connection from a source slot to a sink
     * @param src_slot ID if the source slot
     * @param sink_slot ID of the sink_slot
-    * @param level The level of the connetion 1.0 means no change in level
+    * @param presistant if set to ture the xp will be saved in the config file otherwise it is just a momentary connection
+    * @param level The level in dB of the connetion -40 is the minimum, lower values mute the crosspoint, +20 is the maximum
     * @return PJ_SUCESS or the respective error code
     */
-    int connectConfPort(int src_slot, int sink_slot, float level, bool persistant = true);
+    int connectConfPort(int src_slot, int sink_slot, int level, bool persistant = true);
 
     /**
     * @brief Remove a connection between a source slot to a sink
@@ -133,10 +134,9 @@ public:
     * @brief Change Volume of an unidirectional connection from a source slot to a sink
     * @param src_slot ID if the source slot
     * @param sink_slot ID of the sink_slot
-    * @param level The level of the connetion 1.0 means no change in level
-    * @return PJ_SUCESS or the respective error code
+    * @param level The level in dB of the connetion -40 is the minimum, lower values mute the crosspoint, +20 is the maximum
     */
-    int changeConfPortLevel(int src_slot, int sink_slot, float level);
+    void changeConfPortLevel(int src_slot, int sink_slot, int level);
 
     /**
     * @brief Add a sine wave generator
@@ -239,8 +239,6 @@ private:
     */
     QMap<QString,QString> m_customSourceLabels;
     QMap<QString,QString> m_customDestLabels;
-
-
 };
 
 #endif // AUDIOROUTER_H

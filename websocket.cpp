@@ -502,13 +502,13 @@ void Websocket::connectConfPort(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     int src_slot, sink_slot;
     QString levelStr;
-    float level;
+    int level;
     bool persistant;
     if (    jCheckInt(src_slot, data["src_slot"]) &&
             jCheckInt(sink_slot, data["sink_slot"]) &&
             jCheckString(levelStr, data["level"]) &&
             jCheckBool(persistant, data["persistant"]) ) {
-        level = levelStr.toFloat();
+        level = levelStr.toInt();
         int retVal = m_lib->connectConfPort(src_slot, sink_slot, level, persistant);
         retDataObj["returnValue"] = retVal;
         ret["data"] = retDataObj;
@@ -535,13 +535,12 @@ void Websocket::changeConfPortLevel(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     int src_slot, sink_slot;
     QString levelStr;
-    float level;
+    int level;
     if (    jCheckInt(src_slot, data["src_slot"]) &&
             jCheckInt(sink_slot, data["sink_slot"]) &&
             jCheckString(levelStr, data["level"])) {
-        level = levelStr.toFloat();
-        int retVal = m_lib->changeConfPortLevel(src_slot, sink_slot, level);
-        retDataObj["returnValue"] = retVal;
+        level = levelStr.toInt();
+        m_lib->changeConfPortLevel(src_slot, sink_slot, level);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {
@@ -681,7 +680,6 @@ void Websocket::getActiveCodecs(QJsonObject &data, QJsonObject &ret) {
 
 void Websocket::createGpioDev(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj, newDevice;
-    QString devName;
     if (jCheckObject(newDevice, data["newDev"]))   {
         QString retVal = m_lib->createGpioDev(newDevice);
         retDataObj["returnValue"] = retVal;
