@@ -202,6 +202,12 @@ signals:
     void audioRoutesChanged(QList<s_audioRoutes> audioRoutes);
 
     /**
+    * @brief Signal if a level of a confport has changed
+    * @param audioRoutes the Route with the changed level
+    */
+    void confportLevelChanged(s_audioRoutes changedRoute);
+
+    /**
     * @brief Signal if audio route Table from the conference-bridge changed
     * @param portList all Sources and Sinks as Struct
     */

@@ -978,6 +978,14 @@ void Websocket::audioRoutesChanged(const QList<s_audioRoutes>& audioRoutes){
     sendToAll(obj);
 }
 
+void Websocket::confportLevelChanged(s_audioRoutes changedRoute){
+    QJsonObject obj, data;
+    data["confportLevelChanged"] = changedRoute.toJSON();
+    obj["signal"] = "confportLevelChanged";
+    obj["data"] = data;
+    sendToAll(obj);
+}
+
 void Websocket::audioRoutesTableChanged(const s_audioPortList& portList){
     QJsonObject obj, data;
     data["portList"] = portList.toJSON();

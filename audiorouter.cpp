@@ -746,6 +746,7 @@ int AudioRouter::connectConfPort(int src_slot, int sink_slot, int level, bool pe
     if (status == PJ_SUCCESS){
         m_lib->m_Log->writeLog(3,(QString("connect slot: ") + QString::number(src_slot) + " to " + QString::number(sink_slot) + " successfully" ));
         m_audioRoutes.append(route);
+        emit audioRoutesChanged(m_audioRoutes);
         changeConfPortLevel(src_slot,sink_slot, level);     // this is called to set the exact db values with the factor used in this function it is not in every case correct!!
         if(persistant)
             m_lib->m_Settings->saveAudioRoutes();
@@ -792,33 +793,7 @@ void AudioRouter::changeConfPortLevel(int src_slot, int sink_slot, int level)
     pjsua_conf_port_id src = src_slot;
     pjsua_conf_port_id sink = sink_slot;
     int leveladjust = dBtoAdjLevel(level);
-//    if(level > 20) level = 20;                // limit the maximum gain to 20dB
-//    if(level < -42){               // values below -40 are not supported by pjsua, so mute the xp
-//        leveladjust = -128;
-//        level = -96;
-//    }
-//    switch (level) {                // adapt level to
-//        level = -28;
-//        break;
-//    case -29:
-//        level = -30;
-//        break;
-//    case -31:
-//        level = -32;
-//        break;
-//    case -33:
-//    case -34:
-//    case -35:
-//        level = -36;
-//        break;
-//    case -37:
-//    case -38:
-//    case -39:
-//    case -40:
-//    case -41:
-//        level = -42;
-//        break;
-//    }
+
     status = pjmedia_conf_adjust_conn_level(intData->mconf, src, sink,  leveladjust);
     if (status == PJ_SUCCESS){
 
@@ -826,11 +801,11 @@ void AudioRouter::changeConfPortLevel(int src_slot, int sink_slot, int level)
         for(auto& route : m_audioRoutes){
             if(route.srcSlot == src_slot && route.destSlot == sink_slot){
                 route.level = level;
+                emit confportLevelChanged(route);
                 if(route.persistant)
                     m_lib->m_Settings->saveAudioRoutes();
             }
         }
-        emit audioRoutesChanged(m_audioRoutes);
     }
     else{
         char buf[50];

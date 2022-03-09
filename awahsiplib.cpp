@@ -96,6 +96,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(m_Buddies, &Buddies::BuddyEntryChanged, this, &AWAHSipLib::signalBuddyEntryChanged);
     connect(m_Log, &Log::logMessage, this, &AWAHSipLib::logMessage);
     connect(m_AudioRouter, &AudioRouter::audioRoutesChanged, this, &AWAHSipLib::audioRoutesChanged);
+    connect(m_AudioRouter, &AudioRouter::confportLevelChanged, this, &AWAHSipLib::confportLevelChanged);
     connect(m_AudioRouter, &AudioRouter::audioRoutesTableChanged, this, &AWAHSipLib::audioRoutesTableChanged);
     connect(m_Accounts, &Accounts::AccountsChanged, this, &AWAHSipLib::AccountsChanged);
     connect(m_Accounts, &Accounts::callInfo, this, &AWAHSipLib::callInfo);
@@ -117,6 +118,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(this, &AWAHSipLib::signalBuddyEntryChanged, m_Websocket, &Websocket::BuddyEntryChanged);
     connect(this, &AWAHSipLib::logMessage, m_Websocket, &Websocket::logMessage);
     connect(this, &AWAHSipLib::audioRoutesChanged, m_Websocket, &Websocket::audioRoutesChanged);
+    connect(this, &AWAHSipLib::confportLevelChanged, m_Websocket, &Websocket::confportLevelChanged);
     connect(this, &AWAHSipLib::audioRoutesTableChanged, m_Websocket, &Websocket::audioRoutesTableChanged);
     connect(this, &AWAHSipLib::AccountsChanged, m_Websocket, &Websocket::AccountsChanged);
     connect(this, &AWAHSipLib::callInfo, m_Websocket, &Websocket::callInfo);

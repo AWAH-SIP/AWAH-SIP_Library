@@ -159,6 +159,7 @@ public slots:
     void logMessage(QString msg);
     void audioRoutesChanged(const QList<s_audioRoutes>& audioRoutes);
     void audioRoutesTableChanged(const s_audioPortList& portList);
+    void confportLevelChanged(const s_audioRoutes changedRoute);
     void callInfo(int accId, int callId, QJsonObject callInfo);
     void AccountsChanged(QList <s_account>* Accounts);
     void gpioRoutesChanged(const QList<s_gpioRoute>& routes);
