@@ -87,6 +87,7 @@ public:
 signals:
 
 private:
+    void sendDTMF(uint number);
     bool m_inState[10], m_outState[8];
 
 };

@@ -328,7 +328,7 @@ void PJCall::onInstantMessage(OnInstantMessageParam &prm)
 
 void PJCall::onDtmfDigit(OnDtmfDigitParam &prm)
 {
-    char dtmfdigit = prm.digit.at(0);
+    char dtmfdigit = prm.digit.c_str()[0];
     CallInfo ci = getInfo();
     s_account* callAcc = nullptr;
     callAcc = parent->getAccountByID(ci.accId);
@@ -386,8 +386,10 @@ void PJCall::onDtmfDigit(OnDtmfDigitParam &prm)
         callAcc->gpioDev->setGPI(7,1);
         break;
     default:
+        m_lib->m_Log->writeLog(2,QString("onDtmfDigit: Error decoding digit: ") + QString().fromStdString(prm.digit));
         break;
     }
     m_lib->m_Log->writeLog(3,QString("Recieved DTMF: ") + QString().fromStdString(prm.digit));
+
 
 }

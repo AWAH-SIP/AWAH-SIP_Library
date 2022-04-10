@@ -80,22 +80,23 @@ AccountGpioDev::AccountGpioDev(s_IODevices &deviceInfo)
     for(int i=0; i<10;i++){
         m_inState[i] = false;
     }
-    GpioRouter::instance()->registerDevice(m_deviceInfo, this, {"Registered", "Connected", "DTMF 0/1", "DTMF 2/3", "DTMF 4/5", "DTMF 6/7", "DTMF 8/9", "DTMF */#", "DTMF A/B", "DTMF C/D"});
+    GpioRouter::instance()->registerDevice(m_deviceInfo, this, {"Registered", "Connected", "DTMF 0/1", "DTMF 2/3", "DTMF 4/5", "DTMF 6/7", "DTMF 8/9", "DTMF */#", "DTMF A/B", "DTMF C/D"},{"DTMF 0/1", "DTMF 2/3", "DTMF 4/5", "DTMF 6/7", "DTMF 8/9", "DTMF */#", "DTMF A/B", "DTMF C/D"});
 }
 
 void AccountGpioDev::setGPI(uint number, bool state)
-{
-    if(number < 2) {
+{    
+    if( number < 10) {
         m_inState[number] = state;
+        emit gpioChanged();
     }
 }
 
 void AccountGpioDev::setGPO(uint number, bool state)
 {
-    if(number < 2 && m_outState[number] != state) {
+    if(number < 8 && m_outState[number] != state) {
         m_outState[number] = state;
-        qDebug() << "hey du vogel da wird de gpi message gsended";
-    }
+        sendDTMF(number);
+   }
 }
 
 void AccountGpioDev::setRegistered(bool state)
@@ -110,8 +111,52 @@ void AccountGpioDev::setConnected(bool state)
 {
     if(m_inState[1] != state) {
         m_inState[1] = state;
+        if(!state){
+            for(int i=2;i<10;i++){
+                setGPI(i,false);
+            }
+        }
         emit gpioChanged();
     }
+    if(state){
+        for(int i=0;i<8;i++){
+            sendDTMF(i);
+        }
+    }
+}
+
+void AccountGpioDev::sendDTMF(uint number)
+{
+    char DTMFdigit = -1;
+    switch (number) {
+    case 0:
+        DTMFdigit = m_outState[number] ? '1' : '0';
+        break;
+    case 1:
+        DTMFdigit = m_outState[number] ? '3' : '2';
+        break;
+    case 2:
+        DTMFdigit = m_outState[number] ? '5' : '4';
+        break;
+    case 3:
+        DTMFdigit = m_outState[number] ? '7' : '6';
+        break;
+    case 4:
+        DTMFdigit = m_outState[number] ? '9' : '8';
+        break;
+    case 5:
+        DTMFdigit = m_outState[number] ? '#' : '*';
+        break;
+    case 6:
+        DTMFdigit = m_outState[number] ? 'B' : 'A';
+        break;
+    case 7:
+        DTMFdigit = m_outState[number] ? 'D' : 'C';
+        break;
+    default:
+        break;
+    }
+    AWAHSipLib::instance()->sendDTMFtoAllCalls(m_deviceInfo.uid,DTMFdigit);
 }
 
 AudioCrosspointDev::AudioCrosspointDev(s_IODevices &deviceInfo)

@@ -119,6 +119,7 @@ public:
     void holdCall(int callId, int AccID);
     void transferCall(int callId, int AccID, QString destination);
 
+    void sendDTMFtoAllCalls(QString Uid, char DTMFdigit);
 
     /**
     * @brief get streaminfo and callstatistics for a call

@@ -305,6 +305,36 @@ void Accounts::transferCall(int callId, int AccID, QString destination)
     }
 }
 
+void Accounts::sendDTMFtoAllCalls(QString Uid, char DTMFdigit)
+{
+    s_account* account = getAccountByUID(Uid);
+    switch (DTMFdigit) {
+    case '0':
+    case '1':
+    case '2':
+    case '3':
+    case '4':
+    case '5':
+    case '6':
+    case '7':
+    case '8':
+    case '9':
+    case '*':
+    case '#':
+    case 'A':
+    case 'B':
+    case 'C':
+    case 'D':
+        for (int pos = 0; pos<account->CallList.count(); pos++){
+            AWAHSipLib::instance()->sendDtmf(account->CallList.at(pos).callId, account->AccID,QString(DTMFdigit));
+        }
+        break;
+    default:
+        m_lib->m_Log->writeLog(3,(QString("sendDTMFtoAllCalls: Invalid DTMF Digit ") + QString( DTMFdigit)));
+        return;
+    }
+}
+
 QJsonObject Accounts::getCallInfo(int callId, int AccID){
     QJsonObject callInfo;
     QStringList Line;
