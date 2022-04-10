@@ -71,6 +71,7 @@ public:
 
     virtual void onInstantMessage(OnInstantMessageParam &prm);
 
+    virtual void onDtmfDigit(OnDtmfDigitParam &prm);
 
     inline bool isOnHold()
     {

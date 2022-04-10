@@ -77,15 +77,24 @@ void LogicGpioDev::setGPO(uint number, bool state)
 AccountGpioDev::AccountGpioDev(s_IODevices &deviceInfo)
     : GpioDevice(deviceInfo)
 {
-    m_inState[0] = false;
-    m_inState[1] = false;
-    GpioRouter::instance()->registerDevice(m_deviceInfo, this, {"Registered", "Connected"});
+    for(int i=0; i<10;i++){
+        m_inState[i] = false;
+    }
+    GpioRouter::instance()->registerDevice(m_deviceInfo, this, {"Registered", "Connected", "DTMF 0/1", "DTMF 2/3", "DTMF 4/5", "DTMF 6/7", "DTMF 8/9", "DTMF */#", "DTMF A/B", "DTMF C/D"});
 }
 
 void AccountGpioDev::setGPI(uint number, bool state)
 {
     if(number < 2) {
         m_inState[number] = state;
+    }
+}
+
+void AccountGpioDev::setGPO(uint number, bool state)
+{
+    if(number < 2 && m_outState[number] != state) {
+        m_outState[number] = state;
+        qDebug() << "hey du vogel da wird de gpi message gsended";
     }
 }
 

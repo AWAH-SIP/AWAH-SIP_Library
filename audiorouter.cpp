@@ -796,8 +796,7 @@ void AudioRouter::changeConfPortLevel(int src_slot, int sink_slot, int level)
 
     status = pjmedia_conf_adjust_conn_level(intData->mconf, src, sink,  leveladjust);
     if (status == PJ_SUCCESS){
-
-        m_lib->m_Log->writeLog(3,(QString("ChangeConfPortLevel: changed level from slot: ") + QString::number(src_slot) + " to " + QString::number(sink_slot) + " successfully" ));
+        m_lib->m_Log->writeLog(4,(QString("ChangeConfPortLevel: changed level from slot: ") + QString::number(src_slot) + " to " + QString::number(sink_slot) + " successfully" ));
         for(auto& route : m_audioRoutes){
             if(route.srcSlot == src_slot && route.destSlot == sink_slot){
                 route.level = level;

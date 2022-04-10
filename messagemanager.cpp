@@ -73,3 +73,4 @@ void MessageManager::slotSendMessage(int callId, int AccID, QString type, QByteA
         }
     }
 }
+

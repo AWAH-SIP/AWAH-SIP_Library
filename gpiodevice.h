@@ -78,16 +78,16 @@ public:
     explicit AccountGpioDev(s_IODevices& deviceInfo);
     ~AccountGpioDev() {};
     void setGPI(uint number, bool state) override;
-    void setGPO(uint number, bool state) override { Q_UNUSED(number); Q_UNUSED(state); };
+    void setGPO(uint number, bool state) override;
     void setRegistered(bool state);
     void setConnected(bool state);
     bool getGPI(uint number) const override { return m_inState[number]; };
-    bool getGPO(uint number) const override { Q_UNUSED(number); return false; };
+    bool getGPO(uint number) const override { return m_outState[number]; };
 
 signals:
 
 private:
-    bool m_inState[2];
+    bool m_inState[10], m_outState[8];
 
 };
 
