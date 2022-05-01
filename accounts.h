@@ -161,6 +161,7 @@ public:
     void setDefaultACfg(const AccountConfig &value){ defaultACfg = value; };
 
     int m_MaxCallTime;
+    int m_CallDisconnectRXTimeout;
 
 signals:
     void regStateChanged(int accId, bool status);

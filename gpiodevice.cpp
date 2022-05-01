@@ -125,6 +125,62 @@ void AccountGpioDev::setConnected(bool state)
     }
 }
 
+void AccountGpioDev::setFromDTMF(char DTMF)
+{
+    switch (DTMF) {
+    case '0':
+        setGPI(2,0);
+        break;
+    case '1':
+        setGPI(2,1);
+        break;
+    case '2':
+        setGPI(3,0);
+        break;
+    case '3':
+        setGPI(3,1);
+        break;
+    case '4':
+        setGPI(4,0);
+        break;
+    case '5':
+        setGPI(4,1);
+        break;
+    case '6':
+        setGPI(5,0);
+        break;
+    case '7':
+        setGPI(5,1);
+        break;
+    case '8':
+        setGPI(6,0);
+        break;
+    case '9':
+        setGPI(6,1);
+        break;
+    case 'A':
+        setGPI(8,0);
+        break;
+    case 'B':
+        setGPI(8,1);
+        break;
+    case 'C':
+        setGPI(9,0);
+        break;
+    case 'D':
+        setGPI(9,1);
+        break;
+    case '*':
+        setGPI(7,0);
+        break;
+    case '#':
+        setGPI(7,1);
+        break;
+    default:
+        break;
+    }
+}
+
 void AccountGpioDev::sendDTMF(uint number)
 {
     char DTMFdigit = -1;

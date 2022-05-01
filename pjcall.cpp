@@ -336,60 +336,6 @@ void PJCall::onDtmfDigit(OnDtmfDigitParam &prm)
         m_lib->m_Log->writeLog(2,QString("onDtmfDigit: Error account not found!"));
         return;
     }
-    switch (dtmfdigit) {
-    case '0':
-        callAcc->gpioDev->setGPI(2,0);
-        break;
-    case '1':
-        callAcc->gpioDev->setGPI(2,1);
-        break;
-    case '2':
-        callAcc->gpioDev->setGPI(3,0);
-        break;
-    case '3':
-        callAcc->gpioDev->setGPI(3,1);
-        break;
-    case '4':
-        callAcc->gpioDev->setGPI(4,0);
-        break;
-    case '5':
-        callAcc->gpioDev->setGPI(4,1);
-        break;
-    case '6':
-        callAcc->gpioDev->setGPI(5,0);
-        break;
-    case '7':
-        callAcc->gpioDev->setGPI(5,1);
-        break;
-    case '8':
-        callAcc->gpioDev->setGPI(6,0);
-        break;
-    case '9':
-        callAcc->gpioDev->setGPI(6,1);
-        break;
-    case 'A':
-        callAcc->gpioDev->setGPI(8,0);
-        break;
-    case 'B':
-        callAcc->gpioDev->setGPI(8,1);
-        break;
-    case 'C':
-        callAcc->gpioDev->setGPI(9,0);
-        break;
-    case 'D':
-        callAcc->gpioDev->setGPI(9,1);
-        break;
-    case '*':
-        callAcc->gpioDev->setGPI(7,0);
-        break;
-    case '#':
-        callAcc->gpioDev->setGPI(7,1);
-        break;
-    default:
-        m_lib->m_Log->writeLog(2,QString("onDtmfDigit: Error decoding digit: ") + QString().fromStdString(prm.digit));
-        break;
-    }
-    m_lib->m_Log->writeLog(3,QString("Recieved DTMF: ") + QString().fromStdString(prm.digit));
-
-
+    callAcc->gpioDev->setFromDTMF(dtmfdigit);
+    m_lib->m_Log->writeLog(3,QString("Account: ") + callAcc->name + " Recieved DTMF: " + QString().fromStdString(prm.digit));
 }

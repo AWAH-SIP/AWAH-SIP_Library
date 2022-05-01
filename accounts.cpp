@@ -591,26 +591,25 @@ void Accounts::CallInspector()
                 QTime time = QTime::fromString(info["Call time:"].toString(), "hh:mm:ss");
                 if(m_MaxCallTime <= (time.hour()*60 + time.minute())){
                     hangupCall(call.callId,account.AccID);
-                    m_lib->m_Log->writeLog(3,(QString("Max call time exeeded on account ID: ")+ QString::number(account.AccID) + " call disconnected"));
+                    m_lib->m_Log->writeLog(3,(QString("Max call time exeeded on account with ID: ")+ QString::number(account.AccID) + " call disconnected"));
+                    return;
                 }
             }
 
-            int emptyGetevent = info["JB: Number of empty on GET events: "].toInt();    // detect rx media loss
+            int emptyGetevent = info["JB: Number of empty on GET events:"].toInt();    // detect rx media loss
             if(emptyGetevent > call.lastJBemptyGETevent){  // RX media lost
-                emit  callStateChanged(account.AccID, pjCallInfo.role, call.callId, pjCallInfo.remOfferer, pjCallInfo.connectDuration.sec, 7, call.CallStatusCode, QString("RX media lost since: ") + QDateTime::fromSecsSinceEpoch(call.RXlostSeconds, Qt::OffsetFromUTC).toString("hh:mm:ss"),call.ConnectedTo);
+                emit  callStateChanged(account.AccID, pjCallInfo.role, call.callId, pjCallInfo.remOfferer, pjCallInfo.connectDuration.sec, 7, call.CallStatusCode, QString("RX unlocked since: ") + QDateTime::fromSecsSinceEpoch(call.RXlostSeconds, Qt::OffsetFromUTC).toString("hh:mm:ss"),call.ConnectedTo);
                 call.lastJBemptyGETevent = emptyGetevent;
-                if(call.RXlostSeconds==15){
-                    qDebug() << "loss prevention";
-
-                    //pjsua_call_reinvite(call.callId,0,nullptr);
-                    pjsua_call_update(call.callId,0,nullptr);
+                if(call.RXlostSeconds >= m_CallDisconnectRXTimeout){
+                    hangupCall(call.callId,account.AccID);
+                    return;
                 }
                 call.RXlostSeconds++;
             }
-            else if(call.RXlostSeconds){    // RX media recovered
+            else if(call.RXlostSeconds && pjsua_call_is_active(call.callId) != 0){    // RX media recovered
                 call.RXlostSeconds = 0;
                 emit  callStateChanged(account.AccID, pjCallInfo.role, call.callId, pjCallInfo.remOfferer, pjCallInfo.connectDuration.sec, 5, pjCallInfo.state , QString::fromStdString(pjCallInfo.stateText),call.ConnectedTo);
-                qDebug() << "RX Stream recovered";
+                m_lib->m_Log->writeLog(3,(QString("Account: ")+ account.name + QString(", Call ID: ") + QString::number(call.callId) + " RX stream locked"));
             }
         }
     }

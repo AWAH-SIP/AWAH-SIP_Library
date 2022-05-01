@@ -81,6 +81,7 @@ public:
     void setGPO(uint number, bool state) override;
     void setRegistered(bool state);
     void setConnected(bool state);
+    void setFromDTMF(char DTMF);
     bool getGPI(uint number) const override { return m_inState[number]; };
     bool getGPO(uint number) const override { return m_outState[number]; };
 

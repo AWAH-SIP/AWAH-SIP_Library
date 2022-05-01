@@ -119,7 +119,6 @@ void Settings::loadGpioRoutes()
     loadedRoutes = settings.value("GpioRoutes").value<QList<s_gpioRoute>>();
     m_lib->m_Log->writeLog(3,QString("loadGpioRoutes: loaded routes: ") + QString::number(loadedRoutes.count()));
 
-
     for(auto& route : loadedRoutes ){
         GpioRouter::instance()->connectGpioPort(route.srcSlotId,route.destSlotId,route.inverted, route.persistant);
     }
@@ -365,6 +364,15 @@ void Settings::loadSettings()                                           // todo 
     item["min"] = 0;
     item["max"] = 7200;
     GlobalSettings["Max call duration (min)"] = item;
+
+    // ******* Call disconnect timeout after media loss *********
+    item = QJsonObject();
+    item["type"] = INTEGER;
+    m_lib->m_Accounts->m_CallDisconnectRXTimeout = settings.value("settings/MediaConfig/CallDisconnectRXTimeout","10").toInt();
+    item["value"] = settings.value("settings/MediaConfig/CallDisconnectRXTimeout","10").toInt();
+    item["min"] = 0;
+    item["max"] = 7200;
+    GlobalSettings["Call disconnect after RX lost in seconds"] = item;
 
 
     // ***** clockrate *****
@@ -705,6 +713,10 @@ void Settings::setSettings(QJsonObject editedSettings)
 
         if (it.key() == "Max call duration (min)"){
             settings.setValue("settings/MediaConfig/Max_Call_Duration",it.value().toInt());
+        }
+
+        if (it.key() == "Call disconnect after RX lost in seconds"){
+            settings.setValue("settings/MediaConfig/CallDisconnectRXTimeout",it.value().toInt());
         }
 
         if (it.key() == "Max Calls"){

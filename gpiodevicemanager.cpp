@@ -332,7 +332,14 @@ void GpioDeviceManager::appendDevice(GpioDevice *device)
 void GpioDeviceManager::createStaticOnDev()
 {
     if(m_staticOnUid.isEmpty()){
-        VirtualGpioDev* dev = create(1, 0, QString("Static ON"));
+        s_IODevices newDev;
+        newDev.devicetype = VirtualGpioDevice;
+        newDev.uid = "virtual_staticon_gpiodevice_uuid";
+        newDev.inputname = newDev.outputame = "Static ON";
+        newDev.RecDevID = newDev.PBDevID = 0;
+        newDev.inChannelCount = 1;
+        newDev.outChannelCount = 0;
+        VirtualGpioDev* dev = new VirtualGpioDev(newDev);
         m_staticOnUid = dev->getDeviceInfo().uid;
         dev->setGPI(0, true);
         emit dev->gpioChanged();

@@ -404,10 +404,10 @@ struct s_audioPortList{
             s_audioPort entry;
             srcPortArr = audioPortListJSON["srcPorts"].toArray();
             destPortArr = audioPortListJSON["destPorts"].toArray();
-            for (auto srcPort : srcPortArr) {
+            for (auto&& srcPort : srcPortArr) {
                 srcPorts.append(*entry.fromJSON(srcPort.toObject()));
             }
-            for (auto destPort : destPortArr) {
+            for (auto&& destPort : destPortArr) {
                 destPorts.append(*entry.fromJSON(destPort.toObject()));
             }
         }
@@ -498,10 +498,10 @@ struct s_gpioPortList{
             s_gpioPort entry;
             srcPortArr = gpioPortListJSON["srcPorts"].toArray();
             destPortArr = gpioPortListJSON["destPorts"].toArray();
-            for (auto srcPort : srcPortArr) {
+            for (auto&& srcPort : srcPortArr) {
                 srcPorts.append(*entry.fromJSON(srcPort.toObject()));
             }
-            for (auto destPort : destPortArr) {
+            for (auto&& destPort : destPortArr) {
                 destPorts.append(*entry.fromJSON(destPort.toObject()));
             }
         }
