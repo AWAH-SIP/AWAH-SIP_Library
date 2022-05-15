@@ -36,7 +36,10 @@ void Accounts::createAccount(QString accountName, QString server, QString user, 
     QString idUri = "\""+ accountName +"\" <sip:"+ user +"@"+ server +">";
     QString registrarUri = "sip:"+ server;
     s_account newAccount;
-
+    if(m_accounts.count() > 63){
+        m_lib->m_Log->writeLog(1,"CreateAccount: Account creation failed, only 64 accounts alowed!");
+        return;
+    }
     if(uid.isEmpty())
         uid = createNewUID();
     try{
@@ -512,12 +515,11 @@ void Accounts::sendPresenceStatus(int AccID, AWAHPresenceState AWAHpresence)
            }
            account->accountPtr->setOnlineStatus(ps);
            account->presenceState = AWAHpresence;
-
        } catch(Error& err) {
-           qDebug() << "PJSUA: Set PresenceState NR: " << AWAHpresence << " " << QString::fromStdString(ps.note) << " failed: " << err.info().c_str();
+           m_lib->m_Log->writeLog(2,(QString("PJSUA: send presence of account: ") + account->name + " failed: " + QString::fromStdString(err.info().c_str())));
            return;
        }
-       qDebug() << "PJSUA: Set PresenceState NR: " << AWAHpresence << " " << QString::fromStdString(ps.note);
+       m_lib->m_Log->writeLog(4,(QString("PJSUA: send presence of account: ") + account->name + " to: " + QString::fromStdString(ps.note)));
    }
 }
 
@@ -592,7 +594,7 @@ void Accounts::CallInspector()
                 if(m_MaxCallTime <= (time.hour()*60 + time.minute())){
                     hangupCall(call.callId,account.AccID);
                     m_lib->m_Log->writeLog(3,(QString("Max call time exeeded on account with ID: ")+ QString::number(account.AccID) + " call disconnected"));
-                    return;
+                    break;
                 }
             }
 
@@ -602,7 +604,7 @@ void Accounts::CallInspector()
                 call.lastJBemptyGETevent = emptyGetevent;
                 if(call.RXlostSeconds >= m_CallDisconnectRXTimeout){
                     hangupCall(call.callId,account.AccID);
-                    return;
+                    break;
                 }
                 call.RXlostSeconds++;
             }

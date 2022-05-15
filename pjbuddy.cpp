@@ -38,19 +38,21 @@ PJBuddy::~PJBuddy()
 
 void PJBuddy::onBuddyState(){
     BuddyInfo bi;
+    int state = unknown;
     try {
         bi = getInfo();
     }  catch(Error& err) {
         m_lib->m_Log->writeLog(2, QString("onBuddyState:getInfo failed: ") + err.info().c_str());
         return;
     }
-    m_lib->m_Log->writeLog(4, QString("onBuddyState: Buddy: ") + QString::fromStdString(bi.uri) + " is " + QString::fromStdString(bi.presStatus.statusText) + " note is: " + QString::fromStdString(bi.presStatus.note));
-    m_lib->m_Log->writeLog(4, QString("Contact: ") + QString::fromStdString(bi.contact) + " SubStateName: " + QString::fromStdString(bi.subStateName) + " SubTermReason: " + QString::fromStdString(bi.subTermReason));
-    if(bi.presStatus.note == "Online"){
+    m_lib->m_Log->writeLog(4, QString("onBuddyState: Buddy: ") + QString::fromStdString(bi.uri) + " is " + QString::number(bi.presStatus.status) + " note is: " + QString::fromStdString(bi.presStatus.note));
+    if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE){
         state = online;
-    }else if(bi.presStatus.note == "Busy"){
+    }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE && bi.presStatus.note == "Busy"){
         state = busy;
-    }else{
+    }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_UNKNOWN){
+        state = unknown;
+    }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_OFFLINE){
         state = unknown;
     }
     m_lib->m_Buddies->changeBuddyState(QString::fromStdString(bi.uri), state);
@@ -59,6 +61,7 @@ void PJBuddy::onBuddyState(){
 void PJBuddy::onBuddyEvSubState(OnBuddyEvSubStateParam &prm){
     QString reason =  QString::fromUtf8(pjsip_event_str(prm.e.type));
     BuddyInfo bi;
+    int state = unknown;
     try {
         bi = getInfo();
     }  catch(Error& err) {
@@ -66,4 +69,15 @@ void PJBuddy::onBuddyEvSubState(OnBuddyEvSubStateParam &prm){
         return;
     }
     m_lib->m_Log->writeLog(4, QString("onBuddyEvSubState Event subscription state of buddy ") + QString::fromStdString(bi.uri) + " is " + reason);
+    if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE){
+        state = online;
+    }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE && bi.presStatus.note == "Busy"){
+        state = busy;
+    }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_UNKNOWN){
+        state = unknown;
+    }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_OFFLINE){
+        state = unknown;
+    }
+    m_lib->m_Buddies->changeBuddyState(QString::fromStdString(bi.uri), state);
+
 }

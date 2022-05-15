@@ -51,7 +51,6 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
 
         // read config from config file:
         m_Settings->loadSettings();
-
         epCfg.uaConfig.userAgent = "AWAHSip";
         epCfg.uaConfig.natTypeInSdp = 0;
 

@@ -23,7 +23,10 @@
 
 Buddies::Buddies(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_lib(parentLib)
 {
-
+    m_BuddyChecker = new QTimer(this);
+    m_BuddyChecker->setInterval(10000);
+    connect(m_BuddyChecker, SIGNAL(timeout()), this, SLOT(BuddyChecker()));
+    m_BuddyChecker->start();
 }
 
 bool Buddies::registerBuddy(int AccID, QString buddyUrl){
@@ -31,7 +34,6 @@ bool Buddies::registerBuddy(int AccID, QString buddyUrl){
     QString fulladdr = "sip:"+ buddyUrl +"@"+ account->serverURI;
     Buddy buddyptr;
     if(account){
-
         buddyptr = account->accountPtr->findBuddy2(fulladdr.toStdString());
         if(!buddyptr.isValid()){
             BuddyConfig cfg;
@@ -146,7 +148,47 @@ void Buddies::changeBuddyState(QString buddyUrl, int state){
     for(auto& buddy : m_buddies){
         if(buddy.buddyUrl == URL){
             buddy.status = state;
+            if(buddy.status == busy){
+                buddy.lastSeen = QDateTime::currentDateTime();
+                buddy.autoconnectInProgress = false;
+            }
+            if(buddy.status  == unknown){
+                buddy.autoconnectInProgress = false;
+            }
+            else if(buddy.status  == online){
+                buddy.lastSeen = QDateTime::currentDateTime();
+                QList<s_account>* accounts = m_lib->m_Accounts->getAccounts();
+                for(auto& account : *accounts){                                 // if buddy changed to online search accounts if it is marked as autoconnect
+                    if (buddy.uid == account.autoconnectToBuddyUID){
+                        if(account.SIPStatusCode == 200 && account.CallList.length() == 0 && buddy.autoconnectInProgress == false){                     // only connect if account is registered, no call is active and no autoconnect is aready in progress
+                            m_lib->m_Log->writeLog(3,"Autoconnect to buddy: connecting from account: " + account.name + " to: " + buddy.Name+ " " + buddy.buddyUrl);
+                            buddy.autoconnectInProgress = true;
+                            m_lib->m_Accounts->makeCall(buddy.buddyUrl,account.AccID,buddy.codec);
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
+void Buddies::BuddyChecker()
+{
+    QDateTime now = QDateTime::currentDateTime();
+    for(auto& buddy : m_buddies){
+        if(buddy.lastSeen.isValid() && (uint8_t)buddy.lastSeen.secsTo(now) > buddy.maxPresenceRefreshTime){
+            s_account* account = m_lib->m_Accounts->getAccountByUID(buddy.accUid);
+            Buddy buddyptr;
+            if(account){
+                QString fulladdr = "sip:"+ buddy.buddyUrl +"@"+ account->serverURI;
+                buddyptr = account->accountPtr->findBuddy2(fulladdr.toStdString());
+                if(buddyptr.isValid()){
+                    changeBuddyState( fulladdr, 0);                                     // to detect offline buddys reliably we set the buddy as offline after maxPresenceRefreshTime
+                    buddyptr.subscribePresence(false);                                  // then we subscribe the buddy again like this we have only the online buddys in the list
+                    buddyptr.subscribePresence(true);
+                }
+            }
+        }
+    }
+}

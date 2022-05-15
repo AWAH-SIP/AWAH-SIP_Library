@@ -337,5 +337,5 @@ void PJCall::onDtmfDigit(OnDtmfDigitParam &prm)
         return;
     }
     callAcc->gpioDev->setFromDTMF(dtmfdigit);
-    m_lib->m_Log->writeLog(3,QString("Account: ") + callAcc->name + " Recieved DTMF: " + QString().fromStdString(prm.digit));
+    m_lib->m_Log->writeLog(3,QString("Account: ") + callAcc->name + " recieved DTMF digit: " + QString().fromStdString(prm.digit));
 }

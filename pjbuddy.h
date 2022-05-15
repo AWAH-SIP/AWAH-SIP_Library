@@ -43,7 +43,6 @@ public:
 private:
     Buddies *parent;
     AWAHSipLib* m_lib;
-    int state;
 };
 
 #endif // PJBUDDY_H

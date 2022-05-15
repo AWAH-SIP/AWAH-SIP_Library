@@ -533,9 +533,12 @@ struct s_buddy{
     QString buddyUrl = "";
     QString Name = "";
     int status = PJSUA_BUDDY_STATUS_UNKNOWN;
+    bool autoconnectInProgress = false;
     QString accUid = "";
     s_codec codec;
     QString uid = "";
+    uint8_t maxPresenceRefreshTime = 30;
+    QDateTime lastSeen = QDateTime();
     QJsonObject toJSON() const {
         return{{"buddyUrl", buddyUrl}, {"Name", Name}, {"status", status}, {"accUid", accUid}, {"codec", codec.toJSON()}, {"uid", uid}};
     }

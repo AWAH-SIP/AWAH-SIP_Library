@@ -22,6 +22,7 @@
 #include <QObject>
 #include "pjbuddy.h"
 #include "types.h"
+#include <QTimer>
 
 class AWAHSipLib;
 
@@ -105,6 +106,15 @@ signals:
 private:
     AWAHSipLib* m_lib;
     QList <s_buddy> m_buddies;
+    QTimer *m_BuddyChecker;
+
+private slots:
+
+    /**
+    * @brief the buddychecker slot is called every 10 seconds and checks if the last seen timestamp is within the time window defined by the maxPresenceRefreshTime
+    * @brief if the timestamp is to old, the buddy is marked as unknown und its presence is subscribed again
+    */
+    void BuddyChecker();
 
 };
 

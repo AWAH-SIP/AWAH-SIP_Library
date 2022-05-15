@@ -47,10 +47,6 @@ void PJAccount::onRegState(OnRegStateParam &prm) {
         else if(ai.regIsActive && !acc->CallList.isEmpty()){
             parent->sendPresenceStatus(ai.id,busy);
         }
-        else if(!ai.regIsActive && ai.regStatus == 200){                                        // todo check me!!!!!!
-            emit parent->signalSipStatus(ai.id, 0,"unregistered");
-            parent->sendPresenceStatus(ai.id,unknown);
-        }
     }
 }
 
@@ -75,7 +71,19 @@ void PJAccount::onIncomingCall(OnIncomingCallParam &iprm)
 void PJAccount::onIncomingSubscribe(OnIncomingSubscribeParam &prm){
     const pj_str_t statusCode = *pjsip_get_status_text(prm.code);
     m_lib->m_Log->writeLog(3, QString("Incoming subscribtion from URL: ") + QString::fromStdString(prm.fromUri) + " Status Code: " + QString::fromStdString(statusCode.ptr) + " Reason: " + QString::fromStdString(prm.reason));
+    AccountInfo ai = getInfo();
+    s_account *acc = parent->getAccountByID(ai.id);
+    QString URI = QString::fromStdString(prm.fromUri);
+    if(acc){
+        Buddy buddyptr;
+        int startPos = URI.indexOf('<')+1;
+        int endPos = URI.indexOf('>');
+        int length = endPos - startPos;
+        QString URL = (URI.mid(startPos, length));
+        m_lib->m_Buddies->changeBuddyState(URL, online);
+    }
 }
+
 
 int PJAccount::getAccID()
 {
