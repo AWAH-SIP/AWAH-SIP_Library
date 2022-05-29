@@ -570,7 +570,6 @@ int Codecs::setCodecParam(s_codec codec)
                 opus_cfg.bit_rate  = it.value().toObject()["value"].toInt();
              }
              if (it.key() == "Bit rate mode"){
-                 qDebug() << "setting bitrate mode : " << it.value().toObject()["value"].toInt();
                  opus_cfg.cbr  = it.value().toObject()["value"].toInt();
              }
              if (it.key() == "Channel count"){

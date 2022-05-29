@@ -80,6 +80,21 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Settings->loadGpioDevConfig();
         m_Codecs->listCodecs();
         m_Settings->loadBuddies();
+
+        //************************************************************** olny for TdS 2022 remove me soon!!!!!!!! ****************
+        s_codec defaultCodec;
+        defaultCodec.encodingName = "opus";
+        defaultCodec.displayName ="Opus";                   //   resolve issue #71 and to remove this
+        QJsonObject codecParam;
+        QJsonObject value;
+        value.insert("value", 2);
+        codecParam.insert("Channel count", value);
+        value.insert("value", 64000);
+        codecParam.insert("Bit rate", value);
+        defaultCodec.codecParameters = codecParam;
+        m_Codecs->setCodecParam(defaultCodec);
+        // **********************************************************************************************************************
+
     }
     catch (Error &err){
         m_Log->writeLog(1,QString("AWAHsip: starting lib failed: ") + err.info().c_str());
