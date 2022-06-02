@@ -80,6 +80,9 @@ AccountGpioDev::AccountGpioDev(s_IODevices &deviceInfo)
     for(int i=0; i<10;i++){
         m_inState[i] = false;
     }
+    for(int i=0; i<8;i++){
+        m_outState[i] = false;
+    }
     GpioRouter::instance()->registerDevice(m_deviceInfo, this, {"Registered", "Connected", "DTMF 0/1", "DTMF 2/3", "DTMF 4/5", "DTMF 6/7", "DTMF 8/9", "DTMF */#", "DTMF A/B", "DTMF C/D"},{"DTMF 0/1", "DTMF 2/3", "DTMF 4/5", "DTMF 6/7", "DTMF 8/9", "DTMF */#", "DTMF A/B", "DTMF C/D"});
 }
 
