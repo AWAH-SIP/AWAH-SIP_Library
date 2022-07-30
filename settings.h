@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (C) 2016 - 2021 Andy Weiss, Adi Hilber
+ * Copyright (C) 2016 - 2022 Andy Weiss, Adi Hilber
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -170,12 +170,6 @@ private:
     */
     QJsonObject m_settings;
 
-    /**
-    * @brief offline routes are stored here
-    * @details we have to keep track of offline routes, oterwise they get lost on restart
-    * this list is then added to te settingsfile with the online routes
-    */
-    QList<s_audioRoutes>  offlineRoutes;
     bool m_AccountsLoaded = false;
     bool m_IoDevicesLoaded = false;
     bool m_AudioRoutesLoaded = false;

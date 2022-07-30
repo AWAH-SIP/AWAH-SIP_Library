@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 - 2021 Andy Weiss, Adi Hilber
+ * Copyright (C) 2016 - 2022 Andy Weiss, Adi Hilber
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -92,6 +92,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         value.insert("value", 64000);
         codecParam.insert("Bit rate", value);
         defaultCodec.codecParameters = codecParam;
+        m_Codecs->selectCodec(defaultCodec);
         m_Codecs->setCodecParam(defaultCodec);
         // **********************************************************************************************************************
 

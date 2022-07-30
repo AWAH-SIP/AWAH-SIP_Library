@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 - 2021 Andy Weiss, Adi Hilber
+ * Copyright (C) 2016 - 2022 Andy Weiss, Adi Hilber
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -451,19 +451,13 @@ void Accounts::addCallToHistory(int AccID, QString callUri, int duration, s_code
 {
     s_account* account = getAccountByID(AccID);
     bool entryexists = false;
-    for (auto histentry : account->CallHistory) {
+    for (auto & histentry : account->CallHistory) {
         if(histentry.callUri == callUri){
             entryexists = true;
             histentry.codec = codec;
             histentry.count++;
             histentry.duration = duration;
             histentry.outgoing = outgoing;
-            for(int i =0; i<account->CallHistory.size(); i++){      // delete the existing entry and place then modified entry as the first item
-                if(account->CallHistory.at(i).callUri == callUri){
-                    account->CallHistory.removeAt(i);
-                    account->CallHistory.prepend(histentry);
-                }
-            }
             break;
         }
     }

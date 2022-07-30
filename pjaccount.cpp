@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 - 2021 Andy Weiss, Adi Hilber
+ * Copyright (C) 2016 - 2022 Andy Weiss, Adi Hilber
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -55,7 +55,6 @@ void PJAccount::onRegStarted(OnRegStartedParam &prm)
      AccountInfo ai = getInfo();
      m_lib->m_Log->writeLog(2, QString("RegisterStateStarted: on Account: ") + QString::fromStdString(ai.uri) + (ai.regIsConfigured? " Starting Registration" : " AccountParam is NOT Set! NOT starting Registration") + " code = " + QString::number(prm.renew));
      emit parent->regStateChanged(ai.id, ai.regIsConfigured);
-     parent->sendPresenceStatus(ai.id,online);
      //parent->emit signalSipStatus(ai.id, ai.regStatus,QString::fromStdString(ai.regStatusText));
 }
 

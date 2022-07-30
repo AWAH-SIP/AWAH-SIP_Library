@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 - 2021 Andy Weiss, Adi Hilber
+ * Copyright (C) 2016 - 2022 Andy Weiss, Adi Hilber
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,12 +32,18 @@
 
 AudioRouter::AudioRouter(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_lib(parentLib)
 { 
+    m_SoundDeviceInspectorTimer = new QTimer(this);
+    m_SoundDeviceInspectorTimer->setInterval(5000);
+    connect(m_SoundDeviceInspectorTimer, SIGNAL(timeout()), this, SLOT(SoundDeviceInspector()));
+    m_sounddevCount = pjmedia_snd_get_dev_count();
+    m_SoundDeviceInspectorTimer->start();
 }
 
 AudioRouter::~AudioRouter()
 {
+    m_SoundDeviceInspectorTimer->stop();
     QList<s_IODevices> *audioDevs = getAudioDevices();
-    for(int i = 0;i<audioDevs->count();i++) {                    // close all sound device bevore deinit library to prevent assertion fault!
+    for(int i = 0;i<audioDevs->count();i++) {                    // close all sound device before deinit library to prevent assertion fault!
         if(audioDevs->at(i).devicetype == SoundDevice) {
             pjmedia_snd_port_destroy(audioDevs->at(i).soundport);
             m_lib->m_Log->writeLog(3,(QString("Sound device closed: ") + audioDevs->at(i).inputname));
@@ -51,6 +57,7 @@ AudioRouter::~AudioRouter()
 
 
 QStringList AudioRouter::listInputSoundDev(){
+    pjmedia_aud_dev_refresh() ;
     QStringList snddevlist;
     QString snddev;
     foreach(AudioDevInfo audiodev, m_lib->m_pjEp->audDevManager().enumDev2()){
@@ -64,6 +71,7 @@ QStringList AudioRouter::listInputSoundDev(){
 }
 
 QStringList AudioRouter::listOutputSoundDev(){
+    pjmedia_aud_dev_refresh() ;
     QStringList snddevlist;
     QString snddev;
     foreach(AudioDevInfo audiodev, m_lib->m_pjEp->audDevManager().enumDev2()){
@@ -99,25 +107,27 @@ void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid
     QList<int> connectedSlots;
     s_IODevices Audiodevice;
 
-    for(auto& device : m_AudioDevices){
-        if(device.devicetype == SoundDevice)
-            if(device.RecDevID == recordDevId || device.PBDevID == playbackDevId){
-                m_lib->m_Log->writeLog(3,"AddAudioDevice: error could not add device. Device already exists!" );
-                return;
-            }
-    }
+//    for(auto& device : m_AudioDevices){
+//        if(device.devicetype == SoundDevice){
+//            qDebug() << "Add audio device name: " << device.inputname;
+//            qDebug() << "Add audio device info rec id: " << device.RecDevID;
+//            qDebug() << "Add audio device info pb id: " << device.PBDevID;
+//            qDebug() << "Add audio input rec id: " << recordDevId;
+//            qDebug() << "Add audio input pb id: " << playbackDevId;
+//            if(device.RecDevID >-1 && device.RecDevID >-1 && (device.RecDevID == recordDevId || device.PBDevID == playbackDevId)){
+//                m_lib->m_Log->writeLog(3,"AddAudioDevice: error could not add device. Device already exists!" );
+//                //return;
+//            }
+//        }
+//    }
 
     recorddev =  m_lib->m_pjEp->audDevManager().getDevInfo(recordDevId);
     playbackdev = m_lib->m_pjEp->audDevManager().getDevInfo(playbackDevId);
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   /* recorddev.inputCount = 6;                                                           // octo sound card hack!!!!!!!
-    playbackdev.outputCount = 8;          */                                              // fix and remove me!!!!!!!!
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if(uid.isEmpty())
         uid = createNewUID();
 
     if(recorddev.inputCount >= playbackdev.outputCount){                            // if rec and playback device have different channelcount
-        channelCnt =recorddev.inputCount ;                                         // use the bigger number
+        channelCnt =recorddev.inputCount;                                         // use the bigger number
     }
     else channelCnt = playbackdev.outputCount;
 
@@ -214,24 +224,102 @@ void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid
     Audiodevice.soundport = soundport;
     Audiodevice.inChannelCount = recorddev.inputCount;
     Audiodevice.outChannelCount = playbackdev.outputCount;
-    m_AudioDevices.append(Audiodevice);
+    bool devicefound = false;
+    for (auto & existingaudiodev : m_AudioDevices){                                     // uptate existing audio dev when offline device is changing to online
+        if (existingaudiodev.uid == uid){
+            existingaudiodev = Audiodevice;
+            devicefound = true;
+            break;
+        }
+    }
+    if (!devicefound){
+         m_AudioDevices.append(Audiodevice);
+    }
     m_lib->m_Settings->saveIODevConfig();
     conferenceBridgeChanged();
     emit AudioDevicesChanged(m_AudioDevices);
     return;
 }
 
-void AudioRouter::addOfflineAudioDevice(QString inputName, QString outputName, QString uid)
+void AudioRouter::setAudioDeviceToOffline(QString inputName, QString outputName, QString uid)
 {
-    s_IODevices Audiodevice;
-    Audiodevice.inputname = inputName;
-    Audiodevice.outputame = outputName;
-    Audiodevice.PBDevID = -1;
-    Audiodevice.RecDevID = -1;
-    Audiodevice.devicetype = SoundDevice;
-    Audiodevice.uid = uid;
-    m_AudioDevices.append(Audiodevice);
-    m_lib->m_Settings->saveIODevConfig();
+    s_IODevices* offlineDevice = nullptr;
+    pj_status_t status;
+    for(auto& device : m_AudioDevices){
+        if(device.uid == uid){
+            offlineDevice = &device;
+            break;
+        }
+    }
+    if(offlineDevice == nullptr){                   // device is offline and never seen during runtime
+        s_IODevices Audiodevice;
+        Audiodevice.inputname = inputName;
+        Audiodevice.outputame = outputName;
+        Audiodevice.PBDevID = -1;
+        Audiodevice.RecDevID = -1;
+        Audiodevice.devicetype = SoundDevice;
+        Audiodevice.uid = uid;
+        m_AudioDevices.append(Audiodevice);
+        m_lib->m_Settings->saveIODevConfig();
+        emit AudioDevicesChanged(m_AudioDevices);
+        return;
+    }
+    else{                                               // device was online an is lost. Some cleanup is needed
+        if(offlineDevice->devicetype == SoundDevice)
+        {
+            if(offlineDevice->PBDevID > -1 && offlineDevice->RecDevID > -1){
+
+                for(auto& slot : offlineDevice->portNo){
+                    try{
+                        pj_status_t status;
+                        bool save = false;
+                        QMutableListIterator<s_audioRoutes> i(m_audioRoutes);
+                        while(i.hasNext()){
+                            s_audioRoutes& route = i.next();
+                            if(route.srcSlot == slot || route.destSlot == slot){
+                                status = pjsua_conf_disconnect(route.srcSlot, route.destSlot);
+                                if (status != PJ_SUCCESS){
+                                    char buf[50];
+                                    pj_strerror	(status,buf,sizeof (buf) );
+                                    m_lib->m_Log->writeLog(2,(QString("setAudioDeviceToOffline: disconnect slot failed from slot: ") + QString::number(route.srcSlot) + " : " + buf));
+                                }
+                                route.persistant ? (save = true) : false;
+                                if(save){
+                                    m_offlineRoutes.append(route);
+                                    i.remove();
+                                }
+                            }
+                        }
+                        status = pjsua_conf_remove_port(slot);
+                        if (status != PJ_SUCCESS){
+                            char buf[50];
+                            pj_strerror	(status,buf,sizeof (buf));
+                            m_lib->m_Log->writeLog(1,(QString("setAudioDeviceToOffline: could not remove port - ERROR: ") + buf));
+                            return;
+                        }
+                    }
+                    catch(Error &err)
+                    {
+                        m_lib->m_Log->writeLog(1,(QString("setAudioDeviceToOffline: failed: - ERROR: " ) +  err.info().c_str()));
+                        return;
+                    }
+                }
+                status = pjmedia_snd_port_destroy(offlineDevice->soundport);
+                if (status != PJ_SUCCESS){
+                    char buf[50];
+                    pj_strerror	(status,buf,sizeof (buf));
+                    m_lib->m_Log->writeLog(1,(QString("setAudioDeviceToOffline: could not remove sound device - ERROR: ") + buf));
+                    return;
+                }
+                m_lib->m_Log->writeLog(3,(QString("setAudioDeviceToOffline: removing: ")  +   offlineDevice->inputname));
+            }
+        }
+        offlineDevice->PBDevID = -1;
+        offlineDevice->RecDevID = -1;
+        emit AudioDevicesChanged(m_AudioDevices);
+        conferenceBridgeChanged();
+        m_lib->m_Settings->saveIODevConfig();
+    }
 }
 
 void AudioRouter::removeAudioDevice(QString uid)
@@ -272,14 +360,16 @@ void AudioRouter::removeAudioDevice(QString uid)
     }
     if(deviceToRemove->devicetype == SoundDevice)
     {
-        status = pjmedia_snd_port_destroy(deviceToRemove->soundport);
-        if (status != PJ_SUCCESS){
-            char buf[50];
-            pj_strerror	(status,buf,sizeof (buf));
-            m_lib->m_Log->writeLog(1,(QString("removeAudioDevice: could not remove sound device - ERROR: ") + buf));
-            return;
+        if(deviceToRemove->PBDevID > -1 && deviceToRemove->RecDevID > -1){
+            status = pjmedia_snd_port_destroy(deviceToRemove->soundport);
+            if (status != PJ_SUCCESS){
+                char buf[50];
+                pj_strerror	(status,buf,sizeof (buf));
+                m_lib->m_Log->writeLog(1,(QString("removeAudioDevice: could not remove sound device - ERROR: ") + buf));
+                return;
+            }
+            m_lib->m_Log->writeLog(3,(QString("removeAudioDevice: removing: ")  +   deviceToRemove->inputname));
         }
-        m_lib->m_Log->writeLog(3,(QString("removeAudioDevice: removing: ")  +   deviceToRemove->inputname));
     }
 
     if(deviceToRemove->devicetype == FilePlayer)
@@ -745,7 +835,18 @@ int AudioRouter::connectConfPort(int src_slot, int sink_slot, int level, bool pe
     status = pjsua_conf_connect2(src, sink, &param);
     if (status == PJ_SUCCESS){
         m_lib->m_Log->writeLog(3,(QString("connect slot: ") + QString::number(src_slot) + " to " + QString::number(sink_slot) + " successfully" ));
-        m_audioRoutes.append(route);
+        bool routeExists = false;
+        for(auto& existingroute : m_audioRoutes){                                                   // check if route is already connected
+            if(existingroute.srcSlot == route.srcSlot && existingroute.destSlot == route.destSlot){
+                existingroute = route;
+                routeExists = true;
+                m_lib->m_Log->writeLog(2,(QString("connectConfPort: route already connected! updating it instead: ") + QString::number(src_slot) + " to " + QString::number(sink_slot)));
+                break;
+            }
+        }
+        if(!routeExists){
+            m_audioRoutes.append(route);
+        }
         emit audioRoutesChanged(m_audioRoutes);
         changeConfPortLevel(src_slot,sink_slot, level);     // this is called to set the exact db values with the factor used in this function it is not in every case correct!!
         if(persistant)
@@ -881,7 +982,6 @@ void AudioRouter::changeConfportdstName(const QString portName, const QString cu
 
 void AudioRouter::removeAllCustomNamesWithUID(const QString uid)
 {
-    qDebug() << "stored lables: " << m_customSourceLabels << m_customDestLabels;
     QMap<QString, QString>::const_iterator it = m_customSourceLabels.constBegin();
     auto end = m_customSourceLabels.constEnd();
     while (it != end) {
@@ -900,5 +1000,68 @@ void AudioRouter::removeAllCustomNamesWithUID(const QString uid)
     }
     m_lib->m_Settings->saveCustomSourceNames();
     m_lib->m_Settings->saveCustomDestinationNames();
-    qDebug() << "now lables: " << m_customSourceLabels << m_customDestLabels;
+}
+
+
+void AudioRouter::SoundDeviceInspector()
+{
+    pjmedia_aud_dev_refresh() ;
+    uint8_t count = pjmedia_snd_get_dev_count();
+    int i;
+    if(count == m_sounddevCount){                                       // if the number of audio devices in the system did not change we assume that nothing changed
+        return;
+    }
+
+    if(count > m_sounddevCount){                                        // if the number of audio devices changed: check if devices marked as offline are still offline
+        for (auto &audiodev : m_AudioDevices){
+            if(audiodev.devicetype == SoundDevice && audiodev.PBDevID ==-1 && audiodev.RecDevID ==-1){
+                for (i=0; i<count; ++i)
+                {
+                    const pjmedia_snd_dev_info *info;
+                    info = pjmedia_snd_get_dev_info(i);
+                    if(info->name == audiodev.inputname){
+                        int recDevId = getSoundDevID(audiodev.inputname);
+                        int pbDevId = getSoundDevID(audiodev.outputame);
+                        m_lib->m_Log->writeLog(3,QString("SoundDeviceInspector: offline sound device: ") + audiodev.inputname + " is now avaliable ");
+                        addAudioDevice(recDevId,pbDevId,audiodev.uid);
+                        const QMap<int, QString> srcAudioSlotMap = getSrcAudioSlotMap();
+                        const QMap<int, QString> destAudioSlotMap = getDestAudioSlotMap();
+                        QMutableListIterator<s_audioRoutes> i(m_offlineRoutes);
+                        while(i.hasNext()){
+                            s_audioRoutes& route = i.next();
+                            route.srcSlot = srcAudioSlotMap.key(route.srcDevName, -1);
+                            route.destSlot = destAudioSlotMap.key(route.destDevName, -1);
+                            int check = m_lib->m_AudioRouter->connectConfPort(route.srcSlot, route.destSlot, route.level, route.persistant);
+                            if(check == PJ_SUCCESS){
+                                m_lib->m_Log->writeLog(3,QString("SoundDeviceInspector: added AudioRoute from: ") + route.srcDevName + " to " + route.destDevName);
+                                i.remove();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if(count < m_sounddevCount){                                        // if the number of audio devices changed: check also if existing devices are still online
+        for (auto &audiodev : m_AudioDevices){
+            if(audiodev.devicetype == SoundDevice ){
+                bool devicefound = false;
+                for (i=0; i<count; ++i)
+                {
+                    const pjmedia_snd_dev_info *info;
+                    info = pjmedia_snd_get_dev_info(i);
+                    if(info->name == audiodev.inputname){
+                        devicefound = true;
+                        break;
+                    }
+                }
+                if(devicefound == false){
+                    m_lib->m_Log->writeLog(3,QString("SoundDeviceInspector: existing sound device: ") + audiodev.inputname + " lost!");
+                    setAudioDeviceToOffline(audiodev.inputname,audiodev.outputame, audiodev.uid);
+                }
+            }
+        }
+    }
+    m_sounddevCount = count;
 }

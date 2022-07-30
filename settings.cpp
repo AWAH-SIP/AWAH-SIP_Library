@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 - 2021 Andy Weiss, Adi Hilber
+ * Copyright (C) 2016 - 2022 Andy Weiss, Adi Hilber
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,25 +35,24 @@ Settings::Settings(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_
 
 void Settings::loadIODevConfig()
 {
-    //qRegisterMetaTypeStreamOperators <QList<s_IODevices>>("QList<s_IODevices>");
     QList<s_IODevices> loadedDevices;
     int recordDevId, playbackDevId;
     QSettings settings("awah", "AWAHsipConfig");
 
     loadedDevices = settings.value("IODevConfig").value<QList<s_IODevices>>();
 
-    for( int i=0; i<loadedDevices.count(); ++i )                                                     // todo send an error message if sound defice is not found!!
+    for( int i=0; i<loadedDevices.count(); ++i )                                                     // todo send an error message if sound device is not found!!
     {
         if(loadedDevices.at(i).devicetype == SoundDevice){
             recordDevId = m_lib->m_AudioRouter->getSoundDevID(loadedDevices.at(i).inputname);
             playbackDevId = m_lib->m_AudioRouter->getSoundDevID(loadedDevices.at(i).outputame);
             if (recordDevId != -1 && playbackDevId !=-1){
                 m_lib->m_AudioRouter->addAudioDevice(recordDevId,playbackDevId, loadedDevices.at(i).uid);
-                m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added sound device from config file: ") + loadedDevices.at(i).inputname + loadedDevices.at(i).outputame);
+                m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added sound device from config file: ") + loadedDevices.at(i).inputname + " " + loadedDevices.at(i).outputame);
             }
             else{
-                m_lib->m_AudioRouter->addOfflineAudioDevice(loadedDevices.at(i).inputname,loadedDevices.at(i).outputame, loadedDevices.at(i).uid);
-                m_lib->m_Log->writeLog(1,QString("loadIODevConfig: Error loading sound Device: device not found"));
+                m_lib->m_AudioRouter->setAudioDeviceToOffline(loadedDevices.at(i).inputname,loadedDevices.at(i).outputame, loadedDevices.at(i).uid);
+                m_lib->m_Log->writeLog(1,QString("loadIODevConfig: Error loading sound Device: ") + loadedDevices.at(i).inputname + loadedDevices.at(i).outputame + " device not found");
             }
         }
         if(loadedDevices.at(i).devicetype == TestToneGenerator){
@@ -112,8 +111,6 @@ void Settings::saveGpioDevConfig()
 void Settings::loadGpioRoutes()
 {
     QList<s_gpioRoute>  loadedRoutes;
-    const QMap<int, QString> srcGpioSlotMap;
-    const QMap<int, QString> destAudioSlotMap = m_lib->m_AudioRouter->getDestAudioSlotMap();
     QSettings settings("awah", "AWAHsipConfig");
 
     loadedRoutes = settings.value("GpioRoutes").value<QList<s_gpioRoute>>();
@@ -171,7 +168,7 @@ void Settings::loadAccConfig()
     QSettings settings("awah", "AWAHsipConfig");
     loadedAccounts = settings.value("AccountConfig").value<QList<s_account>>();
 
-    for( int i=0; i<loadedAccounts.count(); ++i ){
+    for(int i=0; i<loadedAccounts.count(); ++i ){
         m_lib->m_Accounts->createAccount(loadedAccounts.at(i).name,loadedAccounts.at(i).serverURI,loadedAccounts.at(i).user,loadedAccounts.at(i).password, loadedAccounts.at(i).FilePlayPath, loadedAccounts.at(i).FileRecordPath,loadedAccounts.at(i).fixedJitterBuffer,loadedAccounts.at(i).fixedJitterBufferValue,loadedAccounts.at(i).autoconnectToBuddyUID,loadedAccounts.at(i).CallHistory, loadedAccounts.at(i).uid);
         m_lib->m_Log->writeLog(3,QString("loadAccConfig: added Account from config file: ") + loadedAccounts.at(i).name);
     }
@@ -194,11 +191,9 @@ int Settings::loadAudioRoutes()
     const QMap<int, QString> srcAudioSlotMap = m_lib->m_AudioRouter->getSrcAudioSlotMap();
     const QMap<int, QString> destAudioSlotMap = m_lib->m_AudioRouter->getDestAudioSlotMap();
     QSettings settings("awah", "AWAHsipConfig");
-
+    m_lib->m_AudioRouter->clearAllOfflineAudioRoutes();
     loadedRoutes = settings.value("AudioRoutes").value<QList<s_audioRoutes>>();
     m_lib->m_Log->writeLog(3,QString("loadAudioRoutes: loaded routes: ") + QString::number(loadedRoutes.count()));
-
-
     for(auto& route : loadedRoutes ){
         route.srcSlot = srcAudioSlotMap.key(route.srcDevName, -1);
         route.destSlot = destAudioSlotMap.key(route.destDevName, -1);
@@ -215,7 +210,7 @@ int Settings::loadAudioRoutes()
             else
                 m_lib->m_Log->writeLog(3,QString("loadAudioRoutes: added AudioRoute from: ") + route.srcDevName + " to " + route.destDevName);
         } else {
-            offlineRoutes.append(route);
+            m_lib->m_AudioRouter->addOfflineAudioRoute(route);
             status = -1;
         }
     }
@@ -230,10 +225,31 @@ int Settings::saveAudioRoutes()
         return PJ_SUCCESS;
     QList<s_audioRoutes> routesToSave, audioRoutes = m_lib->m_AudioRouter->getAudioRoutes();
     for(auto& route : audioRoutes){
-        if(route.persistant)
-            routesToSave.append(route);
+        if(route.persistant){
+            bool routeExists = false;
+            for(auto& savedRoute : routesToSave){                                                               // check if route already exists
+                if(route.destDevName == savedRoute.destDevName && route.srcDevName == savedRoute.srcDevName){
+                    routeExists = true;
+                    break;
+                }
+            }
+            if(!routeExists){
+                routesToSave.append(route);
+            }
+        }
     }
-    routesToSave.append(offlineRoutes);
+    for(auto& offlineroute : m_lib->m_AudioRouter->getOfflineAudioRoutes()){
+        if(offlineroute.persistant){
+            for(auto& route : audioRoutes){
+                if(route.srcDevName == offlineroute.srcDevName && route.destDevName == offlineroute.destDevName){  // check if the offline route is alredy stored as online route
+                    break;
+                }
+                else{
+                    routesToSave.append(offlineroute);
+                }
+            }
+        }
+    }
     QSettings settings("awah", "AWAHsipConfig");
     settings.setValue("AudioRoutes", QVariant::fromValue(routesToSave));
     settings.sync();

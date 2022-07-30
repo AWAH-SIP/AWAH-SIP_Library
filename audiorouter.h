@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 - 2021 Andy Weiss, Adi Hilber
+ * Copyright (C) 2016 - 2022 Andy Weiss, Adi Hilber
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QMap>
 #include "types.h"
+#include <QTimer>
 
 class AWAHSipLib;
 
@@ -37,6 +38,23 @@ public:
     * @return the audioRoutes struct
     */
     QList <s_audioRoutes> getAudioRoutes() { return m_audioRoutes; };
+
+    /**
+    * @brief get the offline audio routes
+    * @return the audioRoutes struct
+    */
+    QList <s_audioRoutes> getOfflineAudioRoutes() { return m_offlineRoutes; };
+
+    /**
+    * @brief If a route referes to a device that is offline add it here to restore it if the device is online again
+    * @param route the offline route
+    */
+    void addOfflineAudioRoute(s_audioRoutes route){m_offlineRoutes.append(route);};
+
+    /**
+    * @brief clear all offline routes
+    */
+    void clearAllOfflineAudioRoutes(){m_offlineRoutes.clear();};
 
     /**
     * @brief List all input sound devicees available in the system
@@ -75,8 +93,7 @@ public:
     * @param outputName the name of the output devie
     * @param uid the uid of the device
     */
-    void addOfflineAudioDevice(QString inputName, QString outputName, QString uid);
-
+    void setAudioDeviceToOffline(QString inputName, QString outputName, QString uid);
 
     /**
     * @brief remove a an audio device from the conference bridge.
@@ -101,7 +118,7 @@ public:
 
     /**
     * @brief add a file recorder to the conference bridge
-    * @param File the path                                              // todo richtig beschreiben wenn das
+    * @param File the path                                              // todo explain in more detail
     * @param uid  the unique identifyer
     */
     void addFileRecorder(QString File, QString uid = "");
@@ -218,6 +235,8 @@ private:
     QMap<int, QString> m_srcAudioSlotMap;
     QMap<int, QString> m_destAudioSlotMap;
     s_audioPortList m_confPortList;
+    QTimer *m_SoundDeviceInspectorTimer;
+    uint8_t m_sounddevCount = 0;
 
     /**
     * @brief All AudioDevices (soundcards, generators, fileplayer and recoder) are added to this list
@@ -226,9 +245,16 @@ private:
     QList<s_IODevices> m_AudioDevices;
 
     /**
-    * @brief All routes from the Conference Bridge are added to this list
+    * @brief All routes from the conference bridge are added to this list
     */
     QList<s_audioRoutes> m_audioRoutes;
+
+    /**
+    * @brief offline routes are stored here
+    * @details we have to keep track of offline routes, oterwise they get lost on restart
+    * this list is then added to te settingsfile with the online routes
+    */
+    QList<s_audioRoutes>  m_offlineRoutes;
 
     void removeAllRoutesFromSlot(int slot);
 
@@ -245,6 +271,14 @@ private:
     */
     QMap<QString,QString> m_customSourceLabels;
     QMap<QString,QString> m_customDestLabels;
+
+private slots:
+    /**
+    * @brief SoundDeviceInspector checks the avaliable sound devices, if there is a change in the system
+    * @brief the devices in use ar checked if they are still availabe and the offline devices a checked if they are online now
+    * @brief with this sound devices are hot pluggable
+    */
+    void SoundDeviceInspector();
 };
 
 #endif // AUDIOROUTER_H

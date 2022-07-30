@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 - 2021 Andy Weiss, Adi Hilber
+ * Copyright (C) 2016 - 2022 Andy Weiss, Adi Hilber
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -316,7 +316,7 @@ struct s_account{
     int AccID = PJSUA_INVALID_ID;;
     int splitterSlot = PJSUA_INVALID_ID;
     pjmedia_port *splitComb = nullptr;
-    QList <s_Call> CallList = QList <s_Call> ();
+    QList <s_Call> CallList = QList <s_Call>();
     QList <s_callHistory> CallHistory = QList <s_callHistory>();
     QString callStatusLastReason = "";
     bool fixedJitterBuffer = true;
