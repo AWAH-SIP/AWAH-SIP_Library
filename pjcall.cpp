@@ -34,6 +34,8 @@ void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
     Q_UNUSED(media_port);
     s_Call *call = static_cast<s_Call*>(user_data);
     Call *ownObj = lookup(call->callId);
+    CallInfo ci = ownObj->getInfo();
+    s_account* callAcc = AWAHSipLib::instance()->m_Accounts->getAccountByID(ci.accId);
 
     if(ownObj == nullptr) {
         AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): Got Invalid CallID: %1 PJ::Call Object lookup not succesfull!").arg(call->callId)));
@@ -53,7 +55,9 @@ void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
 
     if(call->rec_id != INVALID_ID  ){
         PJSUA2_CHECK_EXPR (pjsua_conf_connect(pjsua_call_get_conf_port(call->callId), pjsua_recorder_get_conf_port(call->rec_id)) );
-        PJSUA2_CHECK_EXPR (pjsua_conf_connect(call->splitterSlot, pjsua_recorder_get_conf_port(call->rec_id)) );
+        if(!callAcc->FileRecordRXonly){
+            PJSUA2_CHECK_EXPR (pjsua_conf_connect(call->splitterSlot, pjsua_recorder_get_conf_port(call->rec_id)) );
+        }
     }
 }
 
@@ -257,7 +261,9 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
                 // connect active call to call recorder immediatley if there is no fileplayer configured
                 else if(Callopts->player_id == PJSUA_INVALID_ID){
                     PJSUA2_CHECK_EXPR( pjsua_conf_connect(callId, pjsua_recorder_get_conf_port(Callopts->rec_id)) );
-                    PJSUA2_CHECK_EXPR( pjsua_conf_connect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(Callopts->rec_id)) );
+                    if(!callAcc->FileRecordRXonly){
+                        PJSUA2_CHECK_EXPR( pjsua_conf_connect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(Callopts->rec_id)) );          // record audio from the far end and also the local audio (usually questions from the host)
+                    }
                 }
             } else {
                 m_lib->m_Log->writeLog(2,QString("onCallMediaState: call recorder for callId %1 already exists").arg(Callopts->callId));

@@ -38,7 +38,8 @@ void Settings::loadIODevConfig()
     QList<s_IODevices> loadedDevices;
     int recordDevId, playbackDevId;
     QSettings settings("awah", "AWAHsipConfig");
-
+    qDebug() << "Settings filepath: " <<
+                settings.fileName();
     loadedDevices = settings.value("IODevConfig").value<QList<s_IODevices>>();
 
     for( int i=0; i<loadedDevices.count(); ++i )                                                     // todo send an error message if sound device is not found!!
@@ -169,7 +170,7 @@ void Settings::loadAccConfig()
     loadedAccounts = settings.value("AccountConfig").value<QList<s_account>>();
 
     for(int i=0; i<loadedAccounts.count(); ++i ){
-        m_lib->m_Accounts->createAccount(loadedAccounts.at(i).name,loadedAccounts.at(i).serverURI,loadedAccounts.at(i).user,loadedAccounts.at(i).password, loadedAccounts.at(i).FilePlayPath, loadedAccounts.at(i).FileRecordPath,loadedAccounts.at(i).fixedJitterBuffer,loadedAccounts.at(i).fixedJitterBufferValue,loadedAccounts.at(i).autoconnectToBuddyUID,loadedAccounts.at(i).CallHistory, loadedAccounts.at(i).uid);
+        m_lib->m_Accounts->createAccount(loadedAccounts.at(i).name,loadedAccounts.at(i).serverURI,loadedAccounts.at(i).user,loadedAccounts.at(i).password, loadedAccounts.at(i).FilePlayPath, loadedAccounts.at(i).FileRecordPath, loadedAccounts.at(i).FileRecordRXonly ,loadedAccounts.at(i).fixedJitterBuffer,loadedAccounts.at(i).fixedJitterBufferValue,loadedAccounts.at(i).autoconnectToBuddyUID, loadedAccounts.at(i).autoconnectEnable ,loadedAccounts.at(i).CallHistory, loadedAccounts.at(i).uid);
         m_lib->m_Log->writeLog(3,QString("loadAccConfig: added Account from config file: ") + loadedAccounts.at(i).name);
     }
     m_AccountsLoaded = true;

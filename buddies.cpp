@@ -160,7 +160,7 @@ void Buddies::changeBuddyState(QString buddyUrl, int state){
                 QList<s_account>* accounts = m_lib->m_Accounts->getAccounts();
                 for(auto& account : *accounts){                                 // if buddy changed to online search accounts if it is marked as autoconnect
                     if (buddy.uid == account.autoconnectToBuddyUID){
-                        if(account.SIPStatusCode == 200 && account.CallList.length() == 0 && buddy.autoconnectInProgress == false){                     // only connect if account is registered, no call is active and no autoconnect is aready in progress
+                        if(account.SIPStatusCode == 200 && account.CallList.length() == 0 && buddy.autoconnectInProgress == false && account.autoconnectEnable){                     // only connect if account is registered, no call is active and no autoconnect is aready in progress
                             m_lib->m_Log->writeLog(3,"Autoconnect to buddy: connecting from account: " + account.name + " to: " + buddy.Name+ " " + buddy.buddyUrl);
                             buddy.autoconnectInProgress = true;
                             m_lib->m_Accounts->makeCall(buddy.buddyUrl,account.AccID,buddy.codec);

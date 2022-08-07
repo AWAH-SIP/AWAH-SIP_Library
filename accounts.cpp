@@ -31,13 +31,13 @@ Accounts::Accounts(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_
     connect(this, &Accounts::signalSipStatus, this, &Accounts::OnsignalSipStatus);
 }
 
-void Accounts::createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID, QList<s_callHistory> history , QString uid)
+void Accounts::createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID, bool autoconnectEnable ,QList<s_callHistory> history , QString uid)
 {
     QString idUri = "\""+ accountName +"\" <sip:"+ user +"@"+ server +">";
     QString registrarUri = "sip:"+ server;
     s_account newAccount;
     if(m_accounts.count() > 63){
-        m_lib->m_Log->writeLog(1,"CreateAccount: Account creation failed, only 64 accounts alowed!");
+        m_lib->m_Log->writeLog(1,"CreateAccount: Account creation failed, only 64 accounts allowed!");
         return;
     }
     if(uid.isEmpty())
@@ -63,9 +63,11 @@ void Accounts::createAccount(QString accountName, QString server, QString user, 
         newAccount.AccID = account->getId();
         newAccount.FilePlayPath = filePlayPath;
         newAccount.FileRecordPath = fileRecPath;
+        newAccount.FileRecordRXonly = fileRecordRXonly;
         newAccount.fixedJitterBuffer = fixedJitterBuffer;
         newAccount.fixedJitterBufferValue = fixedJitterBufferValue;
         newAccount.autoconnectToBuddyUID = autoconnectToBuddyUID;
+        newAccount.autoconnectEnable = autoconnectEnable;
         newAccount.CallHistory = history;
         PJSUA2_CHECK_EXPR(m_lib->m_AudioRouter->addSplittComb(newAccount));
         newAccount.gpioDev = GpioDeviceManager::instance()->create(newAccount);
@@ -79,7 +81,7 @@ void Accounts::createAccount(QString accountName, QString server, QString user, 
     }
 }
 
-void Accounts::modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath,bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID){
+void Accounts::modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID, bool autoconnectEnable){
     QString idUri = "\""+ accountName +"\" <sip:"+ user +"@"+ server +">";
     QString registrarUri = "sip:"+ server;
     aCfg = defaultACfg;
@@ -96,12 +98,16 @@ void Accounts::modifyAccount(QString uid, QString accountName, QString server, Q
             acc.name = accountName;
             acc.serverURI = server;
             acc.user = user;
-            acc.password = password;
+            if(password != ""){
+                acc.password = password;
+            }
             acc.FilePlayPath = filePlayPath;
             acc.FileRecordPath = fileRecPath;
+            acc.FileRecordRXonly = fileRecordRXonly;
             acc.fixedJitterBuffer = fixedJitterBuffer;
             acc.fixedJitterBufferValue = fixedJitterBufferValue;
             acc.autoconnectToBuddyUID = autoconnectToBuddyUID;
+            acc.autoconnectEnable = autoconnectEnable;
             try{
                 acc.accountPtr->modify(aCfg);
                 m_lib->m_Settings->saveAccConfig();
@@ -203,7 +209,6 @@ void Accounts::acceptCall(int callId, int AccID)
             m_lib->m_Log->writeLog(1,(QString("AcceptCall: Account: ") + account->name + "accepting call failed: " + err.info().c_str()));
         }
     }
-
 }
 
 void Accounts::hangupCall(int callId, int AccID)

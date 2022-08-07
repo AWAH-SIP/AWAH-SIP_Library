@@ -46,13 +46,15 @@ public:
     * @param password the password
     * @param FilePlayPath if a path is specified then this file will be payed on call accepted
     * @param FileRecPath if a record path is specified all calls will be recorded into this directory
+    * @param fileRecordRXonly if true only recieved (far end) audio will be recorded instead of recieved and transmitted signal
     * @param fixedJitterBuffer if true a fixed jitter buffer is set, otherwise an adaptive jitter buffer is active
     * @param fixedJitterBufferValue the time in ms for the fixed jitter buffer
     * @param autoconnectToBuddyUID connect to this buddy automatically as soon the buddy is online
+    * @param autoconnectEnable if true autoconnect is activated (used to terminate autoconnect calls)
     * @param history the call history
     * @param uid the unique idenifyer of the account
     */
-    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID = "", QList<s_callHistory> history = QList<s_callHistory>(), QString uid = "");
+    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID = "", bool autoconnectEnable = true ,QList<s_callHistory> history = QList<s_callHistory>(), QString uid = "");
 
     /**
     * @brief modify a existing SIP account
@@ -60,14 +62,16 @@ public:
     * @param accountName a user definable name to identify the account
     * @param server the uri of the sip server
     * @param user  username of the account
-    * @param password the password
+    * @param password if this field is empty the password stays the same. You only have to provide a password if you like to change it
     * @param FilePlayPath if a path is specified then this file will be payed on call accepted
     * @param FileRecPath if a record path is specified all calls will be recorded into this directory
+    * @param fileRecordRXonly if true only recieved (far end) audio will be recorded instead of recieved and transmitted signal
     * @param fixedJitterBuffer if true a fixed jitter buffer is set, otherwise an adaptive jitter buffer is active
     * @param fixedJitterBufferValue the time in ms for the fixed jitter buffer
     * @param autoconnectToBuddyUID connect to this buddy automatically as soon the buddy is online
+    ** @param autoconnectEnable if true autoconnect is activated (used to terminate autoconnect calls)
     */
-    void modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID = "");
+    void modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID = "", bool autoconnectEnable = true);
 
     /**
     * @brief remove a SIP Account

@@ -309,8 +309,10 @@ struct s_account{
     QString serverURI = "";
     QString uid = "";
     QString FileRecordPath = "";
+    bool FileRecordRXonly = true;
     QString FilePlayPath = "";
     QString autoconnectToBuddyUID = "";
+    bool autoconnectEnable = true;
     PJAccount *accountPtr = nullptr;          // not saved to file, only for runtime handling
     AccountGpioDev *gpioDev = nullptr;        // not saved to file, only for runtime handling
     int AccID = PJSUA_INVALID_ID;;
@@ -338,6 +340,7 @@ struct s_account{
             {"password", password},
             {"serverURI", serverURI},
             {"FileRecordPath", FileRecordPath},
+            {"FileRecordRXonly", FileRecordRXonly},
             {"FilePlayPath", FilePlayPath},
             {"AccID", AccID},
             {"CallList", callListJSON},
@@ -348,6 +351,7 @@ struct s_account{
             {"SIPStatusText", SIPStatusText},
             {"callStatusLastReason", callStatusLastReason},
             {"autoconnectToBuddyUID", autoconnectToBuddyUID},
+            {"autoconnectEnable", autoconnectEnable},
             {"uid", uid}
         };
     }
@@ -357,10 +361,12 @@ struct s_account{
         password = accountJSON["password"].toString();
         serverURI = accountJSON["serverURI"].toString();
         FileRecordPath = accountJSON["FileRecordPath"].toString();
+        FileRecordRXonly = accountJSON["FileRecordRXonly"].toBool();
         FilePlayPath = accountJSON["FilePlayPath"].toString();
         fixedJitterBuffer = accountJSON["fixedJitterBuffer"].toBool();
         fixedJitterBufferValue = accountJSON["fixedJitterBufferValue"].toInt();
         autoconnectToBuddyUID = accountJSON["AutoconnectToBuddyUID"].toString();
+        autoconnectEnable = accountJSON["autoconnectEnable"].toBool();
         return this;
     }
 };

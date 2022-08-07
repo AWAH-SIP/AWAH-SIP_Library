@@ -107,27 +107,22 @@ void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid
     QList<int> connectedSlots;
     s_IODevices Audiodevice;
 
-//    for(auto& device : m_AudioDevices){
-//        if(device.devicetype == SoundDevice){
-//            qDebug() << "Add audio device name: " << device.inputname;
-//            qDebug() << "Add audio device info rec id: " << device.RecDevID;
-//            qDebug() << "Add audio device info pb id: " << device.PBDevID;
-//            qDebug() << "Add audio input rec id: " << recordDevId;
-//            qDebug() << "Add audio input pb id: " << playbackDevId;
-//            if(device.RecDevID >-1 && device.RecDevID >-1 && (device.RecDevID == recordDevId || device.PBDevID == playbackDevId)){
-//                m_lib->m_Log->writeLog(3,"AddAudioDevice: error could not add device. Device already exists!" );
-//                //return;
-//            }
-//        }
-//    }
+    for(auto& device : m_AudioDevices){
+        if(device.devicetype == SoundDevice){
+            if(device.RecDevID >-1 && device.RecDevID >-1 && (device.RecDevID == recordDevId || device.PBDevID == playbackDevId)){
+                m_lib->m_Log->writeLog(3,"AddAudioDevice: error device not added. Device already exists!" );
+                return;
+            }
+        }
+    }
 
     recorddev =  m_lib->m_pjEp->audDevManager().getDevInfo(recordDevId);
     playbackdev = m_lib->m_pjEp->audDevManager().getDevInfo(playbackDevId);
     if(uid.isEmpty())
         uid = createNewUID();
 
-    if(recorddev.inputCount >= playbackdev.outputCount){                            // if rec and playback device have different channelcount
-        channelCnt =recorddev.inputCount;                                         // use the bigger number
+    if(recorddev.inputCount >= playbackdev.outputCount){                              // if rec and playback device have different channelcount
+        channelCnt =recorddev.inputCount;                                             // use the bigger number
     }
     else channelCnt = playbackdev.outputCount;
 
