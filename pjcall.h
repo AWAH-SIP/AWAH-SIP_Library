@@ -67,6 +67,8 @@ public:
 
     virtual void onStreamCreated(OnStreamCreatedParam &prm);
 
+    virtual void onCallSdpCreated(OnCallSdpCreatedParam &prm);
+
     // virtual void onCallRxOffer(OnCallRxOfferParam &prm);
 
     virtual void onInstantMessage(OnInstantMessageParam &prm);

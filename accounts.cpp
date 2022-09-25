@@ -87,9 +87,6 @@ void Accounts::modifyAccount(QString uid, QString accountName, QString server, Q
     aCfg = defaultACfg;
     aCfg.idUri = idUri.toStdString();
     aCfg.regConfig.registrarUri = registrarUri.toStdString();
-    AuthCredInfo cred("digest", "*", user.toStdString(), 0, password.toStdString());
-    aCfg.sipConfig.authCreds.clear();
-    aCfg.sipConfig.authCreds.push_back(cred);
 
     QMutableListIterator<s_account> it(m_accounts);
     while(it.hasNext()){
@@ -98,9 +95,12 @@ void Accounts::modifyAccount(QString uid, QString accountName, QString server, Q
             acc.name = accountName;
             acc.serverURI = server;
             acc.user = user;
-            if(password != ""){
+            if(!password.isEmpty()){
                 acc.password = password;
             }
+            AuthCredInfo cred("digest", "*", user.toStdString(), 0, acc.password.toStdString());
+            aCfg.sipConfig.authCreds.clear();
+            aCfg.sipConfig.authCreds.push_back(cred);
             acc.FilePlayPath = filePlayPath;
             acc.FileRecordPath = fileRecPath;
             acc.FileRecordRXonly = fileRecordRXonly;

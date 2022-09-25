@@ -294,9 +294,10 @@ struct s_Call{
     pjsua_recorder_id rec_id = PJSUA_INVALID_ID;
     PJCall* callptr = nullptr;
     s_codec codec = s_codec();
+    QString SDP = "";
     int splitterSlot;
     QJsonObject toJSON() const {
-        return {{"CallStatusText", CallStatusText}, {"CallStatusCode", CallStatusCode}, {"ConnectedTo", ConnectedTo}, {"callId", callId}};
+        return {{"CallStatusText", CallStatusText}, {"CallStatusCode", CallStatusCode}, {"ConnectedTo", ConnectedTo}, {"callId", callId}, {"SDP", SDP}, {"codec", codec.toJSON()}};
     }
 };
 //Q_DECLARE_METATYPE(s_Call);

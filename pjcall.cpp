@@ -22,6 +22,7 @@
 #include "pjsua-lib/pjsua_internal.h"
 #include "awahsiplib.h"
 #include <QDateTime>
+#include "pjmedia/sdp.h"
 
 #include "types.h"
 
@@ -122,6 +123,7 @@ void PJCall::onCallState(OnCallStateParam &prm)
         }
 
         m_lib->m_Accounts->addCallToHistory(callAcc->AccID,QString::fromStdString(ci.remoteUri),ci.connectDuration.sec,Callopts->codec,!ci.remOfferer);
+        qDebug() << "history callacount list has: " << callAcc->CallList.first().callId << " call codec " << callAcc->CallList.first().codec.encodingName  << callAcc->CallList.first().toJSON();
         QMutableListIterator<s_Call> i(callAcc->CallList);
         while(i.hasNext()){
             s_Call &callentry = i.next();                    //check if its a valid callid and remove it from the list
@@ -166,21 +168,6 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
         // Get the first audio media and connect it to its Splitter
         audioMedia = getAudioMedia(-1);
         int callId = audioMedia.getPortId();
-        StreamInfo streaminfo;
-
-        // get the codec parameters, to have it ready for the callhistory
-        streaminfo = getStreamInfo(0);
-        s_codec callCodec;                                                                     // todo parse all parameters like bitrate etc;
-        //callCodec.channelCount = streaminfo.audCodecParam.info.channelCnt;                   // pares the SDP !!!!!!!!
-        //callCodec.clockRate = streaminfo.codecClockRate;
-        callCodec.encodingName = QString::fromStdString(streaminfo.codecName);
-        for(auto& codec : m_lib->m_Codecs->listCodecs()){                                   // search the codeclist got get displaynames and parameters
-            if(codec.encodingName == QString::fromStdString(streaminfo.codecName)){         // this is wrong it gets the parameters of the local codec settings!
-                callCodec.displayName = codec.displayName;
-                callCodec.codecParameters = codec.codecParameters;
-            }
-        }
-        Callopts->codec = callCodec;
 
         if(!callAcc->FilePlayPath.isEmpty() && ci.remOfferer){          // if a announcement is configured and call is incoming create a player
             if(Callopts->player_id == PJSUA_INVALID_ID) {
@@ -320,6 +307,135 @@ void PJCall::onCallRxOffer(OnCallRxOfferParam &prm)
     qDebug() << "onCallRxOffer statusCode" << prm.statusCode;
 }
 */
+
+void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
+{
+    CallInfo ci = getInfo();
+    s_account* callAcc = nullptr;
+    pjmedia_sdp_session *sdp = nullptr;
+    callAcc = parent->getAccountByID(ci.accId);
+    if(callAcc == nullptr){
+        m_lib->m_Log->writeLog(2,QString("onSdpCreated: Error account not found!"));
+        return;
+    }
+    s_Call*  call = nullptr;
+    for(auto& thecall : callAcc->CallList){
+        if(thecall.callId == getId()){
+            call = &thecall;
+            break;
+        }
+    }
+
+    if(ci.remOfferer){
+        sdp =  static_cast<pjmedia_sdp_session*>(prm.remSdp.pjSdpSession);
+        s_codec remoteCodec;
+        for (unsigned i = 0; i < sdp->media_count; i++)                                                                     // todo parse and config the L16 family
+            if (pj_stricmp2(&sdp->media[i]->desc.media, "audio") == 0) {
+                pjmedia_sdp_media *r_media = sdp->media[i];
+                pjmedia_sdp_attr *codec = pjmedia_sdp_attr_find2(r_media->attr_count, r_media->attr, "rtpmap", NULL);        // find codec type
+                if (codec != NULL) {
+                    QString tmp = pj2Str(codec->value);
+                    QStringList codectype = tmp.split(" ");
+                    codectype = codectype.at(1).split(";");
+                    remoteCodec.encodingName = codectype.first();
+                    if(remoteCodec.encodingName.startsWith("opus",Qt::CaseInsensitive)){          // convert the encoding name to a nice userfriendly name
+                        remoteCodec.encodingName = "opus/48000/2";
+                        remoteCodec.displayName = "Opus";
+                    }
+                    else if(remoteCodec.encodingName.startsWith("PCMU",Qt::CaseInsensitive)){
+                        remoteCodec.encodingName = "PCMU/8000/1";
+                        remoteCodec.displayName = "G711 u-Law";
+                    }
+                    else if(remoteCodec.encodingName.startsWith("PCMA",Qt::CaseInsensitive)){
+                        remoteCodec.encodingName = "PCMA/8000/1";
+                        remoteCodec.displayName = "G711 A-Law";
+                    }
+                    else if(remoteCodec.encodingName.startsWith("L16",Qt::CaseInsensitive)){
+                        remoteCodec.displayName = "Linear";
+                        QStringList tmp = remoteCodec.encodingName.split("/");
+                        QJsonObject jsob = remoteCodec.codecParameters["Clockrate"].toObject();
+                        jsob["value"] = tmp.at(1).toInt();
+                        remoteCodec.codecParameters["Clockrate"] = jsob;
+                        if(tmp.size() > 2){
+                            QJsonObject jsob = remoteCodec.codecParameters["Channelcount"].toObject();
+                            jsob["value"] = tmp.at(2).toInt();
+                            remoteCodec.codecParameters["Channelcount"] = jsob;
+                        }
+                        qDebug() << "L16 !!!!!!!!!!! clockrate " << tmp;
+
+                    }
+                    else if(remoteCodec.encodingName.startsWith("G722",Qt::CaseInsensitive)){
+                        remoteCodec.displayName = "G722";
+                    }
+                    else if(remoteCodec.encodingName.startsWith("speex",Qt::CaseInsensitive)){
+                        remoteCodec.displayName = "Speex";
+                    }
+                    else if(remoteCodec.encodingName.startsWith("AMR",Qt::CaseInsensitive)){
+                        remoteCodec.displayName = "AMR";
+                    }
+                    else if(remoteCodec.encodingName.startsWith("iLBC",Qt::CaseInsensitive)){
+                        remoteCodec.displayName = "iLBC";
+                    }
+                    else if(remoteCodec.encodingName.startsWith("GSM",Qt::CaseInsensitive)){
+                        remoteCodec.displayName = "GSM";
+                    }
+                    else
+                    remoteCodec.displayName = remoteCodec.encodingName;
+                    remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(codectype.first());
+                }
+
+                pjmedia_sdp_attr *attribute = pjmedia_sdp_attr_find2(r_media->attr_count, r_media->attr, "fmtp", NULL);       // find and parse fmtp attributes
+                if (attribute != NULL) {
+                    QString tmp = pj2Str(attribute->value);
+                    QStringList attributes = tmp.split(" ");
+                    attributes = attributes.at(1).split(";");
+                    for( int i = 0; i  < attributes.size() ; i++){
+                        if(attributes.at(i).contains("maxaveragebitrate")){
+                            QStringList value = attributes.at(i).split("=");
+                            QJsonObject jsob = remoteCodec.codecParameters["Bit rate"].toObject();
+                            jsob["value"] = value.at(1).toDouble();
+                            remoteCodec.codecParameters["Bit rate"] = jsob;
+                        }
+                        else if(attributes.at(i).contains("stereo")){
+                            QStringList value = attributes.at(i).split("=");
+                            QJsonObject jsob = remoteCodec.codecParameters["Channelcount"].toObject();
+                            jsob["value"] = 2;
+                            remoteCodec.codecParameters["Channel count"] = jsob;
+                        }
+                        else if(attributes.at(i).contains("cbr")){
+                            QStringList value = attributes.at(i).split("=");
+                            QJsonObject jsob = remoteCodec.codecParameters["Bit rate mode"].toObject();
+                            jsob["value"] = value.at(1).toInt();
+                            remoteCodec.codecParameters["Bit rate mode"] = jsob;
+                        }
+                        else if(attributes.at(i).contains("useinbandfec")){
+                            QStringList value = attributes.at(i).split("=");
+                            QJsonObject jsob = remoteCodec.codecParameters["Inband FEC"].toObject();
+                            jsob["value"] = value.at(1).toInt();
+                            remoteCodec.codecParameters["Inband FEC"] = jsob;
+                        }
+                    }
+                    m_lib->m_Codecs->setCodecParam(remoteCodec);
+
+                    if(call == nullptr) {
+                        m_lib->m_Log->writeLog(1, QString("onSDPcreated: Call %1 not found in CallList of Account %2:%3: Creating a new entry")
+                                               .arg(QString::fromStdString(ci.remoteUri), QString::number(callAcc->AccID), callAcc->name));
+                        s_Call newCall(callAcc->splitterSlot);                              // callist entry is created here
+                        newCall.callptr = this;
+                        newCall.callId = getId();
+                        newCall.CallStatusCode =  getInfo().state;
+                        newCall.CallStatusText = QString::fromStdString(getInfo().stateText);
+                        newCall.codec = remoteCodec;
+                        newCall.SDP = QString::fromStdString(prm.remSdp.wholeSdp);
+                        qDebug() << "SDP " << prm.remSdp.wholeSdp.c_str();
+                        callAcc->CallList.append(newCall);
+                        call = &newCall;
+                        emit m_lib->AccountsChanged(m_lib->m_Accounts->getAccounts());
+                    }
+                }
+            }
+    }
+}
 
 void PJCall::onInstantMessage(OnInstantMessageParam &prm)
 {

@@ -68,10 +68,10 @@ QList<s_codec> Codecs::listCodecs(){
         }
         else if(CodecInfo.at(0) == "opus"){
             newCodec.displayName = "Opus";
+            newCodec.encodingName = "opus/48000/2";
 
         }
         else if(CodecInfo.at(0) == "speex"){
-            newCodec.displayName = "Speex";
             item = QJsonObject();
             item["type"] = ENUM_INT;
             item["value"] = CodecInfo.at(1).toInt();
@@ -92,14 +92,29 @@ QList<s_codec> Codecs::listCodecs(){
             item["enumlist"] = enumitems;
             newCodec.codecParameters["Channelcount"] = item;
         }
-        else if(CodecInfo.at(0) == "mpeg4-generic"){
-            newCodec.displayName = "AAC";
-        }
         else if(CodecInfo.at(0) == "PCMU"){
             newCodec.displayName = "G711 u-Law";
+            newCodec.encodingName = "PCMU/8000/1";
         }
         else if(CodecInfo.at(0) == "PCMA"){
             newCodec.displayName = "G711 A-Law";
+            newCodec.encodingName = "PCMA/8000/1";
+        }
+        else if(CodecInfo.at(0) == "G722"){
+            newCodec.displayName = "G722";
+            newCodec.encodingName = "G722/16000/1";
+        }
+        else if(CodecInfo.at(0) == "iLBC"){
+            newCodec.displayName = "iLBC";
+            newCodec.encodingName = "iLBC/8000/1";
+        }
+        else if(CodecInfo.at(0) == "AMR"){
+            newCodec.displayName = "AMR";
+            newCodec.encodingName = "AMR/8000/1";
+        }
+        else if(CodecInfo.at(0) == "GSM"){
+            newCodec.displayName = "GSM";
+            newCodec.encodingName = "GSM/8000/1";
         }
         else{
             newCodec.displayName = CodecInfo.at(0);
@@ -134,60 +149,39 @@ QList<s_codec> Codecs::getActiveCodecs()
     return codecList;
 }
 
-void Codecs::selectCodec(s_codec codec){
+void Codecs::selectCodec(s_codec &codec){
     QString codecId;
-    bool fixedEncName = false;
-    if(codec.encodingName == "opus"){
-        codecId = "opus/48000/2";
-        fixedEncName = true;
-    }
-    if(codec.encodingName == "PCMU"){
-        codecId = "PCMU/8000/1";
-        fixedEncName = true;
-    }
-    if(codec.encodingName == "PCMA"){
-        codecId = "PCMA/8000/1";
-        fixedEncName = true;
-    }
-    if(codec.encodingName == "G722"){
-        codecId = "G722/16000/1";
-        fixedEncName = true;
-    }
-    if(codec.encodingName == "mpeg4-generic"){
-        codecId = "mpeg4-generic/48000/2";
-        fixedEncName = true;
-    }
-    if(codec.encodingName == "GSM"){
-        codecId = "GSM/8000/1";
-        fixedEncName = true;
-    }
-    if(codec.encodingName == "iLBC"){
-        codecId = "iLBC/8000/1";
-        fixedEncName = true;
-    }
-    if(!fixedEncName){
-        codecId = codec.encodingName + "/" + QString::number(codec.codecParameters["Clockrate"].toObject()["value"].toInt()) + "/" + QString::number(codec.codecParameters["Channelcount"].toObject()["value"].toInt());
+
+    qDebug() << "codec encodingname: " << codec.displayName << " existing encodig name ";
+    if(!codec.encodingName.contains("/")){
+        qDebug() << "Generate codec encodingname: " << codec.displayName << " existing encodig name " << codec.encodingName;
+        codec.encodingName = codec.encodingName + "/" + QString::number(codec.codecParameters["Clockrate"].toObject()["value"].toInt()) + "/" + QString::number(codec.codecParameters["Channelcount"].toObject()["value"].toInt());
+        qDebug() << "new encodingname: "  << codec.encodingName;
     }
     bool codecFound = false;
-    foreach(const CodecInfo codec, m_lib->m_pjEp->codecEnum2())
+    foreach(const CodecInfo codecinfo, m_lib->m_pjEp->codecEnum2())
     {
-        if(QString::fromStdString(codec.codecId) == codecId){
-            m_lib->m_pjEp->codecSetPriority(codec.codecId, 255);
+        if(QString::fromStdString(codecinfo.codecId) == codec.encodingName){
+            m_lib->m_pjEp->codecSetPriority(codecinfo.codecId, 255);
             codecFound = true;
             }
         else{
-            m_lib->m_pjEp->codecSetPriority(codec.codecId, 0);
+            m_lib->m_pjEp->codecSetPriority(codecinfo.codecId, 0);
             }
     }
     if(!codecFound){
-        m_lib->m_Log->writeLog(3,(QString("select Codec: could not select codec: codec ") + codecId + " not found"));
+        m_lib->m_Log->writeLog(3,(QString("select Codec: could not select codec: codec ") + codecId + ": codec not found"));
     }
 }
 
 const QJsonObject Codecs::getCodecParam(QString codecId)
 {
     CodecParam param;
+    try{
     param = m_lib->m_pjEp->codecGetParam(codecId.toStdString());
+    }  catch (Error &err) {
+        AWAHSipLib::instance()->m_Log->writeLog(1, (QString("getCodecParam: failed: ") + err.info().c_str()));
+    }
     return getCodecParam(param, codecId);
 }
 
@@ -217,18 +211,62 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
 
     foreach(const pj::CodecFmtp fmtp, PJcodecParam.setting.decFmtp){
         item = QJsonObject();
+        bool paramParsed = false;
         if(strcmp(fmtp.name.c_str(),"useinbandfec")==0){            // show only known parameters
             item["type"] = INTEGER;
             item["value"] = atoi(fmtp.val.c_str());                    // opus fec
             item["min"] = 0;
             item["max"] = 100;                                        // to test!
             codecparam["Inband FEC"]= item;
+            paramParsed = true;
         }
-        else if(strcmp(fmtp.name.c_str(),"mode")==0 && codecId.startsWith("mpeg4")){               //AAC Mode
-                item["type"] = STRING;
-                item["value"] = fmtp.val.c_str();             // todo check values here!!!!!!!!!!!!!!¨
-                codecparam["Mode"]= item;
+        else if(strcmp(fmtp.name.c_str(),"maxaveragebitrate")==0){
+//            item["type"] = ENUM_INT;
+//            item["value"] = atoi(fmtp.val.c_str());
+//            item["min"] = 6000;
+//            item["max"] = 510000;
+//            enumitems = QJsonObject();
+//            enumitems[" 16kBit/s"] =16000;
+//            enumitems[" 32kBit/s"] =32000;
+//            enumitems[" 64kBit/s"] =64000;
+//            enumitems[" 96kBit/s"] =96000;
+//            enumitems["128kBit/s"] =128000;
+//            enumitems["192kBit/s"] =192000;
+//            enumitems["256kBit/s"] =256000;
+//            enumitems["320kBit/s"] =320000;
+//            enumitems["448kBit/s"] =448000;
+//            item["enumlist"] = enumitems;
+//            codecparam["Max average bitrate"]= item;
+            paramParsed = true;
         }
+        else if(strcmp(fmtp.name.c_str(),"cbr")==0){
+//            item["type"] = ENUM_INT;
+//            item["value"] = atoi(fmtp.val.c_str());
+//            item["min"] = 0;
+//            item["max"] = 1;
+//            enumitems = QJsonObject();
+//            enumitems["variable bitrate"] = 0;
+//            enumitems["constant bitrate"] = 1;
+//           item["enumlist"] = enumitems;
+//            codecparam["Bitrate mode"]= item;
+            paramParsed = true;
+        }
+        else if(strcmp(fmtp.name.c_str(),"stereo")==0){
+//            item["type"] = ENUM_INT;
+//            item["value"] = atoi(fmtp.val.c_str());
+//            item["min"] = 1;
+//            item["max"] = 2;
+//            enumitems = QJsonObject();
+//            enumitems["mono"] = 1;
+//            enumitems["stereo"] = 2;
+//           item["enumlist"] = enumitems;
+//            codecparam["Channel count"]= item;
+            paramParsed = true;
+        }
+        else if(strcmp(fmtp.name.c_str(),"sprop-stereo")==0){                           // don't populate menu just mark as parsed
+            paramParsed = true;
+        }
+
         else if(strcmp(fmtp.name.c_str(),"mode")==0 && codecId.startsWith("iLBC")){
                 item["type"] = ENUM_INT;                                //iLBC Mode
                 item["value"] = atoi(fmtp.val.c_str());
@@ -239,71 +277,19 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
                 enumitems["30ms"] = 30;
                item["enumlist"] = enumitems;
                 codecparam["Mode"]= item;
+                paramParsed = true;
         }
-        else if(strcmp(fmtp.name.c_str(),"streamtype")==0){               //AAC streamtype
-            item["type"] = INTEGER;
-            item["value"] = atoi(fmtp.val.c_str());
-            item["min"] = 0;                                              // todo check values here!!!!!!!!!!!!!!¨
-            item["max"] = 9000;
-            codecparam["Streamtype"]= item;
-        }
-        else if(strcmp(fmtp.name.c_str(),"profile-level-id")==0){               //AAC profile-level-id
-            item["type"] = INTEGER;
-            item["min"] = 0;                                              // todo check values here!!!!!!!!!!!!!!¨
-            item["max"] = 9000;
-            item["value"] = fmtp.val.c_str();
-            codecparam["Profile level id"]= item;
-        }
-        else if(strcmp(fmtp.name.c_str(),"sizelength")==0){               //AAC sizelenght
-            item["type"] = INTEGER;
-            item["value"] = atoi(fmtp.val.c_str());
-            item["min"] = 0;                                              // todo check values here!!!!!!!!!!!!!!¨
-            item["max"] = 9000;
-            codecparam["Sizelength"]= item;
-        }
-        else if(strcmp(fmtp.name.c_str(),"indexlength")==0){               //AAC indexlenght
-            item["type"] = INTEGER;
-            item["value"] = atoi(fmtp.val.c_str());
-            item["min"] = 0;                                              // todo check values here!!!!!!!!!!!!!!¨
-            item["max"] = 9000;
-            codecparam["Indexlength"]= item;
-        }
-        else if(strcmp(fmtp.name.c_str(),"indexdeltalength")==0){               //AAC indexlenght
-            item["type"] = INTEGER;
-            item["value"] = atoi(fmtp.val.c_str());
-            item["min"] = 0;                                              // todo check values here!!!!!!!!!!!!!!¨
-            item["max"] = 9000;
-            codecparam["Indexdeltalength"]= item;
-        }
-        else if(strcmp(fmtp.name.c_str(),"object")==0){               //AAC indexlenght
-            item["type"] = INTEGER;
-            item["value"] = atoi(fmtp.val.c_str());
-            item["min"] = 0;                                              // todo check values here!!!!!!!!!!!!!!¨
-            item["max"] = 9000;
-            codecparam["Object"]= item;
-        }
-        else if(strcmp(fmtp.name.c_str(),"sbr")==0){               //AAC indexlenght
-            item["type"] = INTEGER;
-            item["value"] = atoi(fmtp.val.c_str());
-            item["min"] = 0;                                              // todo check values here!!!!!!!!!!!!!!¨
-            item["max"] = 9000;
-            codecparam["Sbr"]= item;
-        }
-        else if(strcmp(fmtp.name.c_str(),"bitrate")==0){               //AAC indexlenght
-            item["type"] = INTEGER;
-            item["value"] = atoi(fmtp.val.c_str());
-            item["min"] = 0;                                              // todo check values here!!!!!!!!!!!!!!¨
-            item["max"] = 384000;
-            codecparam["Bitrate"]= item;
-        }
-        else m_lib->m_Log->writeLog(4,QString("getCodecParam: unparsed key/value: ") +fmtp.name.c_str() + "value: " + fmtp.val.c_str());
 
+        if(!paramParsed){
+            m_lib->m_Log->writeLog(4,QString("getCodecParam: dec fmtp unparsed key/value: ") +fmtp.name.c_str() + " value: " + fmtp.val.c_str());
+        }
     }
+
     foreach(const pj::CodecFmtp fmtp, PJcodecParam.setting.encFmtp){
-        m_lib->m_Log->writeLog(4,QString("getCodecParam: unparsed key/value: ") +fmtp.name.c_str());
+        m_lib->m_Log->writeLog(4,QString("getCodecParam: unparsed encoding key/value: ") +fmtp.name.c_str());
     }
 
-    if(codecId.startsWith("opus")){
+    if(codecId.startsWith("opus",Qt::CaseInsensitive)){
 
         pjmedia_codec_opus_config opus_cfg;
         pjmedia_codec_opus_get_config(&opus_cfg);
@@ -341,7 +327,7 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
         item["value"] = (int) opus_cfg.channel_cnt;
         item["min"] = 1;
         item["max"] = (int) m_lib->epCfg.medConfig.channelCount;
-        codecparam["Channel count"] = item;
+        codecparam["Channelcount"] = item;
 
         item = QJsonObject();
         item["type"] = ENUM_INT;
@@ -388,10 +374,8 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
         enumitems ["24kHz (super-wideband)"] = 24000;
         enumitems ["48kHz (fullband)"]= 48000;
         item["enumlist"] = enumitems;
-        codecparam["Sample Rate"] = item;
-
+        codecparam["Clockrate"] = item;
     }
-
     return codecparam;
 }
 
@@ -406,53 +390,20 @@ int Codecs::setCodecParam(s_codec codec)
     pjmedia_codec_info  info[CodecsCount] , * selected;
     pjmedia_codec_param param;
     pjmedia_codec_opus_config opus_cfg;
-    QString codecId;
-    bool fixedEncName = false;
-    if(codec.encodingName == "opus"){
-        codecId = "opus/48000/2";
-        fixedEncName = true;
-    }
-    if(codec.encodingName == "PCMU"){
-        codecId = "PCMU/8000/1";
-        fixedEncName = true;
-    }
-    if(codec.encodingName == "PCMA"){
-        codecId = "PCMA/8000/1";
-        fixedEncName = true;
-    }
-    if(codec.encodingName == "G722"){
-        codecId = "G722/16000/1";
-        fixedEncName = true;
-    }
-    if(codec.encodingName == "mpeg4-generic"){
-        codecId = "mpeg4-generic/48000/2";
-        fixedEncName = true;
-    }
-    if(codec.encodingName == "GSM"){
-        codecId = "GSM/8000/1";
-        fixedEncName = true;
-    }
-    if(codec.encodingName == "iLBC"){
-        codecId = "iLBC/8000/1";
-        fixedEncName = true;
-    }
-    if(!fixedEncName){
-        codecId = codec.encodingName + "/" + QString::number(codec.codecParameters["Clockrate"].toObject()["value"].toInt()) + "/" + QString::number(codec.codecParameters["Channelcount"].toObject()["value"].toInt());
-    }
 
     medep = pjsua_get_pjmedia_endpt();
     mgr= pjmedia_endpt_get_codec_mgr(medep);
     pjmedia_codec_mgr_enum_codecs(mgr,&count,info,nullptr);
     for (unsigned int i = 0; i< count;i++){
         QString pjCodecID = pj2Str(info[i].encoding_name) + "/" + QString::number(info[i].clock_rate) + "/" + QString::number(info[i].channel_cnt);
-        if ( pjCodecID == codecId){
+        if ( pjCodecID == codec.encodingName){
              pjmedia_codec_mgr_get_default_param(mgr,&info[i], &param);          // get the default parameters in case not all available parameters are included in the JSON
              selected = &info[i];
              status = PJ_SUCCESS;
         }
     }
     if (status) {
-        m_lib->m_Log->writeLog(3,QString("setCodecPar: codec with the ID: ") + codecId +  " not found");
+        m_lib->m_Log->writeLog(3,QString("setCodecPar: codec with the ID: ") + codec.encodingName +  " not found");
         return status;
     }
 
@@ -473,74 +424,10 @@ int Codecs::setCodecParam(s_codec codec)
             }
         }
 
-        if (i.key() == "Mode" && codecId.startsWith("iLBC")){
+        if (i.key() == "Mode" && codec.encodingName.startsWith("iLBC")){
             for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
                  if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"mode")==0){               //iLBC Mode
                     param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;                   // todo does not work!!!
-                 }
-            }
-        }
-
-        if (i.key() == "Mode" && codecId.startsWith("mpeg4")){
-            for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
-                 if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"mode")==0){
-                    param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
-                 }
-            }
-        }
-
-        if (i.key() == "Streamtype"){                                                                      // todo test me!
-            for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
-                 if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"streamtype")==0){
-                    param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
-                 }
-            }
-        }
-
-        if (i.key() == "Profile level id"){                                                                      // todo test me!
-            for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
-                 if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"profile-level-id")==0){
-                    param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
-                 }
-            }
-        }
-
-        if (i.key() == "Sizelength"){                                                                      // todo test me!
-            for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
-                 if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"sizelength")==0){
-                    param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
-                 }
-            }
-        }
-
-        if (i.key() == "Indexlength"){                                                                      // todo test me!
-            for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
-                 if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"indexlength")==0){
-                    param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
-                 }
-            }
-        }
-
-        if (i.key() == "Indexdeltalength"){                                                                      // todo test me!
-            for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
-                 if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"indexdeltalength")==0){
-                    param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
-                 }
-            }
-        }
-
-        if (i.key() == "Object"){                                                                      // todo test me!
-            for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
-                 if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"object")==0){
-                    param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
-                 }
-            }
-        }
-
-        if (i.key() == "Sbr"){                                                                      // todo test me!
-            for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
-                 if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"sbr")==0){
-                    param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
                  }
             }
         }
@@ -562,7 +449,7 @@ int Codecs::setCodecParam(s_codec codec)
         return status;
     }
 
-    if(codecId.startsWith("opus")){                                     // do the opus stuff
+    if(codec.encodingName.startsWith("opus",Qt::CaseInsensitive)){                                     // do the opus stuff
          pjmedia_codec_opus_get_config(&opus_cfg);
          QJsonObject::iterator it;
          for (it = codec.codecParameters.begin(); it != codec.codecParameters.end(); ++it) {
@@ -572,7 +459,7 @@ int Codecs::setCodecParam(s_codec codec)
              if (it.key() == "Bit rate mode"){
                  opus_cfg.cbr  = it.value().toObject()["value"].toInt();
              }
-             if (it.key() == "Channel count"){
+             if (it.key() == "Channelcount"){
                 opus_cfg.channel_cnt  = it.value().toObject()["value"].toInt();
              }
              if (it.key() == "Complexity"){
@@ -581,7 +468,7 @@ int Codecs::setCodecParam(s_codec codec)
              if (it.key() == "Frame ptime"){
                opus_cfg.frm_ptime  = it.value().toObject()["value"].toInt();
              }
-             if (it.key() == "Sample Rate"){
+             if (it.key() == "Clockrate"){
                opus_cfg.sample_rate = it.value().toObject()["value"].toInt();
              }
           }

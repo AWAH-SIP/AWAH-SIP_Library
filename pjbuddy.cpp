@@ -59,7 +59,7 @@ void PJBuddy::onBuddyState(){
 }
 
 void PJBuddy::onBuddyEvSubState(OnBuddyEvSubStateParam &prm){
-    QString reason =  QString::fromUtf8(pjsip_event_str(prm.e.type));
+    Q_UNUSED(prm);
     BuddyInfo bi;
     int state = unknown;
     try {
@@ -68,15 +68,19 @@ void PJBuddy::onBuddyEvSubState(OnBuddyEvSubStateParam &prm){
         m_lib->m_Log->writeLog(2, QString("onBuddyEvSubState getInfo failed: ") + err.info().c_str());
         return;
     }
-    m_lib->m_Log->writeLog(4, QString("onBuddyEvSubState Event subscription state of buddy ") + QString::fromStdString(bi.uri) + " is " + reason);
+
     if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE){
         state = online;
+        m_lib->m_Log->writeLog(4, QString("onBuddyEvSubState Event subscription state of buddy ") + QString::fromStdString(bi.uri) + " is online");
     }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE && bi.presStatus.note == "Busy"){
         state = busy;
+        m_lib->m_Log->writeLog(4, QString("onBuddyEvSubState Event subscription state of buddy ") + QString::fromStdString(bi.uri) + " is busy");
     }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_UNKNOWN){
         state = unknown;
+        m_lib->m_Log->writeLog(4, QString("onBuddyEvSubState Event subscription state of buddy ") + QString::fromStdString(bi.uri) + " is unknown");
     }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_OFFLINE){
         state = unknown;
+        m_lib->m_Log->writeLog(4, QString("onBuddyEvSubState Event subscription state of buddy ") + QString::fromStdString(bi.uri) + " is unknown");
     }
     m_lib->m_Buddies->changeBuddyState(QString::fromStdString(bi.uri), state);
 

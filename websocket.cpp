@@ -268,6 +268,7 @@ void Websocket::modifyAccount(QJsonObject &data, QJsonObject &ret) {
             jCheckBool(autoconnectEnable, data["autoconnectEnable"]) ){
         m_lib->modifyAccount(uid, accountName, server, user, password, filePlayPath, fileRecPath, fileRecordRXonly, fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID, autoconnectEnable);
         ret["data"] = retDataObj;
+        ret["error"] = noError();
     } else {
         ret["error"] = hasError("Parameters not accepted");
     }

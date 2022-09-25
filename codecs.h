@@ -49,7 +49,7 @@ public:
     * @brief note that all other codecs will be disabled
     * @param codec the codec you like to select. (only encodingName, channelCount and clockRate are needed)
     */
-    void selectCodec(s_codec codec);
+    void selectCodec(s_codec &codec);
 
     /**
     * @brief get all editable parameters for a codec
