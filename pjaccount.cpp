@@ -56,7 +56,6 @@ void PJAccount::onRegStarted(OnRegStartedParam &prm)
      m_lib->m_Log->writeLog(2, QString("RegisterStateStarted: on Account: ") + QString::fromStdString(ai.uri) + (ai.regIsConfigured? " Starting Registration" : " AccountParam is NOT Set! NOT starting Registration") + " code = " + QString::number(prm.renew));
      emit parent->regStateChanged(ai.id, ai.regIsConfigured);
      //parent->emit signalSipStatus(ai.id, ai.regStatus,QString::fromStdString(ai.regStatusText));
-     parent->sendPresenceStatus(ai.id,online);
 }
 
 void PJAccount::onIncomingCall(OnIncomingCallParam &iprm)
