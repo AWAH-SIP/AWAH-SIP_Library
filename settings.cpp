@@ -691,6 +691,8 @@ void Settings::loadSettings()                                           // todo 
     m_lib->epCfg.medConfig.quality =10;
     m_lib->epCfg.medConfig.noVad = true;
     aCfg.callConfig.timerUse = PJSUA_SIP_TIMER_ALWAYS;
+    aCfg.ipChangeConfig.reinviteFlags = 0;                            // added to prevent request timeouts -> check if it helps!!!!!!!!!
+    aCfg.ipChangeConfig.shutdownTp = 0;                             // added to prevent request timeouts -> check if it helps!!!!!!!!!
     aCfg.callConfig.timerSessExpiresSec = 90;
     aCfg.regConfig.randomRetryIntervalSec = 10;                     // not all account schould reregister on the same time
     m_settings["SIPSettings"] = SIPSettings;
