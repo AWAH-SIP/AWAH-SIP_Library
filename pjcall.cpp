@@ -415,7 +415,7 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
                             remoteCodec.codecParameters["Inband FEC"] = jsob;
                         }
                     }
-                    m_lib->m_Codecs->setCodecParam(remoteCodec);
+                    //m_lib->m_Codecs->setCodecParam(remoteCodec);
 
                     if(call == nullptr) {
                         m_lib->m_Log->writeLog(1, QString("onSDPcreated: Call %1 not found in CallList of Account %2:%3: Creating a new entry")

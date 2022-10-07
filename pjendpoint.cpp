@@ -101,14 +101,14 @@ void PJEndpoint::onSelectAccount(OnSelectAccountParam &prm)
 }
 
 void PJEndpoint::onIpChangeProgress(OnIpChangeProgressParam &prm)
-{    
-    qDebug() << "onIpChangeProgress() IP Adress Change detected !";
-    pjsua_ip_change_param param;
-    pjsua_ip_change_param_default(&param);
-    param.restart_listener = true;
-    param.restart_lis_delay = true;
-    pjsua_acc_set_registration(prm.accId,true);
-    pjsua_handle_ip_change(&param);
+{
+     m_lib->m_Log->writeLog(3, QString("onIpChangeProgress(): IP change detected, but we don't care!"));
+//    pjsua_ip_change_param param;
+//    pjsua_ip_change_param_default(&param);
+//    param.restart_listener = true;
+//    param.restart_lis_delay = true;
+//    pjsua_acc_set_registration(prm.accId,true);
+//    pjsua_handle_ip_change(&param);
 }
 
 void PJEndpoint::setAwahLibrary(AWAHSipLib *lib)
