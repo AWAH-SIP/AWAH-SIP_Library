@@ -527,6 +527,16 @@ void Settings::loadSettings()                                           // todo 
     item["max"] = 3600;
     SIPSettings["Account session timer expiration"] = item;
 
+    // ***** NAT hole pinching keep alive packets *********
+
+    item = QJsonObject();
+    aCfg.natConfig.udpKaIntervalSec = settings.value("settings/NatConfig/KaInterval",0).toInt();
+    item["value"] = settings.value("settings/NatConfig/KaInterval",0).toInt();
+    item["type"] = INTEGER;
+    item["min"] = 0;
+    item["max"] = 60;
+    SIPSettings["NAT hole punching keep alive packet timer (sec)"] = item;
+
     // ***** enable ICE *****
     item = QJsonObject();
     item["value"] = aCfg.natConfig.iceEnabled = settings.value("settings/NatConfig/Ice_Enabled",0).toBool();
@@ -670,6 +680,14 @@ void Settings::loadSettings()                                           // todo 
     // ***** min session timer expiration *****
     aCfg.callConfig.timerMinSESec = settings.value("settings/AcccountConfig/timerMinSESec", 90).toInt();
     settings.setValue("settings/AcccountConfig/timerMinSESec", aCfg.callConfig.timerMinSESec);
+
+    aCfg.natConfig.udpKaIntervalSec = 0;
+    aCfg.callConfig.timerUse = PJSUA_SIP_TIMER_ALWAYS;
+    aCfg.callConfig.timerSessExpiresSec = 90;
+    aCfg.regConfig.randomRetryIntervalSec = 10;
+    m_lib->epCfg.medConfig.quality =10;
+    m_lib->epCfg.medConfig.noVad = true;
+
     m_lib->m_Accounts->setDefaultACfg(aCfg);
 
     // ***** Transport Port Range *****
@@ -687,14 +705,10 @@ void Settings::loadSettings()                                           // todo 
     m_lib->m_websocketPort = settings.value("settings/Websocket/Port", "2924").toUInt();
     settings.setValue("settings/Websocket/Port", m_lib->m_websocketPort);
 
-    // ****************** Hard coded settings ********************
-    m_lib->epCfg.medConfig.quality =10;
-    m_lib->epCfg.medConfig.noVad = true;
-    aCfg.callConfig.timerUse = PJSUA_SIP_TIMER_ALWAYS;
-    aCfg.ipChangeConfig.reinviteFlags = 0;                            // added to prevent request timeouts -> check if it helps!!!!!!!!!
-    aCfg.ipChangeConfig.shutdownTp = 0;                             // added to prevent request timeouts -> check if it helps!!!!!!!!!
-    aCfg.callConfig.timerSessExpiresSec = 90;
-    aCfg.regConfig.randomRetryIntervalSec = 10;                     // not all account schould reregister on the same time
+
+
+
+                    // not all account schould reregister on the same time
     m_settings["SIPSettings"] = SIPSettings;
     m_settings["GlobalSettings"] = GlobalSettings;
     m_settings["AudioSettings"] =  AudioSettings;
