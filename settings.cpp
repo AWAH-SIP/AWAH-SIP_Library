@@ -528,7 +528,6 @@ void Settings::loadSettings()                                           // todo 
     SIPSettings["Account session timer expiration"] = item;
 
     // ***** NAT hole pinching keep alive packets *********
-
     item = QJsonObject();
     aCfg.natConfig.udpKaIntervalSec = settings.value("settings/NatConfig/KaInterval",0).toInt();
     item["value"] = settings.value("settings/NatConfig/KaInterval",0).toInt();
@@ -681,25 +680,24 @@ void Settings::loadSettings()                                           // todo 
     aCfg.callConfig.timerMinSESec = settings.value("settings/AcccountConfig/timerMinSESec", 90).toInt();
     settings.setValue("settings/AcccountConfig/timerMinSESec", aCfg.callConfig.timerMinSESec);
 
-    aCfg.natConfig.udpKaIntervalSec = 0;
-    aCfg.callConfig.timerUse = PJSUA_SIP_TIMER_ALWAYS;
-    aCfg.callConfig.timerSessExpiresSec = 90;
+    // ***** Transport Port Range *****
+//    if(settings.value("settings/NatConfig/Ice_NoRtcp","1").toBool())               // range 0 creates a range of 10 adresses!             // todo test me
+//    {                                                                   // range 1 creates 2 adresses
+//        aCfg.mediaConfig.transportConfig.portRange = 0;
+//    }
+//    else
+//    {
+//    aCfg.mediaConfig.transportConfig.portRange = 2;
+//    // range has to be 2 if RTCP is on (but the audio port toggles between odd and even   NOT EBU Tech 3326 compliant!!!
+//    }
+    //aCfg.callConfig.timerUse = PJSUA_SIP_TIMER_ALWAYS;
+    //aCfg.callConfig.timerSessExpiresSec = 90;
+
     aCfg.regConfig.randomRetryIntervalSec = 10;
     m_lib->epCfg.medConfig.quality =10;
     m_lib->epCfg.medConfig.noVad = true;
 
     m_lib->m_Accounts->setDefaultACfg(aCfg);
-
-    // ***** Transport Port Range *****
-    if(settings.value("settings/NatConfig/Ice_NoRtcp","1").toBool())               // range 0 creates a range of 10 adresses!
-    {                                                                   // range 1 creates 2 adresses
-        aCfg.mediaConfig.transportConfig.portRange = 0;
-    }
-    else
-    {
-    aCfg.mediaConfig.transportConfig.portRange = 2;
-    // range has to be 2 if RTCP is on (but the audio port toggles between odd and even   NOT EBU Tech 3326 compliant!!!
-    }
 
     //Websocket Port
     m_lib->m_websocketPort = settings.value("settings/Websocket/Port", "2924").toUInt();
@@ -818,6 +816,10 @@ void Settings::setSettings(QJsonObject editedSettings)
 
         if (it.key() == "Account session timer expiration"){
             settings.setValue("settings/AcccountConfig/timersSesExpire", it.value().toInt());
+        }
+
+        if (it.key() == "NAT hole punching keep alive packet timer (sec)"){
+            settings.setValue("settings/NatConfig/KaInterval", it.value().toInt());
         }
 
         if (it.key() == "ICE (Interactive Connectivity Establishment)"){
