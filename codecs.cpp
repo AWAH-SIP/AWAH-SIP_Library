@@ -221,46 +221,12 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
             paramParsed = true;
         }
         else if(strcmp(fmtp.name.c_str(),"maxaveragebitrate")==0){
-//            item["type"] = ENUM_INT;
-//            item["value"] = atoi(fmtp.val.c_str());
-//            item["min"] = 6000;
-//            item["max"] = 510000;
-//            enumitems = QJsonObject();
-//            enumitems[" 16kBit/s"] =16000;
-//            enumitems[" 32kBit/s"] =32000;
-//            enumitems[" 64kBit/s"] =64000;
-//            enumitems[" 96kBit/s"] =96000;
-//            enumitems["128kBit/s"] =128000;
-//            enumitems["192kBit/s"] =192000;
-//            enumitems["256kBit/s"] =256000;
-//            enumitems["320kBit/s"] =320000;
-//            enumitems["448kBit/s"] =448000;
-//            item["enumlist"] = enumitems;
-//            codecparam["Max average bitrate"]= item;
             paramParsed = true;
         }
         else if(strcmp(fmtp.name.c_str(),"cbr")==0){
-//            item["type"] = ENUM_INT;
-//            item["value"] = atoi(fmtp.val.c_str());
-//            item["min"] = 0;
-//            item["max"] = 1;
-//            enumitems = QJsonObject();
-//            enumitems["variable bitrate"] = 0;
-//            enumitems["constant bitrate"] = 1;
-//           item["enumlist"] = enumitems;
-//            codecparam["Bitrate mode"]= item;
             paramParsed = true;
         }
         else if(strcmp(fmtp.name.c_str(),"stereo")==0){
-//            item["type"] = ENUM_INT;
-//            item["value"] = atoi(fmtp.val.c_str());
-//            item["min"] = 1;
-//            item["max"] = 2;
-//            enumitems = QJsonObject();
-//            enumitems["mono"] = 1;
-//            enumitems["stereo"] = 2;
-//           item["enumlist"] = enumitems;
-//            codecparam["Channel count"]= item;
             paramParsed = true;
         }
         else if(strcmp(fmtp.name.c_str(),"sprop-stereo")==0){                           // don't populate menu just mark as parsed

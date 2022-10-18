@@ -176,6 +176,8 @@ void Accounts::makeCall(QString number, int AccID, s_codec codec)
     if(account){
         m_lib->m_Codecs->selectCodec(codec);
         m_lib->m_Codecs->setCodecParam(codec);
+        account->SelectedCodec = codec;
+        addCallToHistory(account->AccID,number,0,codec,1);
         newCall = new PJCall(this, m_lib, m_lib->m_MessageManager, *account->accountPtr);
         CallOpParam prm(true);        // Use default call settings
         try{
@@ -228,27 +230,27 @@ void Accounts::hangupCall(int callId, int AccID)
 
     if(account && call != Q_NULLPTR){
         m_lib->m_Log->writeLog(3,(QString("HangupCall: Account: ") + account->name + " hang up call with ID: " + QString::number(callId)));
-        try{
-            CallInfo ci = call->getInfo();
-            CallOpParam prm;
+        if(callId >= 0){
+            try{
+                CallInfo ci = call->getInfo();
+                CallOpParam prm;
+                if(ci.lastStatusCode == PJSIP_SC_RINGING){
+                    prm.statusCode = PJSIP_SC_BUSY_HERE;
+                }
+                else{
+                    prm.statusCode = PJSIP_SC_OK;
+                }
 
-            if(ci.lastStatusCode == PJSIP_SC_RINGING){
-                prm.statusCode = PJSIP_SC_BUSY_HERE;
+                if(callId < (int)m_lib->epCfg.uaConfig.maxCalls){
+                    call->hangup(prm);                                                                // callobject gets deleted in onCallState callback
+                }
+                else{
+                    m_lib->m_Log->writeLog(1, "HangupCall: Hang up call, max. calls bug");                                                   // todo check if this bug exists anymore!
+                }
             }
-            else{
-                prm.statusCode = PJSIP_SC_OK;
+            catch(Error& err){
+                m_lib->m_Log->writeLog(1,(QString("HangupCall: Hang up call failed ") + err.info().c_str()));
             }
-
-            if(callId>= 0 && callId < (int)m_lib->epCfg.uaConfig.maxCalls){
-                call->hangup(prm);                                                                // callobject gets deleted in onCallState callback
-
-            }
-            else{
-                m_lib->m_Log->writeLog(1, "HangupCall: Hang up call, max. calls bug");                                                   // todo check if this bug exists anymore!
-            }
-        }
-        catch(Error& err){
-            m_lib->m_Log->writeLog(1,(QString("HangupCall: Hang up call failed ") + err.info().c_str()));
         }
     }
 }
@@ -451,31 +453,49 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
     return callInfo;
 }
 
+QString Accounts::getSDP(int callId, int AccID){
+    s_account* account = getAccountByID(AccID);
+    if(account != nullptr){
+        for (auto & call : account->CallList){
+            if(call.callId == callId){
+                return call.SDP;
+            }
+        }
+    }
+    return QString("no SDP available");
+}
+
 
 void Accounts::addCallToHistory(int AccID, QString callUri, int duration, s_codec codec, bool outgoing)
 {
     s_account* account = getAccountByID(AccID);
+    s_callHistory newCall;
     bool entryexists = false;
-    for (auto & histentry : account->CallHistory) {
-        if(histentry.callUri == callUri){
-            entryexists = true;
-            histentry.codec = codec;
-            histentry.count++;
-            histentry.duration = duration;
-            histentry.outgoing = outgoing;
-            break;
-        }
-    }
+    qDebug() << "Add call to History: " << callUri << " account: " << account->name <<  " codec: " << codec.toJSON();
 
-    if (!entryexists) {
-        s_callHistory newCall;
+    QMutableListIterator<s_callHistory> it(account->CallHistory);
+    while(it.hasNext()){
+        s_callHistory &entry = it.next();
+        if(entry.callUri.contains(callUri) || callUri.contains(entry.callUri)){         //the call list could contain only the number and we recieve a fully URI or vice verca
+            entryexists = true;
+            newCall.callUri = callUri;
+            newCall.codec = codec;
+            newCall.count = entry.count + 1;
+            newCall.duration = duration;
+            newCall.outgoing = outgoing;
+            it.remove();
+            account->CallHistory.prepend(newCall);
+            break;
+            }
+    }
+    if (!entryexists) {                                                                 // if it is a new unkonwn number create a new entry
         newCall.callUri = callUri;
         newCall.codec = codec;
         newCall.duration = duration;
         newCall.outgoing = outgoing;
         newCall.codec = codec;
         newCall.count = 1;
-        if (account->CallHistory.count() > 9) {
+        if (account->CallHistory.count() > 9) {                                         // only keep the last 10 numbers
             account->CallHistory.removeLast();
         }
         account->CallHistory.prepend(newCall);
@@ -483,7 +503,7 @@ void Accounts::addCallToHistory(int AccID, QString callUri, int duration, s_code
     m_lib->m_Settings->saveAccConfig();
 }
 
-const QList<s_callHistory>* Accounts::getCallHistory(int AccID) {
+QList<s_callHistory> *Accounts::getCallHistory(int AccID) {
     s_account* account = getAccountByID(AccID);
     return &account->CallHistory ;
 }
@@ -542,7 +562,7 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
     thisAccount->callStatusLastReason = statustxt;
 
     if(state == PJSIP_INV_STATE_EARLY){
-        if(lastStatusCode == 180 && role == 1){                                                                           // autoanswer call
+        if(lastStatusCode == 180 && role == 1){                                                                           // auto answer call
             acceptCall(accID,callId);
         }
         thisCall->CallStatusText = "Invite: State Early";
@@ -581,13 +601,15 @@ void Accounts::CallInspector()
     QJsonObject info;
     for(auto& account : m_accounts){                                                   // send callInfo for every call one a second
         for(auto& call : account.CallList ){
+            if(call.callId < 0){
+                break;
+            }
             if(pjsua_call_is_active(call.callId) == 0){
                 break;
             }
             info = getCallInfo(call.callId, account.AccID);
             emit callInfo(account.AccID, call.callId,info);
             CallInfo pjCallInfo = call.callptr->getInfo();
-
             if(m_MaxCallTime){                                                          // hang up calls if call time is exeeded
                 QTime time = QTime::fromString(info["Call time:"].toString(), "hh:mm:ss");
                 if(m_MaxCallTime <= (time.hour()*60 + time.minute())){

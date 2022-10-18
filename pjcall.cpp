@@ -68,23 +68,24 @@ void PJCall::onCallState(OnCallStateParam &prm)
     Q_UNUSED(prm);
     CallInfo ci = getInfo();
     s_account* callAcc = parent->getAccountByID(ci.accId);
-    s_Call*  Callopts = nullptr;
+    s_Call*  CalllistEntry = nullptr;
     for(auto& call : callAcc->CallList){
         if(call.callId == getId()){
-            Callopts = &call;
+            CalllistEntry = &call;
             break;
         }
     }
-    if(Callopts == nullptr) {
-        m_lib->m_Log->writeLog(1, QString("onCallState: Call %1 not found in CallList of Account %2:%3: Creating a new entry")
+    if(CalllistEntry == nullptr) {
+        m_lib->m_Log->writeLog(1, QString("onCallState: Call %1 not found in CallList of Account %2: %3: Creating a new entry")
                                .arg(QString::fromStdString(ci.remoteUri), QString::number(callAcc->AccID), callAcc->name));
         s_Call newCall(callAcc->splitterSlot);                              // callist entry is created here
         newCall.callptr = this;
         newCall.callId = getId();
+        newCall.codec = callAcc->SelectedCodec;
         newCall.CallStatusCode =  getInfo().state;
         newCall.CallStatusText = QString::fromStdString(getInfo().stateText);
         callAcc->CallList.append(newCall);
-        Callopts = &newCall;
+        CalllistEntry = &newCall;
         emit m_lib->AccountsChanged(m_lib->m_Accounts->getAccounts());
     }
 
@@ -104,26 +105,25 @@ void PJCall::onCallState(OnCallStateParam &prm)
                 //first stop the mic stream, then the playback stream
                 PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callAcc->splitterSlot, callId) );
                 PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callId, callAcc->splitterSlot) );
-                if (Callopts->player_id!= PJSUA_INVALID_ID)
+                if (CalllistEntry->player_id!= PJSUA_INVALID_ID)
                 {
-                    pjsua_conf_disconnect(pjsua_player_get_conf_port(Callopts->player_id), callId);
-                    PJSUA2_CHECK_EXPR( pjsua_player_destroy(Callopts->player_id) );
-                    Callopts->player_id = PJSUA_INVALID_ID;
+                    pjsua_conf_disconnect(pjsua_player_get_conf_port(CalllistEntry->player_id), callId);
+                    PJSUA2_CHECK_EXPR( pjsua_player_destroy(CalllistEntry->player_id) );
+                    CalllistEntry->player_id = PJSUA_INVALID_ID;
                 }
-                if (Callopts->rec_id != PJSUA_INVALID_ID)
+                if (CalllistEntry->rec_id != PJSUA_INVALID_ID)
                 {
-                    pjsua_conf_disconnect(callId, pjsua_recorder_get_conf_port(Callopts->rec_id));
-                    pjsua_conf_disconnect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(Callopts->rec_id));
-                    PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(Callopts->rec_id) );
-                    Callopts->rec_id = PJSUA_INVALID_ID;
+                    pjsua_conf_disconnect(callId, pjsua_recorder_get_conf_port(CalllistEntry->rec_id));
+                    pjsua_conf_disconnect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(CalllistEntry->rec_id));
+                    PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(CalllistEntry->rec_id) );
+                    CalllistEntry->rec_id = PJSUA_INVALID_ID;
                 }
             }  catch (Error &err) {
                 m_lib->m_Log->writeLog(1,QString("onCallState: Disconnect Error: ") + QString().fromStdString(err.info(true)));
             }
         }
 
-        m_lib->m_Accounts->addCallToHistory(callAcc->AccID,QString::fromStdString(ci.remoteUri),ci.connectDuration.sec,Callopts->codec,!ci.remOfferer);
-        qDebug() << "history callacount list has: " << callAcc->CallList.first().callId << " call codec " << callAcc->CallList.first().codec.encodingName  << callAcc->CallList.first().toJSON();
+        m_lib->m_Accounts->addCallToHistory(callAcc->AccID,QString::fromStdString(ci.remoteUri),ci.connectDuration.sec,CalllistEntry->codec,!ci.remOfferer);
         QMutableListIterator<s_Call> i(callAcc->CallList);
         while(i.hasNext()){
             s_Call &callentry = i.next();                    //check if its a valid callid and remove it from the list
@@ -313,23 +313,22 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
     CallInfo ci = getInfo();
     s_account* callAcc = nullptr;
     pjmedia_sdp_session *sdp = nullptr;
+    s_codec remoteCodec;
+    QString sdpString;
     callAcc = parent->getAccountByID(ci.accId);
     if(callAcc == nullptr){
         m_lib->m_Log->writeLog(2,QString("onSdpCreated: Error account not found!"));
         return;
     }
-    s_Call*  call = nullptr;
-    for(auto& thecall : callAcc->CallList){
-        if(thecall.callId == getId()){
-            call = &thecall;
-            break;
+
+    if(ci.role == PJSIP_ROLE_UAC){                                                              // get local SDP if we established the call
+              sdpString = QString::fromStdString(prm.sdp.wholeSdp);
         }
-    }
 
     if(ci.remOfferer){
+        sdpString = QString::fromStdString(prm.remSdp.wholeSdp);
         sdp =  static_cast<pjmedia_sdp_session*>(prm.remSdp.pjSdpSession);
-        s_codec remoteCodec;
-        for (unsigned i = 0; i < sdp->media_count; i++)                                                                     // todo parse and config the L16 family
+        for (unsigned i = 0; i < sdp->media_count; i++)
             if (pj_stricmp2(&sdp->media[i]->desc.media, "audio") == 0) {
                 pjmedia_sdp_media *r_media = sdp->media[i];
                 pjmedia_sdp_attr *codec = pjmedia_sdp_attr_find2(r_media->attr_count, r_media->attr, "rtpmap", NULL);        // find codec type
@@ -361,7 +360,6 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
                             jsob["value"] = tmp.at(2).toInt();
                             remoteCodec.codecParameters["Channelcount"] = jsob;
                         }
-                        qDebug() << "L16 !!!!!!!!!!! clockrate " << tmp;
 
                     }
                     else if(remoteCodec.encodingName.startsWith("G722",Qt::CaseInsensitive)){
@@ -400,7 +398,7 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
                             QStringList value = attributes.at(i).split("=");
                             QJsonObject jsob = remoteCodec.codecParameters["Channelcount"].toObject();
                             jsob["value"] = 2;
-                            remoteCodec.codecParameters["Channel count"] = jsob;
+                            remoteCodec.codecParameters["Channelcount"] = jsob;
                         }
                         else if(attributes.at(i).contains("cbr")){
                             QStringList value = attributes.at(i).split("=");
@@ -415,26 +413,37 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
                             remoteCodec.codecParameters["Inband FEC"] = jsob;
                         }
                     }
-                    //m_lib->m_Codecs->setCodecParam(remoteCodec);
 
-                    if(call == nullptr) {
-                        m_lib->m_Log->writeLog(1, QString("onSDPcreated: Call %1 not found in CallList of Account %2:%3: Creating a new entry")
-                                               .arg(QString::fromStdString(ci.remoteUri), QString::number(callAcc->AccID), callAcc->name));
-                        s_Call newCall(callAcc->splitterSlot);                              // callist entry is created here
-                        newCall.callptr = this;
-                        newCall.callId = getId();
-                        newCall.CallStatusCode =  getInfo().state;
-                        newCall.CallStatusText = QString::fromStdString(getInfo().stateText);
-                        newCall.codec = remoteCodec;
-                        newCall.SDP = QString::fromStdString(prm.remSdp.wholeSdp);
-                        qDebug() << "SDP " << prm.remSdp.wholeSdp.c_str();
-                        callAcc->CallList.append(newCall);
-                        call = &newCall;
-                        emit m_lib->AccountsChanged(m_lib->m_Accounts->getAccounts());
-                    }
                 }
             }
-    }
+        }
+
+        s_Call*  call = nullptr;
+        for(auto& thecall : callAcc->CallList){
+            qDebug() << " here ar all the calls in the list" << thecall.toJSON();
+            if(thecall.callId == getId()){
+                if(ci.remOfferer){
+                    thecall.codec = remoteCodec;
+                }
+                thecall.SDP = sdpString;
+                break;
+            }
+        }
+        if(call == nullptr){
+            m_lib->m_Log->writeLog(1, QString("onCallSDP: Call %1 not found in CallList of Account %2:%3: Creating a new entry")
+                                                           .arg(QString::fromStdString(ci.remoteUri), QString::number(callAcc->AccID), callAcc->name));
+            s_Call newCall(callAcc->splitterSlot);                              // callist entry is created here
+            newCall.callptr = this;
+            newCall.callId = getId();
+            newCall.CallStatusCode =  getInfo().state;
+            newCall.CallStatusText = QString::fromStdString(getInfo().stateText);
+            newCall.codec = remoteCodec;
+            newCall.SDP = sdpString;
+            callAcc->CallList.append(newCall);
+        }
+
+    emit m_lib->AccountsChanged(m_lib->m_Accounts->getAccounts());
+
 }
 
 void PJCall::onInstantMessage(OnInstantMessageParam &prm)

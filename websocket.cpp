@@ -164,7 +164,7 @@ void Websocket::echo(QJsonObject &data, QJsonObject &ret) {
 void Websocket::getAllVariables(QJsonObject &data, QJsonObject &ret){
     Q_UNUSED(data);
     QJsonObject retDataObj;
-    QJsonArray accountsArr, ioDevArr, audioRoutesArr , gpioDevArr, gpioRoutesArr;
+    QJsonArray accountsArr, ioDevArr, audioRoutesArr , gpioRoutesArr;
 
     for (auto & account : *m_lib->getAccounts()) {
         accountsArr.append(account.toJSON());
@@ -367,6 +367,19 @@ void Websocket::getCallInfo(QJsonObject &data, QJsonObject &ret) {
     if (jCheckInt(callId, data["callId"]) && jCheckInt(AccID, data["AccID"])) {
         QJsonObject retVal = m_lib->getCallInfo(callId, AccID);
         retDataObj["callHistoryObj"] = retVal;
+        ret["data"] = retDataObj;
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::getSDP(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj;
+    int callId, AccID;
+    if (jCheckInt(callId, data["callId"]) && jCheckInt(AccID, data["AccID"])) {
+        QString retVal = m_lib->getSDP(callId, AccID);
+        retDataObj["SDP"] = retVal;
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {

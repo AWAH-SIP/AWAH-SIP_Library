@@ -81,6 +81,7 @@ public:
     void transferCall(int callId, int AccID, QString destination) const { return m_Accounts->transferCall(callId, AccID, destination); };
     void sendDTMFtoAllCalls(QString Uid, char DTMFdigit) const {return m_Accounts->sendDTMFtoAllCalls(Uid, DTMFdigit); };
     QJsonObject getCallInfo(int callID, int AccID) const { return m_Accounts->getCallInfo(callID, AccID); };
+    QString getSDP(int callId, int AccID) const { return m_Accounts->getSDP(callId, AccID); };
     const QList<s_callHistory>* getCallHistory(int AccID) const { return m_Accounts->getCallHistory(AccID); };
     const s_account* getAccountByID(int ID) {return m_Accounts->getAccountByID(ID); };
 

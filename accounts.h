@@ -134,6 +134,14 @@ public:
     QJsonObject getCallInfo(int callId, int AccID);
 
     /**
+    * @brief get the current SDP of a call ( it the call is incoming: the remote SDP if the call is outgoing: the local SDP)
+    * @param callId the ID of the call you're intrested in
+    * @param AccID the account that owns the call
+    * @return QString the SDP
+    */
+    QString getSDP(int callId, int AccID);
+
+    /**
     * @brief add call to the challhistory (the last 10 calls will be stored)
     * @param AccID the account witch history shold be edited
     * @param callUri the Uri of the call
@@ -144,11 +152,11 @@ public:
     void addCallToHistory(int AccID, QString callUri, int duration, s_codec codec, bool outgoing);
 
     /**
-    * @brief get streaminfos callhistory for an account
+    * @brief get callhistory for an account
     * @param AccID the account
     * @return a qlist with up to 10 calls
     */
-    const QList<s_callHistory>* getCallHistory(int AccID);
+    QList<s_callHistory>* getCallHistory(int AccID);
 
     /**
     * @brief Set or modify accounts presence status to be advertised to remote/ presence soubscribers

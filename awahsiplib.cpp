@@ -53,7 +53,6 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Settings->loadSettings();
         epCfg.uaConfig.userAgent = "AWAHSip";
         epCfg.uaConfig.natTypeInSdp = 0;
-
 //        epCfg.medConfig.rxDropPct = RX_DROP_PACKAGE;
 //        epCfg.medConfig.txDropPct = TX_DROP_PACKAGE;
 
@@ -80,21 +79,6 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Settings->loadGpioDevConfig();
         m_Codecs->listCodecs();
         m_Settings->loadBuddies();
-
-        //************************************************************** olny for TdS 2022 remove me soon!!!!!!!! ****************
-//        s_codec defaultCodec;
-//        defaultCodec.encodingName = "opus";
-//        defaultCodec.displayName ="Opus";                   //   resolve issue #71 and to remove this
-//        QJsonObject codecParam;
-//        QJsonObject value;
-//        value.insert("value", 2);
-//        codecParam.insert("Channel count", value);
-//        value.insert("value", 64000);
-//        codecParam.insert("Bit rate", value);
-//        defaultCodec.codecParameters = codecParam;
-//        m_Codecs->selectCodec(defaultCodec);
-//        m_Codecs->setCodecParam(defaultCodec);
-        // **********************************************************************************************************************
 
     }
     catch (Error &err){

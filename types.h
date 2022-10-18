@@ -242,8 +242,8 @@ Q_DECLARE_METATYPE(s_IODevices);
 Q_DECLARE_METATYPE(QList<s_IODevices>);
 
 struct s_codec{
-    QString encodingName = "";
-    QString displayName = "";
+    QString encodingName = QString();
+    QString displayName = QString();
     int priority = 0;
     QJsonObject codecParameters = QJsonObject();
     QJsonObject toJSON() const {
@@ -289,15 +289,15 @@ struct s_Call{
     int RXlostSeconds = 0;      // time in seconds since the last recieved frame
     QString CallStatusText = "Idle... ";
     int CallStatusCode = 0;
-    QString ConnectedTo = "";
+    QString ConnectedTo = QString();
     pjsua_player_id player_id = PJSUA_INVALID_ID;
     pjsua_recorder_id rec_id = PJSUA_INVALID_ID;
     PJCall* callptr = nullptr;
     s_codec codec = s_codec();
-    QString SDP = "";
+    QString SDP = QString();
     int splitterSlot;
     QJsonObject toJSON() const {
-        return {{"CallStatusText", CallStatusText}, {"CallStatusCode", CallStatusCode}, {"ConnectedTo", ConnectedTo}, {"callId", callId}, {"SDP", SDP}, {"codec", codec.toJSON()}};
+        return {{"CallStatusText", CallStatusText}, {"CallStatusCode", CallStatusCode}, {"ConnectedTo", ConnectedTo}, {"callId", callId}, {"codec", codec.toJSON()}};
     }
 };
 //Q_DECLARE_METATYPE(s_Call);
@@ -313,13 +313,14 @@ struct s_account{
     bool FileRecordRXonly = true;
     QString FilePlayPath = "";
     QString autoconnectToBuddyUID = "";
-    bool autoconnectEnable = true;
+    bool autoconnectEnable = false;
     PJAccount *accountPtr = nullptr;          // not saved to file, only for runtime handling
     AccountGpioDev *gpioDev = nullptr;        // not saved to file, only for runtime handling
     int AccID = PJSUA_INVALID_ID;;
     int splitterSlot = PJSUA_INVALID_ID;
     pjmedia_port *splitComb = nullptr;
     QList <s_Call> CallList = QList <s_Call>();
+    s_codec SelectedCodec = s_codec();             // used to temporary store the codecsettings for outgoing calls
     QList <s_callHistory> CallHistory = QList <s_callHistory>();
     QString callStatusLastReason = "";
     bool fixedJitterBuffer = true;

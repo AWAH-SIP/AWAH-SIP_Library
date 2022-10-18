@@ -536,6 +536,25 @@ void Settings::loadSettings()                                           // todo 
     item["max"] = 60;
     SIPSettings["NAT hole punching keep alive packet timer (sec)"] = item;
 
+    // ***** retry registration failure delay *********
+    item = QJsonObject();
+    aCfg.regConfig.retryIntervalSec = settings.value("settings/regConfig/retryIntervalSec",35).toInt();
+    item["value"] = settings.value("settings/regConfig/retryIntervalSec",35).toInt();
+    item["type"] = INTEGER;
+    item["min"] = 0;
+    item["max"] = 1000;
+    SIPSettings["auto registration retry upon registration failure (sec)"] = item;
+
+    // ****** first retry delay on registration failure **************
+    item = QJsonObject();
+    aCfg.regConfig.firstRetryIntervalSec = settings.value("settings/regConfig/firstRetryIntervalSec",120).toInt();
+    item["value"] = settings.value("settings/regConfig/firstRetryIntervalSec",120).toInt();
+    item["type"] = INTEGER;
+    item["min"] = 0;
+    item["max"] = 1000;
+    SIPSettings["interval for the first registration retry (sec)"] = item;
+
+
     // ***** enable ICE *****
     item = QJsonObject();
     item["value"] = aCfg.natConfig.iceEnabled = settings.value("settings/NatConfig/Ice_Enabled",0).toBool();
@@ -690,10 +709,10 @@ void Settings::loadSettings()                                           // todo 
 //    aCfg.mediaConfig.transportConfig.portRange = 2;
 //    // range has to be 2 if RTCP is on (but the audio port toggles between odd and even   NOT EBU Tech 3326 compliant!!!
 //    }
-    //aCfg.callConfig.timerUse = PJSUA_SIP_TIMER_ALWAYS;
+//    aCfg.callConfig.timerUse = PJSUA_SIP_TIMER_ALWAYS;
     //aCfg.callConfig.timerSessExpiresSec = 90;
-
     aCfg.regConfig.randomRetryIntervalSec = 10;
+    //aCfg.ipChangeConfig.shutdownTp = 1;
     m_lib->epCfg.medConfig.quality =10;
     m_lib->epCfg.medConfig.noVad = true;
 
@@ -820,6 +839,14 @@ void Settings::setSettings(QJsonObject editedSettings)
 
         if (it.key() == "NAT hole punching keep alive packet timer (sec)"){
             settings.setValue("settings/NatConfig/KaInterval", it.value().toInt());
+        }
+
+        if (it.key() == "auto registration retry upon registration failure (sec)"){
+            settings.setValue("settings/regConfig/retryIntervalSec", it.value().toInt());
+        }
+
+        if (it.key() == "interval for the first registration retry (sec)"){
+            settings.setValue("settings/regConfig/firstRetryIntervalSec", it.value().toInt());
         }
 
         if (it.key() == "ICE (Interactive Connectivity Establishment)"){

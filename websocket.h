@@ -88,6 +88,7 @@ private slots:
     void holdCall(QJsonObject &data, QJsonObject &ret);
     void transferCall(QJsonObject &data, QJsonObject &ret);
     void getCallInfo(QJsonObject &data, QJsonObject &ret);
+    void getSDP(QJsonObject &data, QJsonObject &ret);
     void getCallHistory(QJsonObject &data, QJsonObject &ret);
     void getAccountByID(QJsonObject &data, QJsonObject &ret);
 
