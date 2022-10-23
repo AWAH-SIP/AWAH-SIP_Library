@@ -709,7 +709,7 @@ void Settings::loadSettings()                                           // todo 
 //    aCfg.mediaConfig.transportConfig.portRange = 2;
 //    // range has to be 2 if RTCP is on (but the audio port toggles between odd and even   NOT EBU Tech 3326 compliant!!!
 //    }
-//    aCfg.callConfig.timerUse = PJSUA_SIP_TIMER_ALWAYS;
+   aCfg.callConfig.timerUse = PJSUA_SIP_TIMER_INACTIVE;
     //aCfg.callConfig.timerSessExpiresSec = 90;
     aCfg.regConfig.randomRetryIntervalSec = 10;
     //aCfg.ipChangeConfig.shutdownTp = 1;

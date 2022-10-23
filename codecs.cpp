@@ -227,9 +227,27 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
             paramParsed = true;
         }
         else if(strcmp(fmtp.name.c_str(),"stereo")==0){
+            item["type"] = ENUM_INT;                                // opus test
+            item["value"] = atoi(fmtp.val.c_str());
+            item["min"] = 0;
+            item["max"] = 1;
+             enumitems = QJsonObject();
+            enumitems["mono"] = 0;
+            enumitems["stereo"] = 1;
+           item["enumlist"] = enumitems;
+            codecparam["stereo"]= item;
             paramParsed = true;
         }
         else if(strcmp(fmtp.name.c_str(),"sprop-stereo")==0){                           // don't populate menu just mark as parsed
+            item["type"] = ENUM_INT;                                // opus test
+            item["value"] = atoi(fmtp.val.c_str());
+            item["min"] = 0;
+            item["max"] = 1;
+             enumitems = QJsonObject();
+            enumitems["mono"] = 0;
+            enumitems["stereo"] = 1;
+           item["enumlist"] = enumitems;
+            codecparam["sprop-stereo"]= item;
             paramParsed = true;
         }
 
@@ -375,6 +393,7 @@ int Codecs::setCodecParam(s_codec codec)
 
     QJsonObject::iterator i;
     for (i = codec.codecParameters.begin(); i != codec.codecParameters.end(); ++i) {
+        qDebug() << "found codec param: " << i.key() << " value : " << i.value();
         if (i.key() == "Confort Noise generator"){
             param.setting.cng = i.value().toObject()["value"].toInt();
         }
@@ -389,6 +408,22 @@ int Codecs::setCodecParam(s_codec codec)
                  }
             }
         }
+
+        if (i.key() == "stereo"){                                                                      // todo test me!
+                    for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
+                         if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"stereo")==0){
+                            param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
+                         }
+                    }
+                }
+
+        if (i.key() == "sprop-stereo"){                                                                      // todo test me!
+                    for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
+                         if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"sprop-stereo")==0){
+                            param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
+                         }
+                    }
+                }
 
         if (i.key() == "Mode" && codec.encodingName.startsWith("iLBC")){
             for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){

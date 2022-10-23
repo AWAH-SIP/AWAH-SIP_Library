@@ -102,7 +102,6 @@ void PJEndpoint::onSelectAccount(OnSelectAccountParam &prm)
 
 void PJEndpoint::onIpChangeProgress(OnIpChangeProgressParam &prm)
 {
-     m_lib->m_Log->writeLog(3, QString("onIpChangeProgress(): IP change detected, but we don't care!"));
     pjsua_ip_change_param param;
     pjsua_ip_change_param_default(&param);
     param.restart_listener = true;

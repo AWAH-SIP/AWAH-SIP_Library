@@ -322,8 +322,9 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
     }
 
     if(ci.role == PJSIP_ROLE_UAC){                                                              // get local SDP if we established the call
-              sdpString = QString::fromStdString(prm.sdp.wholeSdp);
-        }
+        sdpString = QString::fromStdString(prm.sdp.wholeSdp);
+        remoteCodec = callAcc->SelectedCodec;
+    }
 
     if(ci.remOfferer){
         sdpString = QString::fromStdString(prm.remSdp.wholeSdp);
@@ -378,8 +379,7 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
                         remoteCodec.displayName = "GSM";
                     }
                     else
-                    remoteCodec.displayName = remoteCodec.encodingName;
-                    remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(codectype.first());
+                        remoteCodec.displayName = remoteCodec.encodingName;
                 }
 
                 pjmedia_sdp_attr *attribute = pjmedia_sdp_attr_find2(r_media->attr_count, r_media->attr, "fmtp", NULL);       // find and parse fmtp attributes
@@ -397,7 +397,7 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
                         else if(attributes.at(i).contains("stereo")){
                             QStringList value = attributes.at(i).split("=");
                             QJsonObject jsob = remoteCodec.codecParameters["Channelcount"].toObject();
-                            jsob["value"] = 2;
+                            jsob["value"] = value.at(1).toInt() + 1;        // +1 if stereo=0 -> channelcount is 1
                             remoteCodec.codecParameters["Channelcount"] = jsob;
                         }
                         else if(attributes.at(i).contains("cbr")){
@@ -413,37 +413,32 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
                             remoteCodec.codecParameters["Inband FEC"] = jsob;
                         }
                     }
-
                 }
             }
-        }
-
-        s_Call*  call = nullptr;
-        for(auto& thecall : callAcc->CallList){
-            qDebug() << " here ar all the calls in the list" << thecall.toJSON();
-            if(thecall.callId == getId()){
-                if(ci.remOfferer){
-                    thecall.codec = remoteCodec;
-                }
-                thecall.SDP = sdpString;
-                break;
+    }
+    s_Call*  call = nullptr;
+    for(auto& thecall : callAcc->CallList){
+        if(thecall.callId == getId()){
+            if(ci.remOfferer){
+                thecall.codec = remoteCodec;
             }
+            thecall.SDP = sdpString;
+            break;
         }
-        if(call == nullptr){
-            m_lib->m_Log->writeLog(1, QString("onCallSDP: Call %1 not found in CallList of Account %2:%3: Creating a new entry")
-                                                           .arg(QString::fromStdString(ci.remoteUri), QString::number(callAcc->AccID), callAcc->name));
-            s_Call newCall(callAcc->splitterSlot);                              // callist entry is created here
-            newCall.callptr = this;
-            newCall.callId = getId();
-            newCall.CallStatusCode =  getInfo().state;
-            newCall.CallStatusText = QString::fromStdString(getInfo().stateText);
-            newCall.codec = remoteCodec;
-            newCall.SDP = sdpString;
-            callAcc->CallList.append(newCall);
-        }
-
+    }
+    if(call == nullptr){
+        m_lib->m_Log->writeLog(1, QString("onCallSDP: Call %1 not found in CallList of Account %2:%3: Creating a new entry")
+                               .arg(QString::fromStdString(ci.remoteUri), QString::number(callAcc->AccID), callAcc->name));
+        s_Call newCall(callAcc->splitterSlot);                              // callist entry is created here
+        newCall.callptr = this;
+        newCall.callId = getId();
+        newCall.CallStatusCode =  getInfo().state;
+        newCall.CallStatusText = QString::fromStdString(getInfo().stateText);
+        newCall.codec = remoteCodec;
+        newCall.SDP = sdpString;
+        callAcc->CallList.append(newCall);
+    }
     emit m_lib->AccountsChanged(m_lib->m_Accounts->getAccounts());
-
 }
 
 void PJCall::onInstantMessage(OnInstantMessageParam &prm)
