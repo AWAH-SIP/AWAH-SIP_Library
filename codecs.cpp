@@ -227,27 +227,27 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
             paramParsed = true;
         }
         else if(strcmp(fmtp.name.c_str(),"stereo")==0){
-            item["type"] = ENUM_INT;                                // opus test
-            item["value"] = atoi(fmtp.val.c_str());
-            item["min"] = 0;
-            item["max"] = 1;
-             enumitems = QJsonObject();
-            enumitems["mono"] = 0;
-            enumitems["stereo"] = 1;
-           item["enumlist"] = enumitems;
-            codecparam["stereo"]= item;
+//            item["type"] = ENUM_INT;                                // opus test
+//            item["value"] = atoi(fmtp.val.c_str());
+//            item["min"] = 0;
+//            item["max"] = 1;
+//             enumitems = QJsonObject();
+//            enumitems["mono"] = 0;
+//            enumitems["stereo"] = 1;
+//           item["enumlist"] = enumitems;
+//            codecparam["stereo"]= item;
             paramParsed = true;
         }
         else if(strcmp(fmtp.name.c_str(),"sprop-stereo")==0){                           // don't populate menu just mark as parsed
-            item["type"] = ENUM_INT;                                // opus test
-            item["value"] = atoi(fmtp.val.c_str());
-            item["min"] = 0;
-            item["max"] = 1;
-             enumitems = QJsonObject();
-            enumitems["mono"] = 0;
-            enumitems["stereo"] = 1;
-           item["enumlist"] = enumitems;
-            codecparam["sprop-stereo"]= item;
+//            item["type"] = ENUM_INT;                                // opus test
+//            item["value"] = atoi(fmtp.val.c_str());
+//            item["min"] = 0;
+//            item["max"] = 1;
+//             enumitems = QJsonObject();
+//            enumitems["mono"] = 0;
+//            enumitems["stereo"] = 1;
+//           item["enumlist"] = enumitems;
+//            codecparam["sprop-stereo"]= item;
             paramParsed = true;
         }
 

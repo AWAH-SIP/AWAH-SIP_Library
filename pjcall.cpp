@@ -69,8 +69,9 @@ void PJCall::onCallState(OnCallStateParam &prm)
     CallInfo ci = getInfo();
     s_account* callAcc = parent->getAccountByID(ci.accId);
     s_Call*  CalllistEntry = nullptr;
+    int callid = getId();
     for(auto& call : callAcc->CallList){
-        if(call.callId == getId()){
+        if(call.callId ==  callid){
             CalllistEntry = &call;
             break;
         }
@@ -327,6 +328,7 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
     }
 
     if(ci.remOfferer){
+        m_lib->m_Codecs->listCodecs();                                                         // list codecs to reset priorities to accept all codecs
         sdpString = QString::fromStdString(prm.remSdp.wholeSdp);
         sdp =  static_cast<pjmedia_sdp_session*>(prm.remSdp.pjSdpSession);
         for (unsigned i = 0; i < sdp->media_count; i++)

@@ -336,7 +336,13 @@ void Accounts::sendDTMFtoAllCalls(QString Uid, char DTMFdigit)
     case 'C':
     case 'D':
         for (int pos = 0; pos<account->CallList.count(); pos++){
-            AWAHSipLib::instance()->sendDtmf(account->CallList.at(pos).callId, account->AccID,QString(DTMFdigit));
+            if(account->CallList.at(pos).callId >= 0){
+                try {
+                    AWAHSipLib::instance()->sendDtmf(account->CallList.at(pos).callId, account->AccID,QString(DTMFdigit));
+                }  catch (Error& err) {
+                     m_lib->m_Log->writeLog(1,(QString("sendDTMF: failed ") + err.info().c_str()));
+                }
+            }
         }
         break;
     default:
@@ -471,7 +477,6 @@ void Accounts::addCallToHistory(int AccID, QString callUri, int duration, s_code
     s_account* account = getAccountByID(AccID);
     s_callHistory newCall;
     bool entryexists = false;
-    qDebug() << "Add call to History: " << callUri << " account: " << account->name <<  " codec: " << codec.toJSON();
 
     QMutableListIterator<s_callHistory> it(account->CallHistory);
     while(it.hasNext()){
