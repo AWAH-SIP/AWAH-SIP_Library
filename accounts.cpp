@@ -605,7 +605,8 @@ void Accounts::CallInspector()
 {
     QJsonObject info;
     for(auto& account : m_accounts){                                                   // send callInfo for every call one a second
-        for(auto& call : account.CallList ){
+        int accID = account.AccID;
+        for(auto& call : getAccountByID(accID)->CallList ){
             if(call.callId < 0){
                 break;
             }

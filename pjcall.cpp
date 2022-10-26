@@ -97,27 +97,29 @@ void PJCall::onCallState(OnCallStateParam &prm)
         //parent->setConnectDuration(ci.connectDuration.sec);
         m_lib->m_Log->writeLog(3,QString("onCallState: deleting call with id: %1 from %2 of Account %3").arg(QString::number(ci.id), QString::fromStdString(ci.remoteUri), callAcc->name));
 
-        try {
-            //first stop the mic stream, then the playback stream
-            pjsua_conf_disconnect(callAcc->splitterSlot, CalllistEntry->callConfPort);
-            pjsua_conf_disconnect(CalllistEntry->callConfPort, callAcc->splitterSlot);
-            if (CalllistEntry->player_id!= PJSUA_INVALID_ID)
-            {
-                pjsua_conf_disconnect(pjsua_player_get_conf_port(CalllistEntry->player_id), CalllistEntry->callConfPort);
-                PJSUA2_CHECK_EXPR( pjsua_player_destroy(CalllistEntry->player_id) );
-                CalllistEntry->player_id = PJSUA_INVALID_ID;
-            }
-            if (CalllistEntry->rec_id != PJSUA_INVALID_ID)
-            {
-                pjsua_conf_disconnect(CalllistEntry->callConfPort, pjsua_recorder_get_conf_port(CalllistEntry->rec_id));
-                if(!callAcc->FileRecordRXonly){
-                    pjsua_conf_disconnect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(CalllistEntry->rec_id));
+        if(CalllistEntry->callConfPort != -1) {
+            try {
+                //first stop the mic stream, then the playback stream
+                pjsua_conf_disconnect(callAcc->splitterSlot, CalllistEntry->callConfPort);
+                pjsua_conf_disconnect(CalllistEntry->callConfPort, callAcc->splitterSlot);
+                if (CalllistEntry->player_id!= PJSUA_INVALID_ID)
+                {
+                    pjsua_conf_disconnect(pjsua_player_get_conf_port(CalllistEntry->player_id), CalllistEntry->callConfPort);
+                    PJSUA2_CHECK_EXPR( pjsua_player_destroy(CalllistEntry->player_id) );
+                    CalllistEntry->player_id = PJSUA_INVALID_ID;
                 }
-                PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(CalllistEntry->rec_id) );
-                CalllistEntry->rec_id = PJSUA_INVALID_ID;
+                if (CalllistEntry->rec_id != PJSUA_INVALID_ID)
+                {
+                    pjsua_conf_disconnect(CalllistEntry->callConfPort, pjsua_recorder_get_conf_port(CalllistEntry->rec_id));
+                    if(!callAcc->FileRecordRXonly){
+                        pjsua_conf_disconnect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(CalllistEntry->rec_id));
+                    }
+                    PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(CalllistEntry->rec_id) );
+                    CalllistEntry->rec_id = PJSUA_INVALID_ID;
+                }
+            }  catch (Error &err) {
+                m_lib->m_Log->writeLog(1,QString("onCallState: Disconnect Error: ") + QString().fromStdString(err.info(true)));
             }
-        }  catch (Error &err) {
-            m_lib->m_Log->writeLog(1,QString("onCallState: Disconnect Error: ") + QString().fromStdString(err.info(true)));
         }
 
         m_lib->m_Accounts->addCallToHistory(callAcc->AccID,QString::fromStdString(ci.remoteUri),ci.connectDuration.sec,CalllistEntry->codec,!ci.remOfferer);
