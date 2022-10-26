@@ -296,6 +296,7 @@ struct s_Call{
     s_codec codec = s_codec();
     QString SDP = QString();
     int splitterSlot;
+    int callConfPort = -1;
     QJsonObject toJSON() const {
         return {{"CallStatusText", CallStatusText}, {"CallStatusCode", CallStatusCode}, {"ConnectedTo", ConnectedTo}, {"callId", callId}, {"codec", codec.toJSON()}};
     }

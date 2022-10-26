@@ -97,38 +97,36 @@ void PJCall::onCallState(OnCallStateParam &prm)
         //parent->setConnectDuration(ci.connectDuration.sec);
         m_lib->m_Log->writeLog(3,QString("onCallState: deleting call with id: %1 from %2 of Account %3").arg(QString::number(ci.id), QString::fromStdString(ci.remoteUri), callAcc->name));
 
-        if(hasMedia())                                          //to be determined if it's a bug... Nope Adi encounters it... but it crashes...
-        {                                                     // change this!!!! it never has media (on Andys macbook)!!!!
-            m_lib->m_Log->writeLog(3,QString("onCallState: Disconnect: call has media!!!!! look at pjcall.cpp @ Line 93"));
-            AudioMedia audioMedia = getAudioMedia(-1);
-            int callId = ci.media.at(0).audioConfSlot;
-            try {
-                //first stop the mic stream, then the playback stream
-                PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callAcc->splitterSlot, callId) );
-                PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(callId, callAcc->splitterSlot) );
-                if (CalllistEntry->player_id!= PJSUA_INVALID_ID)
-                {
-                    pjsua_conf_disconnect(pjsua_player_get_conf_port(CalllistEntry->player_id), callId);
-                    PJSUA2_CHECK_EXPR( pjsua_player_destroy(CalllistEntry->player_id) );
-                    CalllistEntry->player_id = PJSUA_INVALID_ID;
-                }
-                if (CalllistEntry->rec_id != PJSUA_INVALID_ID)
-                {
-                    pjsua_conf_disconnect(callId, pjsua_recorder_get_conf_port(CalllistEntry->rec_id));
-                    pjsua_conf_disconnect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(CalllistEntry->rec_id));
-                    PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(CalllistEntry->rec_id) );
-                    CalllistEntry->rec_id = PJSUA_INVALID_ID;
-                }
-            }  catch (Error &err) {
-                m_lib->m_Log->writeLog(1,QString("onCallState: Disconnect Error: ") + QString().fromStdString(err.info(true)));
+        try {
+            //first stop the mic stream, then the playback stream
+            pjsua_conf_disconnect(callAcc->splitterSlot, CalllistEntry->callConfPort);
+            pjsua_conf_disconnect(CalllistEntry->callConfPort, callAcc->splitterSlot);
+            if (CalllistEntry->player_id!= PJSUA_INVALID_ID)
+            {
+                pjsua_conf_disconnect(pjsua_player_get_conf_port(CalllistEntry->player_id), CalllistEntry->callConfPort);
+                PJSUA2_CHECK_EXPR( pjsua_player_destroy(CalllistEntry->player_id) );
+                CalllistEntry->player_id = PJSUA_INVALID_ID;
             }
+            if (CalllistEntry->rec_id != PJSUA_INVALID_ID)
+            {
+                pjsua_conf_disconnect(CalllistEntry->callConfPort, pjsua_recorder_get_conf_port(CalllistEntry->rec_id));
+                if(!callAcc->FileRecordRXonly){
+                    pjsua_conf_disconnect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(CalllistEntry->rec_id));
+                }
+                PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(CalllistEntry->rec_id) );
+                CalllistEntry->rec_id = PJSUA_INVALID_ID;
+            }
+        }  catch (Error &err) {
+            m_lib->m_Log->writeLog(1,QString("onCallState: Disconnect Error: ") + QString().fromStdString(err.info(true)));
         }
 
         m_lib->m_Accounts->addCallToHistory(callAcc->AccID,QString::fromStdString(ci.remoteUri),ci.connectDuration.sec,CalllistEntry->codec,!ci.remOfferer);
+
+        callAcc = parent->getAccountByID(ci.accId);         // as callHistory is stored in QList of callAccount, most likly this Pointer changed.
         QMutableListIterator<s_Call> i(callAcc->CallList);
         while(i.hasNext()){
-            s_Call &callentry = i.next();                    //check if its a valid callid and remove it from the list
-            if(callentry.callId == ci.id){
+            s_Call &callentry = i.next();
+            if(callentry.callId == ci.id){                  //check if its a valid callid and remove it from the list
                 i.remove();
                 break;
             }
@@ -164,11 +162,13 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
     m_lib->m_Log->writeLog(3,QString("onCallMediaState: Call %1:%2 of Account %3:%4 has media: %5")
                            .arg(QString::number(Callopts->callId), QString::fromStdString(ci.remoteUri), QString::number(callAcc->AccID), callAcc->name, hasMedia() ? "true" : "false" ));
 
+    if(!hasMedia()) return;
+
     AudioMedia audioMedia;
     try {
         // Get the first audio media and connect it to its Splitter
         audioMedia = getAudioMedia(-1);
-        int callId = audioMedia.getPortId();
+        Callopts->callConfPort = audioMedia.getPortId();
 
         if(!callAcc->FilePlayPath.isEmpty() && ci.remOfferer){          // if a announcement is configured and call is incoming create a player
             if(Callopts->player_id == PJSUA_INVALID_ID) {
@@ -188,7 +188,7 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
                     const pjsua_conf_port_id slot = pjsua_player_get_conf_port(Callopts->player_id);
                     int level = -3;
                     PJSUA2_CHECK_EXPR(pjmedia_conf_adjust_rx_level(intData->mconf, slot, dBtoAdjLevel(level)));
-                    PJSUA2_CHECK_EXPR(pjsua_conf_connect(slot, callId) );
+                    PJSUA2_CHECK_EXPR(pjsua_conf_connect(slot, Callopts->callConfPort) );
                     status = pjsua_player_get_port(Callopts->player_id, &player_media_port);
                     if (status != PJ_SUCCESS){
                         char buf[50];
@@ -236,7 +236,8 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
                 filename.replace("%s", Second);
                 filename.replace("%C", Caller);
                 filename.replace("%A",Account);
-                pj_cstr(&rec_file,filename.toStdString().c_str());
+                char * rec_file_content = _strdup(filename.toStdString().c_str());
+                pj_cstr(&rec_file, rec_file_content);
 
                 // Create recorder for call
                 status = pjsua_recorder_create(&rec_file, 0, NULL, 0, 0, &Callopts->rec_id);
@@ -248,18 +249,19 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
                 }
                 // connect active call to call recorder immediatley if there is no fileplayer configured
                 else if(Callopts->player_id == PJSUA_INVALID_ID){
-                    PJSUA2_CHECK_EXPR( pjsua_conf_connect(callId, pjsua_recorder_get_conf_port(Callopts->rec_id)) );
+                    PJSUA2_CHECK_EXPR( pjsua_conf_connect(Callopts->callConfPort, pjsua_recorder_get_conf_port(Callopts->rec_id)) );
                     if(!callAcc->FileRecordRXonly){
                         PJSUA2_CHECK_EXPR( pjsua_conf_connect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(Callopts->rec_id)) );          // record audio from the far end and also the local audio (usually questions from the host)
                     }
                 }
+                free(rec_file_content);
             } else {
                 m_lib->m_Log->writeLog(2,QString("onCallMediaState: call recorder for callId %1 already exists").arg(Callopts->callId));
             }
 
         }
-        PJSUA2_CHECK_EXPR( pjsua_conf_connect(callId, callAcc->splitterSlot) );
-        PJSUA2_CHECK_EXPR( pjsua_conf_connect((callAcc->splitterSlot),callId) );
+        PJSUA2_CHECK_EXPR( pjsua_conf_connect(Callopts->callConfPort, callAcc->splitterSlot) );
+        PJSUA2_CHECK_EXPR( pjsua_conf_connect((callAcc->splitterSlot),Callopts->callConfPort) );
 
     } catch(Error& err) {
         m_lib->m_Log->writeLog(1,QString("onCallMediaState: media error ") +  err.info().c_str());

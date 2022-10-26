@@ -714,6 +714,7 @@ void Settings::loadSettings()                                           // todo 
     //aCfg.ipChangeConfig.shutdownTp = 1;
     m_lib->epCfg.medConfig.quality =10;
     m_lib->epCfg.medConfig.noVad = true;
+    //m_lib->epCfg.uaConfig.mainThreadOnly = true;
 
     m_lib->m_Accounts->setDefaultACfg(aCfg);
 
