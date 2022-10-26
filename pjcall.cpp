@@ -236,11 +236,9 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
                 filename.replace("%s", Second);
                 filename.replace("%C", Caller);
                 filename.replace("%A",Account);
-                char * rec_file_content = _strdup(filename.toStdString().c_str());
-                pj_cstr(&rec_file, rec_file_content);
 
                 // Create recorder for call
-                status = pjsua_recorder_create(&rec_file, 0, NULL, 0, 0, &Callopts->rec_id);
+                status = pjsua_recorder_create(pj_cstr(&rec_file, filename.toStdString().c_str()), 0, NULL, 0, 0, &Callopts->rec_id);
                 if (status != PJ_SUCCESS){
                     char buf[50];
                     pj_strerror	(status,buf,sizeof (buf) );
@@ -254,7 +252,6 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
                         PJSUA2_CHECK_EXPR( pjsua_conf_connect(callAcc->splitterSlot, pjsua_recorder_get_conf_port(Callopts->rec_id)) );          // record audio from the far end and also the local audio (usually questions from the host)
                     }
                 }
-                free(rec_file_content);
             } else {
                 m_lib->m_Log->writeLog(2,QString("onCallMediaState: call recorder for callId %1 already exists").arg(Callopts->callId));
             }
