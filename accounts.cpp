@@ -31,7 +31,7 @@ Accounts::Accounts(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_
     connect(this, &Accounts::signalSipStatus, this, &Accounts::OnsignalSipStatus);
 }
 
-void Accounts::createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID, bool autoconnectEnable ,QList<s_callHistory> history , QString uid)
+void Accounts::createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID, bool autoconnectEnable, bool hasDTMFGPIO ,QList<s_callHistory> history , QString uid)
 {
     QString idUri = "\""+ accountName +"\" <sip:"+ user +"@"+ server +">";
     QString registrarUri = "sip:"+ server;
@@ -69,8 +69,12 @@ void Accounts::createAccount(QString accountName, QString server, QString user, 
         newAccount.autoconnectToBuddyUID = autoconnectToBuddyUID;
         newAccount.autoconnectEnable = autoconnectEnable;
         newAccount.CallHistory = history;
+        newAccount.hasDTMFGPIO = hasDTMFGPIO;
         PJSUA2_CHECK_EXPR(m_lib->m_AudioRouter->addSplittComb(newAccount));
-        newAccount.gpioDev = GpioDeviceManager::instance()->create(newAccount);
+        if(hasDTMFGPIO){
+                newAccount.gpioDev = GpioDeviceManager::instance()->create(newAccount);
+        }
+        else newAccount.gpioDev = nullptr;
         m_accounts.append(newAccount);
         m_lib->m_Settings->saveAccConfig();
         m_lib->m_AudioRouter->conferenceBridgeChanged();
@@ -81,7 +85,7 @@ void Accounts::createAccount(QString accountName, QString server, QString user, 
     }
 }
 
-void Accounts::modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID, bool autoconnectEnable){
+void Accounts::modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID, bool autoconnectEnable, bool hasDTMFGPIO){
     QString idUri = "\""+ accountName +"\" <sip:"+ user +"@"+ server +">";
     QString registrarUri = "sip:"+ server;
     aCfg = defaultACfg;
@@ -108,6 +112,7 @@ void Accounts::modifyAccount(QString uid, QString accountName, QString server, Q
             acc.fixedJitterBufferValue = fixedJitterBufferValue;
             acc.autoconnectToBuddyUID = autoconnectToBuddyUID;
             acc.autoconnectEnable = autoconnectEnable;
+            acc.hasDTMFGPIO = hasDTMFGPIO;
             try{
                 acc.accountPtr->modify(aCfg);
                 m_lib->m_Settings->saveAccConfig();
@@ -116,6 +121,12 @@ void Accounts::modifyAccount(QString uid, QString accountName, QString server, Q
             }
             catch (Error &err){
                 m_lib->m_Log->writeLog(0,(QString("ModifyAccount: failed") + err.info().c_str()));
+            }
+            if(hasDTMFGPIO && acc.gpioDev == nullptr){
+                 acc.gpioDev = GpioDeviceManager::instance()->create(acc);
+            }
+            if(!hasDTMFGPIO && acc.gpioDev != nullptr){
+                GpioDeviceManager::instance()->removeDevice(uid);
             }
             m_lib->m_Settings->saveAccConfig();
             m_lib->m_AudioRouter->conferenceBridgeChanged();
@@ -576,7 +587,9 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
         thisCall->CallStatusText = "calling";
     }
     else if(state == PJSIP_INV_STATE_CONFIRMED && lastStatusCode == 200){
-        thisAccount->gpioDev->setConnected(true);
+        if(thisAccount->gpioDev != nullptr){
+            thisAccount->gpioDev->setConnected(true);
+        }
         sendPresenceStatus(accID, busy);
         emit m_lib->m_AudioRouter->audioRoutesChanged(m_lib->m_AudioRouter->getAudioRoutes());
     }

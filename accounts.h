@@ -51,10 +51,11 @@ public:
     * @param fixedJitterBufferValue the time in ms for the fixed jitter buffer
     * @param autoconnectToBuddyUID connect to this buddy automatically as soon the buddy is online
     * @param autoconnectEnable if true autoconnect is activated (used to terminate autoconnect calls)
+    * @param hasDTMFGPIO if true there is a GPIO device created that sends the GPIO over DTMF tones
     * @param history the call history
     * @param uid the unique idenifyer of the account
     */
-    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID = "", bool autoconnectEnable = true ,QList<s_callHistory> history = QList<s_callHistory>(), QString uid = "");
+    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID = "", bool autoconnectEnable = true , bool hasDTMFGPIO = false, QList<s_callHistory> history = QList<s_callHistory>(), QString uid = "");
 
     /**
     * @brief modify a existing SIP account
@@ -69,9 +70,10 @@ public:
     * @param fixedJitterBuffer if true a fixed jitter buffer is set, otherwise an adaptive jitter buffer is active
     * @param fixedJitterBufferValue the time in ms for the fixed jitter buffer
     * @param autoconnectToBuddyUID connect to this buddy automatically as soon the buddy is online
-    ** @param autoconnectEnable if true autoconnect is activated (used to terminate autoconnect calls)
+    * @param autoconnectEnable if true autoconnect is activated (used to terminate autoconnect calls)
+    * @param hasDTMFGPIO if true there is a GPIO device created that sends the GPIO over DTMF tones
     */
-    void modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID = "", bool autoconnectEnable = true);
+    void modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID = "", bool autoconnectEnable = true, bool hasDTMFGPIO = false);
 
     /**
     * @brief remove a SIP Account

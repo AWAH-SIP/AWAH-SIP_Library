@@ -315,6 +315,7 @@ struct s_account{
     QString FilePlayPath = "";
     QString autoconnectToBuddyUID = "";
     bool autoconnectEnable = false;
+    bool hasDTMFGPIO = false;
     PJAccount *accountPtr = nullptr;          // not saved to file, only for runtime handling
     AccountGpioDev *gpioDev = nullptr;        // not saved to file, only for runtime handling
     int AccID = PJSUA_INVALID_ID;;
@@ -355,6 +356,7 @@ struct s_account{
             {"callStatusLastReason", callStatusLastReason},
             {"autoconnectToBuddyUID", autoconnectToBuddyUID},
             {"autoconnectEnable", autoconnectEnable},
+            {"hasDTMFGPIO", hasDTMFGPIO},
             {"uid", uid}
         };
     }
@@ -370,6 +372,7 @@ struct s_account{
         fixedJitterBufferValue = accountJSON["fixedJitterBufferValue"].toInt();
         autoconnectToBuddyUID = accountJSON["AutoconnectToBuddyUID"].toString();
         autoconnectEnable = accountJSON["autoconnectEnable"].toBool();
+        hasDTMFGPIO = accountJSON["hasDTMFGPIO"].toBool();
         return this;
     }
 };

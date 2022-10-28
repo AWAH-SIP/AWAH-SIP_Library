@@ -68,10 +68,10 @@ public:
     static void prepareLib();
 
     // Public API - Accounts
-    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID, bool autoconnectEnable) const
-        { return m_Accounts->createAccount(accountName, server, user, password, filePlayPath, fileRecPath, fileRecordRXonly ,fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID, autoconnectEnable); };
-    void modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID, bool autoconnectEnable) const
-        { return m_Accounts->modifyAccount(uid, accountName, server, user, password, filePlayPath, fileRecPath, fileRecordRXonly, fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID, autoconnectEnable); };
+    void createAccount(QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID, bool autoconnectEnable, bool hasDTMFGPIO) const
+        { return m_Accounts->createAccount(accountName, server, user, password, filePlayPath, fileRecPath, fileRecordRXonly ,fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID, autoconnectEnable, hasDTMFGPIO); };
+    void modifyAccount(QString uid, QString accountName, QString server, QString user, QString password, QString filePlayPath, QString fileRecPath, bool fileRecordRXonly, bool fixedJitterBuffer, uint fixedJitterBufferValue, QString autoconnectToBuddyUID, bool autoconnectEnable, bool hasDTMFGPIO) const
+        { return m_Accounts->modifyAccount(uid, accountName, server, user, password, filePlayPath, fileRecPath, fileRecordRXonly, fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID, autoconnectEnable, hasDTMFGPIO); };
     void removeAccount(QString uid) const { return m_Accounts->removeAccount(uid); };
     QList <s_account>* getAccounts() const { return m_Accounts->getAccounts(); };
     void makeCall(QString number, int AccID,s_codec codec) const { return m_Accounts->makeCall(number, AccID, codec); };

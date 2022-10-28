@@ -229,7 +229,7 @@ void Websocket::getIoDevices(QJsonObject &data, QJsonObject &ret) {
 void Websocket::createAccount(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     QString accountName, server, user, password, filePlayPath, fileRecPath, autoconnectToBuddyUID;
-    bool fixedJitterBuffer = true, fileRecordRXonly= true, autoconnectEnable = true;
+    bool fixedJitterBuffer = true, fileRecordRXonly= true, autoconnectEnable = true, hasDTMFGPIO = false;
     int fixedJitterBufferValue = 0;
     if(     jCheckString(accountName, data["accountName"]) &&
             jCheckString(server, data["server"]) &&
@@ -241,8 +241,9 @@ void Websocket::createAccount(QJsonObject &data, QJsonObject &ret) {
             jCheckBool(fixedJitterBuffer, data["fixedJitterBuffer"]) &&
             jCheckInt(fixedJitterBufferValue, data["fixedJitterBufferValue"]) &&
             jCheckString(autoconnectToBuddyUID, data["autoconnectToBuddyUID"]) &&
+            jCheckBool(hasDTMFGPIO, data["hasDTMFGPIO"]) &&
             jCheckBool(autoconnectEnable, data["autoconnectEnable"]) ){
-        m_lib->createAccount(accountName, server, user, password, filePlayPath, fileRecPath, fileRecordRXonly, fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID, autoconnectEnable);
+        m_lib->createAccount(accountName, server, user, password, filePlayPath, fileRecPath, fileRecordRXonly, fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID, autoconnectEnable, hasDTMFGPIO);
         ret["data"] = retDataObj;
     } else {
         ret["error"] = hasError("Parameters not accepted");
@@ -252,7 +253,7 @@ void Websocket::createAccount(QJsonObject &data, QJsonObject &ret) {
 void Websocket::modifyAccount(QJsonObject &data, QJsonObject &ret) {
     QJsonObject retDataObj;
     QString uid, accountName, server, user, password, filePlayPath, fileRecPath, autoconnectToBuddyUID;
-    bool fixedJitterBuffer = true, fileRecordRXonly= true, autoconnectEnable = true;
+    bool fixedJitterBuffer = true, fileRecordRXonly= true, autoconnectEnable = true, hasDTMFGPIO = true;
     int fixedJitterBufferValue = 0;
     if(     jCheckString(uid, data["uid"]) &&
             jCheckString(accountName, data["accountName"]) &&
@@ -265,8 +266,9 @@ void Websocket::modifyAccount(QJsonObject &data, QJsonObject &ret) {
             jCheckBool(fixedJitterBuffer, data["fixedJitterBuffer"]) &&
             jCheckInt(fixedJitterBufferValue, data["fixedJitterBufferValue"]) &&
             jCheckString(autoconnectToBuddyUID, data["autoconnectToBuddyUID"]) &&
-            jCheckBool(autoconnectEnable, data["autoconnectEnable"]) ){
-        m_lib->modifyAccount(uid, accountName, server, user, password, filePlayPath, fileRecPath, fileRecordRXonly, fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID, autoconnectEnable);
+            jCheckBool(autoconnectEnable, data["autoconnectEnable"]) &&
+            jCheckBool(hasDTMFGPIO, data["hasDTMFGPIO"]) ){
+        m_lib->modifyAccount(uid, accountName, server, user, password, filePlayPath, fileRecPath, fileRecordRXonly, fixedJitterBuffer, fixedJitterBufferValue, autoconnectToBuddyUID, autoconnectEnable, hasDTMFGPIO);
         ret["data"] = retDataObj;
         ret["error"] = noError();
     } else {

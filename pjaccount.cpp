@@ -40,7 +40,9 @@ void PJAccount::onRegState(OnRegStateParam &prm) {
     emit parent->regStateChanged(ai.id, ai.regIsActive);
     emit parent->signalSipStatus(ai.id, ai.regStatus,QString::fromStdString(ai.regStatusText));
     if(acc != nullptr){
-        acc->gpioDev->setRegistered(ai.regIsActive);
+        if(acc->gpioDev != nullptr){
+            acc->gpioDev->setRegistered(ai.regIsActive);
+        }
         if(ai.regIsActive && acc->CallList.isEmpty()){
             parent->sendPresenceStatus(ai.id,online);
         }

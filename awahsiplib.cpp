@@ -189,13 +189,13 @@ QDataStream &operator>>(QDataStream &in, s_IODevices &obj)
 
 QDataStream &operator<<(QDataStream &out, const s_account &obj)
 {
-    out << obj.name << obj.user << obj.password << obj.serverURI << obj.FileRecordPath << obj.FileRecordRXonly << obj.FilePlayPath << obj.uid << obj.CallHistory << obj.fixedJitterBuffer << obj.fixedJitterBufferValue << obj.autoconnectToBuddyUID << obj.autoconnectEnable;
+    out << obj.name << obj.user << obj.password << obj.serverURI << obj.FileRecordPath << obj.FileRecordRXonly << obj.FilePlayPath << obj.uid << obj.CallHistory << obj.fixedJitterBuffer << obj.fixedJitterBufferValue << obj.autoconnectToBuddyUID << obj.autoconnectEnable << obj.hasDTMFGPIO;
     return out;
 }
 
 QDataStream &operator>>(QDataStream &in, s_account &obj)
 {
-    in  >> obj.name >> obj.user >> obj.password >> obj.serverURI >> obj.FileRecordPath >> obj.FileRecordRXonly >> obj.FilePlayPath >> obj.uid >> obj.CallHistory >> obj.fixedJitterBuffer >> obj.fixedJitterBufferValue >> obj.autoconnectToBuddyUID >> obj.autoconnectEnable;
+    in  >> obj.name >> obj.user >> obj.password >> obj.serverURI >> obj.FileRecordPath >> obj.FileRecordRXonly >> obj.FilePlayPath >> obj.uid >> obj.CallHistory >> obj.fixedJitterBuffer >> obj.fixedJitterBufferValue >> obj.autoconnectToBuddyUID >> obj.autoconnectEnable >> obj.hasDTMFGPIO;
     return in;
 }
 

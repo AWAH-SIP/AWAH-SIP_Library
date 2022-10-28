@@ -135,7 +135,9 @@ void PJCall::onCallState(OnCallStateParam &prm)
         }
 
         if(callAcc->CallList.count()==0){
-            callAcc->gpioDev->setConnected(false);
+            if(callAcc->gpioDev != nullptr){
+                callAcc->gpioDev->setConnected(false);
+            }
         }
         emit m_lib->m_Accounts->AccountsChanged(m_lib->m_Accounts->getAccounts());
         delete this;
@@ -388,9 +390,12 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
                 pjmedia_sdp_attr *attribute = pjmedia_sdp_attr_find2(r_media->attr_count, r_media->attr, "fmtp", NULL);       // find and parse fmtp attributes
                 if (attribute != NULL) {
                     QString tmp = pj2Str(attribute->value);
+                    qDebug() << "original" << tmp;
                     QStringList attributes = tmp.split(" ");
                     attributes = attributes.at(1).split(";");
+                    qDebug() << attributes.at(0) << " und was " << attributes.at(1);
                     for( int i = 0; i  < attributes.size() ; i++){
+                        qDebug() << "fuking sdp : " << attributes.at(i) ;
                         if(attributes.at(i).contains("maxaveragebitrate")){
                             QStringList value = attributes.at(i).split("=");
                             QJsonObject jsob = remoteCodec.codecParameters["Bit rate"].toObject();
@@ -414,6 +419,9 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
                             QJsonObject jsob = remoteCodec.codecParameters["Inband FEC"].toObject();
                             jsob["value"] = value.at(1).toInt();
                             remoteCodec.codecParameters["Inband FEC"] = jsob;
+                        }
+                        else if(attributes.at(i).contains("0-16")){
+                            qDebug() << "yes we can sent DTMF";
                         }
                     }
                 }
@@ -465,6 +473,8 @@ void PJCall::onDtmfDigit(OnDtmfDigitParam &prm)
         m_lib->m_Log->writeLog(2,QString("onDtmfDigit: Error account not found!"));
         return;
     }
-    callAcc->gpioDev->setFromDTMF(dtmfdigit);
-    m_lib->m_Log->writeLog(3,QString("Account: ") + callAcc->name + " recieved DTMF digit: " + QString().fromStdString(prm.digit));
+    if(callAcc->gpioDev != nullptr){
+        callAcc->gpioDev->setFromDTMF(dtmfdigit);
+    }
+    m_lib->m_Log->writeLog(4,QString("Account: ") + callAcc->name + " recieved DTMF digit: " + QString().fromStdString(prm.digit));
 }

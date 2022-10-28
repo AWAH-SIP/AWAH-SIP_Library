@@ -39,7 +39,7 @@ void MessageManager::sendDtmf(int callId, int AccID, QString num)
     if(m_call != Q_NULLPTR){
         try{
             m_call->dialDtmf(num.toStdString());
-            m_lib->m_Log->writeLog(3,QString("sendDtmf from account: " + account->name +  " DTMF digit: ") + num);
+            m_lib->m_Log->writeLog(4,QString("sendDtmf from account: " + account->name +  " DTMF digit: ") + num);
         }
         catch(Error& err){
             m_lib->m_Log->writeLog(2,QString("sendDtmf from account: " + account->name + " failed ") + err.info().c_str());
