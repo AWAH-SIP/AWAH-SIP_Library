@@ -387,15 +387,15 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
                         remoteCodec.displayName = remoteCodec.encodingName;
                 }
 
-                pjmedia_sdp_attr *attribute = pjmedia_sdp_attr_find2(r_media->attr_count, r_media->attr, "fmtp", NULL);       // find and parse fmtp attributes
-                if (attribute != NULL) {
+                pjmedia_sdp_attr *attribute = pjmedia_sdp_attr_find2(r_media->attr_count, r_media->attr, "fmtp", NULL);       // find and parse fmtp attributes                 // todo rewrite the whole section or even better find a good solution!!!!!
+                if (attribute != NULL) {                                                                                                                                        // this finds only the first paremeter depending on sdp structure we miss a lot!!!!!
                     QString tmp = pj2Str(attribute->value);
-                    qDebug() << "original" << tmp;
                     QStringList attributes = tmp.split(" ");
                     attributes = attributes.at(1).split(";");
-                    qDebug() << attributes.at(0) << " und was " << attributes.at(1);
                     for( int i = 0; i  < attributes.size() ; i++){
-                        qDebug() << "fuking sdp : " << attributes.at(i) ;
+//                        if(attributes.at(i).contains("0-1")){              // could be 0-15 or 0-16 depending on the client                                                   // started to detct if the opposit supports DTMF and only send them if true
+//                            qDebug() << "yes we can send DTMF";
+//                        }
                         if(attributes.at(i).contains("maxaveragebitrate")){
                             QStringList value = attributes.at(i).split("=");
                             QJsonObject jsob = remoteCodec.codecParameters["Bit rate"].toObject();
@@ -419,9 +419,6 @@ void PJCall::onCallSdpCreated(OnCallSdpCreatedParam &prm)
                             QJsonObject jsob = remoteCodec.codecParameters["Inband FEC"].toObject();
                             jsob["value"] = value.at(1).toInt();
                             remoteCodec.codecParameters["Inband FEC"] = jsob;
-                        }
-                        else if(attributes.at(i).contains("0-16")){
-                            qDebug() << "yes we can sent DTMF";
                         }
                     }
                 }

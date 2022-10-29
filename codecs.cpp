@@ -393,7 +393,6 @@ int Codecs::setCodecParam(s_codec codec)
 
     QJsonObject::iterator i;
     for (i = codec.codecParameters.begin(); i != codec.codecParameters.end(); ++i) {
-        qDebug() << "found codec param: " << i.key() << " value : " << i.value();
         if (i.key() == "Confort Noise generator"){
             param.setting.cng = i.value().toObject()["value"].toInt();
         }
