@@ -22,7 +22,6 @@
 
 #define THIS_FILE		"accounts.cpp"
 
-
 Accounts::Accounts(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_lib(parentLib)
 {
     m_CallInspectorTimer = new QTimer(this);
@@ -188,7 +187,6 @@ void Accounts::makeCall(QString number, int AccID, s_codec codec)
         m_lib->m_Codecs->selectCodec(codec);
         m_lib->m_Codecs->setCodecParam(codec);
         account->SelectedCodec = codec;
-        addCallToHistory(account->AccID,number,0,codec,1);
         newCall = new PJCall(this, m_lib, m_lib->m_MessageManager, *account->accountPtr);
         CallOpParam prm(true);        // Use default call settings
         try{
@@ -488,11 +486,13 @@ void Accounts::addCallToHistory(int AccID, QString callUri, int duration, s_code
     s_account* account = getAccountByID(AccID);
     s_callHistory newCall;
     bool entryexists = false;
-
+    if(codec.encodingName.isEmpty()){                                                   // don't add calls witout a codec to the history (this is the case when the offered codec is not accepted froem the remote side)
+        return;
+    }
     QMutableListIterator<s_callHistory> it(account->CallHistory);
     while(it.hasNext()){
         s_callHistory &entry = it.next();
-        if(entry.callUri.contains(callUri) || callUri.contains(entry.callUri)){         //the call list could contain only the number and we recieve a fully URI or vice verca
+        if(entry.callUri.contains(callUri) || callUri.contains(entry.callUri)){         //the call list could contain only the number and the recieved chall has a fully URI or vice verca
             entryexists = true;
             newCall.callUri = callUri;
             newCall.codec = codec;
@@ -581,7 +581,7 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
         if(lastStatusCode == 180 && role == 1){                                                                           // auto answer call
             acceptCall(accID,callId);
         }
-        thisCall->CallStatusText = "Invite: State Early";
+        thisCall->CallStatusText = "Invite: State early";
     }
     else if (state == PJSIP_INV_STATE_CALLING) {
         thisCall->CallStatusText = "calling";

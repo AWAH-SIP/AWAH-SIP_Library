@@ -151,12 +151,11 @@ QList<s_codec> Codecs::getActiveCodecs()
 
 void Codecs::selectCodec(s_codec &codec){
     QString codecId;
-
-    qDebug() << "codec encodingname: " << codec.displayName << " existing encodig name ";
-    if(!codec.encodingName.contains("/")){
-        qDebug() << "Generate codec encodingname: " << codec.displayName << " existing encodig name " << codec.encodingName;
+    if(!codec.encodingName.contains("/")){                                              // todo test if this is needed anymore
         codec.encodingName = codec.encodingName + "/" + QString::number(codec.codecParameters["Clockrate"].toObject()["value"].toInt()) + "/" + QString::number(codec.codecParameters["Channelcount"].toObject()["value"].toInt());
-        qDebug() << "new encodingname: "  << codec.encodingName;
+    }
+    if(codec.encodingName.startsWith("L16",Qt::CaseInsensitive)){                       // update encoding name because L16 familiy is presented to the user as "Linear" with parameters and not as individual codecs
+        codec.encodingName = QString("L16/") + QString::number(codec.codecParameters["Clockrate"].toObject()["value"].toInt()) + "/" + QString::number(codec.codecParameters["Channelcount"].toObject()["value"].toInt());
     }
     bool codecFound = false;
     foreach(const CodecInfo codecinfo, m_lib->m_pjEp->codecEnum2())
@@ -220,34 +219,16 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
             codecparam["Inband FEC"]= item;
             paramParsed = true;
         }
-        else if(strcmp(fmtp.name.c_str(),"maxaveragebitrate")==0){
+        else if(strcmp(fmtp.name.c_str(),"maxaveragebitrate")==0){          // don't populate opus menus just mark as parsed -> opus settings are handled further down
             paramParsed = true;
         }
         else if(strcmp(fmtp.name.c_str(),"cbr")==0){
             paramParsed = true;
         }
         else if(strcmp(fmtp.name.c_str(),"stereo")==0){
-//            item["type"] = ENUM_INT;                                // opus test
-//            item["value"] = atoi(fmtp.val.c_str());
-//            item["min"] = 0;
-//            item["max"] = 1;
-//             enumitems = QJsonObject();
-//            enumitems["mono"] = 0;
-//            enumitems["stereo"] = 1;
-//           item["enumlist"] = enumitems;
-//            codecparam["stereo"]= item;
             paramParsed = true;
         }
-        else if(strcmp(fmtp.name.c_str(),"sprop-stereo")==0){                           // don't populate menu just mark as parsed
-//            item["type"] = ENUM_INT;                                // opus test
-//            item["value"] = atoi(fmtp.val.c_str());
-//            item["min"] = 0;
-//            item["max"] = 1;
-//             enumitems = QJsonObject();
-//            enumitems["mono"] = 0;
-//            enumitems["stereo"] = 1;
-//           item["enumlist"] = enumitems;
-//            codecparam["sprop-stereo"]= item;
+        else if(strcmp(fmtp.name.c_str(),"sprop-stereo")==0){
             paramParsed = true;
         }
 
@@ -272,9 +253,7 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
     foreach(const pj::CodecFmtp fmtp, PJcodecParam.setting.encFmtp){
         m_lib->m_Log->writeLog(4,QString("getCodecParam: unparsed encoding key/value: ") +fmtp.name.c_str());
     }
-
     if(codecId.startsWith("opus",Qt::CaseInsensitive)){
-
         pjmedia_codec_opus_config opus_cfg;
         pjmedia_codec_opus_get_config(&opus_cfg);
         item = QJsonObject();
@@ -360,6 +339,35 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
         item["enumlist"] = enumitems;
         codecparam["Clockrate"] = item;
     }
+
+    if(codecId.startsWith("L16",Qt::CaseInsensitive)){
+        QStringList CodecSettings = codecId.split("/");       // the list contains now name , bitrate , channelcount ("L16", "16000", "1")
+        if(CodecSettings.at(0) == "L16"){
+            item = QJsonObject();
+            item["type"] = ENUM_INT;
+            item["value"] = CodecSettings.at(1).toInt();
+            item["min"] = 8000;
+            item["max"] = 48000;
+            enumitems = QJsonObject();
+            enumitems["8k"] = 8000;
+            enumitems["16k"] = 16000;
+            enumitems["32k"] = 32000;
+            enumitems["44,1k"] = 44100;
+            enumitems["48k"] = 48000;
+            item["enumlist"] = enumitems;
+            codecparam["Clockrate"] = item;
+            item = QJsonObject();
+            item["type"] = ENUM_INT;
+            item["value"] = CodecSettings.at(2).toInt();
+            item["max"] = 2;
+            enumitems = QJsonObject();
+            enumitems["mono"] = 1;
+            enumitems["stereo"] = 2;
+            item["enumlist"] = enumitems;
+            codecparam["Channelcount"] = item;
+            return codecparam;
+        }
+    }
     return codecparam;
 }
 
@@ -378,6 +386,11 @@ int Codecs::setCodecParam(s_codec codec)
     medep = pjsua_get_pjmedia_endpt();
     mgr= pjmedia_endpt_get_codec_mgr(medep);
     pjmedia_codec_mgr_enum_codecs(mgr,&count,info,nullptr);
+
+    if(codec.encodingName.startsWith("L16",Qt::CaseInsensitive)){               // update encoding name according to the set channelcount and clockrate
+        codec.encodingName = QString("L16/") + QString::number(codec.codecParameters["Clockrate"].toObject()["value"].toInt()) + "/" + QString::number(codec.codecParameters["Channelcount"].toObject()["value"].toInt());
+    }
+
     for (unsigned int i = 0; i< count;i++){
         QString pjCodecID = pj2Str(info[i].encoding_name) + "/" + QString::number(info[i].clock_rate) + "/" + QString::number(info[i].channel_cnt);
         if ( pjCodecID == codec.encodingName){
@@ -400,7 +413,7 @@ int Codecs::setCodecParam(s_codec codec)
             param.setting.frm_per_pkt = i.value().toObject()["value"].toInt();
         }
 
-        if (i.key() == "Inband FEC"){                                                                      // todo test me!
+        if (i.key() == "Inband FEC"){                                                                      // todo test me! see issue #95
             for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
                  if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"useinbandfec")==0){
                     param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
@@ -408,7 +421,7 @@ int Codecs::setCodecParam(s_codec codec)
             }
         }
 
-        if (i.key() == "stereo"){                                                                      // todo test me!
+        if (i.key() == "stereo"){                                                                      // todo test me! see issue #95
                     for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
                          if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"stereo")==0){
                             param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
@@ -416,7 +429,7 @@ int Codecs::setCodecParam(s_codec codec)
                     }
                 }
 
-        if (i.key() == "sprop-stereo"){                                                                      // todo test me!
+        if (i.key() == "sprop-stereo"){                                                                      // todo test me! see issue #95
                     for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
                          if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"sprop-stereo")==0){
                             param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
@@ -426,7 +439,7 @@ int Codecs::setCodecParam(s_codec codec)
 
         if (i.key() == "Mode" && codec.encodingName.startsWith("iLBC")){
             for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
-                 if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"mode")==0){               //iLBC Mode
+                 if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"mode")==0){                           //iLBC Mode
                     param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;                   // todo does not work!!!
                  }
             }
@@ -436,11 +449,20 @@ int Codecs::setCodecParam(s_codec codec)
             for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
                  if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"bitrate")==0){
                     param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
+                    qDebug() << " *************** setCodecPar: fmtp bitrate " << param.setting.dec_fmtp.param[j].val.ptr;
+                 }
+            }
+        }
+
+        if (i.key() == "maxaveragebitrate"){                                                                      // todo test me!
+            for(int j = 0; j<param.setting.dec_fmtp.cnt; j++){
+                 if(pj_strcmp2(&param.setting.dec_fmtp.param[j].name,"maxaveragebitrate")==0){
+                    param.setting.dec_fmtp.param[j].val = str2Pj(i.value().toObject()["value"].toString()) ;
+                    qDebug() << " *************** setCodecPar: fmtp maxaveragebitrate " << param.setting.dec_fmtp.param[j].val.ptr;
                  }
             }
         }
     }
-
     status =  pjmedia_codec_mgr_set_default_param(mgr,selected,&param);
     if (status ) {
         char buf[50];
@@ -449,7 +471,7 @@ int Codecs::setCodecParam(s_codec codec)
         return status;
     }
 
-    if(codec.encodingName.startsWith("opus",Qt::CaseInsensitive)){                                     // do the opus stuff
+    if(codec.encodingName.startsWith("opus",Qt::CaseInsensitive)){                                     // set the default opus config
          pjmedia_codec_opus_get_config(&opus_cfg);
          QJsonObject::iterator it;
          for (it = codec.codecParameters.begin(); it != codec.codecParameters.end(); ++it) {

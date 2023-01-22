@@ -69,8 +69,6 @@ public:
 
     virtual void onCallSdpCreated(OnCallSdpCreatedParam &prm);
 
-    // virtual void onCallRxOffer(OnCallRxOfferParam &prm);
-
     virtual void onInstantMessage(OnInstantMessageParam &prm);
 
     virtual void onDtmfDigit(OnDtmfDigitParam &prm);
