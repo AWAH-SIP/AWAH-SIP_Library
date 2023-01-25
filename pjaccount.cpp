@@ -43,6 +43,28 @@ void PJAccount::onRegState(OnRegStateParam &prm) {
         if(acc->gpioDev != nullptr){
             acc->gpioDev->setRegistered(ai.regIsActive);
         }
+        if(ai.regIsActive){                                                                             // only register buddy on active account and if the account does not have any buddies registered
+            BuddyVector2 accbuddies = acc->accountPtr->enumBuddies2();
+            if(accbuddies.empty()){
+                for (auto& buddy : m_lib->m_Buddies->getBuddies()){
+                    if(buddy.accUid == acc->uid){
+                        m_lib->m_Buddies->registerBuddy(acc->AccID,buddy.buddyUrl);
+                    }
+                }
+            }
+        }
+        if(!ai.regIsActive){                                                                            // unregister buddies if account not online to prevent subscribe messages on a offline account
+            BuddyVector2 accbuddies = acc->accountPtr->enumBuddies2();
+            if(!accbuddies.empty()){
+                for (auto& buddy : m_lib->m_Buddies->getBuddies()){
+                    if(buddy.accUid == acc->uid){
+                        m_lib->m_Buddies->unregisterBuddy(acc->AccID,buddy.buddyUrl);
+                    }
+                }
+
+            }
+
+        }
         if(ai.regIsActive && acc->CallList.isEmpty()){
             parent->sendPresenceStatus(ai.id,online);
         }

@@ -40,20 +40,23 @@ bool Buddies::registerBuddy(int AccID, QString buddyUrl){
             cfg.uri = fulladdr.toStdString();
             cfg.subscribe = true;
             PJBuddy *buddy = new PJBuddy(m_lib, this);
-            try {
-                buddy->create(*account->accountPtr, cfg);
-            } catch(Error& err) {
-                m_lib->m_Log->writeLog(1,QString("RegisterBuddy: Buddy register failed: ") + err.info().c_str());
-                return false;
+            if(account->SIPStatusCode == 200){                                      // only register buddys when account is registered, otherwise the subsrcibe messages can cause problems because they are not trusted messages on certain sbc's
+                try {
+                    buddy->create(*account->accountPtr, cfg);
+                    qDebug() << "register buddy! registered buddy: " << buddy->getInfo().contact.c_str();
+                    return true;
+                } catch(Error& err) {
+                    m_lib->m_Log->writeLog(1,QString("RegisterBuddy: Buddy register failed: ") + err.info().c_str());
+                    return false;
+                }
             }
-            return true;
         }
         else{
             m_lib->m_Log->writeLog(3,"RegisterBuddy: Buddy register failed: Buddy already exists!");
             return false;
         }
     }
-    else return false;
+    return false;
 }
 
 bool Buddies::unregisterBuddy(int AccID, QString buddyUrl){
@@ -63,11 +66,12 @@ bool Buddies::unregisterBuddy(int AccID, QString buddyUrl){
         Buddy buddy;
         try{
             buddy = account->accountPtr->findBuddy2(fulladdr.toStdString());
+            buddy.subscribePresence(0);                                                                                 // todo test this, is is sufficient to only unsubscribe presence?
         } catch(Error &err) {
-            m_lib->m_Log->writeLog(2,QString("deleteBuddy: ") + buddyUrl + " failed: " + err.info().c_str( ));
+            m_lib->m_Log->writeLog(2,QString("unregisterBuddy: ") + buddyUrl + " failed: " + err.info().c_str( ));
             return false;
         }
-        m_lib->m_Log->writeLog(3,QString("deleteBuddy: ") + buddyUrl + " deleted successfully");
+        m_lib->m_Log->writeLog(3,QString("undregisterBuddy: ") + buddyUrl + " unregistered successfully");
         return true;
     }else return false;
 }

@@ -56,6 +56,7 @@ void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
 
     if(call->rec_id != INVALID_ID  ){
         PJSUA2_CHECK_EXPR (pjsua_conf_connect(pjsua_call_get_conf_port(call->callId), pjsua_recorder_get_conf_port(call->rec_id)) );
+        AWAHSipLib::instance()->m_Log->writeLog(3, (QString("PJCall::on_media_finished(): Announcement for CallID: %1 finished connecting call to recorder").arg(call->callId)));
         if(!callAcc->FileRecordRXonly){
             PJSUA2_CHECK_EXPR (pjsua_conf_connect(call->splitterSlot, pjsua_recorder_get_conf_port(call->rec_id)) );
         }
@@ -93,10 +94,7 @@ void PJCall::onCallState(OnCallStateParam &prm)
     parent->OncallStateChanged(ci.accId, ci.role, ci.id, ci.remOfferer, ci.connectDuration.sec,ci.state, ci.lastStatusCode, QString::fromStdString(ci.lastReason),QString::fromStdString(ci.remoteUri));
 
     if(ci.state == PJSIP_INV_STATE_DISCONNECTED)
-    {
-        //parent->setConnectDuration(ci.connectDuration.sec);
-        m_lib->m_Log->writeLog(3,QString("onCallState: deleting call with id: %1 from %2 of Account %3").arg(QString::number(ci.id), QString::fromStdString(ci.remoteUri), callAcc->name));
-
+    {  
         if(CalllistEntry->callConfPort != -1) {
             try {
                 //first stop the mic stream, then the playback stream
@@ -116,6 +114,7 @@ void PJCall::onCallState(OnCallStateParam &prm)
                     }
                     PJSUA2_CHECK_EXPR( pjsua_recorder_destroy(CalllistEntry->rec_id) );
                     CalllistEntry->rec_id = PJSUA_INVALID_ID;
+                    m_lib->m_Log->writeLog(3,QString("onCallState: closing recorder for call with id: %1 from %2 of Account %3").arg(QString::number(ci.id), QString::fromStdString(ci.remoteUri), callAcc->name));
                 }
             }  catch (Error &err) {
                 m_lib->m_Log->writeLog(1,QString("onCallState: Disconnect Error: ") + QString().fromStdString(err.info(true)));
@@ -139,8 +138,9 @@ void PJCall::onCallState(OnCallStateParam &prm)
                 callAcc->gpioDev->setConnected(false);
             }
         }
-        emit m_lib->m_Accounts->AccountsChanged(m_lib->m_Accounts->getAccounts());
         delete this;
+        m_lib->m_Log->writeLog(3,QString("onCallState: deleting call with id: %1 from %2 of Account %3").arg(QString::number(ci.id), QString::fromStdString(ci.remoteUri), callAcc->name));
+        emit m_lib->m_Accounts->AccountsChanged(m_lib->m_Accounts->getAccounts());
     }
 }
 
@@ -216,7 +216,7 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
 
         if(!callAcc->FileRecordPath.isEmpty()){            // if a filerecorder is configured create a recorder
             if(Callopts->rec_id == PJSUA_INVALID_ID) {
-                m_lib->m_Log->writeLog(3,QString("onCallMediaState: creating call recorder for callId %1").arg(Callopts->callId));
+                m_lib->m_Log->writeLog(3,QString("onCallMediaState: creating a call recorder for callId %1").arg(Callopts->callId));
                 pj_status_t status = PJ_ENOTFOUND;
                 pj_str_t rec_file;
                 QDateTime local(QDateTime::currentDateTime());

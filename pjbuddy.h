@@ -38,7 +38,7 @@ public:
     ~PJBuddy();
 
     virtual void onBuddyState();
-    virtual void onBuddyEvSubState(OnBuddyEvSubStateParam &prm);
+//    virtual void onBuddyEvSubState(OnBuddyEvSubStateParam &prm);
 
 private:
     Buddies *parent;
