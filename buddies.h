@@ -35,12 +35,12 @@ public:
     /**
     * @brief this function is ondy used internally to register a buddy in pjsua
     */
-    bool registerBuddy(int AccID, QString buddyUrl);            // todo make me private
+    bool registerBuddy(s_buddy& buddy);
 
     /**
     * @brief this function is ondy used internally to remove a burry from pjsua
     */
-    bool unregisterBuddy(int AccID, QString buddyUrl);
+    bool unregisterBuddy(s_buddy& buddy);
 
     /**
     * @brief add a Buddy entry (a buddy can be seen as a phonebook entry)
