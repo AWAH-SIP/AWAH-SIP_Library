@@ -72,7 +72,7 @@ public:
     * @brief get the configured Buddies
     * @return QList with all the buddies
     */
-    const QList <s_buddy> getBuddies(){return m_buddies; };
+    QList <s_buddy> getBuddies(){return m_buddies; };
 
     /**
     * @brief get a buddy by its uid

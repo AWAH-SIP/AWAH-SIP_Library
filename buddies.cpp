@@ -101,12 +101,12 @@ void Buddies::editBuddy(QString buddyUrl, QString name, QString accUid, QJsonObj
     s_buddy *editBuddy = nullptr;
     editBuddy = getBuddyByUID(uid);
     if(editBuddy != nullptr){
-        unregisterBuddy(editBuddy);
+        unregisterBuddy(*editBuddy);
         editBuddy->buddyUrl = buddyUrl;
         editBuddy->Name = name;
         editBuddy->accUid = accUid;
         editBuddy->codec.fromJSON(codecSettings);
-        registerBuddy(editBuddy);
+        registerBuddy(*editBuddy);
         m_lib->m_Settings->saveBuddies();
         emit BuddyEntryChanged(&m_buddies);
     }
