@@ -48,7 +48,7 @@ void PJAccount::onRegState(OnRegStateParam &prm) {
             if(accbuddies.empty()){
                 for (auto& buddy : m_lib->m_Buddies->getBuddies()){
                     if(buddy.accUid == acc->uid){
-                        m_lib->m_Buddies->registerBuddy(acc->AccID,buddy.buddyUrl);
+                        m_lib->m_Buddies->registerBuddy(buddy);
                     }
                 }
             }
@@ -58,7 +58,7 @@ void PJAccount::onRegState(OnRegStateParam &prm) {
             if(!accbuddies.empty()){
                 for (auto& buddy : m_lib->m_Buddies->getBuddies()){
                     if(buddy.accUid == acc->uid){
-                        m_lib->m_Buddies->unregisterBuddy(acc->AccID,buddy.buddyUrl);
+                        m_lib->m_Buddies->unregisterBuddy(buddy);
                     }
                 }
 

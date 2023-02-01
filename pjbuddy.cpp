@@ -26,26 +26,16 @@
 #include "awahsiplib.h"
 
 
-PJBuddy::PJBuddy(AWAHSipLib *parentLib, Buddies *parent) : m_lib(parentLib)
-{
-    this->parent = parent;
-}
-
-PJBuddy::~PJBuddy()
-{
-
-}
-
 void PJBuddy::onBuddyState(){
     BuddyInfo bi;
     int state = unknown;
     try {
         bi = getInfo();
     }  catch(Error& err) {
-        m_lib->m_Log->writeLog(2, QString("onBuddyState:getInfo failed: ") + err.info().c_str());
+        AWAHSipLib::instance()->m_Log->writeLog(2, QString("onBuddyState:getInfo failed: ") + err.info().c_str());
         return;
     }
-    m_lib->m_Log->writeLog(4, QString("onBuddyState: Buddy: ") + QString::fromStdString(bi.uri) + " is " + QString::number(bi.presStatus.status) + " note is: " + QString::fromStdString(bi.presStatus.note));
+    AWAHSipLib::instance()->m_Log->writeLog(4, QString("onBuddyState: Buddy: ") + QString::fromStdString(bi.uri) + " is " + QString::number(bi.presStatus.status) + " note is: " + QString::fromStdString(bi.presStatus.note));
     if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE){
         state = online;
     }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE && bi.presStatus.note == "Busy"){
@@ -55,7 +45,7 @@ void PJBuddy::onBuddyState(){
     }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_OFFLINE){
         state = unknown;
     }
-    m_lib->m_Buddies->changeBuddyState(QString::fromStdString(bi.uri), state);
+    AWAHSipLib::instance()->m_Buddies->changeBuddyState(QString::fromStdString(bi.uri), state);
 }
 
 //void PJBuddy::onBuddyEvSubState(OnBuddyEvSubStateParam &prm){
