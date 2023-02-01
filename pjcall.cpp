@@ -138,9 +138,9 @@ void PJCall::onCallState(OnCallStateParam &prm)
                 callAcc->gpioDev->setConnected(false);
             }
         }
-        delete this;
         m_lib->m_Log->writeLog(3,QString("onCallState: deleting call with id: %1 from %2 of Account %3").arg(QString::number(ci.id), QString::fromStdString(ci.remoteUri), callAcc->name));
         emit m_lib->m_Accounts->AccountsChanged(m_lib->m_Accounts->getAccounts());
+        delete this;
     }
 }
 
@@ -313,22 +313,22 @@ void PJCall::onStreamCreated(OnStreamCreatedParam &prm)
                     }
                     else if(encodingName =="speex"){
                         remoteCodec.displayName = "Speex";
-                        remoteCodec.encodingName = encodingName + "/" + info.fmt.clock_rate + "/" + info.fmt.channel_cnt;
-                        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
+                        remoteCodec.encodingName = encodingName + "/" + QString::number(info.fmt.clock_rate) + "/" + QString::number(info.fmt.channel_cnt);
+                        remoteCodec.codecParameters["Clockrate"].toObject()["value"] = (QString)info.fmt.clock_rate;
                     }
-                    else if(encodingName =="AMR"){
+                    else if(encodingName.contains("AMR")){
                         remoteCodec.displayName = "AMR";
-                        remoteCodec.encodingName = encodingName + "/" + info.fmt.clock_rate + "/" + info.fmt.channel_cnt;
+                        remoteCodec.encodingName = (QString)"AMR/8000/1";
                         remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
                     }
                     else if(encodingName =="iLBC"){
                         remoteCodec.displayName = "iLBC";
-                        remoteCodec.encodingName = encodingName + "/" + info.fmt.clock_rate + "/" + info.fmt.channel_cnt;
+                        remoteCodec.encodingName = encodingName + "/" + (QString)info.fmt.clock_rate + "/" +(QString)info.fmt.channel_cnt;
                         remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
                     }
                     else if(encodingName =="GSM"){
                         remoteCodec.displayName = "GSM";
-                        remoteCodec.encodingName = encodingName + "/" + info.fmt.clock_rate + "/" + info.fmt.channel_cnt;
+                        remoteCodec.encodingName = encodingName + "/" + (QString)info.fmt.clock_rate + "/" + (QString)info.fmt.channel_cnt;
                         remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
                     }
                     else{

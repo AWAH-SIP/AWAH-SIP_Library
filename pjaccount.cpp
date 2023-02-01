@@ -95,19 +95,23 @@ void PJAccount::onIncomingCall(OnIncomingCallParam &iprm)
             pjmedia_sdp_attr *codec = pjmedia_sdp_attr_find2(r_media->attr_count, r_media->attr, "rtpmap", NULL);        // find codec type         // this attributes getupdatet in the callback onMediaCreated to chatch upddates during the negotiation phase
             if (codec != NULL) {
                 QString tmp = pj2Str(codec->value);
+
                 QStringList codectype = tmp.split(" ");
                 codectype = codectype.at(1).split(";");
                 remoteCodec.encodingName = codectype.first();
+                qDebug() << "codec name recieced " <<  codec->name.ptr;
+                qDebug() << "recieved codecvalue. " << tmp;
+                qDebug() << "remote Codec encodign name: " << remoteCodec.encodingName;
                 if(remoteCodec.encodingName.startsWith("opus",Qt::CaseInsensitive)){                                    // convert the encoding name to a nice userfriendly name
                     remoteCodec.encodingName = "opus/48000/2";
                     remoteCodec.displayName = "Opus";
                     }
-                }
-                else if(remoteCodec.encodingName.startsWith("PCMU",Qt::CaseInsensitive)){
+
+                else if(remoteCodec.encodingName.contains("PCMU",Qt::CaseInsensitive)){
                     remoteCodec.encodingName = "PCMU/8000/1";
                     remoteCodec.displayName = "G711 u-Law";
                 }
-                else if(remoteCodec.encodingName.startsWith("PCMA",Qt::CaseInsensitive)){
+                else if(remoteCodec.encodingName.contains("PCMA",Qt::CaseInsensitive)){
                     remoteCodec.encodingName = "PCMA/8000/1";
                     remoteCodec.displayName = "G711 A-Law";
                 }
@@ -123,24 +127,31 @@ void PJAccount::onIncomingCall(OnIncomingCallParam &iprm)
                         remoteCodec.codecParameters["Channelcount"] = jsob;
                     }
                 }
-                else if(remoteCodec.encodingName.startsWith("G722",Qt::CaseInsensitive)){
+                else if(remoteCodec.encodingName.contains("G722",Qt::CaseInsensitive)){
                     remoteCodec.displayName = "G722";
                 }
                 else if(remoteCodec.encodingName.startsWith("speex",Qt::CaseInsensitive)){
                     remoteCodec.displayName = "Speex";
+                    QStringList tmp = remoteCodec.encodingName.split("/");
+                    QJsonObject jsob = remoteCodec.codecParameters["Clockrate"].toObject();
+                    jsob["value"] = tmp.at(1).toInt();
+                    remoteCodec.encodingName = QString("speex/")+tmp.at(1)+"/1";
+                    qDebug() << "remote Codec encodign name processed: " << remoteCodec.encodingName;
                 }
-                else if(remoteCodec.encodingName.startsWith("AMR",Qt::CaseInsensitive)){
+                else if(remoteCodec.encodingName.contains("AMR",Qt::CaseInsensitive)){
                     remoteCodec.displayName = "AMR";
+                    remoteCodec.encodingName = "AMR/8000/1";
                 }
-                else if(remoteCodec.encodingName.startsWith("iLBC",Qt::CaseInsensitive)){
+                else if(remoteCodec.encodingName.contains("iLBC",Qt::CaseInsensitive)){
                     remoteCodec.displayName = "iLBC";
                 }
-                else if(remoteCodec.encodingName.startsWith("GSM",Qt::CaseInsensitive)){
+                else if(remoteCodec.encodingName.contains("GSM",Qt::CaseInsensitive)){
                     remoteCodec.displayName = "GSM";
+                    remoteCodec.encodingName = "GSM/8000/1";
                 }
                 else
                     remoteCodec.displayName = remoteCodec.encodingName;
-
+            }
             pjmedia_sdp_attr *attribute = pjmedia_sdp_attr_find2(r_media->attr_count, r_media->attr, "fmtp", NULL);       // find and parse fmtp attributes                 // todo rewrite the whole section or even better: find a good solution!!!!!
             if (attribute != NULL) {                                                                                                                                        // this reads only the first paremeter depending on sdp structure we miss a lot!!!!!
                 QString tmp = pj2Str(attribute->value);

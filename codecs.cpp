@@ -72,6 +72,7 @@ QList<s_codec> Codecs::listCodecs(){
 
         }
         else if(CodecInfo.at(0) == "speex"){
+            newCodec.displayName = "Speex";
             item = QJsonObject();
             item["type"] = ENUM_INT;
             item["value"] = CodecInfo.at(1).toInt();
@@ -83,14 +84,7 @@ QList<s_codec> Codecs::listCodecs(){
             enumitems["32k"] = 32000;
             item["enumlist"] = enumitems;
             newCodec.codecParameters["Clockrate"] = item;
-            item = QJsonObject();
-            item["type"] = ENUM_INT;
-            item["value"] = CodecInfo.at(2).toInt();
-            item["max"] = 1;
-            enumitems = QJsonObject();
-            enumitems["mono"] = 1;
-            item["enumlist"] = enumitems;
-            newCodec.codecParameters["Channelcount"] = item;
+            qDebug() << "codec speex setting clockrate: " << item;
         }
         else if(CodecInfo.at(0) == "PCMU"){
             newCodec.displayName = "G711 u-Law";
@@ -157,6 +151,9 @@ void Codecs::selectCodec(s_codec &codec){
     if(codec.encodingName.startsWith("L16",Qt::CaseInsensitive)){                       // update encoding name because L16 familiy is presented to the user as "Linear" with parameters and not as individual codecs
         codec.encodingName = QString("L16/") + QString::number(codec.codecParameters["Clockrate"].toObject()["value"].toInt()) + "/" + QString::number(codec.codecParameters["Channelcount"].toObject()["value"].toInt());
     }
+    if(codec.encodingName.startsWith("speex",Qt::CaseInsensitive)){
+            codec.encodingName = QString("speex/") + QString::number(codec.codecParameters["Clockrate"].toObject()["value"].toInt()) + "/1";
+        }
     bool codecFound = false;
     foreach(const CodecInfo codecinfo, m_lib->m_pjEp->codecEnum2())
     {
@@ -367,6 +364,23 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
             codecparam["Channelcount"] = item;
             return codecparam;
         }
+        if(codecId.startsWith("speex",Qt::CaseInsensitive)){
+            QStringList CodecSettings = codecId.split("/");       // the list contains now name , bitrate , channelcount ("speex", "16000", "1")
+            if(CodecSettings.at(0) == "speex"){
+                item = QJsonObject();
+                item["type"] = ENUM_INT;
+                item["value"] = CodecSettings.at(1).toInt();
+                item["min"] = 8000;
+                item["max"] = 32000;
+                enumitems = QJsonObject();
+                enumitems["8k"] = 8000;
+                enumitems["16k"] = 16000;
+                enumitems["32k"] = 32000;
+                item["enumlist"] = enumitems;
+                codecparam["Clockrate"] = item;
+                return codecparam;
+            }
+        }
     }
     return codecparam;
 }
@@ -389,6 +403,10 @@ int Codecs::setCodecParam(s_codec codec)
 
     if(codec.encodingName.startsWith("L16",Qt::CaseInsensitive)){               // update encoding name according to the set channelcount and clockrate
         codec.encodingName = QString("L16/") + QString::number(codec.codecParameters["Clockrate"].toObject()["value"].toInt()) + "/" + QString::number(codec.codecParameters["Channelcount"].toObject()["value"].toInt());
+    }
+
+    if(codec.encodingName.startsWith("speex",Qt::CaseInsensitive)){               // update encoding name according to the set channelcount and clockrate
+        codec.encodingName = QString("speex/") + QString::number(codec.codecParameters["Clockrate"].toObject()["value"].toInt()) + "/1";
     }
 
     for (unsigned int i = 0; i< count;i++){
