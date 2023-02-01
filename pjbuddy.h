@@ -34,7 +34,7 @@ class PJBuddy : public Buddy
 
 public:
 
-    PJBuddy(AWAHSipLib *parentLib, Buddies *parent);
+    PJBuddy();
     ~PJBuddy();
 
     virtual void onBuddyState();

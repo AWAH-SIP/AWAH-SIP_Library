@@ -29,9 +29,9 @@ Buddies::Buddies(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_li
     m_BuddyChecker->start();
 }
 
-bool Buddies::registerBuddy(int AccID, QString buddyUrl){
-    s_account* account = m_lib->m_Accounts->getAccountByID(AccID);
-    QString fulladdr = "sip:"+ buddyUrl +"@"+ account->serverURI;
+bool Buddies::registerBuddy(s_buddy& buddy){
+    s_account* account = m_lib->m_Accounts->getAccountByUID(buddy.accUid);
+    QString fulladdr = "sip:"+ buddy.buddyUrl +"@"+ account->serverURI;
     Buddy buddyptr;
     if(account){
         buddyptr = account->accountPtr->findBuddy2(fulladdr.toStdString());
@@ -39,11 +39,11 @@ bool Buddies::registerBuddy(int AccID, QString buddyUrl){
             BuddyConfig cfg;
             cfg.uri = fulladdr.toStdString();
             cfg.subscribe = true;
-            PJBuddy *buddy = new PJBuddy(m_lib, this);
+            buddy.buddyptr = new PJBuddy();
             if(account->SIPStatusCode == 200){                                      // only register buddys when account is registered, otherwise the subsrcibe messages can cause problems because they are not trusted messages on certain sbc's
                 try {
-                    buddy->create(*account->accountPtr, cfg);
-                    qDebug() << "register buddy! registered buddy: " << buddy->getInfo().contact.c_str();
+                    buddy.buddyptr->create(*account->accountPtr, cfg);
+                    qDebug() << "register buddy! registered buddy: " << buddy.buddyptr->getInfo().contact.c_str();
                     return true;
                 } catch(Error& err) {
                     m_lib->m_Log->writeLog(1,QString("RegisterBuddy: Buddy register failed: ") + err.info().c_str());
@@ -59,19 +59,16 @@ bool Buddies::registerBuddy(int AccID, QString buddyUrl){
     return false;
 }
 
-bool Buddies::unregisterBuddy(int AccID, QString buddyUrl){
-    s_account* account = m_lib->m_Accounts->getAccountByID(AccID);
-    QString fulladdr = "sip:"+ buddyUrl +"@"+ account->serverURI;
+bool Buddies::unregisterBuddy(s_buddy& buddy){
+    s_account* account = m_lib->m_Accounts->getAccountByUID(buddy.accUid);
     if(account){
-        Buddy buddy;
         try{
-            buddy = account->accountPtr->findBuddy2(fulladdr.toStdString());
-            buddy.subscribePresence(0);                                                                                 // todo test this, is is sufficient to only unsubscribe presence?
+            delete buddy.buddyptr;
         } catch(Error &err) {
-            m_lib->m_Log->writeLog(2,QString("unregisterBuddy: ") + buddyUrl + " failed: " + err.info().c_str( ));
+            m_lib->m_Log->writeLog(2,QString("unregisterBuddy: ") + buddy.buddyUrl + " failed: " + err.info().c_str( ));
             return false;
         }
-        m_lib->m_Log->writeLog(3,QString("undregisterBuddy: ") + buddyUrl + " unregistered successfully");
+        m_lib->m_Log->writeLog(3,QString("unregisterBuddy: ") + buddy.buddyUrl + " unregistered successfully");
         return true;
     }else return false;
 }
@@ -89,7 +86,7 @@ void Buddies::addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObje
     newBuddy.uid = uid;
     account = m_lib->m_Accounts->getAccountByUID(accUid);
     if(account != nullptr){
-        registerBuddy(account->AccID, buddyUrl);
+        registerBuddy(newBuddy);
     }
     else{
         m_lib->m_Log->writeLog(3,"AddBuddy: failed: could not find account with uid " + newBuddy.accUid);
@@ -104,10 +101,12 @@ void Buddies::editBuddy(QString buddyUrl, QString name, QString accUid, QJsonObj
     s_buddy *editBuddy = nullptr;
     editBuddy = getBuddyByUID(uid);
     if(editBuddy != nullptr){
+        unregisterBuddy(editBuddy);
         editBuddy->buddyUrl = buddyUrl;
         editBuddy->Name = name;
         editBuddy->accUid = accUid;
         editBuddy->codec.fromJSON(codecSettings);
+        registerBuddy(editBuddy);
         m_lib->m_Settings->saveBuddies();
         emit BuddyEntryChanged(&m_buddies);
     }
@@ -125,7 +124,7 @@ void Buddies::removeBuddy(QString uid)
             s_account* account = nullptr;
             account = m_lib->m_Accounts->getAccountByUID(buddy.accUid);
             if(account != nullptr){
-                unregisterBuddy(account->AccID,buddy.buddyUrl);
+                unregisterBuddy(buddy);
             }
             i.remove();
             emit BuddyEntryChanged(&m_buddies);
