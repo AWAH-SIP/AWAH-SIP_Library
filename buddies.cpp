@@ -32,45 +32,49 @@ Buddies::Buddies(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_li
 bool Buddies::registerBuddy(s_buddy& buddy){
     s_account* account = m_lib->m_Accounts->getAccountByUID(buddy.accUid);
     QString fulladdr = "sip:"+ buddy.buddyUrl +"@"+ account->serverURI;
-    Buddy buddyptr;
-    if(account){
-        buddyptr = account->accountPtr->findBuddy2(fulladdr.toStdString());
-        if(!buddyptr.isValid()){
-            BuddyConfig cfg;
-            cfg.uri = fulladdr.toStdString();
-            cfg.subscribe = true;
-            buddy.buddyptr = new PJBuddy();
-            if(account->SIPStatusCode == 200){                                      // only register buddys when account is registered, otherwise the subsrcibe messages can cause problems because they are not trusted messages on certain sbc's
-                try {
-                    buddy.buddyptr->create(*account->accountPtr, cfg);
-                    qDebug() << "register buddy! registered buddy: " << buddy.buddyptr->getInfo().contact.c_str();
-                    return true;
-                } catch(Error& err) {
-                    m_lib->m_Log->writeLog(1,QString("RegisterBuddy: Buddy register failed: ") + err.info().c_str());
-                    return false;
-                }
-            }
-        }
-        else{
-            m_lib->m_Log->writeLog(3,"RegisterBuddy: Buddy register failed: Buddy already exists!");
-            return false;
-        }
+
+    if(account == nullptr){
+        return false;
     }
-    return false;
+    if(account->SIPStatusCode != 200){          // only register buddys when account is registered, otherwise the subsrcibe messages can cause problems because they are not trusted messages on certain sbc's
+        return false;
+    }
+    BuddyConfig cfg;
+    cfg.uri = fulladdr.toStdString();
+    cfg.subscribe = true;
+    buddy.buddyptr = new PJBuddy();
+    try {
+        buddy.buddyptr->create(*account->accountPtr, cfg);
+        buddy.buddyptr->subscribePresence(true);
+        m_lib->m_Log->writeLog(3,QString("RegisterBuddy: Buddy registered: ") + buddy.Name + " -> " + buddy.buddyUrl);
+
+    } catch(Error& err) {
+        m_lib->m_Log->writeLog(1,QString("RegisterBuddy: Buddy register failed: ") + err.info().c_str());
+        return false;
+    }
+    return true;
 }
 
 bool Buddies::unregisterBuddy(s_buddy& buddy){
     s_account* account = m_lib->m_Accounts->getAccountByUID(buddy.accUid);
-    if(account){
+    if(account == nullptr){
+        return false;
+    }
+        QString fulladdr = "sip:"+ buddy.buddyUrl +"@"+ account->serverURI;
+        changeBuddyState(fulladdr, unknown);
+        if(buddy.buddyptr == nullptr){
+            return false;
+        }
         try{
-            delete buddy.buddyptr;
+            buddy.buddyptr->subscribePresence(0);
+             delete buddy.buddyptr;
+             buddy.buddyptr = nullptr;
         } catch(Error &err) {
             m_lib->m_Log->writeLog(2,QString("unregisterBuddy: ") + buddy.buddyUrl + " failed: " + err.info().c_str( ));
             return false;
-        }
-        m_lib->m_Log->writeLog(3,QString("unregisterBuddy: ") + buddy.buddyUrl + " unregistered successfully");
-        return true;
-    }else return false;
+      }
+        m_lib->m_Log->writeLog(3,QString("unregisterBuddy: ") + buddy.Name + " " + buddy.buddyUrl + " unregistered successfully");
+        return true; 
 }
 
 void Buddies::addBuddy(QString buddyUrl, QString name, QString accUid, QJsonObject codecSettings, QString uid)
@@ -101,12 +105,12 @@ void Buddies::editBuddy(QString buddyUrl, QString name, QString accUid, QJsonObj
     s_buddy *editBuddy = nullptr;
     editBuddy = getBuddyByUID(uid);
     if(editBuddy != nullptr){
-        unregisterBuddy(editBuddy);
+        unregisterBuddy(*editBuddy);
         editBuddy->buddyUrl = buddyUrl;
         editBuddy->Name = name;
         editBuddy->accUid = accUid;
         editBuddy->codec.fromJSON(codecSettings);
-        registerBuddy(editBuddy);
+        registerBuddy(*editBuddy);
         m_lib->m_Settings->saveBuddies();
         emit BuddyEntryChanged(&m_buddies);
     }
@@ -180,16 +184,14 @@ void Buddies::BuddyChecker()
 {
     QDateTime now = QDateTime::currentDateTime();
     for(auto& buddy : m_buddies){
-        if(buddy.lastSeen.isValid() && (uint8_t)buddy.lastSeen.secsTo(now) > buddy.maxPresenceRefreshTime){
+        if(buddy.lastSeen.isValid() && (uint8_t)buddy.lastSeen.secsTo(now) > maxPresenceRefreshTime){
             s_account* account = m_lib->m_Accounts->getAccountByUID(buddy.accUid);
-            Buddy buddyptr;
             if(account){
                 QString fulladdr = "sip:"+ buddy.buddyUrl +"@"+ account->serverURI;
-                buddyptr = account->accountPtr->findBuddy2(fulladdr.toStdString());
-                if(buddyptr.isValid()){
-                    changeBuddyState( fulladdr, 0);                                     // to detect offline buddys reliably we set the buddy as offline after maxPresenceRefreshTime
-                    buddyptr.subscribePresence(false);                                  // then we subscribe the buddy again like this we have only the online buddys in the list
-                    buddyptr.subscribePresence(true);
+                changeBuddyState( fulladdr, unknown);                                          // set the buddy as offline after maxPresenceRefreshTime to detect offline buddies reliably
+                if(account->SIPStatusCode == 200 && buddy.buddyptr != nullptr){
+                    buddy.buddyptr->subscribePresence(false);                                  // then subscribe the buddy again to enshure that only the online buddies are in the buddy list
+                    buddy.buddyptr->subscribePresence(true);
                 }
             }
         }

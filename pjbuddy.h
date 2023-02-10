@@ -34,15 +34,14 @@ class PJBuddy : public Buddy
 
 public:
 
-    PJBuddy();
-    ~PJBuddy();
+    PJBuddy() : Buddy() {};
+    ~PJBuddy(){};
 
     virtual void onBuddyState();
 //    virtual void onBuddyEvSubState(OnBuddyEvSubStateParam &prm);
 
 private:
-    Buddies *parent;
-    AWAHSipLib* m_lib;
+
 };
 
 #endif // PJBUDDY_H

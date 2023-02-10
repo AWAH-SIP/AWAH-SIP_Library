@@ -33,12 +33,12 @@ public:
     explicit Buddies(AWAHSipLib *parentLib, QObject *parent = nullptr);
 
     /**
-    * @brief this function is ondy used internally to register a buddy in pjsua
+    * @brief this function is only used internally to register a buddy in pjsua
     */
     bool registerBuddy(s_buddy& buddy);
 
     /**
-    * @brief this function is ondy used internally to remove a burry from pjsua
+    * @brief this function is only used internally to remove a buddy from pjsua
     */
     bool unregisterBuddy(s_buddy& buddy);
 
@@ -72,7 +72,7 @@ public:
     * @brief get the configured Buddies
     * @return QList with all the buddies
     */
-    const QList <s_buddy> getBuddies(){return m_buddies; };
+    QList <s_buddy>* getBuddies(){return &m_buddies; };
 
     /**
     * @brief get a buddy by its uid
@@ -87,6 +87,12 @@ public:
     * @param  State the new State
     */
     void changeBuddyState(QString buddyUrl, int state);
+
+    /**
+    * @brief  set the time in seconds how often the buddy state is cleared and refreshed. A low value is useful for a fast autoconnect but generates a lot of sip messages.
+    * @param  sec the refresh time in seconds
+    */
+    void SetMaxPresenceRefreshTime(const u_int8_t sec) {maxPresenceRefreshTime = sec; };
 
 signals:
 
@@ -107,6 +113,7 @@ private:
     AWAHSipLib* m_lib;
     QList <s_buddy> m_buddies;
     QTimer *m_BuddyChecker;
+    uint8_t maxPresenceRefreshTime = 30;
 
 private slots:
 

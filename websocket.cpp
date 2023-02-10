@@ -205,7 +205,7 @@ void Websocket::getAllVariables(QJsonObject &data, QJsonObject &ret){
     retDataObj["gpioStatesArray"] = gpioStateArr;
 
     QJsonArray buddyArr;
-    for (auto& buddy : m_lib->getBuddies()){
+    for (auto& buddy : *m_lib->getBuddies()){
         buddyArr.append(buddy.toJSON());
     }
     retDataObj["buddyArray"] = buddyArr;
@@ -678,7 +678,7 @@ void Websocket::getBuddies(QJsonObject &data, QJsonObject &ret){
     Q_UNUSED(data);
     QJsonObject retDataObj;
     QJsonArray buddyArr;
-    for (auto& buddy : m_lib->getBuddies()){
+    for (auto& buddy : *m_lib->getBuddies()){
         buddyArr.append(buddy.toJSON());
     }
     retDataObj["buddyArray"] = buddyArr;

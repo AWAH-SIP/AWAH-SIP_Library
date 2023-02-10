@@ -35,7 +35,7 @@ void PJBuddy::onBuddyState(){
         AWAHSipLib::instance()->m_Log->writeLog(2, QString("onBuddyState:getInfo failed: ") + err.info().c_str());
         return;
     }
-    AWAHSipLib::instance()->m_Log->writeLog(4, QString("onBuddyState: Buddy: ") + QString::fromStdString(bi.uri) + " is " + QString::number(bi.presStatus.status) + " note is: " + QString::fromStdString(bi.presStatus.note));
+    AWAHSipLib::instance()->m_Log->writeLog(4, QString("onBuddyState: Buddy: ") + QString::fromStdString(bi.uri) + " is " + QString::fromStdString(bi.presStatus.statusText));
     if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE){
         state = online;
     }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE && bi.presStatus.note == "Busy"){
@@ -48,29 +48,3 @@ void PJBuddy::onBuddyState(){
     AWAHSipLib::instance()->m_Buddies->changeBuddyState(QString::fromStdString(bi.uri), state);
 }
 
-//void PJBuddy::onBuddyEvSubState(OnBuddyEvSubStateParam &prm){
-//    Q_UNUSED(prm);
-//    BuddyInfo bi;
-//    int state = unknown;
-//    try {
-//        bi = getInfo();
-//    }  catch(Error& err) {
-//        m_lib->m_Log->writeLog(2, QString("onBuddyEvSubState getInfo failed: ") + err.info().c_str());
-//        return;
-//    }
-
-//    if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE){
-//        state = online;
-//        m_lib->m_Log->writeLog(4, QString("onBuddyEvSubState Event subscription state of buddy ") + QString::fromStdString(bi.uri) + " is online");
-//    }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE && bi.presStatus.note == "Busy"){
-//        state = busy;
-//        m_lib->m_Log->writeLog(4, QString("onBuddyEvSubState Event subscription state of buddy ") + QString::fromStdString(bi.uri) + " is busy");
-//    }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_UNKNOWN){
-//        state = unknown;
-//        m_lib->m_Log->writeLog(4, QString("onBuddyEvSubState Event subscription state of buddy ") + QString::fromStdString(bi.uri) + " is unknown");
-//    }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_OFFLINE){
-//        state = unknown;
-//        m_lib->m_Log->writeLog(4, QString("onBuddyEvSubState Event subscription state of buddy ") + QString::fromStdString(bi.uri) + " is offline");
-//    }
-//    m_lib->m_Buddies->changeBuddyState(QString::fromStdString(bi.uri), state);
-//}

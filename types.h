@@ -549,8 +549,7 @@ struct s_buddy{
     QString accUid = "";
     s_codec codec;
     QString uid = "";
-    PJBuddy *buddyptr;
-    uint8_t maxPresenceRefreshTime = 30;
+    PJBuddy *buddyptr = nullptr;
     QDateTime lastSeen = QDateTime();
     QJsonObject toJSON() const {
         return{{"buddyUrl", buddyUrl}, {"Name", Name}, {"status", status}, {"accUid", accUid}, {"codec", codec.toJSON()}, {"uid", uid}};

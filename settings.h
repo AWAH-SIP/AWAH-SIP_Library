@@ -150,11 +150,6 @@ public slots:
     */
     void saveGpioRoutes();
 
-//    /**
-//     * @brief save Buddies to the settings file
-//     */
-//    void saveBuddies();
-
 signals:
 
 

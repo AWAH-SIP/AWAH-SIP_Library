@@ -157,9 +157,8 @@ void Settings::saveBuddies()
 {
     if(!m_BuddiesLoaded)
         return;
-    const QList<s_buddy> buddies = m_lib->m_Buddies->getBuddies();
     QSettings settings("awah", "AWAHsipConfig");
-    settings.setValue("Buddies", QVariant::fromValue(buddies));
+    settings.setValue("Buddies", QVariant::fromValue(*m_lib->m_Buddies->getBuddies()));
     settings.sync();
 }
 
@@ -517,6 +516,15 @@ void Settings::loadSettings()                                           // todo 
     item["min"] = 30;
     item["max"] = 3600;
     GlobalSettings["Account retry interval in s"] = item;
+
+    // ***** Buddy refresh interval *****
+    item = QJsonObject();
+    m_lib->m_Buddies->SetMaxPresenceRefreshTime(settings.value("settings/BuddyConfig/maxPresenceRefreshTime","30").toUInt());
+    item["value"] = settings.value("settings/BuddyConfig/maxPresenceRefreshTime","30").toInt();
+    item["type"] = INTEGER;
+    item["min"] = 10;
+    item["max"] = 500;
+    GlobalSettings["Buddy presence refresh time"] = item;
 
     // ***** session timer expiration *****
     item = QJsonObject();
@@ -896,7 +904,9 @@ void Settings::setSettings(QJsonObject editedSettings)
         if (it.key() == "rewrite contact in SIP header"){
             settings.setValue("settings/NatConfig/SIPHeader_rewrite_Contact", it.value().toInt());
         }
-
+        if (it.key() == "Buddy presence refresh time"){
+            settings.setValue("settings/BuddyConfig/maxPresenceRefreshTime", it.value().toInt());
+        }
 
     }
     settings.sync();

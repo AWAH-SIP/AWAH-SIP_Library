@@ -43,25 +43,35 @@ void PJAccount::onRegState(OnRegStateParam &prm) {
         if(acc->gpioDev != nullptr){
             acc->gpioDev->setRegistered(ai.regIsActive);
         }
-        if(ai.regIsActive){                                                                             // only register buddy on active account and if the account does not have any buddies registered
-            BuddyVector2 accbuddies = acc->accountPtr->enumBuddies2();
-            if(accbuddies.empty()){
-                for (auto& buddy : m_lib->m_Buddies->getBuddies()){
-                    if(buddy.accUid == acc->uid){
+        if(ai.regIsActive){                                         // only register buddy on active account if they are not already found in the registered buddy list of the account
+            for (auto& buddy : *m_lib->m_Buddies->getBuddies()){
+                if(buddy.accUid == acc->uid){
+                    bool buddyexists = false;
+                    BuddyVector2 accbuddies = acc->accountPtr->enumBuddies2();
+                    for(unsigned int i = 0; i < accbuddies.size(); i++)
+                    {
+                        QString URI = accbuddies[i].getInfo().uri.c_str();
+                        if(URI.contains(buddy.buddyUrl)){
+                            buddyexists = true;
+                            break;
+                        }
+                    }
+                    if(!buddyexists){
                         m_lib->m_Buddies->registerBuddy(buddy);
                     }
                 }
             }
         }
-        if(!ai.regIsActive){                                                                            // unregister buddies if account not online to prevent subscribe messages on a offline account
+
+        if(!ai.regIsActive){                                                    // unregister buddies if account not online to prevent subscribe messages on a offline account
             BuddyVector2 accbuddies = acc->accountPtr->enumBuddies2();
             if(!accbuddies.empty()){
-                for (auto& buddy : m_lib->m_Buddies->getBuddies()){
+                for (auto& buddy : *m_lib->m_Buddies->getBuddies()){
                     if(buddy.accUid == acc->uid){
+                        qDebug() << "on account unregistration: unregister buddy: " << buddy.Name << " " << buddy.buddyUrl;
                         m_lib->m_Buddies->unregisterBuddy(buddy);
                     }
                 }
-
             }
 
         }
