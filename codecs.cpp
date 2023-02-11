@@ -84,7 +84,6 @@ QList<s_codec> Codecs::listCodecs(){
             enumitems["32k"] = 32000;
             item["enumlist"] = enumitems;
             newCodec.codecParameters["Clockrate"] = item;
-            qDebug() << "codec speex setting clockrate: " << item;
         }
         else if(CodecInfo.at(0) == "PCMU"){
             newCodec.displayName = "G711 u-Law";
@@ -364,6 +363,7 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
             codecparam["Channelcount"] = item;
             return codecparam;
         }
+    }
         if(codecId.startsWith("speex",Qt::CaseInsensitive)){
             QStringList CodecSettings = codecId.split("/");       // the list contains now name , bitrate , channelcount ("speex", "16000", "1")
             if(CodecSettings.at(0) == "speex"){
@@ -380,7 +380,6 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
                 codecparam["Clockrate"] = item;
                 return codecparam;
             }
-        }
     }
     return codecparam;
 }

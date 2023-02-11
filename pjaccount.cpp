@@ -68,7 +68,6 @@ void PJAccount::onRegState(OnRegStateParam &prm) {
             if(!accbuddies.empty()){
                 for (auto& buddy : *m_lib->m_Buddies->getBuddies()){
                     if(buddy.accUid == acc->uid){
-                        qDebug() << "on account unregistration: unregister buddy: " << buddy.Name << " " << buddy.buddyUrl;
                         m_lib->m_Buddies->unregisterBuddy(buddy);
                     }
                 }
@@ -86,10 +85,10 @@ void PJAccount::onRegState(OnRegStateParam &prm) {
 
 void PJAccount::onRegStarted(OnRegStartedParam &prm)
 {
-     AccountInfo ai = getInfo();
-     m_lib->m_Log->writeLog(2, QString("RegisterStateStarted: on Account: ") + QString::fromStdString(ai.uri) + (ai.regIsConfigured? " Starting Registration" : " AccountParam is NOT Set! NOT starting Registration") + " code = " + QString::number(prm.renew));
-     emit parent->regStateChanged(ai.id, ai.regIsConfigured);
-     emit parent->signalSipStatus(ai.id, ai.regStatus,QString::fromStdString(ai.regStatusText));
+    AccountInfo ai = getInfo();
+    m_lib->m_Log->writeLog(2, QString("RegisterStateStarted: on Account: ") + QString::fromStdString(ai.uri) + (ai.regIsConfigured? " Starting Registration" : " AccountParam is NOT Set! NOT starting Registration") + " code = " + QString::number(prm.renew));
+    emit parent->regStateChanged(ai.id, ai.regIsConfigured);
+    emit parent->signalSipStatus(ai.id, ai.regStatus,QString::fromStdString(ai.regStatusText));
 }
 
 void PJAccount::onIncomingCall(OnIncomingCallParam &iprm)
@@ -109,13 +108,10 @@ void PJAccount::onIncomingCall(OnIncomingCallParam &iprm)
                 QStringList codectype = tmp.split(" ");
                 codectype = codectype.at(1).split(";");
                 remoteCodec.encodingName = codectype.first();
-                qDebug() << "codec name recieced " <<  codec->name.ptr;
-                qDebug() << "recieved codecvalue. " << tmp;
-                qDebug() << "remote Codec encodign name: " << remoteCodec.encodingName;
                 if(remoteCodec.encodingName.startsWith("opus",Qt::CaseInsensitive)){                                    // convert the encoding name to a nice userfriendly name
                     remoteCodec.encodingName = "opus/48000/2";
                     remoteCodec.displayName = "Opus";
-                    }
+                }
 
                 else if(remoteCodec.encodingName.contains("PCMU",Qt::CaseInsensitive)){
                     remoteCodec.encodingName = "PCMU/8000/1";
@@ -146,7 +142,7 @@ void PJAccount::onIncomingCall(OnIncomingCallParam &iprm)
                     QJsonObject jsob = remoteCodec.codecParameters["Clockrate"].toObject();
                     jsob["value"] = tmp.at(1).toInt();
                     remoteCodec.encodingName = QString("speex/")+tmp.at(1)+"/1";
-                    qDebug() << "remote Codec encodign name processed: " << remoteCodec.encodingName;
+                    remoteCodec.codecParameters["Clockrate"] = jsob;
                 }
                 else if(remoteCodec.encodingName.contains("AMR",Qt::CaseInsensitive)){
                     remoteCodec.displayName = "AMR";
@@ -168,9 +164,9 @@ void PJAccount::onIncomingCall(OnIncomingCallParam &iprm)
                 QStringList attributes = tmp.split(" ");
                 attributes = attributes.at(1).split(";");
                 for( int i = 0; i  < attributes.size() ; i++){
-//                        if(attributes.at(i).contains("0-1")){              // could be 0-15 or 0-16 depending on the client                                               // started to detect if the other side supports DTMF and only send tones if true
-//                            qDebug() << "yes we can send DTMF";                                                                                                           // todo find a better place for this
-//                        }
+                    //                        if(attributes.at(i).contains("0-1")){              // could be 0-15 or 0-16 depending on the client                                               // started to detect if the other side supports DTMF and only send tones if true
+                    //                            qDebug() << "yes we can send DTMF";                                                                                                           // todo find a better place for this
+                    //                        }
                     if(attributes.at(i).contains("maxaveragebitrate")){
                         QStringList value = attributes.at(i).split("=");
                         QJsonObject jsob = remoteCodec.codecParameters["Bit rate"].toObject();
@@ -197,8 +193,8 @@ void PJAccount::onIncomingCall(OnIncomingCallParam &iprm)
                     }
                 }
             }
-        }               
-    m_lib->m_Codecs->setCodecParam(remoteCodec);  
+        }
+    m_lib->m_Codecs->setCodecParam(remoteCodec);
     AccountInfo ai = getInfo();
     parent->acceptCall(iprm.callId, ai.id);
     emit parent->signalSipStatus(ai.id, ai.regStatus,QString::fromStdString(ai.regStatusText));

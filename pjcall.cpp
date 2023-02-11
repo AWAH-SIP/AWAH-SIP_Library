@@ -72,7 +72,7 @@ void PJCall::onCallState(OnCallStateParam &prm)
     s_Call*  CalllistEntry = nullptr;
     int callid = getId();
     for(auto& call : callAcc->CallList){
-        if(call.callId ==  callid){
+        if(call.callId == callid){
             CalllistEntry = &call;
             break;
         }
@@ -276,66 +276,64 @@ void PJCall::onStreamCreated(OnStreamCreatedParam &prm)
     CallInfo ci = getInfo();
     pjmedia_stream_info info;
     pjmedia_stream_get_info((pjmedia_stream *) prm.stream, &info);
-    s_codec remoteCodec;
-
-
-    if(true){                                                                                                               // parse codec parameters for the callhistory entry
+    s_codec remoteCodec;                                                                                    // parse codec parameters for the callhistory entry
     QString encodingName = pj2Str(info.fmt.encoding_name);
-                    if( encodingName == "opus"){                                                                            // convert the encoding name to a nice userfriendly name
-                        remoteCodec.encodingName = "opus/48000/2";
-                        remoteCodec.displayName = "Opus";
-                        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);             // load the default parameters to have a full set of objects
-                        remoteCodec.codecParameters["Channelcount"].toObject()["value"] = (int)info.fmt.channel_cnt;
-                        remoteCodec.codecParameters["Bit rate"].toObject()["value"] = (int)info.param->info.avg_bps;
-                        remoteCodec.codecParameters["Clockrate"].toObject()["value"] = (int)info.param->info.clock_rate;
-                    }
-                    else if(encodingName == "PCMU"){
-                        remoteCodec.encodingName = "PCMU/8000/1";
-                        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
-                        remoteCodec.displayName = "G711 u-Law";
-                    }
-                    else if(encodingName == "PCMA"){
-                        remoteCodec.encodingName = "PCMA/8000/1";
-                        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
-                        remoteCodec.displayName = "G711 A-Law";
-                    }
-                    else if(encodingName == "L16"){
-                        remoteCodec.displayName = "Linear";
-                        remoteCodec.encodingName = encodingName + "/" + QString::number(info.fmt.clock_rate) + "/" + QString::number(info.fmt.channel_cnt);
-                        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
-                        remoteCodec.codecParameters["Channelcount"].toObject()["value"] = (QString) info.fmt.channel_cnt;
-                        remoteCodec.codecParameters["Clockrate"].toObject()["value"] = (QString)info.fmt.clock_rate;
-                    }
-                    else if(encodingName == "G722"){
-                        remoteCodec.displayName = "G722";
-                        remoteCodec.encodingName = "G722/16000/1";
-                        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
-                    }
-                    else if(encodingName =="speex"){
-                        remoteCodec.displayName = "Speex";
-                        remoteCodec.encodingName = encodingName + "/" + QString::number(info.fmt.clock_rate) + "/" + QString::number(info.fmt.channel_cnt);
-                        remoteCodec.codecParameters["Clockrate"].toObject()["value"] = (QString)info.fmt.clock_rate;
-                    }
-                    else if(encodingName.contains("AMR")){
-                        remoteCodec.displayName = "AMR";
-                        remoteCodec.encodingName = (QString)"AMR/8000/1";
-                        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
-                    }
-                    else if(encodingName =="iLBC"){
-                        remoteCodec.displayName = "iLBC";
-                        remoteCodec.encodingName = encodingName + "/" + (QString)info.fmt.clock_rate + "/" +(QString)info.fmt.channel_cnt;
-                        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
-                    }
-                    else if(encodingName =="GSM"){
-                        remoteCodec.displayName = "GSM";
-                        remoteCodec.encodingName = encodingName + "/" + (QString)info.fmt.clock_rate + "/" + (QString)info.fmt.channel_cnt;
-                        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
-                    }
-                    else{
-                        remoteCodec.displayName = encodingName;
-                        remoteCodec.encodingName = encodingName;
-                    }
-                }
+    if( encodingName == "opus"){                                                                            // convert the encoding name to a nice userfriendly name
+        remoteCodec.encodingName = "opus/48000/2";
+        remoteCodec.displayName = "Opus";
+        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);             // load the default parameters to have a full set of objects
+        remoteCodec.codecParameters["Channelcount"].toObject()["value"] = (int)info.fmt.channel_cnt;
+        remoteCodec.codecParameters["Bit rate"].toObject()["value"] = (int)info.param->info.avg_bps;
+        remoteCodec.codecParameters["Clockrate"].toObject()["value"] = (int)info.param->info.clock_rate;
+    }
+    else if(encodingName == "PCMU"){
+        remoteCodec.encodingName = "PCMU/8000/1";
+        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
+        remoteCodec.displayName = "G711 u-Law";
+    }
+    else if(encodingName == "PCMA"){
+        remoteCodec.encodingName = "PCMA/8000/1";
+        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
+        remoteCodec.displayName = "G711 A-Law";
+    }
+    else if(encodingName == "L16"){
+        remoteCodec.displayName = "Linear";
+        remoteCodec.encodingName = encodingName + "/" + QString::number(info.fmt.clock_rate) + "/" + QString::number(info.fmt.channel_cnt);
+        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
+        remoteCodec.codecParameters["Channelcount"].toObject()["value"] = (QString) info.fmt.channel_cnt;
+        remoteCodec.codecParameters["Clockrate"].toObject()["value"] = (QString)info.fmt.clock_rate;
+    }
+    else if(encodingName == "G722"){
+        remoteCodec.displayName = "G722";
+        remoteCodec.encodingName = "G722/16000/1";
+        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
+    }
+    else if(encodingName =="speex"){
+        remoteCodec.displayName = "Speex";
+        remoteCodec.encodingName = encodingName + "/" + QString::number(info.fmt.clock_rate) + "/" + QString::number(info.fmt.channel_cnt);
+        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
+        remoteCodec.codecParameters["Clockrate"].toObject()["value"] = (QString)info.fmt.clock_rate;
+    }
+    else if(encodingName.contains("AMR")){
+        remoteCodec.displayName = "AMR";
+        remoteCodec.encodingName = encodingName + "/" + QString::number(info.fmt.clock_rate) + "/" + QString::number(info.fmt.channel_cnt);
+        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
+    }
+    else if(encodingName =="iLBC"){
+        remoteCodec.displayName = "iLBC";
+        remoteCodec.encodingName = encodingName + "/" + QString::number(info.fmt.clock_rate) + "/" + QString::number(info.fmt.channel_cnt);
+        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
+    }
+    else if(encodingName =="GSM"){
+        remoteCodec.displayName = "GSM";
+        remoteCodec.encodingName = encodingName + "/" + QString::number(info.fmt.clock_rate) + "/" + QString::number(info.fmt.channel_cnt);
+        remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
+    }
+    else{
+        remoteCodec.displayName = encodingName;
+        remoteCodec.encodingName = encodingName;
+    }
+
 
     s_account* callAcc = parent->getAccountByID(ci.accId);
     if(callAcc->fixedJitterBuffer){
