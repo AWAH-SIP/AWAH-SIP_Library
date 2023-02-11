@@ -92,7 +92,7 @@ public:
     * @brief  set the time in seconds how often the buddy state is cleared and refreshed. A low value is useful for a fast autoconnect but generates a lot of sip messages.
     * @param  sec the refresh time in seconds
     */
-    void SetMaxPresenceRefreshTime(const u_int8_t sec) {maxPresenceRefreshTime = sec; };
+    void SetMaxPresenceRefreshTime(const u_int8_t RefTimeSec) {maxPresenceRefreshTime = RefTimeSec; };
 
 signals:
 
