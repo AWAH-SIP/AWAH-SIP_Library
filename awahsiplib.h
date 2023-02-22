@@ -57,6 +57,10 @@ extern "C" {
 
 #include <QJsonDocument>
 
+#define AWAHSIP_VERSION 3.2
+#ifndef GITHUBBUILD
+#define BUILD_NO "LocalBuild"
+#endif
 
 class AWAHSipLib : public QObject
 {
@@ -144,6 +148,12 @@ public:
     void setSettings(QJsonObject editedSetting) { return m_Settings->setSettings(editedSetting); } ;
     const QJsonObject getCodecPriorities() const { return m_Settings->getCodecPriorities(); };
     void setSCodecPriorities(QJsonObject Codecpriority) { return m_Settings->setCodecPriorities(Codecpriority); } ;
+
+    /**
+    * @brief get the Version of AWAH Sip and underliying PJSIP Version
+    * @return JSON object with all the Versions
+    */
+     QJsonObject getVersions();
 
 public slots:
     void slotSendMessage(int callId, int AccID, QString type, QByteArray message);

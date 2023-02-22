@@ -145,6 +145,7 @@ private slots:
     void setSettings(QJsonObject &data, QJsonObject &ret);
     void getCodecPriorities(QJsonObject &data, QJsonObject &ret);
     void setCodecPriorities(QJsonObject &data, QJsonObject &ret);
+    void getVersions(QJsonObject &data, QJsonObject &ret);
 
     /**
      * Implementation-Functions for API-Signals

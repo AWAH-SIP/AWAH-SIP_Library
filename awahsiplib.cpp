@@ -40,7 +40,6 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     m_GpioDeviceManager = GpioDeviceManager::instance(this);
     m_MessageManager = new MessageManager(this, this);
     m_Settings = new Settings(this, this);
-
     m_GpioDeviceManager->setLib(this);
 
     m_pjEp = PJEndpoint::instance();
@@ -66,7 +65,12 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
 
         // Start the library (worker threads etc)
         m_pjEp->libStart();
-        m_Log->writeLog(3,"**** AWAHsip lib STARTED ****");
+        m_Log->writeLog(3,"********************************************************");
+        m_Log->writeLog(3,"      AWAH-SIP Codec started");
+        m_Log->writeLog(3,"      Version: "+ QString::number(AWAHSIP_VERSION));
+        m_Log->writeLog(3,"      Build no: " + QString(BUILD_NO));
+        m_Log->writeLog(3,"      PJSIP Version: "+ QString::fromStdString(m_pjEp->libVersion().full));
+        m_Log->writeLog(3,"********************************************************");
 
         /* Create pool for multiple Sound Device handling */
         pool = pjsua_pool_create("awahsip", 512, 512);
@@ -173,6 +177,16 @@ void AWAHSipLib::slotIoDevicesChanged(QList<s_IODevices> &IoDev)
 void AWAHSipLib::slotSendMessage(int callId, int AccID, QString type, QByteArray message)
 {
     m_MessageManager->slotSendMessage(callId, AccID, type, message);
+}
+
+QJsonObject AWAHSipLib::getVersions()
+{
+    QJsonObject versions;
+    versions = QJsonObject();
+    versions["AWAH-Sip_Lib"] = AWAHSIP_VERSION;
+    versions["build"] = BUILD_NO;
+    versions["PJSIP"] = QString::fromStdString(m_pjEp->libVersion().full);
+    return versions;
 }
 
 QDataStream &operator<<(QDataStream &out, const s_IODevices &obj)

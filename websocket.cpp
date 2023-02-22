@@ -910,6 +910,15 @@ void Websocket::setCodecPriorities(QJsonObject &data, QJsonObject &ret) {
     }
 }
 
+void Websocket::getVersions(QJsonObject &data, QJsonObject &ret) {
+    Q_UNUSED(data);
+    QJsonObject retDataObj;
+    const QJsonObject retVal = m_lib->getVersions();
+    retDataObj["Versions"] = retVal;
+    ret["data"] = retDataObj;
+    ret["error"] = noError();
+}
+
 
 // Implementation-Functions for API-Signals
 void Websocket::regStateChanged(int accId, bool status){

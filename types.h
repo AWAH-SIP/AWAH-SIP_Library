@@ -66,8 +66,6 @@ inline QString pj2Str(const pj_str_t &input_str)
     return QString();
 }
 
-
-
 inline int dBtoAdjLevel(int &level)
 {
     int leveladjust = 0;
@@ -341,7 +339,7 @@ struct s_account{
         return {
             {"name", name},
             {"user", user},
-            {"password", password},
+           // {"password", password},
             {"serverURI", serverURI},
             {"FileRecordPath", FileRecordPath},
             {"FileRecordRXonly", FileRecordRXonly},
@@ -567,4 +565,6 @@ struct s_buddy{
 Q_DECLARE_METATYPE(s_buddy);
 Q_DECLARE_METATYPE(QList<s_buddy>);
 
+
 #endif // TYPES_H
+
