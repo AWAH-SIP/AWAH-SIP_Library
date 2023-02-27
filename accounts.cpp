@@ -24,9 +24,6 @@
 
 Accounts::Accounts(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_lib(parentLib)
 {
-    m_CallInspectorTimer = new QTimer(this);
-    m_CallInspectorTimer->setInterval(1000);
-    connect(m_CallInspectorTimer, SIGNAL(timeout()), this, SLOT(CallInspector()));
     connect(this, &Accounts::signalSipStatus, this, &Accounts::OnsignalSipStatus);
 }
 
@@ -611,50 +608,60 @@ void Accounts::OnsignalSipStatus(int accId, int status, QString remoteUri)
 
 void Accounts::startCallInspector()
 {
-    m_CallInspectorTimer->start();
+    pj_timer_entry_init(&timerEntry, 0, NULL, &CallInspector);
+    pj_time_val timeDelay;
+    timeDelay.sec=1;
+    timeDelay.msec=0;
+    pjsip_endpt_schedule_timer(pjsua_get_pjsip_endpt(), &timerEntry,&timeDelay);
 }
 
-void Accounts::CallInspector()
+void Accounts::CallInspector(pj_timer_heap_t *timer_heap, pj_timer_entry *entry)
 {
+    PJ_UNUSED_ARG(timer_heap);
     QJsonObject info;
-    for(auto& account : m_accounts){                                                   // send callInfo for every call one a second
-        int accID = account.AccID;
-        for(auto& call : getAccountByID(accID)->CallList ){
+    QList<s_account> *accounts = AWAHSipLib::instance()->m_Accounts->getAccounts();
+    for(auto& account : *accounts ){                                                   // send callInfo for every call one a second
+       int accID = account.AccID;
+        for(auto& call : AWAHSipLib::instance()->m_Accounts->getAccountByID(accID)->CallList ){
             if(call.callId < 0){
                 break;
             }
             if(pjsua_call_is_active(call.callId) == 0){
                 break;
             }
-            info = getCallInfo(call.callId, account.AccID);
-            emit callInfo(account.AccID, call.callId,info);
+            info = AWAHSipLib::instance()->m_Accounts->getCallInfo(call.callId, account.AccID);
+            emit AWAHSipLib::instance()->m_Accounts->callInfo(account.AccID, call.callId,info);
             CallInfo pjCallInfo = call.callptr->getInfo();
-            if(m_MaxCallTime){                                                          // hang up calls if call time is exeeded
+            if(AWAHSipLib::instance()->m_Accounts->m_MaxCallTime){                                                          // hang up calls if call time is exeeded
                 QTime time = QTime::fromString(info["Call time:"].toString(), "hh:mm:ss");
-                if(m_MaxCallTime <= (time.hour()*60 + time.minute())){
-                    hangupCall(call.callId,account.AccID);
-                    m_lib->m_Log->writeLog(3,(QString("Max call time exeeded on account with ID: ")+ QString::number(account.AccID) + " call disconnected"));
+                if(AWAHSipLib::instance()->m_Accounts->m_MaxCallTime <= (time.hour()*60 + time.minute())){
+                    AWAHSipLib::instance()->m_Accounts->hangupCall(call.callId,account.AccID);
+                    AWAHSipLib::instance()->m_Log->writeLog(3,(QString("Max call time exeeded on account with ID: ")+ QString::number(account.AccID) + " call disconnected"));
                     break;
                 }
             }
 
             int emptyGetevent = info["JB: Number of empty on GET events:"].toInt();    // detect rx media loss
             if(emptyGetevent > call.lastJBemptyGETevent){  // RX media lost
-                emit  callStateChanged(account.AccID, pjCallInfo.role, call.callId, pjCallInfo.remOfferer, pjCallInfo.connectDuration.sec, 7, call.CallStatusCode, QString("RX unlocked since: ") + QDateTime::fromSecsSinceEpoch(call.RXlostSeconds, Qt::OffsetFromUTC).toString("hh:mm:ss"),call.ConnectedTo);
+                emit  AWAHSipLib::instance()->m_Accounts->callStateChanged(account.AccID, pjCallInfo.role, call.callId, pjCallInfo.remOfferer, pjCallInfo.connectDuration.sec, 7, call.CallStatusCode, QString("RX unlocked since: ") + QDateTime::fromSecsSinceEpoch(call.RXlostSeconds, Qt::OffsetFromUTC).toString("hh:mm:ss"),call.ConnectedTo);
                 call.lastJBemptyGETevent = emptyGetevent;
-                if(call.RXlostSeconds >= m_CallDisconnectRXTimeout){
-                    hangupCall(call.callId,account.AccID);
+                if(call.RXlostSeconds >= AWAHSipLib::instance()->m_Accounts->m_CallDisconnectRXTimeout){
+                    AWAHSipLib::instance()->m_Accounts->hangupCall(call.callId,account.AccID);
                     break;
                 }
                 call.RXlostSeconds++;
             }
             else if(call.RXlostSeconds && pjsua_call_is_active(call.callId) != 0){    // RX media recovered
                 call.RXlostSeconds = 0;
-                emit  callStateChanged(account.AccID, pjCallInfo.role, call.callId, pjCallInfo.remOfferer, pjCallInfo.connectDuration.sec, 5, pjCallInfo.state , QString::fromStdString(pjCallInfo.stateText),call.ConnectedTo);
-                m_lib->m_Log->writeLog(3,(QString("Account: ")+ account.name + QString(", Call ID: ") + QString::number(call.callId) + " RX stream locked"));
+                emit  AWAHSipLib::instance()->m_Accounts->callStateChanged(account.AccID, pjCallInfo.role, call.callId, pjCallInfo.remOfferer, pjCallInfo.connectDuration.sec, 5, pjCallInfo.state , QString::fromStdString(pjCallInfo.stateText),call.ConnectedTo);
+                AWAHSipLib::instance()->m_Log->writeLog(3,(QString("Account: ")+ account.name + QString(", Call ID: ") + QString::number(call.callId) + " RX stream locked"));
             }
         }
     }
+    pj_time_val loctimeDelay;                                                       // restart Timer
+    loctimeDelay.msec=0;
+    loctimeDelay.sec=1;
+    pjsip_endpt_schedule_timer(pjsua_get_pjsip_endpt(), entry, &loctimeDelay);
 }
 
 

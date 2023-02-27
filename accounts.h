@@ -170,12 +170,18 @@ public:
     void OncallStateChanged(int accID, int role, int callId, bool remoteofferer, long calldur, int state, int lastStatusCode, QString statustxt, QString remoteUri);
     void OnsignalSipStatus(int accId, int status, QString remoteUri);
 
+    /**
+    * @brief The CallInspector is executed every second once started with startCallInspector
+    *        he call inspector, to gets call information, detects media loss, handles max call time etc.
+    */
+    static void CallInspector(pj_timer_heap_t *timer_heap, pj_timer_entry*entry);
+
     AccountConfig getDefaultACfg() const { return defaultACfg;};
 
     void setDefaultACfg(const AccountConfig &value){ defaultACfg = value; };
-
     int m_MaxCallTime;
     int m_CallDisconnectRXTimeout;
+
 
 signals:
     void regStateChanged(int accId, bool status);
@@ -187,19 +193,13 @@ signals:
 private:
     AWAHSipLib* m_lib;
     AccountConfig aCfg, defaultACfg;
-    QTimer *m_CallInspectorTimer;
-
-
+    pj_timer_entry timerEntry;
 
     /**
     * @brief All accounts are added to this list
     *       in order to save and load current setup
     */
     QList<s_account> m_accounts;
-
-private slots:
-    void CallInspector();
-
 
 };
 
