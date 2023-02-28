@@ -633,10 +633,10 @@ void Accounts::CallInspector(pj_timer_heap_t *timer_heap, pj_timer_entry *entry)
             emit AWAHSipLib::instance()->m_Accounts->callInfo(pjCallInfo.accId, pjCallInfo.id,info);
             qDebug() << "Call id: " << call.callId << " pjsua id " << pjCallInfo.id;
             if(AWAHSipLib::instance()->m_Accounts->m_MaxCallTime){                                                          // hang up calls if call time is exeeded
-                if(AWAHSipLib::instance()->m_Accounts->m_MaxCallTime*10 <= (pjCallInfo.connectDuration.sec) && pjCallInfo.remOfferer){
+                if(AWAHSipLib::instance()->m_Accounts->m_MaxCallTime*60 <= (pjCallInfo.connectDuration.sec) && pjCallInfo.remOfferer){
                     AWAHSipLib::instance()->m_Accounts->hangupCall(pjCallInfo.id,pjCallInfo.accId);
                     AWAHSipLib::instance()->m_Log->writeLog(3,(QString("Max call time exeeded on account ")+ account.name + ": call with ID: "+ QString::number(pjCallInfo.id) +" disconnected"));
-                    pj_time_val loctimeDelay;                                                       // restart Timer
+                    pj_time_val loctimeDelay;                                                       // restart Timer and return because call is deleted
                     loctimeDelay.msec=7;
                     loctimeDelay.sec=1;
                     pjsip_endpt_schedule_timer(pjsua_get_pjsip_endpt(), entry, &loctimeDelay);
