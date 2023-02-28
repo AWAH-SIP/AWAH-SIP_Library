@@ -94,6 +94,17 @@ public:
     */
     void SetMaxPresenceRefreshTime(const int RefTimeSec) {maxPresenceRefreshTime = RefTimeSec; };
 
+    /**
+    * @brief start the buddychecker timer
+    */
+    void StartBuddyChecker();
+
+    /**
+    * @brief the buddychecker slot is called every 10 seconds and checks if the last seen timestamp is within the time window defined by the maxPresenceRefreshTime
+    * @brief if the timestamp is to old, the buddy is marked as unknown und its presence is subscribed again
+    */
+    static void BuddyChecker(pj_timer_heap_t *timer_heap, pj_timer_entry*entry);
+
 signals:
 
     /**
@@ -112,16 +123,8 @@ signals:
 private:
     AWAHSipLib* m_lib;
     QList <s_buddy> m_buddies;
-    QTimer *m_BuddyChecker;
+    pj_timer_entry m_timerEntry;
     uint8_t maxPresenceRefreshTime = 30;
-
-private slots:
-
-    /**
-    * @brief the buddychecker slot is called every 10 seconds and checks if the last seen timestamp is within the time window defined by the maxPresenceRefreshTime
-    * @brief if the timestamp is to old, the buddy is marked as unknown und its presence is subscribed again
-    */
-    void BuddyChecker();
 
 };
 

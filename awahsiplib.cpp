@@ -83,6 +83,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Settings->loadGpioDevConfig();
         m_Codecs->listCodecs();
         m_Settings->loadBuddies();
+        m_Buddies->StartBuddyChecker();
 
     }
     catch (Error &err){

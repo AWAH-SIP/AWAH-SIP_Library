@@ -23,10 +23,6 @@
 
 Buddies::Buddies(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_lib(parentLib)
 {
-    m_BuddyChecker = new QTimer(this);
-    m_BuddyChecker->setInterval(10000);
-    connect(m_BuddyChecker, SIGNAL(timeout()), this, SLOT(BuddyChecker()));
-    m_BuddyChecker->start();
 }
 
 bool Buddies::registerBuddy(s_buddy& buddy){
@@ -180,15 +176,26 @@ void Buddies::changeBuddyState(QString buddyUrl, int state){
     }
 }
 
-void Buddies::BuddyChecker()
+void Buddies::StartBuddyChecker()
 {
+    pj_timer_entry_init(&m_timerEntry, 0, NULL, &BuddyChecker);
+    pj_time_val timeDelay;
+    timeDelay.sec=10;
+    timeDelay.msec=12;
+    pjsip_endpt_schedule_timer(pjsua_get_pjsip_endpt(), &m_timerEntry,&timeDelay);
+}
+
+void Buddies::BuddyChecker(pj_timer_heap_t *timer_heap, pj_timer_entry *entry)
+{
+    PJ_UNUSED_ARG(timer_heap);
     QDateTime now = QDateTime::currentDateTime();
-    for(auto& buddy : m_buddies){
-        if(buddy.lastSeen.isValid() && (uint8_t)buddy.lastSeen.secsTo(now) > maxPresenceRefreshTime){
-            s_account* account = m_lib->m_Accounts->getAccountByUID(buddy.accUid);
+    QList<s_buddy> *buddies = AWAHSipLib::instance()->m_Buddies->getBuddies();
+    for(auto& buddy : *buddies){
+        if(buddy.lastSeen.isValid() && (uint8_t)buddy.lastSeen.secsTo(now) > AWAHSipLib::instance()->m_Buddies->maxPresenceRefreshTime){
+            s_account* account = AWAHSipLib::instance()->m_Accounts->getAccountByUID(buddy.accUid);
             if(account){
                 QString fulladdr = "sip:"+ buddy.buddyUrl +"@"+ account->serverURI;
-                changeBuddyState( fulladdr, unknown);                                          // set the buddy as offline after maxPresenceRefreshTime to detect offline buddies reliably
+                AWAHSipLib::instance()->m_Buddies->changeBuddyState( fulladdr, unknown);                                          // set the buddy as offline after maxPresenceRefreshTime to detect offline buddies reliably
                 if(account->SIPStatusCode == 200 && buddy.buddyptr != nullptr){
                     buddy.buddyptr->subscribePresence(false);                                  // then subscribe the buddy again to enshure that only the online buddies are in the buddy list
                     buddy.buddyptr->subscribePresence(true);
@@ -196,4 +203,8 @@ void Buddies::BuddyChecker()
             }
         }
     }
+    pj_time_val loctimeDelay;                                                       // restart Timer
+    loctimeDelay.msec=12;
+    loctimeDelay.sec=10;
+    pjsip_endpt_schedule_timer(pjsua_get_pjsip_endpt(), entry, &loctimeDelay);
 }
