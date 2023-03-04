@@ -85,6 +85,8 @@ public:
     */
     void addAudioDevice(int recordDevId, int playbackDevId, QString uid = "");
 
+    void setClockingDevice(int recordDevId);
+
     /**
     * @brief Add an offline device to the the router
     *        it will not be added to the conference bridge but it will stay in the device config

@@ -631,7 +631,6 @@ void Accounts::CallInspector(pj_timer_heap_t *timer_heap, pj_timer_entry *entry)
             CallInfo pjCallInfo = call.callptr->getInfo();
             info = AWAHSipLib::instance()->m_Accounts->getCallInfo(pjCallInfo.id, pjCallInfo.accId);
             emit AWAHSipLib::instance()->m_Accounts->callInfo(pjCallInfo.accId, pjCallInfo.id,info);
-            qDebug() << "Call id: " << call.callId << " pjsua id " << pjCallInfo.id;
             if(AWAHSipLib::instance()->m_Accounts->m_MaxCallTime){                                                          // hang up calls if call time is exeeded
                 if(AWAHSipLib::instance()->m_Accounts->m_MaxCallTime*60 <= (pjCallInfo.connectDuration.sec) && pjCallInfo.remOfferer){
                     AWAHSipLib::instance()->m_Accounts->hangupCall(pjCallInfo.id,pjCallInfo.accId);

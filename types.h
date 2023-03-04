@@ -70,40 +70,40 @@ inline int dBtoAdjLevel(int &level)
 {
     int leveladjust = 0;
     // conversion table from dB to pjusa leveladjust, this is used because I din't find any algorithm to match the dB values over the whole range
-    QHash<int,int> const m_dbToAdjustVol = {{20,1152},{19,1013},{18,889},{17,778},{16,680},{15,592},{14,514},{13,444},{12,382},{11,326},
-                                            {10,277},{9,233},{8,193},{7,157},{6,128},{5,99},{4,75},{3,51},{2,33},{1,15},{0,0},
-                                            {-1,-14},{-2,-26},{-3,-37},{-4,-47},{-5,-56},{-6,-64},{-7,-71},{-8,-77},{-9,-83},{-10,-88},
-                                            {-11,-92},{-12,-96},{-13,-99},{-14,-103},{-15,-105},{-16,-108},{-17,-110},{-18,-112},{-19,-114},{-20,-115},
-                                            {-21,-117},{-22,-118},{-23,-119},{-24,-120},{-25,-121},{-26,-122},{-28,-123},
-                                            {-30,-124},{-32,-125},{-36,-126},
-                                            {-42,-127}};            // levels below -42 are not supported, mute = -128
+    QHash<int,int> const m_dbToAdjustVol = {{26,1152},{25,1013},{24,889},{23,778},{22,680},{21,592},
+                                            {20,514},{19,444},{18,382},{17,326},{16,277},{15,233},{14,193},{13,157},{12,128},{11,99},
+                                            {10,75},{9,51},{8,33},{7,15},{6,0},{5,-14},{4,-26},{3,-37},{2,-47},{1,-56},
+                                            {0,-64},{-1,-71},{-2,-77},{-3,-83},{-4,-88},{-5,-92},{-6,-96},{-7,-99},{-8,-103},{-9,-105},
+                                            {-10,-108},{-11,-110},{-12,-112},{-13,-114},{-14,-115},{-15,-117},{-16,-118},{-17,-119},{-18,-120},{-19,-121},
+                                            {-20,-122},{-22,-123},{-24,-124},{-26,-125},
+                                            {-30,-126},{-36,-127}};            // levels below -36 are not supported, mute = -128
 
-    if(level > 20) level = 20;              // limit the maximum gain to 20dB
-    if(level < -42){                        // values below -40 are not supported by pjsua, so mute the xp
+    if(level > 26) level = 26;              // limit the maximum gain to 20dB
+    if(level < -36){                        // values below -40 are not supported by pjsua, so mute the xp
         leveladjust = -128;
         level = -96;
     }
     switch (level) {                        // some levels can not be set due to poor resolution so the level is mapped to the next closest
-    case -27:
-        level = -28;
+    case -21:
+        level = -22;
         break;
+    case -23:
+        level = -24;
+        break;
+    case -25:
+        level = -26;
+        break;
+    case -27:
+    case -28:
     case -29:
         level = -30;
         break;
     case -31:
-        level = -32;
-        break;
+    case -32:
     case -33:
     case -34:
     case -35:
         level = -36;
-        break;
-    case -37:
-    case -38:
-    case -39:
-    case -40:
-    case -41:
-        level = -42;
         break;
     }
     if(m_dbToAdjustVol.contains(level)){

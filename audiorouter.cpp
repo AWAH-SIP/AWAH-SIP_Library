@@ -97,6 +97,13 @@ int AudioRouter::getSoundDevID(QString DeviceName)
     return -1;
 }
 
+void AudioRouter::setClockingDevice(int recordDevId){
+    m_lib->m_pjEp->audDevManager().setNullDev();
+//    recordDevId = getSoundDevID("OsX to Codec");
+//    qDebug() << "master Clocking device is: " << recordDevId;
+//    m_lib->m_pjEp->audDevManager().setCaptureDev(recordDevId);
+}
+
 void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid){
     pjmedia_snd_port *soundport;
     pj_status_t status;
@@ -197,7 +204,9 @@ void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid
             return;
         }
         pjsua_conf_connect(masterPortInfo.slot_id,slot);        // connect masterport to sound dev to keep it open all the time to prevent different latencies (see issue #29)
-        pjsua_conf_connect(slot,masterPortInfo.slot_id);
+        //pjsua_conf_disconnect(masterPortInfo.slot_id,slot);
+        pjsua_data* intData = pjsua_get_var();
+        pjmedia_conf_adjust_conn_level(intData->mconf, masterPortInfo.slot_id, slot,  -128);
 
         status = pjmedia_snd_port_connect(soundport, splitcomb);
         if (status != PJ_SUCCESS){
@@ -259,7 +268,7 @@ void AudioRouter::setAudioDeviceToOffline(QString inputName, QString outputName,
         emit AudioDevicesChanged(m_AudioDevices);
         return;
     }
-    else{                                               // device was online an is lost. Some cleanup is needed
+    else{                                               // device was online and is lost now. Some cleanup is needed
         if(offlineDevice->devicetype == SoundDevice)
         {
             if(offlineDevice->PBDevID > -1 && offlineDevice->RecDevID > -1){
@@ -649,7 +658,8 @@ int AudioRouter::addSplittComb(s_account &account)
             return -1;
         }
         pjsua_conf_connect(masterPortInfo.slot_id,slot);        // connect masterport to sound dev to keep it open all the time to prevent different latencies (see issue #29)
-        pjsua_conf_connect(slot,masterPortInfo.slot_id);
+        pjsua_data* intData = pjsua_get_var();
+        pjmedia_conf_adjust_conn_level(intData->mconf, masterPortInfo.slot_id, slot,  -128);
     }
 
     status = pjsua_conf_add_port(m_lib->pool, account.splitComb, &slot);
@@ -660,7 +670,8 @@ int AudioRouter::addSplittComb(s_account &account)
         return -1;
     }
     pjsua_conf_connect(masterPortInfo.slot_id,slot);        // connect masterport to sound dev to keep it open all the time to prevent different latencies (see issue #29)
-    pjsua_conf_connect(slot,masterPortInfo.slot_id);
+    pjsua_data* intData = pjsua_get_var();
+    pjmedia_conf_adjust_conn_level(intData->mconf, masterPortInfo.slot_id, slot,  -128);
 
 
     account.splitterSlot = slot;
@@ -826,7 +837,7 @@ int AudioRouter::connectConfPort(int src_slot, int sink_slot, int level, bool pe
     pjsua_conf_port_id src = src_slot;
     pjsua_conf_port_id sink = sink_slot;
     pjsua_conf_connect_param param;
-    param.level = dBtoFact(level);
+    param.level = 0.5;
     status = pjsua_conf_connect2(src, sink, &param);
     if (status == PJ_SUCCESS){
         m_lib->m_Log->writeLog(3,(QString("connect slot: ") + QString::number(src_slot) + " to " + QString::number(sink_slot) + " successfully" ));
