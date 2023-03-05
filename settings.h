@@ -134,10 +134,15 @@ public:
     const QJsonObject getCodecPriorities();
 
     /**
-    * @brief set general settings
+    * @brief set codec priorities
     * @param a JSON Object with codecname as key and priority as value
     */
     void setCodecPriorities(QJsonObject CodecPriorities);
+
+    /**
+    * @brief get the saved master clock setting and all input sound devices as clock source
+    */
+    void getMasterClock();
 
 public slots:
     /**

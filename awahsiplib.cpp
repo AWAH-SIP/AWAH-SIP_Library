@@ -58,6 +58,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Log = new Log(this, this);
         m_pjEp->libInit(epCfg);
         //m_pjEp->audDevManager().setNullDev();                  // set a nulldevice as masterdevice
+        m_Settings->getMasterClock();
         m_AudioRouter->setClockingDevice(1);
         if(TransportProtocol=="TCP")
             m_pjEp->transportCreate(PJSIP_TRANSPORT_TCP, tCfg);
@@ -66,6 +67,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
 
         // Start the library (worker threads etc)
         m_pjEp->libStart();
+
         m_Log->writeLog(3,"********************************************************");
         m_Log->writeLog(3,"      AWAH-SIP Codec started");
         m_Log->writeLog(3,"      Version: "+ QString::number(AWAHSIP_VERSION));
@@ -85,6 +87,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Codecs->listCodecs();
         m_Settings->loadBuddies();
         m_Buddies->StartBuddyChecker();
+
 
     }
     catch (Error &err){

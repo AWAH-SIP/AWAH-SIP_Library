@@ -98,10 +98,15 @@ int AudioRouter::getSoundDevID(QString DeviceName)
 }
 
 void AudioRouter::setClockingDevice(int recordDevId){
-    m_lib->m_pjEp->audDevManager().setNullDev();
-//    recordDevId = getSoundDevID("OsX to Codec");
-//    qDebug() << "master Clocking device is: " << recordDevId;
-//    m_lib->m_pjEp->audDevManager().setCaptureDev(recordDevId);
+     if(recordDevId == -1){
+         m_lib->m_pjEp->audDevManager().setNullDev();
+     }
+     else{
+         m_lib->m_pjEp->audDevManager().setCaptureDev(recordDevId);
+         pjmedia_aud_dev_info info;
+         pjmedia_aud_dev_get_info(recordDevId, &info);
+         m_lib->m_Log->writeLog(3,QString("SetClockingDevice: new router clocksource is: ") + info.name );
+     }
 }
 
 void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid){
