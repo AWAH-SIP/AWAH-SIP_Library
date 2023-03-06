@@ -59,12 +59,14 @@ AudioRouter::~AudioRouter()
 QStringList AudioRouter::listInputSoundDev(){
     pjmedia_aud_dev_refresh() ;
     QStringList snddevlist;
-    QString snddev;
+    QString devname;
     foreach(AudioDevInfo audiodev, m_lib->m_pjEp->audDevManager().enumDev2()){
-        snddev.clear();
+        devname = QString::fromStdString(audiodev.name);
         if(audiodev.inputCount>0){
-            snddev.append(QString::fromStdString(audiodev.name));
-            snddevlist << snddev;
+            snddevlist << devname;
+        }
+        if(devname.contains("Merging")){                                            // this is done because the Merging driver does not return a channelcount.
+            snddevlist << devname;
         }
     }
     return snddevlist;
@@ -73,12 +75,14 @@ QStringList AudioRouter::listInputSoundDev(){
 QStringList AudioRouter::listOutputSoundDev(){
     pjmedia_aud_dev_refresh() ;
     QStringList snddevlist;
-    QString snddev;
+    QString  devname;
     foreach(AudioDevInfo audiodev, m_lib->m_pjEp->audDevManager().enumDev2()){
-        snddev.clear();
+        devname = QString::fromStdString(audiodev.name);
         if(audiodev.outputCount>0){
-            snddev.append(QString::fromStdString(audiodev.name));
-            snddevlist << snddev;
+            snddevlist << devname;
+        }
+        if(devname.contains("Merging")){                                            // this is done because the Merging driver does not return a channelcount.
+            snddevlist << devname;
         }
     }
     return snddevlist;
@@ -141,7 +145,9 @@ void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid
     if (channelCnt > 64){                                                             // important edit splitcomb.c line 34  #define MAX_CHANNELS from 16 to 64
         channelCnt = 64;                                                              // limit the number of channels acorrding to MAX_CHANNEL set
     }
-
+    if (QString::fromStdString(recorddev.name).contains("Merging")){
+        channelCnt =64;
+    }
     if (channelCnt == 0){
         m_lib->m_Log->writeLog(3,"AddAudioDevice: Device has either no input or no outputs!" );
         return;
