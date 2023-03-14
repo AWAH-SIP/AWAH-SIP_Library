@@ -59,7 +59,6 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_pjEp->libInit(epCfg);
         //m_pjEp->audDevManager().setNullDev();                  // set a nulldevice as masterdevice
         m_Settings->getMasterClock();
-        m_AudioRouter->setClockingDevice(1);
         if(TransportProtocol=="TCP")
             m_pjEp->transportCreate(PJSIP_TRANSPORT_TCP, tCfg);
         else
