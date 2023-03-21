@@ -824,7 +824,7 @@ void Settings::setSettings(QJsonObject editedSettings)
              settings.setValue("settings/MediaConfig/Sound_Device_Record_Latency",it.value().toInt());
         }
 
-        if (it.key() == "Router clock source"){                                         // save the device name instead of the id beause the id chan change on restart
+        if (it.key() == "Router clock source"){                                         // save the device name instead of the id beause the id can change on restart
             pjmedia_aud_dev_info info;
             pjmedia_aud_dev_get_info(it.value().toInt(),&info);
             if(it.value().toInt() == -1){
@@ -957,7 +957,7 @@ void Settings::setCodecPriorities(QJsonObject CodecPriorities){
     m_lib->m_Codecs->listCodecs();     // sets priorities to the endpoint
 }
 
-void Settings::getMasterClock(){                                              // master Clock of the internal Audio router, saved with setSettings funtion. This get Function is separate becaus it needs the library started to enum availabe sync sources
+int Settings::getMasterClock(){                                              // master Clock of the internal Audio router, saved with setSettings funtion. This get Function is separate becaus it needs the library started to enum availabe sync sources
     QSettings settings("awah", "AWAHsipConfig");
     QJsonObject AudioSettings = m_settings["AudioSettings"].toObject(), enumitems, item, codecitem;
     item = QJsonObject();
@@ -973,5 +973,5 @@ void Settings::getMasterClock(){                                              //
     item["enumlist"] = enumitems;
     AudioSettings["Router clock source"] = item;
     m_settings["AudioSettings"] = AudioSettings;
-    m_lib->m_AudioRouter->setClockingDevice(m_lib->m_AudioRouter->getSoundDevID(settings.value("settings/MediaConfig/Master_Clock","internal").toString()));
+    return m_lib->m_AudioRouter->getSoundDevID(settings.value("settings/MediaConfig/Master_Clock","internal").toString());
 }

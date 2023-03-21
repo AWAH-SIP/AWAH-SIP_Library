@@ -141,8 +141,9 @@ public:
 
     /**
     * @brief get the saved master clock setting and all input sound devices as clock source
+    * @return the audio devie ID of the selected device of -1 for internal clocking
     */
-    void getMasterClock();
+    int getMasterClock();
 
 public slots:
     /**

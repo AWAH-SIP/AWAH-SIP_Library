@@ -104,6 +104,7 @@ int AudioRouter::getSoundDevID(QString DeviceName)
 void AudioRouter::setClockingDevice(int recordDevId){
      if(recordDevId == -1){
          m_lib->m_pjEp->audDevManager().setNullDev();
+         m_lib->m_Log->writeLog(3,QString("SetClockingDevice: new router clocksource is: internal"));
      }
      else{
          m_lib->m_pjEp->audDevManager().setCaptureDev(recordDevId);
