@@ -101,17 +101,131 @@ int AudioRouter::getSoundDevID(QString DeviceName)
     return -1;
 }
 
-void AudioRouter::setClockingDevice(int recordDevId){
-     if(recordDevId == -1){
-         m_lib->m_pjEp->audDevManager().setNullDev();
-         m_lib->m_Log->writeLog(3,QString("SetClockingDevice: new router clocksource is: internal"));
-     }
-     else{
-         m_lib->m_pjEp->audDevManager().setCaptureDev(recordDevId);
-         pjmedia_aud_dev_info info;
-         pjmedia_aud_dev_get_info(recordDevId, &info);
-         m_lib->m_Log->writeLog(3,QString("SetClockingDevice: new router clocksource is: ") + info.name );
-     }
+void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString uid){
+    pjmedia_snd_port *soundport;
+    pj_status_t status;
+    AudioDevInfo recorddev, playbackdev;
+    int samples_per_frame, channelCnt, slot;
+    QList<int> connectedSlots;
+    s_IODevices Audiodevice;
+
+    if(recordDevId == -1){
+        m_lib->m_pjEp->audDevManager().setNullDev();
+        m_lib->m_Log->writeLog(3,QString("AddClockingDevice: Selected device not found, new router clocksource is set to internal"));
+        return;
+    }
+
+    recorddev =  m_lib->m_pjEp->audDevManager().getDevInfo(recordDevId);
+    playbackdev = m_lib->m_pjEp->audDevManager().getDevInfo(playbackDevId);
+
+    if(recorddev.inputCount >= playbackdev.outputCount){                              // if rec and playback device have different channelcount
+        channelCnt =recorddev.inputCount;                                             // use the bigger number
+    }
+    else channelCnt = playbackdev.outputCount;
+
+    if (channelCnt > 64){                                                             // important edit splitcomb.c line 34  #define MAX_CHANNELS from 16 to 64
+        channelCnt = 64;                                                              // limit the number of channels acorrding to MAX_CHANNEL set
+    }
+    if (QString::fromStdString(recorddev.name).contains("Merging")){
+        channelCnt =64;
+    }
+    if (channelCnt == 0){
+        m_lib->m_Log->writeLog(3,"AddClockingDevice: Device has either no input or no outputs!" );
+        return;
+    }
+
+    samples_per_frame = recorddev.defaultSamplesPerSec * m_lib->epCfg.medConfig.audioFramePtime * channelCnt /  1000;
+
+    status =   pjmedia_snd_port_create(
+                /* pointer to the memory pool */ m_lib->pool,
+                /* Id record device*/            recordDevId,
+                /* Id pb device*/                playbackDevId,
+                /* clock rate*/                  recorddev.defaultSamplesPerSec,
+                /*channel count*/                channelCnt,
+                /*samples per frame(ptime)*/     samples_per_frame ,
+                /* bits per sample*/             16,
+                /* options*/                     0,
+                /*pointer to the new sound port*/  &soundport);
+    if (status != PJ_SUCCESS) {
+        char buf[50];
+        pj_strerror	(status,buf,sizeof (buf) );
+        m_lib->m_Log->writeLog(1,(QString("AddClockingDevice: adding Audio decive failed: ") + buf));
+        return;
+    }
+
+    pjmedia_port *splitcomb;
+    status = pjmedia_splitcomb_create(
+                /* pointer to the memory pool */        m_lib->pool,
+                /* clock rate*/                         recorddev.defaultSamplesPerSec,
+                /*channel count */                      channelCnt,
+                /*samples per frame*/                   samples_per_frame,
+                /* bits per sample*/                    16,
+                /* options*/                            0,
+                &splitcomb);
+    if (status != PJ_SUCCESS){
+        char buf[50];
+        pj_strerror	(status,buf,sizeof (buf) );
+        m_lib->m_Log->writeLog(1,(QString("AddClockingDevice: create splitcomb port failed: ") + buf));
+        return;
+    }
+    for (int i = 0; i<channelCnt;i++)
+    {
+        pjmedia_port *revch;
+        QString name = "AD:" + uid + "-Ch:" + QString::number(i+1);
+        status = pjmedia_splitcomb_create_rev_channel(m_lib->pool, splitcomb, i, 0, &revch);
+        if (status != PJ_SUCCESS){
+            char buf[50];
+            pj_strerror	(status,buf,sizeof (buf) );
+            m_lib->m_Log->writeLog(1,(QString("AddClockingDevice: could not create splittcomb revchannel: ") + buf));
+            return;
+        }
+        pj_strdup2(m_lib->pool, &revch->info.name, name.toStdString().c_str());
+        status = pjsua_conf_add_port(m_lib->pool, revch, &slot);
+        if (status != PJ_SUCCESS){
+            char buf[50];
+            pj_strerror	(status,buf,sizeof (buf) );
+            m_lib->m_Log->writeLog(1,(QString("AddClockingDevice: adding  conference port failed: ") + buf));
+            return;
+        }
+        pjsua_conf_connect(0,slot);        // connect masterport to sound dev to keep it open all the time to prevent different latencies (see issue #29)
+        pjsua_data* intData = pjsua_get_var();
+        pjmedia_conf_adjust_conn_level(intData->mconf, 0, slot,  -128);
+
+        status = pjmedia_snd_port_connect(soundport, splitcomb);
+        if (status != PJ_SUCCESS){
+            char buf[50];
+            pj_strerror	(status,buf,sizeof (buf) );
+            m_lib->m_Log->writeLog(1,(QString("AddClockingDevice: connecting sound port failed: ") + buf));
+            return;
+        }
+        connectedSlots.append(slot);
+    }
+
+    Audiodevice.inputname = QString::fromStdString(recorddev.name);                      // update devicelist for saving and recalling current setup
+    Audiodevice.outputame = QString::fromStdString(playbackdev.name);
+    Audiodevice.devicetype = SoundDevice;
+    Audiodevice.uid = uid;
+    Audiodevice.PBDevID = playbackDevId;
+    Audiodevice.RecDevID = recordDevId;
+    Audiodevice.portNo = connectedSlots;
+    Audiodevice.soundport = soundport;
+    Audiodevice.inChannelCount = recorddev.inputCount;
+    Audiodevice.outChannelCount = playbackdev.outputCount;
+    bool devicefound = false;
+    for (auto & existingaudiodev : m_AudioDevices){                                     // uptate existing audio dev when offline device is changing to online
+        if (existingaudiodev.uid == uid){
+            existingaudiodev = Audiodevice;
+            devicefound = true;
+            break;
+        }
+    }
+    if (!devicefound){
+         m_AudioDevices.append(Audiodevice);
+    }
+    m_lib->m_Settings->saveIODevConfig();
+    conferenceBridgeChanged();
+    emit AudioDevicesChanged(m_AudioDevices);
+    return;
 }
 
 void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid){
@@ -161,7 +275,6 @@ void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid
         m_lib->m_Log->writeLog(1,(QString("AddAudioDevice: Error while reading master port info") + buf));
         return;
     }
-
     samples_per_frame = masterPortInfo.clock_rate * m_lib->epCfg.medConfig.audioFramePtime * channelCnt /  1000;
 
     status =   pjmedia_snd_port_create(
@@ -216,7 +329,6 @@ void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid
             return;
         }
         pjsua_conf_connect(masterPortInfo.slot_id,slot);        // connect masterport to sound dev to keep it open all the time to prevent different latencies (see issue #29)
-        //pjsua_conf_disconnect(masterPortInfo.slot_id,slot);
         pjsua_data* intData = pjsua_get_var();
         pjmedia_conf_adjust_conn_level(intData->mconf, masterPortInfo.slot_id, slot,  -128);
 
@@ -284,7 +396,6 @@ void AudioRouter::setAudioDeviceToOffline(QString inputName, QString outputName,
         if(offlineDevice->devicetype == SoundDevice)
         {
             if(offlineDevice->PBDevID > -1 && offlineDevice->RecDevID > -1){
-
                 for(auto& slot : offlineDevice->portNo){
                     try{
                         pj_status_t status;
@@ -354,7 +465,7 @@ void AudioRouter::removeAudioDevice(QString uid)
     }
 
     if(deviceToRemove->devicetype > FileRecorder){
-        m_lib->m_Log->writeLog(3,"removeAudioDevice: device not an audio device");
+        m_lib->m_Log->writeLog(3,"removeAudioDevice: device not an audio device: nothing removed!");
     }
 
     for(auto& slot : deviceToRemove->portNo){

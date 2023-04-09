@@ -1,4 +1,4 @@
-﻿/*
+﻿ /*
  * Copyright (C) 2016 - 2022 Andy Weiss, Adi Hilber
  *
  * This program is free software; you can redistribute it and/or modify
@@ -141,9 +141,9 @@ public:
 
     /**
     * @brief get the saved master clock setting and all input sound devices as clock source
-    * @return the audio devie ID of the selected device of -1 for internal clocking
+    * @return the name of the masterclock device
     */
-    int getMasterClock();
+    QString getMasterClock();
 
 public slots:
     /**

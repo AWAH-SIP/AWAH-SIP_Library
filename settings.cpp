@@ -32,15 +32,33 @@ Settings::Settings(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_
 {
 }
 
-
 void Settings::loadIODevConfig()
 {
     QList<s_IODevices> loadedDevices;
     int recordDevId, playbackDevId;
     QSettings settings("awah", "AWAHsipConfig");
-    qDebug() << "Settings filepath: " <<
-                settings.fileName();
+    m_lib->m_Log->writeLog(3,QString("loadConfig: Settingsloaded from file:" + settings.fileName()));
     loadedDevices = settings.value("IODevConfig").value<QList<s_IODevices>>();
+    QString MasterClockDev = getMasterClock();
+
+    bool clockdevFound = false;
+    for( int i=0; i<loadedDevices.count(); ++i ){
+        if(loadedDevices.at(i).devicetype == SoundDevice){                                      // add the Clocking Device first because the other devices get the clock from the port 0 of the conference bridge.
+            if(loadedDevices.at(i).inputname == MasterClockDev){
+                recordDevId = m_lib->m_AudioRouter->getSoundDevID(loadedDevices.at(i).inputname);
+                playbackDevId = m_lib->m_AudioRouter->getSoundDevID(loadedDevices.at(i).outputame);
+                m_lib->m_AudioRouter->AddClockingDevice(recordDevId,playbackDevId, loadedDevices.at(i).uid);
+                m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added Master clocking sound device form config file: ") + loadedDevices.at(i).inputname + " " + loadedDevices.at(i).outputame);
+                if(recordDevId > -1){
+                    clockdevFound = true;
+                }
+            }
+        }
+    }
+    if(!clockdevFound){
+        m_lib->m_AudioRouter->AddClockingDevice(-1,-1, "");
+        m_lib->m_Log->writeLog(3,QString("loadIODevConfig: Setting up dummy sound device for internal clocking"));
+    }
 
     for( int i=0; i<loadedDevices.count(); ++i )                                                     // todo send an error message if sound device is not found!!
     {
@@ -279,10 +297,9 @@ void Settings::loadCustomSourceNames()
     QStringList keys = settings.childKeys();
     foreach (QString key, keys) {
          srcLables[key] = settings.value(key).toString();
-         qDebug() << "found lable: " << key << "with value: " << settings.value(key).toString();
     }
     settings.endGroup();
-    qDebug() << "Loaded custom Source Lables" << srcLables;
+    m_lib->m_Log->writeLog(3,QString("loadCustomSourceNames: custom source lables loaded"));
     m_lib->m_AudioRouter->setCustomSourceLables(srcLables);
 }
 
@@ -957,7 +974,7 @@ void Settings::setCodecPriorities(QJsonObject CodecPriorities){
     m_lib->m_Codecs->listCodecs();     // sets priorities to the endpoint
 }
 
-int Settings::getMasterClock(){                                              // master Clock of the internal Audio router, saved with setSettings funtion. This get Function is separate becaus it needs the library started to enum availabe sync sources
+QString Settings::getMasterClock(){                                 // master Clock of the internal Audio router, saved with setSettings funtion. This get Function is separate becaus it needs the library started to enum availabe sync sources
     QSettings settings("awah", "AWAHsipConfig");
     QJsonObject AudioSettings = m_settings["AudioSettings"].toObject(), enumitems, item, codecitem;
     item = QJsonObject();
@@ -967,11 +984,13 @@ int Settings::getMasterClock(){                                              // 
     item["max"] = 127;
     enumitems = QJsonObject();
     enumitems["internal"] = -1;
-    foreach(const QString inputdev , m_lib->m_AudioRouter->listInputSoundDev() ){
-        enumitems[inputdev] = m_lib->m_AudioRouter->getSoundDevID(inputdev);
+    for (auto& Audiodev : *m_lib->m_AudioRouter->getAudioDevices()) {
+        if(Audiodev.devicetype == SoundDevice && Audiodev.RecDevID > -1){
+            enumitems[Audiodev.inputname] = Audiodev.RecDevID;
+        }
     }
     item["enumlist"] = enumitems;
     AudioSettings["Router clock source"] = item;
     m_settings["AudioSettings"] = AudioSettings;
-    return m_lib->m_AudioRouter->getSoundDevID(settings.value("settings/MediaConfig/Master_Clock","internal").toString());
+    return settings.value("settings/MediaConfig/Master_Clock","internal").toString();
 }

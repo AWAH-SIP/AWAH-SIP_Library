@@ -74,7 +74,6 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Log->writeLog(3,"      PJSIP Version: "+ QString::fromStdString(m_pjEp->libVersion().full));
         m_Log->writeLog(3,"********************************************************");
 
-        m_AudioRouter->setClockingDevice(m_Settings->getMasterClock());
         /* Create pool for multiple Sound Device handling */
         pool = pjsua_pool_create("awahsip", 512, 512);
         m_Settings->loadCustomDestinationNames();
@@ -87,7 +86,6 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Codecs->listCodecs();
         m_Settings->loadBuddies();
         m_Buddies->StartBuddyChecker();
-
 
     }
     catch (Error &err){

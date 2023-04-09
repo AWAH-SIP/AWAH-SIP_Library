@@ -76,16 +76,22 @@ public:
     int getSoundDevID(QString DeviceName);
 
     /**
+    * @brief Set the Clocking device
+    *        the timing for the conference bridge is taken from this device.
+    * @param recordDevId ID of the desired record device
+    * @param playbackDevId ID of the dseired playback device
+    * @param if the device is loaded from settings you have to provide it's uid to assign the correct routes
+    */
+    void AddClockingDevice(int recordDevId, int playbackDevId, QString uid);
+
+    /**
     * @brief Add an Audio device to the conference bridge
     *        all channels of the device will be added (upto 64 channels)
     * @param recordDevId ID of the desired record device
     * @param playbackDevId ID of the dseired playback device
     * @param if the device is loaded from settings you have to provide it's uid to assign the correct routes
-    * @return no of channels added or -1 on error
     */
     void addAudioDevice(int recordDevId, int playbackDevId, QString uid = "");
-
-    void setClockingDevice(int recordDevId);
 
     /**
     * @brief Add an offline device to the the router
