@@ -65,7 +65,7 @@ QStringList AudioRouter::listInputSoundDev(){
         if(audiodev.inputCount>0){
             snddevlist << devname;
         }
-        if(devname.contains("Merging")){                                            // this is done because the Merging driver does not return a channelcount.
+        if(devname.contains("RAVENNA")){                                            // this is done because the Merging driver does not return a channelcount.
             snddevlist << devname;
         }
     }
@@ -81,7 +81,7 @@ QStringList AudioRouter::listOutputSoundDev(){
         if(audiodev.outputCount>0){
             snddevlist << devname;
         }
-        if(devname.contains("Merging")){                                            // this is done because the Merging driver does not return a channelcount.
+        if(devname.contains("RAVENNA")){                                            // this is done because the Merging driver does not return a channelcount.
             snddevlist << devname;
         }
     }
@@ -126,21 +126,20 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
     if (channelCnt > 64){                                                             // important edit splitcomb.c line 34  #define MAX_CHANNELS from 16 to 64
         channelCnt = 64;                                                              // limit the number of channels acorrding to MAX_CHANNEL set
     }
-    if (QString::fromStdString(recorddev.name).contains("Merging")){
+    if (QString::fromStdString(recorddev.name).contains("RAVENNA")){
         channelCnt =64;
     }
     if (channelCnt == 0){
         m_lib->m_Log->writeLog(3,"AddClockingDevice: Device has either no input or no outputs!" );
         return;
     }
-
-    samples_per_frame = recorddev.defaultSamplesPerSec * m_lib->epCfg.medConfig.audioFramePtime * channelCnt /  1000;
+    samples_per_frame = m_lib->epCfg.medConfig.clockRate * m_lib->epCfg.medConfig.audioFramePtime * channelCnt /  1000;
 
     status =   pjmedia_snd_port_create(
                 /* pointer to the memory pool */ m_lib->pool,
                 /* Id record device*/            recordDevId,
                 /* Id pb device*/                playbackDevId,
-                /* clock rate*/                  recorddev.defaultSamplesPerSec,
+                /* clock rate*/                  m_lib->epCfg.medConfig.clockRate,
                 /*channel count*/                channelCnt,
                 /*samples per frame(ptime)*/     samples_per_frame ,
                 /* bits per sample*/             16,
@@ -149,14 +148,15 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
     if (status != PJ_SUCCESS) {
         char buf[50];
         pj_strerror	(status,buf,sizeof (buf) );
-        m_lib->m_Log->writeLog(1,(QString("AddClockingDevice: adding Audio decive failed: ") + buf));
+        m_lib->m_Log->writeLog(1,(QString("AddClockingDevice: adding Audio device failed: ") + buf));
         return;
     }
-
+ m_lib->m_Log->writeLog(3,(QString("AddClockingDevice:mediaconfig clockrate: ") + QString::number(m_lib->epCfg.medConfig.clockRate)));
+ m_lib->m_Log->writeLog(3,(QString("AddClockingDevice:masterportinfo spf: ") + QString::number(samples_per_frame)));
     pjmedia_port *splitcomb;
     status = pjmedia_splitcomb_create(
                 /* pointer to the memory pool */        m_lib->pool,
-                /* clock rate*/                         recorddev.defaultSamplesPerSec,
+                /* clock rate*/                         m_lib->epCfg.medConfig.clockRate,
                 /*channel count */                      channelCnt,
                 /*samples per frame*/                   samples_per_frame,
                 /* bits per sample*/                    16,
@@ -188,8 +188,8 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
             return;
         }
         pjsua_conf_connect(0,slot);        // connect masterport to sound dev to keep it open all the time to prevent different latencies (see issue #29)
-        pjsua_data* intData = pjsua_get_var();
-        pjmedia_conf_adjust_conn_level(intData->mconf, 0, slot,  -128);
+        //pjsua_data* intData = pjsua_get_var();
+        //pjmedia_conf_adjust_conn_level(intData->mconf, 0, slot,  -128);
 
         status = pjmedia_snd_port_connect(soundport, splitcomb);
         if (status != PJ_SUCCESS){
@@ -260,7 +260,7 @@ void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid
     if (channelCnt > 64){                                                             // important edit splitcomb.c line 34  #define MAX_CHANNELS from 16 to 64
         channelCnt = 64;                                                              // limit the number of channels acorrding to MAX_CHANNEL set
     }
-    if (QString::fromStdString(recorddev.name).contains("Merging")){
+    if (QString::fromStdString(recorddev.name).contains("RAVENNA")){
         channelCnt =64;
     }
     if (channelCnt == 0){
@@ -293,7 +293,8 @@ void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid
         m_lib->m_Log->writeLog(1,(QString("AddAudioDevice: adding Audio decive failed: ") + buf));
         return;
     }
-
+// m_lib->m_Log->writeLog(3,(QString("AddClockingDevice:masterportinfo clockrate: ") + QString::number(masterPortInfo.clock_rate)));
+// m_lib->m_Log->writeLog(3,(QString("AddClockingDevice:masterportinfo spf: ") + QString::number(samples_per_frame)));
     pjmedia_port *splitcomb;
     status = pjmedia_splitcomb_create(
                 /* pointer to the memory pool */        m_lib->pool,
