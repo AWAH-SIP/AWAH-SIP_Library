@@ -282,9 +282,11 @@ void PJCall::onStreamCreated(OnStreamCreatedParam &prm)
         remoteCodec.encodingName = "opus/48000/2";
         remoteCodec.displayName = "Opus";
         remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);             // load the default parameters to have a full set of objects
+        remoteCodec.codecParameters["Bit rate mode"].toObject()["value"] = 0;
         remoteCodec.codecParameters["Channelcount"].toObject()["value"] = (int)info.fmt.channel_cnt;
         remoteCodec.codecParameters["Bit rate"].toObject()["value"] = (int)info.param->info.avg_bps;
         remoteCodec.codecParameters["Clockrate"].toObject()["value"] = (int)info.param->info.clock_rate;
+
     }
     else if(encodingName == "PCMU"){
         remoteCodec.encodingName = "PCMU/8000/1";
