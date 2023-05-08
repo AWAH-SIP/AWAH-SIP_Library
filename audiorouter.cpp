@@ -128,6 +128,8 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
     }
     if (QString::fromStdString(recorddev.name).contains("RAVENNA")){
         channelCnt =64;
+        recorddev.inputCount = 64;
+        playbackdev.outputCount = 64;
     }
     if (channelCnt == 0){
         m_lib->m_Log->writeLog(3,"AddClockingDevice: Device has either no input or no outputs!" );
@@ -262,6 +264,8 @@ void AudioRouter::addAudioDevice(int recordDevId, int playbackDevId, QString uid
     }
     if (QString::fromStdString(recorddev.name).contains("RAVENNA")){
         channelCnt =64;
+        recorddev.inputCount = 64;
+        playbackdev.outputCount = 64;
     }
     if (channelCnt == 0){
         m_lib->m_Log->writeLog(3,"AddAudioDevice: Device has either no input or no outputs!" );

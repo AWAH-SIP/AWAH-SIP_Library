@@ -56,7 +56,7 @@ void Settings::loadIODevConfig()
         }
     }
     if(!clockdevFound){
-        m_lib->m_AudioRouter->AddClockingDevice(-1,-1, "");
+        m_lib->m_pjEp->audDevManager().setNullDev();
         m_lib->m_Log->writeLog(3,QString("loadIODevConfig: Setting up dummy sound device for internal clocking"));
     }
 
