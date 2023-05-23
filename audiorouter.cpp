@@ -108,6 +108,8 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
         m_lib->m_Log->writeLog(3,QString("AddClockingDevice: Selected device not found, new router clocksource is set to internal"));
         return;
     }
+    pjsua_set_no_snd_dev();
+    pjsua_set_snd_dev(recordDevId, playbackDevId);
 
     recorddev =  m_lib->m_pjEp->audDevManager().getDevInfo(recordDevId);
     playbackdev = m_lib->m_pjEp->audDevManager().getDevInfo(playbackDevId);
@@ -179,8 +181,8 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
             return;
         }
         pjsua_conf_connect(0,slot);        // connect masterport to sound dev to keep it open all the time to prevent different latencies (see issue #29)
-        //pjsua_data* intData = pjsua_get_var();
-        //pjmedia_conf_adjust_conn_level(intData->mconf, 0, slot,  -128);
+        pjsua_data* intData = pjsua_get_var();
+        pjmedia_conf_adjust_conn_level(intData->mconf, 0, slot,  -128);
 
         status = pjmedia_snd_port_connect(soundport, splitcomb);
         if (status != PJ_SUCCESS){
