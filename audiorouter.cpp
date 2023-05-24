@@ -108,7 +108,7 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
         m_lib->m_Log->writeLog(3,QString("AddClockingDevice: Selected device not found, new router clocksource is set to internal"));
         return;
     }
-    pjsua_set_no_snd_dev();
+    //pjsua_set_no_snd_dev();
     pjsua_set_snd_dev(recordDevId, playbackDevId);
 
     recorddev =  m_lib->m_pjEp->audDevManager().getDevInfo(recordDevId);
