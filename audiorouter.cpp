@@ -97,19 +97,36 @@ int AudioRouter::getSoundDevID(QString DeviceName)
 
 void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString uid){
     pjmedia_snd_port *soundport;
+    pjmedia_port *masterport;
+    pjmedia_master_port *themaster;
     pj_status_t status;
     AudioDevInfo recorddev, playbackdev;
     int samples_per_frame, channelCnt, slot;
     QList<int> connectedSlots;
     s_IODevices Audiodevice;
-
     if(recordDevId == -1){
         m_lib->m_pjEp->audDevManager().setNullDev();
         m_lib->m_Log->writeLog(3,QString("AddClockingDevice: Selected device not found, new router clocksource is set to internal"));
         return;
     }
-    //pjsua_set_no_snd_dev();
-    pjsua_set_snd_dev(recordDevId, playbackDevId);
+    pjsua_data* pjsuavar = pjsua_get_var();
+     masterport = pjsua_set_no_snd_dev();
+     status = pjmedia_master_port_create(m_lib->pool, pjsuavar->null_port,
+                         masterport, 0, &themaster);
+     pjmedia_master_port_start	(	themaster);
+
+//    pjmedia_clock_src* clocksrc;
+//    pjmedia_clock_src_init(clocksrc,PJMEDIA_DIR_ENCODING,)
+//    for(int i = 0; i < 100; i++){
+//        qDebug() << "momentary Timespamp is: " << clocksrc->timestamp.u64;
+//    }
+
+//   pjsua_data* pjsuavar = pjsua_get_var();
+//   pjsuavar->cap_dev = -1;
+//   pjsuavar->play_dev = -2;
+//   pjsuavar->snd_is_on = true;
+//   pjsuavar->snd_mode = PJSUA_SND_DEV_NO_IMMEDIATE_OPEN;
+
 
     recorddev =  m_lib->m_pjEp->audDevManager().getDevInfo(recordDevId);
     playbackdev = m_lib->m_pjEp->audDevManager().getDevInfo(playbackDevId);
@@ -127,7 +144,6 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
         return;
     }
     samples_per_frame = m_lib->epCfg.medConfig.clockRate * m_lib->epCfg.medConfig.audioFramePtime * channelCnt /  1000;
-
     status =   pjmedia_snd_port_create(
                 /* pointer to the memory pool */ m_lib->pool,
                 /* Id record device*/            recordDevId,
@@ -161,6 +177,9 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
         m_lib->m_Log->writeLog(1,(QString("AddClockingDevice: create splitcomb port failed: ") + buf));
         return;
     }
+
+
+
     for (int i = 0; i<channelCnt;i++)
     {
         pjmedia_port *revch;
@@ -183,7 +202,6 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
         pjsua_conf_connect(0,slot);        // connect masterport to sound dev to keep it open all the time to prevent different latencies (see issue #29)
         pjsua_data* intData = pjsua_get_var();
         pjmedia_conf_adjust_conn_level(intData->mconf, 0, slot,  -128);
-
         status = pjmedia_snd_port_connect(soundport, splitcomb);
         if (status != PJ_SUCCESS){
             char buf[50];
@@ -193,7 +211,6 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
         }
         connectedSlots.append(slot);
     }
-
     Audiodevice.inputname = QString::fromStdString(recorddev.name);                      // update devicelist for saving and recalling current setup
     Audiodevice.outputame = QString::fromStdString(playbackdev.name);
     Audiodevice.devicetype = SoundDevice;
