@@ -114,6 +114,7 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
     }
     pjsua_data* pjsuavar = pjsua_get_var();
      masterport = pjsua_set_no_snd_dev();
+     pjsua_set_ec(0,0);
      status = pjmedia_master_port_create(m_lib->pool, pjsuavar->null_port, masterport, 0, &themaster);
      if (status != PJ_SUCCESS){
              char buf[50];
