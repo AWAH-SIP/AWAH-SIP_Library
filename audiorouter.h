@@ -245,6 +245,7 @@ private:
     s_audioPortList m_confPortList;
     QTimer *m_SoundDeviceInspectorTimer;
     uint8_t m_sounddevCount = 0;
+    pjmedia_master_port *themaster = nullptr;
 
     /**
     * @brief All AudioDevices (soundcards, generators, fileplayer and recoder) are added to this list

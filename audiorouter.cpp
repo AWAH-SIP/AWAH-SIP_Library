@@ -43,6 +43,10 @@ AudioRouter::~AudioRouter()
 {
     m_SoundDeviceInspectorTimer->stop();
     QList<s_IODevices> *audioDevs = getAudioDevices();
+    if(themaster != nullptr){
+        pjmedia_master_port_stop(themaster);
+        pjmedia_master_port_destroy(themaster,false);
+    }
     for(int i = 0;i<audioDevs->count();i++) {                    // close all sound device before deinit library to prevent assertion fault!
         if(audioDevs->at(i).devicetype == SoundDevice) {
             pjmedia_snd_port_destroy(audioDevs->at(i).soundport);
@@ -98,7 +102,6 @@ int AudioRouter::getSoundDevID(QString DeviceName)
 void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString uid){
     pjmedia_snd_port *soundport;
     pjmedia_port *masterport;
-    pjmedia_master_port *themaster;
     pj_status_t status;
     AudioDevInfo recorddev, playbackdev;
     int samples_per_frame, channelCnt, slot;
@@ -111,22 +114,20 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
     }
     pjsua_data* pjsuavar = pjsua_get_var();
      masterport = pjsua_set_no_snd_dev();
-     status = pjmedia_master_port_create(m_lib->pool, pjsuavar->null_port,
-                         masterport, 0, &themaster);
-     pjmedia_master_port_start	(	themaster);
-
-//    pjmedia_clock_src* clocksrc;
-//    pjmedia_clock_src_init(clocksrc,PJMEDIA_DIR_ENCODING,)
-//    for(int i = 0; i < 100; i++){
-//        qDebug() << "momentary Timespamp is: " << clocksrc->timestamp.u64;
-//    }
-
-//   pjsua_data* pjsuavar = pjsua_get_var();
-//   pjsuavar->cap_dev = -1;
-//   pjsuavar->play_dev = -2;
-//   pjsuavar->snd_is_on = true;
-//   pjsuavar->snd_mode = PJSUA_SND_DEV_NO_IMMEDIATE_OPEN;
-
+     status = pjmedia_master_port_create(m_lib->pool, pjsuavar->null_port, masterport, 0, &themaster);
+     if (status != PJ_SUCCESS){
+             char buf[50];
+             pj_strerror	(status,buf,sizeof (buf) );
+             m_lib->m_Log->writeLog(1,(QString("AddClockingDevice: create master port failed: ") + buf));
+             return;
+         }
+     status = pjmedia_master_port_start	(themaster);
+     if (status != PJ_SUCCESS){
+             char buf[50];
+             pj_strerror	(status,buf,sizeof (buf) );
+             m_lib->m_Log->writeLog(1,(QString("AddClockingDevice: start master port failed: ") + buf));
+             return;
+         }
 
     recorddev =  m_lib->m_pjEp->audDevManager().getDevInfo(recordDevId);
     playbackdev = m_lib->m_pjEp->audDevManager().getDevInfo(playbackDevId);
@@ -177,8 +178,6 @@ void AudioRouter::AddClockingDevice(int recordDevId, int playbackDevId, QString 
         m_lib->m_Log->writeLog(1,(QString("AddClockingDevice: create splitcomb port failed: ") + buf));
         return;
     }
-
-
 
     for (int i = 0; i<channelCnt;i++)
     {
