@@ -524,16 +524,6 @@ void Settings::loadSettings()                                           // todo 
     item["type"] = STRING;
     GlobalSettings["Log path:"] = item;
 
-
-    // ***** Account retry interval *****
-    item = QJsonObject();
-    aCfg.regConfig.retryIntervalSec = settings.value("settings/AcccountConfig/retryIntervalSec",30).toInt();
-    item["value"] = settings.value("settings/AcccountConfig/retryIntervalSec",30).toInt();
-    item["type"] = INTEGER;
-    item["min"] = 30;
-    item["max"] = 3600;
-    GlobalSettings["Account retry interval in s"] = item;
-
     // ***** Buddy refresh interval *****
     item = QJsonObject();
     m_lib->m_Buddies->SetMaxPresenceRefreshTime(settings.value("settings/BuddyConfig/maxPresenceRefreshTime","30").toUInt());
@@ -858,10 +848,6 @@ void Settings::setSettings(QJsonObject editedSettings)
 
         if (it.key() == "Log path:"){
              settings.setValue("settings/log/Path",it.value().toString());
-        }
-
-        if (it.key() == "Account retry interval in s"){
-            settings.setValue("settings/AcccountConfig/retryIntervalSec",it.value().toInt());
         }
 
         if (it.key() == "Account session timer expiration"){
