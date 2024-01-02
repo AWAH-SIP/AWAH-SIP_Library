@@ -89,7 +89,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
 
         //******************************************* set default opus parameters *******************
          s_codec defaultCodec;
-         defaultCodec.encodingName = "opus";
+         defaultCodec.encodingName = "opus/48000/2";
          defaultCodec.displayName ="Opus";
          QJsonObject codecParam;
          QJsonObject value;
@@ -101,7 +101,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
          codecParam.insert("Channelcount", value);
          defaultCodec.codecParameters = codecParam;
          m_Codecs->setCodecParam(defaultCodec);
-       // **************************************************************************************************************
+       // ***********************************************************************************************
 
     }
     catch (Error &err){
