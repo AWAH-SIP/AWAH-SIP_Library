@@ -104,10 +104,10 @@ void PJEndpoint::onIpChangeProgress(OnIpChangeProgressParam &prm)
 {
     pjsua_ip_change_param param;
     pjsua_ip_change_param_default(&param);
-    param.restart_listener = true;
-    param.restart_lis_delay = true;
-    pjsua_acc_set_registration(prm.accId,true);
-    pjsua_handle_ip_change(&param);
+//    param.restart_listener = true;
+//    param.restart_lis_delay = true;
+//    pjsua_acc_set_registration(prm.accId,true);
+//    pjsua_handle_ip_change(&param);
 }
 
 void PJEndpoint::setAwahLibrary(AWAHSipLib *lib)
