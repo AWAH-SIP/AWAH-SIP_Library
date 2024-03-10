@@ -713,6 +713,12 @@ void Settings::loadSettings()                                           // todo 
     // ***** min session timer expiration *****
     aCfg.callConfig.timerMinSESec = settings.value("settings/AcccountConfig/timerMinSESec", 90).toInt();
     settings.setValue("settings/AcccountConfig/timerMinSESec", aCfg.callConfig.timerMinSESec);
+    //std::basic_string
+    TransportConfig	transportConfig;
+    transportConfig.boundAddress = settings.value("settings/MediaConfig/Trasport_Config/boundAddress","0.0.0.0").toString().toStdString();
+    transportConfig.publicAddress = settings.value("settings/MediaConfig/Trasport_Config/publicAddress","0.0.0.0").toString().toStdString();
+    aCfg.mediaConfig.transportConfig.boundAddress.assign(transportConfig.boundAddress);
+
 
     // ***** Transport Port Range *****
 //    if(settings.value("settings/NatConfig/Ice_NoRtcp","1").toBool())               // range 0 creates a range of 10 adresses!             // todo test me
