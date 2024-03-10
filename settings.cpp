@@ -707,18 +707,28 @@ void Settings::loadSettings()                                           // todo 
     item["enumlist"] = enumitems;
     SIPSettings["rewrite contact in SIP header"] = item;
 
+    // ***** bound address *****
+    TransportConfig	transportConfig;
+
+    item = QJsonObject();
+    item["type"] = STRING;
+    item["value"] = settings.value("settings/MediaConfig/TrasportConfig/boundAddress","0.0.0.0").toString();
+    transportConfig.boundAddress = settings.value("settings/MediaConfig/TrasportConfig/boundAddress","0.0.0.0").toString().toStdString();
+    aCfg.mediaConfig.transportConfig.boundAddress.assign(transportConfig.boundAddress);
+    SIPSettings["Transport bound address"] = item;
+
+    item = QJsonObject();
+    item["type"] = STRING;
+    item["value"] = settings.value("settings/MediaConfig/TrasportConfig/publicAddress","0.0.0.0").toString();
+    transportConfig.publicAddress = settings.value("settings/MediaConfig/TrasportConfig/publicAddress","0.0.0.0").toString().toStdString();
+    aCfg.mediaConfig.transportConfig.publicAddress.assign(transportConfig.publicAddress);
+    SIPSettings["Transport public address"] = item;
 
      // *************** Settings only in the config File, not exported to the GUI *********************
 
     // ***** min session timer expiration *****
     aCfg.callConfig.timerMinSESec = settings.value("settings/AcccountConfig/timerMinSESec", 90).toInt();
     settings.setValue("settings/AcccountConfig/timerMinSESec", aCfg.callConfig.timerMinSESec);
-    //std::basic_string
-    TransportConfig	transportConfig;
-    transportConfig.boundAddress = settings.value("settings/MediaConfig/Trasport_Config/boundAddress","0.0.0.0").toString().toStdString();
-    transportConfig.publicAddress = settings.value("settings/MediaConfig/Trasport_Config/publicAddress","0.0.0.0").toString().toStdString();
-    aCfg.mediaConfig.transportConfig.boundAddress.assign(transportConfig.boundAddress);
-
 
     // ***** Transport Port Range *****
 //    if(settings.value("settings/NatConfig/Ice_NoRtcp","1").toBool())               // range 0 creates a range of 10 adresses!             // todo test me
@@ -923,6 +933,12 @@ void Settings::setSettings(QJsonObject editedSettings)
             settings.setValue("settings/BuddyConfig/maxPresenceRefreshTime", it.value().toInt());
         }
 
+        if (it.key() == "Transport bound address"){
+            settings.setValue("settings/MediaConfig/TrasportConfig/boundAddress", it.value().toString());
+        }
+        if (it.key() == "Transport public address"){
+            settings.setValue("settings/MediaConfig/TrasportConfig/publicAddress", it.value().toString());
+        }
     }
     settings.sync();
     loadSettings();
