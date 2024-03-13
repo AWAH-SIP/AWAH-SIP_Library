@@ -746,7 +746,6 @@ void Settings::loadSettings()                                           // todo 
     m_lib->epCfg.medConfig.quality =10;
     m_lib->epCfg.medConfig.noVad = true;
     m_lib->m_Accounts->setDefaultACfg(aCfg);
-
     //Websocket Port
     m_lib->m_websocketPort = settings.value("settings/Websocket/Port", "2924").toUInt();
     settings.setValue("settings/Websocket/Port", m_lib->m_websocketPort);
