@@ -140,7 +140,7 @@ void PJCall::onCallState(OnCallStateParam &prm)
         }
         m_lib->m_Log->writeLog(3,QString("onCallState: deleting call with id: %1 from %2 of Account %3").arg(QString::number(ci.id), QString::fromStdString(ci.remoteUri), callAcc->name));
         emit m_lib->m_Accounts->AccountsChanged(m_lib->m_Accounts->getAccounts());
-        //delete this;
+        delete this;
     }
 }
 
