@@ -59,7 +59,7 @@ extern "C" {
 
 #define AWAHSIP_VERSION 3.2
 #ifndef GITHUBBUILD
-#define BUILD_NO "3.2.3_beta2"
+#define BUILD_NO "3.2.3"
 #endif
 
 class AWAHSipLib : public QObject

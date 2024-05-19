@@ -648,7 +648,7 @@ void Accounts::CallInspector(pj_timer_heap_t *timer_heap, pj_timer_entry *entry)
                 call.lastJBemptyGETevent = emptyGetevent;
                 if(call.RXlostSeconds >= AWAHSipLib::instance()->m_Accounts->m_CallDisconnectRXTimeout){
                     AWAHSipLib::instance()->m_Accounts->hangupCall(pjCallInfo.id,pjCallInfo.accId);
-                    AWAHSipLib::instance()->m_Log->writeLog(3,(QString("No packets recieved for mor than 10 seconds on ")+ account.name + ": call with ID: "+ QString::number(pjCallInfo.id) +": disconnected"));
+                    AWAHSipLib::instance()->m_Log->writeLog(3,(QString("No packets recieved for mor than 10 seconds on ")+ account.name + ": call with ID: "+ QString::number(pjCallInfo.id) +": disconnecting call"));
                     pj_time_val loctimeDelay;                                                       // restart Timer and return because call is deleted
                     loctimeDelay.msec=7;
                     loctimeDelay.sec=1;
