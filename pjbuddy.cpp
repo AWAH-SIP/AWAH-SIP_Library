@@ -35,6 +35,7 @@ void PJBuddy::onBuddyState(){
         AWAHSipLib::instance()->m_Log->writeLog(2, QString("onBuddyState:getInfo failed: ") + err.info().c_str());
         return;
     }
+    
     AWAHSipLib::instance()->m_Log->writeLog(4, QString("onBuddyState: Buddy: ") + QString::fromStdString(bi.uri) + " is " + QString::fromStdString(bi.presStatus.statusText));
     if(bi.presStatus.status == PJSUA_BUDDY_STATUS_ONLINE){
         state = online;
@@ -45,6 +46,8 @@ void PJBuddy::onBuddyState(){
     }if(bi.presStatus.status == PJSUA_BUDDY_STATUS_OFFLINE){
         state = unknown;
     }
+    
     AWAHSipLib::instance()->m_Buddies->changeBuddyState(QString::fromStdString(bi.uri), state);
 }
+
 
