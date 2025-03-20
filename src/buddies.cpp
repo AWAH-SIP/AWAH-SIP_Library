@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "buddies.h"
-#include "awahsiplib.h"
+#include "../include/buddies.h"
+#include "../include/awahsiplib.h"
 
 #define THIS_FILE		"buddies.cpp"
 

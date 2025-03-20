@@ -20,7 +20,7 @@
 #define SETTINGS_H
 
 #include <QObject>
-#include "types.h"
+#include <QtCore/qjsonobject.h>
 
 class AWAHSipLib;
 

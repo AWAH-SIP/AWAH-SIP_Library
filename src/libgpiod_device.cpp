@@ -1,7 +1,7 @@
-#include "libgpiod_device.h"
+#include "../include/libgpiod_device.h"
 
-#include "awahsiplib.h"
-#include "gpiorouter.h"
+#include "../include/awahsiplib.h"
+#include "../include/gpiorouter.h"
 
 libgpiod_Device::libgpiod_Device(s_IODevices& deviceInfo)
     : GpioDevice(deviceInfo), m_chipName(deviceInfo.typeSpecificSettings["chipName"].toString()),

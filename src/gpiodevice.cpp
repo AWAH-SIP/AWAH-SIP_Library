@@ -1,7 +1,7 @@
-#include "gpiodevice.h"
-#include "gpiorouter.h"
-#include "gpiodevicemanager.h"
-#include "awahsiplib.h"
+#include "../include/gpiodevice.h"
+#include "../include/gpiorouter.h"
+#include "../include/gpiodevicemanager.h"
+#include "../include/awahsiplib.h"
 
 GpioDevice::GpioDevice(s_IODevices &deviceInfo)
     : QObject(GpioDeviceManager::instance()), m_deviceInfo(deviceInfo)

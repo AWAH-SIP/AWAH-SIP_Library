@@ -16,15 +16,15 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "pjcall.h"
+#include "../include/pjcall.h"
 #include <QDebug>
 #include "pjmedia.h"
 #include "pjsua-lib/pjsua_internal.h"
-#include "awahsiplib.h"
+#include "../include/awahsiplib.h"
 #include <QDateTime>
 #include "pjmedia/sdp.h"
 
-#include "types.h"
+#include "../include/types.h"
 
 #define THIS_FILE		"PJCall.cpp"
 
@@ -302,8 +302,8 @@ void PJCall::onStreamCreated(OnStreamCreatedParam &prm)
         remoteCodec.displayName = "Linear";
         remoteCodec.encodingName = encodingName + "/" + QString::number(info.fmt.clock_rate) + "/" + QString::number(info.fmt.channel_cnt);
         remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
-        remoteCodec.codecParameters["Channelcount"].toObject()["value"] = (QString) info.fmt.channel_cnt;
-        remoteCodec.codecParameters["Clockrate"].toObject()["value"] = (QString)info.fmt.clock_rate;
+        remoteCodec.codecParameters["Channelcount"].toObject()["value"] = QString::number(info.fmt.channel_cnt);
+        remoteCodec.codecParameters["Clockrate"].toObject()["value"] = QString::number(info.fmt.clock_rate);
     }
     else if(encodingName == "G722"){
         remoteCodec.displayName = "G722";
@@ -314,7 +314,7 @@ void PJCall::onStreamCreated(OnStreamCreatedParam &prm)
         remoteCodec.displayName = "Speex";
         remoteCodec.encodingName = encodingName + "/" + QString::number(info.fmt.clock_rate) + "/" + QString::number(info.fmt.channel_cnt);
         remoteCodec.codecParameters = m_lib->m_Codecs->getCodecParam(remoteCodec.encodingName);
-        remoteCodec.codecParameters["Clockrate"].toObject()["value"] = (QString)info.fmt.clock_rate;
+        remoteCodec.codecParameters["Clockrate"].toObject()["value"] = QString::number(info.fmt.clock_rate);
     }
     else if(encodingName.contains("AMR")){
         remoteCodec.displayName = "AMR";
@@ -354,7 +354,7 @@ void PJCall::onStreamCreated(OnStreamCreatedParam &prm)
 
 void PJCall::onCallTransferRequest(OnCallTransferRequestParam &prm)
 {
-    m_lib->m_Log->writeLog(3,QString("onCallTransferRequest: transfering call to: ") +  prm.dstUri.c_str() + prm.statusCode);
+    m_lib->m_Log->writeLog(3,QString("onCallTransferRequest: transfering call to: ") +  prm.dstUri.c_str() + QString::number(prm.statusCode));
     CallInfo ci = getInfo();
     parent->OncallStateChanged(ci.accId, ci.role, ci.id,ci.remOfferer, ci.connectDuration.sec,ci.state, ci.lastStatusCode, QString::fromStdString(ci.lastReason),QString::fromStdString(ci.remoteUri));
 }

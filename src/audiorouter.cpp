@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "audiorouter.h"
-#include "awahsiplib.h"
+#include "../include/audiorouter.h"
+#include "../include/awahsiplib.h"
 #include "pjmedia.h"
 #include "pjlib-util.h" /* pj_getopt */
 #include "pjlib.h"

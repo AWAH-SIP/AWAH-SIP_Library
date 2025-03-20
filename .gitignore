@@ -64,3 +64,18 @@ target_wrapper.*
 
 # QtCreator CMake
 CMakeLists.txt.user*
+
+# CMake
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+pjproject-install
+build

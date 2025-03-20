@@ -16,12 +16,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "pjaccount.h"
+#include "../include/pjaccount.h"
 
 #include <QString>
 #include <QDebug>
 
-#include "awahsiplib.h"
+#include "../include/awahsiplib.h"
 
 
 PJAccount::PJAccount(AWAHSipLib *parentLib, Accounts *parent) : m_lib(parentLib)

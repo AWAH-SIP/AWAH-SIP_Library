@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "pjlogwriter.h"
-#include "log.h"
+#include "../include/pjlogwriter.h"
+#include "../include/log.h"
 #include <QDebug>
 
 PJLogWriter::PJLogWriter(Log *log) : m_Log(log)

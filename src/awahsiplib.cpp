@@ -16,8 +16,23 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "awahsiplib.h"
+#include "../include/awahsiplib.h"
 #include "pjsua-lib/pjsua_internal.h"
+
+QDataStream &operator<<(QDataStream &out, const QList<s_callHistory> &list);
+QDataStream &operator>>(QDataStream &in, QList<s_callHistory> &list);
+QDataStream &operator<<(QDataStream &out, const QList<s_IODevices> &list);
+QDataStream &operator>>(QDataStream &in, QList<s_IODevices> &list);
+QDataStream &operator<<(QDataStream &out, const QList<s_account> &list);
+QDataStream &operator>>(QDataStream &in, QList<s_account> &list);
+QDataStream &operator<<(QDataStream &out, const QList<s_audioRoutes> &list);
+QDataStream &operator>>(QDataStream &in, QList<s_audioRoutes> &list);
+QDataStream &operator<<(QDataStream &out, const QList<s_codec> &list);
+QDataStream &operator>>(QDataStream &in, QList<s_codec> &list);
+QDataStream &operator<<(QDataStream &out, const QList<s_gpioRoute> &list);
+QDataStream &operator>>(QDataStream &in, QList<s_gpioRoute> &list);
+QDataStream &operator<<(QDataStream &out, const QList<s_buddy> &list);
+QDataStream &operator>>(QDataStream &in, QList<s_buddy> &list);
 
 AWAHSipLib *AWAHSipLib::AWAHSipLibInstance = NULL;
 AWAHSipLib *AWAHSipLib::instance(QObject *parent)
@@ -171,12 +186,7 @@ AWAHSipLib::~AWAHSipLib()
 
 void AWAHSipLib::prepareLib()
 {
-    qRegisterMetaTypeStreamOperators <QList<s_IODevices>>("QList<s_IODevices>");
-    qRegisterMetaTypeStreamOperators <QList<s_account>>("QList<s_account>");
-    qRegisterMetaTypeStreamOperators <QList<s_audioRoutes>>("QList<s_audioRoutes>");
-    qRegisterMetaTypeStreamOperators <QList<s_callHistory>>("QList<s_callHistory>");
-    qRegisterMetaTypeStreamOperators <QList<s_gpioRoute>>("QList<s_gpioRoute>");
-    qRegisterMetaTypeStreamOperators <QList<s_buddy>>("QList<s_buddy>");
+
 }
 
 QList<s_IODevices> &AWAHSipLib::getIoDevices()
@@ -289,5 +299,173 @@ QDataStream &operator<<(QDataStream &out, const s_buddy &obj)
 QDataStream &operator>>(QDataStream &in, s_buddy &obj)
 {
     in >> obj.Name >> obj.accUid >> obj.buddyUrl >> obj.codec >> obj.uid;
+    return in;
+}
+
+// Stream-Operatoren für QList<s_callHistory>
+QDataStream &operator<<(QDataStream &out, const QList<s_callHistory> &list)
+{
+    out << quint32(list.size());
+    for (const s_callHistory &item : list) {
+        out << item;
+    }
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, QList<s_callHistory> &list)
+{
+    list.clear();
+    quint32 size;
+    in >> size;
+    list.reserve(size);
+    for (quint32 i = 0; i < size; ++i) {
+        s_callHistory item;
+        in >> item;
+        list.append(item);
+    }
+    return in;
+}
+
+// Stream-Operatoren für QList<s_IODevices>
+QDataStream &operator<<(QDataStream &out, const QList<s_IODevices> &list)
+{
+    out << quint32(list.size());
+    for (const s_IODevices &item : list) {
+        out << item;
+    }
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, QList<s_IODevices> &list)
+{
+    list.clear();
+    quint32 size;
+    in >> size;
+    list.reserve(size);
+    for (quint32 i = 0; i < size; ++i) {
+        s_IODevices item;
+        in >> item;
+        list.append(item);
+    }
+    return in;
+}
+
+// Stream-Operatoren für QList<s_account>
+QDataStream &operator<<(QDataStream &out, const QList<s_account> &list)
+{
+    out << quint32(list.size());
+    for (const s_account &item : list) {
+        out << item;
+    }
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, QList<s_account> &list)
+{
+    list.clear();
+    quint32 size;
+    in >> size;
+    list.reserve(size);
+    for (quint32 i = 0; i < size; ++i) {
+        s_account item;
+        in >> item;
+        list.append(item);
+    }
+    return in;
+}
+
+// Stream-Operatoren für QList<s_audioRoutes>
+QDataStream &operator<<(QDataStream &out, const QList<s_audioRoutes> &list)
+{
+    out << quint32(list.size());
+    for (const s_audioRoutes &item : list) {
+        out << item;
+    }
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, QList<s_audioRoutes> &list)
+{
+    list.clear();
+    quint32 size;
+    in >> size;
+    list.reserve(size);
+    for (quint32 i = 0; i < size; ++i) {
+        s_audioRoutes item;
+        in >> item;
+        list.append(item);
+    }
+    return in;
+}
+
+// Stream-Operatoren für QList<s_codec>
+QDataStream &operator<<(QDataStream &out, const QList<s_codec> &list)
+{
+    out << quint32(list.size());
+    for (const s_codec &item : list) {
+        out << item;
+    }
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, QList<s_codec> &list)
+{
+    list.clear();
+    quint32 size;
+    in >> size;
+    list.reserve(size);
+    for (quint32 i = 0; i < size; ++i) {
+        s_codec item;
+        in >> item;
+        list.append(item);
+    }
+    return in;
+}
+
+// Stream-Operatoren für QList<s_gpioRoute>
+QDataStream &operator<<(QDataStream &out, const QList<s_gpioRoute> &list)
+{
+    out << quint32(list.size());
+    for (const s_gpioRoute &item : list) {
+        out << item;
+    }
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, QList<s_gpioRoute> &list)
+{
+    list.clear();
+    quint32 size;
+    in >> size;
+    list.reserve(size);
+    for (quint32 i = 0; i < size; ++i) {
+        s_gpioRoute item;
+        in >> item;
+        list.append(item);
+    }
+    return in;
+}
+
+// Stream-Operatoren für QList<s_buddy>
+QDataStream &operator<<(QDataStream &out, const QList<s_buddy> &list)
+{
+    out << quint32(list.size());
+    for (const s_buddy &item : list) {
+        out << item;
+    }
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, QList<s_buddy> &list)
+{
+    list.clear();
+    quint32 size;
+    in >> size;
+    list.reserve(size);
+    for (quint32 i = 0; i < size; ++i) {
+        s_buddy item;
+        in >> item;
+        list.append(item);
+    }
     return in;
 }

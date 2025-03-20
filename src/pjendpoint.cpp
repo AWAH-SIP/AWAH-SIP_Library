@@ -1,8 +1,8 @@
-#include "pjendpoint.h"
+#include "../include/pjendpoint.h"
 
 #include <QDebug>
-#include "types.h"
-#include "awahsiplib.h"
+#include "../include/types.h"
+#include "../include/awahsiplib.h"
 
 PJEndpoint *PJEndpoint::pjEndpointInstance = NULL;
 PJEndpoint *PJEndpoint::instance()

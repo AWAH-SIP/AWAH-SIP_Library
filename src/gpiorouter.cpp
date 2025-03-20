@@ -1,5 +1,5 @@
-#include "gpiorouter.h"
-#include "gpiodevice.h"
+#include "../include/gpiorouter.h"
+#include "../include/gpiodevice.h"
 
 GpioRouter *GpioRouter::GpioRouterInstance = NULL;
 GpioRouter *GpioRouter::instance(QObject *parent)

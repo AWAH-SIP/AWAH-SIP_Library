@@ -1,3 +1,4 @@
-[submodule "pjsip"]
-	path = pjsip
-	url = https://github.com/AWAH-SIP/AWAH-SIP_PJSIP-Assets.git
+[submodule "third-party/pjproject"]
+	path = third-party/pjproject
+	url = https://github.com/AWAH-SIP/pjproject.git
+	branch = AWAH-SIP_master

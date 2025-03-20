@@ -1,5 +1,5 @@
-#include "gpiodevicemanager.h"
-#include "awahsiplib.h"
+#include "../include/gpiodevicemanager.h"
+#include "../include/awahsiplib.h"
 
 GpioDeviceManager *GpioDeviceManager::GpioDeviceManagerInstance = NULL;
 GpioDeviceManager *GpioDeviceManager::instance(QObject *parent)

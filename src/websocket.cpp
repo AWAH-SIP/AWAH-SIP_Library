@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "websocket.h"
-#include "awahsiplib.h"
+#include "../include/websocket.h"
+#include "../include/awahsiplib.h"
 
 #include <QtWebSockets>
 #include <QtCore>
@@ -1105,7 +1105,7 @@ bool Websocket::objectFromString(const QString& in, QJsonObject &obj)
 
 void Websocket::sendToAll(QJsonObject &obj) {
     obj["error"] = noError();
-    for (QWebSocket *pClient : qAsConst(m_clients)) {
+    for (QWebSocket *pClient : std::as_const(m_clients)) {
         pClient->sendTextMessage(QJsonDocument(obj).toJson(QJsonDocument::Compact));
     }
 }

@@ -16,9 +16,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "codecs.h"
+#include "../include/codecs.h"
 #include <QSettings>
-#include "awahsiplib.h"
+#include "../include/awahsiplib.h"
 
 #define THIS_FILE		"codecs.cpp"
 

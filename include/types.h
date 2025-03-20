@@ -44,7 +44,6 @@ extern "C" {
 #include "pjaccount.h"
 #include "pjbuddy.h"
 #include "pjcall.h"
-#include "pjlogwriter.h"
 
 class GpioDevice;
 class AccountGpioDev;

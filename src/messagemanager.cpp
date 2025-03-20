@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "messagemanager.h"
-#include "awahsiplib.h"
+#include "../include/messagemanager.h"
+#include "../include/awahsiplib.h"
 
 #define THIS_FILE		"messagemanager.cpp"
 

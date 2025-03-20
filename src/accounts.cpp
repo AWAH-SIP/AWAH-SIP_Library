@@ -16,9 +16,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "accounts.h"
-#include "awahsiplib.h"
-#include "gpiodevicemanager.h"
+#include "../include/accounts.h"
+#include "../include/awahsiplib.h"
+#include "../include/gpiodevicemanager.h"
 
 #define THIS_FILE		"accounts.cpp"
 
