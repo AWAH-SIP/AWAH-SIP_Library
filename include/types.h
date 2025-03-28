@@ -27,6 +27,8 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+#include <QtCore/qlist.h>
+#include <QtCore/qmetatype.h>
 #include <pjsua2.hpp>
 
 extern "C" {

@@ -186,7 +186,20 @@ AWAHSipLib::~AWAHSipLib()
 
 void AWAHSipLib::prepareLib()
 {
-
+    qRegisterMetaType<QList<s_account>>();
+    qRegisterMetaType<QList<s_audioRoutes>>();
+    qRegisterMetaType<QList<s_buddy>>();
+    qRegisterMetaType<QList<s_codec>>();
+    qRegisterMetaType<QList<s_callHistory>>();
+    qRegisterMetaType<QList<s_gpioRoute>>();
+    qRegisterMetaType<QList<s_IODevices>>();
+    qRegisterMetaType<s_account>();
+    qRegisterMetaType<s_audioRoutes>();
+    qRegisterMetaType<s_buddy>();
+    qRegisterMetaType<s_codec>();
+    qRegisterMetaType<s_callHistory>();
+    qRegisterMetaType<s_gpioRoute>();
+    qRegisterMetaType<s_IODevices>();
 }
 
 QList<s_IODevices> &AWAHSipLib::getIoDevices()
