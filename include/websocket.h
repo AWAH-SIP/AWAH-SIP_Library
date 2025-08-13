@@ -147,6 +147,19 @@ private slots:
     void setCodecPriorities(QJsonObject &data, QJsonObject &ret);
     void getVersions(QJsonObject &data, QJsonObject &ret);
 
+    // WebRTC API
+    void webrtc_offer(QJsonObject &data, QJsonObject &ret);
+    void webrtc_answer(QJsonObject &data, QJsonObject &ret);
+    void webrtc_disconnect(QJsonObject &data, QJsonObject &ret);
+    void webrtc_status(QJsonObject &data, QJsonObject &ret);
+    void webrtc_ice_candidate(QJsonObject &data, QJsonObject &ret);
+    
+    // WebRTC Channel Management
+    void getWebRTCChannels(QJsonObject &data, QJsonObject &ret);
+    void createWebRTCChannel(QJsonObject &data, QJsonObject &ret);
+    void modifyWebRTCChannel(QJsonObject &data, QJsonObject &ret);
+    void removeWebRTCChannel(QJsonObject &data, QJsonObject &ret);
+
     /**
      * Implementation-Functions for API-Signals
      *
@@ -164,6 +177,11 @@ public slots:
     void confportLevelChanged(const s_audioRoutes changedRoute);
     void callInfo(int accId, int callId, QJsonObject callInfo);
     void AccountsChanged(QList <s_account>* Accounts);
+    void webrtcIceCandidate(QString channelId, QString sessionId, QString candidate,
+                            int sdpMLineIndex, QString sdpMid);
+    
+
+
     void gpioRoutesChanged(const QList<s_gpioRoute>& routes);
     void gpioRoutesTableChanged(const s_gpioPortList& portList);
     void gpioStatesChanged(const QMap<QString, bool> changedGpios);

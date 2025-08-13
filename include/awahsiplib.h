@@ -54,6 +54,7 @@ extern "C" {
 #include "messagemanager.h"
 #include "settings.h"
 #include "websocket.h"
+#include "webrtcchannels.h"
 
 #include <QJsonDocument>
 
@@ -253,6 +254,9 @@ signals:
     * @param callInfo a JsonObject with various info parameters
     */
     void callInfo(int accId, int callId, QJsonObject callInfo);
+    
+    // WebRTC signals
+    void WebRTCChannelsChanged(QList<s_webrtc_channel>* channels);
 
     /**
     * @brief Signal if device config changed
@@ -305,6 +309,8 @@ private:
     MessageManager* m_MessageManager;
     Settings* m_Settings;
     Websocket* m_Websocket;
+    WebRTCChannels* m_WebRTCChannels = nullptr;
+    WebRTCChannels* getWebRTCChannels() const { return m_WebRTCChannels; }
 
     friend class Accounts;
     friend class AudioRouter;
@@ -322,6 +328,7 @@ private:
     friend class PJBuddy;
     friend class PJCall;
     friend class Websocket;
+    friend class WebRTCChannels;
 };
 
 #endif // AWAHSIPLIB_H

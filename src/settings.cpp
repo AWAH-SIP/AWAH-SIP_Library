@@ -202,6 +202,29 @@ void Settings::saveAccConfig()
     settings.sync();
 }
 
+void Settings::loadWebRTCChannelConfig() {
+    QList<s_webrtc_channel> loadedChannels;
+    QSettings settings("awah", "AWAHsipConfig");
+    loadedChannels = settings.value("WebRTCChannelConfig").value<QList<s_webrtc_channel>>();
+    for (int i = 0; i < loadedChannels.count(); ++i) {
+        m_lib->m_WebRTCChannels->createChannel(
+            loadedChannels.at(i).id,
+            loadedChannels.at(i).description,
+            loadedChannels.at(i).enabled
+        );
+        m_lib->m_Log->writeLog(3, QString("loadWebRTCChannelConfig: added WebRTC channel from config file: ") + loadedChannels.at(i).id);
+    }
+    m_WebRTCChannelsLoaded = true;
+}
+
+void Settings::saveWebRTCChannelConfig() {
+    if (!m_WebRTCChannelsLoaded)
+        return;
+    QSettings settings("awah", "AWAHsipConfig");
+    settings.setValue("WebRTCChannelConfig", QVariant::fromValue(*m_lib->m_WebRTCChannels->getChannels()));
+    settings.sync();
+}
+
 int Settings::loadAudioRoutes()
 {
     int status = PJ_SUCCESS;

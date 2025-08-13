@@ -910,6 +910,28 @@ s_audioPortList AudioRouter::listConfPorts(){
                 m_srcAudioSlotMap[slot] = pj2Str(confinfo.name);
                 m_destAudioSlotMap[slot] = pj2Str(confinfo.name);
             }
+        } else if(portName.startsWith("WRTC:")){
+            // WebRTC channel splitter/combiner ports are named as WRTC:<channelId>-Ch:<n>
+            QString id = split[0];
+            id.remove("WRTC:");
+            src.pjName = confinfo.name;
+            if(m_customSourceLabels.contains(pj2Str(src.pjName))){
+                src.name = m_customSourceLabels[pj2Str(src.pjName)];
+            } else {
+                src.name = QString("WRTC: ") + id + " " + split.value(1);
+            }
+            src.slot = slot;
+            dest.pjName = confinfo.name;
+            if(m_customDestLabels.contains(pj2Str(dest.pjName))){
+                dest.name = m_customDestLabels[pj2Str(dest.pjName)];
+            } else {
+                dest.name = QString("WRTC: ") + id + " " + split.value(1);
+            }
+            dest.slot = slot;
+            audioPortList.srcPorts.append(src);
+            audioPortList.destPorts.append(dest);
+            m_srcAudioSlotMap[slot] = pj2Str(confinfo.name);
+            m_destAudioSlotMap[slot] = pj2Str(confinfo.name);
         } else if(portName.startsWith("FP:")){
             QString uid = split[0].remove("FP:");
             const s_IODevices* aDevice = getADeviceByUID(uid);

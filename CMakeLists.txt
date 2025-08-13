@@ -32,7 +32,8 @@ add_library(AWAH_SIP_Library STATIC
             include/pjlogwriter.h 
             include/settings.h 
             include/types.h 
-            include/websocket.h
+            include/websocket.h 
+            include/webrtcchannels.h
 
             src/accounts.cpp 
             src/audiorouter.cpp 
@@ -51,7 +52,8 @@ add_library(AWAH_SIP_Library STATIC
             src/pjendpoint.cpp 
             src/pjlogwriter.cpp 
             src/settings.cpp 
-            src/websocket.cpp
+            src/websocket.cpp 
+            src/webrtcchannels.cpp
 )
 
 include_directories(${PKG_PJSIP_INCLUDE_DIRS})
