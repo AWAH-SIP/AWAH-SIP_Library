@@ -580,7 +580,7 @@ struct s_webrtc_channel {
     QString turnCredential = "";
     bool trickleIceEnabled = true;     // Enable trickle ICE
     bool sendOnly = false;             // Send-only (codec -> browser)
-    int maxConcurrentCalls = 5;        // Maximum calls per channel
+    int maxConcurrentStreams = 5;        // Maximum concurrent streams per channel
     
     // ICE settings
     bool iceEnabled = true;
@@ -603,9 +603,7 @@ struct s_webrtc_channel {
         description = json["description"].toString();
         enabled = json["enabled"].toBool();
         splitterSlot = json["splitterSlot"].toInt();
-        // Backward-compat: accept either 'sendOnly' or legacy 'audioOnly'
-        if (json.contains("sendOnly")) sendOnly = json["sendOnly"].toBool();
-        else if (json.contains("audioOnly")) sendOnly = json["audioOnly"].toBool();
+        sendOnly = json["sendOnly"].toBool();
         // CallList is runtime only, not loaded from config
         return this;
     }

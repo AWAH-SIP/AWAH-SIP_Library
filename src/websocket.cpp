@@ -1041,7 +1041,7 @@ void Websocket::getWebRTCChannels(QJsonObject &data, QJsonObject &ret) {
         channelObj["description"] = channel.description;
         channelObj["enabled"] = channel.enabled;
         channelObj["sendOnly"] = channel.sendOnly;
-        channelObj["maxConcurrentCalls"] = channel.maxConcurrentCalls;
+        channelObj["maxConcurrentStreams"] = channel.maxConcurrentStreams;
         channelObj["stunServer"] = channel.stunServer;
         channelObj["turnEnabled"] = channel.turnEnabled;
         channelObj["turnServer"] = channel.turnServer;
@@ -1067,7 +1067,7 @@ void Websocket::createWebRTCChannel(QJsonObject &data, QJsonObject &ret) {
             enabled = data["enabled"].toBool();
         }
         if (data.contains("sendOnly")) sendOnly = data["sendOnly"].toBool();
-        if (data.contains("maxConcurrentCalls")) maxConcurrent = data["maxConcurrentCalls"].toInt();
+        if (data.contains("maxConcurrentStreams")) maxConcurrent = data["maxConcurrentStreams"].toInt();
         if (data.contains("stunServer")) stun = data["stunServer"].toString();
         if (data.contains("turnServer")) turn = data["turnServer"].toString();
         if (data.contains("turnUsername")) turnUser = data["turnUsername"].toString();
@@ -1101,7 +1101,7 @@ void Websocket::modifyWebRTCChannel(QJsonObject &data, QJsonObject &ret) {
         
         m_lib->m_WebRTCChannels->modifyChannel(id, description, enabled);
         if (data.contains("sendOnly")) sendOnly = data["sendOnly"].toBool();
-        if (data.contains("maxConcurrentCalls")) maxConcurrent = data["maxConcurrentCalls"].toInt();
+        if (data.contains("maxConcurrentStreams")) maxConcurrent = data["maxConcurrentStreams"].toInt();
         if (data.contains("stunServer")) stun = data["stunServer"].toString();
         if (data.contains("turnServer")) turn = data["turnServer"].toString();
         if (data.contains("turnUsername")) turnUser = data["turnUsername"].toString();

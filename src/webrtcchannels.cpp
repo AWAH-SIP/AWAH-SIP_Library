@@ -75,7 +75,7 @@ bool WebRTCChannels::createChannel(QString id, QString description, bool enabled
     channel.iceAlwaysUpdate = true;
     channel.turnEnabled = false;
     channel.sendOnly = false;
-    channel.maxConcurrentCalls = 5;
+    channel.maxConcurrentStreams = 5;
     channel.stunServer = "stun:stun.l.google.com:19302"; // Default STUN server
     
     // If channel is disabled, just add it to the list without creating infrastructure
@@ -193,7 +193,7 @@ void WebRTCChannels::setChannelMaxCalls(const QString& channelId, int maxCalls)
 {
     s_webrtc_channel* channel = getChannelById(channelId);
     if (channel) {
-        channel->maxConcurrentCalls = maxCalls;
+        channel->maxConcurrentStreams = maxCalls;
         m_lib->m_Log->writeLog(3, QString("Set max calls for channel %1: %2").arg(channelId).arg(maxCalls));
     }
 }
@@ -207,17 +207,17 @@ QString WebRTCChannels::createSession(const QString& channelId)
         return QString();
     }
     
-    // Check max concurrent calls
-    int activeCalls = 0;
-    for (const auto& session : m_sessions) {
-        if (session.channelId == channelId && session.isActive) {
-            activeCalls++;
+    // Enforce max concurrent streams (count streams that are active or in progress)
+    int currentStreams = 0;
+    for (const auto& sess : m_sessions) {
+        if (sess.channelId != channelId) continue;
+        if (sess.isActive || sess.mediaStream != nullptr || sess.srtpReady) {
+            currentStreams++;
         }
     }
-    
-    if (activeCalls >= channel->maxConcurrentCalls) {
-        m_lib->m_Log->writeLog(1, QString("Cannot create session: channel %1 has reached max calls (%2)")
-                               .arg(channelId).arg(channel->maxConcurrentCalls));
+    if (currentStreams >= channel->maxConcurrentStreams) {
+        m_lib->m_Log->writeLog(1, QString("Cannot create session: channel %1 reached max streams (%2)")
+                               .arg(channelId).arg(channel->maxConcurrentStreams));
         return QString();
     }
     
