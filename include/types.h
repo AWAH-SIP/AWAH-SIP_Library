@@ -604,7 +604,6 @@ struct s_webrtc_channel {
         enabled = json["enabled"].toBool();
         splitterSlot = json["splitterSlot"].toInt();
         sendOnly = json["sendOnly"].toBool();
-        // CallList is runtime only, not loaded from config
         return this;
     }
 };
