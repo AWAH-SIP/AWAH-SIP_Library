@@ -566,6 +566,50 @@ struct s_buddy{
 Q_DECLARE_METATYPE(s_buddy);
 Q_DECLARE_METATYPE(QList<s_buddy>);
 
+struct s_webrtc_channel {
+    QString id = ""; // Unique identifier
+    QString description = "";
+    bool enabled = true;
+    int splitterSlot = PJSUA_INVALID_ID; // Audio routing slot
+    pjmedia_port *splitCombPort = nullptr; // Stereo split/combiner media port (not persisted)
+    
+    // WebRTC-specific settings independent from SIP
+    QString stunServer = "stun:stun.l.google.com:19302";  // STUN server for this channel
+    QString turnServer = "";           // TURN server for this channel  
+    QString turnUsername = "";         // TURN credentials
+    QString turnCredential = "";
+    bool trickleIceEnabled = true;     // Enable trickle ICE
+    bool sendOnly = false;             // Send-only (codec -> browser)
+    int maxConcurrentStreams = 5;        // Maximum concurrent streams per channel
+    
+    // ICE settings
+    bool iceEnabled = true;
+    bool turnEnabled = false;
+    bool iceAlwaysUpdate = true;
+    
+    // Runtime-only fields (not persisted):
+    void* transportPtr = nullptr; // Placeholder for PJSIP transport/session
+    QJsonObject toJSON() const {
+        return {
+            {"id", id},
+            {"description", description},
+            {"enabled", enabled},
+            {"splitterSlot", splitterSlot},
+            {"sendOnly", sendOnly}
+        };
+    }
+    s_webrtc_channel* fromJSON(QJsonObject &json) {
+        id = json["id"].toString();
+        description = json["description"].toString();
+        enabled = json["enabled"].toBool();
+        splitterSlot = json["splitterSlot"].toInt();
+        sendOnly = json["sendOnly"].toBool();
+        return this;
+    }
+};
+Q_DECLARE_METATYPE(s_webrtc_channel);
+Q_DECLARE_METATYPE(QList<s_webrtc_channel>);
+
 
 #endif // TYPES_H
 

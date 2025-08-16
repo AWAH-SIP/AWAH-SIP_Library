@@ -37,16 +37,16 @@ QDataStream &operator>>(QDataStream &in, QList<s_buddy> &list);
 AWAHSipLib *AWAHSipLib::AWAHSipLibInstance = NULL;
 AWAHSipLib *AWAHSipLib::instance(QObject *parent)
 {
-    if(AWAHSipLibInstance == NULL)
-        AWAHSipLibInstance = new AWAHSipLib(parent);
+    if(AWAHSipLib::AWAHSipLibInstance == NULL)
+        AWAHSipLib::AWAHSipLibInstance = new AWAHSipLib(parent);
 
-    return AWAHSipLibInstance;
+    return AWAHSipLib::AWAHSipLibInstance;
 }
 
 AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
 {
-    delete AWAHSipLibInstance;
-    AWAHSipLibInstance = NULL;
+    delete AWAHSipLib::AWAHSipLibInstance;
+    AWAHSipLib::AWAHSipLibInstance = NULL;
 
     m_Accounts = new Accounts(this, this);
     m_AudioRouter = new AudioRouter(this, this);
@@ -71,6 +71,9 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
 //        epCfg.medConfig.txDropPct = TX_DROP_PACKAGE;
 
         m_Log = new Log(this, this);
+        
+        m_WebRTCChannels = new WebRTCChannels(this, this);
+        
         m_pjEp->libInit(epCfg);
         //m_pjEp->audDevManager().setNullDev();                  // set a nulldevice as masterdevice
 
@@ -95,6 +98,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Settings->loadCustomSourceNames();
         m_Settings->loadIODevConfig();
         m_Settings->loadAccConfig();
+        m_Settings->loadWebRTCChannelConfig();
         m_Settings->loadAudioRoutes();
         m_Accounts->startCallInspector();
         m_Settings->loadGpioDevConfig();
@@ -146,6 +150,8 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
     connect(m_GpioDeviceManager, &GpioDeviceManager::gpioDevicesChanged, m_Settings, &Settings::saveGpioDevConfig);
     connect(this, &AWAHSipLib::AudioDevicesChanged, this, &AWAHSipLib::slotIoDevicesChanged);
 
+    connect(m_WebRTCChannels, &WebRTCChannels::ChannelsChanged, this, &AWAHSipLib::WebRTCChannelsChanged);
+    connect(m_WebRTCChannels, &WebRTCChannels::webrtcIceCandidate, m_Websocket, &Websocket::webrtcIceCandidate);
 
     connect(this, &AWAHSipLib::regStateChanged, m_Websocket, &Websocket::regStateChanged);
     connect(this, &AWAHSipLib::callStateChanged, m_Websocket, &Websocket::callStateChanged);

@@ -18,9 +18,14 @@
 
 #include "../include/websocket.h"
 #include "../include/awahsiplib.h"
-
-#include <QtWebSockets>
-#include <QtCore>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
+#include <QJsonValueRef>
+#include <QMapIterator>
+#include <QWebSocket>
+#include <QWebSocketServer>
 
 
 static QString getIdentifier(QWebSocket *peer)
@@ -134,10 +139,12 @@ void Websocket::processMessage(const QString &message)
                 pSender->sendTextMessage(QJsonDocument(ret).toJson(QJsonDocument::Compact));
             }
         } else {
+            ret["command"] = "error";
             ret["error"] = hasError("JSON does not have a 'command' and a 'data' Object");
             pSender->sendTextMessage(QJsonDocument(ret).toJson(QJsonDocument::Compact));
         }
     } else {
+        ret["command"] = "error";
         ret["error"] = hasError("Not valid JSON");
         pSender->sendTextMessage(QJsonDocument(ret).toJson(QJsonDocument::Compact));
     }
@@ -919,6 +926,208 @@ void Websocket::getVersions(QJsonObject &data, QJsonObject &ret) {
     ret["error"] = noError();
 }
 
+void Websocket::webrtc_offer(QJsonObject &data, QJsonObject &ret) {
+    QString channelId, sessionId;
+    if (jCheckString(channelId, data["channelId"])) {
+        // Optional sessionId parameter
+        if (data.contains("sessionId")) {
+            jCheckString(sessionId, data["sessionId"]);
+        }
+        
+        QJsonObject result;
+        if (m_lib->m_WebRTCChannels->processWebRTCOffer(channelId, sessionId, data, result)) {
+            ret["data"] = result;
+            ret["error"] = noError();
+        } else {
+            if (result.contains("error")) {
+                ret["error"] = result["error"];
+            } else {
+                ret["error"] = hasError("Failed to process WebRTC offer");
+            }
+        }
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::webrtc_answer(QJsonObject &data, QJsonObject &ret) {
+    QString sessionId;
+    if (jCheckString(sessionId, data["sessionId"])) {
+        QJsonObject result;
+        if (m_lib->m_WebRTCChannels->processWebRTCAnswer(sessionId, data, result)) {
+            ret["data"] = result;
+            ret["error"] = noError();
+        } else {
+            if (result.contains("error")) {
+                ret["error"] = result["error"];
+            } else {
+                ret["error"] = hasError("Failed to process WebRTC answer");
+            }
+        }
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::webrtc_disconnect(QJsonObject &data, QJsonObject &ret) {
+    QString sessionId;
+    if (jCheckString(sessionId, data["sessionId"])) {
+        m_lib->m_WebRTCChannels->disconnectWebRTCCall(sessionId);
+        ret["status"] = "disconnected";
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::webrtc_ice_candidate(QJsonObject &data, QJsonObject &ret) {
+    QString sessionId, candidate, sdpMid;
+    int sdpMLineIndex = 0;
+    
+    if (jCheckString(candidate, data["candidate"])) {
+        if (!data.contains("sessionId") || !jCheckString(sessionId, data["sessionId"])) {
+            ret["error"] = hasError("Missing sessionId");
+            return;
+        }
+        
+        if (data.contains("sdpMLineIndex")) {
+            jCheckInt(sdpMLineIndex, data["sdpMLineIndex"]);
+        }
+        if (data.contains("sdpMid")) {
+            jCheckString(sdpMid, data["sdpMid"]);
+        }
+        
+        m_lib->m_WebRTCChannels->processWebRTCIceCandidate(sessionId, candidate, sdpMLineIndex, sdpMid);
+        QJsonObject result;
+        result["status"] = "candidate_processed";
+        ret["data"] = result;
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::webrtcIceCandidate(QString channelId, QString sessionId, QString candidate, 
+                                   int sdpMLineIndex, QString sdpMid) {
+    QJsonObject obj, payload;
+    payload["channelId"] = channelId;
+    payload["sessionId"] = sessionId;
+    payload["candidate"] = candidate;
+    payload["sdpMLineIndex"] = sdpMLineIndex;
+    payload["sdpMid"] = sdpMid;
+    obj["command"] = "webrtc_ice_candidate";
+    obj["data"] = payload;
+    sendToAll(obj);
+}
+
+void Websocket::webrtc_status(QJsonObject &data, QJsonObject &ret) {
+    QString channelId;
+    if (jCheckString(channelId, data["channelId"])) {
+        m_lib->m_WebRTCChannels->getWebRTCStatus(channelId, ret);
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::getWebRTCChannels(QJsonObject &data, QJsonObject &ret) {
+    Q_UNUSED(data);
+    QJsonObject retDataObj;
+    QJsonArray channelsArray;
+    
+    QList<s_webrtc_channel>* channels = m_lib->m_WebRTCChannels->getChannels();
+    for (const auto& channel : *channels) {
+        QJsonObject channelObj;
+        channelObj["id"] = channel.id;
+        channelObj["description"] = channel.description;
+        channelObj["enabled"] = channel.enabled;
+        channelObj["sendOnly"] = channel.sendOnly;
+        channelObj["maxConcurrentStreams"] = channel.maxConcurrentStreams;
+        channelObj["stunServer"] = channel.stunServer;
+        channelObj["turnEnabled"] = channel.turnEnabled;
+        channelObj["turnServer"] = channel.turnServer;
+        channelObj["turnUsername"] = channel.turnUsername;
+        channelObj["turnCredential"] = channel.turnCredential;
+        channelsArray.append(channelObj);
+    }
+    
+    ret["data"] = channelsArray;
+    ret["error"] = noError();
+}
+
+void Websocket::createWebRTCChannel(QJsonObject &data, QJsonObject &ret) {
+    QString id, description;
+    bool enabled = true;
+    bool sendOnly = false;
+    int maxConcurrent = 5;
+    QString stun, turn, turnUser, turnPass;
+    
+    if (jCheckString(id, data["id"]) && jCheckString(description, data["description"])) {
+        
+        if (data.contains("enabled")) {
+            enabled = data["enabled"].toBool();
+        }
+        if (data.contains("sendOnly")) sendOnly = data["sendOnly"].toBool();
+        if (data.contains("maxConcurrentStreams")) maxConcurrent = data["maxConcurrentStreams"].toInt();
+        if (data.contains("stunServer")) stun = data["stunServer"].toString();
+        if (data.contains("turnServer")) turn = data["turnServer"].toString();
+        if (data.contains("turnUsername")) turnUser = data["turnUsername"].toString();
+        if (data.contains("turnCredential")) turnPass = data["turnCredential"].toString();
+        
+        bool success = m_lib->m_WebRTCChannels->createChannel(id, description, enabled);
+        if (success) {
+            if (!stun.isEmpty()) m_lib->m_WebRTCChannels->setChannelStunServer(id, stun);
+            if (!turn.isEmpty()) m_lib->m_WebRTCChannels->setChannelTurnServer(id, turn, turnUser, turnPass);
+            m_lib->m_WebRTCChannels->setChannelMaxCalls(id, maxConcurrent);
+            m_lib->m_WebRTCChannels->setChannelSendOnly(id, sendOnly);
+            ret["status"] = "channel_created";
+            ret["error"] = noError();
+        } else {
+            ret["error"] = hasError("Failed to create WebRTC channel");
+        }
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::modifyWebRTCChannel(QJsonObject &data, QJsonObject &ret) {
+    QString id, description;
+    bool enabled;
+    bool sendOnly = false;
+    int maxConcurrent = 5;
+    QString stun, turn, turnUser, turnPass;
+    
+    if (jCheckString(id, data["id"]) && jCheckString(description, data["description"]) && 
+        jCheckBool(enabled, data["enabled"])) {
+        
+        m_lib->m_WebRTCChannels->modifyChannel(id, description, enabled);
+        if (data.contains("sendOnly")) sendOnly = data["sendOnly"].toBool();
+        if (data.contains("maxConcurrentStreams")) maxConcurrent = data["maxConcurrentStreams"].toInt();
+        if (data.contains("stunServer")) stun = data["stunServer"].toString();
+        if (data.contains("turnServer")) turn = data["turnServer"].toString();
+        if (data.contains("turnUsername")) turnUser = data["turnUsername"].toString();
+        if (data.contains("turnCredential")) turnPass = data["turnCredential"].toString();
+        if (!stun.isEmpty()) m_lib->m_WebRTCChannels->setChannelStunServer(id, stun);
+        if (!turn.isEmpty()) m_lib->m_WebRTCChannels->setChannelTurnServer(id, turn, turnUser, turnPass);
+        m_lib->m_WebRTCChannels->setChannelMaxCalls(id, maxConcurrent);
+        m_lib->m_WebRTCChannels->setChannelSendOnly(id, sendOnly);
+        ret["status"] = "channel_modified";
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::removeWebRTCChannel(QJsonObject &data, QJsonObject &ret) {
+    QString id;
+    
+    if (jCheckString(id, data["id"])) {
+        m_lib->m_WebRTCChannels->removeChannel(id);
+        ret["status"] = "channel_removed";
+        ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
 
 // Implementation-Functions for API-Signals
 void Websocket::regStateChanged(int accId, bool status){

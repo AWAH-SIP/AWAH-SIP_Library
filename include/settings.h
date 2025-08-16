@@ -115,6 +115,16 @@ public:
     void saveCustomDestinationNames();
 
     /**
+    * @brief load WebRTC channel config from settings file
+    */
+    void loadWebRTCChannelConfig();
+
+    /**
+    * @brief save WebRTC channel config to the settings file
+    */
+    void saveWebRTCChannelConfig();
+
+    /**
     * @brief get the log file path
     * @return QString logfilepath
     */
@@ -188,6 +198,7 @@ private:
     bool m_GpioDevicesLoaded = false;
     bool m_GpioRoutesLoaded = false;
     bool m_BuddiesLoaded = false;
+    bool m_WebRTCChannelsLoaded = false;
 
 private slots:
     void loadIODevConfigLater();
