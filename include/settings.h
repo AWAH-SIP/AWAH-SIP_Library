@@ -28,6 +28,14 @@ class Settings : public QObject
 {
     Q_OBJECT
 public:
+    enum SettingsType {
+        INTEGER = 0,
+        FLOAT = 1,
+        STRING = 2,
+        ENUM_INT = 3
+    };
+    Q_ENUM(SettingsType)
+
     explicit Settings(AWAHSipLib *parentLib, QObject *parent = nullptr);
 
     /**
@@ -170,6 +178,9 @@ signals:
 
 
 private:
+    // Helper functions for JSON operations
+    QJsonObject loadJsonConfig();
+    void saveJsonConfig(const QJsonObject &config);
 
     AWAHSipLib* m_lib;
 
