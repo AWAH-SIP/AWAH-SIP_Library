@@ -63,7 +63,7 @@ void MessageManager::slotSendMessage(int callId, int AccID, QString type, QByteA
         try{
             SendInstantMessageParam prm;
             m_lib->m_Log->writeLog(3,QString("SendMessage: Mesage type: ") + type + " Message: " + message + " sent");
-            foreach(char c, message)
+            for (char c : message)
                 prm.content+=c;
             prm.contentType = type.toStdString();
             m_call->sendInstantMessage(prm);

@@ -18,9 +18,6 @@
 
 #include "../include/settings.h"
 #include "../include/awahsiplib.h"
-#include "pjmedia.h"
-#include "pjlib-util.h" /* pj_getopt */
-#include "pjlib.h"
 #include <QDebug>
 #include <QThread>
 #include <QSettings>
@@ -318,7 +315,7 @@ void Settings::loadCustomSourceNames()
     settings.beginGroup("CustomSourceNames");
     QMap<QString,QString> srcLables;
     QStringList keys = settings.childKeys();
-    foreach (QString key, keys) {
+    for (const QString &key : keys) {
          srcLables[key] = settings.value(key).toString();
     }
     settings.endGroup();
@@ -347,7 +344,7 @@ void Settings::loadCustomDestinationNames()
     settings.beginGroup("CustomDestinationNames");
     QMap<QString,QString> dstLables;
     QStringList keys = settings.childKeys();
-    foreach (QString key, keys) {
+    for (const QString &key : keys) {
          dstLables[key] = settings.value(key).toString();
     }
     settings.endGroup();
@@ -977,7 +974,7 @@ const QJsonObject Settings::getCodecPriorities(){
      enumitems["1 lowest"] = 1;
      enumitems["0 disabled"] = 0;
 
-     foreach(const CodecInfo codec, m_lib->m_pjEp->codecEnum2())
+     for (const CodecInfo &codec : m_lib->m_pjEp->codecEnum2())
      {
          codecname = QString::fromStdString(codec.codecId);
          priority = settings.value("settings/CodecPriority/"+codecname,"128").toInt();

@@ -66,14 +66,13 @@ void Accounts::createAccount(QString accountName, QString server, QString user, 
         newAccount.autoconnectEnable = autoconnectEnable;
         newAccount.CallHistory = history;
         newAccount.hasDTMFGPIO = hasDTMFGPIO;
-        PJSUA2_CHECK_EXPR(m_lib->m_AudioRouter->addSplittComb(newAccount));
         if(hasDTMFGPIO){
                 newAccount.gpioDev = GpioDeviceManager::instance()->create(newAccount);
         }
         else newAccount.gpioDev = nullptr;
         m_accounts.append(newAccount);
         m_lib->m_Settings->saveAccConfig();
-        m_lib->m_AudioRouter->conferenceBridgeChanged();
+        m_lib->m_AudioRouter->scheduleConferenceRefresh(150);
         emit AccountsChanged(&m_accounts);
     }
     catch(Error& err){
@@ -112,7 +111,7 @@ void Accounts::modifyAccount(QString uid, QString accountName, QString server, Q
             try{
                 acc.accountPtr->modify(aCfg);
                 m_lib->m_Settings->saveAccConfig();
-                m_lib->m_AudioRouter->conferenceBridgeChanged();
+                m_lib->m_AudioRouter->scheduleConferenceRefresh(150);
                 emit AccountsChanged(&m_accounts);
             }
             catch (Error &err){
@@ -125,7 +124,7 @@ void Accounts::modifyAccount(QString uid, QString accountName, QString server, Q
                 GpioDeviceManager::instance()->removeDevice(uid);
             }
             m_lib->m_Settings->saveAccConfig();
-            m_lib->m_AudioRouter->conferenceBridgeChanged();
+            m_lib->m_AudioRouter->scheduleConferenceRefresh(150);
             emit AccountsChanged(&m_accounts);
             break;
         }
@@ -150,7 +149,7 @@ void Accounts::removeAccount(QString uid)
                 break;
             }
         }
-        m_lib->m_AudioRouter->conferenceBridgeChanged();
+        m_lib->m_AudioRouter->scheduleConferenceRefresh(150);
         m_lib->m_Settings->saveAccConfig();
         emit AccountsChanged(&m_accounts);
     }
@@ -206,7 +205,7 @@ void Accounts::acceptCall(int callId, int AccID)
             newCall = new PJCall(this, m_lib, m_lib->m_MessageManager, *account->accountPtr, callId);
             CallOpParam prm;
             prm.statusCode = PJSIP_SC_OK;
-            s_Call thisCall(account->splitterSlot);
+            s_Call thisCall;
             thisCall.callptr = newCall;
             thisCall.callId = callId;
             m_lib->m_Log->writeLog(3,(QString("AcceptCall: Account: ") + account->name + " accepting call with ID: " + QString::number(callId)));
@@ -276,7 +275,7 @@ void Accounts::holdCall(int callId, int AccID)                                  
             m_lib->m_Log->writeLog(3,(QString("HoldCall: Account: ") + account->name + " hold call with ID: " + QString::number(callId)));
             CallOpParam prm(true);
 
-            if(!m_call->isOnHold()){
+            if(m_call->isOnHold()){
                 m_lib->m_Log->writeLog(3,(QString("HoldCall: Account: ") + account->name + " set call to hold "));
                 m_call->setHoldTo(true);
                 prm.statusCode = PJSIP_SC_QUEUED;
@@ -388,7 +387,7 @@ QJsonObject Accounts::getCallInfo(int callId, int AccID){
                 streamstats = pjCall->getStreamStat(0);
                 callInfo["Status:"] = QString::fromStdString(callinfo.stateText);
                 callInfo["Connected to:"] = QString::fromStdString(callinfo.remoteUri);
-                callInfo["Call time:"] = QDateTime::fromSecsSinceEpoch(callinfo.connectDuration.sec, Qt::OffsetFromUTC).toString("hh:mm:ss");
+                callInfo["Call time:"] = QDateTime::fromSecsSinceEpoch(callinfo.connectDuration.sec, QTimeZone::UTC).toString("hh:mm:ss");
                 callInfo["Peer: "] = QString::fromStdString(transportinfo.srcRtpName);
                 callInfo["Recieved data total:"] = sizeFormat(streamstats.rtcp.rxStat.bytes);
                 if(callinfo.connectDuration.sec){       //avoid division by zero
@@ -587,10 +586,12 @@ void Accounts::OncallStateChanged(int accID, int role, int callId, bool remoteof
             thisAccount->gpioDev->setConnected(true);
         }
         sendPresenceStatus(accID, busy);
+        m_lib->m_AudioRouter->scheduleConferenceRefresh(150);
         emit m_lib->m_AudioRouter->audioRoutesChanged(m_lib->m_AudioRouter->getAudioRoutes());
     }
     else if(state == PJSIP_INV_STATE_DISCONNECTED) {
         sendPresenceStatus(accID, online);
+        m_lib->m_AudioRouter->scheduleConferenceRefresh(150);
     }
     m_lib->m_Log->writeLog(3,(QString("Accounts::OncallStateChanged(): Callstate of ") + remoteUri + " is  " + thisCall->CallStatusText));
 }
@@ -644,7 +645,7 @@ void Accounts::CallInspector(pj_timer_heap_t *timer_heap, pj_timer_entry *entry)
             }
             int emptyGetevent = info["JB: Number of empty on GET events:"].toInt();    // detect rx media loss
             if(emptyGetevent > call.lastJBemptyGETevent){  // RX media lost
-                emit  AWAHSipLib::instance()->m_Accounts->callStateChanged(pjCallInfo.accId, pjCallInfo.role, pjCallInfo.id, pjCallInfo.remOfferer, pjCallInfo.connectDuration.sec, 7, call.CallStatusCode, QString("RX unlocked since: ") + QDateTime::fromSecsSinceEpoch(call.RXlostSeconds, Qt::OffsetFromUTC).toString("hh:mm:ss"),call.ConnectedTo);
+                emit  AWAHSipLib::instance()->m_Accounts->callStateChanged(pjCallInfo.accId, pjCallInfo.role, pjCallInfo.id, pjCallInfo.remOfferer, pjCallInfo.connectDuration.sec, 7, call.CallStatusCode, QString("RX unlocked seit: ") + QDateTime::fromSecsSinceEpoch(call.RXlostSeconds, QTimeZone::UTC).toString("hh:mm:ss"),call.ConnectedTo);
                 call.lastJBemptyGETevent = emptyGetevent;
                 if(call.RXlostSeconds >= AWAHSipLib::instance()->m_Accounts->m_CallDisconnectRXTimeout){
                     AWAHSipLib::instance()->m_Accounts->hangupCall(pjCallInfo.id,pjCallInfo.accId);

@@ -31,7 +31,7 @@ QList<s_codec> Codecs::listCodecs(){
     QSettings settings("awah", "AWAHsipConfig");
     int priority;
     m_codecs.clear();
-    foreach(const CodecInfo codec, m_lib->m_pjEp->codecEnum2())
+    for (const CodecInfo &codec : m_lib->m_pjEp->codecEnum2())
     {
         s_codec newCodec;
         QJsonObject item, enumitems;
@@ -154,7 +154,7 @@ void Codecs::selectCodec(s_codec &codec){
             codec.encodingName = QString("speex/") + QString::number(codec.codecParameters["Clockrate"].toObject()["value"].toInt()) + "/1";
         }
     bool codecFound = false;
-    foreach(const CodecInfo codecinfo, m_lib->m_pjEp->codecEnum2())
+    for (const CodecInfo &codecinfo : m_lib->m_pjEp->codecEnum2())
     {
         if(QString::fromStdString(codecinfo.codecId) == codec.encodingName){
             m_lib->m_pjEp->codecSetPriority(codecinfo.codecId, 255);
@@ -204,7 +204,7 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
     enumitems = QJsonObject();
     codecparam["Frames per Packet"] = item;
 
-    foreach(const pj::CodecFmtp fmtp, PJcodecParam.setting.decFmtp){
+    for (const pj::CodecFmtp &fmtp : PJcodecParam.setting.decFmtp){
         item = QJsonObject();
         bool paramParsed = false;
         if(strcmp(fmtp.name.c_str(),"useinbandfec")==0){            // show only known parameters
@@ -246,7 +246,7 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
         }
     }
 
-    foreach(const pj::CodecFmtp fmtp, PJcodecParam.setting.encFmtp){
+    for (const pj::CodecFmtp &fmtp : PJcodecParam.setting.encFmtp){
         m_lib->m_Log->writeLog(4,QString("getCodecParam: unparsed encoding key/value: ") +fmtp.name.c_str());
     }
     if(codecId.startsWith("opus",Qt::CaseInsensitive)){
@@ -285,7 +285,7 @@ const QJsonObject Codecs::getCodecParam(CodecParam PJcodecParam, QString codecId
         item["type"] = INTEGER;
         item["value"] = (int) opus_cfg.channel_cnt;
         item["min"] = 1;
-        item["max"] = (int) m_lib->epCfg.medConfig.channelCount;
+        item["max"] = 8;
         codecparam["Channelcount"] = item;
 
         item = QJsonObject();

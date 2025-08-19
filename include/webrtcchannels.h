@@ -37,6 +37,7 @@ struct WebRTCSession {
     pjmedia_port* perStreamSplitComb = nullptr;        // Per-stream split/comb (matches stream)
     QList<pjmedia_port*> perStreamMonoPorts;           // Reverse-channel mono ports
     QList<int> perStreamConfSlots;                     // Conf slots for mono ports
+    pj_pool_t* sessionPool = nullptr;                  // Per-session pool for per-stream objects
 
     // SDP negotiation
     pjmedia_sdp_session* remoteSdp = nullptr;

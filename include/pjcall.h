@@ -24,6 +24,8 @@
 
 using namespace pj;
 
+struct pj_pool_t;
+
 class Accounts;
 class AWAHSipLib;
 class MessageManager;
@@ -66,6 +68,7 @@ public:
     virtual void onCallReplaceRequest(OnCallReplaceRequestParam &prm);
 
     virtual void onStreamCreated(OnStreamCreatedParam &prm);
+    virtual void onStreamDestroyed(OnStreamDestroyedParam &prm);
 
     virtual void onCallSdpCreated(OnCallSdpCreatedParam &prm);
 
@@ -92,6 +95,9 @@ private:
     AudioMedia *audioMedia;
     AudioMedia *captureMedia;
     bool hold;
+
+    // Per-call pool to allocate splitcomb/master ports/rev channels
+    pj_pool_t* m_callPool = nullptr;
 };
 
 #endif // PJCall_H

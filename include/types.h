@@ -281,7 +281,7 @@ Q_DECLARE_METATYPE(s_callHistory);
 Q_DECLARE_METATYPE(QList<s_callHistory>);
 
 struct s_Call{
-    explicit s_Call(int &splitterSlot) : splitterSlot(splitterSlot) { };
+    s_Call() = default;
 
     int callId = PJSUA_INVALID_ID;
     int lastJBemptyGETevent = 0;
@@ -294,8 +294,16 @@ struct s_Call{
     PJCall* callptr = nullptr;
     s_codec codec = s_codec();
     QString SDP = QString();
-    int splitterSlot;
-    int callConfPort = -1;
+    pjmedia_port* callStreamPort = nullptr;
+    pjmedia_stream* pjStream = nullptr;
+
+    // Per-call stereo handling
+    pjmedia_port *perCallSplitComb = nullptr;
+    pjmedia_master_port* mp_split_to_stream = nullptr;
+    pjmedia_master_port* mp_stream_to_split = nullptr;
+    QList<pjmedia_port*> perCallMonoPorts = {};
+    QList<pjsua_conf_port_id> perCallConfSlots = {};
+
     QJsonObject toJSON() const {
         return {{"CallStatusText", CallStatusText}, {"CallStatusCode", CallStatusCode}, {"ConnectedTo", ConnectedTo}, {"callId", callId}, {"codec", codec.toJSON()}};
     }
@@ -318,8 +326,6 @@ struct s_account{
     PJAccount *accountPtr = nullptr;          // not saved to file, only for runtime handling
     AccountGpioDev *gpioDev = nullptr;        // not saved to file, only for runtime handling
     int AccID = PJSUA_INVALID_ID;;
-    int splitterSlot = PJSUA_INVALID_ID;
-    pjmedia_port *splitComb = nullptr;
     QList <s_Call> CallList = QList <s_Call>();
     s_codec SelectedCodec = s_codec();             // used to temporary store the codecsettings for outgoing calls
     QList <s_callHistory> CallHistory = QList <s_callHistory>();

@@ -170,13 +170,6 @@ public:
     void addToneGen(int freq, QString uid = "");
 
     /**
-    * @brief Add a Splitter-Combiner to the ConferenceBridge for an account
-    * @param account account-struct to add the SplitterCombiner
-    * @return PJ_SUCESS or the respective error code
-    */
-    int addSplittComb(s_account& account);
-
-    /**
     * @brief Add a custom lable to a Confport source
     * @param portName the portName (defaultlable)
     * @param CustomName the new custom name for that source
@@ -195,6 +188,12 @@ public:
     * @param uid the uid of the account or the audio device
     */
     void removeAllCustomNamesWithUID(const QString uid);
+    /**
+     * @brief Remove all connections where the given slot participates (as source or destination)
+     *        Used on SIP/WebRTC teardown to ensure no stale crosspoints remain.
+     * @param slot the conference-bridge slot whose routes should be removed
+     */
+    void removeAllRoutesFromSlot(int slot);
 
     /**
     * @brief get the active devices
@@ -202,8 +201,8 @@ public:
     */
     QList<s_IODevices>* getAudioDevices() { return &m_AudioDevices; };
 
-    void conferenceBridgeChanged();
     void removeAllRoutesFromAccount(const s_account account);
+    void scheduleConferenceRefresh(int delayMs);
 
     QMap<int, QString> getSrcAudioSlotMap() const { return m_srcAudioSlotMap; };
     QMap<int, QString> getDestAudioSlotMap() const { return m_destAudioSlotMap; };
@@ -244,8 +243,10 @@ private:
     QMap<int, QString> m_destAudioSlotMap;
     s_audioPortList m_confPortList;
     QTimer *m_SoundDeviceInspectorTimer;
+    QTimer *m_confRefreshDebounceTimer = nullptr;
     uint8_t m_sounddevCount = 0;
     pjmedia_master_port *themaster = nullptr;
+    void conferenceBridgeChanged();
 
     /**
     * @brief All AudioDevices (soundcards, generators, fileplayer and recoder) are added to this list
@@ -265,7 +266,6 @@ private:
     */
     QList<s_audioRoutes>  m_offlineRoutes;
 
-    void removeAllRoutesFromSlot(int slot);
 
     /**
     * @brief List all active conference ports
