@@ -967,9 +967,10 @@ int AudioRouter::connectConfPort(int src_slot, int sink_slot, int level, bool pe
     pj_status_t status;
     pjsua_conf_port_id src = src_slot;
     pjsua_conf_port_id sink = sink_slot;
-    pjsua_conf_connect_param param;
-    param.level = 0.5;
-    status = pjsua_conf_connect2(src, sink, &param);
+    int leveladjust = dBtoAdjLevel(level);
+    pjsua_data* intData = pjsua_get_var();
+
+    status = pjmedia_conf_connect_port(intData->mconf, src, sink, leveladjust);
     if (status == PJ_SUCCESS){
         m_lib->m_Log->writeLog(3,(QString("connect slot: ") + QString::number(src_slot) + " to " + QString::number(sink_slot) + " successfully" ));
         bool routeExists = false;
@@ -985,7 +986,6 @@ int AudioRouter::connectConfPort(int src_slot, int sink_slot, int level, bool pe
             m_audioRoutes.append(route);
         }
         emit audioRoutesChanged(m_audioRoutes);
-        changeConfPortLevel(src_slot,sink_slot, level);     // this is called to set the exact db values with the factor used in this function it is not in every case correct!!
         if(persistant)
             m_lib->m_Settings->saveAudioRoutes();
     }
@@ -1003,7 +1003,9 @@ int AudioRouter::disconnectConfPort(int src_slot, int sink_slot)
     pj_status_t status;
     pjsua_conf_port_id src = src_slot;
     pjsua_conf_port_id sink = sink_slot;
-    status = pjsua_conf_disconnect(src, sink);
+    pjsua_data* intData = pjsua_get_var();
+
+    status = pjmedia_conf_disconnect_port(intData->mconf, src, sink);
     if (status == PJ_SUCCESS){
         m_lib->m_Log->writeLog(3,(QString("disconnect slot: ") + QString::number(sink_slot) + " to " + QString::number(src_slot) + " successfully" ));
         for(int i = 0; i < m_audioRoutes.size(); ++i){
