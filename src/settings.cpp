@@ -25,8 +25,10 @@
 #include <QThread>
 #include <QSettings>
 #include <QDir>
+#include <QtCore/QCoreApplication>
 
 #define THIS_FILE		"settings.cpp"
+
 #define CONFIG_FILE      "AWAHsipConfig.json"
 #define CONFIG_DIR       ".config/awah"
 
@@ -36,42 +38,80 @@ Settings::Settings(AWAHSipLib *parentLib, QObject *parent) : QObject(parent), m_
 
 QJsonObject Settings::loadJsonConfig()
 {
-    QString settingsPath = QSettings(QSettings::IniFormat, QSettings::UserScope, "awah", "AWAHsipConfig").fileName();
-    m_lib->m_Log->writeLog(3, QString("Config file location: ") + settingsPath);
+    // Load from AWAHsipConfig.ini file using QSettings path (contains pure JSON)
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "awah", "AWAHsipConfig");
+    QString settingsPath = settings.fileName();
+    m_lib->m_Log->writeLog(1, QString("Loading JSON config from: ") + settingsPath);
 
     QFile file(settingsPath);
-    if (!file.open(QIODevice::ReadOnly)) {
-        m_lib->m_Log->writeLog(3, QString("loadJsonConfig: No config file found, creating new configuration"));
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        m_lib->m_Log->writeLog(1, QString("Could not open config file: ") + settingsPath);
+        m_lib->m_Log->writeLog(1, QString("Error: ") + file.errorString());
         return QJsonObject();
     }
 
+    // Read the entire content
     QByteArray jsonData = file.readAll();
     file.close();
-    
-    QJsonDocument doc = QJsonDocument::fromJson(jsonData);
+
+    m_lib->m_Log->writeLog(1, QString("File size: %1 bytes").arg(jsonData.size()));
+    m_lib->m_Log->writeLog(1, QString("First part of content: ") + QString(jsonData.left(200)));
+
+    // Parse as JSON
+    QJsonParseError parseError;
+    QJsonDocument doc = QJsonDocument::fromJson(jsonData, &parseError);
     if (doc.isNull()) {
-        m_lib->m_Log->writeLog(1, QString("loadJsonConfig: Invalid JSON in config"));
+        m_lib->m_Log->writeLog(1, QString("JSON parse error at position %1: %2")
+            .arg(parseError.offset)
+            .arg(parseError.errorString()));
         return QJsonObject();
     }
+
+    QJsonObject obj = doc.object();
+    m_lib->m_Log->writeLog(1, QString("JSON successfully loaded. Found keys: ") + 
+        obj.keys().join(", "));
     
-    return doc.object();
+    return obj;
 }
 
-void Settings::saveJsonConfig(const QJsonObject &config)
+void Settings::saveJsonConfig(const QJsonObject &newConfig)
 {
-    QString settingsPath = QSettings(QSettings::IniFormat, QSettings::UserScope, "awah", "AWAHsipConfig").fileName();
-    QJsonDocument doc(config);
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "awah", "AWAHsipConfig");
+    QString settingsPath = settings.fileName();
+    m_lib->m_Log->writeLog(1, QString("Saving config to: ") + settingsPath);
     
-    QFile file(settingsPath);
-    if (!file.open(QIODevice::WriteOnly)) {
-        m_lib->m_Log->writeLog(1, QString("saveJsonConfig: Could not open config file for writing"));
+    // Load existing configuration
+    QJsonObject existingConfig;
+    QFile readFile(settingsPath);
+    if (readFile.open(QIODevice::ReadOnly)) {
+        QByteArray data = readFile.readAll();
+        QJsonDocument doc = QJsonDocument::fromJson(data);
+        if (!doc.isNull() && doc.isObject()) {
+            existingConfig = doc.object();
+            m_lib->m_Log->writeLog(1, QString("Loaded existing config with keys: ") + existingConfig.keys().join(", "));
+        }
+        readFile.close();
+    }
+    
+    // Merge new configuration with existing
+    for (auto it = newConfig.begin(); it != newConfig.end(); ++it) {
+        existingConfig[it.key()] = it.value();
+    }
+    
+    m_lib->m_Log->writeLog(1, QString("Merged config has keys: ") + existingConfig.keys().join(", "));
+    
+    // Save the merged configuration
+    QJsonDocument doc(existingConfig);
+    QFile writeFile(settingsPath);
+    if (!writeFile.open(QIODevice::WriteOnly)) {
+        m_lib->m_Log->writeLog(1, QString("Error: Could not open config file for writing: ") + settingsPath);
         return;
     }
     
-    file.write(doc.toJson(QJsonDocument::Indented));
-    file.close();
+    writeFile.write(doc.toJson(QJsonDocument::Indented));
+    writeFile.close();
     
-    m_lib->m_Log->writeLog(3, QString("saveJsonConfig: Configuration saved to ") + settingsPath);
+    m_lib->m_Log->writeLog(1, QString("Configuration successfully saved to: ") + settingsPath);
 }
 
 void Settings::loadIODevConfig()
@@ -81,22 +121,78 @@ void Settings::loadIODevConfig()
 
     // Load JSON configuration
     QJsonObject config = loadJsonConfig();
-    QJsonArray deviceArray = config["IODevConfig"].toArray();
+    
+    // Check if config is empty
+    if (config.isEmpty()) {
+        m_lib->m_Log->writeLog(1, QString("loadIODevConfig: No configuration loaded"));
+        return;
+    }
+    
+    // Try to get ioDevices array (used in test1.json format)
+    QJsonArray deviceArray = config["ioDevices"].toArray();
+    
+    // If ioDevices doesn't exist, try audio_devices as fallback
+    if (deviceArray.isEmpty()) {
+        deviceArray = config["audio_devices"].toArray();
+    }
+    
+    m_lib->m_Log->writeLog(1, QString("loadIODevConfig: Found %1 devices in configuration").arg(deviceArray.size()));
     
     // Convert JSON array to QList<s_IODevices>
     for (const QJsonValue &value : deviceArray) {
         QJsonObject obj = value.toObject();
-        // Nur wenn die minimal benötigten Felder vorhanden sind
-        if (obj.contains("uid") && obj.contains("devicetype")) {
-            s_IODevices device;
-            device.uid = obj["uid"].toString();
+        
+        s_IODevices device;
+        
+        // Handle different JSON formats
+        if (obj.contains("devicetype")) {
             device.devicetype = static_cast<DeviceType>(obj["devicetype"].toInt());
-            // Optional fields - use defaults if not present
-            device.inputname = obj.contains("inputname") ? obj["inputname"].toString() : QString();
-            device.outputame = obj.contains("outputname") ? obj["outputname"].toString() : QString();
-            device.path = obj.contains("path") ? obj["path"].toString() : QString();
-            device.genfrequency = obj.contains("genfrequency") ? obj["genfrequency"].toInt() : 0;
+            
+            // Direct string values (test1.json format)
+            if (obj.contains("inputname")) {
+                if (obj["inputname"].isString()) {
+                    device.inputname = obj["inputname"].toString();
+                } else if (obj["inputname"].isObject()) {
+                    device.inputname = obj["inputname"].toObject()["value"].toString();
+                }
+            }
+            
+            if (obj.contains("outputname")) {
+                if (obj["outputname"].isString()) {
+                    device.outputame = obj["outputname"].toString();
+                } else if (obj["outputname"].isObject()) {
+                    device.outputame = obj["outputname"].toObject()["value"].toString();
+                }
+            }
+            
+            if (obj.contains("path")) {
+                if (obj["path"].isString()) {
+                    device.path = obj["path"].toString();
+                } else if (obj["path"].isObject()) {
+                    device.path = obj["path"].toObject()["value"].toString();
+                }
+            }
+            
+            if (obj.contains("genfrequency")) {
+                if (obj["genfrequency"].isDouble()) {
+                    device.genfrequency = obj["genfrequency"].toInt();
+                } else if (obj["genfrequency"].isObject()) {
+                    device.genfrequency = obj["genfrequency"].toObject()["value"].toInt();
+                }
+            }
+            
+            // Generate UID if not present
+            if (obj.contains("uid")) {
+                device.uid = obj["uid"].toString();
+            } else {
+                device.uid = QString("%1_%2").arg(device.inputname).arg(device.outputame);
+            }
+            
             loadedDevices.append(device);
+            m_lib->m_Log->writeLog(3, QString("loadIODevConfig: Loaded device: %1 -> %2 (type: %3)")
+                .arg(device.inputname)
+                .arg(device.outputame)
+                .arg(device.devicetype));
         }
     }
 
@@ -166,16 +262,20 @@ void Settings::saveIODevConfig()
     const QList<s_IODevices>* devices = m_lib->m_AudioRouter->getAudioDevices();
     for (const s_IODevices &device : *devices) {
         QJsonObject obj;
+        
+        // Use the format consistent with test1.json
         obj["uid"] = device.uid;
         obj["devicetype"] = static_cast<int>(device.devicetype);
         obj["inputname"] = device.inputname;
         obj["outputname"] = device.outputame;
         obj["path"] = device.path;
         obj["genfrequency"] = device.genfrequency;
+
         deviceArray.append(obj);
     }
     
-    config["IODevConfig"] = deviceArray;
+    // Save as ioDevices to match test1.json format
+    config["ioDevices"] = deviceArray;
     
     // Save updated configuration
     saveJsonConfig(config);
@@ -190,24 +290,127 @@ void Settings::loadIODevConfigLater()
 {
     QList<s_IODevices> loadedDevices;
     QJsonObject config = loadJsonConfig();
-    QJsonArray deviceArray = config["GpioDevConfig"].toArray();
+    
+    // GPIO devices are in the same ioDevices array as audio devices
+    // We need to filter for GPIO device types (typically devicetype >= 4)
+    QJsonArray deviceArray = config["ioDevices"].toArray();
+    
+    // If ioDevices doesn't exist, try GpioDevConfig as fallback
+    if (deviceArray.isEmpty()) {
+        deviceArray = config["GpioDevConfig"].toArray();
+    }
 
-    // Convert JSON array to QList<s_IODevices>
+    m_lib->m_Log->writeLog(3, QString("loadIODevConfigLater: Found %1 devices total, filtering for GPIO devices").arg(deviceArray.size()));
+
+    // Convert JSON array to QList<s_IODevices>, filtering for GPIO devices
     for (const QJsonValue &value : deviceArray) {
         QJsonObject obj = value.toObject();
-        if (obj.contains("uid")) {
-            s_IODevices device;
-            device.uid = obj["uid"].toString();
-            device.devicetype = static_cast<DeviceType>(obj["devicetype"].toInt());
-            device.inputname = obj.contains("inputname") ? obj["inputname"].toString() : QString();
-            device.outputame = obj.contains("outputname") ? obj["outputname"].toString() : QString();
-            device.path = obj.contains("path") ? obj["path"].toString() : QString();
-            device.genfrequency = obj.contains("genfrequency") ? obj["genfrequency"].toInt() : 0;
-            loadedDevices.append(device);
-            m_lib->m_GpioDeviceManager->createGeneric(device);
-            m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: added GPIO device from config file: ") + device.outputame);
+        if (obj.contains("uid") && obj.contains("devicetype")) {
+            int deviceType = obj["devicetype"].toInt();
+            
+            // Filter for GPIO device types based on DeviceType enum:
+            // VirtualGpioDevice(4), LogicAndGpioDevice(5), LogicOrGpioDevice(6), 
+            // AccountGpioDevice(7), LinuxGpioDevice(8), AudioCrosspointDevice(9)
+            if (deviceType >= VirtualGpioDevice && deviceType <= AudioCrosspointDevice) {
+                // Get device type name for logging
+                QString deviceTypeName;
+                switch(static_cast<DeviceType>(deviceType)) {
+                    case VirtualGpioDevice: deviceTypeName = "VirtualGpioDevice"; break;
+                    case LogicAndGpioDevice: deviceTypeName = "LogicAndGpioDevice"; break;
+                    case LogicOrGpioDevice: deviceTypeName = "LogicOrGpioDevice"; break;
+                    case AccountGpioDevice: deviceTypeName = "AccountGpioDevice"; break;
+                    case LinuxGpioDevice: deviceTypeName = "LinuxGpioDevice"; break;
+                    case AudioCrosspointDevice: deviceTypeName = "AudioCrosspointDevice"; break;
+                    default: deviceTypeName = QString("Unknown GPIO Type (%1)").arg(deviceType); break;
+                }
+                
+                s_IODevices device;
+                device.uid = obj["uid"].toString();
+                device.devicetype = static_cast<DeviceType>(deviceType);
+                device.inputname = obj.contains("inputname") ? obj["inputname"].toString() : QString();
+                device.outputame = obj.contains("outputname") ? obj["outputname"].toString() : QString();
+                device.path = obj.contains("path") ? obj["path"].toString() : QString();
+                device.genfrequency = obj.contains("genfrequency") ? obj["genfrequency"].toInt() : 0;
+                
+                // Load device IDs (test1.json compatibility)
+                device.PBDevID = obj.contains("PBDevID") ? obj["PBDevID"].toInt() : 0;
+                device.RecDevID = obj.contains("RecDevID") ? obj["RecDevID"].toInt() : 0;
+                
+                // Load typeSpecificSettings if present (test1.json compatibility)
+                if (obj.contains("typeSpecificSettings")) {
+                    device.typeSpecificSettings["typeSpecificSettings"] = obj["typeSpecificSettings"];
+                }
+                
+                // IMPORTANT: Load channel counts for GPIO devices
+                device.inChannelCount = obj.contains("inChannelCount") ? obj["inChannelCount"].toInt() : 0;
+                device.outChannelCount = obj.contains("outChannelCount") ? obj["outChannelCount"].toInt() : 0;
+                
+                // Set default channel counts for specific device types if not specified OR if both are 0
+                if ((device.inChannelCount == 0 && device.outChannelCount == 0)) {
+                    switch(static_cast<DeviceType>(deviceType)) {
+                        case VirtualGpioDevice:
+                            device.inChannelCount = 8;   // Default 8 inputs
+                            device.outChannelCount = 8;  // Default 8 outputs
+                            break;
+                        case LogicAndGpioDevice:
+                        case LogicOrGpioDevice:
+                            device.inChannelCount = 1;   // Logic devices have 1 input
+                            device.outChannelCount = 2;  // Default 2 outputs
+                            break;
+                        case AudioCrosspointDevice:
+                            device.inChannelCount = 1;   // Crosspoint 1 input
+                            device.outChannelCount = 1;  // Crosspoint 1 output
+                            break;
+                        case LinuxGpioDevice:
+                            device.inChannelCount = 4;   // Default 4 inputs
+                            device.outChannelCount = 4;  // Default 4 outputs
+                            break;
+                        default:
+                            device.inChannelCount = 1;
+                            device.outChannelCount = 1;
+                            break;
+                    }
+                    
+                    m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: Set default channels for %1: in=%2, out=%3")
+                        .arg(deviceTypeName)
+                        .arg(device.inChannelCount)
+                        .arg(device.outChannelCount));
+                } else {
+                    // Apply minimum values to prevent 0-channel devices
+                    if (device.inChannelCount == 0 && device.outChannelCount > 0) {
+                        // Output-only device (like some Virtual GPIO with only outputs)
+                        m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: %1 is output-only device (in=0, out=%2)")
+                            .arg(deviceTypeName).arg(device.outChannelCount));
+                    } else if (device.inChannelCount > 0 && device.outChannelCount == 0) {
+                        // Input-only device
+                        m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: %1 is input-only device (in=%2, out=0)")
+                            .arg(deviceTypeName).arg(device.inChannelCount));
+                    }
+                }
+                
+                loadedDevices.append(device);
+                
+                m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: calling createGeneric for %1 device: %2 (uid: %3, in: %4, out: %5)")
+                    .arg(deviceTypeName)
+                    .arg(device.outputame.isEmpty() ? device.inputname : device.outputame)
+                    .arg(device.uid)
+                    .arg(device.inChannelCount)
+                    .arg(device.outChannelCount));
+                
+                GpioDevice* createdDevice = m_lib->m_GpioDeviceManager->createGeneric(device);
+                
+                if(createdDevice) {
+                    m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: SUCCESS - createGeneric returned device for %1")
+                        .arg(device.uid));
+                } else {
+                    m_lib->m_Log->writeLog(1,QString("loadGpioDevManager: ERROR - createGeneric returned nullptr for %1")
+                        .arg(device.uid));
+                }
+            }
         }
     }
+    
+    m_lib->m_Log->writeLog(3, QString("loadIODevConfigLater: Successfully loaded %1 GPIO devices").arg(loadedDevices.size()));
     m_GpioDevicesLoaded = true;
     loadGpioRoutes();
 }
@@ -220,30 +423,89 @@ void Settings::saveGpioDevConfig()
     // Load existing configuration
     QJsonObject config = loadJsonConfig();
     
-    // Convert QList<s_IODevices> to JSON array
-    QJsonArray deviceArray;
-    const QList<s_IODevices>& devices = m_lib->m_GpioDeviceManager->getGpioDevices();
-    for (const s_IODevices &device : devices) {
+    // Get existing ioDevices array to preserve non-GPIO devices
+    QJsonArray existingDevices;
+    if (config.contains("ioDevices")) {
+        existingDevices = config["ioDevices"].toArray();
+    }
+    
+    // Filter out old GPIO devices from ioDevices array
+    QJsonArray newDeviceArray;
+    for (const QJsonValue &value : existingDevices) {
+        QJsonObject obj = value.toObject();
+        if (obj.contains("devicetype")) {
+            int deviceType = obj["devicetype"].toInt();
+            // Keep only non-GPIO devices (0-3: Sound, TestTone, FilePlayer, FileRecorder)
+            if (deviceType < VirtualGpioDevice || deviceType > AudioCrosspointDevice) {
+                newDeviceArray.append(value);
+            }
+        }
+    }
+    
+    // Add current GPIO devices to the ioDevices array
+    const QList<s_IODevices>& gpioDevices = m_lib->m_GpioDeviceManager->getGpioDevices();
+    for (const s_IODevices &device : gpioDevices) {
         QJsonObject obj;
+        
+        // Core device fields (compatible with test1.json format)
         obj["uid"] = device.uid;
         obj["devicetype"] = static_cast<int>(device.devicetype);
         obj["inputname"] = device.inputname;
         obj["outputname"] = device.outputame;
         obj["path"] = device.path;
         obj["genfrequency"] = device.genfrequency;
-        deviceArray.append(obj);
+        
+        // Channel counts for GPIO devices
+        obj["inChannelCount"] = static_cast<int>(device.inChannelCount);
+        obj["outChannelCount"] = static_cast<int>(device.outChannelCount);
+        
+        // Device IDs (required for test1.json compatibility)
+        obj["PBDevID"] = device.PBDevID;
+        obj["RecDevID"] = device.RecDevID;
+        
+        // Additional fields for full test1.json compatibility
+        obj["portNo"] = QJsonArray(); // Empty array like in test1.json
+        
+        // typeSpecificSettings (preserve existing or create empty)
+        QJsonObject typeSettings;
+        if (device.typeSpecificSettings.contains("typeSpecificSettings")) {
+            typeSettings = device.typeSpecificSettings["typeSpecificSettings"].toObject();
+        }
+        obj["typeSpecificSettings"] = typeSettings;
+        
+        newDeviceArray.append(obj);
+        
+        m_lib->m_Log->writeLog(3, QString("saveGpioDevConfig: Saved GPIO device '%1' (type: %2, in: %3, out: %4)")
+            .arg(device.outputame.isEmpty() ? device.inputname : device.outputame)
+            .arg(device.devicetype)
+            .arg(device.inChannelCount)
+            .arg(device.outChannelCount));
     }
     
-    config["GpioDevConfig"] = deviceArray;
+    // Update ioDevices array with merged devices (audio + GPIO)
+    config["ioDevices"] = newDeviceArray;
     
     // Save updated configuration
     saveJsonConfig(config);
+    
+    m_lib->m_Log->writeLog(1, QString("saveGpioDevConfig: Successfully saved %1 GPIO devices to ioDevices array").arg(gpioDevices.size()));
 }
 
 void Settings::loadGpioRoutes()
 {
     QJsonObject config = loadJsonConfig();
-    QJsonArray routeArray = config["GpioRoutes"].toArray();
+    
+    // Try both "gpioRoutes" and "GpioRoutes" for flexibility
+    QJsonArray routeArray;
+    if (config.contains("gpioRoutes")) {
+        routeArray = config["gpioRoutes"].toArray();
+        m_lib->m_Log->writeLog(3, QString("loadGpioRoutes: found gpioRoutes array"));
+    } else if (config.contains("GpioRoutes")) {
+        routeArray = config["GpioRoutes"].toArray();
+        m_lib->m_Log->writeLog(3, QString("loadGpioRoutes: found GpioRoutes array"));
+    } else {
+        m_lib->m_Log->writeLog(3, QString("loadGpioRoutes: no GPIO routes found in config"));
+    }
 
     m_lib->m_Log->writeLog(3, QString("loadGpioRoutes: loaded routes: ") + QString::number(routeArray.size()));
 
@@ -274,44 +536,117 @@ void Settings::saveGpioRoutes()
     for (const s_gpioRoute &route : gpioRoutes) {
         if (route.persistant) {
             QJsonObject obj;
-            obj["srcSlotId"] = route.srcSlotId;  // Store as string
+            obj["srcSlotId"] = route.srcSlotId;
             obj["destSlotId"] = route.destSlotId;
             obj["inverted"] = route.inverted;
             obj["persistant"] = route.persistant;
             routeArray.append(obj);
-            m_lib->m_Log->writeLog(3, QString("saveGpioRoutes: saving route from %1 to %2").arg(route.srcSlotId, route.destSlotId));
+            m_lib->m_Log->writeLog(3, QString("saveGpioRoutes: Saving route %1 -> %2").arg(route.srcSlotId, route.destSlotId));
         }
     }
     
-    config["GpioRoutes"] = routeArray;
+    // Use lowercase "gpioRoutes" to match test1.json format
+    config["gpioRoutes"] = routeArray;
     saveJsonConfig(config);
-    m_lib->m_Log->writeLog(3, QString("saveGpioRoutes: saved routes: ") + QString::number(routeArray.size()));
+    m_lib->m_Log->writeLog(1, QString("saveGpioRoutes: Successfully saved %1 GPIO routes").arg(routeArray.size()));
 }
 
 void Settings::loadBuddies()
 {
     QList<s_buddy> loadedBuddies;
     QJsonObject config = loadJsonConfig();
-    QJsonArray buddyArray = config["Buddies"].toArray();
+    
+    // Check if config is empty
+    if (config.isEmpty()) {
+        m_lib->m_Log->writeLog(1, QString("loadBuddies: No configuration loaded"));
+        return;
+    }
+    
+    // Try to get buddies array (test1.json format uses lowercase)
+    QJsonArray buddyArray = config["buddies"].toArray();
+    
+    // If buddies doesn't exist, try Buddies as fallback
+    if (buddyArray.isEmpty()) {
+        buddyArray = config["Buddies"].toArray();
+    }
+    
+    m_lib->m_Log->writeLog(1, QString("loadBuddies: Found %1 buddies in configuration").arg(buddyArray.size()));
 
     for (const QJsonValue &value : buddyArray) {
         QJsonObject obj = value.toObject();
-        if (obj.contains("uid")) {
+        
+        // Helper function to load string fields - supports both direct values and nested objects
+        auto loadStringField = [&](const QString &field, const QString &defaultValue = QString()) -> QString {
+            if (!obj.contains(field)) {
+                return defaultValue;
+            }
+            
+            QJsonValue val = obj[field];
+            if (val.isString()) {
+                // Direct string value (test1.json format)
+                QString result = val.toString();
+                m_lib->m_Log->writeLog(3, QString("Loaded buddy %1: %2 (direct)").arg(field).arg(result));
+                return result;
+            } else if (val.isObject()) {
+                // Nested object with "value" field (saveBuddies format)
+                QJsonObject fieldObj = val.toObject();
+                if (fieldObj.contains("value")) {
+                    QString result = fieldObj["value"].toString();
+                    m_lib->m_Log->writeLog(3, QString("Loaded buddy %1: %2 (nested)").arg(field).arg(result));
+                    return result;
+                }
+            }
+            return defaultValue;
+        };
+        
+        // Check if this entry has the required fields
+        if (obj.contains("Name") || obj.contains("buddyUrl") || obj.contains("uid")) {
             s_buddy buddy;
-            buddy.uid = obj["uid"].toString();
-            buddy.buddyUrl = obj["buddyUrl"].toString();
-            buddy.Name = obj["Name"].toString();
-            buddy.accUid = obj["accUid"].toString();
             
-            s_codec codec;
-            codec.fromJSON(obj["codec"].toObject());
-            buddy.codec = codec;
+            // Load basic buddy information
+            buddy.uid = loadStringField("uid");
+            buddy.buddyUrl = loadStringField("buddyUrl");  
+            buddy.Name = loadStringField("Name");
+            buddy.accUid = loadStringField("accUid");
             
+            // Generate UID if not present
+            if (buddy.uid.isEmpty()) {
+                buddy.uid = QString("%1_%2").arg(buddy.Name).arg(buddy.buddyUrl);
+            }
+            
+            // Load codec information if present
+            if (obj.contains("codec")) {
+                s_codec codec;
+                QJsonValue codecVal = obj["codec"];
+                
+                if (codecVal.isObject()) {
+                    // Direct codec object (test1.json format)
+                    codec.fromJSON(codecVal.toObject());
+                } else if (codecVal.isObject()) {
+                    // Check if it's nested format
+                    QJsonObject codecObj = codecVal.toObject();
+                    if (codecObj.contains("value") && codecObj["value"].isObject()) {
+                        codec.fromJSON(codecObj["value"].toObject());
+                    } else {
+                        codec.fromJSON(codecObj);
+                    }
+                }
+                buddy.codec = codec;
+            }
+            
+            // Add the buddy to the system
             m_lib->m_Buddies->addBuddy(buddy.buddyUrl, buddy.Name, buddy.accUid, buddy.codec.toJSON(), buddy.uid);
+            
+            m_lib->m_Log->writeLog(1, QString("loadBuddies: Successfully loaded buddy: %1 (%2) for account %3")
+                .arg(buddy.Name)
+                .arg(buddy.buddyUrl)
+                .arg(buddy.accUid));
+            
+            loadedBuddies.append(buddy);
         }
     }
     
-    m_lib->m_Log->writeLog(3, QString("loadBuddies: loaded buddies: ") + QString::number(buddyArray.size()));
+    m_lib->m_Log->writeLog(1, QString("loadBuddies: Successfully loaded %1 buddies").arg(loadedBuddies.size()));
     m_BuddiesLoaded = true;
 }
 
@@ -326,65 +661,178 @@ void Settings::saveBuddies()
     const QList<s_buddy>* buddies = m_lib->m_Buddies->getBuddies();
     for (const s_buddy &buddy : *buddies) {
         QJsonObject obj;
+        
+        // Use test1.json format (direct values, lowercase key)
         obj["uid"] = buddy.uid;
         obj["buddyUrl"] = buddy.buddyUrl;
         obj["Name"] = buddy.Name;
         obj["accUid"] = buddy.accUid;
         obj["codec"] = buddy.codec.toJSON();
+        
         buddyArray.append(obj);
     }
     
-    config["Buddies"] = buddyArray;
+    // Use lowercase "buddies" to match test1.json format
+    config["buddies"] = buddyArray;
     saveJsonConfig(config);
 }
 
 void Settings::loadAccConfig()
 {
     QJsonObject config = loadJsonConfig();
-    QJsonArray accountArray = config["AccountConfig"].toArray();
+    
+    // Check if config is empty
+    if (config.isEmpty()) {
+        m_lib->m_Log->writeLog(1, QString("loadAccConfig: No configuration loaded"));
+        return;
+    }
+    
+    QJsonArray accountArray = config["accounts"].toArray();
+    m_lib->m_Log->writeLog(1, QString("loadAccConfig: Found %1 accounts in configuration").arg(accountArray.size()));
 
     for (const QJsonValue &value : accountArray) {
         QJsonObject obj = value.toObject();
-        if (obj.contains("uid")) {
+        
+        if (obj.contains("AccID")) {
             s_account acc;
-            acc.uid = obj["uid"].toString();
-            acc.name = obj["name"].toString();
-            acc.serverURI = obj["serverURI"].toString();
-            acc.user = obj["user"].toString();
-            acc.password = obj["password"].toString();
-            acc.FilePlayPath = obj["FilePlayPath"].toString();
-            acc.FileRecordPath = obj["FileRecordPath"].toString();
-            acc.FileRecordRXonly = obj["FileRecordRXonly"].toBool();
-            acc.fixedJitterBuffer = obj["fixedJitterBuffer"].toBool();
-            acc.fixedJitterBufferValue = obj["fixedJitterBufferValue"].toInt();
-            acc.autoconnectToBuddyUID = obj["autoconnectToBuddyUID"].toString();
-            acc.autoconnectEnable = obj["autoconnectEnable"].toBool();
-            acc.hasDTMFGPIO = obj["hasDTMFGPIO"].toBool();
+            acc.uid = QString::number(obj["AccID"].toInt());
             
-            // Konvertiere CallHistory Array
-            QJsonArray historyArray = obj["CallHistory"].toArray();
-            for (const QJsonValue &histVal : historyArray) {
-                s_callHistory callHist;
-                callHist.callUri = histVal["callUri"].toString();
-                if (histVal.isObject()) {
-                    QJsonObject histObj = histVal.toObject();
-                    // Setze weitere Felder von s_callHistory, falls vorhanden
-                    if (histObj.contains("codec")) {
-                        s_codec codec;
-                        codec.fromJSON(histObj["codec"].toObject());
-                        callHist.codec = codec;
+            // Helper function to load string fields - supports both direct values and nested objects
+            auto loadStringField = [&](const QString &field, const QString &defaultValue = QString()) -> QString {
+                if (!obj.contains(field)) {
+                    return defaultValue;
+                }
+                
+                QJsonValue val = obj[field];
+                if (val.isString()) {
+                    // Direct string value (test1.json format)
+                    QString result = val.toString();
+                    m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (direct)").arg(field).arg(result));
+                    return result;
+                } else if (val.isObject()) {
+                    // Nested object with "value" field (saveAccConfig format)
+                    QJsonObject fieldObj = val.toObject();
+                    if (fieldObj.contains("value")) {
+                        QString result = fieldObj["value"].toString();
+                        m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (nested)").arg(field).arg(result));
+                        return result;
                     }
                 }
-                acc.CallHistory.append(callHist);
+                m_lib->m_Log->writeLog(3, QString("Could not load field %1").arg(field));
+                return defaultValue;
+            };
+            
+            // Helper function to load boolean fields
+            auto loadBoolField = [&](const QString &field, bool defaultValue = false) -> bool {
+                if (!obj.contains(field)) {
+                    return defaultValue;
+                }
+                
+                QJsonValue val = obj[field];
+                if (val.isBool()) {
+                    // Direct boolean value (test1.json format)
+                    bool result = val.toBool();
+                    m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (direct bool)").arg(field).arg(result));
+                    return result;
+                } else if (val.isObject()) {
+                    // Nested object with "value" field
+                    QJsonObject fieldObj = val.toObject();
+                    if (fieldObj.contains("value")) {
+                        bool result = fieldObj["value"].toBool();
+                        m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (nested bool)").arg(field).arg(result));
+                        return result;
+                    }
+                }
+                return defaultValue;
+            };
+            
+            // Helper function to load integer fields
+            auto loadIntField = [&](const QString &field, int defaultValue = 0) -> int {
+                if (!obj.contains(field)) {
+                    return defaultValue;
+                }
+                
+                QJsonValue val = obj[field];
+                if (val.isDouble()) {
+                    // Direct integer value (test1.json format)
+                    int result = val.toInt();
+                    m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (direct int)").arg(field).arg(result));
+                    return result;
+                } else if (val.isObject()) {
+                    // Nested object with "value" field
+                    QJsonObject fieldObj = val.toObject();
+                    if (fieldObj.contains("value")) {
+                        int result = fieldObj["value"].toInt();
+                        m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (nested int)").arg(field).arg(result));
+                        return result;
+                    }
+                }
+                return defaultValue;
+            };
+            
+            // Load all account fields
+            acc.name = loadStringField("name");
+            acc.serverURI = loadStringField("serverURI");
+            acc.user = loadStringField("user");
+            acc.password = loadStringField("password");
+            acc.FilePlayPath = loadStringField("FilePlayPath");
+            acc.FileRecordPath = loadStringField("FileRecordPath");
+            
+            acc.FileRecordRXonly = loadBoolField("FileRecordRXonly");
+            acc.fixedJitterBuffer = loadBoolField("fixedJitterBuffer");
+            acc.fixedJitterBufferValue = loadIntField("fixedJitterBufferValue");
+            acc.autoconnectToBuddyUID = loadStringField("autoconnectToBuddyUID");
+            acc.autoconnectEnable = loadBoolField("autoconnectEnable");
+            acc.hasDTMFGPIO = loadBoolField("hasDTMFGPIO");
+            
+            acc.hasDTMFGPIO = loadBoolField("hasDTMFGPIO");
+            
+            // Load CallHistory Array
+            if (obj.contains("CallHistory")) {
+                QJsonArray historyArray = obj["CallHistory"].toArray();
+                m_lib->m_Log->writeLog(3, QString("Loading %1 call history entries").arg(historyArray.size()));
+                
+                for (const QJsonValue &histVal : historyArray) {
+                    if (histVal.isObject()) {
+                        QJsonObject histObj = histVal.toObject();
+                        s_callHistory callHist;
+                        
+                        callHist.callUri = histObj["callUri"].toString();
+                        
+                        // Load additional fields if present
+                        if (histObj.contains("count")) {
+                            callHist.count = histObj["count"].toInt();
+                        }
+                        if (histObj.contains("duration")) {
+                            callHist.duration = histObj["duration"].toInt();
+                        }
+                        if (histObj.contains("outgoing")) {
+                            callHist.outgoing = histObj["outgoing"].toBool();
+                        }
+                        
+                        // Load codec information if present
+                        if (histObj.contains("codec")) {
+                            s_codec codec;
+                            codec.fromJSON(histObj["codec"].toObject());
+                            callHist.codec = codec;
+                        }
+                        
+                        acc.CallHistory.append(callHist);
+                    }
+                }
             }
             
+            // Create the account
             m_lib->m_Accounts->createAccount(acc.name, acc.serverURI, acc.user, acc.password, 
                                            acc.FilePlayPath, acc.FileRecordPath, acc.FileRecordRXonly,
                                            acc.fixedJitterBuffer, acc.fixedJitterBufferValue,
                                            acc.autoconnectToBuddyUID, acc.autoconnectEnable,
                                            acc.hasDTMFGPIO, acc.CallHistory, acc.uid);
                                            
-            m_lib->m_Log->writeLog(3, QString("loadAccConfig: added Account from config file: ") + acc.name);
+            m_lib->m_Log->writeLog(1, QString("loadAccConfig: Successfully loaded account: %1 (user: %2, server: %3)")
+                .arg(acc.name)
+                .arg(acc.user) 
+                .arg(acc.serverURI));
         }
     }
     m_AccountsLoaded = true;
@@ -401,19 +849,83 @@ void Settings::saveAccConfig()
     const QList<s_account>* accounts = m_lib->m_Accounts->getAccounts();
     for (const s_account &acc : *accounts) {
         QJsonObject obj;
-        obj["uid"] = acc.uid;
-        obj["name"] = acc.name;
-        obj["serverURI"] = acc.serverURI;
-        obj["user"] = acc.user;
-        obj["password"] = acc.password;
-        obj["FilePlayPath"] = acc.FilePlayPath;
-        obj["FileRecordPath"] = acc.FileRecordPath;
-        obj["FileRecordRXonly"] = acc.FileRecordRXonly;
-        obj["fixedJitterBuffer"] = acc.fixedJitterBuffer;
-        obj["fixedJitterBufferValue"] = static_cast<int>(acc.fixedJitterBufferValue);
-        obj["autoconnectToBuddyUID"] = acc.autoconnectToBuddyUID;
-        obj["autoconnectEnable"] = acc.autoconnectEnable;
-        obj["hasDTMFGPIO"] = acc.hasDTMFGPIO;
+        obj["AccID"] = acc.uid.toInt();
+
+        if (!acc.name.isEmpty()) {
+            QJsonObject nameObj;
+            nameObj["type"] = 1;
+            nameObj["value"] = acc.name;
+            obj["name"] = nameObj;
+        }
+
+        if (!acc.serverURI.isEmpty()) {
+            QJsonObject serverObj;
+            serverObj["type"] = 1;
+            serverObj["value"] = acc.serverURI;
+            obj["serverURI"] = serverObj;
+        }
+
+        if (!acc.user.isEmpty()) {
+            QJsonObject userObj;
+            userObj["type"] = 1;
+            userObj["value"] = acc.user;
+            obj["user"] = userObj;
+        }
+
+        if (!acc.password.isEmpty()) {
+            QJsonObject pwdObj;
+            pwdObj["type"] = 1;
+            pwdObj["value"] = acc.password;
+            obj["password"] = pwdObj;
+        }
+
+        // FilePlayPath als String
+        QJsonObject playPathObj;
+        playPathObj["type"] = 1; // String type
+        playPathObj["value"] = acc.FilePlayPath;
+        obj["FilePlayPath"] = playPathObj;
+
+        // FileRecordPath als String
+        QJsonObject recordPathObj;
+        recordPathObj["type"] = 1; // String type
+        recordPathObj["value"] = acc.FileRecordPath;
+        obj["FileRecordPath"] = recordPathObj;
+
+        // FileRecordRXonly als Boolean
+        QJsonObject rxOnlyObj;
+        rxOnlyObj["type"] = 3; // Boolean type
+        rxOnlyObj["value"] = acc.FileRecordRXonly;
+        obj["FileRecordRXonly"] = rxOnlyObj;
+
+        // fixedJitterBuffer als Boolean
+        QJsonObject jitterObj;
+        jitterObj["type"] = 3; // Boolean type
+        jitterObj["value"] = acc.fixedJitterBuffer;
+        obj["fixedJitterBuffer"] = jitterObj;
+
+        // fixedJitterBufferValue als Integer
+        QJsonObject jitterValObj;
+        jitterValObj["type"] = 2; // Integer type
+        jitterValObj["value"] = static_cast<int>(acc.fixedJitterBufferValue);
+        obj["fixedJitterBufferValue"] = jitterValObj;
+
+        // autoconnectToBuddyUID als String
+        QJsonObject autoconnectUidObj;
+        autoconnectUidObj["type"] = 1; // String type
+        autoconnectUidObj["value"] = acc.autoconnectToBuddyUID;
+        obj["autoconnectToBuddyUID"] = autoconnectUidObj;
+
+        // autoconnectEnable als Boolean
+        QJsonObject autoconnectObj;
+        autoconnectObj["type"] = 3; // Boolean type
+        autoconnectObj["value"] = acc.autoconnectEnable;
+        obj["autoconnectEnable"] = autoconnectObj;
+
+        // hasDTMFGPIO als Boolean
+        QJsonObject dtmfObj;
+        dtmfObj["type"] = 3; // Boolean type
+        dtmfObj["value"] = acc.hasDTMFGPIO;
+        obj["hasDTMFGPIO"] = dtmfObj;
         
         // Konvertiere CallHistory in JSON Array
         QJsonArray historyArray;
@@ -428,21 +940,31 @@ void Settings::saveAccConfig()
         accountArray.append(obj);
     }
     
-    config["AccountConfig"] = accountArray;
+    config["accounts"] = accountArray;
     saveJsonConfig(config);
 }
 
 void Settings::loadWebRTCChannelConfig() {
     QList<s_webrtc_channel> loadedChannels;
-    QSettings settings("awah", "AWAHsipConfig");
-    loadedChannels = settings.value("WebRTCChannelConfig").value<QList<s_webrtc_channel>>();
-    for (int i = 0; i < loadedChannels.count(); ++i) {
-        m_lib->m_WebRTCChannels->createChannel(
-            loadedChannels.at(i).id,
-            loadedChannels.at(i).description,
-            loadedChannels.at(i).enabled
-        );
-        m_lib->m_Log->writeLog(3, QString("loadWebRTCChannelConfig: added WebRTC channel from config file: ") + loadedChannels.at(i).id);
+    
+    QJsonObject config = loadJsonConfig();
+    QJsonArray channelArray = config["WebRTCChannels"].toArray();
+    
+    for (const QJsonValue &value : channelArray) {
+        QJsonObject obj = value.toObject();
+        if (obj.contains("id")) {
+            s_webrtc_channel channel;
+            channel.id = obj["id"].toObject()["value"].toString();
+            channel.description = obj["description"].toObject()["value"].toString();
+            channel.enabled = obj["enabled"].toObject()["value"].toBool();
+            
+            m_lib->m_WebRTCChannels->createChannel(
+                channel.id,
+                channel.description,
+                channel.enabled
+            );
+            m_lib->m_Log->writeLog(3, QString("loadWebRTCChannelConfig: added WebRTC channel from config file: ") + channel.id);
+        }
     }
     m_WebRTCChannelsLoaded = true;
 }
@@ -450,9 +972,37 @@ void Settings::loadWebRTCChannelConfig() {
 void Settings::saveWebRTCChannelConfig() {
     if (!m_WebRTCChannelsLoaded)
         return;
-    QSettings settings("awah", "AWAHsipConfig");
-    settings.setValue("WebRTCChannelConfig", QVariant::fromValue(*m_lib->m_WebRTCChannels->getChannels()));
-    settings.sync();
+        
+    QJsonObject config = loadJsonConfig();
+    QJsonArray channelArray;
+    
+    const QList<s_webrtc_channel>* channels = m_lib->m_WebRTCChannels->getChannels();
+    for (const s_webrtc_channel &channel : *channels) {
+        QJsonObject obj;
+        
+        // ID als String
+        QJsonObject idObj;
+        idObj["type"] = 1; // String type
+        idObj["value"] = channel.id;
+        obj["id"] = idObj;
+        
+        // Description als String
+        QJsonObject descObj;
+        descObj["type"] = 1; // String type
+        descObj["value"] = channel.description;
+        obj["description"] = descObj;
+        
+        // Enabled als Boolean
+        QJsonObject enabledObj;
+        enabledObj["type"] = 3; // Boolean type
+        enabledObj["value"] = channel.enabled;
+        obj["enabled"] = enabledObj;
+        
+        channelArray.append(obj);
+    }
+    
+    config["WebRTCChannels"] = channelArray;
+    saveJsonConfig(config);
 }
 
 int Settings::loadAudioRoutes()
@@ -463,24 +1013,58 @@ int Settings::loadAudioRoutes()
     const QMap<int, QString> destAudioSlotMap = m_lib->m_AudioRouter->getDestAudioSlotMap();
     
     QJsonObject config = loadJsonConfig();
-    QJsonArray routeArray = config["AudioRoutes"].toArray();
+    
+    // Check if config is empty
+    if (config.isEmpty()) {
+        m_lib->m_Log->writeLog(1, QString("loadAudioRoutes: No configuration loaded"));
+        return PJ_SUCCESS;
+    }
+    
+    // Try to get audioRoutes array (test1.json format uses lowercase)
+    QJsonArray routeArray = config["audioRoutes"].toArray();
+    
+    // If audioRoutes doesn't exist, try AudioRoutes as fallback  
+    if (routeArray.isEmpty()) {
+        routeArray = config["AudioRoutes"].toArray();
+    }
+    
+    m_lib->m_Log->writeLog(1, QString("loadAudioRoutes: Found %1 routes in configuration").arg(routeArray.size()));
     
     m_lib->m_AudioRouter->clearAllOfflineAudioRoutes();
     
-    // Konvertiere JSON Array zu QList<s_audioRoutes>
+    // Convert JSON Array to QList<s_audioRoutes>
     for (const QJsonValue &value : routeArray) {
         QJsonObject obj = value.toObject();
+        
         if (obj.contains("srcDevName") && obj.contains("destDevName")) {
             s_audioRoutes route;
+            
+            // Direct values (test1.json format) - no nested objects
             route.srcDevName = obj["srcDevName"].toString();
             route.destDevName = obj["destDevName"].toString();
-            route.level = obj["level"].toDouble();
-            route.persistant = obj["persistant"].toBool();
+            route.level = obj.contains("level") ? obj["level"].toDouble() : 0.0;
+            route.persistant = obj.contains("persistant") ? obj["persistant"].toBool() : true;
+            
+            // Optional fields that might be present
+            if (obj.contains("srcSlot")) {
+                // srcSlot is informational from the saved state, we'll recalculate it
+            }
+            if (obj.contains("destSlot")) {
+                // destSlot is informational from the saved state, we'll recalculate it  
+            }
+            
             loadedRoutes.append(route);
+            m_lib->m_Log->writeLog(3, QString("loadAudioRoutes: Loaded route %1 -> %2 (level: %3, persistent: %4)")
+                .arg(route.srcDevName)
+                .arg(route.destDevName) 
+                .arg(route.level)
+                .arg(route.persistant));
         }
     }
     
-    m_lib->m_Log->writeLog(3, QString("loadAudioRoutes: loaded routes: ") + QString::number(loadedRoutes.count()));
+    m_lib->m_Log->writeLog(1, QString("loadAudioRoutes: Successfully loaded %1 audio routes").arg(loadedRoutes.count()));
+    
+    // Apply the loaded routes
     for(auto& route : loadedRoutes ){
         route.srcSlot = srcAudioSlotMap.key(route.srcDevName, -1);
         route.destSlot = destAudioSlotMap.key(route.destDevName, -1);
@@ -495,9 +1079,11 @@ int Settings::loadAudioRoutes()
             if(check != PJ_SUCCESS)
                 status = -1;
             else
-                m_lib->m_Log->writeLog(3,QString("loadAudioRoutes: added AudioRoute from: ") + route.srcDevName + " to " + route.destDevName);
+                m_lib->m_Log->writeLog(3,QString("loadAudioRoutes: Successfully connected: ") + route.srcDevName + " to " + route.destDevName);
         } else {
             m_lib->m_AudioRouter->addOfflineAudioRoute(route);
+            m_lib->m_Log->writeLog(2, QString("loadAudioRoutes: Route offline (devices not found): %1 -> %2")
+                .arg(route.srcDevName).arg(route.destDevName));
             status = -1;
         }
     }
@@ -510,7 +1096,6 @@ int Settings::saveAudioRoutes()
 {
     if(!m_AudioRoutesLoaded)
         return PJ_SUCCESS;
-        
     QJsonObject config = loadJsonConfig();
     QJsonArray routeArray;
     QList<s_audioRoutes> routesToSave;
@@ -548,76 +1133,110 @@ int Settings::saveAudioRoutes()
         }
     }
     
-    // Konvertiere zu JSON
+    // Convert to JSON using test1.json format (direct values, lowercase key)
     for(const auto& route : routesToSave) {
         QJsonObject obj;
         obj["srcDevName"] = route.srcDevName;
         obj["destDevName"] = route.destDevName;
+        obj["srcSlot"] = route.srcSlot;
+        obj["destSlot"] = route.destSlot;
         obj["level"] = route.level;
         obj["persistant"] = route.persistant;
         routeArray.append(obj);
     }
     
-    config["AudioRoutes"] = routeArray;
+    // Use lowercase "audioRoutes" to match test1.json format
+    config["audioRoutes"] = routeArray;
     saveJsonConfig(config);
     return PJ_SUCCESS;
 }
 
 void Settings::saveCustomSourceNames()
 {
-    QSettings settings("awah", "AWAHsipConfig");
-    settings.remove("CustomSourceNames");
-    settings.beginGroup("CustomSourceNames");
-    QMap<QString,QString> srcLables = m_lib->m_AudioRouter->getCustomSourceLabels();
-    QMap<QString, QString>::const_iterator i = srcLables.constBegin();
-    while (i != srcLables.constEnd()) {
-         settings.setValue(i.key(), i.value());
-         ++i;
-     }
-    settings.endGroup();
-    settings.sync();
+    QJsonObject config = loadJsonConfig();
+    QJsonObject audioSettings;
+    if (config.contains("AudioSettings")) {
+        audioSettings = config["AudioSettings"].toObject();
+    }
+    
+    QMap<QString,QString> srcLabels = m_lib->m_AudioRouter->getCustomSourceLabels();
+    for (auto i = srcLabels.constBegin(); i != srcLabels.constEnd(); ++i) {
+        QJsonObject labelObj;
+        labelObj["type"] = 1;  // String type wie in test1.json
+        labelObj["value"] = i.value();
+        audioSettings[QString("CustomSource_%1").arg(i.key())] = labelObj;
+    }
+    
+    config["AudioSettings"] = audioSettings;
+    saveJsonConfig(config);
+    
+    m_lib->m_Log->writeLog(3, QString("saveCustomSourceNames: saved %1 custom source labels").arg(srcLabels.size()));
 }
 
 void Settings::loadCustomSourceNames()
 {
-    QSettings settings("awah", "AWAHsipConfig");
-    settings.beginGroup("CustomSourceNames");
-    QMap<QString,QString> srcLables;
-    QStringList keys = settings.childKeys();
-    foreach (QString key, keys) {
-         srcLables[key] = settings.value(key).toString();
+    QJsonObject config = loadJsonConfig();
+    QMap<QString,QString> srcLabels;
+    
+    if (config.contains("AudioSettings")) {
+        QJsonObject audioSettings = config["AudioSettings"].toObject();
+        for (auto it = audioSettings.constBegin(); it != audioSettings.constEnd(); ++it) {
+            if (it.key().startsWith("CustomSource_")) {
+                QString sourceKey = it.key().mid(13); // Remove "CustomSource_" prefix
+                QJsonObject labelObj = it.value().toObject();
+                if (labelObj.contains("value")) {
+                    srcLabels[sourceKey] = labelObj["value"].toString();
+                }
+            }
+        }
     }
-    settings.endGroup();
-    m_lib->m_Log->writeLog(3,QString("loadCustomSourceNames: custom source lables loaded"));
-    m_lib->m_AudioRouter->setCustomSourceLables(srcLables);
+    
+    m_lib->m_Log->writeLog(3, QString("loadCustomSourceNames: loaded %1 custom source labels").arg(srcLabels.size()));
+    m_lib->m_AudioRouter->setCustomSourceLables(srcLabels);
 }
 
 void Settings::saveCustomDestinationNames()
 {
-    QSettings settings("awah", "AWAHsipConfig");
-    settings.remove("CustomDestinationNames");
-    settings.beginGroup("CustomDestinationNames");
-    QMap<QString,QString> dstLables = m_lib->m_AudioRouter->getCustomDestLables();
-    QMap<QString, QString>::const_iterator i = dstLables.constBegin();
-    while (i != dstLables.constEnd()) {
-         settings.setValue(i.key(), i.value());
-         ++i;
-     }
-    settings.endGroup();
-    settings.sync();
+    QJsonObject config = loadJsonConfig();
+    QJsonObject audioSettings;
+    if (config.contains("AudioSettings")) {
+        audioSettings = config["AudioSettings"].toObject();
+    }
+    
+    QMap<QString,QString> dstLabels = m_lib->m_AudioRouter->getCustomDestLables();
+    for (auto i = dstLabels.constBegin(); i != dstLabels.constEnd(); ++i) {
+        QJsonObject labelObj;
+        labelObj["type"] = 1;  // String type wie in test1.json
+        labelObj["value"] = i.value();
+        audioSettings[QString("CustomDest_%1").arg(i.key())] = labelObj;
+    }
+    
+    config["AudioSettings"] = audioSettings;
+    saveJsonConfig(config);
+    
+    m_lib->m_Log->writeLog(3, QString("saveCustomDestinationNames: saved %1 custom destination labels").arg(dstLabels.size()));
 }
 
 void Settings::loadCustomDestinationNames()
 {
-    QSettings settings("awah", "AWAHsipConfig");
-    settings.beginGroup("CustomDestinationNames");
-    QMap<QString,QString> dstLables;
-    QStringList keys = settings.childKeys();
-    foreach (QString key, keys) {
-         dstLables[key] = settings.value(key).toString();
+    QJsonObject config = loadJsonConfig();
+    QMap<QString,QString> dstLabels;
+    
+    if (config.contains("AudioSettings")) {
+        QJsonObject audioSettings = config["AudioSettings"].toObject();
+        for (auto it = audioSettings.constBegin(); it != audioSettings.constEnd(); ++it) {
+            if (it.key().startsWith("CustomDest_")) {
+                QString destKey = it.key().mid(11); // Remove "CustomDest_" prefix
+                QJsonObject labelObj = it.value().toObject();
+                if (labelObj.contains("value")) {
+                    dstLabels[destKey] = labelObj["value"].toString();
+                }
+            }
+        }
     }
-    settings.endGroup();
-    m_lib->m_AudioRouter->setCustomDestinationLables(dstLables);
+    
+    m_lib->m_Log->writeLog(3, QString("loadCustomDestinationNames: loaded %1 custom destination labels").arg(dstLabels.size()));
+    m_lib->m_AudioRouter->setCustomDestinationLables(dstLabels);
 }
 
 void Settings::loadSettings()                                           // todo check if library is alredy running and restart if true
