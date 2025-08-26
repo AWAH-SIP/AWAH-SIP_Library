@@ -41,7 +41,13 @@ QJsonObject Settings::loadJsonConfig()
     // Load from AWAHsipConfig.ini file using QSettings path (contains pure JSON)
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, "awah", "AWAHsipConfig");
     QString settingsPath = settings.fileName();
-    m_lib->m_Log->writeLog(1, QString("Loading JSON config from: ") + settingsPath);
+
+    // Log only once on first call
+    static bool firstCall = true;
+    if (firstCall) {
+        m_lib->m_Log->writeLog(3, QString("Loading JSON config from: ") + settingsPath);
+        firstCall = false;
+    }
 
     QFile file(settingsPath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -50,14 +56,10 @@ QJsonObject Settings::loadJsonConfig()
         return QJsonObject();
     }
 
-    // Read the entire content
+    // Read the entire content and parse as json
     QByteArray jsonData = file.readAll();
     file.close();
 
-    m_lib->m_Log->writeLog(1, QString("File size: %1 bytes").arg(jsonData.size()));
-    m_lib->m_Log->writeLog(1, QString("First part of content: ") + QString(jsonData.left(200)));
-
-    // Parse as JSON
     QJsonParseError parseError;
     QJsonDocument doc = QJsonDocument::fromJson(jsonData, &parseError);
     if (doc.isNull()) {
@@ -66,10 +68,7 @@ QJsonObject Settings::loadJsonConfig()
             .arg(parseError.errorString()));
         return QJsonObject();
     }
-
     QJsonObject obj = doc.object();
-    m_lib->m_Log->writeLog(1, QString("JSON successfully loaded. Found keys: ") + 
-        obj.keys().join(", "));
     
     return obj;
 }
@@ -78,7 +77,7 @@ void Settings::saveJsonConfig(const QJsonObject &newConfig)
 {
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, "awah", "AWAHsipConfig");
     QString settingsPath = settings.fileName();
-    m_lib->m_Log->writeLog(1, QString("Saving config to: ") + settingsPath);
+
     
     // Load existing configuration
     QJsonObject existingConfig;
@@ -88,7 +87,6 @@ void Settings::saveJsonConfig(const QJsonObject &newConfig)
         QJsonDocument doc = QJsonDocument::fromJson(data);
         if (!doc.isNull() && doc.isObject()) {
             existingConfig = doc.object();
-            m_lib->m_Log->writeLog(1, QString("Loaded existing config with keys: ") + existingConfig.keys().join(", "));
         }
         readFile.close();
     }
@@ -98,7 +96,6 @@ void Settings::saveJsonConfig(const QJsonObject &newConfig)
         existingConfig[it.key()] = it.value();
     }
     
-    m_lib->m_Log->writeLog(1, QString("Merged config has keys: ") + existingConfig.keys().join(", "));
     
     // Save the merged configuration
     QJsonDocument doc(existingConfig);
@@ -111,7 +108,7 @@ void Settings::saveJsonConfig(const QJsonObject &newConfig)
     writeFile.write(doc.toJson(QJsonDocument::Indented));
     writeFile.close();
     
-    m_lib->m_Log->writeLog(1, QString("Configuration successfully saved to: ") + settingsPath);
+    // m_lib->m_Log->writeLog(4, QString("Configuration successfully saved to: ") + settingsPath);
 }
 
 void Settings::loadIODevConfig()
@@ -189,14 +186,14 @@ void Settings::loadIODevConfig()
             }
             
             loadedDevices.append(device);
-            m_lib->m_Log->writeLog(3, QString("loadIODevConfig: Loaded device: %1 -> %2 (type: %3)")
+            m_lib->m_Log->writeLog(5, QString("loadIODevConfig: Loaded device: %1 -> %2 (type: %3)")
                 .arg(device.inputname)
                 .arg(device.outputame)
                 .arg(device.devicetype));
         }
     }
 
-    m_lib->m_Log->writeLog(3, QString("loadIODevConfig: Settings loaded from JSON file"));
+
     QString MasterClockDev = getMasterClock();
 
     bool clockdevFound = false;
@@ -206,7 +203,7 @@ void Settings::loadIODevConfig()
                 recordDevId = m_lib->m_AudioRouter->getSoundDevID(loadedDevices.at(i).inputname);
                 playbackDevId = m_lib->m_AudioRouter->getSoundDevID(loadedDevices.at(i).outputame);
                 m_lib->m_AudioRouter->AddClockingDevice(recordDevId,playbackDevId, loadedDevices.at(i).uid);
-                m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added Master clocking sound device form config file: ") + loadedDevices.at(i).inputname + " " + loadedDevices.at(i).outputame);
+                // m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added Master clocking sound device form config file: ") + loadedDevices.at(i).inputname + " " + loadedDevices.at(i).outputame);
                 if(recordDevId > -1){
                     clockdevFound = true;
                 }
@@ -225,7 +222,7 @@ void Settings::loadIODevConfig()
             playbackDevId = m_lib->m_AudioRouter->getSoundDevID(loadedDevices.at(i).outputame);
             if (recordDevId != -1 && playbackDevId !=-1){
                 m_lib->m_AudioRouter->addAudioDevice(recordDevId,playbackDevId, loadedDevices.at(i).uid);
-                m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added sound device from config file: ") + loadedDevices.at(i).inputname + " " + loadedDevices.at(i).outputame);
+                m_lib->m_Log->writeLog(4,QString("loadIODevConfig: added sound device from config file: ") + loadedDevices.at(i).inputname + " " + loadedDevices.at(i).outputame);
             }
             else{
                 m_lib->m_AudioRouter->setAudioDeviceToOffline(loadedDevices.at(i).inputname,loadedDevices.at(i).outputame, loadedDevices.at(i).uid);
@@ -234,16 +231,16 @@ void Settings::loadIODevConfig()
         }
         if(loadedDevices.at(i).devicetype == TestToneGenerator){
             m_lib->m_AudioRouter->addToneGen(loadedDevices.at(i).genfrequency, loadedDevices.at(i).uid);
-            m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added Generator from config file: ") + loadedDevices.at(i).inputname);
+            m_lib->m_Log->writeLog(4,QString("loadIODevConfig: added Generator from config file: ") + loadedDevices.at(i).inputname);
 
         }
         if(loadedDevices.at(i).devicetype == FilePlayer){
             m_lib->m_AudioRouter->addFilePlayer(loadedDevices.at(i).inputname, loadedDevices.at(i).path, loadedDevices.at(i).uid);
-            m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added FilePlayer from config file: ") + loadedDevices.at(i).inputname);
+            m_lib->m_Log->writeLog(4,QString("loadIODevConfig: added FilePlayer from config file: ") + loadedDevices.at(i).inputname);
         }
         if(loadedDevices.at(i).devicetype == FileRecorder){
             m_lib->m_AudioRouter->addFileRecorder(loadedDevices.at(i).path, loadedDevices.at(i).uid);
-            m_lib->m_Log->writeLog(3,QString("loadIODevConfig: added FileRecorder from config file: ") + loadedDevices.at(i).outputame);
+            m_lib->m_Log->writeLog(4,QString("loadIODevConfig: added FileRecorder from config file: ") + loadedDevices.at(i).outputame);
         }
     }
     m_IoDevicesLoaded = true;
@@ -263,7 +260,6 @@ void Settings::saveIODevConfig()
     for (const s_IODevices &device : *devices) {
         QJsonObject obj;
         
-        // Use the format consistent with test1.json
         obj["uid"] = device.uid;
         obj["devicetype"] = static_cast<int>(device.devicetype);
         obj["inputname"] = device.inputname;
@@ -274,7 +270,6 @@ void Settings::saveIODevConfig()
         deviceArray.append(obj);
     }
     
-    // Save as ioDevices to match test1.json format
     config["ioDevices"] = deviceArray;
     
     // Save updated configuration
@@ -300,7 +295,7 @@ void Settings::loadIODevConfigLater()
         deviceArray = config["GpioDevConfig"].toArray();
     }
 
-    m_lib->m_Log->writeLog(3, QString("loadIODevConfigLater: Found %1 devices total, filtering for GPIO devices").arg(deviceArray.size()));
+    m_lib->m_Log->writeLog(5, QString("loadIODevConfigLater: Found %1 devices total, filtering for GPIO devices").arg(deviceArray.size()));
 
     // Convert JSON array to QList<s_IODevices>, filtering for GPIO devices
     for (const QJsonValue &value : deviceArray) {
@@ -345,72 +340,34 @@ void Settings::loadIODevConfigLater()
                 device.inChannelCount = obj.contains("inChannelCount") ? obj["inChannelCount"].toInt() : 0;
                 device.outChannelCount = obj.contains("outChannelCount") ? obj["outChannelCount"].toInt() : 0;
                 
-                // Set default channel counts for specific device types if not specified OR if both are 0
-                if ((device.inChannelCount == 0 && device.outChannelCount == 0)) {
-                    switch(static_cast<DeviceType>(deviceType)) {
-                        case VirtualGpioDevice:
-                            device.inChannelCount = 8;   // Default 8 inputs
-                            device.outChannelCount = 8;  // Default 8 outputs
-                            break;
-                        case LogicAndGpioDevice:
-                        case LogicOrGpioDevice:
-                            device.inChannelCount = 1;   // Logic devices have 1 input
-                            device.outChannelCount = 2;  // Default 2 outputs
-                            break;
-                        case AudioCrosspointDevice:
-                            device.inChannelCount = 1;   // Crosspoint 1 input
-                            device.outChannelCount = 1;  // Crosspoint 1 output
-                            break;
-                        case LinuxGpioDevice:
-                            device.inChannelCount = 4;   // Default 4 inputs
-                            device.outChannelCount = 4;  // Default 4 outputs
-                            break;
-                        default:
-                            device.inChannelCount = 1;
-                            device.outChannelCount = 1;
-                            break;
-                    }
-                    
-                    m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: Set default channels for %1: in=%2, out=%3")
-                        .arg(deviceTypeName)
-                        .arg(device.inChannelCount)
-                        .arg(device.outChannelCount));
-                } else {
-                    // Apply minimum values to prevent 0-channel devices
-                    if (device.inChannelCount == 0 && device.outChannelCount > 0) {
-                        // Output-only device (like some Virtual GPIO with only outputs)
-                        m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: %1 is output-only device (in=0, out=%2)")
-                            .arg(deviceTypeName).arg(device.outChannelCount));
-                    } else if (device.inChannelCount > 0 && device.outChannelCount == 0) {
-                        // Input-only device
-                        m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: %1 is input-only device (in=%2, out=0)")
-                            .arg(deviceTypeName).arg(device.inChannelCount));
-                    }
+
+                // Log channel configuration for info
+                if (device.inChannelCount == 0 && device.outChannelCount > 0) {
+                    m_lib->m_Log->writeLog(5,QString("loadGpioDevManager: %1 configured as output-only device")
+                        .arg(deviceTypeName));
+                } else if (device.inChannelCount > 0 && device.outChannelCount == 0) {
+                    m_lib->m_Log->writeLog(5,QString("loadGpioDevManager: %1 configured as input-only device")
+                        .arg(deviceTypeName));
                 }
                 
                 loadedDevices.append(device);
                 
-                m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: calling createGeneric for %1 device: %2 (uid: %3, in: %4, out: %5)")
-                    .arg(deviceTypeName)
-                    .arg(device.outputame.isEmpty() ? device.inputname : device.outputame)
-                    .arg(device.uid)
-                    .arg(device.inChannelCount)
-                    .arg(device.outChannelCount));
-                
                 GpioDevice* createdDevice = m_lib->m_GpioDeviceManager->createGeneric(device);
                 
                 if(createdDevice) {
-                    m_lib->m_Log->writeLog(3,QString("loadGpioDevManager: SUCCESS - createGeneric returned device for %1")
-                        .arg(device.uid));
+                    m_lib->m_Log->writeLog(4,QString("loadGpioDevManager: Loaded %1 device: %2")
+                        .arg(deviceTypeName)
+                        .arg(device.outputame.isEmpty() ? device.inputname : device.outputame));
                 } else {
-                    m_lib->m_Log->writeLog(1,QString("loadGpioDevManager: ERROR - createGeneric returned nullptr for %1")
+                    m_lib->m_Log->writeLog(2,QString("loadGpioDevManager: ERROR - Failed to create %1 device: %2")
+                        .arg(deviceTypeName)
                         .arg(device.uid));
                 }
             }
         }
     }
     
-    m_lib->m_Log->writeLog(3, QString("loadIODevConfigLater: Successfully loaded %1 GPIO devices").arg(loadedDevices.size()));
+    // m_lib->m_Log->writeLog(3, QString("loadIODevConfigLater: Successfully loaded %1 GPIO devices").arg(loadedDevices.size()));
     m_GpioDevicesLoaded = true;
     loadGpioRoutes();
 }
@@ -447,7 +404,7 @@ void Settings::saveGpioDevConfig()
     for (const s_IODevices &device : gpioDevices) {
         QJsonObject obj;
         
-        // Core device fields (compatible with test1.json format)
+
         obj["uid"] = device.uid;
         obj["devicetype"] = static_cast<int>(device.devicetype);
         obj["inputname"] = device.inputname;
@@ -459,7 +416,7 @@ void Settings::saveGpioDevConfig()
         obj["inChannelCount"] = static_cast<int>(device.inChannelCount);
         obj["outChannelCount"] = static_cast<int>(device.outChannelCount);
         
-        // Device IDs (required for test1.json compatibility)
+
         obj["PBDevID"] = device.PBDevID;
         obj["RecDevID"] = device.RecDevID;
         
@@ -475,11 +432,6 @@ void Settings::saveGpioDevConfig()
         
         newDeviceArray.append(obj);
         
-        m_lib->m_Log->writeLog(3, QString("saveGpioDevConfig: Saved GPIO device '%1' (type: %2, in: %3, out: %4)")
-            .arg(device.outputame.isEmpty() ? device.inputname : device.outputame)
-            .arg(device.devicetype)
-            .arg(device.inChannelCount)
-            .arg(device.outChannelCount));
     }
     
     // Update ioDevices array with merged devices (audio + GPIO)
@@ -488,7 +440,7 @@ void Settings::saveGpioDevConfig()
     // Save updated configuration
     saveJsonConfig(config);
     
-    m_lib->m_Log->writeLog(1, QString("saveGpioDevConfig: Successfully saved %1 GPIO devices to ioDevices array").arg(gpioDevices.size()));
+    // m_lib->m_Log->writeLog(3, QString("saveGpioDevConfig: Successfully saved %1 GPIO devices to ioDevices array").arg(gpioDevices.size()));
 }
 
 void Settings::loadGpioRoutes()
@@ -499,15 +451,15 @@ void Settings::loadGpioRoutes()
     QJsonArray routeArray;
     if (config.contains("gpioRoutes")) {
         routeArray = config["gpioRoutes"].toArray();
-        m_lib->m_Log->writeLog(3, QString("loadGpioRoutes: found gpioRoutes array"));
+        // m_lib->m_Log->writeLog(5, QString("loadGpioRoutes: found gpioRoutes array"));
     } else if (config.contains("GpioRoutes")) {
         routeArray = config["GpioRoutes"].toArray();
-        m_lib->m_Log->writeLog(3, QString("loadGpioRoutes: found GpioRoutes array"));
+        // m_lib->m_Log->writeLog(5, QString("loadGpioRoutes: found GpioRoutes array"));
     } else {
-        m_lib->m_Log->writeLog(3, QString("loadGpioRoutes: no GPIO routes found in config"));
+        m_lib->m_Log->writeLog(4, QString("loadGpioRoutes: no GPIO routes found in config"));
     }
 
-    m_lib->m_Log->writeLog(3, QString("loadGpioRoutes: loaded routes: ") + QString::number(routeArray.size()));
+    // m_lib->m_Log->writeLog(3, QString("loadGpioRoutes: loaded %1 routes").arg(routeArray.size()));
 
     for (const QJsonValue &value : routeArray) {
         QJsonObject obj = value.toObject();
@@ -517,7 +469,7 @@ void Settings::loadGpioRoutes()
             bool inverted = obj["inverted"].toBool();
             bool persistant = obj["persistant"].toBool();
             
-            m_lib->m_Log->writeLog(3, QString("loadGpioRoutes: loading route from %1 to %2").arg(srcSlotId, destSlotId));
+            // m_lib->m_Log->writeLog(5, QString("loadGpioRoutes: loading route from %1 to %2").arg(srcSlotId, destSlotId));
             GpioRouter::instance()->connectGpioPort(srcSlotId, destSlotId, inverted, persistant);
         }
     }
@@ -541,7 +493,7 @@ void Settings::saveGpioRoutes()
             obj["inverted"] = route.inverted;
             obj["persistant"] = route.persistant;
             routeArray.append(obj);
-            m_lib->m_Log->writeLog(3, QString("saveGpioRoutes: Saving route %1 -> %2").arg(route.srcSlotId, route.destSlotId));
+            // m_lib->m_Log->writeLog(5, QString("saveGpioRoutes: Saving route %1 -> %2").arg(route.srcSlotId, route.destSlotId));
         }
     }
     
@@ -585,14 +537,14 @@ void Settings::loadBuddies()
             if (val.isString()) {
                 // Direct string value (test1.json format)
                 QString result = val.toString();
-                m_lib->m_Log->writeLog(3, QString("Loaded buddy %1: %2 (direct)").arg(field).arg(result));
+                // m_lib->m_Log->writeLog(5, QString("Loaded buddy %1: %2 (direct)").arg(field).arg(result));
                 return result;
             } else if (val.isObject()) {
                 // Nested object with "value" field (saveBuddies format)
                 QJsonObject fieldObj = val.toObject();
                 if (fieldObj.contains("value")) {
                     QString result = fieldObj["value"].toString();
-                    m_lib->m_Log->writeLog(3, QString("Loaded buddy %1: %2 (nested)").arg(field).arg(result));
+                    // m_lib->m_Log->writeLog(5, QString("Loaded buddy %1: %2 (nested)").arg(field).arg(result));
                     return result;
                 }
             }
@@ -707,14 +659,16 @@ void Settings::loadAccConfig()
                 if (val.isString()) {
                     // Direct string value (test1.json format)
                     QString result = val.toString();
-                    m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (direct)").arg(field).arg(result));
+                    // Account detail logging removed to reduce spam
+                    // m_lib->m_Log->writeLog(5, QString("Loaded %1: %2 (direct)").arg(field).arg(result));
                     return result;
                 } else if (val.isObject()) {
                     // Nested object with "value" field (saveAccConfig format)
                     QJsonObject fieldObj = val.toObject();
                     if (fieldObj.contains("value")) {
                         QString result = fieldObj["value"].toString();
-                        m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (nested)").arg(field).arg(result));
+                        // Account detail logging removed to reduce spam
+                        // m_lib->m_Log->writeLog(5, QString("Loaded %1: %2 (nested)").arg(field).arg(result));
                         return result;
                     }
                 }
@@ -732,14 +686,16 @@ void Settings::loadAccConfig()
                 if (val.isBool()) {
                     // Direct boolean value (test1.json format)
                     bool result = val.toBool();
-                    m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (direct bool)").arg(field).arg(result));
+                    // Account detail logging removed to reduce spam
+                    // m_lib->m_Log->writeLog(6, QString("Loaded %1: %2 (direct bool)").arg(field).arg(result));
                     return result;
                 } else if (val.isObject()) {
                     // Nested object with "value" field
                     QJsonObject fieldObj = val.toObject();
                     if (fieldObj.contains("value")) {
                         bool result = fieldObj["value"].toBool();
-                        m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (nested bool)").arg(field).arg(result));
+                        // Account detail logging removed to reduce spam
+                        // m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (nested bool)").arg(field).arg(result));
                         return result;
                     }
                 }
@@ -756,14 +712,16 @@ void Settings::loadAccConfig()
                 if (val.isDouble()) {
                     // Direct integer value (test1.json format)
                     int result = val.toInt();
-                    m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (direct int)").arg(field).arg(result));
+                    // Account detail logging removed to reduce spam
+                    // m_lib->m_Log->writeLog(6, QString("Loaded %1: %2 (direct int)").arg(field).arg(result));
                     return result;
                 } else if (val.isObject()) {
                     // Nested object with "value" field
                     QJsonObject fieldObj = val.toObject();
                     if (fieldObj.contains("value")) {
                         int result = fieldObj["value"].toInt();
-                        m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (nested int)").arg(field).arg(result));
+                        // Account detail logging removed to reduce spam
+                        // m_lib->m_Log->writeLog(3, QString("Loaded %1: %2 (nested int)").arg(field).arg(result));
                         return result;
                     }
                 }
@@ -790,7 +748,8 @@ void Settings::loadAccConfig()
             // Load CallHistory Array
             if (obj.contains("CallHistory")) {
                 QJsonArray historyArray = obj["CallHistory"].toArray();
-                m_lib->m_Log->writeLog(3, QString("Loading %1 call history entries").arg(historyArray.size()));
+                // Account detail logging reduced to prevent spam
+                // m_lib->m_Log->writeLog(5, QString("Loading %1 call history entries").arg(historyArray.size()));
                 
                 for (const QJsonValue &histVal : historyArray) {
                     if (histVal.isObject()) {
@@ -829,10 +788,10 @@ void Settings::loadAccConfig()
                                            acc.autoconnectToBuddyUID, acc.autoconnectEnable,
                                            acc.hasDTMFGPIO, acc.CallHistory, acc.uid);
                                            
-            m_lib->m_Log->writeLog(1, QString("loadAccConfig: Successfully loaded account: %1 (user: %2, server: %3)")
-                .arg(acc.name)
-                .arg(acc.user) 
-                .arg(acc.serverURI));
+            // m_lib->m_Log->writeLog(3, QString("loadAccConfig: Successfully loaded account: %1 (user: %2, server: %3)")
+            //     .arg(acc.name)
+            //     .arg(acc.user) 
+            //     .arg(acc.serverURI));
         }
     }
     m_AccountsLoaded = true;
@@ -963,7 +922,7 @@ void Settings::loadWebRTCChannelConfig() {
                 channel.description,
                 channel.enabled
             );
-            m_lib->m_Log->writeLog(3, QString("loadWebRTCChannelConfig: added WebRTC channel from config file: ") + channel.id);
+            // m_lib->m_Log->writeLog(3, QString("loadWebRTCChannelConfig: added WebRTC channel from config file: ") + channel.id);
         }
     }
     m_WebRTCChannelsLoaded = true;
@@ -1054,11 +1013,12 @@ int Settings::loadAudioRoutes()
             }
             
             loadedRoutes.append(route);
-            m_lib->m_Log->writeLog(3, QString("loadAudioRoutes: Loaded route %1 -> %2 (level: %3, persistent: %4)")
-                .arg(route.srcDevName)
-                .arg(route.destDevName) 
-                .arg(route.level)
-                .arg(route.persistant));
+            // Individual route logging removed to reduce spam
+            // m_lib->m_Log->writeLog(3, QString("loadAudioRoutes: Loaded route %1 -> %2 (level: %3, persistent: %4)")
+            //     .arg(route.srcDevName)
+            //     .arg(route.destDevName) 
+            //     .arg(route.level)
+            //     .arg(route.persistant));
         }
     }
     
@@ -1078,8 +1038,10 @@ int Settings::loadAudioRoutes()
             int check = m_lib->m_AudioRouter->connectConfPort(route.srcSlot, route.destSlot, route.level, route.persistant);
             if(check != PJ_SUCCESS)
                 status = -1;
-            else
-                m_lib->m_Log->writeLog(3,QString("loadAudioRoutes: Successfully connected: ") + route.srcDevName + " to " + route.destDevName);
+            else {
+                // Individual connection logging removed to reduce spam
+                // m_lib->m_Log->writeLog(3,QString("loadAudioRoutes: Successfully connected: ") + route.srcDevName + " to " + route.destDevName);
+            }
         } else {
             m_lib->m_AudioRouter->addOfflineAudioRoute(route);
             m_lib->m_Log->writeLog(2, QString("loadAudioRoutes: Route offline (devices not found): %1 -> %2")
@@ -1170,7 +1132,7 @@ void Settings::saveCustomSourceNames()
     config["AudioSettings"] = audioSettings;
     saveJsonConfig(config);
     
-    m_lib->m_Log->writeLog(3, QString("saveCustomSourceNames: saved %1 custom source labels").arg(srcLabels.size()));
+    // m_lib->m_Log->writeLog(3, QString("saveCustomSourceNames: saved %1 custom source labels").arg(srcLabels.size()));
 }
 
 void Settings::loadCustomSourceNames()
@@ -1191,7 +1153,8 @@ void Settings::loadCustomSourceNames()
         }
     }
     
-    m_lib->m_Log->writeLog(3, QString("loadCustomSourceNames: loaded %1 custom source labels").arg(srcLabels.size()));
+    // Debug logging reduced to prevent spam
+    // m_lib->m_Log->writeLog(4, QString("loadCustomSourceNames: loaded %1 custom source labels").arg(srcLabels.size()));
     m_lib->m_AudioRouter->setCustomSourceLables(srcLabels);
 }
 
@@ -1214,7 +1177,7 @@ void Settings::saveCustomDestinationNames()
     config["AudioSettings"] = audioSettings;
     saveJsonConfig(config);
     
-    m_lib->m_Log->writeLog(3, QString("saveCustomDestinationNames: saved %1 custom destination labels").arg(dstLabels.size()));
+    // m_lib->m_Log->writeLog(3, QString("saveCustomDestinationNames: saved %1 custom destination labels").arg(dstLabels.size()));
 }
 
 void Settings::loadCustomDestinationNames()
@@ -1235,7 +1198,8 @@ void Settings::loadCustomDestinationNames()
         }
     }
     
-    m_lib->m_Log->writeLog(3, QString("loadCustomDestinationNames: loaded %1 custom destination labels").arg(dstLabels.size()));
+    // Debug logging reduced to prevent spam
+    // m_lib->m_Log->writeLog(4, QString("loadCustomDestinationNames: loaded %1 custom destination labels").arg(dstLabels.size()));
     m_lib->m_AudioRouter->setCustomDestinationLables(dstLabels);
 }
 
@@ -1862,7 +1826,7 @@ const QJsonObject Settings::getCodecPriorities(){
      enumitems["1 lowest"] = 1;
      enumitems["0 disabled"] = 0;
 
-     foreach(const CodecInfo codec, m_lib->m_pjEp->codecEnum2())
+     for (const auto &codec : m_lib->m_pjEp->codecEnum2())
      {
          codecname = QString::fromStdString(codec.codecId);
          priority = settings.value("settings/CodecPriority/"+codecname,"128").toInt();
