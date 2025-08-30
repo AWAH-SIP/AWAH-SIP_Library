@@ -430,55 +430,129 @@ void Settings::saveAccConfig()
 }
 
 void Settings::loadWebRTCChannelConfig() {
-    QList<s_webrtc_channel> loadedChannels;
-    QSettings settings("awah", "AWAHsipConfig");
-    loadedChannels = settings.value("WebRTCChannelConfig").value<QList<s_webrtc_channel>>();
-    for (int i = 0; i < loadedChannels.count(); ++i) {
-        m_lib->m_WebRTCChannels->createChannel(
-            loadedChannels.at(i).id,
-            loadedChannels.at(i).description,
-            loadedChannels.at(i).enabled
-        );
-        m_lib->m_Log->writeLog(3, QString("loadWebRTCChannelConfig: added WebRTC channel from config file: ") + loadedChannels.at(i).id);
+    QJsonObject config = loadJsonConfig();
+    QJsonArray chanArray = config["WebRTCChannelConfig"].toArray();
+    int added = 0;
+    for (const QJsonValue &value : chanArray) {
+        QJsonObject obj = value.toObject();
+        const QString id = obj["id"].toString();
+        if (id.isEmpty()) continue;
+        const QString desc = obj["description"].toString();
+        const bool enabled = obj["enabled"].toBool(true);
+        m_lib->m_WebRTCChannels->createChannel(id, desc, enabled);
+        // Populate optional fields
+        if (s_webrtc_channel* ch = m_lib->m_WebRTCChannels->getChannelById(id)) {
+            // Direction and limits
+            if (obj.contains("sendOnly")) {
+                m_lib->m_WebRTCChannels->setChannelSendOnly(id, obj["sendOnly"].toBool(false));
+            }
+            if (obj.contains("maxConcurrentStreams")) {
+                m_lib->m_WebRTCChannels->setChannelMaxCalls(id, obj["maxConcurrentStreams"].toInt(ch->maxConcurrentStreams));
+            }
+            // STUN/TURN
+            if (obj.contains("stunServer")) {
+                m_lib->m_WebRTCChannels->setChannelStunServer(id, obj["stunServer"].toString(ch->stunServer));
+            }
+            if (obj.contains("turnServer") || obj.contains("turnUsername") || obj.contains("turnCredential")) {
+                const QString turnSrv = obj["turnServer"].toString(ch->turnServer);
+                const QString turnUser = obj["turnUsername"].toString(ch->turnUsername);
+                const QString turnCred = obj["turnCredential"].toString(ch->turnCredential);
+                m_lib->m_WebRTCChannels->setChannelTurnServer(id, turnSrv, turnUser, turnCred);
+            }
+            // ICE flags
+            if (obj.contains("iceEnabled")) ch->iceEnabled = obj["iceEnabled"].toBool(ch->iceEnabled);
+            if (obj.contains("turnEnabled")) ch->turnEnabled = obj["turnEnabled"].toBool(ch->turnEnabled);
+            if (obj.contains("trickleIceEnabled")) ch->trickleIceEnabled = obj["trickleIceEnabled"].toBool(ch->trickleIceEnabled);
+            if (obj.contains("iceAlwaysUpdate")) ch->iceAlwaysUpdate = obj["iceAlwaysUpdate"].toBool(ch->iceAlwaysUpdate);
+        }
+        ++added;
     }
+    m_lib->m_Log->writeLog(3, QString("loadWebRTCChannelConfig: loaded channels: ") + QString::number(added));
     m_WebRTCChannelsLoaded = true;
+    // Ensure persisted config includes optional fields post-load
+    m_lib->m_Settings->saveWebRTCChannelConfig();
 }
 
 void Settings::saveWebRTCChannelConfig() {
     if (!m_WebRTCChannelsLoaded)
         return;
-    QSettings settings("awah", "AWAHsipConfig");
-    settings.setValue("WebRTCChannelConfig", QVariant::fromValue(*m_lib->m_WebRTCChannels->getChannels()));
-    settings.sync();
+    QJsonObject config = loadJsonConfig();
+    QJsonArray chanArray;
+    const QList<s_webrtc_channel>* chans = m_lib->m_WebRTCChannels->getChannels();
+    for (const s_webrtc_channel &ch : *chans) {
+        QJsonObject obj;
+        obj["id"] = ch.id;
+        obj["description"] = ch.description;
+        obj["enabled"] = ch.enabled;
+        // Optional fields (persist if present)
+        obj["sendOnly"] = ch.sendOnly;
+        obj["maxConcurrentStreams"] = ch.maxConcurrentStreams;
+        obj["stunServer"] = ch.stunServer;
+        obj["turnServer"] = ch.turnServer;
+        obj["turnUsername"] = ch.turnUsername;
+        obj["turnCredential"] = ch.turnCredential;
+        obj["iceEnabled"] = ch.iceEnabled;
+        obj["turnEnabled"] = ch.turnEnabled;
+        obj["trickleIceEnabled"] = ch.trickleIceEnabled;
+        obj["iceAlwaysUpdate"] = ch.iceAlwaysUpdate;
+        chanArray.append(obj);
+    }
+    config["WebRTCChannelConfig"] = chanArray;
+    saveJsonConfig(config);
 }
 
 int Settings::loadAudioRoutes()
 {
     int status = PJ_SUCCESS;
     QList<s_audioRoutes> loadedRoutes;
-    const QMap<int, QString> srcAudioSlotMap = m_lib->m_AudioRouter->getSrcAudioSlotMap();
-    const QMap<int, QString> destAudioSlotMap = m_lib->m_AudioRouter->getDestAudioSlotMap();
+    // Ensure maps are populated at startup
+    m_lib->m_AudioRouter->refreshConfPortMaps();
+    QMap<int, QString> srcAudioSlotMap = m_lib->m_AudioRouter->getSrcAudioSlotMap();
+    QMap<int, QString> destAudioSlotMap = m_lib->m_AudioRouter->getDestAudioSlotMap();
     
     QJsonObject config = loadJsonConfig();
     QJsonArray routeArray = config["AudioRoutes"].toArray();
     
     m_lib->m_AudioRouter->clearAllOfflineAudioRoutes();
     
-    // Konvertiere JSON Array zu QList<s_audioRoutes>
+    // Konvertiere JSON Array zu QList<s_audioRoutes> (supports legacy and parent routes)
     for (const QJsonValue &value : routeArray) {
         QJsonObject obj = value.toObject();
-        if (obj.contains("srcDevName") && obj.contains("destDevName")) {
-            s_audioRoutes route;
-            route.srcDevName = obj["srcDevName"].toString();
-            route.destDevName = obj["destDevName"].toString();
-            route.level = obj["level"].toDouble();
-            route.persistant = obj["persistant"].toBool();
-            loadedRoutes.append(route);
+        s_audioRoutes route;
+        // Legacy/dev name entries
+        if (obj.contains("srcDevName")) route.srcDevName = obj["srcDevName"].toString();
+        if (obj.contains("destDevName")) route.destDevName = obj["destDevName"].toString();
+        // Extended parent entries
+        route.srcIsParent = obj["srcIsParent"].toBool(false);
+        route.destIsParent = obj["destIsParent"].toBool(false);
+        route.srcParentKey = obj["srcParentKey"].toString();
+        route.destParentKey = obj["destParentKey"].toString();
+        route.srcParentChannel = obj["srcParentChannel"].toInt(0);
+        route.destParentChannel = obj["destParentChannel"].toInt(0);
+        route.level = obj["level"].toVariant().toInt();
+        route.persistant = obj["persistant"].toBool();
+        // Skip empty rows
+        if (!route.srcIsParent && !route.destIsParent && route.srcDevName.isEmpty() && route.destDevName.isEmpty()) {
+            continue;
         }
+        loadedRoutes.append(route);
     }
     
     m_lib->m_Log->writeLog(3, QString("loadAudioRoutes: loaded routes: ") + QString::number(loadedRoutes.count()));
     for(auto& route : loadedRoutes ){
+        // Parent routes: store intent via AudioRouter unified API (ensure negative slots are set for GUI)
+        if (route.srcIsParent || route.destIsParent) {
+            // Use router API to reconstruct parent routes honoring channel
+            if (route.srcIsParent && !route.srcParentKey.isEmpty()) {
+                QString other = route.destIsParent ? route.destParentKey : route.destDevName;
+                m_lib->m_AudioRouter->connectParentToDev(route.srcParentKey, Entity_Unknown, true, other, route.level, route.persistant, route.srcParentChannel, route.destParentChannel);
+            } else if (route.destIsParent && !route.destParentKey.isEmpty()) {
+                QString other = route.srcIsParent ? route.srcParentKey : route.srcDevName;
+                m_lib->m_AudioRouter->connectParentToDev(route.destParentKey, Entity_Unknown, false, other, route.level, route.persistant, route.destParentChannel, route.srcParentChannel);
+            }
+            continue;
+        }
+        // Legacy direct routes: try to map now, otherwise store as offline until devices appear
         route.srcSlot = srcAudioSlotMap.key(route.srcDevName, -1);
         route.destSlot = destAudioSlotMap.key(route.destDevName, -1);
         if(route.srcSlot >= 0 && route.destSlot >= 0){
@@ -500,6 +574,10 @@ int Settings::loadAudioRoutes()
     }
     m_AudioRoutesLoaded = true;
     saveAudioRoutes();
+    // Ensure UI sees loaded routes immediately
+    if (m_lib && m_lib->m_AudioRouter) {
+        m_lib->m_AudioRouter->scheduleConferenceRefresh(0);
+    }
     return status;
 }
 
@@ -513,19 +591,23 @@ int Settings::saveAudioRoutes()
     QList<s_audioRoutes> routesToSave;
     QList<s_audioRoutes> audioRoutes = m_lib->m_AudioRouter->getAudioRoutes();
     
-    // Sammle persistente Routes und prüfe auf Duplikate
+    // Sammle persistente Routes und prüfe auf Duplikate (consider parent keys and channels)
+    auto makeKey = [](const s_audioRoutes &r)->QString{
+        // Include channels so Ch:1 and Ch:2 routes are distinct
+        return QString("%1|%2|%3|%4|%5|%6|srcCh:%7|dstCh:%8")
+            .arg(r.srcIsParent)
+            .arg(r.srcParentKey, r.srcDevName, r.destParentKey, r.destDevName)
+            .arg(r.destIsParent)
+            .arg(r.srcParentChannel)
+            .arg(r.destParentChannel);
+    };
+    QSet<QString> seen;
     for(const auto& route : audioRoutes) {
         if(route.persistant) {
-            bool routeExists = false;
-            for(const auto& savedRoute : routesToSave) {
-                if(route.destDevName == savedRoute.destDevName && route.srcDevName == savedRoute.srcDevName) {
-                    routeExists = true;
-                    break;
-                }
-            }
-            if(!routeExists) {
-                routesToSave.append(route);
-            }
+            const QString key = makeKey(route);
+            if (seen.contains(key)) continue;
+            seen.insert(key);
+            routesToSave.append(route);
         }
     }
     
@@ -545,11 +627,13 @@ int Settings::saveAudioRoutes()
         }
     }
     
-    // Konvertiere zu JSON
+    // Konvertiere zu JSON (write new optional fields when present)
     for(const auto& route : routesToSave) {
         QJsonObject obj;
-        obj["srcDevName"] = route.srcDevName;
-        obj["destDevName"] = route.destDevName;
+        if (!route.srcDevName.isEmpty()) obj["srcDevName"] = route.srcDevName;
+        if (!route.destDevName.isEmpty()) obj["destDevName"] = route.destDevName;
+        if (route.srcIsParent) { obj["srcIsParent"] = true; if (!route.srcParentKey.isEmpty()) obj["srcParentKey"] = route.srcParentKey; if (route.srcParentChannel>0) obj["srcParentChannel"]=route.srcParentChannel; }
+        if (route.destIsParent) { obj["destIsParent"] = true; if (!route.destParentKey.isEmpty()) obj["destParentKey"] = route.destParentKey; if (route.destParentChannel>0) obj["destParentChannel"]=route.destParentChannel; }
         obj["level"] = route.level;
         obj["persistant"] = route.persistant;
         routeArray.append(obj);
@@ -1029,6 +1113,7 @@ void Settings::loadSettings()                                           // todo 
 
     aCfg.regConfig.randomRetryIntervalSec = 10;             // not all account schould reregister on the same time
     //aCfg.ipChangeConfig.shutdownTp = 1;
+    m_lib->epCfg.medConfig.sndUseSwClock = true;
     m_lib->epCfg.medConfig.quality =10;
     m_lib->epCfg.medConfig.noVad = true;
     m_lib->m_Accounts->setDefaultACfg(aCfg);

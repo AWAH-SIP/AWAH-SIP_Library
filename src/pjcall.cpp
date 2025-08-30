@@ -30,42 +30,6 @@
 
 using namespace pj;
 
-void PJCall::on_media_finished(pjmedia_port *media_port, void *user_data)
-{
-    Q_UNUSED(media_port);
-    s_Call *call = static_cast<s_Call*>(user_data);
-    Call *ownObj = lookup(call->callId);
-    if(ownObj == nullptr) {
-        AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): Got Invalid CallID: %1 PJ::Call Object lookup not succesfull!").arg(call->callId)));
-        return;
-    }
-
-    CallInfo ci = ownObj->getInfo();
-    s_account* callAcc = AWAHSipLib::instance()->m_Accounts->getAccountByID(ci.accId);
-
-    if(call->callId < 0 && call->callId > (int)AWAHSipLib::instance()->epCfg.uaConfig.maxCalls) {
-        AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): Got Invalid CallID: %1").arg(call->callId)));
-        return;
-    }
-
-    try {
-        const pjsua_conf_port_id pslot = pjsua_player_get_conf_port(call->player_id);
-        for (auto slot : call->perCallConfSlots) {
-            PJSUA2_CHECK_EXPR( pjsua_conf_disconnect(pslot, slot) );
-        }
-    }  catch (Error &err) {
-        AWAHSipLib::instance()->m_Log->writeLog(1, (QString("PJCall::on_media_finished(): disconnect call from player failed ") + err.info().c_str()));
-    }
-
-    if(call->rec_id != INVALID_ID  ){
-        // After announcement finishes, route call audio to recorder (left channel if stereo)
-        if (!call->perCallConfSlots.isEmpty()) {
-            PJSUA2_CHECK_EXPR (pjsua_conf_connect(call->perCallConfSlots.first(), pjsua_recorder_get_conf_port(call->rec_id)) );
-        }
-        AWAHSipLib::instance()->m_Log->writeLog(3, (QString("PJCall::on_media_finished(): Announcement for CallID: %1 finished connecting call to recorder").arg(call->callId)));
-        // No account splitter path anymore TODO: reimplemet if(!callAcc->FileRecordRXonly)
-    }
-}
 
 // Notification when call's state has changed.
 void PJCall::onCallState(OnCallStateParam &prm)
@@ -152,113 +116,43 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
     try {
         // Get the first audio media (auto-added by pjsua)
         audioMedia = getAudioMedia(-1);
-
-        // Remove the auto-added conf port (always; mono and stereo)
+        // Remove auto-added conf port, ensure pjsua does not manage it
         if (audioMedia.getPortId() != -1) {
-            pjsua_conf_remove_port(audioMedia.getPortId());
-        }
-        // Ensure PJSUA won't try to auto-remove a conf port we already removed
-        {
-            pjsua_data* intData = pjsua_get_var();
-            if (intData) {
+            m_lib->m_AudioRouter->removeConfPort(audioMedia.getPortId());
+            if (pjsua_data* intData = pjsua_get_var()) {
                 pjsua_call *pcall = &intData->calls[getId()];
-                if (pcall && pcall->audio_idx >= 0) {
-                    pjsua_call_media *call_med = &pcall->media[pcall->audio_idx];
-                    call_med->strm.a.conf_slot = PJSUA_INVALID_ID;
-                }
+                if (pcall && pcall->audio_idx >= 0) pjsua_get_var()->calls[getId()].media[pcall->audio_idx].strm.a.conf_slot = PJSUA_INVALID_ID;
             }
         }
-
-        // Determine channels via stored codec info
-        const int chcnt = Callopts->codec.codecParameters["Channelcount"].toObject()["value"].toInt(1);
-        pjsua_conf_port_info masterInfo;
-        pjsua_conf_get_port_info(0, &masterInfo);
-
-        if (chcnt <= 1) {
-            // Mono: re-add stream port with SIP naming and wire player/recorder below
-            pjmedia_port *streamPort = Callopts->callStreamPort;
-            if (streamPort) {
-                QString remoteUri = QString::fromStdString(ci.remoteUri);
-                QString remoteNum = remoteUri; int c=remoteNum.indexOf(":"); int a=remoteNum.indexOf("@");
-                if (c>=0 && a>c) remoteNum = remoteNum.mid(c+1, a-c-1);
-                QString name = QString("SIP:%1-%2-Ch:1").arg(callAcc->name).arg(remoteNum);
-                pj_strdup2(m_lib->pool, &streamPort->info.name, name.toStdString().c_str());
-                pjsua_conf_port_id slot;
-                if (pjsua_conf_add_port(m_lib->pool, streamPort, &slot)==PJ_SUCCESS) {
-                    Callopts->perCallConfSlots.clear();
-                    Callopts->perCallConfSlots.append(slot);
-                }
-            }
-        } else {
-            // Stereo+: create splitcomb and one master_port, register both rev channels
-            if (!m_callPool) {
-                QString poolName = QString("SIP-CALL-%1").arg(getId());
-                m_callPool = pj_pool_create(&pjsua_get_var()->cp.factory, poolName.toStdString().c_str(), 4096, 4096, NULL);
-            }
-            pjmedia_port *streamPort = Callopts->callStreamPort;
-            if (streamPort) {
-                const pjmedia_port_info &pi = streamPort->info;
-                int srate = PJMEDIA_PIA_SRATE(&pi);
-                int spf = PJMEDIA_PIA_SPF(&pi);
-                if (srate <= 0) srate = (int)callAcc->SelectedCodec.codecParameters["Clockrate"].toObject()["value"].toInt(48000);
-                if (spf <= 0) spf = (srate * 20 * 2)/1000;
-                pj_status_t st = pjmedia_splitcomb_create(m_callPool ? m_callPool : m_lib->pool, srate, 2, spf, 16, 0, &Callopts->perCallSplitComb);
-                if (st == PJ_SUCCESS && Callopts->perCallSplitComb) {
-                    st = pjmedia_master_port_create(m_callPool ? m_callPool : m_lib->pool, streamPort, Callopts->perCallSplitComb, 0, &Callopts->mp_stream_to_split);
-                    if (st == PJ_SUCCESS) {
-                        pjmedia_master_port_start(Callopts->mp_stream_to_split);
-                        pjsua_conf_port_info masterInfo; pjsua_conf_get_port_info(0, &masterInfo);
-                        for (int ch=0; ch<2; ++ch) {
-                            pjmedia_port *revch=nullptr;
-                            st = pjmedia_splitcomb_create_rev_channel(m_callPool ? m_callPool : m_lib->pool, Callopts->perCallSplitComb, ch, 32, &revch);
-                            if (st != PJ_SUCCESS || !revch) continue;
-                            QString remoteUri = QString::fromStdString(ci.remoteUri);
-                            QString remoteNum = remoteUri; int c=remoteNum.indexOf(":"); int a=remoteNum.indexOf("@");
-                            if (c>=0 && a>c) remoteNum = remoteNum.mid(c+1, a-c-1);
-                            QString name = QString("SIP:%1-%2-Ch:%3").arg(callAcc->name).arg(remoteNum).arg(ch+1);
-                            pj_strdup2(m_callPool ? m_callPool : m_lib->pool, &revch->info.name, name.toStdString().c_str());
-                            pjsua_conf_port_id mslot=PJSUA_INVALID_ID;
-                            if (pjsua_conf_add_port(m_callPool ? m_callPool : m_lib->pool, revch, &mslot)==PJ_SUCCESS) {
-                                Callopts->perCallMonoPorts.append(revch);
-                                Callopts->perCallConfSlots.append(mslot);
-                                pjsua_conf_connect(masterInfo.slot_id, mslot);
-                                pjsua_data* intData = pjsua_get_var();
-                                pjmedia_conf_adjust_conn_level(intData->mconf, masterInfo.slot_id, mslot, -128);
-                            }
-                        }
-                    }
-                }
-            }
+        // Determine detected channels
+        int chcnt = 1;
+        if (Callopts->callStreamPort) {
+            const pjmedia_port_info &pi_detect = Callopts->callStreamPort->info;
+            int detected = PJMEDIA_PIA_CCNT(&pi_detect);
+            if (detected > 0) chcnt = detected;
         }
-
+        // Delegate channel attach to AudioRouter
+        QString remoteUri = QString::fromStdString(ci.remoteUri);
+        QString remoteNum = remoteUri; int c=remoteNum.indexOf(":"); int a=remoteNum.indexOf("@");
+        if (c>=0 && a>c) remoteNum = remoteNum.mid(c+1, a-c-1);
+        const QString parentKey = QString("ACC:%1").arg(callAcc->uid);
+        const QString sessionKey = QString("%1|CID:%2").arg(parentKey).arg(getId());
+        m_lib->m_AudioRouter->attachStreamChannels(parentKey, sessionKey, callAcc->name, remoteNum, Callopts->callStreamPort, chcnt);
+         
         // After final ports exist, create and wire file player and recorder
         {
             const bool isStereo = (chcnt > 1);
-            // Announcement player (incoming only)
+            // Announcement player via AudioRouter (incoming only)
             if (!callAcc->FilePlayPath.isEmpty() && ci.remOfferer && Callopts->player_id == PJSUA_INVALID_ID) {
-                pj_str_t name; pj_status_t status;
-                status = pjsua_player_create(pj_cstr(&name, callAcc->FilePlayPath.toStdString().c_str()), PJMEDIA_FILE_NO_LOOP, &Callopts->player_id);
-                if (status == PJ_SUCCESS) {
-                    pjsua_data* intData = pjsua_get_var();
-                    const pjsua_conf_port_id pslot = pjsua_player_get_conf_port(Callopts->player_id);
-                    int level = -3;
-                    pjmedia_conf_adjust_rx_level(intData->mconf, pslot, dBtoAdjLevel(level));
-                    if (!Callopts->perCallConfSlots.isEmpty()) {
-                        for (auto slot : Callopts->perCallConfSlots) pjsua_conf_connect(pslot, slot);
-                    }
-                    pjmedia_port *player_media_port = nullptr;
-                    if (pjsua_player_get_port(Callopts->player_id, &player_media_port) == PJ_SUCCESS) {
-                        pjmedia_wav_player_set_eof_cb2(player_media_port, Callopts, &on_media_finished);
-                    }
-                } else {
-                    char buf[64]; pj_strerror(status, buf, sizeof(buf));
-                    m_lib->m_Log->writeLog(1, QString("onCallMediaState: Error creating announcement player: ") + buf);
+                const QString parentKey = QString("ACC:%1").arg(callAcc->uid);
+                Callopts->player_id = m_lib->m_AudioRouter->addAnnouncementPlayerForParent(parentKey, callAcc->FilePlayPath);
+                if (Callopts->player_id == PJSUA_INVALID_ID) {
+                    m_lib->m_Log->writeLog(1, QString("onCallMediaState: Error creating announcement player via AudioRouter"));
                 }
             }
-
-            // Recorder
+             
+            // Recorder via AudioRouter
             if (!callAcc->FileRecordPath.isEmpty() && Callopts->rec_id == PJSUA_INVALID_ID) {
-                pj_status_t status; pj_str_t rec_file;
                 QDateTime local(QDateTime::currentDateTime());
                 QString Year = local.toString("yyyy");
                 QString Month = local.toString("MM");
@@ -266,29 +160,28 @@ void PJCall::onCallMediaState(OnCallMediaStateParam &prm)
                 QString Hour = local.toString("hh");
                 QString Minute = local.toString("mm");
                 QString Second = local.toString("ss");
-                QString Caller = QString::fromStdString(ci.remoteUri);
-                Caller.truncate(Caller.lastIndexOf("@"));
-                Caller = Caller.mid(Caller.indexOf(":")+1);
+                QString Caller = QString::fromStdString(ci.remoteUri).remove("sip:").remove("@").remove(">").remove("<");
+                int pos = Caller.indexOf(QLatin1Char('>'));
+                if(pos != -1){ Caller.truncate( pos ); }
+                if (Caller.indexOf(QLatin1Char(':')) != -1) {
+                    Caller = Caller.section(QLatin1Char(':'), 1, -1);
+                    Caller = Caller.section(QLatin1Char('@'), 0, 0);
+                }
+                if(Caller.contains(";")){
+                    Caller = Caller.section(QLatin1Char(';'), 0, 0);
+                }
                 QString filename = callAcc->FileRecordPath + ".wav";
                 filename.replace("%Y", Year).replace("%M", Month).replace("%D", Day).replace("%h", Hour)
                         .replace("%m", Minute).replace("%s", Second).replace("%C", Caller).replace("%A", callAcc->name);
-                status = pjsua_recorder_create(pj_cstr(&rec_file, filename.toStdString().c_str()), 0, NULL, 0, 0, &Callopts->rec_id);
-                if (status == PJ_SUCCESS) {
-                    const pjsua_conf_port_id rslot = pjsua_recorder_get_conf_port(Callopts->rec_id);
-                    // Only connect immediately if no announcement player is active
-                    if (Callopts->player_id == PJSUA_INVALID_ID) {
-                        if (!Callopts->perCallConfSlots.isEmpty()) {
-                            pjsua_conf_connect(Callopts->perCallConfSlots[0], rslot);
-                        }
-                    }
-                } else {
-                    char buf[64]; pj_strerror(status, buf, sizeof(buf));
-                    m_lib->m_Log->writeLog(1, QString("onCallMediaState: Error creating call recorder: ") + buf);
+                const QString parentKey2 = QString("ACC:%1").arg(callAcc->uid);
+                Callopts->rec_id = m_lib->m_AudioRouter->addCallRecorderForParent(parentKey2, filename);
+                if (Callopts->rec_id == PJSUA_INVALID_ID) {
+                    m_lib->m_Log->writeLog(1, QString("onCallMediaState: Error creating call recorder via AudioRouter"));
                 }
             }
-
+ 
         }
-
+ 
     } catch(Error& err) {
         m_lib->m_Log->writeLog(1,QString("onCallMediaState: media error ") +  err.info().c_str());
         return;
@@ -505,40 +398,17 @@ void PJCall::onStreamDestroyed(OnStreamDestroyedParam &prm)
 
     m_lib->m_Log->writeLog(3, QString("onStreamDestroyed: cleaning media for callId %1").arg(getId()));
 
-    if (callEntry->rec_id != PJSUA_INVALID_ID) {
-        const pjsua_conf_port_id rslot = pjsua_recorder_get_conf_port(callEntry->rec_id);
-        m_lib->m_AudioRouter->removeAllRoutesFromSlot(rslot);
-        pjsua_recorder_destroy(callEntry->rec_id);
-        callEntry->rec_id = PJSUA_INVALID_ID;
+    // Delegate teardown of AudioRouter-managed media and channels to AudioRouter
+    if (callAcc) {
+        const QString parentKey = QString("ACC:%1").arg(callAcc->uid);
+        m_lib->m_AudioRouter->teardownParentMedia(parentKey);
+        const QString sessionKey = QString("%1|CID:%2").arg(parentKey).arg(getId());
+        m_lib->m_AudioRouter->detachParentStream(sessionKey);
     }
+    callEntry->rec_id = PJSUA_INVALID_ID;
+    callEntry->player_id = PJSUA_INVALID_ID;
 
-    if (callEntry->player_id != PJSUA_INVALID_ID) {
-        const pjsua_conf_port_id pslot = pjsua_player_get_conf_port(callEntry->player_id);
-        m_lib->m_AudioRouter->removeAllRoutesFromSlot(pslot);
-        pjsua_player_destroy(callEntry->player_id);
-        callEntry->player_id = PJSUA_INVALID_ID;
-    }
-
-    if (!callEntry->perCallConfSlots.isEmpty()) {
-        for (auto slot : callEntry->perCallConfSlots) {
-            m_lib->m_AudioRouter->removeAllRoutesFromSlot(slot);
-            pjsua_conf_remove_port(slot);
-        }
-        callEntry->perCallConfSlots.clear();
-    }
-    callEntry->perCallMonoPorts.clear();
-
-    if (callEntry->mp_stream_to_split) {
-        pjmedia_master_port_stop(callEntry->mp_stream_to_split);
-        pjmedia_master_port_destroy(callEntry->mp_stream_to_split, PJ_FALSE);
-        callEntry->mp_stream_to_split = nullptr;
-    }
-    if (callEntry->mp_split_to_stream) {
-        pjmedia_master_port_stop(callEntry->mp_split_to_stream);
-        pjmedia_master_port_destroy(callEntry->mp_split_to_stream, PJ_FALSE);
-        callEntry->mp_split_to_stream = nullptr;
-    }
-    callEntry->perCallSplitComb = nullptr; // pool-owned
+    // Per-call channelizer is owned by AudioRouter; all legacy members removed
 
     if (m_callPool) {
         pj_pool_release(m_callPool);

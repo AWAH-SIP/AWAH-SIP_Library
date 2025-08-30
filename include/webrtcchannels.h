@@ -32,11 +32,6 @@ struct WebRTCSession {
     pjmedia_transport* srtpTransport = nullptr;  // SRTP/DTLS wrapper
     pjmedia_stream* mediaStream = nullptr;       // Audio stream
     pjmedia_port* streamPort = nullptr;          // Port interface of the stream
-    pjmedia_master_port* mp_split_to_stream = nullptr; // splitcomb -> stream (send path)
-    pjmedia_master_port* mp_stream_to_split = nullptr; // stream -> splitcomb (receive path)
-    pjmedia_port* perStreamSplitComb = nullptr;        // Per-stream split/comb (matches stream)
-    QList<pjmedia_port*> perStreamMonoPorts;           // Reverse-channel mono ports
-    QList<int> perStreamConfSlots;                     // Conf slots for mono ports
     pj_pool_t* sessionPool = nullptr;                  // Per-session pool for per-stream objects
 
     // SDP negotiation
@@ -44,9 +39,6 @@ struct WebRTCSession {
     pjmedia_sdp_session* localSdp = nullptr;
     pjmedia_sdp_neg* sdpNeg = nullptr;
 
-    // Conference bridge integration
-    int confSlot = -1;        // Conference bridge slot for this stream
-    int splitterSlot = -1;    // Connected to channel's splitter-combiner
 
     // Trickle ICE bookkeeping (optional)
     QString remoteUfrag;

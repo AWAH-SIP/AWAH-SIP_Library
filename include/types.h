@@ -297,12 +297,6 @@ struct s_Call{
     pjmedia_port* callStreamPort = nullptr;
     pjmedia_stream* pjStream = nullptr;
 
-    // Per-call stereo handling
-    pjmedia_port *perCallSplitComb = nullptr;
-    pjmedia_master_port* mp_split_to_stream = nullptr;
-    pjmedia_master_port* mp_stream_to_split = nullptr;
-    QList<pjmedia_port*> perCallMonoPorts = {};
-    QList<pjsua_conf_port_id> perCallConfSlots = {};
 
     QJsonObject toJSON() const {
         return {{"CallStatusText", CallStatusText}, {"CallStatusCode", CallStatusCode}, {"ConnectedTo", ConnectedTo}, {"callId", callId}, {"codec", codec.toJSON()}};
@@ -384,17 +378,53 @@ struct s_account{
 Q_DECLARE_METATYPE(s_account);
 Q_DECLARE_METATYPE(QList<s_account>);
 
+// Audio matrix entities (used in s_audioPort and routes)
+enum AudioEntityType {
+    Entity_Unknown = 0,
+    Entity_SipAccount = 1,
+    Entity_SipCall = 2,
+    Entity_WebRTCChannel = 3,
+    Entity_WebRTCStream = 4,
+    Entity_AudioDevice = 5,
+    Entity_FilePlayer = 6,
+    Entity_FileRecorder = 7,
+    Entity_ToneGen = 8
+};
+Q_ENUMS(AudioEntityType)
+
 struct s_audioPort{
     QString name ="";
-    pj_str_t pjName;
+    pj_str_t pjName = {nullptr, 0};
     int slot =INVALID_ID;
+    // Extensions for parent/virtual grouping
+    bool isVirtual = false;                 // true for account/channel virtual entries
+    AudioEntityType entityType = Entity_Unknown;
+    QString parentKey = "";                // e.g., ACC:<uid>, WRTC_CH:<id>
+    QList<int> childSlots = {};             // currently attached child slots
+    int channelIndex = 0;                   // 1-based for child slots when known
     QJsonObject toJSON() const {
-        return {{"name",name}, {"pjName", pj2Str(pjName)}, {"slot",slot}};
+        QJsonObject o = {{"name",name}, {"pjName", pj2Str(pjName)}, {"slot",slot}};
+        if (isVirtual) o["isVirtual"] = isVirtual;
+        if (!parentKey.isEmpty()) o["parentKey"] = parentKey;
+        if (entityType != Entity_Unknown) o["entityType"] = (int)entityType;
+        if (!childSlots.isEmpty()) {
+            QJsonArray a; for (int s : childSlots) a.append(s); o["childSlots"] = a;
+        }
+        if (channelIndex > 0) o["channelIndex"] = channelIndex;
+        return o;
     }
     s_audioPort* fromJSON(const QJsonObject &audioPortJSON) {
         name = audioPortJSON["name"].toString();
         pjName = str2Pj(audioPortJSON["pjName"].toString());
         slot = audioPortJSON["slot"].toInt();
+        isVirtual = audioPortJSON["isVirtual"].toBool(false);
+        parentKey = audioPortJSON["parentKey"].toString();
+        entityType = (AudioEntityType) audioPortJSON["entityType"].toInt(0);
+        childSlots.clear();
+        if (audioPortJSON.contains("childSlots") && audioPortJSON["childSlots"].isArray()) {
+            for (const auto &v : audioPortJSON["childSlots"].toArray()) childSlots.append(v.toInt());
+        }
+        channelIndex = audioPortJSON["channelIndex"].toInt(0);
         return this;
     }
 };
@@ -440,8 +470,22 @@ struct s_audioRoutes{
     QString destDevName = "";
     int level = 0;
     bool persistant = 0;
+    // Parent routing extensions (optional)
+    bool srcIsParent = false;
+    bool destIsParent = false;
+    QString srcParentKey = "";   // ACC:<uid>, WRTC_CH:<id>
+    QString destParentKey = "";
+    int srcParentChannel = 0;     // 1-based; 0 means any
+    int destParentChannel = 0;
+    bool mirrorToRecorder = false;      // optional mirror to recorder
+    int  mirrorDestChannel = 1;         // which destination channel to mirror
     QJsonObject toJSON() const {
-        return {{"srcSlot", srcSlot}, {"destSlot", destSlot}, {"srcDevName", srcDevName}, {"destDevName", destDevName}, {"level", level}, {"persistant", persistant} };
+        QJsonObject o = {{"srcSlot", srcSlot}, {"destSlot", destSlot}, {"srcDevName", srcDevName}, {"destDevName", destDevName}, {"level", level}, {"persistant", persistant}};
+        if (srcIsParent) { o["srcIsParent"] = true; o["srcParentKey"] = srcParentKey; if (srcParentChannel>0) o["srcParentChannel"]=srcParentChannel; }
+        if (destIsParent) { o["destIsParent"] = true; o["destParentKey"] = destParentKey; if (destParentChannel>0) o["destParentChannel"]=destParentChannel; }
+        if (mirrorToRecorder) { o["mirrorToRecorder"] = true; }
+        if (mirrorDestChannel != 1) { o["mirrorDestChannel"] = mirrorDestChannel; }
+        return o;
     }
     s_audioRoutes fromJSON(QJsonObject &audioRoutesJSON) {
         s_audioRoutes audioroutes;
@@ -451,8 +495,15 @@ struct s_audioRoutes{
         destDevName = audioRoutesJSON["destDevName"].toString();
         level = audioRoutesJSON["level"].toVariant().toInt();
         persistant = audioRoutesJSON["persistant"].toBool();
+        srcIsParent = audioRoutesJSON["srcIsParent"].toBool(false);
+        destIsParent = audioRoutesJSON["destIsParent"].toBool(false);
+        srcParentKey = audioRoutesJSON["srcParentKey"].toString();
+        destParentKey = audioRoutesJSON["destParentKey"].toString();
+        srcParentChannel = audioRoutesJSON["srcParentChannel"].toInt(0);
+        destParentChannel = audioRoutesJSON["destParentChannel"].toInt(0);
+        mirrorToRecorder = audioRoutesJSON["mirrorToRecorder"].toBool(false);
+        mirrorDestChannel = audioRoutesJSON["mirrorDestChannel"].toInt(1);
         return audioroutes;
-
     }
     s_audioRoutes* fromJSON(const QJsonObject &audioRouteJSON) {
         srcSlot = audioRouteJSON["srcSlot"].toInt();
@@ -461,6 +512,14 @@ struct s_audioRoutes{
         destDevName = audioRouteJSON["destDevName"].toString();
         level = audioRouteJSON["level"].toInt();
         persistant = audioRouteJSON["persistant"].toBool();
+        srcIsParent = audioRouteJSON["srcIsParent"].toBool(false);
+        destIsParent = audioRouteJSON["destIsParent"].toBool(false);
+        srcParentKey = audioRouteJSON["srcParentKey"].toString();
+        destParentKey = audioRouteJSON["destParentKey"].toString();
+        srcParentChannel = audioRouteJSON["srcParentChannel"].toInt(0);
+        destParentChannel = audioRouteJSON["destParentChannel"].toInt(0);
+        mirrorToRecorder = audioRouteJSON["mirrorToRecorder"].toBool(false);
+        mirrorDestChannel = audioRouteJSON["mirrorDestChannel"].toInt(1);
         return this;
     }
 };
@@ -576,8 +635,6 @@ struct s_webrtc_channel {
     QString id = ""; // Unique identifier
     QString description = "";
     bool enabled = true;
-    int splitterSlot = PJSUA_INVALID_ID; // Audio routing slot
-    pjmedia_port *splitCombPort = nullptr; // Stereo split/combiner media port (not persisted)
     
     // WebRTC-specific settings independent from SIP
     QString stunServer = "stun:stun.l.google.com:19302";  // STUN server for this channel
@@ -600,7 +657,6 @@ struct s_webrtc_channel {
             {"id", id},
             {"description", description},
             {"enabled", enabled},
-            {"splitterSlot", splitterSlot},
             {"sendOnly", sendOnly}
         };
     }
@@ -608,14 +664,11 @@ struct s_webrtc_channel {
         id = json["id"].toString();
         description = json["description"].toString();
         enabled = json["enabled"].toBool();
-        splitterSlot = json["splitterSlot"].toInt();
         sendOnly = json["sendOnly"].toBool();
         return this;
     }
 };
 Q_DECLARE_METATYPE(s_webrtc_channel);
 Q_DECLARE_METATYPE(QList<s_webrtc_channel>);
-
-
 #endif // TYPES_H
 

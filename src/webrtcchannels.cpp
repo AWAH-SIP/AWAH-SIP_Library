@@ -84,6 +84,10 @@ bool WebRTCChannels::createChannel(QString id, QString description, bool enabled
         m_lib->m_Log->writeLog(3, QString("WebRTC channel created (disabled): %1").arg(id));
         emit ChannelsChanged(&m_channels);
         m_lib->m_Settings->saveWebRTCChannelConfig();
+        if (m_lib && m_lib->m_AudioRouter) {
+            m_lib->m_AudioRouter->scheduleConferenceRefresh(150);
+            m_lib->m_AudioRouter->scheduleRouteEvaluation(200);
+        }
         return true;
     }
     
@@ -93,9 +97,13 @@ bool WebRTCChannels::createChannel(QString id, QString description, bool enabled
 
     // No channel-level splitter/combiner; per-stream splitcombs will be created dynamically
     m_lib->m_Log->writeLog(3, QString("WebRTC channel created: %1").arg(id));
-            emit ChannelsChanged(&m_channels);
+    emit ChannelsChanged(&m_channels);
     m_lib->m_Settings->saveWebRTCChannelConfig();
-            return true;
+    if (m_lib && m_lib->m_AudioRouter) {
+        m_lib->m_AudioRouter->scheduleConferenceRefresh(150);
+        m_lib->m_AudioRouter->scheduleRouteEvaluation(200);
+    }
+    return true;
 }
 
 void WebRTCChannels::modifyChannel(QString id, QString description, bool enabled)
@@ -108,6 +116,10 @@ void WebRTCChannels::modifyChannel(QString id, QString description, bool enabled
             m_lib->m_Log->writeLog(3, QString("WebRTC channel modified: %1").arg(id));
             emit ChannelsChanged(&m_channels);
             m_lib->m_Settings->saveWebRTCChannelConfig();
+            if (m_lib && m_lib->m_AudioRouter) {
+                m_lib->m_AudioRouter->scheduleConferenceRefresh(150);
+                m_lib->m_AudioRouter->scheduleRouteEvaluation(200);
+            }
             return;
         }
     }
@@ -140,6 +152,14 @@ void WebRTCChannels::removeChannel(QString id)
     m_lib->m_Log->writeLog(3, QString("WebRTC channel removed: %1").arg(id));
     emit ChannelsChanged(&m_channels);
     m_lib->m_Settings->saveWebRTCChannelConfig();
+    // Remove parent routes for this channel
+    if (m_lib && m_lib->m_AudioRouter) {
+        m_lib->m_AudioRouter->removeAllRoutesForParentKey(QString("WRTC_CH:%1").arg(id));
+    }
+    if (m_lib && m_lib->m_AudioRouter) {
+        m_lib->m_AudioRouter->scheduleConferenceRefresh(150);
+        m_lib->m_AudioRouter->scheduleRouteEvaluation(200);
+    }
 }
 
 QList<s_webrtc_channel>* WebRTCChannels::getChannels()
@@ -228,8 +248,6 @@ QString WebRTCChannels::createSession(const QString& channelId)
     session.channelId = channelId;
     session.startTime = QDateTime::currentDateTime();
     session.isActive = false;
-    session.confSlot = -1;
-    session.splitterSlot = channel->splitterSlot;
     
     m_sessions[sessionId] = session;
     
@@ -966,104 +984,29 @@ bool WebRTCChannels::createOpusStream(WebRTCSession& session)
         return false;
     }
 
-    // Per-stream split/comb strategy: if stereo/multichannel, build a per-stream splitcomb
-    const unsigned srate = PJMEDIA_PIA_SRATE(&pi);
+    // Delegate to AudioRouter BridgeAdapter for channelization and conference registration
     const unsigned chcnt = PJMEDIA_PIA_CCNT(&pi);
-    const unsigned spf   = PJMEDIA_PIA_SPF(&pi);
-
-    if (chcnt > 1) {
-        // Ensure per-session pool exists for media helpers
-        if (!session.sessionPool) {
-            QString poolName = QString("WRTC-%1").arg(session.sessionId);
-            session.sessionPool = pj_pool_create(&pjsua_get_var()->cp.factory, poolName.toUtf8().constData(), 4096, 4096, NULL);
-        }
-        pj_pool_t* sp = session.sessionPool;
-        // Create splitcomb matching the stream
-        st = pjmedia_splitcomb_create(sp, srate, chcnt, spf, 16, 0, &session.perStreamSplitComb);
-        if (st != PJ_SUCCESS || !session.perStreamSplitComb) {
-            m_lib->m_Log->writeLog(1, QString("SplitComb: create failed %1").arg(st));
-        return false;
-    }
-        // Master-port wiring based on direction
-        if (channel->sendOnly) {
-            // Send-only: splitcomb -> stream
-            st = pjmedia_master_port_create(sp, session.perStreamSplitComb, session.streamPort, 0, &session.mp_split_to_stream);
-            if (st != PJ_SUCCESS) {
-                m_lib->m_Log->writeLog(1, QString("MasterPort: split->stream create failed %1").arg(st));
-                return false;
-            }
-            pjmedia_master_port_start(session.mp_split_to_stream);
-        } else {
-            // Receive path: stream -> splitcomb
-            st = pjmedia_master_port_create(sp, session.streamPort, session.perStreamSplitComb, 0, &session.mp_stream_to_split);
-            if (st != PJ_SUCCESS) {
-                m_lib->m_Log->writeLog(1, QString("MasterPort: stream->split create failed %1").arg(st));
-                return false;
-            }
-            pjmedia_master_port_start(session.mp_stream_to_split);
-        }
-
-        // Create reverse-channel mono ports and add them to pjsua conf, label them for AudioRouter (WRTC:)
-        session.perStreamMonoPorts.clear();
-        session.perStreamConfSlots.clear();
-        for (unsigned i = 0; i < chcnt; ++i) {
-            pjmedia_port *monoPort = nullptr;
-            // Increase reverse-channel buffering (lower 8-bits = number of buffers)
-            st = pjmedia_splitcomb_create_rev_channel(sp, session.perStreamSplitComb, i, 32, &monoPort);
-            if (st != PJ_SUCCESS || !monoPort) {
-                m_lib->m_Log->writeLog(1, QString("SplitComb: create_rev_channel(%1) failed %2").arg(i).arg(st));
-                continue;
-            }
-            // Name the port so AudioRouter lists it (WRTC:<channelId>-Ch:<n>-Sess:<short>)
-            QString shortSess = session.sessionId.left(8);
-            QString portName = QString("WRTC:%1-Sess:%2-Ch:%3").arg(session.channelId).arg(shortSess).arg(i+1);
-            pj_strdup2(sp, &monoPort->info.name, portName.toUtf8().constData());
-            session.perStreamMonoPorts.append(monoPort);
-            pjsua_conf_port_id mslot = PJSUA_INVALID_ID;
-            st = pjsua_conf_add_port(sp, monoPort, &mslot);
-            if (st == PJ_SUCCESS) {
-                session.perStreamConfSlots.append(mslot);
-                if (!channel->sendOnly) {
-                    // Receive-only case: connect mono to master playout for monitoring
-                    pjsua_conf_port_info masterInfo;
-                    if (pjsua_conf_get_port_info(0, &masterInfo) == PJ_SUCCESS) {
-                        pjsua_conf_connect(mslot, masterInfo.slot_id);
-                    }
-                }
-            }
-        }
-        // Do not add streamPort itself to conf when using splitcomb
-        session.confSlot = -1;
-    } else {
-        // Mono stream: add streamPort directly to conf and connect to master port (receive playout)
-        pjsua_conf_port_id slot;
-        // Even for mono, use session pool when available
-        pj_pool_t* sp = session.sessionPool ? session.sessionPool : m_webrtcPool;
-        st = pjsua_conf_add_port(sp, session.streamPort, &slot);
-        if (st != PJ_SUCCESS) {
-            m_lib->m_Log->writeLog(1, QString("Conf: add_port failed %1").arg(st));
-            return false;
-        }
-        session.confSlot = slot;
-        if (!channel->sendOnly) {
-            pjsua_conf_port_info masterInfo;
-            if (pjsua_conf_get_port_info(0, &masterInfo) == PJ_SUCCESS) {
-                pjsua_conf_connect(session.confSlot, masterInfo.slot_id);
-            }
-        }
-    }
+    QString parentKey = QString("WRTC_CH:%1").arg(session.channelId);
+    QString sessionKey = QString("WRTC_CH:%1|SID:%2").arg(session.channelId, session.sessionId);
+    QString accountName = session.channelId;
+    QString remoteNumber = session.sessionId.left(8);
+    m_lib->m_AudioRouter->attachStreamChannels(parentKey,
+                                               sessionKey,
+                                               accountName,
+                                               remoteNumber,
+                                               session.streamPort,
+                                               (int)chcnt);
     m_lib->m_AudioRouter->scheduleConferenceRefresh(150);
-    
+    m_lib->m_AudioRouter->scheduleRouteEvaluation(200);
+
     // Start stream
     st = pjmedia_stream_start(session.mediaStream);
     if (st != PJ_SUCCESS) {
         m_lib->m_Log->writeLog(1, QString("Stream: start failed %1").arg(st));
         return false;
     }
-    
-    // Legacy path connect is no longer used for per-stream splitcomb; mono path already auto-connected above
 
-    m_lib->m_Log->writeLog(3, QString("Stream: Opus stream created (%1ch) and connected to routing").arg(chcnt));
+    m_lib->m_Log->writeLog(3, QString("Stream: Opus stream created (%1ch) and routed via AudioRouter").arg(chcnt));
     return true;
 }
 
@@ -1224,48 +1167,10 @@ void WebRTCChannels::disconnectStreamFromChannel(const QString& sessionId)
     if (!session) {
         return;
     }
-    // Stop and destroy master ports if used
-    if (session->mp_stream_to_split) {
-        pjmedia_master_port_stop(session->mp_stream_to_split);
-        pjmedia_master_port_destroy(session->mp_stream_to_split, PJ_FALSE);
-        session->mp_stream_to_split = nullptr;
-    }
-    if (session->mp_split_to_stream) {
-        pjmedia_master_port_stop(session->mp_split_to_stream);
-        pjmedia_master_port_destroy(session->mp_split_to_stream, PJ_FALSE);
-        session->mp_split_to_stream = nullptr;
-    }
+    // Delegate teardown of channelized resources to AudioRouter BridgeAdapter
+    QString sessionKey = QString("WRTC_CH:%1|SID:%2").arg(session->channelId, session->sessionId);
+    m_lib->m_AudioRouter->detachParentStream(sessionKey);
 
-    // Remove per-stream conf slots and ports
-    for (int mslot : session->perStreamConfSlots) {
-        if (mslot != PJSUA_INVALID_ID) {
-            pjsua_conf_remove_port(mslot);
-        }
-    }
-    session->perStreamConfSlots.clear();
-    session->perStreamMonoPorts.clear();
-    if (session->perStreamSplitComb) {
-        // No explicit destroy API; keep pointer null and let pool lifetime handle cleanup
-        session->perStreamSplitComb = nullptr;
-    }
-    if (session->sessionPool) {
-        pj_pool_release(session->sessionPool);
-        session->sessionPool = nullptr;
-    }
-
-    if (session->confSlot == -1) {
-        return;
-    }
-    
-    s_webrtc_channel* channel = getChannelById(session->channelId);
-    if (!channel) {
-        return;
-    }
-    
-    // Disconnect both directions if mono path was used
-    pjsua_conf_disconnect(channel->splitterSlot, session->confSlot);
-    pjsua_conf_disconnect(session->confSlot, channel->splitterSlot);
-    
     m_lib->m_Log->writeLog(3, QString("WebRTC stream disconnected from channel bridge: session %1")
                            .arg(sessionId));
 }
@@ -1292,7 +1197,7 @@ void WebRTCChannels::getWebRTCStatus(const QString& channelOrSessionId, QJsonObj
     ch["id"] = channel->id;
     ch["description"] = channel->description;
     ch["enabled"] = channel->enabled;
-    ch["splitterSlot"] = channel->splitterSlot;
+    // splitterSlot removed
     ch["sendOnly"] = channel->sendOnly;
     data["channel"] = ch;
 
@@ -1306,12 +1211,12 @@ void WebRTCChannels::getWebRTCStatus(const QString& channelOrSessionId, QJsonObj
         QJsonObject s;
         s["sessionId"] = sess.sessionId;
         s["isActive"] = sess.isActive;
-        s["confSlot"] = sess.confSlot;
-        s["splitterSlot"] = sess.splitterSlot;
+        // confSlot removed; AudioRouter holds per-channel slots
+        // splitterSlot removed
         s["iceReady"] = sess.iceSessionReady;
         s["srtpReady"] = sess.srtpReady;
         s["hasStream"] = (sess.mediaStream != nullptr);
-        s["masterWired"] = (sess.mp_stream_to_split != nullptr);
+        // masterWired removed; AudioRouter manages master keepalives
 
         // Pending ICE candidates
         s["pendingIceCandidatesCount"] = sess.pendingIceCandidates.size();
