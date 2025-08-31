@@ -644,7 +644,7 @@ void Settings::loadAccConfig()
         
         if (obj.contains("AccID")) {
             s_account acc;
-            acc.uid = QString::number(obj["AccID"].toInt());
+            acc.uid = obj["AccID"].toString();
             
             // Helper function to load string fields - supports both direct values and nested objects
             auto loadStringField = [&](const QString &field, const QString &defaultValue = QString()) -> QString {
@@ -805,7 +805,7 @@ void Settings::saveAccConfig()
     const QList<s_account>* accounts = m_lib->m_Accounts->getAccounts();
     for (const s_account &acc : *accounts) {
         QJsonObject obj;
-        obj["AccID"] = acc.uid.toInt();
+        obj["AccID"] = acc.uid;
 
         if (!acc.name.isEmpty()) {
             QJsonObject nameObj;
