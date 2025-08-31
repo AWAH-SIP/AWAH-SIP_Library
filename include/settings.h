@@ -28,14 +28,6 @@ class Settings : public QObject
 {
     Q_OBJECT
 public:
-    enum SettingsType {
-        INTEGER = 0,
-        FLOAT = 1,
-        STRING = 2,
-        ENUM_INT = 3
-    };
-    Q_ENUM(SettingsType)
-
     explicit Settings(AWAHSipLib *parentLib, QObject *parent = nullptr);
 
     /**
@@ -115,27 +107,17 @@ public:
     void saveCustomDestinationNames();
 
     /**
-    * @brief load WebRTC channel config from settings file
+    * @brief get all editable general settings
+    * @return a QJsonObject with an Object for each setting category. Each setting in a category is a new
+    * object which incluedes the value,  max and min and for certain parameters a enum object with default values
     */
-    void loadWebRTCChannelConfig();
-
-    /**
-    * @brief save WebRTC channel config to the settings file
-    */
-    void saveWebRTCChannelConfig();
+    const QJsonObject *getSettings();
 
     /**
     * @brief get the log file path
     * @return QString logfilepath
     */
     QString getLogPath();
-
-    /**
-    * @brief get all editable general settings
-    * @return a QJsonObject with an Object for each setting category. Each setting in a category is a new
-    * object which incluedes the value,  max and min and for certain parameters a enum object with default values
-    */
-    const QJsonObject* getSettings();
 
     /**
     * @brief set general settings
@@ -162,6 +144,16 @@ public:
     * @return the name of the masterclock device
     */
     QString getMasterClock();
+
+    /**
+    * @brief load WebRTC channel configuration from settings file
+    */
+    void loadWebRTCChannelConfig();
+
+    /**
+    * @brief save WebRTC channel configuration to settings file
+    */
+    void saveWebRTCChannelConfig();
 
 public slots:
     /**
