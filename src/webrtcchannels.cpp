@@ -65,7 +65,7 @@ WebRTCChannels::~WebRTCChannels()
 bool WebRTCChannels::createChannel(QString id, QString description, bool enabled)
 {
     s_webrtc_channel channel;
-    channel.id = id;
+    channel.id = id.isEmpty() ? createNewUID() : id;
     channel.description = description; 
     channel.enabled = enabled;
     
@@ -81,7 +81,7 @@ bool WebRTCChannels::createChannel(QString id, QString description, bool enabled
     // If channel is disabled, just add it to the list without creating infrastructure
     if (!enabled) {
         m_channels.append(channel);
-        m_lib->m_Log->writeLog(3, QString("WebRTC channel created (disabled): %1").arg(id));
+        m_lib->m_Log->writeLog(3, QString("WebRTC channel created (disabled): %1").arg(channel.id));
         emit ChannelsChanged(&m_channels);
         m_lib->m_Settings->saveWebRTCChannelConfig();
         if (m_lib && m_lib->m_AudioRouter) {
@@ -96,7 +96,7 @@ bool WebRTCChannels::createChannel(QString id, QString description, bool enabled
             m_channels.append(channel);
 
     // No channel-level splitter/combiner; per-stream splitcombs will be created dynamically
-    m_lib->m_Log->writeLog(3, QString("WebRTC channel created: %1").arg(id));
+    m_lib->m_Log->writeLog(3, QString("WebRTC channel created: %1").arg(channel.id));
     emit ChannelsChanged(&m_channels);
     m_lib->m_Settings->saveWebRTCChannelConfig();
     if (m_lib && m_lib->m_AudioRouter) {

@@ -1061,7 +1061,12 @@ void Websocket::createWebRTCChannel(QJsonObject &data, QJsonObject &ret) {
     int maxConcurrent = 5;
     QString stun, turn, turnUser, turnPass;
     
-    if (jCheckString(id, data["id"]) && jCheckString(description, data["description"])) {
+    // Accept description; ignore any client-supplied id to enforce server-generated UID
+    if (jCheckString(description, data["description"])) {
+        if (data.contains("id")) {
+            // Parse but do not use user-provided id
+            jCheckString(id, data["id"]); 
+        }
         
         if (data.contains("enabled")) {
             enabled = data["enabled"].toBool();
@@ -1073,13 +1078,23 @@ void Websocket::createWebRTCChannel(QJsonObject &data, QJsonObject &ret) {
         if (data.contains("turnUsername")) turnUser = data["turnUsername"].toString();
         if (data.contains("turnCredential")) turnPass = data["turnCredential"].toString();
         
-        bool success = m_lib->m_WebRTCChannels->createChannel(id, description, enabled);
+        // Force auto-UID by passing empty id
+        bool success = m_lib->m_WebRTCChannels->createChannel("", description, enabled);
         if (success) {
-            if (!stun.isEmpty()) m_lib->m_WebRTCChannels->setChannelStunServer(id, stun);
-            if (!turn.isEmpty()) m_lib->m_WebRTCChannels->setChannelTurnServer(id, turn, turnUser, turnPass);
-            m_lib->m_WebRTCChannels->setChannelMaxCalls(id, maxConcurrent);
-            m_lib->m_WebRTCChannels->setChannelSendOnly(id, sendOnly);
+            // Determine the actual assigned UID (last appended channel)
+            QString newId;
+            QList<s_webrtc_channel>* channels = m_lib->m_WebRTCChannels->getChannels();
+            if (channels && !channels->isEmpty()) {
+                newId = channels->last().id;
+            }
+            if (!stun.isEmpty()) m_lib->m_WebRTCChannels->setChannelStunServer(newId, stun);
+            if (!turn.isEmpty()) m_lib->m_WebRTCChannels->setChannelTurnServer(newId, turn, turnUser, turnPass);
+            m_lib->m_WebRTCChannels->setChannelMaxCalls(newId, maxConcurrent);
+            m_lib->m_WebRTCChannels->setChannelSendOnly(newId, sendOnly);
             ret["status"] = "channel_created";
+            QJsonObject dataObj;
+            dataObj["id"] = newId;
+            ret["data"] = dataObj;
             ret["error"] = noError();
         } else {
             ret["error"] = hasError("Failed to create WebRTC channel");
