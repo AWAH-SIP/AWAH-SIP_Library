@@ -902,7 +902,7 @@ void Settings::saveAccConfig()
 
 void Settings::loadWebRTCChannelConfig() {
     QJsonObject config = loadJsonConfig();
-    QJsonArray chanArray = config["WebRTCChannelConfig"].toArray();
+    QJsonArray chanArray = config["WebRTCChannels"].toArray();
     int added = 0;
     for (const QJsonValue &value : chanArray) {
         QJsonObject obj = value.toObject();
@@ -968,7 +968,7 @@ void Settings::saveWebRTCChannelConfig() {
         obj["iceAlwaysUpdate"] = ch.iceAlwaysUpdate;
         chanArray.append(obj);
     }
-    config["WebRTCChannelConfig"] = chanArray;
+    config["WebRTCChannels"] = chanArray;
     saveJsonConfig(config);
 }
 
