@@ -425,15 +425,20 @@ bool WebRTCChannels::createMediaForOffer(WebRTCSession& session, const s_webrtc_
         else if (l == "a=sendrecv" || l == "a=recvonly" || l == "a=sendonly" || l == "a=inactive") remoteDirection = l.mid(2);
     }
 
-    // Enforce channel mode vs remote offer direction
+    // Enforce/normalize channel mode vs remote offer direction (be lenient to avoid crashes)
+    // Map remote direction to our answer when possible to prevent hard failures
+    QString normalizedRemote = remoteDirection.toLower();
+    if (normalizedRemote.isEmpty()) normalizedRemote = "sendrecv"; // default if missing
     if (channel.sendOnly) {
-        if (!remoteDirection.isEmpty() && remoteDirection.compare("recvonly", Qt::CaseInsensitive) != 0) {
-            m_lib->m_Log->writeLog(1, QString("Offer rejected: channel sendOnly requires remote recvonly (got %1)").arg(remoteDirection));
-        return false;
+        // Our channel is send-only; remote must be able to receive (recvonly or sendrecv)
+        if (normalizedRemote != "recvonly" && normalizedRemote != "sendrecv") {
+            m_lib->m_Log->writeLog(1, QString("WebRTCChannels::createMediaForOffer: Offer incompatible with sendOnly channel (remote=%1)").arg(remoteDirection));
+            return false;
         }
     } else {
-        if (!remoteDirection.isEmpty() && remoteDirection.compare("sendrecv", Qt::CaseInsensitive) != 0) {
-            m_lib->m_Log->writeLog(1, QString("Offer rejected: channel bidirectional requires remote sendrecv (got %1)").arg(remoteDirection));
+        // Our channel is bidirectional; if remote has no mic (recvonly), we degrade to sendonly
+        if (normalizedRemote != "sendrecv" && normalizedRemote != "recvonly") {
+            m_lib->m_Log->writeLog(1, QString("WebRTCChannels::createMediaForOffer: Offer incompatible with bidirectional channel (remote=%1)").arg(remoteDirection));
             return false;
         }
     }
@@ -470,8 +475,20 @@ bool WebRTCChannels::createMediaForOffer(WebRTCSession& session, const s_webrtc_
         }
     }
     // Initialize media transport for this session with remote SDP (prepares ICE/DTLS)
+    if (!rem || rem->media_count == 0 || !rem->media[0]) {
+        m_lib->m_Log->writeLog(1, "WebRTCChannels::createMediaForOffer: Remote SDP missing media description");
+        return false;
+    }
     pjmedia_transport *mt = session.srtpTransport ? session.srtpTransport : session.iceTransport;
-    pjmedia_transport_media_create(mt, m_webrtcPool, PJMEDIA_TPMED_RTCP_MUX, rem, 0);
+    if (!mt) {
+        m_lib->m_Log->writeLog(1, "WebRTCChannels::createMediaForOffer: Media transport not initialized");
+        return false;
+    }
+    pj_status_t mc_st = pjmedia_transport_media_create(mt, m_webrtcPool, PJMEDIA_TPMED_RTCP_MUX, rem, 0);
+    if (mc_st != PJ_SUCCESS) {
+        m_lib->m_Log->writeLog(1, QString("WebRTCChannels::createMediaForOffer: media_create failed %1").arg(mc_st));
+        return false;
+    }
 
     // Build base SDP then add an audio media line (similar to pjwebrtc approach)
     pjmedia_transport_info tinfo; pjmedia_transport_info_init(&tinfo);
@@ -506,12 +523,16 @@ bool WebRTCChannels::createMediaForOffer(WebRTCSession& session, const s_webrtc_
     pjmedia_sdp_attr *a_mid    = pjmedia_sdp_attr_create(m_webrtcPool, "mid", &midVal);
     pjmedia_sdp_attr *a_mux    = pjmedia_sdp_attr_create(m_webrtcPool, "rtcp-mux", nullptr);
     pjmedia_sdp_attr *a_rsize  = pjmedia_sdp_attr_create(m_webrtcPool, "rtcp-rsize", nullptr);
-    // Direction: if channel is audio-only (send-only), advertise sendonly
+    // Direction: derive our answer direction from channel mode and remote direction
     pjmedia_sdp_attr *a_sendrecv = nullptr;
     if (channel.sendOnly) {
         a_sendrecv = pjmedia_sdp_attr_create(m_webrtcPool, "sendonly", nullptr);
     } else {
-        a_sendrecv = pjmedia_sdp_attr_create(m_webrtcPool, "sendrecv", nullptr);
+        // bidir by default; if remote is recvonly (no mic), we degrade to sendonly
+        if (normalizedRemote == "recvonly")
+            a_sendrecv = pjmedia_sdp_attr_create(m_webrtcPool, "sendonly", nullptr);
+        else
+            a_sendrecv = pjmedia_sdp_attr_create(m_webrtcPool, "sendrecv", nullptr);
     }
     pjmedia_sdp_media_add_attr(m, a_mid);
     pjmedia_sdp_media_add_attr(m, a_mux);
