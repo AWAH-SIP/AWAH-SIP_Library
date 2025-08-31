@@ -1146,7 +1146,7 @@ int AudioRouter::getOrCreateVirtualSlot(const QString &parentKey, AudioEntityTyp
 
 int AudioRouter::connectConfPort(int src_slot, int sink_slot, int level, bool persistant)
 {
-    if (src_slot == sink_slot || src_slot == PJSUA_INVALID_ID || sink_slot == PJSUA_INVALID_ID) {
+    if (src_slot == PJSUA_INVALID_ID || sink_slot == PJSUA_INVALID_ID) {
         return PJ_EINVAL;
     }
     // Log API request with human-readable labels, including virtual parents/devices
@@ -1266,7 +1266,7 @@ int AudioRouter::connectConfPort(int src_slot, int sink_slot, int level, bool pe
 
 int AudioRouter::disconnectConfPort(int src_slot, int sink_slot)
 {
-    if (src_slot == sink_slot || src_slot == PJSUA_INVALID_ID || sink_slot == PJSUA_INVALID_ID) {
+    if (src_slot == PJSUA_INVALID_ID || sink_slot == PJSUA_INVALID_ID) {
         return PJ_SUCCESS;
     }
     // Log API request with human-readable labels, including virtual parents/devices
