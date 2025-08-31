@@ -1787,7 +1787,8 @@ bool AudioRouter::reconcileActiveConnections()
                     // skip
                 } else {
                     int rec = recorderForChild(d);
-                    if (rec>=0) desired.insert(edgeKey(s,rec), Edge{s,rec,r.level});
+                    // Do not mirror master (slot 0) to recorder
+                    if (rec>=0 && s != 0) desired.insert(edgeKey(s,rec), Edge{s,rec,r.level});
                 }
                 }
             }
@@ -1846,6 +1847,8 @@ bool AudioRouter::reconcileActiveConnections()
                     // Only mirror when destination child is left channel (Ch:1)
                     int dch = getChannelIndexForSlot(e.dst);
                     if (dch != 1) continue;
+                    // Do not mirror master (slot 0) to recorder
+                    if (e.src == 0) continue;
                     desired.insert(edgeKey(e.src, rslot), Edge{e.src, rslot, e.level});
                     s_audioRoutes er; er.srcSlot=e.src; er.destSlot=rslot; er.level=e.level; er.persistant=false;
                     m_ephemeralRoutes.append(er);
@@ -2604,13 +2607,13 @@ void AudioRouter::teardownParentMedia(const QString &parentKey)
         m_parentToPlayerSlot.remove(parentKey);
     }
     // Restore master keepalive routes for this parent's active children (if any)
-    const QList<int> children = m_parentKeyToChildSlots.value(parentKey);
+    /* const QList<int> children = m_parentKeyToChildSlots.value(parentKey);
     for (int cslot : children) {
         if (cslot == PJSUA_INVALID_ID) continue;
         // Left/right child slots get master keepalive both directions
         connectConfPort(0, cslot, -96, false);
         connectConfPort(cslot, 0, -96, false);
-    }
+    } */
     // Recorder
     if (m_parentToRecorderSlot.contains(parentKey)) {
         int rslot = m_parentToRecorderSlot.value(parentKey, PJSUA_INVALID_ID);

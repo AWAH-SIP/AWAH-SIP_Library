@@ -184,6 +184,8 @@ void WebRTCChannels::setChannelStunServer(const QString& channelId, const QStrin
     if (channel) {
         channel->stunServer = stunServer;
         m_lib->m_Log->writeLog(3, QString("Set STUN server for channel %1: %2").arg(channelId, stunServer));
+        emit ChannelsChanged(&m_channels);
+        m_lib->m_Settings->saveWebRTCChannelConfig();
     }
 }
 
@@ -197,6 +199,8 @@ void WebRTCChannels::setChannelTurnServer(const QString& channelId, const QStrin
         channel->turnCredential = credential;
         channel->turnEnabled = !turnServer.isEmpty();
         m_lib->m_Log->writeLog(3, QString("Set TURN server for channel %1: %2").arg(channelId, turnServer));
+        emit ChannelsChanged(&m_channels);
+        m_lib->m_Settings->saveWebRTCChannelConfig();
     }
 }
 
@@ -206,6 +210,8 @@ void WebRTCChannels::setChannelSendOnly(const QString& channelId, bool sendOnly)
     if (channel) {
         channel->sendOnly = sendOnly;
         m_lib->m_Log->writeLog(3, QString("Set send-only for channel %1: %2").arg(channelId).arg(sendOnly));
+        emit ChannelsChanged(&m_channels);
+        m_lib->m_Settings->saveWebRTCChannelConfig();
     }
 }
 
@@ -215,6 +221,8 @@ void WebRTCChannels::setChannelMaxCalls(const QString& channelId, int maxCalls)
     if (channel) {
         channel->maxConcurrentStreams = maxCalls;
         m_lib->m_Log->writeLog(3, QString("Set max calls for channel %1: %2").arg(channelId).arg(maxCalls));
+        emit ChannelsChanged(&m_channels);
+        m_lib->m_Settings->saveWebRTCChannelConfig();
     }
 }
 
