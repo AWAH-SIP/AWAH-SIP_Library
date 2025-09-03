@@ -147,7 +147,8 @@ enum DeviceType {
     LogicOrGpioDevice,
     AccountGpioDevice,
     LinuxGpioDevice,
-    AudioCrosspointDevice
+    AudioCrosspointDevice,
+    LatencyMonitor
 };
 Q_ENUMS(DeviceType)
 

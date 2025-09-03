@@ -22,6 +22,7 @@
 #include <pjmedia/port.h>
 #include <pjmedia/splitcomb.h>
 #include "pj/string.h"
+#include "../include/LatencyMonitorDevice.h"
 #include <QDebug>
 #include <QThread>
 #include <QSettings>
@@ -697,6 +698,75 @@ void AudioRouter::addToneGen(int freq, QString uid){
     scheduleRouteEvaluation(50);
     emit AudioDevicesChanged(m_AudioDevices);
     return;
+}
+
+
+void AudioRouter::addLatencyMonitor(QString uid)
+{
+    if(uid.isEmpty()) uid = createNewUID();
+    QString name = "Latency Monitor";
+    LatencyMonitorDevice *dev = new LatencyMonitorDevice(m_lib);
+    if (!dev->create(0)) { delete dev; m_lib->m_Log->writeLog(1, QString("addLatencyMonitor: create failed")); return; }
+
+    const QString parentKey = QString("LM:%1").arg(uid);
+    const QString sessionKey = parentKey;
+    // Use the same splitcomb/attach path as calls/WebRTC to expose per-channel reverse ports
+    attachStreamChannels(parentKey, sessionKey, QString("LatencyMon"), QString(""), dev->port(), 2);
+
+    s_IODevices Audiodevice;
+    Audiodevice.devicetype = LatencyMonitor;
+    Audiodevice.uid = uid;
+    Audiodevice.inputname = name;
+    Audiodevice.mediaport = dev->port();
+    // Capture the created reverse-channel conf slots for bookkeeping
+    QList<int> revSlots = m_sessionToConfSlots.value(sessionKey);
+    for (int s : revSlots) Audiodevice.portNo.append(s);
+    m_AudioDevices.append(Audiodevice);
+    m_latencyMonitors[uid] = dev;
+    scheduleConferenceRefresh(150);
+    m_lib->m_Settings->saveIODevConfig();
+    scheduleRouteEvaluation(50);
+    emit AudioDevicesChanged(m_AudioDevices);
+}
+
+void AudioRouter::removeLatencyMonitor(QString uid)
+{
+    for (int i=0;i<m_AudioDevices.size();++i) {
+        if (m_AudioDevices[i].uid == uid && m_AudioDevices[i].devicetype == LatencyMonitor) {
+            // Tear down splitcomb/master and reverse slots associated with this LM
+            const QString sessionKey = QString("LM:%1").arg(uid);
+            detachParentStream(sessionKey);
+            // Destroy the LatencyMonitor media
+            LatencyMonitorDevice *dev = m_latencyMonitors.take(uid);
+            if (dev) { dev->destroy(); delete dev; }
+            m_AudioDevices.removeAt(i);
+            scheduleConferenceRefresh(150);
+            emit AudioDevicesChanged(m_AudioDevices);
+            return;
+        }
+    }
+}
+
+void AudioRouter::resetLatencyMonitorStats(QString uid)
+{
+    LatencyMonitorDevice *dev = m_latencyMonitors.value(uid, nullptr);
+    if (dev) dev->resetStats();
+}
+
+QJsonObject AudioRouter::getLatencyMonitorStats(QString uid)
+{
+    LatencyMonitorDevice *dev = m_latencyMonitors.value(uid, nullptr);
+    if (!dev) return {};
+    auto summary = dev->getSummaryStats();
+    auto measurements = dev->getMeasurements();
+    QJsonArray arr; for (const auto &m : measurements) {
+        arr.append(QJsonObject{{"t", (double)m.tsMs}, {"c1", m.rttCh1Ms}, {"c2", m.rttCh2Ms}, {"d", m.deltaMs}, {"s1", m.corrCh1}, {"s2", m.corrCh2}});
+    }
+    return QJsonObject{{"count", summary.count},
+                       {"minCh1", summary.minCh1}, {"maxCh1", summary.maxCh1}, {"avgCh1", summary.avgCh1}, {"medCh1", summary.medCh1},
+                       {"minCh2", summary.minCh2}, {"maxCh2", summary.maxCh2}, {"avgCh2", summary.avgCh2}, {"medCh2", summary.medCh2},
+                       {"minDelta", summary.minDelta}, {"maxDelta", summary.maxDelta}, {"avgDelta", summary.avgDelta}, {"medDelta", summary.medDelta},
+                       {"samples", arr}};
 }
 
 

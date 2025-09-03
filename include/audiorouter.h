@@ -202,6 +202,12 @@ public:
     */
     void addToneGen(int freq, QString uid = "");
 
+    // LatencyMonitor APIs
+    void addLatencyMonitor(QString uid = "");
+    void removeLatencyMonitor(QString uid);
+    void resetLatencyMonitorStats(QString uid);
+    QJsonObject getLatencyMonitorStats(QString uid);
+
     /**
     * @brief Add a custom lable to a Confport source
     * @param portName the portName (defaultlable)
@@ -452,6 +458,8 @@ signals:
 
 private:
     AWAHSipLib* m_lib;
+    // Track LatencyMonitor devices by uid (lifetime managed by AudioRouter)
+    QMap<QString, class LatencyMonitorDevice*> m_latencyMonitors;
     QMap<int, QString> m_srcAudioSlotMap;
     QMap<int, QString> m_destAudioSlotMap;
     s_audioPortList m_confPortList;

@@ -34,6 +34,8 @@ add_library(AWAH_SIP_Library STATIC
             include/types.h 
             include/websocket.h 
             include/webrtcchannels.h
+            include/latencymon_port.h
+            include/LatencyMonitorDevice.h
 
             src/accounts.cpp 
             src/audiorouter.cpp 
@@ -54,6 +56,8 @@ add_library(AWAH_SIP_Library STATIC
             src/settings.cpp 
             src/websocket.cpp 
             src/webrtcchannels.cpp
+            src/latencymon_port.cpp
+            src/LatencyMonitorDevice.cpp
 )
 
 include_directories(${PKG_PJSIP_INCLUDE_DIRS})
