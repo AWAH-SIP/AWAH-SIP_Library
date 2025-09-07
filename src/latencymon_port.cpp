@@ -2,7 +2,6 @@
 
 #include <cmath>
 #include <algorithm>
-#include <numeric>
 #include <QDateTime>
 
 extern "C" {

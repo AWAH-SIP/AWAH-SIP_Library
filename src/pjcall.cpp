@@ -21,7 +21,6 @@
 #include "pjsua-lib/pjsua_internal.h"
 #include "../include/awahsiplib.h"
 #include <QDateTime>
-#include "pj/string.h"
 #include <pj/pool.h>
 
 #include "../include/types.h"

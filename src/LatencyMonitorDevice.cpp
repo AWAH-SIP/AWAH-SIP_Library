@@ -1,7 +1,6 @@
 #include "../include/LatencyMonitorDevice.h"
 #include "../include/awahsiplib.h"
 #include "../include/log.h"
-#include "../include/types.h"
 
 #include <algorithm>
 
