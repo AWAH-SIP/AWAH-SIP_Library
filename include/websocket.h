@@ -160,6 +160,12 @@ private slots:
     void modifyWebRTCChannel(QJsonObject &data, QJsonObject &ret);
     void removeWebRTCChannel(QJsonObject &data, QJsonObject &ret);
 
+    // LatencyMonitor APIs
+    void addLatencyMonitor(QJsonObject &data, QJsonObject &ret);
+    void removeLatencyMonitor(QJsonObject &data, QJsonObject &ret);
+    void resetLatencyMonitorStats(QJsonObject &data, QJsonObject &ret);
+    void getLatencyMonitorStats(QJsonObject &data, QJsonObject &ret);
+
     /**
      * Implementation-Functions for API-Signals
      *

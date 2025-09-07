@@ -15,7 +15,7 @@ LatencyMonitorDevice::~LatencyMonitorDevice()
     destroy();
 }
 
-bool LatencyMonitorDevice::create(int direction)
+bool LatencyMonitorDevice::create(int direction, const QString &nameLabel)
 {
     Q_UNUSED(direction);
     if (!m_lib) return false;
@@ -23,6 +23,7 @@ bool LatencyMonitorDevice::create(int direction)
 
     pjmedia_port *p = nullptr; LatencyMonitorState *st=nullptr;
     QString label = "LatencyMonitor";
+    if (!nameLabel.isEmpty()) label = nameLabel;
     // Use pjsua pool via pjsua_get_pool_factory
     pj_pool_t *pool = pjsua_pool_create("lm", 1024, 1024);
     if (!pool) return false;
@@ -55,7 +56,13 @@ void LatencyMonitorDevice::destroy()
 void LatencyMonitorDevice::resetStats()
 {
     if (m_state) latencymon_reset_stats(m_state);
-    m_loggedFirstSuccess = false; m_loggedFirstFailure=false; m_sinceLastSummary=0;
+    m_loggedFirstSuccessCh1 = false;
+    m_loggedFirstSuccessCh2 = false;
+    m_loggedFirstFailureCh1 = false;
+    m_loggedFirstFailureCh2 = false;
+    m_successSeenCh1 = false;
+    m_successSeenCh2 = false;
+    m_sinceLastSummary=0;
 }
 
 LatencyStatsSummary LatencyMonitorDevice::computeSummary(const QVector<LatencyMeasurement> &ms) const
@@ -65,11 +72,12 @@ LatencyStatsSummary LatencyMonitorDevice::computeSummary(const QVector<LatencyMe
     QVector<double> ch1, ch2, dlt; ch1.reserve((int)ms.size()); ch2.reserve((int)ms.size()); dlt.reserve((int)ms.size());
     QVector<double> sc1, sc2; sc1.reserve((int)ms.size()); sc2.reserve((int)ms.size());
     for (const auto &m : ms) {
-        if (m.rttCh1Ms>=0) ch1.append(m.rttCh1Ms);
-        if (m.rttCh2Ms>=0) ch2.append(m.rttCh2Ms);
+        if (m.rttCh1Ms>=0) { ch1.append(m.rttCh1Ms); if (m.corrCh1>0) sc1.append(m.corrCh1); s.successCh1++; } else { s.missCh1++; }
+        if (m.rttCh2Ms>=0) { ch2.append(m.rttCh2Ms); if (m.corrCh2>0) sc2.append(m.corrCh2); s.successCh2++; } else { s.missCh2++; }
         if (m.deltaMs>=0) dlt.append(m.deltaMs);
-        if (m.corrCh1>0) sc1.append(m.corrCh1);
-        if (m.corrCh2>0) sc2.append(m.corrCh2);
+        if (m.rttCh1Ms>=0 && m.rttCh2Ms>=0) s.bothSuccess++;
+        else if (m.rttCh1Ms>=0 && m.rttCh2Ms<0) s.onlyCh1++;
+        else if (m.rttCh2Ms>=0 && m.rttCh1Ms<0) s.onlyCh2++;
     }
     auto calc = [](QVector<double> v){
         if (v.isEmpty()) return std::tuple<double,double,double,double>(0,0,0,0);
@@ -113,30 +121,46 @@ QVector<LatencyMeasurement> LatencyMonitorDevice::getMeasurements()
 void LatencyMonitorDevice::maybeLogOnNewMeasurement(const LatencyMeasurement &m)
 {
     if (!m_lib) return;
-    bool success = (m.rttCh1Ms>=0 && m.rttCh2Ms>=0);
-    if (success && !m_loggedFirstSuccess) {
-        m_loggedFirstSuccess = true;
-        m_lib->m_Log->writeLog(3, QString("LatencyMon first success: ch1=%1ms (score=%2) ch2=%3ms (score=%4) delta=%5ms")
-                                     .arg(m.rttCh1Ms,0,'f',1).arg(m.corrCh1,0,'f',3)
-                                     .arg(m.rttCh2Ms,0,'f',1).arg(m.corrCh2,0,'f',3)
-                                     .arg(m.deltaMs,0,'f',1));
-    } else if (!success && (m_loggedFirstSuccess && !m_loggedFirstFailure)) {
-        m_loggedFirstFailure = true;
-        m_lib->m_Log->writeLog(2, QString("LatencyMon first failure after success"));
+    // Per-channel first success/failure
+    if (m.rttCh1Ms>=0 && !m_loggedFirstSuccessCh1) {
+        m_loggedFirstSuccessCh1 = true; m_successSeenCh1 = true;
+        // Rearm failure logging for next failure wave after this new success
+        m_loggedFirstFailureCh1 = false;
+        m_lib->m_Log->writeLog(3, QString("LatencyMon first success ch1: %1ms (score=%2)")
+                                     .arg(m.rttCh1Ms,0,'f',1).arg(m.corrCh1,0,'f',3));
+    } else if (m.rttCh1Ms<0 && m_successSeenCh1 && !m_loggedFirstFailureCh1) {
+        m_loggedFirstFailureCh1 = true;
+        m_lib->m_Log->writeLog(2, QString("LatencyMon first failure after success ch1"));
+        // Rearm success logging so next success after this failure is reported once
+        m_loggedFirstSuccessCh1 = false;
     }
+    if (m.rttCh2Ms>=0 && !m_loggedFirstSuccessCh2) {
+        m_loggedFirstSuccessCh2 = true; m_successSeenCh2 = true;
+        // Rearm failure logging for next failure wave after this new success
+        m_loggedFirstFailureCh2 = false;
+        m_lib->m_Log->writeLog(3, QString("LatencyMon first success ch2: %1ms (score=%2)")
+                                     .arg(m.rttCh2Ms,0,'f',1).arg(m.corrCh2,0,'f',3));
+    } else if (m.rttCh2Ms<0 && m_successSeenCh2 && !m_loggedFirstFailureCh2) {
+        m_loggedFirstFailureCh2 = true;
+        m_lib->m_Log->writeLog(2, QString("LatencyMon first failure after success ch2"));
+        // Rearm success logging so next success after this failure is reported once
+        m_loggedFirstSuccessCh2 = false;
+    }
+    // Summary every 10 measurements as long as any channel is measuring successfully over time
     m_sinceLastSummary++;
-    if (m_sinceLastSummary >= 20) {
+    if (m_sinceLastSummary >= 10 && (m_successSeenCh1 || m_successSeenCh2)) {
         m_sinceLastSummary = 0;
         auto ms = latencymon_get_measurements(m_state);
         auto s = computeSummary(ms);
         m_lib->m_Log->writeLog(3, QString(
-            "LatencyMon summary: N=%1 "
+            "LatencyMon summary: N=%1 \n"
             "ch1[min/avg/med/max]=%2/%3/%4/%5 ms "
-            "score1[min/avg/med/max]=%6/%7/%8/%9 "
+            "score1[min/avg/med/max]=%6/%7/%8/%9 \n"
             "ch2[min/avg/med/max]=%10/%11/%12/%13 ms "
-            "score2[min/avg/med/max]=%14/%15/%16/%17 "
-            "delta[min/avg/med/max]=%18/%19/%20/%21 ms "
-            "last[ch1/ch2/delta]=%22/%23/%24 ms")
+            "score2[min/avg/med/max]=%14/%15/%16/%17 \n"
+            "delta[min/avg/med/max]=%18/%19/%20/%21 ms \n"
+            "succ[ch1/ch2/both/only1/only2]=%22/%23/%24/%25/%26 miss[ch1/ch2]=%27/%28 \n"
+            "last[ch1/ch2/delta]=%29/%30/%31 ms last_score[ch1/ch2]=%32/%33")
             .arg(s.count)
             // ch1
             .arg(s.minCh1,0,'f',1).arg(s.avgCh1,0,'f',1).arg(s.medCh1,0,'f',1).arg(s.maxCh1,0,'f',1)
@@ -148,8 +172,10 @@ void LatencyMonitorDevice::maybeLogOnNewMeasurement(const LatencyMeasurement &m)
             .arg(s.minScoreCh2,0,'f',3).arg(s.avgScoreCh2,0,'f',3).arg(s.medScoreCh2,0,'f',3).arg(s.maxScoreCh2,0,'f',3)
             // delta
             .arg(s.minDelta,0,'f',1).arg(s.avgDelta,0,'f',1).arg(s.medDelta,0,'f',1).arg(s.maxDelta,0,'f',1)
+            // success/miss
+            .arg(s.successCh1).arg(s.successCh2).arg(s.bothSuccess).arg(s.onlyCh1).arg(s.onlyCh2).arg(s.missCh1).arg(s.missCh2)
             // last values
-            .arg(m.rttCh1Ms,0,'f',1).arg(m.rttCh2Ms,0,'f',1).arg(m.deltaMs,0,'f',1)
+            .arg(m.rttCh1Ms,0,'f',1).arg(m.rttCh2Ms,0,'f',1).arg(m.deltaMs,0,'f',1).arg(m.corrCh1,0,'f',3).arg(m.corrCh2,0,'f',3)
         );
     }
 }

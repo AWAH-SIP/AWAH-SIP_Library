@@ -704,14 +704,14 @@ void AudioRouter::addToneGen(int freq, QString uid){
 void AudioRouter::addLatencyMonitor(QString uid)
 {
     if(uid.isEmpty()) uid = createNewUID();
-    QString name = "Latency Monitor";
+    QString name = QString("Latency Monitor %1").arg(uid.left(8));
     LatencyMonitorDevice *dev = new LatencyMonitorDevice(m_lib);
-    if (!dev->create(0)) { delete dev; m_lib->m_Log->writeLog(1, QString("addLatencyMonitor: create failed")); return; }
+    if (!dev->create(0, name)) { delete dev; m_lib->m_Log->writeLog(1, QString("addLatencyMonitor: create failed")); return; }
 
     const QString parentKey = QString("LM:%1").arg(uid);
     const QString sessionKey = parentKey;
     // Use the same splitcomb/attach path as calls/WebRTC to expose per-channel reverse ports
-    attachStreamChannels(parentKey, sessionKey, QString("LatencyMon"), QString(""), dev->port(), 2);
+    attachStreamChannels(parentKey, sessionKey, QString("LatencyMon-%1").arg(uid.left(8)), QString(""), dev->port(), 2);
 
     s_IODevices Audiodevice;
     Audiodevice.devicetype = LatencyMonitor;
@@ -1074,6 +1074,29 @@ s_audioPortList AudioRouter::listConfPorts(){
                     m_destAudioSlotMap[slot] = pj2Str(confinfo.name);
                 }
             }
+        } else if (portName.startsWith("LM:")) {
+            // Expected format set in attachStreamChannels: LM:<accountName>-Ch:<n>
+            // Our accountName is "LatencyMon-<uid8>", extract uid8 for display
+            // Examples: "LM:LatencyMon-e9d96708-Ch:1"
+            // Build src/dest labels: "Latency Monitor <uid8> Ch:<n>"
+            QString uid8;
+            int idxDash = portName.indexOf("-");
+            int idxCh = portName.indexOf("-Ch:");
+            if (idxDash >= 0 && idxCh > idxDash) {
+                uid8 = portName.mid(idxDash+1, idxCh - (idxDash+1));
+            }
+            if (uid8.startsWith("LatencyMon-")) uid8 = uid8.mid(QString("LatencyMon-").size());
+            QString chLabel = portName.mid(idxCh + 1); // e.g., "Ch:1"
+            QString nice = QString("Latency Monitor %1 %2").arg(uid8, chLabel);
+            src.name = nice;
+            dest.name = nice;
+            src.slot = slot;
+            dest.slot = slot;
+            audioPortList.srcPorts.append(src);
+            audioPortList.destPorts.append(dest);
+            m_srcAudioSlotMap[slot] = src.name;
+            m_destAudioSlotMap[slot] = dest.name;
+            continue;
         } else {
             // Fallback: append any unknown/other conf ports as generic entries
             src.pjName = confinfo.name;
@@ -2219,13 +2242,15 @@ void AudioRouter::attachStreamChannels(const QString &parentKey,
         QString name;
         if (parentKey.startsWith("WRTC_CH:"))
             name = QString("WRTC:%1-%2-Ch:1").arg(accountName, remoteNumber);
+        else if (parentKey.startsWith("LM:"))
+            name = QString("LM:%1-Ch:1").arg(accountName);
         else
             name = QString("SIP:%1-%2-Ch:1").arg(accountName, remoteNumber);
         pj_strdup2(pool ? pool : m_lib->pool, &streamPort->info.name, name.toStdString().c_str());
         pjsua_conf_port_id slot;
         if (pjsua_conf_add_port(pool ? pool : m_lib->pool, streamPort, &slot)==PJ_SUCCESS) {
             confSlots.append(slot);
-            registerParentForSlot(slot, Entity_SipAccount, parentKey, 1);
+            registerParentForSlot(slot, parentKey.startsWith("LM:") ? Entity_AudioDevice : Entity_SipAccount, parentKey, 1);
         }
     } else {
         // Stereo+: create splitcomb and master
@@ -2244,6 +2269,8 @@ void AudioRouter::attachStreamChannels(const QString &parentKey,
                     QString name;
                     if (parentKey.startsWith("WRTC_CH:"))
                         name = QString("WRTC:%1-%2-Ch:%3").arg(accountName, remoteNumber).arg(ch+1);
+                    else if (parentKey.startsWith("LM:"))
+                        name = QString("LM:%1-Ch:%2").arg(accountName).arg(ch+1);
                     else
                         name = QString("SIP:%1-%2-Ch:%3").arg(accountName, remoteNumber).arg(ch+1);
                     pj_strdup2(pool ? pool : m_lib->pool, &revch->info.name, name.toStdString().c_str());
@@ -2254,7 +2281,7 @@ void AudioRouter::attachStreamChannels(const QString &parentKey,
                         // Use our API to create non-persistent keepalive routes for per-stream channels
                         connectConfPort(masterInfo.slot_id, mslot, -96, false);
                         connectConfPort(mslot, masterInfo.slot_id, -96, false);
-                        registerParentForSlot(mslot, Entity_SipAccount, parentKey, ch+1);
+                        registerParentForSlot(mslot, parentKey.startsWith("LM:") ? Entity_AudioDevice : Entity_SipAccount, parentKey, ch+1);
                     }
                 }
             }

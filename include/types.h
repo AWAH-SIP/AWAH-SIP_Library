@@ -221,6 +221,9 @@ struct s_IODevices{
         case AudioCrosspointDevice:
             devicetype = AudioCrosspointDevice;
             break;
+        case LatencyMonitor:
+            devicetype = LatencyMonitor;
+            break;
         }
         uid = ioDeviceJSON["uid"].toString();
         inputname = ioDeviceJSON["inputname"].toString();

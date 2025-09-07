@@ -107,9 +107,7 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         defaultCodec.codecParameters = codecParam;
         m_Codecs->setCodecParam(defaultCodec);
         // ***********************************************************************************************
-        // Temporary: add latency monitor
-        m_AudioRouter->addLatencyMonitor();
-        // ***********************************************************************************************
+        
     }
     catch (Error &err){
         m_Log->writeLog(1,QString("AWAHsip: starting lib failed: ") + err.info().c_str());

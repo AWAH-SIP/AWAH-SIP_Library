@@ -239,6 +239,10 @@ void Settings::loadIODevConfig()
             m_lib->m_AudioRouter->addFileRecorder(loadedDevices.at(i).path, loadedDevices.at(i).uid);
             m_lib->m_Log->writeLog(4,QString("loadIODevConfig: added FileRecorder from config file: ") + loadedDevices.at(i).outputame);
         }
+        if(loadedDevices.at(i).devicetype == LatencyMonitor){
+            m_lib->m_AudioRouter->addLatencyMonitor(loadedDevices.at(i).uid);
+            m_lib->m_Log->writeLog(4,QString("loadIODevConfig: added LatencyMonitor from config file"));
+        }
     }
     m_IoDevicesLoaded = true;
 }
@@ -360,6 +364,13 @@ void Settings::loadIODevConfigLater()
                         .arg(deviceTypeName)
                         .arg(device.uid));
                 }
+            }
+            // Also allow LatencyMonitor to persist in ioDevices
+            if (deviceType == LatencyMonitor) {
+                s_IODevices device;
+                device.fromJSON(obj);
+                loadedDevices.append(device);
+                m_lib->m_Log->writeLog(5, QString("loadIODevConfigLater: Loaded LatencyMonitor device"));
             }
         }
     }
@@ -1278,7 +1289,7 @@ void Settings::loadSettings()                                           // todo 
     item["type"] = INTEGER;
     m_lib->epCfg.medConfig.audioFramePtime = settings.value("settings/MediaConfig/Audio_Frame_Ptime","20").toInt();
     item["value"] = settings.value("settings/MediaConfig/Audio_Frame_Ptime","20").toInt();
-    item["min"] = 10;
+    item["min"] = 1;
     item["max"] = 200;
     GlobalSettings["Audio frame packet time"] = item;
 

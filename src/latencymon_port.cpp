@@ -19,8 +19,9 @@ static const unsigned kBurstLen   = (kSampleRate/1000) * kBurstMs; // 1600 sampl
 
 static const float kTxLevelDb = -15.0f;             // -15 dBFS
 static const float kFadeMs = 5.0f;                  // 5ms fade
-static const int   kDefaultRepeatMs = 1500;         // every ~1.5s
+static const int   kDefaultRepeatMs = 3000;         // every ~3s
 static const int   kStatsWindowMs = 5*60*1000;      // 5 minutes
+static const double kMinAcceptCorr = 0.7;           // minimum NCC for channel accept
 
 // State machine states
 enum CycleState { CS_IDLE=0, CS_TX_BURST, CS_SILENCE, CS_ANALYZE };
@@ -31,6 +32,7 @@ struct SlidingStats {
     int repeatIntervalMs = kDefaultRepeatMs;
     bool hadSuccess = false;
     int measurementCount = 0;
+    double minAcceptCorr = kMinAcceptCorr; // threshold for accepting measurement
 };
 
 struct LatencyMonitorState {
@@ -326,26 +328,30 @@ static pj_status_t lm_put_frame(pjmedia_port *p, pjmedia_frame *frame)
         double score1=0.0, score2=0.0;
         int lag1 = argmax_ncc(w1, tplView, score1);
         int lag2 = argmax_ncc(w2, tplView, score2);
-        if (lag1>=0 && lag2>=0) {
-            double rtt1_ms = (double)(startIx + lag1) * 1000.0 / (double)kSampleRate;
-            double rtt2_ms = (double)(startIx + lag2) * 1000.0 / (double)kSampleRate;
-            double delta_ms = std::fabs(rtt1_ms - rtt2_ms);
-            LatencyMeasurement m; m.rttCh1Ms=rtt1_ms; m.rttCh2Ms=rtt2_ms; m.deltaMs=delta_ms; m.corrCh1=std::fabs(score1); m.corrCh2=std::fabs(score2); m.tsMs=QDateTime::currentMSecsSinceEpoch();
-            st->stats.buf.append(m);
-            st->stats.measurementCount++;
-            st->stats.hadSuccess = true;
-            quint64 cutoff = m.tsMs - kStatsWindowMs;
-            while (!st->stats.buf.isEmpty() && st->stats.buf.first().tsMs < cutoff) st->stats.buf.removeFirst();
-            if (st->notifyCb) st->notifyCb(st->notifyUser, m);
+        LatencyMeasurement m; m.tsMs = QDateTime::currentMSecsSinceEpoch();
+        // Per-channel acceptance based on threshold
+        if (lag1>=0 && std::fabs(score1) >= st->stats.minAcceptCorr) {
+            m.rttCh1Ms = (double)(startIx + lag1) * 1000.0 / (double)kSampleRate;
+            m.corrCh1 = std::fabs(score1);
+            m.successCh1 = true;
         } else {
-            // Record failed detection
-            LatencyMeasurement m; m.rttCh1Ms=-1; m.rttCh2Ms=-1; m.deltaMs=-1; m.tsMs=QDateTime::currentMSecsSinceEpoch();
-            st->stats.buf.append(m);
-            st->stats.measurementCount++;
-            quint64 cutoff = m.tsMs - kStatsWindowMs;
-            while (!st->stats.buf.isEmpty() && st->stats.buf.first().tsMs < cutoff) st->stats.buf.removeFirst();
-            if (st->notifyCb) st->notifyCb(st->notifyUser, m);
+            m.rttCh1Ms = -1; m.corrCh1 = std::fabs(score1);
         }
+        if (lag2>=0 && std::fabs(score2) >= st->stats.minAcceptCorr) {
+            m.rttCh2Ms = (double)(startIx + lag2) * 1000.0 / (double)kSampleRate;
+            m.corrCh2 = std::fabs(score2);
+            m.successCh2 = true;
+        } else {
+            m.rttCh2Ms = -1; m.corrCh2 = std::fabs(score2);
+        }
+        if (m.rttCh1Ms >= 0 && m.rttCh2Ms >= 0) m.deltaMs = std::fabs(m.rttCh1Ms - m.rttCh2Ms);
+        else m.deltaMs = -1;
+        st->stats.buf.append(m);
+        st->stats.measurementCount++;
+        if (m.rttCh1Ms>=0 || m.rttCh2Ms>=0) st->stats.hadSuccess = true;
+        quint64 cutoff = m.tsMs - kStatsWindowMs;
+        while (!st->stats.buf.isEmpty() && st->stats.buf.first().tsMs < cutoff) st->stats.buf.removeFirst();
+        if (st->notifyCb) st->notifyCb(st->notifyUser, m);
         // Reset buffers and go idle for next cycle
         st->rxCh1.clear(); st->rxCh2.clear();
         st->analyzingPending = false;
@@ -372,6 +378,7 @@ pj_status_t latencymon_port_create(pj_pool_t *pool,
     st->stats.repeatIntervalMs = kDefaultRepeatMs;
     st->stats.hadSuccess = false;
     st->stats.measurementCount = 0;
+    st->stats.minAcceptCorr = kMinAcceptCorr; // ensure non-zero default after zalloc
     st->rxKeepMs = 3000;
     st->rxKeepSamples = (kSampleRate * st->rxKeepMs) / 1000;
     // Pre-generate PN/MLS now and set initial state
@@ -428,6 +435,11 @@ void latencymon_set_log_interval(LatencyMonitorState *st, int everyNMeasurements
 void latencymon_set_repeat_interval_ms(LatencyMonitorState *st, int intervalMs)
 {
     if (!st) return; if (intervalMs<500) intervalMs=500; st->stats.repeatIntervalMs = intervalMs;
+}
+
+void latencymon_set_min_corr(LatencyMonitorState *st, double minCorr)
+{
+    if (!st) return; if (minCorr < 0.0) minCorr = 0.0; if (minCorr > 1.0) minCorr = 1.0; st->stats.minAcceptCorr = minCorr;
 }
 
 void latencymon_set_notify(LatencyMonitorState *st, void *user, latencymon_notify_cb cb)
