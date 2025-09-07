@@ -203,6 +203,30 @@ public:
     void addToneGen(int freq, QString uid = "");
 
     /**
+     * @brief Create and register a LatencyMonitor virtual device.
+     * @details The device is attached to the conference bridge via channelizer (splitcomb)
+     *          and appears as two mono slots labeled with the device UID.
+     * @param uid Optional stable UID; if empty a UID is generated and persisted.
+     */
+    void addLatencyMonitor(QString uid = "");
+    /**
+     * @brief Remove an existing LatencyMonitor device and its bridge resources.
+     * @param uid UID of the LatencyMonitor to remove.
+     */
+    void removeLatencyMonitor(QString uid);
+    /**
+     * @brief Reset sliding statistics for a LatencyMonitor device.
+     * @param uid UID of the LatencyMonitor whose stats should be cleared.
+     */
+    void resetLatencyMonitorStats(QString uid);
+    /**
+     * @brief Retrieve current latency statistics for a LatencyMonitor device.
+     * @param uid UID of the LatencyMonitor.
+     * @return JSON object containing per-channel and delta stats summary.
+     */
+    QJsonObject getLatencyMonitorStats(QString uid);
+
+    /**
     * @brief Add a custom lable to a Confport source
     * @param portName the portName (defaultlable)
     * @param CustomName the new custom name for that source
@@ -452,6 +476,8 @@ signals:
 
 private:
     AWAHSipLib* m_lib;
+    // Track LatencyMonitor devices by uid (lifetime managed by AudioRouter)
+    QMap<QString, class LatencyMonitorDevice*> m_latencyMonitors;
     QMap<int, QString> m_srcAudioSlotMap;
     QMap<int, QString> m_destAudioSlotMap;
     s_audioPortList m_confPortList;

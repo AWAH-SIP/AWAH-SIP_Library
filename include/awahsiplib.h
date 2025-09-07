@@ -106,6 +106,11 @@ public:
     int disconnectConfPort(int src_slot, int sink_slot) const { return m_AudioRouter->disconnectConfPort(src_slot, sink_slot); };
     void changeConfPortLevel(int src_slot, int sink_slot, int level) const { return m_AudioRouter->changeConfPortLevel(src_slot, sink_slot, level); };
     void addToneGen(int freq) const { return m_AudioRouter->addToneGen(freq); };
+    // LatencyMonitor public API
+    void addLatencyMonitor(const QString &uid = "") const { return m_AudioRouter->addLatencyMonitor(uid); }
+    void removeLatencyMonitor(const QString &uid) const { return m_AudioRouter->removeLatencyMonitor(uid); }
+    void resetLatencyMonitorStats(const QString &uid) const { return m_AudioRouter->resetLatencyMonitorStats(uid); }
+    QJsonObject getLatencyMonitorStats(const QString &uid) const { return m_AudioRouter->getLatencyMonitorStats(uid); }
     QList<s_IODevices>& getAudioDevices() const { return *m_AudioRouter->getAudioDevices(); };
     int getSoundDevID(QString DeviceName) const { return m_AudioRouter->getSoundDevID(DeviceName); };
     void changeConfportsrcName(const QString portName, const QString customName) const { return m_AudioRouter->changeConfportsrcName(portName, customName); };
@@ -329,6 +334,7 @@ private:
     friend class PJCall;
     friend class Websocket;
     friend class WebRTCChannels;
+    friend class LatencyMonitorDevice;
 };
 
 #endif // AWAHSIPLIB_H

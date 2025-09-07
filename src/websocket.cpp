@@ -1144,6 +1144,47 @@ void Websocket::removeWebRTCChannel(QJsonObject &data, QJsonObject &ret) {
     }
 }
 
+void Websocket::addLatencyMonitor(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj;
+    QString uid;
+    // uid optional; server will generate if empty
+    if (data.contains("uid")) jCheckString(uid, data["uid"]);
+    m_lib->addLatencyMonitor(uid);
+    ret["data"] = retDataObj;
+    ret["error"] = noError();
+}
+
+void Websocket::removeLatencyMonitor(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj; QString uid;
+    if (jCheckString(uid, data["uid"])) {
+        m_lib->removeLatencyMonitor(uid);
+        ret["data"] = retDataObj; ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::resetLatencyMonitorStats(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj; QString uid;
+    if (jCheckString(uid, data["uid"])) {
+        m_lib->resetLatencyMonitorStats(uid);
+        ret["data"] = retDataObj; ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
+void Websocket::getLatencyMonitorStats(QJsonObject &data, QJsonObject &ret) {
+    QJsonObject retDataObj; QString uid;
+    if (jCheckString(uid, data["uid"])) {
+        QJsonObject stats = m_lib->getLatencyMonitorStats(uid);
+        retDataObj["stats"] = stats;
+        ret["data"] = retDataObj; ret["error"] = noError();
+    } else {
+        ret["error"] = hasError("Parameters not accepted");
+    }
+}
+
 // Implementation-Functions for API-Signals
 void Websocket::regStateChanged(int accId, bool status){
     QJsonObject obj, data;

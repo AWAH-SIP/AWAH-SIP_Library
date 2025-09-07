@@ -147,7 +147,8 @@ enum DeviceType {
     LogicOrGpioDevice,
     AccountGpioDevice,
     LinuxGpioDevice,
-    AudioCrosspointDevice
+    AudioCrosspointDevice,
+    LatencyMonitor
 };
 Q_ENUMS(DeviceType)
 
@@ -219,6 +220,9 @@ struct s_IODevices{
             break;
         case AudioCrosspointDevice:
             devicetype = AudioCrosspointDevice;
+            break;
+        case LatencyMonitor:
+            devicetype = LatencyMonitor;
             break;
         }
         uid = ioDeviceJSON["uid"].toString();

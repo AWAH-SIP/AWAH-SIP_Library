@@ -93,21 +93,21 @@ AWAHSipLib::AWAHSipLib(QObject *parent) : QObject(parent)
         m_Buddies->StartBuddyChecker();
 
         //******************************************* set default opus parameters *******************
-         s_codec defaultCodec;
-         defaultCodec.encodingName = "opus/48000/2";
-         defaultCodec.displayName ="Opus";
-         QJsonObject codecParam;
-         QJsonObject value;
-         value.insert("value", 0);
-         codecParam.insert("Bit rate mode", value);
-         value.insert("value", 64000);
-         codecParam.insert("Bit rate", value);
-         value.insert("value", 2);
-         codecParam.insert("Channelcount", value);
-         defaultCodec.codecParameters = codecParam;
-         m_Codecs->setCodecParam(defaultCodec);
-       // ***********************************************************************************************
-
+        s_codec defaultCodec;
+        defaultCodec.encodingName = "opus/48000/2";
+        defaultCodec.displayName ="Opus";
+        QJsonObject codecParam;
+        QJsonObject value;
+        value.insert("value", 0);
+        codecParam.insert("Bit rate mode", value);
+        value.insert("value", 64000);
+        codecParam.insert("Bit rate", value);
+        value.insert("value", 2);
+        codecParam.insert("Channelcount", value);
+        defaultCodec.codecParameters = codecParam;
+        m_Codecs->setCodecParam(defaultCodec);
+        // ***********************************************************************************************
+        
     }
     catch (Error &err){
         m_Log->writeLog(1,QString("AWAHsip: starting lib failed: ") + err.info().c_str());
