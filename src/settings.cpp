@@ -1648,7 +1648,7 @@ void Settings::loadSettings()                                           // todo 
     aCfg.regConfig.randomRetryIntervalSec = 10;             // not all account schould reregister on the same time
     //aCfg.ipChangeConfig.shutdownTp = 1;
     m_lib->epCfg.medConfig.sndUseSwClock = true;
-    m_lib->epCfg.medConfig.quality =10;
+    m_lib->epCfg.medConfig.quality =8;
     m_lib->epCfg.medConfig.noVad = true;
     m_lib->m_Accounts->setDefaultACfg(aCfg);
     //Websocket Port

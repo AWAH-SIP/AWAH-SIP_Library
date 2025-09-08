@@ -6,7 +6,7 @@
 
 extern "C" {
 #include <pjmedia/port.h>
-#include <pjmedia/converter.h>
+#include <pj/os.h>
 }
 
 static const unsigned kSampleRate = 8000;           // 8 kHz
@@ -63,17 +63,19 @@ struct LatencyMonitorState {
     // Optional notify callback
     void *notifyUser = nullptr;
     latencymon_notify_cb notifyCb = nullptr;
+
+    // Background analysis worker
+    pj_mutex_t *mtx = nullptr;
+    pj_sem_t   *sem = nullptr;
+    pj_thread_t *worker = nullptr;
+    pj_bool_t stopWorker = PJ_FALSE;
+    struct PendingJob {
+        pj_bool_t has = PJ_FALSE;
+        QVector<float> w1;
+        QVector<float> w2;
+        int startIx = 0;
+    } job;
 };
-// Notify hook for device wrapper
-static void lm_notify(LatencyMonitorState *st, const LatencyMeasurement &m)
-{
-    typedef void (*notify_t)(void*, const LatencyMeasurement&);
-    // store in port_data2 fields (user, cb) via port.info.reserved if needed
-    // Simpler: keep in state
-    struct Notify {
-        void *user=nullptr; notify_t cb=nullptr;
-    };
-}
 
 
 static pj_status_t lm_on_destroy(pjmedia_port *p)
@@ -105,7 +107,7 @@ static void build_pn_template(LatencyMonitorState *st)
     float hp_prev = 0.0f, x_prev = 0.0f;
     for (int i=0;i<tmp.size();++i) {
         float x = tmp[i];
-        float hp = hp_a * hp_prev + hp_a * (x - x_prev);
+        float hp = hp_a * hp_prev + (1.0f - hp_a) * (x - x_prev);
         hp_prev = hp; x_prev = x;
         tmp[i] = hp;
     }
@@ -146,7 +148,6 @@ static pj_status_t lm_get_frame(pjmedia_port *p, pjmedia_frame *frame)
     const unsigned perChanSpf = cc ? (spf/cc) : 0;
     const unsigned avgFsz = PJMEDIA_PIA_AVG_FSZ(&p->info);
     pj_int16_t *smp = (pj_int16_t*)frame->buf;
-    frame->size = avgFsz;
 
     // Always zero buffer first
     pjmedia_zero_samples(smp, spf);
@@ -203,7 +204,7 @@ static pj_status_t lm_get_frame(pjmedia_port *p, pjmedia_frame *frame)
         break;
     }
 
-    frame->size = avgFsz;
+    frame->size = sizeof(pj_int16_t) * spf;
     frame->type = PJMEDIA_FRAME_TYPE_AUDIO;
     // Advance sample clock by one frame per channel (only once per generated frame)
     st->sampleClock += perChanSpf;
@@ -212,9 +213,78 @@ static pj_status_t lm_get_frame(pjmedia_port *p, pjmedia_frame *frame)
     return PJ_SUCCESS;
 }
 
+static double dot_norm(const float *a, const float *b, int n);
+static int LM_worker_thread(void *arg)
+{
+    LatencyMonitorState *st = (LatencyMonitorState*)arg;
+    while (!st->stopWorker) {
+        pj_sem_wait(st->sem);
+        if (st->stopWorker) break;
+        // Take job snapshot
+        QVector<float> w1, w2; int startIx=0;
+        pj_mutex_lock(st->mtx);
+        if (st->job.has) {
+            w1 = st->job.w1; w2 = st->job.w2; startIx = st->job.startIx; st->job.has = PJ_FALSE;
+        }
+        pj_mutex_unlock(st->mtx);
+        if (w1.isEmpty() || w2.isEmpty()) continue;
+
+        // Build template view
+        QVector<float> tplView; tplView.resize((int)st->pnLen);
+        for (unsigned i=0;i<st->pnLen;i++) tplView[(int)i] = st->pnTplFlt[i];
+
+        // Normalize to template RMS
+        auto rms = [](const QVector<float> &v){ double s=0; for(float x:v) s += x*x; return std::sqrt(s / std::max<qsizetype>(1,v.size())); };
+        double tplRms = rms(tplView);
+        if (tplRms > 1e-9) {
+            double g1 = (rms(w1) > 1e-9) ? (tplRms / rms(w1)) : 1.0; for (int i=0;i<w1.size();++i) w1[i] = (float)(w1[i]*g1);
+            double g2 = (rms(w2) > 1e-9) ? (tplRms / rms(w2)) : 1.0; for (int i=0;i<w2.size();++i) w2[i] = (float)(w2[i]*g2);
+        }
+
+        // Full NCC search (no decimation/stride)
+        auto argmax_ncc_full = [&](const QVector<float> &x, const QVector<float> &templ, double &outScore){
+            int maxLag = (int)x.size() - (int)templ.size();
+            if (maxLag < 0) { outScore = 0.0; return -1; }
+            int bestLag = -1; double bestScore = -2.0;
+            for (int lag=0; lag<=maxLag; ++lag) {
+                double s = dot_norm(x.constData()+lag, templ.constData(), templ.size());
+                if (s > bestScore) { bestScore = s; bestLag = lag; }
+            }
+            outScore = bestScore; return bestLag;
+        };
+        double score1=0.0, score2=0.0;
+        int lag1 = argmax_ncc_full(w1, tplView, score1);
+        int lag2 = argmax_ncc_full(w2, tplView, score2);
+
+        LatencyMeasurement m; m.tsMs = QDateTime::currentMSecsSinceEpoch();
+        if (lag1>=0 && std::fabs(score1) >= st->stats.minAcceptCorr) {
+            m.rttCh1Ms = (double)(startIx + lag1) * 1000.0 / (double)kSampleRate;
+            m.corrCh1 = std::fabs(score1);
+            m.successCh1 = true;
+        } else { m.rttCh1Ms = -1; m.corrCh1 = std::fabs(score1); }
+        if (lag2>=0 && std::fabs(score2) >= st->stats.minAcceptCorr) {
+            m.rttCh2Ms = (double)(startIx + lag2) * 1000.0 / (double)kSampleRate;
+            m.corrCh2 = std::fabs(score2);
+            m.successCh2 = true;
+        } else { m.rttCh2Ms = -1; m.corrCh2 = std::fabs(score2); }
+        if (m.rttCh1Ms >= 0 && m.rttCh2Ms >= 0) m.deltaMs = std::fabs(m.rttCh1Ms - m.rttCh2Ms);
+        else m.deltaMs = -1;
+
+        // Publish result
+        pj_mutex_lock(st->mtx);
+        st->stats.buf.append(m);
+        st->stats.measurementCount++;
+        if (m.rttCh1Ms>=0 || m.rttCh2Ms>=0) st->stats.hadSuccess = true;
+        quint64 cutoff = m.tsMs - kStatsWindowMs;
+        while (!st->stats.buf.isEmpty() && st->stats.buf.first().tsMs < cutoff) st->stats.buf.removeFirst();
+        pj_mutex_unlock(st->mtx);
+        if (st->notifyCb) st->notifyCb(st->notifyUser, m);
+    }
+    return 0;
+}
+
 static double dot_norm(const float *a, const float *b, int n)
 {
-    // Zero-mean normalized cross-correlation (NCC)
     if (n <= 0) return 0.0;
     double sumA=0.0, sumB=0.0;
     for (int i=0;i<n;i++){ sumA += a[i]; sumB += b[i]; }
@@ -231,28 +301,6 @@ static double dot_norm(const float *a, const float *b, int n)
     return num / den;
 }
 
-static int argmax_ncc(const QVector<float> &x, const QVector<float> &templ, double &outScore)
-{
-    // Search lag in range [0 .. x.size()-templ.size()]
-    int maxLag = (int)x.size() - (int)templ.size();
-    if (maxLag < 0) { outScore = 0.0; return -1; }
-    int bestLag = -1; double bestScore = -2.0; // NCC in [-1,1]
-    // Coarse step 2 for speed, then refine around winner
-    int coarseStep = 1; // precise search; small windows so ok
-    for (int lag=0; lag<=maxLag; lag+=coarseStep) {
-        double s = dot_norm(x.constData()+lag, templ.constData(), templ.size());
-        if (s > bestScore) { bestScore = s; bestLag = lag; }
-    }
-    // refine +/- 2 around best
-    int rs = std::max(0, bestLag-2);
-    int re = std::min(maxLag, bestLag+2);
-    for (int lag=rs; lag<=re; ++lag) {
-        double s = dot_norm(x.constData()+lag, templ.constData(), templ.size());
-        if (s > bestScore) { bestScore = s; bestLag = lag; }
-    }
-    outScore = bestScore;
-    return bestLag;
-}
 
 static pj_status_t lm_put_frame(pjmedia_port *p, pjmedia_frame *frame)
 {
@@ -282,80 +330,32 @@ static pj_status_t lm_put_frame(pjmedia_port *p, pjmedia_frame *frame)
 
     if (!st->initialized) return PJ_SUCCESS;
 
-    // One-shot detection: run once during ANALYZE
+    // Off-thread detection: submit job once during ANALYZE and return to IDLE immediately
     if (st->state == CS_ANALYZE && st->analyzingPending) {
-        const int minRttMs = 0; // allow near-zero loopback in conference
-        const int maxRttMs = std::min((int)st->rxKeepMs, std::max((int)kBurstMs + 100, st->stats.repeatIntervalMs - 100));
+        const int minRttMs = 0;
+        const int maxRttMs = (int)st->rxKeepMs;
         const int minSamp = (int)((long long)minRttMs * (long long)kSampleRate / 1000LL);
         const int maxSamp = (int)((long long)maxRttMs * (long long)kSampleRate / 1000LL);
-        if ((int)st->rxCh1.size() < (minSamp + (int)st->pnLen)) return PJ_SUCCESS; // wait until enough RX accumulated for full template
+        if ((int)st->rxCh1.size() < (minSamp + (int)st->pnLen)) return PJ_SUCCESS;
 
         int endIx = std::min((int)st->rxCh1.size(), maxSamp);
         int startIx = std::min(minSamp, endIx);
         int searchLen = endIx - startIx;
         if (searchLen < (int)st->pnLen) return PJ_SUCCESS;
-        // Normalize windows to match template scale (-15 dBFS)
-        QVector<float> w1 = QVector<float>(st->rxCh1.constBegin()+startIx, st->rxCh1.constBegin()+startIx+searchLen);
-        QVector<float> w2 = QVector<float>(st->rxCh2.constBegin()+startIx, st->rxCh2.constBegin()+startIx+searchLen);
-        auto rms = [](const QVector<float> &v){ double s=0; for(float x:v) s += x*x; return std::sqrt(s / std::max<qsizetype>(1,v.size())); };
-        QVector<float> tplView; tplView.resize((int)st->pnLen);
-        for (unsigned i=0;i<st->pnLen;i++) tplView[(int)i] = st->pnTplFlt[i];
-        double tplRms = rms(tplView);
-        if (tplRms > 1e-9) {
-            double g1 = (rms(w1) > 1e-9) ? (tplRms / rms(w1)) : 1.0; for (int i=0;i<w1.size();++i) w1[i] = (float)(w1[i]*g1);
-            double g2 = (rms(w2) > 1e-9) ? (tplRms / rms(w2)) : 1.0; for (int i=0;i<w2.size();++i) w2[i] = (float)(w2[i]*g2);
-        }
-        auto meanAbs = [](const QVector<float> &v){ double s=0; for (float x: v) s += std::fabs(x); return s / std::max<qsizetype>(1, v.size()); };
-        double e1 = meanAbs(w1), e2 = meanAbs(w2);
-        if (e1 < 0.001 && e2 < 0.001) {
-            // Record a failed measurement
-            LatencyMeasurement m; m.tsMs=QDateTime::currentMSecsSinceEpoch();
-            st->stats.buf.append(m);
-            st->stats.measurementCount++;
-            // Evict old
-            quint64 cutoff = m.tsMs - kStatsWindowMs;
-            while (!st->stats.buf.isEmpty() && st->stats.buf.first().tsMs < cutoff) st->stats.buf.removeFirst();
-            if (st->notifyCb) st->notifyCb(st->notifyUser, m);
-            // reset and stay in ANALYZE->IDLE path
-            st->rxCh1.clear(); st->rxCh2.clear();
-            st->analyzingPending = false;
-            st->state = CS_IDLE;
-            st->stateRemain = 0;
-            return PJ_SUCCESS;
-        }
 
-        double score1=0.0, score2=0.0;
-        int lag1 = argmax_ncc(w1, tplView, score1);
-        int lag2 = argmax_ncc(w2, tplView, score2);
-        LatencyMeasurement m; m.tsMs = QDateTime::currentMSecsSinceEpoch();
-        // Per-channel acceptance based on threshold
-        if (lag1>=0 && std::fabs(score1) >= st->stats.minAcceptCorr) {
-            m.rttCh1Ms = (double)(startIx + lag1) * 1000.0 / (double)kSampleRate;
-            m.corrCh1 = std::fabs(score1);
-            m.successCh1 = true;
-        } else {
-            m.rttCh1Ms = -1; m.corrCh1 = std::fabs(score1);
-        }
-        if (lag2>=0 && std::fabs(score2) >= st->stats.minAcceptCorr) {
-            m.rttCh2Ms = (double)(startIx + lag2) * 1000.0 / (double)kSampleRate;
-            m.corrCh2 = std::fabs(score2);
-            m.successCh2 = true;
-        } else {
-            m.rttCh2Ms = -1; m.corrCh2 = std::fabs(score2);
-        }
-        if (m.rttCh1Ms >= 0 && m.rttCh2Ms >= 0) m.deltaMs = std::fabs(m.rttCh1Ms - m.rttCh2Ms);
-        else m.deltaMs = -1;
-        st->stats.buf.append(m);
-        st->stats.measurementCount++;
-        if (m.rttCh1Ms>=0 || m.rttCh2Ms>=0) st->stats.hadSuccess = true;
-        quint64 cutoff = m.tsMs - kStatsWindowMs;
-        while (!st->stats.buf.isEmpty() && st->stats.buf.first().tsMs < cutoff) st->stats.buf.removeFirst();
-        if (st->notifyCb) st->notifyCb(st->notifyUser, m);
-        // Reset buffers and go idle for next cycle
+        // Snapshot windows and submit job
+        pj_mutex_lock(st->mtx);
+        st->job.w1 = QVector<float>(st->rxCh1.constBegin()+startIx, st->rxCh1.constBegin()+startIx+searchLen);
+        st->job.w2 = QVector<float>(st->rxCh2.constBegin()+startIx, st->rxCh2.constBegin()+startIx+searchLen);
+        st->job.startIx = startIx;
+        st->job.has = PJ_TRUE;
+        pj_mutex_unlock(st->mtx);
+        pj_sem_post(st->sem);
+
+        // Reset for next cycle immediately
         st->rxCh1.clear(); st->rxCh2.clear();
         st->analyzingPending = false;
-        st->state = CS_IDLE;
-        st->stateRemain = 0;
+        st->state = CS_IDLE; st->stateRemain = 0;
     }
     return PJ_SUCCESS;
 }
@@ -386,10 +386,16 @@ pj_status_t latencymon_port_create(pj_pool_t *pool,
     st->state = CS_IDLE;
     st->stateRemain = (unsigned)((kSampleRate * 100) / 1000);
 
+    // Init worker primitives
+    if (pj_mutex_create_simple(pool, "lm_mtx", &st->mtx) != PJ_SUCCESS) { return PJ_ENOMEM; }
+    if (pj_sem_create(pool, "lm_sem", 0, 1, &st->sem) != PJ_SUCCESS) { return PJ_ENOMEM; }
+    if (pj_thread_create(pool, "lm_worker", &LM_worker_thread, st, 0, 0, &st->worker) != PJ_SUCCESS) { return PJ_ENOMEM; }
+
     pj_bzero(&st->port, sizeof(st->port));
-    pj_str_t nm; pj_cstr(&nm, nameLabel.toUtf8().constData());
+    pj_str_t nm;
+    pj_strdup2(st->pool, &nm, nameLabel.isEmpty() ? "LatencyMonitor" : nameLabel.toUtf8().constData());
     // signature 0 (user-defined). samples_per_frame is total per frame across channels (320 for 20ms @ 8kHz stereo)
-    pjmedia_port_info_init(&st->port.info, &nm, 0,
+    pjmedia_port_info_init(&st->port.info, &nm, PJMEDIA_SIG_CLASS_PORT_AUD('L','M'),
                            kSampleRate, kChannels, 16, kSampPerFrm * kChannels);
     st->port.port_data.pdata = st;
     st->port.get_frame = &lm_get_frame;
@@ -404,6 +410,11 @@ pj_status_t latencymon_port_create(pj_pool_t *pool,
 void latencymon_port_destroy(LatencyMonitorState *st)
 {
     if (!st) return;
+    if (st->mtx || st->sem || st->worker) {
+        st->stopWorker = PJ_TRUE;
+        if (st->sem) pj_sem_post(st->sem);
+        if (st->worker) pj_thread_join(st->worker);
+    }
     st->rxCh1.clear(); st->rxCh2.clear(); st->stats.buf.clear();
     // Release owning pool last
     pj_pool_t *pool = st->pool;

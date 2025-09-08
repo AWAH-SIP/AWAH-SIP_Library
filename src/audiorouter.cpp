@@ -654,7 +654,8 @@ void AudioRouter::addToneGen(int freq, QString uid){
         return;
     }
 
-    status = pjmedia_tonegen_create2(m_lib->pool, &label,  masterPortInfo.clock_rate, 1, 2 * masterPortInfo.samples_per_frame, 16,PJMEDIA_TONEGEN_LOOP, &genPort);
+    status = pjmedia_tonegen_create2(m_lib->pool, &label, masterPortInfo.clock_rate,
+                                     1, masterPortInfo.samples_per_frame, 16, PJMEDIA_TONEGEN_LOOP, &genPort);
     if (status != PJ_SUCCESS) {char buf[50];
         pj_strerror	(status,buf,sizeof (buf) );
         m_lib->m_Log->writeLog(2,(QString("AddToneGen: Unable to create tone generator: ") + buf));
@@ -2265,7 +2266,7 @@ void AudioRouter::attachStreamChannels(const QString &parentKey,
                 pjsua_conf_port_info masterInfo; pjsua_conf_get_port_info(0, &masterInfo);
                 for (int ch=0; ch<2; ++ch) {
                     pjmedia_port *revch=nullptr;
-                    if (pjmedia_splitcomb_create_rev_channel(pool ? pool : m_lib->pool, split, ch, 32, &revch) != PJ_SUCCESS || !revch) continue;
+                    if (pjmedia_splitcomb_create_rev_channel(pool ? pool : m_lib->pool, split, ch, 0, &revch) != PJ_SUCCESS || !revch) continue;
                     QString name;
                     if (parentKey.startsWith("WRTC_CH:"))
                         name = QString("WRTC:%1-%2-Ch:%3").arg(accountName, remoteNumber).arg(ch+1);
@@ -2510,21 +2511,19 @@ void AudioRouter::changeConfportdstName(const QString portName, const QString cu
 
 void AudioRouter::removeAllCustomNamesWithUID(const QString uid)
 {
-    QMap<QString, QString>::const_iterator it = m_customSourceLabels.constBegin();
-    auto end = m_customSourceLabels.constEnd();
-    while (it != end) {
-        if(it.key().contains(uid)){
-            m_customSourceLabels.remove(it.key());
+    {
+        QMutableMapIterator<QString, QString> it(m_customSourceLabels);
+        while (it.hasNext()) {
+            it.next();
+            if (it.key().contains(uid)) it.remove();
         }
-        ++it;
     }
-    it = m_customDestLabels.constBegin();
-    end = m_customDestLabels.constEnd();
-    while (it != end) {
-        if(it.key().contains(uid)){
-            m_customDestLabels.remove(it.key());
+    {
+        QMutableMapIterator<QString, QString> it(m_customDestLabels);
+        while (it.hasNext()) {
+            it.next();
+            if (it.key().contains(uid)) it.remove();
         }
-        ++it;
     }
     m_lib->m_Settings->saveCustomSourceNames();
     m_lib->m_Settings->saveCustomDestinationNames();

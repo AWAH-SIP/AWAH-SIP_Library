@@ -21,12 +21,15 @@ bool LatencyMonitorDevice::create(int direction, const QString &nameLabel)
     if (m_confSlot != PJSUA_INVALID_ID) return true;
 
     pjmedia_port *p = nullptr; LatencyMonitorState *st=nullptr;
-    QString label = "LatencyMonitor";
-    if (!nameLabel.isEmpty()) label = nameLabel;
-    // Use pjsua pool via pjsua_get_pool_factory
+    QString label = nameLabel.isEmpty() ? "LatencyMonitor" : nameLabel;
+
     pj_pool_t *pool = pjsua_pool_create("lm", 1024, 1024);
     if (!pool) return false;
-    if (latencymon_port_create(pool, label, (void*)m_lib, &p, &st) != PJ_SUCCESS) return false;
+
+    if (latencymon_port_create(pool, label, (void*)m_lib, &p, &st) != PJ_SUCCESS) {
+        pj_pool_release(pool); // Leak-Fix
+        return false;
+    }
     m_port = p; m_state = st;
     // Register notification so we can log per requirements
     latencymon_set_notify(m_state, this, [](void *user, const LatencyMeasurement &m){
